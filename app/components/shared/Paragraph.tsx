@@ -1,9 +1,9 @@
 export default function Paragraph ({ children, type }) {
   switch (type) {
     case 'normal':
-      return <p className='mb-8 font-secondaryFont text-xl'>{children}</p>
+      return <p className='text-base text-black md:text-xl font-secondaryFont dark:text-white'>{children}</p>
     case 'small':
-      return <p className='font-secondaryFont text-base'>{children}</p>
+      return <p className='text-sm text-black md:text-base font-secondaryFont dark:text-white'>{children}</p>
     default:
       break
   }

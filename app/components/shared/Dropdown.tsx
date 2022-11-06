@@ -8,11 +8,11 @@ export default function Dropdown () {
 
   return (
     <div className='relative'>
-      <button className='flex gap-1 items-center text-white hover:text-primary transition ease-in-out duration-500' onClick={() => setDropdownStatus(!dropdownStatus)}>En<ChevronDownIcon className='w-3 stroke-width-3' /></button>
+      <button className='flex items-center gap-1 text-white transition duration-500 ease-in-out hover:text-primary font-secondaryFont' onClick={() => setDropdownStatus(!dropdownStatus)}>En<ChevronDownIcon className='w-3 stroke-width-3' /></button>
       {dropdownStatus &&
-        <ul className='absolute top-full mt-3 text-white'>
-          <button className='text-white hover:text-primary transition ease-in-out duration-500'>Es</button>
-          <button className='text-white hover:text-primary transition ease-in-out duration-500'>En</button>
+        <ul className='absolute mt-3 text-white top-full'>
+          <button className='text-white transition duration-500 ease-in-out hover:text-primary'>Es</button>
+          <button className='text-white transition duration-500 ease-in-out hover:text-primary'>En</button>
         </ul>}
     </div>
   )

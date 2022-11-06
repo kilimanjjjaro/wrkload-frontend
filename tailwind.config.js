@@ -7,13 +7,13 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      primaryFont: ['Syne', 'sans-serif'],
-      secondaryFont: ['Inter', 'serif']
+      primaryFont: 'var(--syne-font), sans-serif',
+      secondaryFont: 'var(--inter-font), sans-serif'
     },
     extend: {
       colors: {
-        primary: '#0500FF',
-        alternative: '#0D0D0D'
+        primary: '#0500ff',
+        alternative: '#0d0d0d'
       }
     }
   },

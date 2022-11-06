@@ -1,10 +1,10 @@
 import { PlusIcon } from '@heroicons/react/24/outline'
 
-import HeroHeader from './components/HeroHeader'
-import Feature from './components/Feature'
-import Testimony from './components/Testimony'
 import Headline from './components/shared/Headline'
 import Button from './components/shared/Button'
+import Feature from './components/Feature'
+import Testimony from './components/Testimony'
+import Form from './components/Form'
 
 import featureImage from '../public/images/feature.jpg'
 import testimonyImage from '../public/images/testimony.jpg'
@@ -30,27 +30,26 @@ const testimonies = [
 export default function Home () {
   return (
     <>
-      <header>
-        <HeroHeader />
-      </header>
+      <section className='grid mx-auto text-center gap-y-16 md:gap-y-24 dark:text-white'>
+        {features.map((feature, index) => (
+          <Feature key={index} image={feature.image} title={feature.title} description={feature.description} />
+        ))}
+      </section>
 
-      <main>
-        <section className='container flex flex-col gap-y-28 mx-auto pt-28 dark:text-white text-center'>
-          {features.map((feature, index) => (
-            <Feature key={index} image={feature.image} title={feature.title} description={feature.description} />
+      <section className='pt-24 text-center md:pt-36 dark:text-white'>
+        <Headline type='h3'>What they say</Headline>
+        <div className='gap-10 md:mb-10 columns-1 md:columns-2 lg:columns-4'>
+          {testimonies.map((testimony, index) => (
+            <Testimony key={index} image={testimony.image} name={testimony.name} rol={testimony.rol} text={testimony.text} index={index} />
           ))}
-        </section>
+        </div>
+        <Button type='primary'><PlusIcon className='w-4 stroke-width-3' /></Button>
+      </section>
 
-        <section className='container flex flex-col items-center  mx-auto pt-28 dark:text-white text-center'>
-          <Headline type='h3'>What they say</Headline>
-          <div className='columns-2 md:columns-3 lg:columns-4 gap-10 mb-10'>
-            {testimonies.map((testimony, index) => (
-              <Testimony key={index} image={testimony.image} name={testimony.name} rol={testimony.rol} text={testimony.text} />
-            ))}
-          </div>
-          <Button type='primary'><PlusIcon className='w-4 stroke-width-3' /></Button>
-        </section>
-      </main>
+      <section className='grid pt-24 text-center md:gap-10 md:grid-cols-2 md:pt-36 dark:text-white md:text-left'>
+        <Headline type='h3'>Let's talk!</Headline>
+        <Form />
+      </section>
     </>
   )
 }
