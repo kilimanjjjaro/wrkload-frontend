@@ -38,7 +38,7 @@ export default function Home () {
 
       <section className='pt-24 text-center md:pt-36 dark:text-white'>
         <Headline type='h3'>What they say</Headline>
-        <div className='gap-10 md:mb-10 columns-1 md:columns-2 lg:columns-4'>
+        <div className='gap-10 xl:mb-10 columns-1 md:columns-2 xl:columns-4'>
           {testimonies.map((testimony, index) => (
             <Testimony key={index} image={testimony.image} name={testimony.name} rol={testimony.rol} text={testimony.text} index={index} />
           ))}
@@ -46,7 +46,7 @@ export default function Home () {
         <Button type='primary'><PlusIcon className='w-4 stroke-width-3' /></Button>
       </section>
 
-      <section className='grid pt-24 text-center md:gap-10 md:grid-cols-2 md:pt-36 dark:text-white md:text-left'>
+      <section className='grid pt-24 text-center xl:gap-10 xl:grid-cols-2 md:pt-36 dark:text-white xl:text-left'>
         <Headline type='h3'>Let's talk!</Headline>
         <Form />
       </section>

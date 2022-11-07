@@ -16,14 +16,14 @@ export default function NavBar () {
   return (
     <nav className='container flex items-center justify-between mx-auto py-7 md:py-10'>
       <Link href='/'><Logo /></Link>
-      <div className='items-center hidden font-normal md:flex gap-x-10'>
+      <div className='items-center hidden font-normal lg:flex gap-x-10'>
         {
           pages.map((page) => (
             <TextLink link={page.link} key={page.name}>{page.name}</TextLink>
           ))
         }
         <Dropdown />
-        <button><MoonIcon className='w-4 text-white transition duration-500 ease-in-out hover:text-primary' /></button>
+        <button><MoonIcon className='w-4 text-black transition duration-500 ease-in-out dark:text-white hover:text-primary' /></button>
         <Button type='primary'>Log in <LockClosedIcon className='w-4 stroke-width-3' /></Button>
       </div>
     </nav>

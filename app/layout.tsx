@@ -8,11 +8,11 @@ import './globals.css'
 
 export default function RootLayout ({ children }) {
   return (
-    <html lang='en'>
+    <html lang='en' className='dark'>
       <head>
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       </head>
-      <body className={`bg-white dark:bg-alternative ${inter.variable} ${syne.variable} antialiased`}>
+      <body className={`bg-gray-100 dark:bg-alternative ${inter.variable} ${syne.variable} antialiased`}>
         <div className='bg-white dark:bg-black rounded-b-[32px]'>
           <header className='container px-6 mx-auto md:px-8'>
             <NavBar />
