@@ -8,7 +8,7 @@ import { LockClosedIcon } from '@heroicons/react/24/outline'
 
 const pages = [
   { name: 'Home', link: '/' },
-  { name: 'Features', link: '/features' },
+  { name: 'Features', link: '/tasks' },
   { name: 'Contact', link: '/contact' }
 ]
 
@@ -23,7 +23,7 @@ export default function NavBar () {
           ))
         }
         <Dropdown />
-        <button><MoonIcon className='w-4 text-black transition duration-500 ease-in-out dark:text-white hover:text-primary' /></button>
+        <button><MoonIcon className='w-4 text-black transition duration-500 ease-in-out dark:text-white hover:text-primary dark:hover:text-primary' /></button>
         <Button type='primary'>Log in <LockClosedIcon className='w-4 stroke-width-3' /></Button>
       </div>
     </nav>

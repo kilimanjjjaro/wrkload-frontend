@@ -14,12 +14,12 @@ export default function Footer () {
         </div>
         <div className='justify-self-end'>
           <Link href='https://kilimanjjjaro.com/'>
-            <KilimanjjjaroLogo className='w-16 transition duration-500 ease-in-out md:w-18 2xl:w-18 fill-black dark:fill-white hover:fill-primary' />
+            <KilimanjjjaroLogo className='w-16 transition duration-500 ease-in-out md:w-18 2xl:w-18 fill-black dark:fill-white hover:fill-primary dark:hover:fill-primary' />
           </Link>
         </div>
       </div>
       <div className='relative flex justify-center pt-16 pb-12 mx-auto text-center text-black transition duration-500 ease-in-out md:pb-20 md:pt-9 dark:text-white'>
-        <TextLink href='/#contact'>
+        <TextLink>
           <Headline type='h3'>This is the end, <br />do you have ideas?</Headline>
         </TextLink>
       </div>
