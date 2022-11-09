@@ -5,7 +5,7 @@ import Logo from './shared/Logo'
 import KilimanjjjaroLogo from '../../public/images/kilimanjjjaro.svg'
 import { MoonIcon } from '@heroicons/react/24/solid'
 
-export default function Footer () {
+export default function Footer (): JSX.Element {
   return (
     <>
       <div className='grid grid-cols-2 justify-items-start'>
@@ -19,7 +19,7 @@ export default function Footer () {
         </div>
       </div>
       <div className='relative flex justify-center pt-16 pb-12 mx-auto text-center text-black transition duration-500 ease-in-out md:pb-20 md:pt-9 dark:text-white'>
-        <TextLink>
+        <TextLink link='/'>
           <Headline type='h3'>This is the end, <br />do you have ideas?</Headline>
         </TextLink>
       </div>

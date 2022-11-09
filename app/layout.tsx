@@ -5,7 +5,11 @@ import { inter, syne } from './utils/fonts'
 
 import './globals.css'
 
-export default function RootLayout ({ children }) {
+interface Props {
+  children: React.ReactNode
+}
+
+export default function RootLayout ({ children }: Props): JSX.Element {
   return (
     <html lang='en' className='dark scroll-smooth'>
       <head>

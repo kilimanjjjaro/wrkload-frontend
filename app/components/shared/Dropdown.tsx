@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 
-export default function Dropdown () {
+export default function Dropdown (): JSX.Element {
   const [dropdownStatus, setDropdownStatus] = useState(false)
 
   return (

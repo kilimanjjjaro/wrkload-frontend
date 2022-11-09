@@ -8,11 +8,10 @@ import { LockClosedIcon } from '@heroicons/react/24/outline'
 
 const pages = [
   { name: 'Home', link: '/' },
-  { name: 'Features', link: '/tasks' },
-  { name: 'Contact', link: '/contact' }
+  { name: 'Tasks', link: '/tasks' }
 ]
 
-export default function NavBar () {
+export default function NavBar (): JSX.Element {
   return (
     <nav className='container flex items-center justify-between mx-auto py-7 md:py-10'>
       <Link href='/'><Logo /></Link>
@@ -24,7 +23,7 @@ export default function NavBar () {
         }
         <Dropdown />
         <button><MoonIcon className='w-4 text-black transition duration-500 ease-in-out dark:text-white hover:text-primary dark:hover:text-primary' /></button>
-        <Button type='primary'>Log in <LockClosedIcon className='w-4 stroke-width-3' /></Button>
+        <Button type='primary' link='/'>Log in <LockClosedIcon className='w-4 stroke-width-3' /></Button>
       </div>
     </nav>
   )

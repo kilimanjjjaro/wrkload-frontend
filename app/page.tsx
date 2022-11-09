@@ -28,7 +28,7 @@ const testimonies = [
   { image: testimonyImage, name: 'Shannon Wise', rol: 'CEO at Wherever', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida lorem id fermentum vehicula. Lorem ipsum dolor sit amet, consur adipiscing elit. Vestibulum cing elit. Vestibulum gravida lorem id. Loremsum dolor sit amet, consur adipiscing elit. Vestibulum cing elit gravida.' }
 ]
 
-export default function Home () {
+export default function Home (): JSX.Element {
   return (
     <>
       <header className='container px-6 mx-auto md:px-8'>
@@ -44,10 +44,10 @@ export default function Home () {
           <Headline type='h3'>What they say</Headline>
           <div className='gap-10 xl:mb-10 columns-1 md:columns-2 xl:columns-4'>
             {testimonies.map((testimony, index) => (
-              <Testimony key={index} image={testimony.image} name={testimony.name} rol={testimony.rol} text={testimony.text} index={index} />
+              <Testimony key={index} image={testimony.image} name={testimony.name} rol={testimony.rol} text={testimony.text} />
             ))}
           </div>
-          <Button type='primary'><PlusIcon className='w-4 stroke-width-3' /></Button>
+          <Button link='/' type='primary'><PlusIcon className='w-4 stroke-width-3' /></Button>
         </section>
         <section className='grid pt-24 text-center xl:gap-10 xl:grid-cols-2 md:pt-36 dark:text-white xl:text-left'>
           <Headline type='h3'>Let's talk!</Headline>
