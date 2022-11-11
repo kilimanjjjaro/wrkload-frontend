@@ -10,14 +10,14 @@ import Form from './components/Form'
 import featureImage from '../public/images/feature.jpg'
 import testimonyImage from '../public/images/testimony.jpg'
 
-const features = [
+const FEATURES = [
   { image: featureImage, title: 'Without chaos at payday!', description: 'wrkload was developed to help people who get paid by goals to keep track of -easily and clearly- what they have worked on in the month.' },
   { image: featureImage, title: 'All you need in one blink!', description: 'You can control in detail the time you worked on a task and extra data associated with it. All in the same place.' },
   { image: featureImage, title: 'Mo control Mo safety!', description: 'You can have real-time access to what you are earning per project at month and check what you earned at last months.' },
   { image: featureImage, title: 'Fast and safe!', description: 'Just upload your tasks and go have fun because only you have access to them.' }
 ]
 
-const testimonies = [
+const TESTIMONIES = [
   { image: testimonyImage, name: 'Shannon Wise', rol: 'CEO at Wherever', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida lorem id fermentum vehicula. Quisque fringilla turpis at convallis pulvinar adipiscing.' },
   { image: testimonyImage, name: 'Shannon Wise', rol: 'CEO at Wherever', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida lorem id fermentum vehicula adipiscing elit.' },
   { image: testimonyImage, name: 'Shannon Wise', rol: 'CEO at Wherever', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida lorem id fermentum vehicula. Lorem ipsum dolor sit amet, consur adipiscing elit. Vestibulum cing elit. Vestibulum gravida lorem id. Loremsum dolor sit amet, consur adipiscing elit. Vestibulum cing elit gravida.' },
@@ -36,14 +36,14 @@ export default function Home (): JSX.Element {
       </header>
       <main className='container px-6 py-24 mx-auto md:px-8 md:py-28'>
         <section className='grid mx-auto text-center gap-y-16 md:gap-y-24 dark:text-white'>
-          {features.map((feature, index) => (
+          {FEATURES.map((feature, index) => (
             <Feature key={index} image={feature.image} title={feature.title} description={feature.description} />
           ))}
         </section>
         <section className='pt-24 text-center md:pt-36 dark:text-white'>
           <Headline type='h3'>What they say</Headline>
           <div className='gap-10 xl:mb-10 columns-1 md:columns-2 xl:columns-4'>
-            {testimonies.map((testimony, index) => (
+            {TESTIMONIES.map((testimony, index) => (
               <Testimony key={index} image={testimony.image} name={testimony.name} rol={testimony.rol} text={testimony.text} />
             ))}
           </div>
