@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import Logo from './Logo'
-import Dropdown from './Dropdown'
-import Button from './Button'
-import TextLink from './TextLink'
 import { MoonIcon } from '@heroicons/react/24/solid'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
+import Logo from 'app/components/shared/Logo'
+import TextLink from 'app/components/shared/TextLink'
+import Dropdown from 'app/components/shared/Dropdown'
+import Button from 'app/components/shared/Button'
 
 const PAGES = [
   { name: 'Home', link: '/' },

@@ -1,5 +1,5 @@
 import { CalendarIcon, MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/outline'
-import Button from '../../components/shared/Button'
+import Button from 'app/components/shared/Button'
 
 export default function Options (): JSX.Element {
   return (

@@ -1,5 +1,5 @@
-import Options from './components/Options'
-import PageTitle from './components/PageTitle'
+import PageTitle from 'app/tasks/components/PageTitle'
+import Options from 'app/tasks/components/Options'
 
 interface Props {
   children: React.ReactNode

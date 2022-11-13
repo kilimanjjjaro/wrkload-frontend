@@ -1,23 +1,23 @@
 import { PlusIcon } from '@heroicons/react/24/outline'
+import HeroHeader from 'app/components/HeroHeader'
+import Headline from 'app/components/shared/Headline'
+import Button from 'app/components/shared/Button'
+import Feature from 'app/components/Feature'
+import Testimony from 'app/components/Testimony'
+import Form from 'app/components/Form'
+import featureImage from 'public/images/feature.jpg'
+import testimonyImage from 'public/images/testimony.jpg'
+import FeaturesInterface from 'interfaces/home/Features'
+import TestimoniesInterface from 'interfaces/home/Testimonies'
 
-import HeroHeader from './components/HeroHeader'
-import Headline from './components/shared/Headline'
-import Button from './components/shared/Button'
-import Feature from './components/Feature'
-import Testimony from './components/Testimony'
-import Form from './components/Form'
-
-import featureImage from '../public/images/feature.jpg'
-import testimonyImage from '../public/images/testimony.jpg'
-
-const FEATURES = [
+const FEATURES: FeaturesInterface[] = [
   { image: featureImage, title: 'Without chaos at payday!', description: 'wrkload was developed to help people who get paid by goals to keep track of -easily and clearly- what they have worked on in the month.' },
   { image: featureImage, title: 'All you need in one blink!', description: 'You can control in detail the time you worked on a task and extra data associated with it. All in the same place.' },
   { image: featureImage, title: 'Mo control Mo safety!', description: 'You can have real-time access to what you are earning per project at month and check what you earned at last months.' },
   { image: featureImage, title: 'Fast and safe!', description: 'Just upload your tasks and go have fun because only you have access to them.' }
 ]
 
-const TESTIMONIES = [
+const TESTIMONIES: TestimoniesInterface[] = [
   { image: testimonyImage, name: 'Shannon Wise', rol: 'CEO at Wherever', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida lorem id fermentum vehicula. Quisque fringilla turpis at convallis pulvinar adipiscing.' },
   { image: testimonyImage, name: 'Shannon Wise', rol: 'CEO at Wherever', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida lorem id fermentum vehicula adipiscing elit.' },
   { image: testimonyImage, name: 'Shannon Wise', rol: 'CEO at Wherever', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida lorem id fermentum vehicula. Lorem ipsum dolor sit amet, consur adipiscing elit. Vestibulum cing elit. Vestibulum gravida lorem id. Loremsum dolor sit amet, consur adipiscing elit. Vestibulum cing elit gravida.' },

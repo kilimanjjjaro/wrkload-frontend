@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
-import Headline from './shared/Headline'
-import Paragraph from './shared/Paragraph'
-import Button from './shared/Button'
+import Headline from 'app/components/shared/Headline'
+import Paragraph from 'app/components/shared/Paragraph'
+import Button from 'app/components/shared/Button'
 
 export default function HeroHeader (): JSX.Element {
   return (

@@ -1,7 +1,6 @@
-import React from 'react'
-import NavBar from './components/shared/NavBar'
-import Footer from './components/Footer'
-import { inter, syne } from './utils/fonts'
+import { inter, syne } from 'app/utils/fonts'
+import NavBar from 'app/components/shared/NavBar'
+import Footer from 'app/components/Footer'
 import './globals.css'
 
 interface Props {
