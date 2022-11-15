@@ -8,7 +8,9 @@ import Button from 'app/components/shared/Button'
 
 const PAGES = [
   { name: 'Home', link: '/' },
-  { name: 'Tasks', link: '/tasks' }
+  { name: 'Tasks', link: '/tasks' },
+  { name: 'Projects', link: '/projects' },
+  { name: 'Users', link: '/users' }
 ]
 
 export default function NavBar (): JSX.Element {

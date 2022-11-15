@@ -17,7 +17,7 @@ export default function Feature ({ image, title, description }: Props): JSX.Elem
         src={image}
         alt={title}
       /> */}
-      <div className='mb-8 md:mb-10 rounded-3xl w-full h-[300px] md:h-[450px] xl:h-[600px] 2xl:h-[750px] bg-gray-100 dark:bg-alternative' />
+      <div className='mb-8 md:mb-10 rounded-3xl w-full h-[300px] md:h-[450px] xl:h-[600px] 2xl:h-[750px] bg-gray-200 dark:bg-alternative' />
       <div className='mx-auto md:w-[66%] xl:w-[38%]'>
         <Headline type='h3'>{title}</Headline>
         <Paragraph type='normal'>{description}</Paragraph>

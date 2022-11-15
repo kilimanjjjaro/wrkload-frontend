@@ -1,4 +1,4 @@
-import { ArrowUpIcon, ArrowDownIcon, BanknotesIcon, ClockIcon, CloudArrowUpIcon, FireIcon } from '@heroicons/react/24/outline'
+import { ArrowUpIcon, ArrowDownIcon, BanknotesIcon, ClockIcon, InboxStackIcon, FireIcon } from '@heroicons/react/24/outline'
 import StatsInterface from 'interfaces/Stats'
 
 const fetchStats = (): StatsInterface[] => {
@@ -17,8 +17,8 @@ export default async function Stats (): Promise<JSX.Element> {
   return (
     <div className='mt-10 gap-x-10 columns-1 md:columns-2 xl:columns-4'>
       {stats.map((stat, index) => (
-        <div key={index} className='text-black border-4 border-white md:mb-0 rounded-3xl p-7 dark:text-white'>
-          {stat.type === 'totalTasks' && <CloudArrowUpIcon className='h-10 stroke-width-2' />}
+        <div key={index} className='mb-6 text-black border-4 border-gray-200 md:mb-0 rounded-3xl p-7 dark:text-white'>
+          {stat.type === 'totalTasks' && <InboxStackIcon className='h-10 stroke-width-2' />}
           {stat.type === 'totalMonthlyHours' && <ClockIcon className='h-10 stroke-width-2' />}
           {stat.type === 'goals' && <BanknotesIcon className='h-10 stroke-width-2' />}
           {stat.type === 'project' && <FireIcon className='h-10 stroke-width-2' />}
