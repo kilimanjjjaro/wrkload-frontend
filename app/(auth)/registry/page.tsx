@@ -8,15 +8,17 @@ import GitHubLogo from '../../../public/images/github.svg'
 import GoogleLogo from '../../../public/images/google.svg'
 import TextLink from 'app/components/shared/TextLink'
 
-export default function Login (): JSX.Element {
+export default function Registry (): JSX.Element {
   return (
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-96 min-w-auto rounded-3xl'>
-        <Headline variant='md'><b>Welcome again!</b></Headline>
+        <Headline variant='md'><b>Nice to meet you!</b></Headline>
         <form>
           <div className='flex flex-col gap-3 mb-5'>
+            <Input type='text' placeholder='Username' autoComplete='email' centerText />
             <Input type='email' placeholder='Email' autoComplete='email' centerText />
             <Input type='password' placeholder='Password' autoComplete='current-password' centerText />
+            <Input type='password' placeholder='Confirm Password' autoComplete='current-password' centerText />
           </div>
           <Button variant='secondary' onClick={() => { throw new Error('¡Ups!') }}>
             <LockClosedIcon className='w-4 stroke-width-3' />
@@ -39,9 +41,7 @@ export default function Login (): JSX.Element {
         </div>
       </div>
       <div className='flex gap-5 text-sm text-white '>
-        <TextLink link='/remember-password'>Forgot password?</TextLink>
-        <div className=' w-[2px] h-auto bg-white' />
-        <TextLink link='/registry'>Not account yet?</TextLink>
+        <TextLink link='/login'>Already have an account?</TextLink>
       </div>
     </div>
   )
