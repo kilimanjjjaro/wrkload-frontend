@@ -29,7 +29,7 @@ export default async function ListOfTasks (): Promise<JSX.Element> {
       {tasks.map((task, index) => (
         <div key={index} className='relative flex flex-col items-start bg-gray-200 group p-7 dark:bg-white rounded-3xl'>
           <h3 className='mb-5 text-3xl font-bold font-primaryFont'>{task.title}</h3>
-          <Paragraph type='small'>{task.description}</Paragraph>
+          <Paragraph variant='sm'>{task.description}</Paragraph>
           <div className='flex flex-wrap gap-3 mt-4'>
             <div className='flex items-center h-8 px-4 text-xs text-white bg-black rounded-full gap-x-1 font-secondaryFont'><CalendarIcon className='w-4 stroke-width-2' /> {task.deliveredAt}</div>
             <div className='flex items-center h-8 px-4 text-xs text-white bg-black rounded-full gap-x-1 font-secondaryFont'><ClockIcon className='w-4 stroke-width-2' /> {task.timing}</div>

@@ -1,15 +1,13 @@
 interface Props {
   children?: React.ReactNode
-  type: String
+  variant: 'normal' | 'sm'
 }
 
-export default function Paragraph ({ children, type }: Props): JSX.Element {
-  switch (type) {
-    case 'normal':
-      return <p className='text-base md:text-xl font-secondaryFont'>{children}</p>
-    case 'small':
-      return <p className='text-sm font-secondaryFont'>{children}</p>
-    default:
-      return <p className='text-base md:text-xl font-secondaryFont'>{children}</p>
-  }
+export default function Paragraph ({ children, variant }: Props): JSX.Element {
+  return (
+    <>
+      {variant === 'normal' && <p className='text-base md:text-xl font-secondaryFont'>{children}</p>}
+      {variant === 'sm' && <p className='text-sm font-secondaryFont'>{children}</p>}
+    </>
+  )
 }

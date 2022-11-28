@@ -4,9 +4,9 @@ import Button from './Button'
 export default function Pagination (): JSX.Element {
   return (
     <div className='flex justify-center mt-10 gap-x-5'>
-      <Button link='/' type='primary'><ArrowLeftIcon className='w-4 stroke-width-3' /></Button>
+      <Button variant='primary'><ArrowLeftIcon className='w-4 stroke-width-3' /></Button>
       <div className='self-center text-sm text-black dark:text-white font-secondaryFont'>Page 1</div>
-      <Button link='/' type='primary'><ArrowRightIcon className='w-4 stroke-width-3' /></Button>
+      <Button variant='primary'><ArrowRightIcon className='w-4 stroke-width-3' /></Button>
     </div>
   )
 }

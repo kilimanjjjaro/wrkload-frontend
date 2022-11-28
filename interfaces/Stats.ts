@@ -1,5 +1,5 @@
 export default interface StatsInterface {
-  type: String
-  value: String
-  avg?: String
+  type: string
+  value: string
+  avg?: string
 }

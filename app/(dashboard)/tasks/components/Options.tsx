@@ -4,9 +4,9 @@ import Button from 'app/components/shared/Button'
 export default function Options (): JSX.Element {
   return (
     <div className='hidden lg:flex gap-x-5'>
-      <Button link='/' type='primary'><PlusIcon className='w-4 stroke-width-3' /></Button>
-      <Button link='/' type='primary'><CalendarIcon className='w-4 stroke-width-3' /></Button>
-      <Button link='/' type='primary'><MagnifyingGlassIcon className='w-4 stroke-width-3' /></Button>
+      <Button variant='primary'><PlusIcon className='w-4 stroke-width-3' /></Button>
+      <Button variant='primary'><CalendarIcon className='w-4 stroke-width-3' /></Button>
+      <Button variant='primary'><MagnifyingGlassIcon className='w-4 stroke-width-3' /></Button>
     </div>
   )
 }

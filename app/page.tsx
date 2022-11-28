@@ -1,3 +1,4 @@
+import Footer from 'app/components/shared/Footer'
 import { PlusIcon } from '@heroicons/react/24/outline'
 import HeroHeader from 'app/components/HeroHeader'
 import Headline from 'app/components/shared/Headline'
@@ -90,43 +91,46 @@ const TESTIMONIES: TestimoniesInterface[] = [
 
 export default function Home (): JSX.Element {
   return (
-    <>
-      <header className='container px-6 mx-auto md:px-8'>
-        <HeroHeader />
-      </header>
-      <main className='container px-6 py-24 mx-auto md:px-8 md:py-28'>
-        <section className='grid mx-auto text-center gap-y-16 md:gap-y-24 dark:text-white'>
-          {FEATURES.map((feature, index) => (
-            <Feature
-              key={index}
-              image={feature.image}
-              title={feature.title}
-              description={feature.description}
-            />
-          ))}
-        </section>
-        <section className='pt-24 text-center md:pt-36 dark:text-white'>
-          <Headline type='h3'>What they say</Headline>
-          <div className='gap-10 columns-1 md:columns-2 xl:columns-4'>
-            {TESTIMONIES.map((testimony, index) => (
-              <Testimony
+    <div className='bg-gray-200 dark:bg-alternative'>
+      <div className='bg-white dark:bg-black rounded-b-3xl'>
+        <header className='container px-6 mx-auto md:px-8'>
+          <HeroHeader />
+        </header>
+        <main className='container px-6 py-24 mx-auto md:px-8 md:py-28'>
+          <section className='grid mx-auto text-center gap-y-16 md:gap-y-24 dark:text-white'>
+            {FEATURES.map((feature, index) => (
+              <Feature
                 key={index}
-                image={testimony.image}
-                name={testimony.name}
-                rol={testimony.rol}
-                text={testimony.text}
+                image={feature.image}
+                title={feature.title}
+                description={feature.description}
               />
             ))}
-          </div>
-          <Button link='/' type='primary'>
-            <PlusIcon className='w-4 stroke-width-3' />
-          </Button>
-        </section>
-        <section className='grid pt-24 text-center xl:gap-10 xl:grid-cols-2 md:pt-36 dark:text-white xl:text-left'>
-          <Headline type='h3'>Let's talk!</Headline>
-          <Form />
-        </section>
-      </main>
-    </>
+          </section>
+          <section className='pt-24 text-center md:pt-36 dark:text-white'>
+            <Headline variant='xl'>What they say</Headline>
+            <div className='gap-10 columns-1 md:columns-2 xl:columns-4'>
+              {TESTIMONIES.map((testimony, index) => (
+                <Testimony
+                  key={index}
+                  image={testimony.image}
+                  name={testimony.name}
+                  rol={testimony.rol}
+                  text={testimony.text}
+                />
+              ))}
+            </div>
+            <Button variant='primary'>
+              <PlusIcon className='w-4 stroke-width-3' />
+            </Button>
+          </section>
+          <section className='grid pt-24 text-center xl:gap-10 xl:grid-cols-2 md:pt-36 dark:text-white xl:text-left'>
+            <Headline variant='xl'>Let's talk!</Headline>
+            <Form />
+          </section>
+        </main>
+      </div>
+      <Footer variant='primary' />
+    </div>
   )
 }

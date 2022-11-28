@@ -3,7 +3,7 @@ import Image, { StaticImageData } from 'next/image'
 interface Props {
   image: StaticImageData
   name: string
-  rol: String
+  rol: string
   text: string
 }
 

@@ -1,6 +1,5 @@
 import { inter, syne } from 'utils/fonts'
 import NavBar from 'app/components/shared/NavBar'
-import Footer from 'app/components/Footer'
 import './globals.css'
 
 interface Props {
@@ -9,18 +8,13 @@ interface Props {
 
 export default function RootLayout ({ children }: Props): JSX.Element {
   return (
-    <html lang='en' className='dark scroll-smooth'>
+    <html lang='en' className='scroll-smooth dark'>
       <head>
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       </head>
-      <body className={`bg-gray-200 dark:bg-alternative ${inter.variable} ${syne.variable} antialiased`}>
-        <div className='bg-white dark:bg-black rounded-b-[32px]'>
-          <NavBar />
-          {children}
-        </div>
-        <footer className='container px-6 pt-16 pb-8 mx-auto md:px-8'>
-          <Footer />
-        </footer>
+      <body className={`antialiased ${inter.variable} ${syne.variable}`}>
+        <NavBar />
+        {children}
       </body>
     </html>
   )

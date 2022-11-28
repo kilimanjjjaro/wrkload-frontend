@@ -1083,10 +1083,10 @@
   dependencies:
     glob "7.1.7"
 
-"@next/font@13.0.2":
-  version "13.0.2"
-  resolved "https://registry.yarnpkg.com/@next/font/-/font-13.0.2.tgz#509467d6e4a04b67de2e5f21fd682227c2240cdb"
-  integrity sha512-tLbyZCA1uF8HjbUEN5c4zB453yEzt5aT9VDhXPw1/eJhX4U0Q4lD3s3Bs+gpCjuLrEgILd56jQuzxgrMnWHH8A==
+"@next/font@13.0.5":
+  version "13.0.5"
+  resolved "https://registry.yarnpkg.com/@next/font/-/font-13.0.5.tgz#db0ef389d926d3a8b649db8aa76e67f9502a478f"
+  integrity sha512-NrP4B8pxwerrkkuG/m7MQv0ks89Kk4Lc0kzbiRaYX+Xb0coDaw+I9T+g42aOHf8j8ta1vtKqb5XE1+troZ4CoQ==
 
 "@next/swc-android-arm-eabi@13.0.2":
   version "13.0.2"
@@ -1736,6 +1736,11 @@ client-only@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/client-only/-/client-only-0.0.1.tgz#38bba5d403c41ab150bff64a95c85013cf73bca1"
   integrity sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==
+
+clsx@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.2.1.tgz#0ddc4a20a549b59c93a4116bb26f5294ca17dc12"
+  integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
 
 color-convert@^1.9.0:
   version "1.9.3"
