@@ -3,7 +3,7 @@ import clsx from 'clsx'
 
 interface Props {
   variant: 'primary' | 'secondary' | 'alternative'
-  onClick: () => void
+  onClick?: () => void
   fullwidth?: Boolean
   children: React.ReactNode
 }

@@ -1,7 +1,7 @@
 import Stats from 'app/components/shared/Stats'
-import Options from 'app/(dashboard)/users/components/Options'
-import PageTitle from 'app/(dashboard)/users/components/PageTitle'
 import Pagination from 'app/components/shared/Pagination'
+import Header from 'app/components/shared/Header'
+import Footer from 'app/components/shared/Footer'
 
 interface Props {
   children: React.ReactNode
@@ -9,16 +9,14 @@ interface Props {
 
 export default function DashboardLayout ({ children }: Props): JSX.Element {
   return (
-    <>
-      <header className='container flex justify-between px-6 mx-auto md:px-8 pt-7 md:pt-16 dark:text-white'>
-        <PageTitle />
-        <Options />
-      </header>
-      <main className='container px-6 pb-24 mx-auto md:px-8 md:pb-28'>
+    <div className='bg-white dark:bg-black'>
+      <Header />
+      <main className='container px-6 mx-auto md:px-8'>
         {children}
         <Pagination />
         <Stats />
       </main>
-    </>
+      <Footer variant='secondary' />
+    </div>
   )
 }

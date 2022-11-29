@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import Headline from 'app/components/shared/Headline'
 
-export default function PageTitle (): JSX.Element {
+export const PageTitle = (): JSX.Element => {
   const [project, setProject] = useState('Powgen')
 
   return (
