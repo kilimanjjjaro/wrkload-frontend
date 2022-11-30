@@ -1,13 +1,8 @@
-import Image, { StaticImageData } from 'next/image'
+import { TestimonyInterface } from 'interfaces/components'
+import TestimoniesInterface from 'interfaces/home/Testimonies'
+import Image from 'next/image'
 
-interface Props {
-  image: StaticImageData
-  name: string
-  rol: string
-  text: string
-}
-
-export default function Testimony ({ image, name, rol, text }: Props): JSX.Element {
+export default function Testimony ({ image, name, rol, text }: TestimoniesInterface): JSX.Element {
   return (
     <div className='flex flex-col items-center mb-6 bg-gray-200 p-7 md:mb-10 dark:bg-alternative rounded-3xl break-inside-avoid'>
       <Image

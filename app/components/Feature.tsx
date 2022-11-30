@@ -1,15 +1,9 @@
 // import Image from 'next/image'
-import { StaticImageData } from 'next/image'
+import FeaturesInterface from 'interfaces/home/Features'
 import Headline from './shared/Headline'
 import Paragraph from './shared/Paragraph'
 
-interface Props {
-  image: StaticImageData
-  title: string
-  description: string
-}
-
-export default function Feature ({ image, title, description }: Props): JSX.Element {
+export default function Feature ({ image, title, description }: FeaturesInterface): JSX.Element {
   return (
     <div>
       {/* <Image

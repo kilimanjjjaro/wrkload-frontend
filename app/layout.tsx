@@ -1,12 +1,9 @@
 import { inter, syne } from 'utils/fonts'
 import NavBar from 'app/components/shared/NavBar'
 import './globals.css'
+import { LayoutProps } from 'interfaces/components'
 
-interface Props {
-  children: React.ReactNode
-}
-
-export default function RootLayout ({ children }: Props): JSX.Element {
+export default function RootLayout ({ children }: LayoutProps): JSX.Element {
   return (
     <html lang='en' className='scroll-smooth dark'>
       <head>
