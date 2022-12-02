@@ -1,3 +1,4 @@
+'use client'
 import { createContext } from 'react'
 import { signal } from '@preact/signals-react'
 import { LayoutProps, UserContextInterface } from 'interfaces/components'

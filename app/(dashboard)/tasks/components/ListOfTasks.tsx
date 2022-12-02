@@ -34,12 +34,7 @@ export default async function ListOfTasks (): Promise<JSX.Element> {
   return (
     <>
       <MasonryGrid>
-        {(tasks[0].stats != null) &&
-          <>
-            {tasks[0].stats.map((element, index) => (
-              <TasksStats key={index} hours={element.hours} text={element.text} />
-            ))}
-          </>}
+        {(tasks[0].stats != null) && <TasksStats stats={tasks[0].stats} />}
         {tasks.splice(1).map((task, index) => (
           <div key={index} className='relative flex flex-col items-start bg-gray-200 group p-7 dark:bg-white rounded-3xl'>
             <h3 className='mb-5 text-3xl font-bold font-primaryFont'>{task.title}</h3>

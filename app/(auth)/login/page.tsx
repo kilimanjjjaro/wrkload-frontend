@@ -9,10 +9,9 @@ import Button from 'app/components/shared/Button'
 import TextLink from 'app/components/shared/TextLink'
 import GitHubLogo from '../../../public/images/github.svg'
 import GoogleLogo from '../../../public/images/google.svg'
-import { UserContextInterface } from 'interfaces/components'
 
 export default function Login (): JSX.Element {
-  const { user } = useContext(DataContext) as UserContextInterface
+  const { user } = useContext(DataContext)
 
   const handleLogin = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()

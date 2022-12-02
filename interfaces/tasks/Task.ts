@@ -1,6 +1,9 @@
+import { Key } from 'react'
+
 export interface StatsTasksInterface {
-  hours?: string | undefined
-  text?: string | undefined
+  id: Key | undefined
+  hours: string | undefined
+  text: string | undefined
 }
 
 export default interface TaskInterface {
