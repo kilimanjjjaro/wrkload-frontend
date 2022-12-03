@@ -1,6 +1,6 @@
 'use client'
 
-import { PropsInterface } from 'interfaces/components'
+import { LayoutProps } from 'interfaces/components'
 import { Plock, Breakpoint } from 'react-plock'
 
 const BREAKPOINTS: Breakpoint[] = [
@@ -9,7 +9,7 @@ const BREAKPOINTS: Breakpoint[] = [
   { size: 1280, columns: 4 }
 ]
 
-export default function MasonryGrid ({ children }: PropsInterface): JSX.Element {
+export default function MasonryGrid ({ children }: LayoutProps): JSX.Element {
   return (
     <>
       <Plock breakpoints={BREAKPOINTS} gap='2.5rem'>

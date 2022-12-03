@@ -1,3 +1,3 @@
 export default function Head (): JSX.Element {
-  return <title>Registry - wrkload</title>
+  return <title>Registry — wrkload</title>
 }

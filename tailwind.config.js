@@ -11,6 +11,9 @@ module.exports = {
       secondaryFont: 'var(--inter-font), sans-serif'
     },
     extend: {
+      screens: {
+        '2xl': '1740px'
+      },
       colors: {
         primary: '#0500ff',
         alternative: '#0d0d0d',

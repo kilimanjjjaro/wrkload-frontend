@@ -1,3 +1,3 @@
 export default function Head (): JSX.Element {
-  return <title>Change password - wrkload</title>
+  return <title>Change password — wrkload</title>
 }
