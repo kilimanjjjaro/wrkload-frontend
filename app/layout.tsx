@@ -1,7 +1,7 @@
 import { inter, syne } from 'utils/fonts'
 import NavBar from 'app/components/shared/NavBar'
-import './globals.css'
 import { LayoutProps } from 'interfaces/components'
+import './globals.css'
 
 export default function RootLayout ({ children }: LayoutProps): JSX.Element {
   return (

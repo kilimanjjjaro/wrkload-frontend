@@ -1,5 +1,3 @@
-'use client'
-
 import DataProvider from 'context/DataContext'
 import Footer from 'app/components/shared/Footer'
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { DataContext } from 'context/DataContext'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
 import Headline from 'app/components/shared/Headline'
@@ -11,13 +11,18 @@ import GitHubLogo from '../../../public/images/github.svg'
 import GoogleLogo from '../../../public/images/google.svg'
 
 export default function Login (): JSX.Element {
-  const { user } = useContext(DataContext)
+  const { user, setUser } = useContext(DataContext)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  console.log(useContext(DataContext))
 
   const handleLogin = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    console.log(user.value)
-    user.value.email = ''
-    user.value.password = ''
+    console.log(user)
+    setUser({ email, password })
+    console.log(user)
+    setEmail('')
+    setPassword('')
   }
 
   return (
@@ -26,8 +31,8 @@ export default function Login (): JSX.Element {
         <Headline variant='md'><b>Welcome again!</b></Headline>
         <form onSubmit={handleLogin}>
           <div className='flex flex-col gap-3 mb-5'>
-            <Input onChange={(event) => { user.value.email = event.target.value }} type='email' placeholder='Email' autoComplete='email' centerText />
-            <Input onChange={(event) => { user.value.password = event.target.value }} type='password' placeholder='Password' autoComplete='current-password' centerText />
+            <Input onChange={(event) => setEmail(event.target.value)} value={email} type='email' placeholder='Email' autoComplete='email' centerText />
+            <Input onChange={(event) => setPassword(event.target.value)} value={password} type='password' placeholder='Password' autoComplete='current-password' centerText />
           </div>
           <Button variant='secondary'>
             <LockClosedIcon className='w-4 stroke-width-3' />

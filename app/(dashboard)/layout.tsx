@@ -1,3 +1,4 @@
+import DataProvider from 'context/DataContext'
 import Stats from 'app/components/shared/Stats'
 import Pagination from 'app/components/shared/Pagination'
 import Header from 'app/components/shared/Header'
@@ -9,14 +10,16 @@ interface Props {
 
 export default function DashboardLayout ({ children }: Props): JSX.Element {
   return (
-    <div className='bg-white dark:bg-black'>
-      <Header />
-      <main className='container px-6 mx-auto md:px-8'>
-        {children}
-        <Pagination />
-        <Stats />
-      </main>
-      <Footer variant='secondary' />
-    </div>
+    <DataProvider>
+      <div className='bg-white dark:bg-black'>
+        <Header />
+        <main className='container px-6 mx-auto md:px-8'>
+          {children}
+          <Pagination />
+          <Stats />
+        </main>
+        <Footer variant='secondary' />
+      </div>
+    </DataProvider>
   )
 }

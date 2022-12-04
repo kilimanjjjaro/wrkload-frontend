@@ -5,8 +5,8 @@ import { ArrowRightIcon } from '@heroicons/react/24/outline'
 
 export default function Form (): JSX.Element {
   return (
-    <form>
-      <div className='grid gap-6 mb-6 md:mb-5 md:gap-10 md:grid-cols-2'>
+    <form className='flex flex-col items-start gap-y-6 md:gap-y-5'>
+      <div className='grid w-full gap-6 md:gap-10 md:grid-cols-2'>
         <Input type='text' placeholder='Can ask your name?' autoComplete='name' />
         <Input type='email' placeholder='I need you email too' autoComplete='email' />
       </div>

@@ -1,8 +1,9 @@
 import clsx from 'clsx'
 
 interface Props {
+  type?: 'submit'
   variant: 'primary' | 'secondary' | 'alternative'
-  onClick?: () => void
+  onClick?: (() => void) | ((event: any) => void)
   fullwidth?: Boolean
   children: React.ReactNode
 }

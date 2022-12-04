@@ -1,15 +1,15 @@
 'use client'
-import { createContext } from 'react'
-import { signal } from '@preact/signals-react'
-import { LayoutProps, UserContextInterface } from 'interfaces/components'
 
-export const DataContext = createContext<UserContextInterface | null>(null)
+import { createContext, useState } from 'react'
 
-const DataProvider = ({ children }: LayoutProps): JSX.Element => {
-  const user = signal({ email: '', password: '' })
+export const DataContext = createContext<any>({})
+
+const DataProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
+  const [user, setUser] = useState({})
+  const [showTaskModal, setShowTaskModal] = useState(false)
 
   return (
-    <DataContext.Provider value={{ user }}>
+    <DataContext.Provider value={{ user, setUser, showTaskModal, setShowTaskModal }}>
       {children}
     </DataContext.Provider>
   )

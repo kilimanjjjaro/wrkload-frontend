@@ -11,7 +11,7 @@ const PAGES = [
   { name: 'Projects', link: '/projects' },
   { name: 'Users', link: '/users' },
   { name: 'Profile', link: '/' },
-  { name: 'Log out', link: '/' }
+  { name: 'Log out', link: '/login' }
 ]
 
 export default function DashboardTab (): JSX.Element {
@@ -39,10 +39,10 @@ export default function DashboardTab (): JSX.Element {
       <Transition
         className='absolute right-0 top-[59px]'
         show={showBox}
-        enter='duration-500 ease-in-out'
+        enter='transition duration-500 ease-in-out'
         enterFrom='opacity-0 translate-x-20'
         enterTo='opacity-100 translate-x-0'
-        leave='duration-500 ease-in-out'
+        leave='transition duration-500 ease-in-out'
         leaveFrom='opacity-100 translate-x-0'
         leaveTo='opacity-0 translate-x-20'
       >

@@ -3,9 +3,9 @@ import clsx from 'clsx'
 interface Props {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   value?: string
-  type: 'text' | 'password' | 'email'
+  type: 'text' | 'password' | 'email' | 'date' | 'time'
   placeholder: string
-  autoComplete: string
+  autoComplete?: string
   centerText?: boolean
   required?: boolean
 }

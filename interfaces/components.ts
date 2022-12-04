@@ -1,5 +1,3 @@
-import { Signal } from '@preact/signals-core'
-
 export interface LayoutProps {
   children: React.ReactNode
 }
@@ -10,7 +8,8 @@ export interface UserInterface {
 }
 
 export interface UserContextInterface {
-  user: Signal<UserInterface>
+  user: UserInterface[]
+  showTaskModal: boolean
 }
 
 export interface StatsInterface {
