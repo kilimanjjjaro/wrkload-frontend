@@ -28,9 +28,9 @@ export default async function ListOfProjects (): Promise<JSX.Element> {
             <div className='flex items-center h-8 px-4 text-xs text-white bg-black rounded-full gap-x-1 font-secondaryFont'><CalendarIcon className='w-4 stroke-width-2' /> {project.createdAt}</div>
             <div className='flex items-center h-8 px-4 text-xs text-white bg-black rounded-full gap-x-1 font-secondaryFont'><InboxStackIcon className='w-4 stroke-width-2' /> {project.totalTasks}</div>
           </div>
-          <div className='absolute left-0 flex justify-center w-full transition duration-500 ease-in-out opacity-100 -top-4 xl:opacity-0 gap-x-3 group-hover:opacity-100'>
-            <div className='flex items-center h-8 px-4 text-black transition duration-500 ease-in-out rounded-full cursor-pointer bg-custom-yellow hover:text-white hover:bg-black'><PencilSquareIcon className='w-4 stroke-width-2' /></div>
-            <div className='flex items-center h-8 px-4 text-black transition duration-500 ease-in-out rounded-full cursor-pointer bg-custom-red hover:text-white hover:bg-black'><TrashIcon className='w-4 stroke-width-2' /></div>
+          <div className='absolute left-0 flex justify-center w-full transition duration-400 ease-in-out opacity-100 -top-4 xl:opacity-0 gap-x-3 group-hover:opacity-100'>
+            <div className='flex items-center h-8 px-4 text-black transition duration-400 ease-in-out rounded-full cursor-pointer bg-custom-yellow hover:text-white hover:bg-black'><PencilSquareIcon className='w-4 stroke-width-2' /></div>
+            <div className='flex items-center h-8 px-4 text-black transition duration-400 ease-in-out rounded-full cursor-pointer bg-custom-red hover:text-white hover:bg-black'><TrashIcon className='w-4 stroke-width-2' /></div>
           </div>
         </div>
       ))}

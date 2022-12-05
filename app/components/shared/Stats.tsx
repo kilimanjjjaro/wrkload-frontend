@@ -1,5 +1,5 @@
 import { ArrowUpIcon, ArrowDownIcon, BanknotesIcon, ClockIcon, InboxStackIcon, FireIcon } from '@heroicons/react/24/outline'
-import StatsInterface from 'interfaces/Stats'
+import { StatsInterface } from 'interfaces/components'
 
 const fetchStats = (): StatsInterface[] => {
   const stats = [

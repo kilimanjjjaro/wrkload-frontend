@@ -1,17 +1,21 @@
-'use client'
 
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
-import { DataContext } from 'context/DataContext'
+import { TasksContext } from 'context/TasksProvider'
 import { useContext } from 'react'
 
 const AddTask = (): JSX.Element => {
-  const { showTaskModal, setShowTaskModal } = useContext(DataContext)
+  const { showTaskModal, setShowTaskModal } = useContext(TasksContext)
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault()
+    setShowTaskModal(!(showTaskModal === true))
+  }
+
+  const handleCloseModal = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
     setShowTaskModal(!(showTaskModal === true))
   }
@@ -32,7 +36,7 @@ const AddTask = (): JSX.Element => {
             <Button type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-width-3' />
             </Button>
-            <Button onClick={() => setShowTaskModal(!(showTaskModal === true))} variant='alternative'>
+            <Button onClick={handleCloseModal} variant='alternative'>
               <XMarkIcon className='w-4 stroke-width-3' />
             </Button>
           </div>

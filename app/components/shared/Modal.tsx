@@ -1,28 +1,46 @@
-import { Transition } from '@headlessui/react'
 
-export default function Modal ({ children, dependency }: { children: React.ReactNode, dependency: boolean }): JSX.Element {
+import { motion } from 'framer-motion'
+import { ModalInterface } from 'interfaces/components'
+
+const VARIANTS_BACKGROUND = {
+  open: { opacity: 1, display: 'flex' },
+  closed: {
+    opacity: 0,
+    transitionEnd: {
+      display: 'none'
+    }
+  }
+}
+
+const VARIANTS_CONTENT = {
+  initial: { opacity: 0, y: 100, display: 'none' },
+  open: { opacity: 1, y: 0, display: 'block', transition: { delay: 0.2 } },
+  closed: {
+    opacity: 0,
+    transitionEnd: {
+      display: 'none'
+    }
+  }
+}
+
+export default function Modal ({ children, dependency, close }: ModalInterface): JSX.Element {
   return (
-    <Transition
+    <motion.div
       className='fixed top-0 left-0 z-10 flex items-center justify-center w-full h-full'
-      show={dependency}
-      enter='transition duration-500 ease-in-out'
-      enterFrom='opacity-0 invisible'
-      enterTo='opacity-100 visible'
-      leave='transition duration-500 ease-in-out'
-      leaveFrom='opacity-100 visible'
-      leaveTo='opacity-0 invisible'
+      variants={VARIANTS_BACKGROUND}
+      initial={false}
+      animate={dependency ? 'open' : 'closed'}
+      transition={{ ease: 'easeInOut', duration: 0.4 }}
     >
-      <div className='absolute top-0 left-0 w-full h-full bg-black opacity-95' />
-      <Transition.Child
-        enter='transition delay-150 duration-500 ease-in-out'
-        enterFrom='opacity-0 translate-y-32'
-        enterTo='opacity-100 translate-y-0'
-        leave='transition delay-150 duration-500 ease-in-out'
-        leaveFrom='opacity-100 translate-y-0'
-        leaveTo='opacity-0 translate-y-32'
-      >
-        <div className='z-20'>{children}</div>
-      </Transition.Child>
-    </Transition>
+      <div className='absolute top-0 left-0 w-full h-full bg-black cursor-pointer opacity-95' onClick={() => close()} />
+      <motion.div
+        className='z-20'
+        variants={VARIANTS_CONTENT}
+        initial='initial'
+        animate={dependency ? 'open' : 'closed'}
+        transition={{ ease: 'easeInOut', duration: 0.4 }}
+      >{children}
+      </motion.div>
+    </motion.div>
   )
 }

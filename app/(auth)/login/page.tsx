@@ -1,7 +1,7 @@
 'use client'
 
 import { useContext, useState } from 'react'
-import { DataContext } from 'context/DataContext'
+import { UsersContext } from 'context/UsersProvider'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
@@ -11,10 +11,9 @@ import GitHubLogo from '../../../public/images/github.svg'
 import GoogleLogo from '../../../public/images/google.svg'
 
 export default function Login (): JSX.Element {
-  const { user, setUser } = useContext(DataContext)
+  const { user, setUser } = useContext(UsersContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  console.log(useContext(DataContext))
 
   const handleLogin = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()

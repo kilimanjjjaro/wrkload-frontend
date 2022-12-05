@@ -34,7 +34,7 @@ export default function NavBar (): JSX.Element {
               ))
             }
           <Dropdown />
-          <button><MoonIcon className='w-4 text-black transition duration-500 ease-in-out dark:text-white hover:text-primary dark:hover:text-primary' /></button>
+          <button><MoonIcon className='w-4 text-black transition duration-400 ease-in-out dark:text-white hover:text-primary dark:hover:text-primary' /></button>
           {!isLogged
             ? <Button onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-width-3' /></Button>
             : <DashboardTab />}

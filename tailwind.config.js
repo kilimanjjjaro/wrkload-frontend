@@ -11,15 +11,15 @@ module.exports = {
       secondaryFont: 'var(--inter-font), sans-serif'
     },
     extend: {
-      screens: {
-        '2xl': '1740px'
-      },
       colors: {
         primary: '#0500ff',
         alternative: '#0d0d0d',
         'custom-red': '#d0000c',
         'custom-yellow': '#e0ca00',
         'custom-green': '#34a400'
+      },
+      transitionDuration: {
+        400: '400ms'
       }
     }
   },

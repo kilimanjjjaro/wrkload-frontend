@@ -17,3 +17,9 @@ export interface StatsInterface {
   value: string
   avg?: string
 }
+
+export interface ModalInterface {
+  children: React.ReactNode
+  dependency: boolean
+  close: () => void
+}

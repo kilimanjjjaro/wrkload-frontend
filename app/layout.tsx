@@ -1,3 +1,4 @@
+import { AppContextProvider } from 'context'
 import { inter, syne } from 'utils/fonts'
 import NavBar from 'app/components/shared/NavBar'
 import { LayoutProps } from 'interfaces/components'
@@ -10,8 +11,10 @@ export default function RootLayout ({ children }: LayoutProps): JSX.Element {
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       </head>
       <body className={`antialiased ${inter.variable} ${syne.variable}`}>
-        <NavBar />
-        {children}
+        <AppContextProvider>
+          <NavBar />
+          {children}
+        </AppContextProvider>
       </body>
     </html>
   )
