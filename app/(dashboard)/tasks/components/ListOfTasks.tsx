@@ -1,17 +1,17 @@
 import { CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
 import Paragraph from 'app/components/shared/Paragraph'
-import TasksStats from 'app/components/shared/TasksStats'
+import ProjectStats from 'app/components/shared/ProjectStats'
 import TaskInterface from 'interfaces/tasks/Task'
 
 const fetchTasks = (): TaskInterface[] => {
   const data = [
-    // {
-    //   stats: [
-    //     { id: 1, hours: '200', text: 'hours worked in the month in this project.' },
-    //     { id: 2, hours: '240', text: 'hours worked last month in this project.' }
-    //   ]
-    // },
+    {
+      stats: [
+        { id: 1, hours: '200', text: 'hours worked in the month in this project.' },
+        { id: 2, hours: '240', text: 'hours worked last month in this project.' }
+      ]
+    },
     { id: 1, title: 'Develope API of products', description: 'If you are among the best at what you do we invite you to work with us in our creative, results-oriented environment.', deliveredAt: '05/09/2022', timing: '2 hours' },
     { id: 2, title: 'Set environment variables on project', description: 'If you are among the best at what you do we invite you to work with us in our creative, results-oriented environment.', deliveredAt: '05/09/2022', timing: '2 hours' },
     { id: 3, title: 'Test news API', description: 'If you are among the best at what you do we invite you...', deliveredAt: '05/09/2022', timing: '2 hours' },
@@ -33,7 +33,7 @@ const ListOfTasks = async (): Promise<JSX.Element> => {
   return (
     <>
       <MasonryGrid>
-        {(tasks[0].stats != null) && <TasksStats stats={tasks[0].stats} />}
+        {(tasks[0].stats != null) && <ProjectStats stats={tasks[0].stats} />}
         {tasks.splice(1).map((task, index) => (
           <div key={index} className='relative flex flex-col items-start bg-gray-200 group p-7 dark:bg-white rounded-3xl'>
             <h3 className='mb-5 text-3xl font-bold font-primaryFont'>{task.title}</h3>

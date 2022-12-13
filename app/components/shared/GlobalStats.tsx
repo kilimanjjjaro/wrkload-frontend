@@ -11,7 +11,7 @@ const fetchStats = (): StatsInterface[] => {
   return stats
 }
 
-export default async function Stats (): Promise<JSX.Element> {
+export default async function GlobalStats (): Promise<JSX.Element> {
   const stats = await fetchStats()
 
   return (

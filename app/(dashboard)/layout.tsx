@@ -1,4 +1,4 @@
-import Stats from 'app/components/shared/Stats'
+import GlobalStats from 'app/components/shared/GlobalStats'
 import Pagination from 'app/components/shared/Pagination'
 import Header from 'app/components/shared/Header'
 import Footer from 'app/components/shared/Footer'
@@ -14,7 +14,7 @@ export default function DashboardLayout ({ children }: Props): JSX.Element {
       <main className='container px-6 mx-auto md:px-8'>
         {children}
         <Pagination />
-        <Stats />
+        <GlobalStats />
       </main>
       <Footer variant='secondary' />
     </div>

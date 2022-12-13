@@ -1,20 +1,23 @@
 'use client'
 
-import { LayoutProps } from 'interfaces/components'
-import { Plock, Breakpoint } from 'react-plock'
+import Masonry from 'react-masonry-css'
 
-const BREAKPOINTS: Breakpoint[] = [
-  { size: 640, columns: 1 },
-  { size: 768, columns: 2 },
-  { size: 1280, columns: 4 }
-]
+const BREAKPOINTS = {
+  default: 4,
+  768: 2,
+  640: 1
+}
 
 export default function MasonryGrid ({ children }: { children: React.ReactNode }): JSX.Element {
   return (
     <>
-      <Plock breakpoints={BREAKPOINTS} gap='2.5rem'>
+      <Masonry
+        breakpointCols={BREAKPOINTS}
+        className='flex -ml-[30px] w-auto'
+        columnClassName='pl-10 [&>div]:mb-10'
+      >
         {children}
-      </Plock>
+      </Masonry>
     </>
   )
 }
