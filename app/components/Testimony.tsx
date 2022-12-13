@@ -1,4 +1,3 @@
-import { TestimonyInterface } from 'interfaces/components'
 import TestimoniesInterface from 'interfaces/home/Testimonies'
 import Image from 'next/image'
 

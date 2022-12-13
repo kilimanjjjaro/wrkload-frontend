@@ -53,7 +53,7 @@ export default function DashboardTab (): JSX.Element {
         initial={false}
       >
         <div className='relative flex items-center'>
-          <ul className='flex flex-col items-end self-start font-semibold text-black transition ease-in-out duration-400 gap-y-1 dark:bg-primary p-7 rounded-3xl dark:text-black font-secondaryFont'>
+          <ul className='flex flex-col items-end self-start text-black transition ease-in-out duration-400 gap-y-1 dark:bg-primary p-7 rounded-3xl dark:text-black font-secondaryFont'>
             {PAGES.map((page) => (
               <li className='transition ease-in-out duration-400 hover:-translate-x-1' key={page.link} onClick={() => setShowBox(!showBox)}><Link href={page.link}>{page.name}</Link></li>
             ))}

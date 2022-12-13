@@ -9,7 +9,7 @@ const BREAKPOINTS: Breakpoint[] = [
   { size: 1280, columns: 4 }
 ]
 
-export default function MasonryGrid ({ children }: LayoutProps): JSX.Element {
+export default function MasonryGrid ({ children }: { children: React.ReactNode }): JSX.Element {
   return (
     <>
       <Plock breakpoints={BREAKPOINTS} gap='2.5rem'>

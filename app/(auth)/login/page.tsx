@@ -1,7 +1,7 @@
 'use client'
 
-import { useContext, useState } from 'react'
-import { UsersContext } from 'context/UsersProvider'
+import { useState, useContext } from 'react'
+import { useRouter } from 'next/navigation'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
@@ -9,19 +9,29 @@ import Button from 'app/components/shared/Button'
 import TextLink from 'app/components/shared/TextLink'
 import GitHubLogo from '../../../public/images/github.svg'
 import GoogleLogo from '../../../public/images/google.svg'
+import useUser from 'hooks/useUser'
+import { UsersContext } from 'context/UsersProvider'
 
 export default function Login (): JSX.Element {
-  const { user, setUser } = useContext(UsersContext)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('hola@kilimanjjjaro.com')
+  const [password, setPassword] = useState('A123456b')
+  const { login } = useUser()
+  const { isLogged } = useContext(UsersContext)
+  const router = useRouter()
 
-  const handleLogin = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    console.log(user)
-    setUser({ email, password })
-    console.log(user)
-    setEmail('')
-    setPassword('')
+    const user = { email, password }
+
+    if (isLogged) router.push('/tasks')
+
+    try {
+      const response = await login(user)
+      console.log(response)
+      router.push('/tasks')
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (

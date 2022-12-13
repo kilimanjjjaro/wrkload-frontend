@@ -96,7 +96,7 @@ export default function Home (): JSX.Element {
         <header className='container px-6 mx-auto md:px-8'>
           <HeroHeader />
         </header>
-        <main className='container px-6 py-24 mx-auto md:px-8 md:py-28'>
+        <main className='container px-6 mx-auto md:px-8'>
           <section className='grid mx-auto text-center gap-y-16 md:gap-y-24 dark:text-white'>
             {FEATURES.map((feature, index) => (
               <Feature

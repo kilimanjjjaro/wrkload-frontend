@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useContext } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { MoonIcon } from '@heroicons/react/24/solid'
@@ -10,6 +10,7 @@ import TextLink from 'app/components/shared/TextLink'
 import Dropdown from 'app/components/shared/Dropdown'
 import Button from 'app/components/shared/Button'
 import DashboardTab from 'app/components/shared/DashboardTab'
+import { UsersContext } from 'context/UsersProvider'
 
 const PAGES = [
   { name: 'Home', link: '/' },
@@ -19,13 +20,13 @@ const PAGES = [
 ]
 
 export default function NavBar (): JSX.Element {
-  const [isLogged, setIsLogged] = useState(true)
+  const { isLogged } = useContext(UsersContext)
 
   const router = useRouter()
 
   return (
-    <div className='bg-white dark:bg-black'>
-      <nav className='container flex items-center justify-between px-6 mx-auto py-7 md:py-10 md:px-8'>
+    <div className='fixed w-full'>
+      <nav className='flex items-center justify-between px-6 py-6 mx-auto md:py-8 md:px-8'>
         <Link href='/'><Logo /></Link>
         <div className='items-center hidden font-normal lg:flex gap-x-10'>
           {
@@ -34,8 +35,8 @@ export default function NavBar (): JSX.Element {
               ))
             }
           <Dropdown />
-          <button><MoonIcon className='w-4 text-black transition duration-400 ease-in-out dark:text-white hover:text-primary dark:hover:text-primary' /></button>
-          {!isLogged
+          <button><MoonIcon className='w-4 text-black transition ease-in-out duration-400 dark:text-white hover:text-primary dark:hover:text-primary' /></button>
+          {!(isLogged === true)
             ? <Button onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-width-3' /></Button>
             : <DashboardTab />}
         </div>
