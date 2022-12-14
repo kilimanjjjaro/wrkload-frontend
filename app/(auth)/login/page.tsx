@@ -25,10 +25,11 @@ export default function Login (): JSX.Element {
     try {
       const response = await login({ email, password })
       setUser(response)
-      localStorage.setItem('user', JSON.stringify(response))
+      setEmail('')
+      setPassword('')
       router.push('/tasks')
-    } catch (error) {
-      console.error(error)
+    } catch (error: any) {
+      console.error(error.response.data)
     }
   }
 

@@ -18,5 +18,5 @@ export interface ModalInterface {
 
 export interface UserContextInterface {
   user: null
-  setUser: Dispatch<SetStateAction<null>>
+  setUser: Dispatch<SetStateAction<void>>
 }

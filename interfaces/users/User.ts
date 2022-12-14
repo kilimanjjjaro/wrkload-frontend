@@ -3,7 +3,8 @@ export interface UserInterface {
   password: string
 }
 
-export interface FullUserInterface extends UserInterface {
+export interface NewUserInterface {
+  username: string
   email: string
   password: string
 }

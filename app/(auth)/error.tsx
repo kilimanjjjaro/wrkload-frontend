@@ -15,7 +15,7 @@ export default function Error ({ error }: Props): JSX.Element {
     setTitle('We have a problem!')
     setDescription('The email or password is not valid. Please, try again.')
     console.error(error)
-  }, [])
+  }, [error])
 
   return (
     <Feedback title={title} description={description} />
