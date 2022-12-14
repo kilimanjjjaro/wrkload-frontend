@@ -32,8 +32,8 @@ export default function NavBar (): JSX.Element {
   return (
     <div className='fixed w-full'>
       <nav className='flex items-center justify-between px-6 py-6 mx-auto md:py-8 md:px-8'>
-        <Link href='/'><Logo /></Link>
-        <div className='items-center hidden font-normal lg:flex gap-x-10'>
+        <Link className='flex items-center h-12' href='/'><Logo /></Link>
+        <div className='items-center hidden h-12 font-normal lg:flex gap-x-10'>
           {
               PAGES.map((page) => (
                 <TextLink link={page.link} key={page.name}>{page.name}</TextLink>
