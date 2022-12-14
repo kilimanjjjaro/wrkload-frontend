@@ -1,15 +1,7 @@
+import { Dispatch, SetStateAction } from 'react'
+
 export interface LayoutProps {
   children: React.ReactNode
-}
-
-export interface UserInterface {
-  email: string
-  password: string
-}
-
-export interface UserContextInterface {
-  user: UserInterface[]
-  showTaskModal: boolean
 }
 
 export interface StatsInterface {
@@ -22,4 +14,9 @@ export interface ModalInterface {
   children: React.ReactNode
   dependency: boolean
   close: () => void
+}
+
+export interface UserContextInterface {
+  user: null
+  setUser: Dispatch<SetStateAction<null>>
 }

@@ -1,10 +1,9 @@
-export default interface UserInterface {
-  id: number
-  username: string
+export interface UserInterface {
   email: string
-  role: number
-  avatar: string
-  registeredAt: string
-  lastActiveAt: string
-  confirmationStatus: boolean
+  password: string
+}
+
+export interface FullUserInterface extends UserInterface {
+  email: string
+  password: string
 }

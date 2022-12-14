@@ -1,10 +1,8 @@
-import { TasksProvider } from 'context/TasksProvider'
-import { UsersProvider } from 'context/UsersProvider'
 import combineComponents from 'utils/combineComponents'
+import UserProvider from 'context/UserContext'
 
 const providers = [
-  TasksProvider,
-  UsersProvider
+  UserProvider
 ]
 
 export const AppContextProvider = combineComponents(...providers)

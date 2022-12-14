@@ -1,8 +1,7 @@
-import React from 'react'
-
-const combineComponents = (...components): void => {
+const combineComponents = (...components: any[]): { children: React.ReactNode } => {
   return components.reduce(
     (AccumulatedComponents, CurrentComponent) => {
+      // eslint-disable-next-line react/display-name
       return ({ children }: { children: React.ReactNode }): JSX.Element => {
         return (
           <AccumulatedComponents>

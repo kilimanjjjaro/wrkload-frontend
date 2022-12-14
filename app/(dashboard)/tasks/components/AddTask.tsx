@@ -4,20 +4,17 @@ import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
-import { TasksContext } from 'context/TasksProvider'
 import { useContext } from 'react'
 
-const AddTask = (): JSX.Element => {
-  const { showTaskModal, setShowTaskModal } = useContext(TasksContext)
-
+const AddTask = (taskModalStatus, setTaskModalStatus): JSX.Element => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    setShowTaskModal(!(showTaskModal === true))
+    setTaskModalStatus(!(taskModalStatus === true))
   }
 
   const handleCloseModal = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    setShowTaskModal(!(showTaskModal === true))
+    setTaskModalStatus(!(taskModalStatus === true))
   }
 
   return (

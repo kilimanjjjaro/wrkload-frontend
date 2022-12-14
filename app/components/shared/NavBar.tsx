@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { MoonIcon } from '@heroicons/react/24/solid'
@@ -10,7 +10,7 @@ import TextLink from 'app/components/shared/TextLink'
 import Dropdown from 'app/components/shared/Dropdown'
 import Button from 'app/components/shared/Button'
 import DashboardTab from 'app/components/shared/DashboardTab'
-import { UsersContext } from 'context/UsersProvider'
+import { UserContext } from 'context/UserContext'
 
 const PAGES = [
   { name: 'Home', link: '/' },
@@ -20,9 +20,14 @@ const PAGES = [
 ]
 
 export default function NavBar (): JSX.Element {
-  const { isLogged } = useContext(UsersContext)
-
   const router = useRouter()
+  const { user, setUser } = useContext(UserContext)
+
+  useEffect(() => {
+    if (user === null) {
+      setUser(JSON.parse(localStorage.getItem('user') ?? 'null'))
+    }
+  }, [setUser, user])
 
   return (
     <div className='fixed w-full'>
@@ -36,7 +41,7 @@ export default function NavBar (): JSX.Element {
             }
           <Dropdown />
           <button><MoonIcon className='w-4 text-black transition ease-in-out duration-400 dark:text-white hover:text-primary dark:hover:text-primary' /></button>
-          {!(isLogged === true)
+          {user === null
             ? <Button onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-width-3' /></Button>
             : <DashboardTab />}
         </div>

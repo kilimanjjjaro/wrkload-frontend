@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
 import Headline from 'app/components/shared/Headline'
@@ -9,25 +9,23 @@ import Button from 'app/components/shared/Button'
 import TextLink from 'app/components/shared/TextLink'
 import GitHubLogo from '../../../public/images/github.svg'
 import GoogleLogo from '../../../public/images/google.svg'
-import useUser from 'hooks/useUser'
-import { UsersContext } from 'context/UsersProvider'
+import login from 'services/auth/login'
+import { UserContext } from 'context/UserContext'
 
 export default function Login (): JSX.Element {
-  const [email, setEmail] = useState('hola@kilimanjjjaro.com')
-  const [password, setPassword] = useState('A123456b')
-  const { login } = useUser()
-  const { isLogged } = useContext(UsersContext)
   const router = useRouter()
 
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const user = { email, password }
+  const { setUser } = useContext(UserContext)
+  const [email, setEmail] = useState('hola@kilimanjjjaro.com')
+  const [password, setPassword] = useState('A123456b')
 
-    if (isLogged) router.push('/tasks')
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    event.preventDefault()
 
     try {
-      const response = await login(user)
-      console.log(response)
+      const response = await login({ email, password })
+      setUser(response)
+      localStorage.setItem('user', JSON.stringify(response))
       router.push('/tasks')
     } catch (error) {
       console.error(error)
@@ -38,7 +36,7 @@ export default function Login (): JSX.Element {
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-96 min-w-auto rounded-3xl'>
         <Headline variant='md'><b>Welcome again!</b></Headline>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={(event) => { void handleLogin(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
             <Input onChange={(event) => setEmail(event.target.value)} value={email} type='email' placeholder='Email' autoComplete='email' centerText />
             <Input onChange={(event) => setPassword(event.target.value)} value={password} type='password' placeholder='Password' autoComplete='current-password' centerText />
