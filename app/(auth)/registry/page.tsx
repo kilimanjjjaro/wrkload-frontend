@@ -11,6 +11,7 @@ import GoogleLogo from '../../../public/images/google.svg'
 import TextLink from 'app/components/shared/TextLink'
 import { UserContext } from 'context/UserContext'
 import register from 'services/auth/register'
+import getCurrentUser from 'services/users/getCurrentUser'
 
 export default function Register (): JSX.Element {
   const router = useRouter()
@@ -31,9 +32,10 @@ export default function Register (): JSX.Element {
     }
 
     try {
-      const response = await register(newUser)
-      console.log(response)
-      setUser(response)
+      await register(newUser)
+      const currentUser = await getCurrentUser()
+      localStorage.setItem('user', JSON.stringify(currentUser))
+      setUser(currentUser)
       setUsername('')
       setEmail('')
       setPassword('')

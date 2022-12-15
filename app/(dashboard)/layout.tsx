@@ -9,11 +9,12 @@ interface Props {
 
 export default function DashboardLayout ({ children }: Props): JSX.Element {
   return (
-    <div className='bg-white dark:bg-black'>
+    <div className='pt-40 bg-white dark:bg-black'>
       <Header />
       <main className='container px-6 mx-auto md:px-8'>
         {children}
         <Pagination />
+        {/* @ts-expect-error Server Component */}
         <GlobalStats />
       </main>
       <Footer variant='secondary' />

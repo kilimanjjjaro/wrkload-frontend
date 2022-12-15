@@ -6,12 +6,12 @@ import TaskInterface from 'interfaces/tasks/Task'
 
 const fetchTasks = (): TaskInterface[] => {
   const data = [
-    {
-      stats: [
-        { id: 1, hours: '200', text: 'hours worked in the month in this project.' },
-        { id: 2, hours: '240', text: 'hours worked last month in this project.' }
-      ]
-    },
+    // {
+    //   stats: [
+    //     { id: 1, hours: '200', text: 'hours worked in the month in this project.' },
+    //     { id: 2, hours: '240', text: 'hours worked last month in this project.' }
+    //   ]
+    // },
     { id: 1, title: 'Develope API of products', description: 'If you are among the best at what you do we invite you to work with us in our creative, results-oriented environment.', deliveredAt: '05/09/2022', timing: '2 hours' },
     { id: 2, title: 'Set environment variables on project', description: 'If you are among the best at what you do we invite you to work with us in our creative, results-oriented environment.', deliveredAt: '05/09/2022', timing: '2 hours' },
     { id: 3, title: 'Test news API', description: 'If you are among the best at what you do we invite you...', deliveredAt: '05/09/2022', timing: '2 hours' },

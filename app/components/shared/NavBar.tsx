@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { MoonIcon } from '@heroicons/react/24/solid'
@@ -21,13 +21,7 @@ const PAGES = [
 
 export default function NavBar (): JSX.Element {
   const router = useRouter()
-  const { user, setUser } = useContext(UserContext)
-
-  useEffect(() => {
-    if (user === null) {
-      setUser(JSON.parse(localStorage.getItem('user') ?? 'null'))
-    }
-  }, [setUser, user])
+  const { user } = useContext(UserContext)
 
   return (
     <div className='fixed w-full'>

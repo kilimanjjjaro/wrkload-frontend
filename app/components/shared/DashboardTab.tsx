@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import { UserContext } from 'context/UserContext'
 
 const PAGES = [
   { name: 'Tasks', link: '/tasks' },
@@ -24,12 +25,8 @@ const VARIANTS = {
 }
 
 export default function DashboardTab (): JSX.Element {
+  const { user } = useContext(UserContext)
   const [showBox, setShowBox] = useState(false)
-
-  const user = {
-    username: 'kilimanjjjaro',
-    avatar: '/images/testimony.jpg'
-  }
 
   return (
     <div className='relative'>

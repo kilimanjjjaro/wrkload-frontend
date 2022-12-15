@@ -11,6 +11,7 @@ import GitHubLogo from '../../../public/images/github.svg'
 import GoogleLogo from '../../../public/images/google.svg'
 import login from 'services/auth/login'
 import { UserContext } from 'context/UserContext'
+import getCurrentUser from 'services/users/getCurrentUser'
 
 export default function Login (): JSX.Element {
   const router = useRouter()
@@ -23,8 +24,10 @@ export default function Login (): JSX.Element {
     event.preventDefault()
 
     try {
-      const response = await login({ email, password })
-      setUser(response)
+      await login({ email, password })
+      const currentUser = await getCurrentUser()
+      localStorage.setItem('user', JSON.stringify(currentUser))
+      setUser(currentUser)
       setEmail('')
       setPassword('')
       router.push('/tasks')
