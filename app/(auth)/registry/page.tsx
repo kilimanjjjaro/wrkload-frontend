@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
 import Headline from 'app/components/shared/Headline'
@@ -9,46 +9,39 @@ import Button from 'app/components/shared/Button'
 import GitHubLogo from '../../../public/images/github.svg'
 import GoogleLogo from '../../../public/images/google.svg'
 import TextLink from 'app/components/shared/TextLink'
-import { UserContext } from 'context/UserContext'
 import register from 'services/auth/register'
-import getCurrentUser from 'services/users/getCurrentUser'
+
+const INITIAL_CREDENTIALS_STATE = {
+  username: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+}
 
 export default function Register (): JSX.Element {
   const router = useRouter()
 
-  const { setUser } = useContext(UserContext)
-  const [username, setUsername] = useState('kilimanjjjaro')
-  const [email, setEmail] = useState('hola@kilimanjjjaro.com')
-  const [password, setPassword] = useState('A123456b')
-  const [confirmPassword, setConfirmPassword] = useState('A123456b')
+  const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
 
-  const handleRegistry = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    event.preventDefault()
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setCredentials({ ...credentials, [event.target.name]: event.target.value })
+  }
 
-    const newUser = {
-      username,
-      email,
-      password
-    }
-
-    try {
-      await register(newUser)
-      const currentUser = await getCurrentUser()
-      localStorage.setItem('user', JSON.stringify(currentUser))
-      setUser(currentUser)
-      setUsername('')
-      setEmail('')
-      setPassword('')
-      setConfirmPassword('')
-      router.push('/tasks')
-    } catch (error: any) {
-      console.error(error.response.data)
+  const handlePasswordValidation = (): void => {
+    if (credentials.password !== credentials.confirmPassword) {
+      console.log('Passwords do not match')
     }
   }
 
-  const handleValidation = (): void => {
-    if (password !== confirmPassword) {
-      console.error('Passwords do not match')
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    event.preventDefault()
+    const { username, email, password } = credentials
+
+    try {
+      await register({ username, email, password })
+      router.push('/tasks')
+    } catch (error: any) {
+      console.error(error.response.data)
     }
   }
 
@@ -56,12 +49,12 @@ export default function Register (): JSX.Element {
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-96 min-w-auto rounded-3xl'>
         <Headline variant='md'><b>Nice to meet you!</b></Headline>
-        <form onSubmit={(event) => { void handleRegistry(event) }}>
+        <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
-            <Input onChange={(event) => setUsername(event.target.value)} value={username} type='text' placeholder='Username' autoComplete='email' centerText />
-            <Input onChange={(event) => setEmail(event.target.value)} value={email} type='email' placeholder='Email' autoComplete='email' centerText />
-            <Input onChange={(event) => setPassword(event.target.value)} onKeyUp={handleValidation} value={password} type='password' placeholder='Password' autoComplete='current-password' centerText />
-            <Input onChange={(event) => setConfirmPassword(event.target.value)} onKeyUp={handleValidation} value={confirmPassword} type='password' placeholder='Confirm Password' autoComplete='current-password' centerText />
+            <Input onChange={handleChange} value={credentials.username} name='username' type='text' placeholder='Username' autoComplete='email' centerText />
+            <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
+            <Input onChange={handleChange} onKeyUp={handlePasswordValidation} name='password' value={credentials.password} type='password' placeholder='Password' autoComplete='current-password' centerText />
+            <Input onChange={handleChange} onKeyUp={handlePasswordValidation} name='confirmPassword' value={credentials.confirmPassword} type='password' placeholder='Confirm Password' autoComplete='current-password' centerText />
           </div>
           <Button variant='secondary'>
             <LockClosedIcon className='w-4 stroke-width-3' />

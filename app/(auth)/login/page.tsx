@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
 import Headline from 'app/components/shared/Headline'
@@ -10,26 +10,27 @@ import TextLink from 'app/components/shared/TextLink'
 import GitHubLogo from '../../../public/images/github.svg'
 import GoogleLogo from '../../../public/images/google.svg'
 import login from 'services/auth/login'
-import { UserContext } from 'context/UserContext'
-import getCurrentUser from 'services/users/getCurrentUser'
+
+const INITIAL_CREDENTIALS_STATE = {
+  email: 'hola@kilimanjjjaro.com',
+  password: 'A123456b'
+}
 
 export default function Login (): JSX.Element {
   const router = useRouter()
 
-  const { setUser } = useContext(UserContext)
-  const [email, setEmail] = useState('hola@kilimanjjjaro.com')
-  const [password, setPassword] = useState('A123456b')
+  const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
 
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setCredentials({ ...credentials, [event.target.name]: event.target.value })
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
+    const { email, password } = credentials
 
     try {
       await login({ email, password })
-      const currentUser = await getCurrentUser()
-      localStorage.setItem('user', JSON.stringify(currentUser))
-      setUser(currentUser)
-      setEmail('')
-      setPassword('')
       router.push('/tasks')
     } catch (error: any) {
       console.error(error.response.data)
@@ -40,10 +41,10 @@ export default function Login (): JSX.Element {
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-96 min-w-auto rounded-3xl'>
         <Headline variant='md'><b>Welcome again!</b></Headline>
-        <form onSubmit={(event) => { void handleLogin(event) }}>
+        <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
-            <Input onChange={(event) => setEmail(event.target.value)} value={email} type='email' placeholder='Email' autoComplete='email' centerText />
-            <Input onChange={(event) => setPassword(event.target.value)} value={password} type='password' placeholder='Password' autoComplete='current-password' centerText />
+            <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
+            <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' centerText />
           </div>
           <Button variant='secondary'>
             <LockClosedIcon className='w-4 stroke-width-3' />

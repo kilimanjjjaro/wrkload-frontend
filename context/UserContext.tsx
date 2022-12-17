@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { UserContextInterface } from 'interfaces/components'
 
 const CONTEXT_DEFAULT_VALUES: UserContextInterface = {
@@ -10,14 +10,12 @@ const CONTEXT_DEFAULT_VALUES: UserContextInterface = {
 
 export const UserContext = createContext<UserContextInterface>(CONTEXT_DEFAULT_VALUES)
 
+export const useUser = (): UserContextInterface => {
+  return useContext(UserContext)
+}
+
 const UserProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
   const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    if (user === null) {
-      setUser(JSON.parse(localStorage.getItem('user') ?? 'null'))
-    }
-  }, [setUser, user])
 
   return (
     <UserContext.Provider value={{

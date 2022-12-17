@@ -1,4 +1,4 @@
-import { setCookie } from 'cookies-next'
+// import { setCookie } from 'cookies-next'
 import { NewUserInterface } from 'interfaces/users/User'
 import api from 'utils/api'
 
@@ -15,7 +15,7 @@ const register = async (newUser: NewUserInterface): Promise<void> => {
   }
   const response = await api.post('/auth/register', user)
   const { accessToken, expiresIn } = response.data
-  setCookie('accessToken', accessToken, { maxAge: expiresIn })
+  // setCookie('accessToken', accessToken, { maxAge: expiresIn })
 }
 
 export default register

@@ -2,11 +2,11 @@
 import { UserInterface } from 'interfaces/users/User'
 import api from 'utils/api'
 
-const login = async (user: UserInterface): Promise<void> => {
+const changePassword = async (user: UserInterface): Promise<void> => {
   const response = await api.post('/auth/login', user)
   console.log(response)
   // const { accessToken, expiresIn } = response.data
   // setCookie('accessToken', accessToken, { maxAge: expiresIn })
 }
 
-export default login
+export default changePassword
