@@ -51,7 +51,7 @@ export default function Register (): JSX.Element {
         <Headline variant='md'><b>Nice to meet you!</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
-            <Input onChange={handleChange} value={credentials.username} name='username' type='text' placeholder='Username' autoComplete='email' centerText />
+            <Input onChange={handleChange} value={credentials.username} name='username' type='text' placeholder='Username' centerText />
             <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
             <Input onChange={handleChange} onKeyUp={handlePasswordValidation} name='password' value={credentials.password} type='password' placeholder='Password' autoComplete='current-password' centerText />
             <Input onChange={handleChange} onKeyUp={handlePasswordValidation} name='confirmPassword' value={credentials.confirmPassword} type='password' placeholder='Confirm Password' autoComplete='current-password' centerText />

@@ -4,7 +4,7 @@ interface Props {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void
   value?: string
-  name: 'username' | 'email' | 'password' | 'confirmPassword'
+  name: 'username' | 'email' | 'password' | 'confirmPassword' | 'currentPassword' | 'newPassword' | 'confirmNewPassword'
   type: 'text' | 'password' | 'email' | 'date' | 'time'
   placeholder: string
   autoComplete?: string

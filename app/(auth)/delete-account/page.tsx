@@ -9,7 +9,7 @@ import Button from 'app/components/shared/Button'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: 'hola@kilimanjjjaro.com',
-  password: 'A123456b'
+  password: 'SGYvRAV4@wG43Tx'
 }
 
 export default function DeleteAccount (): JSX.Element {
