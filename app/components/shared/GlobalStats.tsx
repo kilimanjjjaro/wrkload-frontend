@@ -22,7 +22,7 @@ export default async function GlobalStats (): Promise<any> {
           {stat.type === 'totalMonthlyHours' && <ClockIcon className='h-10 stroke-width-2' />}
           {stat.type === 'goals' && <BanknotesIcon className='h-10 stroke-width-2' />}
           {stat.type === 'project' && <FireIcon className='h-10 stroke-width-2' />}
-          <div className='text-4xl font-extrabold text-black mt-7 font-secondaryFont dark:text-white'>
+          <div className='flex text-4xl font-extrabold text-black gap-x-1 mt-7 font-secondaryFont dark:text-white'>
             {stat.value}
             {stat.avg === 'better' && <ArrowUpIcon className='w-4 stroke-custom-green stroke-width-3' />}
             {stat.avg === 'worst' && <ArrowDownIcon className='w-4 stroke-custom-red stroke-width-3' />}
