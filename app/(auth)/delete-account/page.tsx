@@ -6,6 +6,8 @@ import Headline from 'app/components/shared/Headline'
 import Paragraph from 'app/components/shared/Paragraph'
 import Input from 'app/components/shared/Input'
 import Button from 'app/components/shared/Button'
+import deleteAccount from 'services/auth/deleteAccount'
+import { useRouter } from 'next/navigation'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: 'hola@kilimanjjjaro.com',
@@ -13,6 +15,8 @@ const INITIAL_CREDENTIALS_STATE = {
 }
 
 export default function DeleteAccount (): JSX.Element {
+  const router = useRouter()
+
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -22,6 +26,13 @@ export default function DeleteAccount (): JSX.Element {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     const { email, password } = credentials
+
+    try {
+      await deleteAccount({ email, password })
+      router.push('/')
+    } catch (error: any) {
+      console.error(error.response.data)
+    }
   }
 
   return (

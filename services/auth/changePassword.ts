@@ -1,16 +1,20 @@
+import { AxiosResponse } from 'axios'
 import { getCookie } from 'cookies-next'
-import { UserInterface } from 'interfaces/users/User'
 import api from 'utils/api'
 
-const changePassword = async (credentials: UserInterface): Promise<void> => {
+interface CredentialsInterface {
+  email: string
+  oldPassword: string
+  newPassword: string
+}
+
+const changePassword = async ({ email, oldPassword, newPassword }: CredentialsInterface): Promise<AxiosResponse> => {
   const accessToken = getCookie('accessToken')
-
   const config = {
-    headers: { Authorization: `Bearer ${accessToken}` }
+    headers: { Authorization: 'Bearer' + ` ${accessToken as string}` }
   }
-
-  const response = await api.patch('/auth/change-password', credentials, config)
-  return response.data
+  const response = await api.patch('/auth/change-password', { email, oldPassword, newPassword }, config)
+  return response
 }
 
 export default changePassword

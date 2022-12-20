@@ -29,21 +29,25 @@ export default function ChangePassword (): JSX.Element {
     }
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleStepOne = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    const { email, currentPassword } = credentials
+    const { email, currentPassword: password } = credentials
 
     try {
-      await login({ email, password: currentPassword })
+      await login({ email, password })
       setStep(2)
     } catch (error: any) {
       console.error(error.response.data)
     }
+  }
 
-    const { newPassword, confirmNewPassword } = credentials
+  const handleStepTwo = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    event.preventDefault()
+    const { email, currentPassword: oldPassword, newPassword } = credentials
 
     try {
-      await changePassword({ email, oldPassword: currentPassword, newPassword })
+      await changePassword({ email, oldPassword, newPassword })
+      setStep(1)
     } catch (error: any) {
       console.error(error.response.data)
     }
@@ -53,26 +57,27 @@ export default function ChangePassword (): JSX.Element {
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-96 min-w-auto rounded-3xl'>
         <Headline variant='md'><b>{step === 1 ? 'Change password' : 'Enter new password'}</b></Headline>
-        <form onSubmit={(event) => { void handleSubmit(event) }}>
-          <div className='flex flex-col gap-3 mb-5'>
-            {step === 1
-              ? (
-                <>
-                  <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
-                  <Input onChange={handleChange} value={credentials.currentPassword} name='currentPassword' type='password' placeholder='Current Password' autoComplete='current-password' centerText />
-                </>
-                )
-              : (
-                <>
-                  <Input onChange={handleChange} value={credentials.newPassword} onKeyUp={handlePasswordValidation} name='newPassword' type='password' placeholder='New password' autoComplete='new-password' centerText />
-                  <Input onChange={handleChange} value={credentials.confirmNewPassword} onKeyUp={handlePasswordValidation} name='confirmNewPassword' type='password' placeholder='Confirm new password' autoComplete='new-password' centerText />
-                </>
-                )}
-          </div>
-          <Button variant='secondary'>
-            <ArrowRightIcon className='w-4 stroke-width-3' />
-          </Button>
-        </form>
+        {step === 1 && (
+          <form onSubmit={(event) => { void handleStepOne(event) }}>
+            <div className='flex flex-col gap-3 mb-5'>
+              <Input onChange={handleChange} value={credentials.currentPassword} name='currentPassword' type='password' placeholder='Current Password' autoComplete='current-password' centerText />
+            </div>
+            <Button variant='secondary'>
+              <ArrowRightIcon className='w-4 stroke-width-3' />
+            </Button>
+          </form>
+        )}
+        {step === 2 && (
+          <form onSubmit={(event) => { void handleStepTwo(event) }}>
+            <div className='flex flex-col gap-3 mb-5'>
+              <Input onChange={handleChange} value={credentials.newPassword} onKeyUp={handlePasswordValidation} name='newPassword' type='password' placeholder='New password' autoComplete='new-password' centerText />
+              <Input onChange={handleChange} value={credentials.confirmNewPassword} onKeyUp={handlePasswordValidation} name='confirmNewPassword' type='password' placeholder='Confirm new password' autoComplete='new-password' centerText />
+            </div>
+            <Button variant='secondary'>
+              <ArrowRightIcon className='w-4 stroke-width-3' />
+            </Button>
+          </form>
+        )}
       </div>
     </div>
   )

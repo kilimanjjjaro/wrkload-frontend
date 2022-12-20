@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['scontent-eze1-1.xx.fbcdn.net']
+    domains: ['localhost']
   },
   experimental: {
     appDir: true

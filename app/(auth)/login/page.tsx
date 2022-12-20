@@ -10,7 +10,6 @@ import TextLink from 'app/components/shared/TextLink'
 import GitHubLogo from '../../../public/images/github.svg'
 import GoogleLogo from '../../../public/images/google.svg'
 import login from 'services/auth/login'
-import getCurrentUser from 'services/users/getCurrentUser'
 import { useUser } from 'context/UserContext'
 
 const INITIAL_CREDENTIALS_STATE = {
@@ -33,8 +32,8 @@ export default function Login (): JSX.Element {
     const { email, password } = credentials
 
     try {
-      await login({ email, password })
-      const user = await getCurrentUser()
+      const response = await login({ email, password })
+      const { user } = response.data
       setUser(user)
       router.push('/tasks')
     } catch (error: any) {
