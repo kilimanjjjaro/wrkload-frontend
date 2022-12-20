@@ -125,7 +125,7 @@ export default function Home (): JSX.Element {
             </Button>
           </section>
           <section className='grid pt-24 text-center xl:gap-10 xl:grid-cols-2 md:pt-36 dark:text-white xl:text-left'>
-            <Headline variant='xl'>Let's talk!</Headline>
+            <Headline variant='xl'>Let&apos;s talk!</Headline>
             <Form />
           </section>
         </main>
