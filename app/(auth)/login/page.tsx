@@ -71,7 +71,7 @@ export default function Login (): JSX.Element {
         </div>
       </div>
       <div className='flex gap-5 text-sm text-white '>
-        <TextLink link='/remember-password'>Forgot password?</TextLink>
+        <TextLink link='/forgot-password'>Forgot password?</TextLink>
         <div className=' w-[2px] h-auto bg-white' />
         <TextLink link='/registry'>Not account yet?</TextLink>
       </div>
