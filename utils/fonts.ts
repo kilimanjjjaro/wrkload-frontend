@@ -1,11 +1,15 @@
 import { Inter, Syne } from '@next/font/google'
 
-export const inter = Inter({
+const inter = Inter({
   variable: '--inter-font',
   subsets: ['latin']
 })
 
-export const syne = Syne({
+const syne = Syne({
   variable: '--syne-font',
   subsets: ['latin']
 })
+
+const fonts = { inter, syne }
+
+export default fonts

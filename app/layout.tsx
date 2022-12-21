@@ -1,9 +1,11 @@
-import { inter, syne } from 'utils/fonts'
+import fonts from 'utils/fonts'
 import NavBar from 'app/components/shared/NavBar'
 import './globals.css'
 import UserProvider from 'context/UserContext'
 
 export default function RootLayout ({ children }: { children: React.ReactNode }): JSX.Element {
+  const { inter, syne } = fonts
+
   return (
     <html lang='en' className='scroll-smooth dark'>
       <head />

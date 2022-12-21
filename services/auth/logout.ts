@@ -7,7 +7,7 @@ interface CredentialsInterface {
   password: string
 }
 
-export default async function login ({ email, password }: CredentialsInterface): Promise<AxiosResponse> {
+export default async function logout ({ email, password }: CredentialsInterface): Promise<AxiosResponse> {
   const response = await api.post('/auth/login', { email, password })
   const { accessToken, expiresIn } = response.data
   setCookie('accessToken', accessToken, { maxAge: expiresIn })

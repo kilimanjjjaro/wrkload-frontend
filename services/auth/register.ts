@@ -11,7 +11,7 @@ interface CredentialsInterface {
 const DEFAULT_AVATAR = 'http://localhost:3000/images/avatar.jpg'
 const DEFAULT_ROLE = 2
 
-const register = async ({ username, email, password }: CredentialsInterface): Promise<AxiosResponse> => {
+export default async function register ({ username, email, password }: CredentialsInterface): Promise<AxiosResponse> {
   const user = {
     username,
     email,
@@ -22,7 +22,6 @@ const register = async ({ username, email, password }: CredentialsInterface): Pr
   const response = await api.post('/auth/register', user)
   const { accessToken, expiresIn } = response.data
   setCookie('accessToken', accessToken, { maxAge: expiresIn })
+  sessionStorage.setItem('user', JSON.stringify(response.data.user))
   return response
 }
-
-export default register

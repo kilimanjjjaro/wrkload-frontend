@@ -9,8 +9,8 @@ import login from 'services/auth/login'
 import changePassword from 'services/auth/changePassword'
 
 const INITIAL_CREDENTIALS_STATE = {
-  email: 'hola@kilimanjjjaro.com',
-  currentPassword: 'SGYvRAV4@wG43Tx',
+  email: '',
+  currentPassword: '',
   newPassword: '',
   confirmNewPassword: ''
 }

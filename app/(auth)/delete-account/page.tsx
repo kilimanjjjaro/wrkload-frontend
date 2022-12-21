@@ -10,8 +10,8 @@ import deleteAccount from 'services/auth/deleteAccount'
 import { useRouter } from 'next/navigation'
 
 const INITIAL_CREDENTIALS_STATE = {
-  email: 'hola@kilimanjjjaro.com',
-  password: 'SGYvRAV4@wG43Tx'
+  email: '',
+  password: ''
 }
 
 export default function DeleteAccount (): JSX.Element {

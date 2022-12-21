@@ -8,7 +8,7 @@ import Button from 'app/components/shared/Button'
 import rememberPassword from 'services/auth/rememberPassword'
 
 const INITIAL_CREDENTIALS_STATE = {
-  email: 'hola@kilimanjjjaro.com'
+  email: ''
 }
 
 export default function ForgotPassword (): JSX.Element {

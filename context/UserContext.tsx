@@ -1,7 +1,12 @@
 'use client'
 
-import { createContext, useContext, useState } from 'react'
-import { UserContextInterface } from 'interfaces/components'
+import { createContext, SetStateAction, useContext, useEffect, useState } from 'react'
+import { getCookie } from 'cookies-next'
+
+interface UserContextInterface {
+  user: null
+  setUser: (user: SetStateAction<null>) => void
+}
 
 const CONTEXT_DEFAULT_VALUES: UserContextInterface = {
   user: null,
@@ -16,6 +21,14 @@ export const useUser = (): UserContextInterface => {
 
 const UserProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
   const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const user = sessionStorage.getItem('user')
+    const accessToken = getCookie('accessToken')
+    if (user !== null && accessToken !== undefined) {
+      setUser(JSON.parse(user))
+    }
+  }, [])
 
   return (
     <UserContext.Provider value={{

@@ -5,10 +5,8 @@ interface CredentialsInterface {
   email: string
 }
 
-const rememberPassword = async ({ email }: CredentialsInterface): Promise<AxiosResponse> => {
+export default async function rememberPassword ({ email }: CredentialsInterface): Promise<AxiosResponse> {
   const response = await api.post('/auth/forgot-password', { email })
   console.log(response)
   return response
 }
-
-export default rememberPassword

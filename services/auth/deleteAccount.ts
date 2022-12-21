@@ -8,7 +8,7 @@ interface CredentialsInterface {
   password: string
 }
 
-const deleteAccount = async ({ email, password }: CredentialsInterface): Promise<AxiosResponse> => {
+export default async function deleteAccount ({ email, password }: CredentialsInterface): Promise<AxiosResponse> {
   const { data } = await login({ email, password })
   const { user } = data
   const accessToken = getCookie('accessToken')
@@ -18,5 +18,3 @@ const deleteAccount = async ({ email, password }: CredentialsInterface): Promise
   const response = await api.delete(`/users/${user._id as string}`, config)
   return response
 }
-
-export default deleteAccount
