@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion'
 import { ModalInterface } from 'interfaces/components'
 
-const VARIANTS_BACKGROUND = {
+const BACKGROUND_VARIANTS = {
   open: { opacity: 1, display: 'flex' },
   closed: {
     opacity: 0,
@@ -12,7 +12,7 @@ const VARIANTS_BACKGROUND = {
   }
 }
 
-const VARIANTS_CONTENT = {
+const CONTENT_VARIANTS = {
   initial: { opacity: 0, y: 100, display: 'none' },
   open: { opacity: 1, y: 0, display: 'block', transition: { delay: 0.2 } },
   closed: {
@@ -27,7 +27,7 @@ export default function Modal ({ children, dependency, close }: ModalInterface):
   return (
     <motion.div
       className='fixed top-0 left-0 z-10 flex items-center justify-center w-full h-full'
-      variants={VARIANTS_BACKGROUND}
+      variants={BACKGROUND_VARIANTS}
       initial={false}
       animate={dependency ? 'open' : 'closed'}
       transition={{ ease: 'easeInOut', duration: 0.4 }}
@@ -35,7 +35,7 @@ export default function Modal ({ children, dependency, close }: ModalInterface):
       <div className='absolute top-0 left-0 w-full h-full bg-black cursor-pointer opacity-95' onClick={() => close()} />
       <motion.div
         className='z-20'
-        variants={VARIANTS_CONTENT}
+        variants={CONTENT_VARIANTS}
         initial='initial'
         animate={dependency ? 'open' : 'closed'}
         transition={{ ease: 'easeInOut', duration: 0.4 }}

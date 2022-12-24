@@ -20,15 +20,15 @@ export const useUser = (): UserContextInterface => {
 }
 
 const UserProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
+  const accessToken = getCookie('accessToken')
   const [user, setUser] = useState(null)
 
   useEffect(() => {
     const user = sessionStorage.getItem('user')
-    const accessToken = getCookie('accessToken')
     if (user !== null && accessToken !== undefined) {
       setUser(JSON.parse(user))
     }
-  }, [])
+  }, [accessToken])
 
   return (
     <UserContext.Provider value={{

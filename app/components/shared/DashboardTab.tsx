@@ -3,13 +3,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+// import api from 'utils/api'
+// import { deleteCookie } from 'cookies-next'
 
 const PAGES = [
   { name: 'Tasks', link: '/tasks' },
   { name: 'Projects', link: '/projects' },
-  { name: 'Users', link: '/users' },
-  { name: 'Profile', link: '/' },
-  { name: 'Log out', link: '/login' }
+  { name: 'Users', link: '/users' }
 ]
 
 const VARIANTS = {
@@ -26,19 +26,23 @@ const VARIANTS = {
 export default function DashboardTab ({ user }: any): JSX.Element {
   const [showBox, setShowBox] = useState(false)
 
+  // const handleLogout = async (): Promise<void> => {
+  //   await api.get('/auth/logout')
+  //   deleteCookie('accessToken')
+  //   sessionStorage.removeItem('user')
+  // }
+
   return (
     <div className='relative'>
       <div className='flex items-center cursor-pointer group gap-x-3' onClick={() => setShowBox(!showBox)}>
         <div className='text-black transition ease-in-out duration-400 dark:text-white group-hover:text-primary dark:group-hover:text-primary font-secondaryFont'>{user.username}</div>
-        <div className='relative flex justify-center'>
-          <Image
-            className='object-cover w-12 h-12 transition ease-in-out border-4 border-black rounded-full duration-400 group-hover:scale-90 group-hover:border-primary'
-            src={user.avatar}
-            alt={user.username}
-            width={40}
-            height={40}
-          />
-        </div>
+        <Image
+          className='object-cover w-12 h-12 transition ease-in-out border-4 border-black rounded-full duration-400 group-hover:scale-90 group-hover:border-primary'
+          src={user.avatar}
+          alt={user.username}
+          width={40}
+          height={40}
+        />
       </div>
       <motion.div
         className='absolute right-0 top-[59px]'

@@ -3,7 +3,7 @@ import clsx from 'clsx'
 interface Props {
   placeholder: string
   centerText?: boolean
-
+  name: string
 }
 
 export default function Textarea ({ placeholder, centerText }: Props): JSX.Element {

@@ -23,7 +23,7 @@ export default function NavBar (): JSX.Element {
   const { user } = useUser()
 
   return (
-    <div className='fixed w-full'>
+    <div className='fixed z-50 w-full'>
       <nav className='flex items-center justify-between px-6 py-6 mx-auto md:py-8 md:px-8'>
         <Link className='flex items-center h-12' href='/'><Logo /></Link>
         <div className='items-center hidden h-12 font-normal lg:flex gap-x-10'>

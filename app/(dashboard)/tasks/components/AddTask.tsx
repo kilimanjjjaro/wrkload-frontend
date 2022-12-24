@@ -4,17 +4,21 @@ import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
-import { useContext } from 'react'
 
-const AddTask = (taskModalStatus, setTaskModalStatus): JSX.Element => {
+interface Props {
+  taskModalStatus: boolean
+  setTaskModalStatus: (value: boolean) => void
+}
+
+const AddTask = ({ taskModalStatus, setTaskModalStatus }: Props): JSX.Element => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    setTaskModalStatus(!(taskModalStatus === true))
+    setTaskModalStatus(!(taskModalStatus))
   }
 
   const handleCloseModal = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    setTaskModalStatus(!(taskModalStatus === true))
+    setTaskModalStatus(!(taskModalStatus))
   }
 
   return (
@@ -23,11 +27,11 @@ const AddTask = (taskModalStatus, setTaskModalStatus): JSX.Element => {
         <Headline variant='md'><b>Create task</b></Headline>
         <form onSubmit={handleSubmit}>
           <div className='flex flex-col mb-5 gap-y-3'>
-            <Input type='text' placeholder='Title' centerText required />
-            <Input type='text' placeholder='Project' centerText required />
-            <Input type='time' placeholder='Timing' centerText required />
-            <Input type='date' placeholder='Delivered' centerText required />
-            <Textarea placeholder='Description' centerText />
+            <Input name='title' type='text' placeholder='Title' centerText required />
+            <Input name='project' type='text' placeholder='Project' centerText required />
+            <Input name='timing' type='time' placeholder='Timing' centerText required />
+            <Input name='delivered' type='date' placeholder='Delivered' centerText required />
+            <Textarea name='description' placeholder='Description' centerText />
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>
