@@ -1,9 +1,9 @@
 import { MoonIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
-import Headline from './Headline'
-import TextLink from './TextLink'
-import Logo from './Logo'
-import KilimanjjjaroLogo from '../../../public/images/kilimanjjjaro.svg'
+import Headline from 'app/components/shared/Headline'
+import TextLink from 'app/components/shared/TextLink'
+import Logo from 'app/components/shared/Logo'
+import KilimanjjjaroLogo from 'public/images/kilimanjjjaro.svg'
 
 interface Props {
   variant: 'primary' | 'secondary'

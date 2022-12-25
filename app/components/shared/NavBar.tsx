@@ -9,7 +9,7 @@ import TextLink from 'app/components/shared/TextLink'
 import Dropdown from 'app/components/shared/Dropdown'
 import Button from 'app/components/shared/Button'
 import { useUser } from 'context/UserContext'
-import DashboardTab from './DashboardTab'
+import DashboardTab from 'app/components/shared/DashboardTab'
 
 const PAGES = [
   { name: 'Home', link: '/' },

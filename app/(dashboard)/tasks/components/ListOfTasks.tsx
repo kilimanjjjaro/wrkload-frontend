@@ -1,41 +1,29 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import { CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
+import getTasks from 'services/tasks/getTasks'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
 import Paragraph from 'app/components/shared/Paragraph'
 import ProjectStats from 'app/components/shared/ProjectStats'
-import TaskInterface from 'interfaces/tasks/Task'
 
-const fetchTasks = (): TaskInterface[] => {
-  const data = [
-    // {
-    //   stats: [
-    //     { id: 1, hours: '200', text: 'hours worked in the month in this project.' },
-    //     { id: 2, hours: '240', text: 'hours worked last month in this project.' }
-    //   ]
-    // },
-    { id: 1, title: 'Develope API of products', description: 'If you are among the best at what you do we invite you to work with us in our creative, results-oriented environment.', deliveredAt: '05/09/2022', timing: '2 hours' },
-    { id: 2, title: 'Set environment variables on project', description: 'If you are among the best at what you do we invite you to work with us in our creative, results-oriented environment.', deliveredAt: '05/09/2022', timing: '2 hours' },
-    { id: 3, title: 'Test news API', description: 'If you are among the best at what you do we invite you...', deliveredAt: '05/09/2022', timing: '2 hours' },
-    { id: 4, title: 'Develope API of products', description: 'If you are among the best at what you do we invite you to work with us in our creative, results-oriented environment.', deliveredAt: '05/09/2022', timing: '2 hours' },
-    { id: 5, title: 'Develope API of products', description: 'If you are among the best at what you do we invite you to work with us in our creative, results-oriented environment.', deliveredAt: '05/09/2022', timing: '2 hours' },
-    { id: 6, title: 'Set env variables on project', description: 'If you are among the best at what you do we invite you to work with us in our creative, results-oriented environment.', deliveredAt: '05/09/2022', timing: '2 hours' },
-    { id: 7, title: 'Test news API', description: 'If you are among the best at what you do we invite you...', deliveredAt: '05/09/2022', timing: '2 hours' },
-    { id: 8, title: 'Develope API of products', description: 'If you are among the best at what you do we invite you to work with us in our creative, results-oriented environment.', deliveredAt: '05/09/2022', timing: '2 hours' },
-    { id: 9, title: 'Develope API of products', description: 'If you are among the best at what you do we invite you to work with us in our creative, results-oriented environment.', deliveredAt: '05/09/2022', timing: '2 hours' },
-    { id: 10, title: 'Develope API of products', description: 'If you are among the best at what you do we invite you to work with us in our creative, results-oriented environment.', deliveredAt: '05/09/2022', timing: '2 hours' },
-    { id: 11, title: 'Set environment variables on project', description: 'If you are among the best at what you do we invite you to work with us in our creative, results-oriented environment.', deliveredAt: '05/09/2022', timing: '2 hours' }
-  ]
-  return data
-}
+const ListOfTasks = (): JSX.Element => {
+  const [tasks, setTasks] = useState([])
+  const [stats, setStats] = useState([])
 
-const ListOfTasks = async (): Promise<JSX.Element> => {
-  const tasks = await fetchTasks()
+  useEffect(() => {
+    (async () => {
+      const response = await getTasks()
+      setTasks(response.data.results)
+    })().catch((result) => console.log(result))
+  }, [])
 
   return (
     <>
       <MasonryGrid>
-        {(tasks[0].stats != null) && <ProjectStats stats={tasks[0].stats} />}
-        {tasks.splice(1).map((task, index) => (
-          <div key={index} className='relative flex flex-col items-start bg-gray-200 group p-7 dark:bg-white rounded-3xl'>
+        {stats.length >= 1 && <ProjectStats stats={stats} />}
+        {tasks.map((task) => (
+          <div key={task._id} className='relative flex flex-col items-start bg-gray-200 group p-7 dark:bg-white rounded-3xl'>
             <h3 className='mb-5 text-3xl font-bold font-primaryFont'>{task.title}</h3>
             <Paragraph variant='sm'>{task.description}</Paragraph>
             <div className='flex flex-wrap gap-3 mt-4'>

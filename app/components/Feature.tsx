@@ -1,7 +1,7 @@
 // import Image from 'next/image'
 import FeaturesInterface from 'interfaces/home/Features'
-import Headline from './shared/Headline'
-import Paragraph from './shared/Paragraph'
+import Headline from 'app/components/shared/Headline'
+import Paragraph from 'app/components/shared/Paragraph'
 
 export default function Feature ({ image, title, description }: FeaturesInterface): JSX.Element {
   return (

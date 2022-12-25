@@ -1,6 +1,6 @@
 import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
-import Button from './shared/Button'
+import Button from 'app/components/shared/Button'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 
 export default function Form (): JSX.Element {

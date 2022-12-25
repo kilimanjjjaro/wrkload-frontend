@@ -1,6 +1,6 @@
 import fonts from 'utils/fonts'
 import NavBar from 'app/components/shared/NavBar'
-import './globals.css'
+import 'app/globals.css'
 import UserProvider from 'context/UserContext'
 
 export default function RootLayout ({ children }: { children: React.ReactNode }): JSX.Element {

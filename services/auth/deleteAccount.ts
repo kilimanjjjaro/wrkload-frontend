@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { getCookie } from 'cookies-next'
 import api from 'utils/api'
-import login from './login'
+import login from 'services/auth/login'
 
 interface CredentialsInterface {
   email: string
