@@ -1,10 +1,15 @@
+
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-// import api from 'utils/api'
-// import { deleteCookie } from 'cookies-next'
+import logout from 'services/auth/logout'
+import { useRouter } from 'next/navigation'
+import { useSWRConfig } from 'swr'
+import api from 'utils/api'
+import { deleteCookie } from 'cookies-next'
+import { UserInterface } from 'interfaces/users/User'
 
 const PAGES = [
   { name: 'Tasks', link: '/tasks' },
@@ -23,14 +28,17 @@ const VARIANTS = {
   }
 }
 
-export default function DashboardTab ({ user }: any): JSX.Element {
+export default function DashboardTab ({ user }: { user: UserInterface }): JSX.Element {
+  const router = useRouter()
+  const { mutate } = useSWRConfig()
   const [showBox, setShowBox] = useState(false)
 
-  // const handleLogout = async (): Promise<void> => {
-  //   await api.get('/auth/logout')
-  //   deleteCookie('accessToken')
-  //   sessionStorage.removeItem('user')
-  // }
+  const handleLogout = async (): Promise<void> => {
+    await api.get('/auth/logout')
+    deleteCookie('uid')
+    await mutate(`http://localhost:5000/api/v1/users/${user._id as string}`, null, false)
+    router.push('/login')
+  }
 
   return (
     <div className='relative'>
@@ -56,6 +64,7 @@ export default function DashboardTab ({ user }: any): JSX.Element {
             {PAGES.map((page) => (
               <li className='transition ease-in-out duration-400 hover:-translate-x-1' key={page.link} onClick={() => setShowBox(!showBox)}><Link href={page.link}>{page.name}</Link></li>
             ))}
+            <button className='transition ease-in-out duration-400 hover:-translate-x-1' onClick={async () => await handleLogout()}>Log out</button>
           </ul>
           <div className='absolute w-8 p-2 transition ease-in-out bg-white rounded-full cursor-pointer duration-400 top-50 -left-12 hover:bg-primary' onClick={() => setShowBox(!showBox)}>
             <XMarkIcon className='stroke-width-2 stroke-black' />

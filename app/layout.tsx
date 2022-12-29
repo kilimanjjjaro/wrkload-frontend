@@ -1,7 +1,7 @@
 import fonts from 'utils/fonts'
 import NavBar from 'app/components/shared/NavBar'
 import 'app/globals.css'
-import UserProvider from 'context/UserContext'
+import DataProvider from 'context/DataContext'
 
 export default function RootLayout ({ children }: { children: React.ReactNode }): JSX.Element {
   const { inter, syne } = fonts
@@ -10,10 +10,10 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
     <html lang='en' className='scroll-smooth dark'>
       <head />
       <body className={`bg-black antialiased ${inter.variable} ${syne.variable}`}>
-        <UserProvider>
+        <DataProvider>
           <NavBar />
           {children}
-        </UserProvider>
+        </DataProvider>
       </body>
     </html>
   )

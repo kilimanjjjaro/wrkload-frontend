@@ -1,5 +1,6 @@
 'use client'
 
+import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { MoonIcon } from '@heroicons/react/24/solid'
@@ -8,8 +9,8 @@ import Logo from 'app/components/shared/Logo'
 import TextLink from 'app/components/shared/TextLink'
 import Dropdown from 'app/components/shared/Dropdown'
 import Button from 'app/components/shared/Button'
-import { useUser } from 'context/UserContext'
 import DashboardTab from 'app/components/shared/DashboardTab'
+import useUser from 'hooks/useUser'
 
 const PAGES = [
   { name: 'Home', link: '/' },
@@ -20,7 +21,8 @@ const PAGES = [
 
 export default function NavBar (): JSX.Element {
   const router = useRouter()
-  const { user } = useUser()
+  const uid = getCookie('uid')
+  const { user } = useUser(uid as string)
 
   return (
     <div className='fixed z-50 w-full'>
@@ -28,13 +30,13 @@ export default function NavBar (): JSX.Element {
         <Link className='flex items-center h-12' href='/'><Logo /></Link>
         <div className='items-center hidden h-12 font-normal lg:flex gap-x-10'>
           {
-              PAGES.map((page) => (
-                <TextLink link={page.link} key={page.name}>{page.name}</TextLink>
-              ))
-            }
+            PAGES.map((page) => (
+              <TextLink link={page.link} key={page.name}>{page.name}</TextLink>
+            ))
+          }
           <Dropdown />
           <button><MoonIcon className='w-4 text-black transition ease-in-out duration-400 dark:text-white hover:text-primary dark:hover:text-primary' /></button>
-          {user === null
+          {user === undefined
             ? <Button onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-width-3' /></Button>
             : <DashboardTab user={user} />}
         </div>

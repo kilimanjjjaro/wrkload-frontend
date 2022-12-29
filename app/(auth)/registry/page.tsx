@@ -10,7 +10,6 @@ import GitHubLogo from 'public/images/github.svg'
 import GoogleLogo from 'public/images/google.svg'
 import TextLink from 'app/components/shared/TextLink'
 import register from 'services/auth/register'
-import { useUser } from 'context/UserContext'
 
 const INITIAL_CREDENTIALS_STATE = {
   username: '',
@@ -21,7 +20,6 @@ const INITIAL_CREDENTIALS_STATE = {
 
 export default function Register (): JSX.Element {
   const router = useRouter()
-  const { setUser } = useUser()
 
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
 
@@ -40,9 +38,7 @@ export default function Register (): JSX.Element {
     const { username, email, password } = credentials
 
     try {
-      const response = await register({ username, email, password })
-      const { user } = response.data
-      setUser(user)
+      await register({ username, email, password })
       router.push('/tasks')
     } catch (error: any) {
       console.error(error.response.data)

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
 import Headline from 'app/components/shared/Headline'
@@ -10,7 +10,7 @@ import TextLink from 'app/components/shared/TextLink'
 import GitHubLogo from 'public/images/github.svg'
 import GoogleLogo from 'public/images/google.svg'
 import login from 'services/auth/login'
-import { useUser } from 'context/UserContext'
+import { DataContext } from 'context/DataContext'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: 'hola@kilimanjjjaro.com',
@@ -19,7 +19,7 @@ const INITIAL_CREDENTIALS_STATE = {
 
 export default function Login (): JSX.Element {
   const router = useRouter()
-  const { setUser } = useUser()
+  const { setIsLogged } = useContext(DataContext)
 
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
 
@@ -32,9 +32,8 @@ export default function Login (): JSX.Element {
     const { email, password } = credentials
 
     try {
-      const response = await login({ email, password })
-      const { user } = response.data
-      setUser(user)
+      await login({ email, password })
+      setIsLogged(true)
       router.push('/tasks')
     } catch (error: any) {
       console.error(error.response.data)
