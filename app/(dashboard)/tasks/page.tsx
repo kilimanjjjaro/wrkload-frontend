@@ -15,8 +15,8 @@ export default function Tasks (): JSX.Element {
   useEffect(() => {
     (async () => {
       const response = await getTasks()
-      setTasks(response.data.results)
       console.log(response.data.results)
+      setTasks(response.data.results)
     })().catch((result) => console.log(result))
   }, [])
 
@@ -29,7 +29,7 @@ export default function Tasks (): JSX.Element {
             <h3 className='mb-5 text-3xl font-bold font-primaryFont'>{task.title}</h3>
             <Paragraph variant='sm'>{task.description}</Paragraph>
             <div className='flex flex-wrap gap-3 mt-4'>
-              <div className='flex items-center h-8 px-4 text-xs text-white bg-black rounded-full gap-x-1 font-secondaryFont'><CalendarIcon className='w-4 stroke-width-2' /> {Moment(task.delivered).format('DD-MM-YYYY')}</div>
+              <div className='flex items-center h-8 px-4 text-xs text-white bg-black rounded-full gap-x-1 font-secondaryFont'><CalendarIcon className='w-4 stroke-width-2' /> {Moment(task.deliveredAt).format('DD-MM-YYYY')}</div>
               <div className='flex items-center h-8 px-4 text-xs text-white bg-black rounded-full gap-x-1 font-secondaryFont'><ClockIcon className='w-4 stroke-width-2' /> {task.timing}</div>
             </div>
             <div className='absolute left-0 flex justify-center w-full transition ease-in-out opacity-100 duration-400 -top-4 xl:opacity-0 gap-x-3 group-hover:opacity-100'>
