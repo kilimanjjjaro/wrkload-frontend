@@ -1,6 +1,6 @@
 'use client'
 
-import { getCookie } from 'cookies-next'
+import { getCookies } from 'cookies-next'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { MoonIcon } from '@heroicons/react/24/solid'
@@ -10,7 +10,11 @@ import TextLink from 'app/components/shared/TextLink'
 import Dropdown from 'app/components/shared/Dropdown'
 import Button from 'app/components/shared/Button'
 import DashboardTab from 'app/components/shared/DashboardTab'
-import useUser from 'hooks/useUser'
+import useSWR, { Fetcher } from 'swr'
+import { useContext } from 'react'
+import { DataContext } from 'context/DataContext'
+import api from 'utils/api'
+import { UserInterface } from 'interfaces/users/User'
 
 const PAGES = [
   { name: 'Home', link: '/' },
@@ -19,10 +23,26 @@ const PAGES = [
   { name: 'Contact', link: '/' }
 ]
 
+interface FetcherInterface {
+  result: UserInterface
+}
+
 export default function NavBar (): JSX.Element {
   const router = useRouter()
-  const uid = getCookie('uid')
-  const { user } = useUser(uid as string)
+  const { uid, accessToken } = getCookies()
+  const { isLogged } = useContext(DataContext)
+
+  const options = {
+    headers: {
+      Authorization: `Bearer ${accessToken as string}`
+    }
+  }
+
+  const fetcher: Fetcher<FetcherInterface> = async (url: string) => await api.get(url, options).then(res => res.data)
+
+  const { data } = useSWR(isLogged ? `https://wrkload-api-production.up.railway.app/api/v1/users/${uid as string}` : null, fetcher)
+
+  const user = data?.result
 
   return (
     <div className='fixed z-50 w-full'>

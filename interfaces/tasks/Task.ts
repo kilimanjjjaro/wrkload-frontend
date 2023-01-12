@@ -6,10 +6,12 @@ export interface StatsTasksInterface {
   text: string | undefined
 }
 
-export default interface TaskInterface {
-  _id?: Number
+export interface TaskInterface {
+  _id?: Key | undefined
   title?: string
-  description?: string
+  project?: string
   deliveredAt?: string
   timing?: string
+  month?: string
+  description?: string
 }

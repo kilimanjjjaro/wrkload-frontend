@@ -1,3 +1,5 @@
+import { TaskInterface } from './tasks/Task'
+
 export interface LayoutProps {
   children: React.ReactNode
 }
@@ -10,6 +12,6 @@ export interface StatsInterface {
 
 export interface ModalInterface {
   children: React.ReactNode
-  dependency: boolean
+  dependency: boolean | TaskInterface
   close: () => void
 }

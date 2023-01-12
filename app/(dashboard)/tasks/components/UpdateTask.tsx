@@ -4,35 +4,28 @@ import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
+import { TaskInterface } from 'interfaces/tasks/Task'
 import { useState } from 'react'
-import createTask from 'services/tasks/createTask'
+import updateTask from 'services/tasks/updateTask'
 
 interface Props {
   taskModalStatus: boolean
   setTaskModalStatus: (value: boolean) => void
+  task: TaskInterface
 }
 
-const INITIAL_TASK_STATE = {
-  title: '',
-  project: '',
-  timing: '',
-  month: '',
-  deliveredAt: '',
-  description: ''
-}
-
-const AddTask = ({ taskModalStatus, setTaskModalStatus }: Props): JSX.Element => {
-  const [task, setTask] = useState(INITIAL_TASK_STATE)
+export default function UpdateTask ({ taskModalStatus, setTaskModalStatus, task }: Props): JSX.Element {
+  const [payload, setPayload] = useState(task)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setTask({ ...task, [event.target.name]: event.target.value })
+    setPayload({ ...payload, [event.target.name]: event.target.value })
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
 
     try {
-      await createTask(task)
+      await updateTask(payload)
       setTaskModalStatus(!(taskModalStatus))
     } catch (error: any) {
       console.error(error.response.data)
@@ -47,14 +40,14 @@ const AddTask = ({ taskModalStatus, setTaskModalStatus }: Props): JSX.Element =>
   return (
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-96 min-w-auto rounded-3xl'>
-        <Headline variant='md'><b>Create task</b></Headline>
+        <Headline variant='md'><b>Update task</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>
-            <Input onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' centerText required />
-            <Input onChange={handleChange} value={task.project} name='project' type='text' placeholder='Project' centerText required />
-            <Input onChange={handleChange} value={task.timing} name='timing' type='time' placeholder='Timing' centerText required />
-            <Input onChange={handleChange} value={task.deliveredAt} name='deliveredAt' type='date' placeholder='Delivered' centerText required />
-            <Textarea onChange={handleChange} value={task.description} name='description' placeholder='Description' centerText />
+            <Input onChange={handleChange} value={payload.title} name='title' type='text' placeholder='Title' centerText required />
+            <Input onChange={handleChange} value={payload.project} name='project' type='text' placeholder='Project' centerText required />
+            <Input onChange={handleChange} value={payload.timing} name='timing' type='time' placeholder='Timing' centerText required />
+            <Input onChange={handleChange} value={payload.deliveredAt} name='deliveredAt' type='date' placeholder='Delivered' centerText required />
+            <Textarea onChange={handleChange} value={payload.description} name='description' placeholder='Description' centerText />
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>
@@ -69,5 +62,3 @@ const AddTask = ({ taskModalStatus, setTaskModalStatus }: Props): JSX.Element =>
     </div>
   )
 }
-
-export default AddTask

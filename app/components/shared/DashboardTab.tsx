@@ -2,14 +2,13 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
+import { deleteCookie } from 'cookies-next'
 import { useContext, useState } from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/navigation'
-import { useSWRConfig } from 'swr'
 import api from 'utils/api'
-import { deleteCookie } from 'cookies-next'
-import { UserInterface } from 'interfaces/users/User'
 import { DataContext } from 'context/DataContext'
+import { UserInterface } from 'interfaces/users/User'
 
 const PAGES = [
   { name: 'Tasks', link: '/tasks' },
@@ -31,13 +30,12 @@ const VARIANTS = {
 export default function DashboardTab ({ user }: { user: UserInterface }): JSX.Element {
   const router = useRouter()
   const { setIsLogged } = useContext(DataContext)
-  const { mutate } = useSWRConfig()
   const [showBox, setShowBox] = useState(false)
 
   const handleLogout = async (): Promise<void> => {
     await api.get('/auth/logout')
     deleteCookie('uid')
-    await mutate(`http://localhost:5000/api/v1/users/${user._id as string}`, null, false)
+    deleteCookie('accessToken')
     setIsLogged(false)
     router.push('/login')
   }

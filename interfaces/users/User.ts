@@ -1,10 +1,11 @@
 export interface UserInterface {
-  email: string
-  password: string
-}
-
-export interface NewUserInterface {
+  _id: string
+  role: number
   username: string
   email: string
-  password: string
+  avatar: string
+  registeredAt: string
+  lastActiveAt: string
+  confirmationStatus: boolean
+  confirmationToken: string
 }

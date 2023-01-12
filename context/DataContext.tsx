@@ -1,6 +1,7 @@
 'use client'
 
-import { createContext, useState } from 'react'
+import { getCookie } from 'cookies-next'
+import { createContext, useEffect, useState } from 'react'
 
 interface DataContextValues {
   isLogged: boolean
@@ -16,6 +17,13 @@ export const DataContext = createContext<DataContextValues>(DEFAULT_VALUE)
 
 const DataProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
   const [isLogged, setIsLogged] = useState(false)
+  const accessToken = getCookie('accessToken')
+
+  useEffect(() => {
+    if (accessToken !== undefined) {
+      setIsLogged(true)
+    }
+  }, [accessToken])
 
   return (
     <DataContext.Provider value={{ isLogged, setIsLogged }}>
