@@ -43,9 +43,9 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
   return (
     <div className='relative'>
       <div className='flex items-center cursor-pointer group gap-x-3' onClick={() => setShowBox(!showBox)}>
-        <div className='text-black transition ease-in-out duration-400 dark:text-white group-hover:text-primary dark:group-hover:text-primary font-secondaryFont'>{user.username}</div>
+        <div className='text-white transition ease-in-out duration-400 dark:text-white group-hover:text-primary dark:group-hover:text-primary font-secondaryFont'>{user.username}</div>
         <Image
-          className='object-cover w-12 h-12 transition ease-in-out border-4 border-black rounded-full duration-400 group-hover:scale-90 group-hover:border-primary'
+          className='object-cover w-12 h-12 transition ease-in-out border-4 border-white rounded-full duration-400 group-hover:scale-90 group-hover:border-primary'
           src={user.avatar}
           alt={user.username}
           width={40}
@@ -60,7 +60,7 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
         initial={false}
       >
         <div className='relative flex items-center'>
-          <ul className='flex flex-col items-end self-start text-black transition ease-in-out duration-400 gap-y-1 dark:bg-primary p-7 rounded-3xl dark:text-black font-secondaryFont'>
+          <ul className='flex flex-col items-end self-start text-black transition ease-in-out bg-white duration-400 gap-y-1 dark:bg-primary p-7 rounded-3xl dark:text-black font-secondaryFont'>
             {PAGES.map((page) => (
               <li className='transition ease-in-out duration-400 hover:-translate-x-1' key={page.link} onClick={() => setShowBox(!showBox)}><Link href={page.link}>{page.name}</Link></li>
             ))}

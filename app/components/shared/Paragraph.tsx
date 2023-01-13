@@ -1,3 +1,5 @@
+import clsx from 'clsx'
+
 interface Props {
   children?: React.ReactNode
   variant: 'normal' | 'sm'
@@ -5,9 +7,12 @@ interface Props {
 
 export default function Paragraph ({ children, variant }: Props): JSX.Element {
   return (
-    <>
-      {variant === 'normal' && <p className='text-base md:text-xl font-secondaryFont'>{children}</p>}
-      {variant === 'sm' && <p className='text-sm font-secondaryFont'>{children}</p>}
-    </>
+    <p
+      className={clsx(
+        variant === 'normal' && 'text-base md:text-xl font-secondaryFont',
+        variant === 'sm' && 'text-sm font-secondaryFont'
+      )}
+    >{children}
+    </p>
   )
 }

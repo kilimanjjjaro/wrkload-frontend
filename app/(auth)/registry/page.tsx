@@ -69,11 +69,11 @@ export default function Register (): JSX.Element {
           <div className='w-[26%] h-[2px] bg-black rounded-full' />
         </div>
         <div className='flex gap-5 mt-5'>
-          <Button variant='alternative' fullwidth>
+          <Button variant='alternative' fullWidth>
             <GoogleLogo className='w-4' />
             Google
           </Button>
-          <Button variant='alternative' fullwidth>
+          <Button variant='alternative' fullWidth>
             <GitHubLogo className='w-4' />
             Github
           </Button>

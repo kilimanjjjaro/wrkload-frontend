@@ -91,13 +91,13 @@ const TESTIMONIES: TestimoniesInterface[] = [
 
 export default function Home (): JSX.Element {
   return (
-    <div className='bg-gray-200 dark:bg-alternative'>
-      <div className='bg-white dark:bg-black rounded-b-3xl'>
+    <div className='bg-dark-gray dark:bg-alternative'>
+      <div className='bg-light-gray dark:bg-black rounded-b-3xl'>
         <header className='container px-6 mx-auto md:px-8'>
           <HeroHeader />
         </header>
-        <main className='container px-6 mx-auto md:px-8'>
-          <section className='grid mx-auto text-center gap-y-16 md:gap-y-24 dark:text-white'>
+        <main className='container px-6 pb-20 mx-auto md:px-8 md:pb-24'>
+          <section className='grid mx-auto text-center text-gray-200 gap-y-16 md:gap-y-24'>
             {FEATURES.map((feature, index) => (
               <Feature
                 key={index}
@@ -107,7 +107,7 @@ export default function Home (): JSX.Element {
               />
             ))}
           </section>
-          <section className='pt-24 text-center md:pt-36 dark:text-white'>
+          <section className='pt-24 text-center text-gray-200 md:pt-36'>
             <Headline variant='xl'>What they say</Headline>
             <div className='gap-10 columns-1 md:columns-2 xl:columns-4'>
               {TESTIMONIES.map((testimony, index) => (
@@ -124,7 +124,7 @@ export default function Home (): JSX.Element {
               <PlusIcon className='w-4 stroke-width-3' />
             </Button>
           </section>
-          <section className='grid pt-24 text-center xl:gap-10 xl:grid-cols-2 md:pt-36 dark:text-white xl:text-left'>
+          <section className='grid pt-24 text-center text-gray-200 xl:gap-10 xl:grid-cols-2 md:pt-36 xl:text-left'>
             <Headline variant='xl'>Let&apos;s talk!</Headline>
             <Form />
           </section>

@@ -16,8 +16,8 @@ export default function Input ({ onChange, onKeyUp, value, name, type, placehold
   return (
     <input
       className={clsx(
-        'w-full h-10 px-5 text-sm leading-tight text-black placeholder-black placeholder-opacity-100 bg-gray-200 rounded-full appearance-none md:text-baseblock font-secondaryFont dark:bg-alternative dark:text-white focus:outline-none dark:placeholder-white focus:placeholder:opacity-0 autofill:bg-transparent',
-        { 'text-center': centerText }
+        'w-full h-10 px-5 text-sm leading-tight text-dark-gray placeholder-dark-gray placeholder-opacity-100 bg-gray-200 rounded-full appearance-none md:text-baseblock font-secondaryFont dark:bg-alternative dark:text-white focus:outline-none dark:placeholder-white focus:bg-white focus:placeholder:opacity-0 autofill:bg-transparent transition duration-400 ease-in-out',
+        centerText !== undefined && 'text-center'
       )}
       value={value} onChange={onChange} onKeyUp={onKeyUp} name={name} type={type} placeholder={placeholder} autoComplete={autoComplete} required={required}
     />

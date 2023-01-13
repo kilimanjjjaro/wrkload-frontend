@@ -38,9 +38,9 @@ export default async function ListOfUsers (): Promise<JSX.Element> {
           </div>
           <div className='flex items-center h-8 px-4 mb-3 text-xs text-white bg-black rounded-full gap-x-1 font-secondaryFont'><EnvelopeIcon className='w-4 stroke-width-2' /> {user.email}</div>
           <div className='flex items-center h-8 px-4 text-xs text-white bg-black rounded-full gap-x-1 font-secondaryFont'><UserIcon className='w-4 stroke-width-2' /> {user.registeredAt}</div>
-          <div className='absolute left-0 flex justify-center w-full transition duration-400 ease-in-out opacity-100 -top-4 xl:opacity-0 gap-x-3 group-hover:opacity-100'>
-            <div className='flex items-center h-8 px-4 text-black transition duration-400 ease-in-out rounded-full cursor-pointer bg-custom-yellow hover:text-white hover:bg-black'><PencilSquareIcon className='w-4 stroke-width-2' /></div>
-            <div className='flex items-center h-8 px-4 text-black transition duration-400 ease-in-out rounded-full cursor-pointer bg-custom-red hover:text-white hover:bg-black'><TrashIcon className='w-4 stroke-width-2' /></div>
+          <div className='absolute left-0 flex justify-center w-full transition ease-in-out opacity-100 duration-400 -top-4 xl:opacity-0 gap-x-3 group-hover:opacity-100'>
+            <div className='flex items-center h-8 px-4 text-black transition ease-in-out rounded-full cursor-pointer duration-400 bg-custom-yellow hover:text-white hover:bg-black'><PencilSquareIcon className='w-4 stroke-width-2' /></div>
+            <div className='flex items-center h-8 px-4 text-black transition ease-in-out rounded-full cursor-pointer duration-400 bg-custom-red hover:text-white hover:bg-black'><TrashIcon className='w-4 stroke-width-2' /></div>
           </div>
         </div>
       ))}

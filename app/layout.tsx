@@ -7,9 +7,9 @@ export default function RootLayout ({ children }: { children: React.ReactNode })
   const { inter, syne } = fonts
 
   return (
-    <html lang='en' className='scroll-smooth dark'>
+    <html lang='en' className='scroll-smooth'>
       <head />
-      <body className={`bg-black antialiased ${inter.variable} ${syne.variable}`}>
+      <body className={`bg-light-gray dark:bg-black antialiased ${inter.variable} ${syne.variable}`}>
         <DataProvider>
           <NavBar />
           {children}

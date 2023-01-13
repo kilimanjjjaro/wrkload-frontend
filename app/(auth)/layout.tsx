@@ -6,7 +6,7 @@ interface Props {
 
 export default function AuthLayout ({ children }: Props): JSX.Element {
   return (
-    <div className='bg-white dark:bg-black'>
+    <div className='bg-light-gray dark:bg-black'>
       <main className='flex items-center justify-center h-[calc(100vh-84px)]'>
         {children}
       </main>

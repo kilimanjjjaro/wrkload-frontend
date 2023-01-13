@@ -20,7 +20,7 @@ export default function Footer ({ variant }: Props): JSX.Element {
             </div>
             <div className='justify-self-end'>
               <Link href='https://kilimanjjjaro.com/'>
-                <KilimanjjjaroLogo className='w-16 transition ease-in-out duration-400 md:w-18 2xl:w-18 fill-black dark:fill-white hover:fill-primary dark:hover:fill-primary' />
+                <KilimanjjjaroLogo className='w-16 transition ease-in-out duration-400 md:w-18 2xl:w-18 fill-gray-200 dark:fill-white hover:fill-white dark:hover:fill-primary' />
               </Link>
             </div>
           </div>
@@ -29,15 +29,15 @@ export default function Footer ({ variant }: Props): JSX.Element {
               <Headline variant='xl'>This is the end, <br />do you have ideas?</Headline>
             </TextLink>
           </div>
-          <div className='flex flex-col justify-between text-sm text-black md:flex-row dark:text-white font-secondaryFont md:text-base'>
+          <div className='flex flex-col justify-between text-sm text-light-gray md:flex-row dark:text-white font-secondaryFont md:text-base'>
             <div className='mb-3 text-center md:mb-0 md:text-left'>© {new Date().getFullYear()} wrkload. All rights reserved.</div>
-            <button className='flex items-center justify-center gap-2 transition ease-in-out duration-400 md:justify-end hover:text-primary '>Dark mode <MoonIcon className='w-4' /></button>
+            <button className='flex items-center justify-center gap-2 transition ease-in-out duration-400 md:justify-end hover:text-gray-200 '>Dark mode <MoonIcon className='w-4' /></button>
           </div>
         </footer>}
 
       {variant === 'secondary' &&
         <footer className='container px-6 py-8 mx-auto md:px-8'>
-          <div className='text-xs text-center text-black dark:text-gray-800 font-secondaryFont md:text-sm'>
+          <div className='text-xs text-center text-dark-gray dark:text-gray-800 font-secondaryFont md:text-sm'>
             © {new Date().getFullYear()} wrkload. All rights reserved.
           </div>
         </footer>}
