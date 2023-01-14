@@ -45,7 +45,7 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
       <div className='flex items-center cursor-pointer group gap-x-3' onClick={() => setShowBox(!showBox)}>
         <div className='transition ease-in-out text-dark-gray duration-400 dark:text-white group-hover:text-white dark:group-hover:text-primary font-secondaryFont'>Welcome, {user.username}!</div>
         <Image
-          className='object-cover w-12 h-12 transition ease-in-out border-4 rounded-full border-dark-gray duration-400 group-hover:scale-90 group-hover:border-white dark:group-hover:border-primary'
+          className='object-cover w-10 h-10 transition ease-in-out border-4 border-dark-gray duration-400 group-hover:scale-90 group-hover:border-white dark:group-hover:border-primary'
           src={user.avatar}
           alt={user.username}
           width={40}
@@ -53,7 +53,7 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
         />
       </div>
       <motion.div
-        className='absolute right-0 top-[59px]'
+        className='absolute right-0 top-[57px]'
         animate={showBox ? 'open' : 'closed'}
         variants={VARIANTS}
         transition={{ ease: 'easeInOut', duration: 0.4 }}

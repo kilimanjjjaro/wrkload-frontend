@@ -4,9 +4,9 @@ interface Props {
   variant: 'primary' | 'alternative'
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void
-  value?: string
+  value?: string | number
   name: string
-  type: 'text' | 'password' | 'email' | 'date' | 'time'
+  type: string
   placeholder: string
   autoComplete?: string
   centerText?: boolean

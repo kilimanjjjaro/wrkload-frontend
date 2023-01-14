@@ -1,6 +1,8 @@
-export default interface ProjectInterface {
-  id: Number
-  name: string
-  createdAt: string
-  totalTasks: string
+import { Key } from 'react'
+
+export interface ProjectInterface {
+  _id?: Key | undefined
+  name?: string
+  createdAt?: string
+  totalTasks?: string
 }

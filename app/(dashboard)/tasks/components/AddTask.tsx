@@ -8,8 +8,8 @@ import { useState } from 'react'
 import createTask from 'services/tasks/createTask'
 
 interface Props {
-  taskModalStatus: boolean
-  setTaskModalStatus: (value: boolean) => void
+  modalStatus: boolean
+  setModalStatus: (value: boolean) => void
 }
 
 const INITIAL_TASK_STATE = {
@@ -21,7 +21,7 @@ const INITIAL_TASK_STATE = {
   description: ''
 }
 
-const AddTask = ({ taskModalStatus, setTaskModalStatus }: Props): JSX.Element => {
+const AddTask = ({ modalStatus, setModalStatus }: Props): JSX.Element => {
   const [task, setTask] = useState(INITIAL_TASK_STATE)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -33,7 +33,7 @@ const AddTask = ({ taskModalStatus, setTaskModalStatus }: Props): JSX.Element =>
 
     try {
       await createTask(task)
-      setTaskModalStatus(!(taskModalStatus))
+      setModalStatus(!(modalStatus))
     } catch (error: any) {
       console.error(error.response.data)
     }
@@ -41,7 +41,7 @@ const AddTask = ({ taskModalStatus, setTaskModalStatus }: Props): JSX.Element =>
 
   const handleCloseModal = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    setTaskModalStatus(!(taskModalStatus))
+    setModalStatus(!(modalStatus))
   }
 
   return (
