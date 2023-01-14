@@ -48,7 +48,7 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-96 min-w-auto --3xl'>
+      <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-96 min-w-auto '>
         <Headline variant='md'><b>Reset password</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>

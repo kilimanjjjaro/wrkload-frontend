@@ -38,16 +38,16 @@ export default function Tasks (): JSX.Element {
     <>
       <MasonryGrid>
         {tasks?.map((task: TaskInterface) => (
-          <div key={task._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7 dark:bg-white dark:text-black --3xl'>
-            <h3 className='mb-5 text-3xl font-bold font-primaryFont'>{task.title}</h3>
+          <div key={task._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7 dark:bg-white dark:text-black '>
+            <h3 className='mb-5 text-4xl font-bold font-primaryFont'>{task.title}</h3>
             <Paragraph variant='sm'>{task.description}</Paragraph>
             <div className='flex flex-wrap gap-3 mt-4'>
-              <div className='flex items-center h-8 px-4 text-xs text-white --full bg-light-gray dark:bg-black dark:text-white gap-x-1 font-secondaryFont'><CalendarIcon className='w-4 stroke-width-2' /> {Moment(task.deliveredAt).format('DD-MM-YYYY')}</div>
-              <div className='flex items-center h-8 px-4 text-xs text-white --full bg-light-gray dark:bg-black dark:text-white gap-x-1 font-secondaryFont'><ClockIcon className='w-4 stroke-width-2' /> {task.timing}</div>
+              <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont'><CalendarIcon className='w-4 stroke-width-2' /> {Moment(task.deliveredAt).format('DD-MM-YYYY')}</div>
+              <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont'><ClockIcon className='w-4 stroke-width-2' /> {task.timing}</div>
             </div>
-            <div className='absolute left-0 flex justify-center w-full transition ease-in-out opacity-100 duration-400 -top-4 xl:opacity-0 gap-x-3 group-hover:opacity-100'>
-              <div onClick={() => setTaskModalStatus(!(taskModalStatus))} className='flex items-center h-8 px-4 text-black transition ease-in-out --full cursor-pointer duration-400 bg-custom-yellow hover:text-white hover:bg-black'><PencilSquareIcon className='w-4 stroke-width-2' /></div>
-              <div className='flex items-center h-8 px-4 text-black transition ease-in-out --full cursor-pointer duration-400 bg-custom-red hover:text-white hover:bg-black'><TrashIcon className='w-4 stroke-width-2' /></div>
+            <div className='absolute left-0 flex justify-center w-full text-xs font-semibold tracking-widest text-white uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 -top-[0.9rem] xl:opacity-0 gap-x-3 group-hover:opacity-100'>
+              <div onClick={() => setTaskModalStatus(!(taskModalStatus))} className='flex items-center px-[0.9rem] transition ease-in-out cursor-pointer h-7 duration-400 bg-custom-yellow hover:bg-dark-gray'><PencilSquareIcon className='w-4 stroke-width-2' /></div>
+              <div className='flex items-center px-[0.9rem] transition ease-in-out cursor-pointer h-7 duration-400 bg-custom-red hover:bg-dark-gray'><TrashIcon className='w-4 stroke-width-2' /></div>
             </div>
             <Modal dependency={taskModalStatus} close={() => setTaskModalStatus(!(taskModalStatus))}>
               <UpdateTask taskModalStatus={taskModalStatus} setTaskModalStatus={setTaskModalStatus} task={task} />

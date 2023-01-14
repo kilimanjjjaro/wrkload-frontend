@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 
 interface Props {
+  variant: 'primary' | 'alternative'
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   value?: string
   name: string
@@ -8,12 +9,14 @@ interface Props {
   centerText?: boolean
 }
 
-export default function Textarea ({ onChange, value, name, placeholder, centerText }: Props): JSX.Element {
+export default function Textarea ({ variant, onChange, value, name, placeholder, centerText }: Props): JSX.Element {
   return (
     <textarea
       className={clsx(
-        'w-full p-5 text-sm leading-tight text-dark-gray placeholder-dark-gray placeholder-opacity-100 bg-white appearance-none resize-none md:text-baseblock h-36 --3xl font-secondaryFont dark:bg-alternative dark:text-white focus:outline-none focus:bg-white dark:placeholder-white focus:placeholder:opacity-0 transition duration-400 ease-in-out hover:bg-white',
-        centerText !== undefined && 'placeholder:text-center'
+        'w-full p-5 text-sm leading-tight placeholder-opacity-100 appearance-none resize-none md:text-baseblock h-36 font-secondaryFont focus:outline-none focus:placeholder:opacity-0 transition duration-400 ease-in-out',
+        variant === 'primary' && 'text-white placeholder-white bg-light-gray hover:bg-dark-gray focus:bg-dark-gray',
+        variant === 'alternative' && 'text-white placeholder-white bg-white',
+        centerText !== undefined && 'text-center'
       )} value={value} onChange={onChange} name={name} placeholder={placeholder}
     />
   )

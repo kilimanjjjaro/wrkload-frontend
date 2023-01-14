@@ -1,7 +1,6 @@
-import GlobalStats from 'app/components/shared/GlobalStats'
+import GlobalStats from 'app/components/shared/stats/GlobalStats'
 import Pagination from 'app/components/shared/Pagination'
 import Header from 'app/components/shared/Header'
-import Footer from 'app/components/shared/Footer'
 
 interface Props {
   children: React.ReactNode
@@ -9,7 +8,7 @@ interface Props {
 
 export default function DashboardLayout ({ children }: Props): JSX.Element {
   return (
-    <div className='px-[5vw] py-44 bg-light-gray dark:bg-black'>
+    <div className='px-[5vw] py-40 pb-36 bg-light-gray'>
       <Header />
       <main>
         {children}
@@ -17,7 +16,6 @@ export default function DashboardLayout ({ children }: Props): JSX.Element {
         {/* @ts-expect-error Server Component */}
         <GlobalStats />
       </main>
-      <Footer />
     </div>
   )
 }

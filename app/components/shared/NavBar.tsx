@@ -35,15 +35,13 @@ export default function NavBar (): JSX.Element {
   const user = data?.result
 
   return (
-    <div className='fixed top-0 left-0 z-50 w-full'>
-      <nav className='flex items-center justify-between px-6 py-6 mx-auto md:py-8 md:px-8'>
-        <Link className='flex items-center h-12' href='/'><Logo /></Link>
-        <div className='items-center hidden h-12 font-normal lg:flex gap-x-10'>
-          {user === undefined
-            ? <Button onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-width-3' /></Button>
-            : <DashboardTab user={user} />}
-        </div>
-      </nav>
-    </div>
+    <header className='fixed top-0 left-0 z-50 flex items-center justify-between w-full px-6 py-6 mx-auto md:py-8 md:px-8'>
+      <Link className='flex items-center h-12' href='/'><Logo /></Link>
+      <div className='relative flex items-center h-12'>
+        {user === undefined
+          ? <Button onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-width-3' /></Button>
+          : <DashboardTab user={user} />}
+      </div>
+    </header>
   )
 }

@@ -8,7 +8,7 @@ const VARIANTS = {
   open: { opacity: 1, x: -62, display: 'flex' },
   closed: {
     opacity: 0,
-    x: 0,
+    x: -50,
     transitionEnd: {
       display: 'none'
     }

@@ -1,4 +1,4 @@
-import { TaskInterface } from './tasks/Task'
+import { TaskInterface } from 'interfaces/tasks/Task'
 
 export interface LayoutProps {
   children: React.ReactNode

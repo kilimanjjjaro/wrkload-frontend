@@ -32,7 +32,7 @@ export default function Modal ({ children, dependency, close }: ModalInterface):
       animate={dependency ? 'open' : 'closed'}
       transition={{ ease: 'easeInOut', duration: 0.4 }}
     >
-      <div className='absolute top-0 left-0 w-full h-full bg-black cursor-pointer opacity-95' onClick={() => close()} />
+      <div className='absolute top-0 left-0 w-full h-full cursor-pointer bg-light-gray' onClick={() => close()} />
       <motion.div
         className='z-20'
         variants={CONTENT_VARIANTS}

@@ -41,7 +41,7 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
   }
 
   return (
-    <div className='relative'>
+    <>
       <div className='flex items-center cursor-pointer group gap-x-3' onClick={() => setShowBox(!showBox)}>
         <div className='transition ease-in-out text-dark-gray duration-400 dark:text-white group-hover:text-white dark:group-hover:text-primary font-secondaryFont'>Welcome, {user.username}!</div>
         <Image
@@ -59,18 +59,18 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
         transition={{ ease: 'easeInOut', duration: 0.4 }}
         initial={false}
       >
-        <div className='relative flex items-center'>
-          <ul className='flex flex-col items-end self-start transition ease-in-out bg-white text-dark-gray duration-400 gap-y-1 dark:bg-primary p-7 --3xl dark:text-black font-secondaryFont'>
+        <nav className='relative flex items-center'>
+          <ul className='flex flex-col items-end self-start transition ease-in-out bg-white p-7 text-dark-gray duration-400 gap-y-1 font-secondaryFont'>
             {PAGES.map((page) => (
               <li className='transition ease-in-out duration-400 hover:-translate-x-1' key={page.link} onClick={() => setShowBox(!showBox)}><Link href={page.link}>{page.name}</Link></li>
             ))}
             <button className='transition ease-in-out duration-400 hover:-translate-x-1' onClick={async () => await handleLogout()}>Log out</button>
           </ul>
-          <div className='absolute w-8 p-2 transition ease-in-out bg-white cursor-pointer dark:hover:bg-primary dark:bg-white duration-400 top-50 -left-12 hover:bg-white' onClick={() => setShowBox(!showBox)}>
-            <XMarkIcon className='stroke-width-2 stroke-dark-gray dark:stroke-black' />
+          <div className='absolute w-8 p-2 transition ease-in-out bg-white cursor-pointer top-50 -left-12 group duration-400 hover:bg-dark-gray' onClick={() => setShowBox(!showBox)}>
+            <XMarkIcon className='stroke-width-2 stroke-dark-gray group-hover:stroke-white' />
           </div>
-        </div>
+        </nav>
       </motion.div>
-    </div>
+    </>
   )
 }
