@@ -22,7 +22,7 @@ export default async function ListOfProjects (): Promise<JSX.Element> {
   return (
     <MasonryGrid>
       {projects.map((project, index) => (
-        <div key={index} className='relative flex flex-col items-start bg-white group p-7 dark:bg-white rounded-3xl'>
+        <div key={index} className='relative flex flex-col items-start bg-white group p-7 dark:bg-white'>
           <h3 className='mb-5 text-3xl font-bold font-primaryFont'>{project.name}</h3>
           <h3 className='mb-5 text-3xl font-bold font-primaryFont'>{project.id}</h3>
           <div className='flex flex-wrap gap-3 mt-4'>

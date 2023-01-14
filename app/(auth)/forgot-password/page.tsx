@@ -30,7 +30,7 @@ export default function ForgotPassword (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-96 min-w-auto rounded-3xl'>
+      <div className='p-10 text-center bg-white text-dark-gray md:w-96 min-w-auto'>
         <Headline variant='md'><b>Forgot password</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
