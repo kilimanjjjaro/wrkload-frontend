@@ -50,23 +50,23 @@ export default function Register (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-96 min-w-auto rounded-3xl'>
+      <div className='p-10 text-center text-white bg-white dark:text-black dark:bg-white md:w-96 min-w-auto --3xl'>
         <Headline variant='md'><b>Nice to meet you!</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
-            <Input onChange={handleChange} value={credentials.username} name='username' type='text' placeholder='Username' centerText />
-            <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
-            <Input onChange={handleChange} onKeyUp={handlePasswordValidation} name='password' value={credentials.password} type='password' placeholder='Password' autoComplete='current-password' centerText />
-            <Input onChange={handleChange} onKeyUp={handlePasswordValidation} name='confirmPassword' value={credentials.confirmPassword} type='password' placeholder='Confirm Password' autoComplete='current-password' centerText />
+            <Input variant='primary' onChange={handleChange} value={credentials.username} name='username' type='text' placeholder='Username' centerText />
+            <Input variant='primary' onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
+            <Input variant='primary' onChange={handleChange} onKeyUp={handlePasswordValidation} name='password' value={credentials.password} type='password' placeholder='Password' autoComplete='current-password' centerText />
+            <Input variant='primary' onChange={handleChange} onKeyUp={handlePasswordValidation} name='confirmPassword' value={credentials.confirmPassword} type='password' placeholder='Confirm Password' autoComplete='current-password' centerText />
           </div>
           <Button variant='secondary'>
             <LockClosedIcon className='w-4 stroke-width-3' />
           </Button>
         </form>
         <div className='flex items-center mt-5 text-sm font-semibold font-secondaryFont'>
-          <div className='w-[26%] h-[2px] bg-black rounded-full' />
+          <div className='w-[26%] h-[2px] bg-black --full' />
           <span className='w-[48%]'>Maybe you use?</span>
-          <div className='w-[26%] h-[2px] bg-black rounded-full' />
+          <div className='w-[26%] h-[2px] bg-black --full' />
         </div>
         <div className='flex gap-5 mt-5'>
           <Button variant='alternative' fullWidth>

@@ -15,7 +15,7 @@ export default function ProjectStats ({ stats }: Props): JSX.Element {
     >
       {stats.map((element) => (
         <SwiperSlide key={element.id}>
-          <div className='relative flex flex-col items-start text-black border-4 border-gray-200 group p-7 md:mb-0 rounded-3xl dark:text-white'>
+          <div className='relative flex flex-col items-start text-black border-4 border-white group p-7 md:mb-0 --3xl dark:text-white'>
             <div className='text-4xl font-extrabold text-black font-secondaryFont dark:text-white'>
               {element.hours}
             </div>

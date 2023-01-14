@@ -7,16 +7,19 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      primaryFont: 'var(--syne-font), sans-serif',
+      primaryFont: 'var(--space-grotesk-font), sans-serif',
       secondaryFont: 'var(--inter-font), sans-serif'
+    },
+    container: {
+      center: true
     },
     extend: {
       colors: {
         primary: '#0500ff',
         alternative: '#0d0d0d',
         'light-gray': '#919191',
-        'dark-gray': '#6a6a6a',
-        'custom-red': '#d0000c',
+        'dark-gray': '#4f4f4f',
+        'custom-red': '#ff0000',
         'custom-yellow': '#e0ca00',
         'custom-green': '#34a400'
       },

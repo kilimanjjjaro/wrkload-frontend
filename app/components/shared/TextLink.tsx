@@ -6,5 +6,5 @@ interface Props {
 }
 
 export default function TextLink ({ children, link = '/' }: Props): JSX.Element {
-  return <Link href={link} className='text-gray-200 transition ease-in-out duration-400 hover:text-white hover:drop-shadow-xl dark:hover:text-primary font-secondaryFont'>{children}</Link>
+  return <Link href={link} className='text-white transition ease-in-out duration-400 hover:text-white dark:hover:text-primary font-secondaryFont'>{children}</Link>
 }

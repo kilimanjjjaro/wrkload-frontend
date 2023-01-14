@@ -14,19 +14,19 @@ export default function Header (): JSX.Element {
   return (
     <>
       {pathName === '/tasks' &&
-        <header className='container flex justify-between px-6 mx-auto md:px-8 dark:text-white'>
+        <header className='container flex justify-between px-6 text-white md:px-8 dark:text-white'>
           <TasksPageTitle />
           <TasksOptions />
         </header>}
 
       {pathName === '/projects' &&
-        <header className='container flex justify-between px-6 mx-auto md:px-8 dark:text-white'>
+        <header className='container flex justify-between px-6 text-white md:px-8 dark:text-white'>
           <ProjectsPageTitle />
           <ProjectsOptions />
         </header>}
 
       {pathName === '/users' &&
-        <header className='container flex justify-between px-6 mx-auto md:px-8 dark:text-white'>
+        <header className='container flex justify-between px-6 text-white md:px-8 dark:text-white'>
           <UsersPageTitle />
           <UsersOptions />
         </header>}

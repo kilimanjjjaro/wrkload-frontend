@@ -1,3 +1,3 @@
 export default function Logo (): JSX.Element {
-  return <h1 className='text-3xl font-bold text-gray-200 transition ease-in-out font-primaryFont md:text-4xl hover:text-white dark:hover:text-primary duration-400'>wrkload</h1>
+  return <h1 className='text-3xl font-bold transition ease-in-out text-dark-gray font-primaryFont md:text-4xl hover:text-white dark:hover:text-primary duration-400'>wrkload</h1>
 }

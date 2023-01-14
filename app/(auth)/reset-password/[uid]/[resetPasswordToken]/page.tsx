@@ -48,12 +48,12 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-96 min-w-auto rounded-3xl'>
+      <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-96 min-w-auto --3xl'>
         <Headline variant='md'><b>Reset password</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
-            <Input onChange={handleChange} value={credentials.newPassword} onKeyUp={handlePasswordValidation} name='newPassword' type='password' placeholder='New password' autoComplete='new-password' centerText />
-            <Input onChange={handleChange} value={credentials.confirmNewPassword} onKeyUp={handlePasswordValidation} name='confirmNewPassword' type='password' placeholder='Confirm new password' autoComplete='new-password' centerText />
+            <Input variant='primary' onChange={handleChange} value={credentials.newPassword} onKeyUp={handlePasswordValidation} name='newPassword' type='password' placeholder='New password' autoComplete='new-password' centerText />
+            <Input variant='primary' onChange={handleChange} value={credentials.confirmNewPassword} onKeyUp={handlePasswordValidation} name='confirmNewPassword' type='password' placeholder='Confirm new password' autoComplete='new-password' centerText />
           </div>
           <Button variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-width-3' />

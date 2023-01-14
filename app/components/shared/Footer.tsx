@@ -1,46 +1,16 @@
 import { MoonIcon } from '@heroicons/react/24/solid'
-import Link from 'next/link'
-import Headline from 'app/components/shared/Headline'
-import TextLink from 'app/components/shared/TextLink'
-import Logo from 'app/components/shared/Logo'
-import KilimanjjjaroLogo from 'public/images/kilimanjjjaro.svg'
+import Dropdown from 'app/components/shared/Dropdown'
 
-interface Props {
-  variant: 'primary' | 'secondary'
-}
-
-export default function Footer ({ variant }: Props): JSX.Element {
+export default function Footer (): JSX.Element {
   return (
-    <>
-      {variant === 'primary' &&
-        <footer className='container px-6 pt-16 pb-8 mx-auto md:px-8'>
-          <div className='grid grid-cols-2 justify-items-start'>
-            <div className='justify-self-start'>
-              <Link href='/'><Logo /></Link>
-            </div>
-            <div className='justify-self-end'>
-              <Link href='https://kilimanjjjaro.com/'>
-                <KilimanjjjaroLogo className='w-16 transition ease-in-out duration-400 md:w-18 2xl:w-18 fill-gray-200 dark:fill-white hover:fill-white dark:hover:fill-primary' />
-              </Link>
-            </div>
-          </div>
-          <div className='relative flex justify-center pt-16 pb-12 mx-auto text-center text-black transition ease-in-out duration-400 md:pb-20 md:pt-9 dark:text-white'>
-            <TextLink link='/'>
-              <Headline variant='xl'>This is the end, <br />do you have ideas?</Headline>
-            </TextLink>
-          </div>
-          <div className='flex flex-col justify-between text-sm text-light-gray md:flex-row dark:text-white font-secondaryFont md:text-base'>
-            <div className='mb-3 text-center md:mb-0 md:text-left'>© {new Date().getFullYear()} wrkload. All rights reserved.</div>
-            <button className='flex items-center justify-center gap-2 transition ease-in-out duration-400 md:justify-end hover:text-gray-200 '>Dark mode <MoonIcon className='w-4' /></button>
-          </div>
-        </footer>}
-
-      {variant === 'secondary' &&
-        <footer className='container px-6 py-8 mx-auto md:px-8'>
-          <div className='text-xs text-center text-dark-gray dark:text-gray-800 font-secondaryFont md:text-sm'>
-            © {new Date().getFullYear()} wrkload. All rights reserved.
-          </div>
-        </footer>}
-    </>
+    <footer className='fixed bottom-0 left-0 z-50 flex justify-between w-full px-6 py-6 mx-auto text-sm text-dark-gray md:py-8 md:px-8'>
+      <span className='font-secondaryFont'>
+        © {new Date().getFullYear()} wrkload. All rights reserved.
+      </span>
+      <div className='flex gap-x-10'>
+        <Dropdown />
+        <button><MoonIcon className='w-4 transition ease-in-out duration-400 hover:text-white dark:hover:text-primary' /></button>
+      </div>
+    </footer>
   )
 }

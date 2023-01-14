@@ -1,16 +1,11 @@
-import Footer from 'app/components/shared/Footer'
-
 interface Props {
   children: React.ReactNode
 }
 
 export default function AuthLayout ({ children }: Props): JSX.Element {
   return (
-    <div className='bg-light-gray dark:bg-black'>
-      <main className='flex items-center justify-center h-[calc(100vh-84px)]'>
-        {children}
-      </main>
-      <Footer variant='secondary' />
-    </div>
+    <main className='px-[5vw] flex items-center justify-center h-screen'>
+      {children}
+    </main>
   )
 }

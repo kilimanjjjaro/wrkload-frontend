@@ -3,9 +3,9 @@ import Image from 'next/image'
 
 export default function Testimony ({ image, name, rol, text }: TestimoniesInterface): JSX.Element {
   return (
-    <div className='flex flex-col items-center mb-6 text-black bg-gray-200 p-7 md:mb-10 dark:bg-alternative rounded-3xl break-inside-avoid'>
+    <div className='flex flex-col items-center mb-6 text-black bg-white p-7 md:mb-10 dark:bg-alternative --3xl break-inside-avoid'>
       <Image
-        className='object-cover w-20 h-20 mb-4 rounded-full'
+        className='object-cover w-20 h-20 mb-4 --full'
         src={image}
         alt={name}
       />

@@ -7,8 +7,8 @@ export default function Form (): JSX.Element {
   return (
     <form className='flex flex-col items-start gap-y-6 md:gap-y-5'>
       <div className='grid w-full gap-6 md:gap-10 md:grid-cols-2'>
-        <Input name='name' type='text' placeholder='Can ask your name?' autoComplete='name' />
-        <Input name='email' type='email' placeholder='I need you email too' autoComplete='email' />
+        <Input variant='alternative' name='name' type='text' placeholder='Can ask your name?' autoComplete='name' />
+        <Input variant='alternative' name='email' type='email' placeholder='I need you email too' autoComplete='email' />
       </div>
       <Textarea name='message' placeholder="What do you want to talk about? Maybe you have an idea or found something that doesn't work as expected." />
       <Button variant='primary'>Send <ArrowRightIcon className='w-4 stroke-width-3' /></Button>

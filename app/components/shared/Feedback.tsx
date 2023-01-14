@@ -11,7 +11,7 @@ interface Props {
 export default function Feedback ({ title, description }: Props): JSX.Element {
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto rounded-3xl'>
+      <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto --3xl'>
         <Headline variant='md'><b>{title}</b></Headline>
         <Paragraph variant='sm'>{description}</Paragraph>
         <Button variant='secondary'>

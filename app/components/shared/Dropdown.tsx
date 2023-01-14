@@ -1,3 +1,5 @@
+'use client'
+
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
@@ -23,14 +25,14 @@ export default function Dropdown (): JSX.Element {
 
   return (
     <div className='relative'>
-      <button className='flex items-center gap-1 text-gray-200 transition ease-in-out duration-400 hover:text-white hover:drop-shadow-xl dark:hover:text-primary font-secondaryFont' onClick={() => setShowDropdown(!showDropdown)}>En<ChevronDownIcon className='w-3 stroke-width-3' /></button>
+      <button className='flex items-center gap-1 transition ease-in-out duration-400 hover:text-white dark:hover:text-primary font-secondaryFont' onClick={() => setShowDropdown(!showDropdown)}>En<ChevronDownIcon className='w-3 stroke-width-3' /></button>
       <motion.ul
         className='absolute mt-3 text-white top-full font-secondaryFont' animate={showDropdown ? 'open' : 'closed'}
         variants={VARIANTS}
         transition={{ ease: 'easeInOut', duration: 0.4 }}
         initial={false}
       >
-        {LANGUAGES.map((language) => <button key={language.code} className='block text-gray-200 transition ease-in-out duration-400 dark:text-white hover:text-white hover:drop-shadow-xl dark:hover:text-primary'>{language.name}</button>)}
+        {LANGUAGES.map((language) => <button key={language.code} className='block text-white transition ease-in-out duration-400 dark:text-white hover:text-white dark:hover:text-primary'>{language.name}</button>)}
       </motion.ul>
     </div>
   )
