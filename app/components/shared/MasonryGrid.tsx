@@ -13,7 +13,7 @@ export default function MasonryGrid ({ children }: { children: React.ReactNode }
     <>
       <Masonry
         breakpointCols={BREAKPOINTS}
-        className='grid grid-cols-4 gap-x-10'
+        className='grid items-start grid-cols-4 gap-x-10'
         columnClassName='!w-full grid gap-y-10'
       >
         {children}
