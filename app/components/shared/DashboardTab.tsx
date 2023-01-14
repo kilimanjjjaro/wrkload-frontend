@@ -43,9 +43,9 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
   return (
     <div className='relative'>
       <div className='flex items-center cursor-pointer group gap-x-3' onClick={() => setShowBox(!showBox)}>
-        <div className='text-white transition ease-in-out duration-400 dark:text-white group-hover:text-white dark:group-hover:text-primary font-secondaryFont'>{user.username}</div>
+        <div className='transition ease-in-out text-dark-gray duration-400 dark:text-white group-hover:text-white dark:group-hover:text-primary font-secondaryFont'>Welcome, {user.username}!</div>
         <Image
-          className='object-cover w-12 h-12 transition ease-in-out border-4 border-white --full duration-400 group-hover:scale-90 group-hover:border-white dark:group-hover:border-primary'
+          className='object-cover w-12 h-12 transition ease-in-out border-4 rounded-full border-dark-gray duration-400 group-hover:scale-90 group-hover:border-white dark:group-hover:border-primary'
           src={user.avatar}
           alt={user.username}
           width={40}
@@ -66,7 +66,7 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
             ))}
             <button className='transition ease-in-out duration-400 hover:-translate-x-1' onClick={async () => await handleLogout()}>Log out</button>
           </ul>
-          <div className='absolute w-8 p-2 transition ease-in-out bg-white --full cursor-pointer dark:hover:bg-primary dark:bg-white duration-400 top-50 -left-12 hover:bg-white' onClick={() => setShowBox(!showBox)}>
+          <div className='absolute w-8 p-2 transition ease-in-out bg-white cursor-pointer dark:hover:bg-primary dark:bg-white duration-400 top-50 -left-12 hover:bg-white' onClick={() => setShowBox(!showBox)}>
             <XMarkIcon className='stroke-width-2 stroke-dark-gray dark:stroke-black' />
           </div>
         </div>
