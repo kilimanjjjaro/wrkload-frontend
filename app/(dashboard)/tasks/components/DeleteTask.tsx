@@ -1,28 +1,20 @@
+'use client'
 
+import { useState } from 'react'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
-import Textarea from 'app/components/shared/Textarea'
-import { useState } from 'react'
-import addTask from 'services/tasks/addTask'
+import deleteTask from 'services/tasks/deleteTask'
+import { TaskInterface } from 'interfaces/tasks/Task'
 
 interface Props {
-  modalStatus: boolean
   setModalStatus: (value: boolean) => void
+  data: TaskInterface
 }
 
-const INITIAL_TASK_STATE = {
-  title: '',
-  project: '',
-  timing: '',
-  month: '',
-  deliveredAt: '',
-  description: ''
-}
-
-const AddTask = ({ modalStatus, setModalStatus }: Props): JSX.Element => {
-  const [task, setTask] = useState(INITIAL_TASK_STATE)
+export default function DeleteTask ({ setModalStatus, data }: Props): JSX.Element {
+  const [task, setTask] = useState(data)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setTask({ ...task, [event.target.name]: event.target.value })
@@ -32,8 +24,8 @@ const AddTask = ({ modalStatus, setModalStatus }: Props): JSX.Element => {
     event.preventDefault()
 
     try {
-      await addTask(task)
-      setModalStatus(!(modalStatus))
+      await deleteTask(task._id)
+      setModalStatus(false)
     } catch (error: any) {
       console.error(error.response.data)
     }
@@ -41,20 +33,16 @@ const AddTask = ({ modalStatus, setModalStatus }: Props): JSX.Element => {
 
   const handleCloseModal = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    setModalStatus(!(modalStatus))
+    setModalStatus(false)
   }
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center bg-white text-dark-gray md:w-96 min-w-auto'>
-        <Headline variant='md'><b>Add task</b></Headline>
+        <Headline variant='md'><b>Sure to delete this task?</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>
-            <Input variant='primary' onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' centerText required />
-            <Input variant='primary' onChange={handleChange} value={task.project} name='project' type='text' placeholder='Project' centerText required />
-            <Input variant='primary' onChange={handleChange} value={task.timing} name='timing' type='time' placeholder='Timing' centerText required />
-            <Input variant='primary' onChange={handleChange} value={task.deliveredAt} name='deliveredAt' type='date' placeholder='Delivered' centerText required />
-            <Textarea variant='primary' onChange={handleChange} value={task.description} name='description' placeholder='Description' centerText />
+            <Input variant='primary' onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' centerText required disabled />
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>
@@ -69,5 +57,3 @@ const AddTask = ({ modalStatus, setModalStatus }: Props): JSX.Element => {
     </div>
   )
 }
-
-export default AddTask

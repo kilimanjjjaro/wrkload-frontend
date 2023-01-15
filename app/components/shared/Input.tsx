@@ -11,9 +11,10 @@ interface Props {
   autoComplete?: string
   centerText?: boolean
   required?: boolean
+  disabled?: boolean
 }
 
-export default function Input ({ variant, onChange, onKeyUp, value, name, type, placeholder, autoComplete, centerText, required }: Props): JSX.Element {
+export default function Input ({ variant, onChange, onKeyUp, value, name, type, placeholder, autoComplete, centerText, required, disabled }: Props): JSX.Element {
   return (
     <input
       className={clsx(
@@ -22,7 +23,7 @@ export default function Input ({ variant, onChange, onKeyUp, value, name, type, 
         variant === 'alternative' && 'text-white placeholder-white bg-white',
         centerText !== undefined && 'text-center'
       )}
-      value={value} onChange={onChange} onKeyUp={onKeyUp} name={name} type={type} placeholder={placeholder} autoComplete={autoComplete} required={required}
+      value={value} onChange={onChange} onKeyUp={onKeyUp} name={name} type={type} placeholder={placeholder} autoComplete={autoComplete} required={required} disabled={disabled}
     />
   )
 }

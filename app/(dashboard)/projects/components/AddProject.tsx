@@ -3,36 +3,30 @@ import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
-import Textarea from 'app/components/shared/Textarea'
 import { useState } from 'react'
-import addTask from 'services/tasks/addTask'
+import addProject from 'services/projects/addProject'
 
 interface Props {
   modalStatus: boolean
   setModalStatus: (value: boolean) => void
 }
 
-const INITIAL_TASK_STATE = {
-  title: '',
-  project: '',
-  timing: '',
-  month: '',
-  deliveredAt: '',
-  description: ''
+const INITIAL_PROJECT_STATE = {
+  name: ''
 }
 
-const AddTask = ({ modalStatus, setModalStatus }: Props): JSX.Element => {
-  const [task, setTask] = useState(INITIAL_TASK_STATE)
+export default function AddProject ({ modalStatus, setModalStatus }: Props): JSX.Element {
+  const [project, setProject] = useState(INITIAL_PROJECT_STATE)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setTask({ ...task, [event.target.name]: event.target.value })
+    setProject({ ...project, [event.target.name]: event.target.value })
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
 
     try {
-      await addTask(task)
+      await addProject(project)
       setModalStatus(!(modalStatus))
     } catch (error: any) {
       console.error(error.response.data)
@@ -47,14 +41,10 @@ const AddTask = ({ modalStatus, setModalStatus }: Props): JSX.Element => {
   return (
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center bg-white text-dark-gray md:w-96 min-w-auto'>
-        <Headline variant='md'><b>Add task</b></Headline>
+        <Headline variant='md'><b>Add project</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>
-            <Input variant='primary' onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' centerText required />
-            <Input variant='primary' onChange={handleChange} value={task.project} name='project' type='text' placeholder='Project' centerText required />
-            <Input variant='primary' onChange={handleChange} value={task.timing} name='timing' type='time' placeholder='Timing' centerText required />
-            <Input variant='primary' onChange={handleChange} value={task.deliveredAt} name='deliveredAt' type='date' placeholder='Delivered' centerText required />
-            <Textarea variant='primary' onChange={handleChange} value={task.description} name='description' placeholder='Description' centerText />
+            <Input variant='primary' onChange={handleChange} value={project.name} name='name' type='text' placeholder='Name' centerText required />
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>
@@ -69,5 +59,3 @@ const AddTask = ({ modalStatus, setModalStatus }: Props): JSX.Element => {
     </div>
   )
 }
-
-export default AddTask

@@ -8,6 +8,7 @@ import useSWR, { Fetcher } from 'swr'
 import api from 'utils/api'
 import Card from 'app/components/shared/Card'
 import UpdateTask from 'app/(dashboard)/tasks/components/UpdateTask'
+import DeleteTask from 'app/(dashboard)/tasks/components/DeleteTask'
 
 interface FetcherInterface {
   results: TaskInterface[]
@@ -34,7 +35,7 @@ export default function Tasks (): JSX.Element {
     <>
       <MasonryGrid>
         {tasks?.map((task: TaskInterface) => (
-          <Card key={task._id} data={task} updateData={UpdateTask} />
+          <Card key={task._id} data={task} updateData={UpdateTask} deleteData={DeleteTask} />
         ))}
       </MasonryGrid>
     </>

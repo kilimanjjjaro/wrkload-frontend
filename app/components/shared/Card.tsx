@@ -15,10 +15,12 @@ interface DataInterface extends TaskInterface, ProjectInterface, UserInterface {
 interface Props {
   data: DataInterface
   updateData: React.ComponentType<any>
+  deleteData: React.ComponentType<any>
 }
 
-export default function Card ({ data, updateData: UpdateData }: Props): JSX.Element {
-  const [modalStatus, setModalStatus] = useState(false)
+export default function Card ({ data, updateData: UpdateData, deleteData: DeleteData }: Props): JSX.Element {
+  const [updateTaskModalStatus, setUpdateTaskModalStatus] = useState(false)
+  const [deleteTaskModalStatus, setDeleteTaskModalStatus] = useState(false)
 
   return (
     <div className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'>
@@ -31,7 +33,7 @@ export default function Card ({ data, updateData: UpdateData }: Props): JSX.Elem
             width='80'
             height='80'
           />
-          {data.confirmationStatus === false && <div className='absolute w-3 h-3 top-1 left-1 bg-custom-red' title='Unconfirmed account' />}
+          {data.confirmationStatus === false && <div className='absolute top-0 left-0 w-3 h-3 bg-custom-red' title='Unconfirmed account' />}
         </div>
       )}
 
@@ -53,15 +55,18 @@ export default function Card ({ data, updateData: UpdateData }: Props): JSX.Elem
         {data.timing !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Timing'><ClockIcon className='w-4 stroke-width-2' /> {data.timing}</div>}
         {data.totalTasks !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Total tasks'><InboxStackIcon className='w-4 stroke-width-2' /> {data.totalTasks}</div>}
         {data.email !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='E-mail'><EnvelopeIcon className='w-4 stroke-width-2' /> {data.email}</div>}
-        {data.registeredAt !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Registered at'><UserIcon className='w-4 stroke-width-2' /> {data.registeredAt}</div>}
+        {data.registeredAt !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Registration date'><UserIcon className='w-4 stroke-width-2' /> {data.registeredAt}</div>}
       </div>
 
       <div className='absolute left-0 flex justify-center w-full text-xs font-semibold tracking-widest text-white uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 -top-[0.9rem] xl:opacity-0 gap-x-3 group-hover:opacity-100'>
-        <div onClick={() => setModalStatus(!(modalStatus))} className='flex items-center px-[0.83rem] transition ease-in-out cursor-pointer h-7 duration-400 bg-custom-yellow hover:bg-dark-gray'><PencilSquareIcon className='w-4 stroke-width-2' /></div>
-        <div className='flex items-center px-[0.83rem] transition ease-in-out cursor-pointer h-7 duration-400 bg-custom-red hover:bg-dark-gray'><TrashIcon className='w-4 stroke-width-2' /></div>
+        <div onClick={() => setUpdateTaskModalStatus(!(updateTaskModalStatus))} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-7 duration-400 bg-custom-yellow hover:bg-dark-gray'><PencilSquareIcon className='w-4 stroke-width-2' /></div>
+        <div onClick={() => setDeleteTaskModalStatus(!(deleteTaskModalStatus))} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-7 duration-400 bg-custom-red hover:bg-dark-gray'><TrashIcon className='w-4 stroke-width-2' /></div>
       </div>
-      <Modal dependency={modalStatus} close={() => setModalStatus(!(modalStatus))}>
-        <UpdateData modalStatus={modalStatus} setModalStatus={setModalStatus} data={data} />
+      <Modal dependency={updateTaskModalStatus} close={() => setUpdateTaskModalStatus(!(updateTaskModalStatus))}>
+        <UpdateData modalStatus={updateTaskModalStatus} setModalStatus={setUpdateTaskModalStatus} data={data} />
+      </Modal>
+      <Modal dependency={deleteTaskModalStatus} close={() => setDeleteTaskModalStatus(!(deleteTaskModalStatus))}>
+        <DeleteData modalStatus={deleteTaskModalStatus} setModalStatus={setDeleteTaskModalStatus} data={data} />
       </Modal>
     </div>
   )

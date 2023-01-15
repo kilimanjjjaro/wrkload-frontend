@@ -2,6 +2,7 @@ import Card from 'app/components/shared/Card'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
 import { ProjectInterface } from 'interfaces/projects/Project'
 import UpdateProject from './components/UpdateProject'
+import DeleteProject from './components/DeleteProject'
 
 const PROJECTS = [
   { _id: 1, name: 'Vercel', createdAt: '05/09/2022', totalTasks: '5 tasks' },
@@ -19,7 +20,7 @@ export default function Projects (): JSX.Element {
     <>
       <MasonryGrid>
         {PROJECTS?.map((project: ProjectInterface) => (
-          <Card key={project._id} data={project} updateData={UpdateProject} />
+          <Card key={project._id} data={project} updateData={UpdateProject} deleteData={DeleteProject} />
         ))}
       </MasonryGrid>
     </>

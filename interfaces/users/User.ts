@@ -3,9 +3,9 @@ import { Key } from 'react'
 export interface UserInterface {
   _id?: Key | undefined
   role?: number
-  username: string
+  username?: string
   email?: string
-  avatar: string
+  avatar?: string
   registeredAt?: string
   lastActiveAt?: string
   confirmationStatus?: boolean

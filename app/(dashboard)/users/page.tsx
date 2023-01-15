@@ -2,6 +2,7 @@ import Card from 'app/components/shared/Card'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
 import UpdateUser from 'app/(dashboard)/users/components/UpdateUser'
 import { UserInterface } from 'interfaces/users/User'
+import DeleteUser from 'app/(dashboard)/users/components/DeleteUser'
 
 const USERS = [
   { _id: 1, username: 'kilimanjjjaro', email: 'hola@kilimanjjjaro.com', role: 1, avatar: '/images/default-avatar.svg', registeredAt: '10/12/1992', lastActiveAt: '10/12/1992', confirmationStatus: true },
@@ -11,11 +12,10 @@ const USERS = [
 ]
 
 export default function Users (): JSX.Element {
-  console.log(USERS)
   return (
     <MasonryGrid>
       {USERS?.map((user: UserInterface) => (
-        <Card key={user._id} data={user} updateData={UpdateUser} />
+        <Card key={user._id} data={user} updateData={UpdateUser} deleteData={DeleteUser} />
       ))}
     </MasonryGrid>
   )
