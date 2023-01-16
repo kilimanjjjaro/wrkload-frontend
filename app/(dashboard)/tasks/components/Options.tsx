@@ -3,19 +3,29 @@ import { CalendarIcon, MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24
 import Button from 'app/components/shared/Button'
 import Modal from 'app/components/shared/Modal'
 import AddTask from 'app/(dashboard)/tasks/components/AddTask'
+import SearchForm from 'app/components/shared/SearchForm'
+import DateFilter from 'app/components/shared/DateFilter'
 
 export const Options = (): JSX.Element => {
   const [addTaskModalStatus, setAddTaskModalStatus] = useState(false)
+  const [searchModalStatus, setSearchModalStatus] = useState(false)
+  const [dateFilterModalStatus, setDateFilterModalStatus] = useState(false)
 
   return (
     <>
-      <div className='hidden lg:flex gap-x-5'>
-        <Button onClick={() => setAddTaskModalStatus(!(addTaskModalStatus))} variant='primary'><PlusIcon className='w-4 stroke-width-3' /></Button>
-        <Button variant='primary'><CalendarIcon className='w-4 stroke-width-3' /></Button>
-        <Button variant='primary'><MagnifyingGlassIcon className='w-4 stroke-width-3' /></Button>
+      <div className='flex items-start gap-x-5'>
+        <Button onClick={() => setAddTaskModalStatus(true)} variant='primary'><PlusIcon className='w-4 stroke-width-3' /></Button>
+        <Button onClick={() => setSearchModalStatus(true)} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-width-3' /></Button>
+        <div className='relative'>
+          <Button onClick={() => setDateFilterModalStatus(!(dateFilterModalStatus))} variant='primary'><CalendarIcon className='w-4 stroke-width-3' /></Button>
+          <DateFilter dependency={dateFilterModalStatus} setDependency={setDateFilterModalStatus} />
+        </div>
       </div>
-      <Modal dependency={addTaskModalStatus} close={() => setAddTaskModalStatus(!(addTaskModalStatus))}>
+      <Modal dependency={addTaskModalStatus} close={() => setAddTaskModalStatus(false)}>
         <AddTask modalStatus={addTaskModalStatus} setModalStatus={setAddTaskModalStatus} />
+      </Modal>
+      <Modal dependency={searchModalStatus} close={() => setSearchModalStatus(false)}>
+        <SearchForm setModalStatus={setSearchModalStatus} type='task' />
       </Modal>
     </>
   )

@@ -59,8 +59,8 @@ export default function Card ({ data, updateData: UpdateData, deleteData: Delete
       </div>
 
       <div className='absolute left-0 flex justify-center w-full text-xs font-semibold tracking-widest text-white uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 -top-[0.9rem] xl:opacity-0 gap-x-3 group-hover:opacity-100'>
-        <div onClick={() => setUpdateTaskModalStatus(!(updateTaskModalStatus))} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-7 duration-400 bg-custom-yellow hover:bg-dark-gray'><PencilSquareIcon className='w-4 stroke-width-2' /></div>
-        <div onClick={() => setDeleteTaskModalStatus(!(deleteTaskModalStatus))} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-7 duration-400 bg-custom-red hover:bg-dark-gray'><TrashIcon className='w-4 stroke-width-2' /></div>
+        <div onClick={() => setUpdateTaskModalStatus(!(updateTaskModalStatus))} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-custom-yellow hover:bg-dark-gray'><PencilSquareIcon className='w-4 stroke-width-2' /></div>
+        <div onClick={() => setDeleteTaskModalStatus(!(deleteTaskModalStatus))} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-custom-red hover:bg-dark-gray'><TrashIcon className='w-4 stroke-width-2' /></div>
       </div>
       <Modal dependency={updateTaskModalStatus} close={() => setUpdateTaskModalStatus(!(updateTaskModalStatus))}>
         <UpdateData modalStatus={updateTaskModalStatus} setModalStatus={setUpdateTaskModalStatus} data={data} />

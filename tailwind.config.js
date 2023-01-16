@@ -18,9 +18,9 @@ module.exports = {
         primary: '#0500ff',
         alternative: '#0d0d0d',
         'light-gray': '#919191',
-        'dark-gray': '#454545',
+        'dark-gray': '#404040',
         'custom-red': '#e32626',
-        'custom-yellow': '#e3d126',
+        'custom-yellow': '#dfcd24',
         'custom-green': '#34a400'
       },
       transitionDuration: {

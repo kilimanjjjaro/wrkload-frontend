@@ -24,8 +24,8 @@ export default async function GlobalStats (): Promise<any> {
           {stat.type === 'project' && <FireIcon className='h-10 text-light-gray stroke-width-2' />}
           <div className='flex items-center text-4xl font-extrabold gap-x-1 mt-7 font-secondaryFont'>
             {stat.value}
-            {stat.avg === 'better' && <ArrowUpIcon className='w-4 stroke-custom-green stroke-width-3' />}
-            {stat.avg === 'worst' && <ArrowDownIcon className='w-4 stroke-custom-red stroke-width-3' />}
+            {stat.avg === 'better' && <ArrowUpIcon className='w-4 stroke-custom-green stroke-width-4' />}
+            {stat.avg === 'worst' && <ArrowDownIcon className='w-4 stroke-custom-red stroke-width-4' />}
           </div>
           {stat.type === 'totalTasks' && <span className='mt-1 text-3xl font-secondaryFont'>tasks uploaded last month.</span>}
           {stat.type === 'totalMonthlyHours' && <span className='mt-1 text-3xl font-secondaryFont'>hours worked last month.</span>}
