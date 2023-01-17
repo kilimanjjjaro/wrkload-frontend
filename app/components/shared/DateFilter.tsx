@@ -29,7 +29,7 @@ export default function DateFilter ({ dependency, setDependency }: Props): JSX.E
       transition={{ ease: 'easeInOut', duration: 0.4 }}
       initial={false}
     >
-      <h4 className='text-sm font-extrabold text-center uppercase font-secondaryFont'>Date range filter</h4>
+      <h4 className='text-sm font-bold text-center font-secondaryFont'>Date range filter</h4>
       <Input variant='primary' name='startingDate' type='date' placeholder='Starting date' centerText required />
       <Input variant='primary' name='endingDate' type='date' placeholder='Ending date' centerText required />
       <div className='flex gap-x-3'>

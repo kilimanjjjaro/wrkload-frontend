@@ -1,6 +1,4 @@
-
 import { motion } from 'framer-motion'
-import { ModalInterface } from 'interfaces/components'
 
 const BACKGROUND_VARIANTS = {
   open: { opacity: 1, display: 'flex' },
@@ -23,7 +21,13 @@ const CONTENT_VARIANTS = {
   }
 }
 
-export default function Modal ({ children, dependency, close }: ModalInterface): JSX.Element {
+interface Props {
+  children: JSX.Element
+  dependency: boolean
+  close: () => void
+}
+
+export default function Modal ({ children, dependency, close }: Props): JSX.Element {
   return (
     <motion.div
       className='fixed top-0 left-0 z-10 flex items-center justify-center w-full h-full'
@@ -32,7 +36,7 @@ export default function Modal ({ children, dependency, close }: ModalInterface):
       animate={dependency ? 'open' : 'closed'}
       transition={{ ease: 'easeInOut', duration: 0.4 }}
     >
-      <div className='absolute top-0 left-0 w-full h-full cursor-pointer bg-light-gray opacity-95' onClick={() => close()} />
+      <div className='absolute top-0 left-0 w-full h-full cursor-pointer bg-light-gray' onClick={() => close()} />
       <motion.div
         className='z-20'
         variants={CONTENT_VARIANTS}

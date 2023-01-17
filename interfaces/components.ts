@@ -1,6 +1,3 @@
-import { TaskInterface } from 'interfaces/tasks/Task'
-import { Dispatch, SetStateAction } from 'react'
-
 export interface LayoutProps {
   children: React.ReactNode
 }

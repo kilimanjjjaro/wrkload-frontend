@@ -25,6 +25,29 @@ module.exports = {
       },
       transitionDuration: {
         400: '400ms'
+      },
+      animation: {
+        'loading-square': 'strokeSpacing 2s ease-in-out infinite'
+      },
+      keyframes: {
+        strokeSpacing: {
+          '0%': {
+            strokeDasharray: '0 200',
+            strokeDashoffset: '0'
+          },
+          '45%': {
+            strokeDasharray: '200 200',
+            strokeDashoffset: '0'
+          },
+          '90%': {
+            strokeDasharray: '200 200',
+            strokeDashoffset: '-200'
+          },
+          '100%': {
+            strokeDasharray: '200 200',
+            strokeDashoffset: '-200'
+          }
+        }
       }
     }
   },
