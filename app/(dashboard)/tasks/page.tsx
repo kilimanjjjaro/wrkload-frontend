@@ -1,14 +1,16 @@
 'use client'
 
 import MasonryGrid from 'app/components/shared/MasonryGrid'
-
-import { TaskInterface } from 'interfaces/tasks/Task'
 import { getCookie } from 'cookies-next'
 import useSWR, { Fetcher } from 'swr'
 import api from 'utils/api'
 import Card from 'app/components/shared/Card'
 import UpdateTask from 'app/(dashboard)/tasks/components/UpdateTask'
 import DeleteTask from 'app/(dashboard)/tasks/components/DeleteTask'
+import Skeleton from 'app/components/shared/Skeleton'
+import { TaskInterface } from 'interfaces/tasks/Task'
+
+const SKELETON = Array.from(Array(8).keys())
 
 interface FetcherInterface {
   results: TaskInterface[]
@@ -29,11 +31,12 @@ export default function Tasks (): JSX.Element {
 
   const tasks = data?.results
 
-  if (isLoading) return <div className='text-white'>Loading...</div>
-
   return (
     <>
       <MasonryGrid>
+        {isLoading && SKELETON.map((_, index) => (
+          <Skeleton type='task' key={index} />
+        ))}
         {tasks?.map((task: TaskInterface) => (
           <Card key={task._id} data={task} updateData={UpdateTask} deleteData={DeleteTask} />
         ))}

@@ -37,9 +37,9 @@ export default function Card ({ data, updateData: UpdateData, deleteData: Delete
         </div>
       )}
 
-      {data.title !== undefined && <h3 className='mb-5 text-4xl font-bold font-primaryFont'>{data.title}</h3>}
-      {data.name !== undefined && <h3 className='mb-5 text-4xl font-bold font-primaryFont'>{data.name}</h3>}
-      {data.username !== undefined && <h3 className='mb-5 text-4xl font-bold font-primaryFont'>{data.username}</h3>}
+      {data.title !== undefined && <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'>{data.title}</h3>}
+      {data.name !== undefined && <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'>{data.name}</h3>}
+      {data.username !== undefined && <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'>{data.username}</h3>}
       {data.role !== undefined && (
         <div className='flex mb-3 items-center h-6 px-2 text-[10px] font-bold text-gray-500 uppercase border-2 border-gray-500  gap-x-1 font-secondaryFont'>
           {data.role === 1 && 'Administrator'}
@@ -63,7 +63,7 @@ export default function Card ({ data, updateData: UpdateData, deleteData: Delete
         <div onClick={() => setDeleteTaskModalStatus(!(deleteTaskModalStatus))} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-custom-red hover:bg-dark-gray'><TrashIcon className='w-4 stroke-width-2' /></div>
       </div>
       <Modal dependency={updateTaskModalStatus} close={() => setUpdateTaskModalStatus(!(updateTaskModalStatus))}>
-        <UpdateData modalStatus={updateTaskModalStatus} setModalStatus={setUpdateTaskModalStatus} data={data} />
+        <UpdateData setModalStatus={setUpdateTaskModalStatus} data={data} />
       </Modal>
       <Modal dependency={deleteTaskModalStatus} close={() => setDeleteTaskModalStatus(!(deleteTaskModalStatus))}>
         <DeleteData modalStatus={deleteTaskModalStatus} setModalStatus={setDeleteTaskModalStatus} data={data} />
