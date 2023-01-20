@@ -31,17 +31,13 @@ export default function Tasks (): JSX.Element {
         ))}
       </MasonryGrid>
 
-      {updateModalStatus && (
-        <Modal modalStatus={updateModalStatus} setModalStatus={setUpdateModalStatus}>
-          <UpdateTask data={selectedTask} setModalStatus={setUpdateModalStatus} />
-        </Modal>
-      )}
+      <Modal modalStatus={updateModalStatus} setModalStatus={setUpdateModalStatus}>
+        <UpdateTask data={selectedTask} setModalStatus={setUpdateModalStatus} />
+      </Modal>
 
-      {deleteModalStatus && (
-        <Modal modalStatus={deleteModalStatus} setModalStatus={setDeleteModalStatus}>
-          <DeleteTask data={selectedTask} setModalStatus={setDeleteModalStatus} />
-        </Modal>
-      )}
+      <Modal modalStatus={deleteModalStatus} setModalStatus={setDeleteModalStatus}>
+        <DeleteTask data={selectedTask} setModalStatus={setDeleteModalStatus} />
+      </Modal>
     </>
   )
 }
