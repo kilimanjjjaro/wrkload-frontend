@@ -3,8 +3,6 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Paragraph from 'app/components/shared/Paragraph'
-import Modal from 'app/components/shared/Modal'
-import Moment from 'moment'
 import { CalendarIcon, ClockIcon, EnvelopeIcon, InboxStackIcon, PencilSquareIcon, TrashIcon, UserIcon } from '@heroicons/react/24/outline'
 import { TaskInterface } from 'interfaces/tasks/Task'
 import { ProjectInterface } from 'interfaces/projects/Project'
@@ -49,11 +47,11 @@ export default function Card ({ data }: Props): JSX.Element {
       <Paragraph variant='sm'>{data.description}</Paragraph>
 
       <div className='flex flex-wrap gap-3 mt-4'>
-        {data.deliveredAt !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Delivery date'><CalendarIcon className='w-4 stroke-width-2' /> {Moment(data.deliveredAt).format('DD-MM-YYYY')}</div>}
-        {data.timing !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Timing'><ClockIcon className='w-4 stroke-width-2' /> {data.timing}</div>}
-        {data.totalTasks !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Total tasks'><InboxStackIcon className='w-4 stroke-width-2' /> {data.totalTasks}</div>}
-        {data.email !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='E-mail'><EnvelopeIcon className='w-4 stroke-width-2' /> {data.email}</div>}
-        {data.registeredAt !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Registration date'><UserIcon className='w-4 stroke-width-2' /> {data.registeredAt}</div>}
+        {data.deliveredAt !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Delivery date'><CalendarIcon className='w-4 stroke-width-2' />{data.deliveredAt}</div>}
+        {data.timing !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Timing'><ClockIcon className='w-4 stroke-width-2' />{data.timing}</div>}
+        {data.totalTasks !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Total tasks'><InboxStackIcon className='w-4 stroke-width-2' />{data.totalTasks}</div>}
+        {data.email !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='E-mail'><EnvelopeIcon className='w-4 stroke-width-2' />{data.email}</div>}
+        {data.registeredAt !== undefined && <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Registration date'><UserIcon className='w-4 stroke-width-2' />{data.registeredAt}</div>}
       </div>
 
       <div className='absolute left-0 flex justify-center w-full text-xs font-semibold tracking-widest text-white uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 -top-[0.9rem] xl:opacity-0 gap-x-3 group-hover:opacity-100'>
