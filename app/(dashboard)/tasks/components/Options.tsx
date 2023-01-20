@@ -21,11 +21,11 @@ export const Options = (): JSX.Element => {
           <DateFilter dependency={dateFilterModalStatus} setDependency={setDateFilterModalStatus} />
         </div>
       </div>
-      <Modal dependency={addTaskModalStatus} close={() => setAddTaskModalStatus(false)}>
-        <AddTask modalStatus={addTaskModalStatus} setModalStatus={setAddTaskModalStatus} />
+      <Modal modalStatus={addTaskModalStatus} setModalStatus={setAddTaskModalStatus}>
+        <AddTask setModalStatus={setAddTaskModalStatus} />
       </Modal>
-      <Modal dependency={searchModalStatus} close={() => setSearchModalStatus(false)}>
-        <SearchForm setModalStatus={setSearchModalStatus} type='task' />
+      <Modal modalStatus={searchModalStatus} setModalStatus={setSearchModalStatus}>
+        <SearchForm type='task' setModalStatus={setSearchModalStatus} />
       </Modal>
     </>
   )

@@ -1,35 +1,24 @@
 'use client'
 
+import { useState } from 'react'
+import useSWR from 'swr'
+import { tasksEndpoint as key, getTasks } from 'services/tasks/tasks'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
-import { getCookie } from 'cookies-next'
-import useSWR, { Fetcher } from 'swr'
-import api from 'utils/api'
-import Card from 'app/components/shared/Card'
+import Skeleton from 'app/components/shared/Skeleton'
+import Modal from 'app/components/shared/Modal'
+import Task from 'app/(dashboard)/tasks/components/Task'
 import UpdateTask from 'app/(dashboard)/tasks/components/UpdateTask'
 import DeleteTask from 'app/(dashboard)/tasks/components/DeleteTask'
-import Skeleton from 'app/components/shared/Skeleton'
 import { TaskInterface } from 'interfaces/tasks/Task'
 
-const SKELETON = Array.from(Array(8).keys())
-
-interface FetcherInterface {
-  results: TaskInterface[]
-}
+import { INITIAL_TASK_STATE, SKELETON } from 'constants/tasks'
 
 export default function Tasks (): JSX.Element {
-  const accessToken = getCookie('accessToken')
+  const [updateModalStatus, setUpdateModalStatus] = useState(false)
+  const [deleteModalStatus, setDeleteModalStatus] = useState(false)
+  const [selectedTask, setSelectedTask] = useState<TaskInterface>(INITIAL_TASK_STATE)
 
-  const options = {
-    headers: {
-      Authorization: `Bearer ${accessToken as string}`
-    }
-  }
-
-  const fetcher: Fetcher<FetcherInterface> = async (url: string) => await api.get(url, options).then(res => res.data)
-
-  const { data, isLoading } = useSWR('https://wrkload-api-production.up.railway.app/api/v1/tasks?limit=8', fetcher)
-
-  const tasks = data?.results
+  const { data: tasks, isLoading } = useSWR(key, getTasks, { onSuccess: data => data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) })
 
   return (
     <>
@@ -37,10 +26,22 @@ export default function Tasks (): JSX.Element {
         {isLoading && SKELETON.map((_, index) => (
           <Skeleton type='task' key={index} />
         ))}
-        {tasks?.map((task: TaskInterface) => (
-          <Card key={task._id} data={task} updateData={UpdateTask} deleteData={DeleteTask} />
+        {tasks?.map((task) => (
+          <Task key={task._id} task={task} setUpdateModalStatus={setUpdateModalStatus} setDeleteModalStatus={setDeleteModalStatus} setSelectedTask={setSelectedTask} />
         ))}
       </MasonryGrid>
+
+      {updateModalStatus && (
+        <Modal modalStatus={updateModalStatus} setModalStatus={setUpdateModalStatus}>
+          <UpdateTask data={selectedTask} setModalStatus={setUpdateModalStatus} />
+        </Modal>
+      )}
+
+      {deleteModalStatus && (
+        <Modal modalStatus={deleteModalStatus} setModalStatus={setDeleteModalStatus}>
+          <DeleteTask data={selectedTask} setModalStatus={setDeleteModalStatus} />
+        </Modal>
+      )}
     </>
   )
 }

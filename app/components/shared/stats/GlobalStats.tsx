@@ -1,19 +1,14 @@
 import { ArrowUpIcon, ArrowDownIcon, BanknotesIcon, ClockIcon, InboxStackIcon, FireIcon } from '@heroicons/react/24/outline'
 import { StatsInterface } from 'interfaces/components'
 
-const fetchStats = (): StatsInterface[] => {
-  const stats = [
-    { type: 'totalTasks', value: '400', avg: 'better' },
-    { type: 'totalMonthlyHours', value: '20', avg: 'worst' },
-    { type: 'goals', value: '$1.000', avg: 'better' },
-    { type: 'project', value: 'Bioland', avg: '' }
-  ]
-  return stats
-}
+const stats: StatsInterface[] = [
+  { type: 'totalTasks', value: '400', avg: 'better' },
+  { type: 'totalMonthlyHours', value: '20', avg: 'worst' },
+  { type: 'goals', value: '$1.000', avg: 'better' },
+  { type: 'project', value: 'Bioland', avg: '' }
+]
 
-export default async function GlobalStats (): Promise<any> {
-  const stats = await fetchStats()
-
+export default function GlobalStats (): JSX.Element {
   return (
     <div className='mt-10 gap-x-10 columns-1 md:columns-2 xl:columns-4'>
       {stats.map((stat, index) => (

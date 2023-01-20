@@ -1,27 +1,20 @@
 
+import { useState } from 'react'
+import { mutate } from 'swr'
+import { addTask, tasksEndpoint as key } from 'services/tasks/tasks'
+import { addTaskOptions } from 'utils/swrOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
-import { useState } from 'react'
-import addTask from 'services/tasks/addTask'
+import { INITIAL_TASK_STATE } from 'constants/tasks'
 
 interface Props {
-  modalStatus: boolean
   setModalStatus: (value: boolean) => void
 }
 
-const INITIAL_TASK_STATE = {
-  title: '',
-  project: '',
-  timing: '',
-  month: '',
-  deliveredAt: '',
-  description: ''
-}
-
-const AddTask = ({ modalStatus, setModalStatus }: Props): JSX.Element => {
+const AddTask = ({ setModalStatus }: Props): JSX.Element => {
   const [task, setTask] = useState(INITIAL_TASK_STATE)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -30,10 +23,14 @@ const AddTask = ({ modalStatus, setModalStatus }: Props): JSX.Element => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
+    setModalStatus(false)
 
     try {
-      await addTask(task)
-      setModalStatus(!(modalStatus))
+      await mutate(
+        key,
+        addTask(task),
+        addTaskOptions(task)
+      )
     } catch (error: any) {
       console.error(error.response.data)
     }
@@ -41,7 +38,7 @@ const AddTask = ({ modalStatus, setModalStatus }: Props): JSX.Element => {
 
   const handleCloseModal = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    setModalStatus(!(modalStatus))
+    setModalStatus(false)
   }
 
   return (

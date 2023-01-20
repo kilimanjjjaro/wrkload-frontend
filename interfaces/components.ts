@@ -7,3 +7,11 @@ export interface StatsInterface {
   value: string
   avg?: string
 }
+
+export interface PaginationInterface {
+  totalResults: number
+  resultsPerPage: number
+  prevPage: number
+  page: number
+  nextPage: number
+}

@@ -1,20 +1,20 @@
-'use client'
-
+import { useState } from 'react'
+import { mutate } from 'swr'
+import { updateTask, tasksEndpoint as key } from 'services/tasks/tasks'
+import { updateTaskOptions } from 'utils/swrOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
 import { TaskInterface } from 'interfaces/tasks/Task'
-import { useState } from 'react'
-import updateTask from 'services/tasks/updateTask'
 
 interface Props {
-  setModalStatus: (value: boolean) => void
   data: TaskInterface
+  setModalStatus: (value: boolean) => void
 }
 
-export default function UpdateTask ({ setModalStatus, data }: Props): JSX.Element {
+export default function UpdateTask ({ data, setModalStatus }: Props): JSX.Element {
   const [task, setTask] = useState(data)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -23,12 +23,16 @@ export default function UpdateTask ({ setModalStatus, data }: Props): JSX.Elemen
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
+    setModalStatus(false)
 
     try {
-      await updateTask(task)
-      setModalStatus(false)
-    } catch (error: any) {
-      console.error(error.response.data)
+      await mutate(
+        key,
+        updateTask(task),
+        updateTaskOptions(task)
+      )
+    } catch (error) {
+      console.error(error)
     }
   }
 
@@ -53,7 +57,7 @@ export default function UpdateTask ({ setModalStatus, data }: Props): JSX.Elemen
             <Button type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-width-3' />
             </Button>
-            <Button onClick={handleCloseModal} variant='alternative'>
+            <Button onClick={(event) => handleCloseModal(event)} variant='alternative'>
               <XMarkIcon className='w-4 stroke-width-3' />
             </Button>
           </div>

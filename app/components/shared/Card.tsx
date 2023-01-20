@@ -14,11 +14,9 @@ interface DataInterface extends TaskInterface, ProjectInterface, UserInterface {
 
 interface Props {
   data: DataInterface
-  updateData: React.ComponentType<any>
-  deleteData: React.ComponentType<any>
 }
 
-export default function Card ({ data, updateData: UpdateData, deleteData: DeleteData }: Props): JSX.Element {
+export default function Card ({ data }: Props): JSX.Element {
   const [updateTaskModalStatus, setUpdateTaskModalStatus] = useState(false)
   const [deleteTaskModalStatus, setDeleteTaskModalStatus] = useState(false)
 
@@ -62,12 +60,6 @@ export default function Card ({ data, updateData: UpdateData, deleteData: Delete
         <div onClick={() => setUpdateTaskModalStatus(!(updateTaskModalStatus))} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-custom-yellow hover:bg-dark-gray'><PencilSquareIcon className='w-4 stroke-width-2' /></div>
         <div onClick={() => setDeleteTaskModalStatus(!(deleteTaskModalStatus))} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-custom-red hover:bg-dark-gray'><TrashIcon className='w-4 stroke-width-2' /></div>
       </div>
-      <Modal dependency={updateTaskModalStatus} close={() => setUpdateTaskModalStatus(!(updateTaskModalStatus))}>
-        <UpdateData setModalStatus={setUpdateTaskModalStatus} data={data} />
-      </Modal>
-      <Modal dependency={deleteTaskModalStatus} close={() => setDeleteTaskModalStatus(!(deleteTaskModalStatus))}>
-        <DeleteData modalStatus={deleteTaskModalStatus} setModalStatus={setDeleteTaskModalStatus} data={data} />
-      </Modal>
     </div>
   )
 }

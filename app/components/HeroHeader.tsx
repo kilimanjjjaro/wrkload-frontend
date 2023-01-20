@@ -8,7 +8,7 @@ import Button from 'app/components/shared/Button'
 
 export default function HeroHeader (): JSX.Element {
   const router = useRouter()
-  
+
   return (
     <div className='grid items-center h-screen grid-cols-2 gap-10 text-black'>
       <div className='flex flex-col items-start text-white justify-cente'>

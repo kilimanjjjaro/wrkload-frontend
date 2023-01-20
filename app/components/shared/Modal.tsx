@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react'
 import { motion } from 'framer-motion'
 
 const BACKGROUND_VARIANTS = {
@@ -22,26 +23,26 @@ const CONTENT_VARIANTS = {
 }
 
 interface Props {
-  children: JSX.Element
-  dependency: boolean
-  close: () => void
+  children: React.ReactNode
+  modalStatus: boolean
+  setModalStatus: Dispatch<SetStateAction<boolean>>
 }
 
-export default function Modal ({ children, dependency, close }: Props): JSX.Element {
+export default function Modal ({ children, modalStatus, setModalStatus }: Props): JSX.Element {
   return (
     <motion.div
       className='fixed top-0 left-0 z-10 flex items-center justify-center w-full h-full'
       variants={BACKGROUND_VARIANTS}
       initial={false}
-      animate={dependency ? 'open' : 'closed'}
+      animate={modalStatus ? 'open' : 'closed'}
       transition={{ ease: 'easeInOut', duration: 0.4 }}
     >
-      <div className='absolute top-0 left-0 w-full h-full cursor-pointer bg-light-gray' onClick={() => close()} />
+      <div className='absolute top-0 left-0 w-full h-full cursor-pointer bg-light-gray' onClick={() => setModalStatus(false)} />
       <motion.div
         className='z-20'
         variants={CONTENT_VARIANTS}
         initial='initial'
-        animate={dependency ? 'open' : 'closed'}
+        animate={modalStatus ? 'open' : 'closed'}
         transition={{ ease: 'easeInOut', duration: 0.4 }}
       >{children}
       </motion.div>

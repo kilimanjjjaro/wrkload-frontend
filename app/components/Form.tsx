@@ -10,7 +10,7 @@ export default function Form (): JSX.Element {
         <Input variant='alternative' name='name' type='text' placeholder='Can ask your name?' autoComplete='name' />
         <Input variant='alternative' name='email' type='email' placeholder='I need you email too' autoComplete='email' />
       </div>
-      <Textarea name='message' placeholder="What do you want to talk about? Maybe you have an idea or found something that doesn't work as expected." />
+      <Textarea variant='primary' name='message' placeholder="What do you want to talk about? Maybe you have an idea or found something that doesn't work as expected." />
       <Button variant='primary'>Send <ArrowRightIcon className='w-4 stroke-width-3' /></Button>
     </form>
   )

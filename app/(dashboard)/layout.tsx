@@ -13,7 +13,6 @@ export default function DashboardLayout ({ children }: Props): JSX.Element {
       <main>
         {children}
         <Pagination />
-        {/* @ts-expect-error Server Component */}
         <GlobalStats />
       </main>
     </div>

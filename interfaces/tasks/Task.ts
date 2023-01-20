@@ -7,11 +7,12 @@ export interface StatsTasksInterface {
 }
 
 export interface TaskInterface {
-  _id?: Key | undefined
-  title?: string
-  project?: string
-  deliveredAt?: string
-  timing?: string
-  month?: string
-  description?: string
+  _id: string
+  title: string
+  project: string
+  createdAt: string
+  deliveredAt: string
+  timing: string
+  month: string
+  description: string
 }
