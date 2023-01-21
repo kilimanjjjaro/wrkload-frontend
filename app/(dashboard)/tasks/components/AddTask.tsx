@@ -36,8 +36,7 @@ const AddTask = ({ setModalStatus }: Props): JSX.Element => {
     }
   }
 
-  const handleCloseModal = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault()
+  const handleCloseModal = (): void => {
     setModalStatus(false)
   }
 
@@ -47,11 +46,11 @@ const AddTask = ({ setModalStatus }: Props): JSX.Element => {
         <Headline variant='md'><b>Add task</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>
-            <Input variant='primary' onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' centerText required />
-            <Input variant='primary' onChange={handleChange} value={task.project} name='project' type='text' placeholder='Project' centerText required />
-            <Input variant='primary' onChange={handleChange} value={task.timing} name='timing' type='time' placeholder='Timing' centerText required />
-            <Input variant='primary' onChange={handleChange} value={task.deliveredAt} name='deliveredAt' type='date' placeholder='Delivered' centerText required />
-            <Textarea variant='primary' onChange={handleChange} value={task.description} name='description' placeholder='Description' centerText />
+            <Input variant='primary' onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' required />
+            <Input variant='primary' onChange={handleChange} value={task.project} name='project' type='text' placeholder='Project' required />
+            <Input variant='primary' onChange={handleChange} value={task.timing} name='timing' type='time' placeholder='Timing' required />
+            <Input variant='primary' onChange={handleChange} value={task.deliveredAt} name='deliveredAt' type='date' placeholder='Delivered' required />
+            <Textarea variant='primary' onChange={handleChange} value={task.description} name='description' placeholder='Description' />
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>

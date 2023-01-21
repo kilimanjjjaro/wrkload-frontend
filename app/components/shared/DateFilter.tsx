@@ -30,8 +30,8 @@ export default function DateFilter ({ dependency, setDependency }: Props): JSX.E
       initial={false}
     >
       <h4 className='text-sm font-bold text-center font-secondaryFont'>Date range filter</h4>
-      <Input variant='primary' name='startingDate' type='date' placeholder='Starting date' centerText required />
-      <Input variant='primary' name='endingDate' type='date' placeholder='Ending date' centerText required />
+      <Input variant='primary' name='startingDate' type='date' placeholder='Starting date' required />
+      <Input variant='primary' name='endingDate' type='date' placeholder='Ending date' required />
       <div className='flex gap-x-3'>
         <Button type='submit' variant='alternative' fullWidth>
           <CheckIcon className='w-4 stroke-width-3' />

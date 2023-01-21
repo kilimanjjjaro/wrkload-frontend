@@ -1,9 +1,9 @@
 'use client'
 
+import { SetStateAction, Dispatch } from 'react'
 import { CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import Paragraph from 'app/components/shared/Paragraph'
 import { TaskInterface } from 'interfaces/tasks/Task'
-import { SetStateAction, Dispatch } from 'react'
 
 interface Props {
   task: TaskInterface

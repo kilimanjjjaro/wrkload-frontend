@@ -1,21 +1,17 @@
 
+import { useState } from 'react'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
-import { useState } from 'react'
 import addProject from 'services/projects/addProject'
+import { INITIAL_PROJECT_STATE } from 'constants/projects'
 
 interface Props {
-  modalStatus: boolean
   setModalStatus: (value: boolean) => void
 }
 
-const INITIAL_PROJECT_STATE = {
-  name: ''
-}
-
-export default function AddProject ({ modalStatus, setModalStatus }: Props): JSX.Element {
+export default function AddProject ({ setModalStatus }: Props): JSX.Element {
   const [project, setProject] = useState(INITIAL_PROJECT_STATE)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -24,18 +20,17 @@ export default function AddProject ({ modalStatus, setModalStatus }: Props): JSX
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
+    setModalStatus(false)
 
     try {
       await addProject(project)
-      setModalStatus(!(modalStatus))
     } catch (error: any) {
       console.error(error.response.data)
     }
   }
 
-  const handleCloseModal = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault()
-    setModalStatus(!(modalStatus))
+  const handleCloseModal = (): void => {
+    setModalStatus(false)
   }
 
   return (

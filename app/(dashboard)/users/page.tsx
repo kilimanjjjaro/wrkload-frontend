@@ -1,22 +1,35 @@
-import Card from 'app/components/shared/Card'
-import MasonryGrid from 'app/components/shared/MasonryGrid'
-import UpdateUser from 'app/(dashboard)/users/components/UpdateUser'
-import { UserInterface } from 'interfaces/users/User'
-import DeleteUser from 'app/(dashboard)/users/components/DeleteUser'
+'use client'
 
-const USERS = [
-  { _id: 1, username: 'kilimanjjjaro', email: 'hola@kilimanjjjaro.com', role: 1, avatar: '/images/default-avatar.svg', registeredAt: '10/12/1992', lastActiveAt: '10/12/1992', confirmationStatus: true },
-  { _id: 1, username: 'rivotril', email: 'hola@kilimanjjjaro.com', role: 2, avatar: '/images/default-avatar.svg', registeredAt: '10/12/1992', lastActiveAt: '10/12/1992', confirmationStatus: false },
-  { _id: 1, username: 'AG5', email: 'hola@kilimanjjjaro.com', role: 3, avatar: '/images/default-avatar.svg', registeredAt: '10/12/1992', lastActiveAt: '10/12/1992', confirmationStatus: false },
-  { _id: 1, username: 'kediev', email: 'hola@kilimanjjjaro.com', role: 1, avatar: '/images/default-avatar.svg', registeredAt: '10/12/1992', lastActiveAt: '10/12/1992', confirmationStatus: true }
-]
+import { useState } from 'react'
+import MasonryGrid from 'app/components/shared/MasonryGrid'
+import User from 'app/(dashboard)/users/components/User'
+import Modal from 'app/components/shared/Modal'
+import UpdateUser from 'app/(dashboard)/users/components/UpdateUser'
+import DeleteUser from 'app/(dashboard)/users/components/DeleteUser'
+import { UserInterface } from 'interfaces/users/User'
+
+import { INITIAL_USER_STATE, USERS } from 'constants/users'
 
 export default function Users (): JSX.Element {
+  const [updateModalStatus, setUpdateModalStatus] = useState(false)
+  const [deleteModalStatus, setDeleteModalStatus] = useState(false)
+  const [selectedUser, setSelectedUser] = useState<UserInterface>(INITIAL_USER_STATE)
+
   return (
-    <MasonryGrid>
-      {USERS?.map((user: UserInterface) => (
-        <Card key={user._id} data={user} updateData={UpdateUser} deleteData={DeleteUser} />
-      ))}
-    </MasonryGrid>
+    <>
+      <MasonryGrid>
+        {USERS?.map((user: UserInterface) => (
+          <User key={user._id} user={user} setUpdateModalStatus={setUpdateModalStatus} setDeleteModalStatus={setDeleteModalStatus} setSelectedUser={setSelectedUser} />
+        ))}
+      </MasonryGrid>
+
+      <Modal modalStatus={updateModalStatus} setModalStatus={setUpdateModalStatus}>
+        <UpdateUser data={selectedUser} setModalStatus={setUpdateModalStatus} />
+      </Modal>
+
+      <Modal modalStatus={deleteModalStatus} setModalStatus={setDeleteModalStatus}>
+        <DeleteUser data={selectedUser} setModalStatus={setDeleteModalStatus} />
+      </Modal>
+    </>
   )
 }
