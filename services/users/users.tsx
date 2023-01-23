@@ -35,6 +35,6 @@ export const getUser = async (): Promise<UserInterface> => {
   return response.data.result
 }
 
-export const clearCache = async () => {
+export const clearCache = async (): Promise<void> => {
   await mutate(() => true, undefined, { revalidate: false })
 }
