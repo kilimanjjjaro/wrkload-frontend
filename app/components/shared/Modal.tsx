@@ -21,7 +21,7 @@ export default function Modal ({ children, modalStatus, setModalStatus }: Props)
       animate={modalStatus ? 'open' : 'closed'}
       transition={{ ease: 'easeInOut', duration: 0.4 }}
     >
-      <div className='absolute top-0 left-0 w-full h-full cursor-pointer bg-light-gray opacity-95' onClick={() => setModalStatus(false)} />
+      <div className='absolute top-0 left-0 w-full h-full cursor-pointer bg-light-gray opacity-[0.97]' onClick={() => setModalStatus(false)} />
 
       {renderChild && (
         <motion.div
