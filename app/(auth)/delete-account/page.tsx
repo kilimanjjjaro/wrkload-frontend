@@ -31,7 +31,7 @@ export default function DeleteAccount (): JSX.Element {
       await deleteAccount({ email, password })
       router.push('/')
     } catch (error: any) {
-      console.error(error.response.data)
+      console.error(error.response)
     }
   }
 

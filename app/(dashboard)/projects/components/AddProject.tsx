@@ -25,7 +25,7 @@ export default function AddProject ({ setModalStatus }: Props): JSX.Element {
     try {
       await addProject(project)
     } catch (error: any) {
-      console.error(error.response.data)
+      console.error(error.response)
     }
   }
 

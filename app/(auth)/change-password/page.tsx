@@ -37,7 +37,7 @@ export default function ChangePassword (): JSX.Element {
       await login({ email, password })
       setStep(2)
     } catch (error: any) {
-      console.error(error.response.data)
+      console.error(error.response)
     }
   }
 
@@ -49,7 +49,7 @@ export default function ChangePassword (): JSX.Element {
       await changePassword({ email, oldPassword, newPassword })
       setStep(1)
     } catch (error: any) {
-      console.error(error.response.data)
+      console.error(error.response)
     }
   }
 

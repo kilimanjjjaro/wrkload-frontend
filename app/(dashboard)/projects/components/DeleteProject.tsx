@@ -27,7 +27,7 @@ export default function DeleteProject ({ setModalStatus, data }: Props): JSX.Ele
       await deleteProject(project._id)
       setModalStatus(false)
     } catch (error: any) {
-      console.error(error.response.data)
+      console.error(error.response)
     }
   }
 

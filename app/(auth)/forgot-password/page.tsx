@@ -24,7 +24,7 @@ export default function ForgotPassword (): JSX.Element {
     try {
       await rememberPassword({ email })
     } catch (error: any) {
-      console.error(error.response.data)
+      console.error(error.response)
     }
   }
 

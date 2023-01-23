@@ -19,5 +19,5 @@ export const getUser = async (): Promise<UserInterface> => {
 
   const response = await api.get(`${USERS_ENDPOINT}/${_id as string}`, config)
 
-  return response.data.result
+  return response.data.user
 }

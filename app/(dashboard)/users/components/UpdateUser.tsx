@@ -34,7 +34,7 @@ export default function UpdateUser ({ data, setModalStatus }: Props): JSX.Elemen
       )
       await mutate(`${key}/_id`)
     } catch (error: any) {
-      console.error(error.response.data)
+      console.error(error.response)
     }
   }
 

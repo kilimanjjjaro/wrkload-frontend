@@ -42,7 +42,7 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
       await resetPassword({ newPassword, uid, resetPasswordToken })
       router.push('/login')
     } catch (error: any) {
-      console.error(error.response.data)
+      console.error(error.response)
     }
   }
 

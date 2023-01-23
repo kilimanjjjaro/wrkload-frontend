@@ -19,5 +19,5 @@ export const getTasks = async (): Promise<TaskInterface[]> => {
 
   const response = await api.get(TASKS_ENDPOINT, config)
 
-  return response.data.results
+  return response.data.tasks
 }

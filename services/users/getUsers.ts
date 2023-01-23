@@ -19,5 +19,5 @@ export const getUsers = async (): Promise<UserInterface[]> => {
 
   const response = await api.get(`${USERS_ENDPOINT}`, config)
 
-  return response.data.results
+  return response.data.users
 }

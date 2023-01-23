@@ -44,7 +44,7 @@ export default function Register (): JSX.Element {
       setIsLogged(true)
       router.push('/tasks')
     } catch (error: any) {
-      console.error(error.response.data)
+      console.error(error.response)
     }
   }
 

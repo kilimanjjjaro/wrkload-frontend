@@ -27,7 +27,7 @@ export default function SearchForm ({ setModalStatus, type }: Props): JSX.Elemen
       setModalStatus(false)
       console.log(response)
     } catch (error: any) {
-      console.error(error.response.data)
+      console.error(error.response)
     }
   }
 

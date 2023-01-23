@@ -33,7 +33,7 @@ export default function DeleteUser ({ data, setModalStatus }: Props): JSX.Elemen
         deleteUserOptions(user._id)
       )
     } catch (error: any) {
-      console.error(error.response.data)
+      console.error(error.response)
     }
   }
 

@@ -19,5 +19,5 @@ export const addTask = async (task: TaskInterface): Promise<TaskInterface> => {
 
   const response = await api.post(TASKS_ENDPOINT, task, config)
 
-  return response.data.result
+  return response.data.newTask
 }

@@ -27,7 +27,7 @@ export default function UpdateProject ({ setModalStatus, data }: Props): JSX.Ele
       await updateProject(project)
       setModalStatus(false)
     } catch (error: any) {
-      console.error(error.response.data)
+      console.error(error.response)
     }
   }
 
