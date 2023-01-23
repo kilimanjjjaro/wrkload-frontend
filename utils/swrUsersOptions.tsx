@@ -1,48 +1,48 @@
-import { TaskInterface } from 'interfaces/tasks/Task'
+import { UserInterface } from 'interfaces/users/User'
 
-export const addTaskOptions = (newTask: TaskInterface): any => {
+export const addUserOptions = (newUser: UserInterface): any => {
   return {
-    optimisticData: (tasks: TaskInterface[]) => [...tasks, newTask]
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
+    optimisticData: (users: UserInterface[]) => [...users, newUser]
+      .sort((a, b) => new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime()),
     rollbackOnError: true,
-    populateCache: (added: TaskInterface, tasks: TaskInterface[]) => [...tasks, added]
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
+    populateCache: (added: UserInterface, users: UserInterface[]) => [...users, added]
+      .sort((a, b) => new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime()),
     revalidate: false
   }
 }
 
-export const updateTaskOptions = (updatedTask: TaskInterface): any => {
+export const updateUserOptions = (updatedUser: UserInterface): any => {
   return {
-    optimisticData: (tasks: TaskInterface[]) => {
-      const prevTasks = tasks.filter(task => {
-        return task._id !== updatedTask._id
+    optimisticData: (users: UserInterface[]) => {
+      const prevUsers = users.filter(user => {
+        return user._id !== updatedUser._id
       })
-      return [...prevTasks, updatedTask]
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      return [...prevUsers, updatedUser]
+        .sort((a, b) => new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime())
     },
     rollbackOnError: true,
-    populateCache: (updated: TaskInterface, tasks: TaskInterface[]) => {
-      const prevTasks = tasks.filter(task => {
-        return task._id !== updatedTask._id
+    populateCache: (updated: UserInterface, users: UserInterface[]) => {
+      const prevUsers = users.filter(user => {
+        return user._id !== updatedUser._id
       })
-      return [...prevTasks, updated]
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      return [...prevUsers, updated]
+        .sort((a, b) => new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime())
     },
     revalidate: false
   }
 }
 
-export const deleteTaskOptions = (_id: string): any => {
+export const deleteUserOptions = (_id: string): any => {
   return {
-    optimisticData: (tasks: TaskInterface[]) => {
-      return tasks.filter(task => {
-        return task._id !== _id
+    optimisticData: (users: UserInterface[]) => {
+      return users.filter(user => {
+        return user._id !== _id
       })
     },
     rollbackOnError: true,
-    populateCache: (_: null, tasks: TaskInterface[]) => {
-      return tasks.filter(task => {
-        return task._id !== _id
+    populateCache: (_: null, users: UserInterface[]) => {
+      return users.filter(user => {
+        return user._id !== _id
       })
     },
     revalidate: false

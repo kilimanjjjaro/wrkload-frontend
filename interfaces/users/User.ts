@@ -11,3 +11,12 @@ export interface UserInterface {
   confirmationStatus: boolean
   confirmationToken: string
 }
+
+export interface NewUserInterface {
+  _id: Key | undefined
+  role: number
+  username: string
+  password: string
+  email: string
+  avatar: string
+}

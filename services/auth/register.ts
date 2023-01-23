@@ -2,14 +2,13 @@ import { AxiosResponse } from 'axios'
 import { setCookie } from 'cookies-next'
 import api from 'utils/api'
 
+import { DEFAULT_AVATAR, DEFAULT_ROLE } from 'constants/users'
+
 interface CredentialsInterface {
   username: string
   email: string
   password: string
 }
-
-const DEFAULT_AVATAR = 'http://localhost:3000/images/avatar.jpg'
-const DEFAULT_ROLE = 2
 
 export default async function register ({ username, email, password }: CredentialsInterface): Promise<AxiosResponse> {
   const user = {

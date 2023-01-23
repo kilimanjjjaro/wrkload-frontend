@@ -33,12 +33,8 @@ const AddTask = ({ setModalStatus }: Props): JSX.Element => {
         addTaskOptions(task)
       )
     } catch (error: any) {
-      console.error(error.response.data)
+      console.error(error)
     }
-  }
-
-  const handleCloseModal = (): void => {
-    setModalStatus(false)
   }
 
   return (
@@ -57,7 +53,7 @@ const AddTask = ({ setModalStatus }: Props): JSX.Element => {
             <Button type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-width-3' />
             </Button>
-            <Button onClick={handleCloseModal} variant='alternative'>
+            <Button onClick={() => setModalStatus(false)} variant='alternative'>
               <XMarkIcon className='w-4 stroke-width-3' />
             </Button>
           </div>

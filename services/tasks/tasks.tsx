@@ -2,7 +2,7 @@ import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 import type { TaskInterface } from 'interfaces/tasks/Task'
 
-const delay = async (): Promise<void> => await new Promise((resolve) => setTimeout(resolve, 1000))
+const delay = async (): Promise<void> => await new Promise((resolve) => setTimeout(resolve, 500))
 
 const accessToken = getCookie('accessToken')
 
