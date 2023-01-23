@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 import { motion } from 'framer-motion'
 import useDelayUnmount from 'hooks/useDelayUnmount'
+
 import { BACKGROUND_VARIANTS, CONTENT_VARIANTS } from 'constants/framerMotion'
 
 interface Props {

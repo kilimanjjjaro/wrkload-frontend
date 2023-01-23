@@ -4,7 +4,9 @@ import NavBar from 'app/components/shared/NavBar'
 import Footer from 'app/components/shared/Footer'
 import 'app/globals.css'
 
-export default function RootLayout ({ children }: { children: React.ReactNode }): JSX.Element {
+import type { ChildrenInterface } from 'interfaces/components'
+
+export default function RootLayout ({ children }: ChildrenInterface): JSX.Element {
   const { inter, spaceGrotesk } = fonts
 
   return (

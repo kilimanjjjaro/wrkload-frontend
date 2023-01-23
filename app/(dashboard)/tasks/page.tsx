@@ -9,9 +9,10 @@ import Modal from 'app/components/shared/Modal'
 import Task from 'app/(dashboard)/tasks/components/Task'
 import UpdateTask from 'app/(dashboard)/tasks/components/UpdateTask'
 import DeleteTask from 'app/(dashboard)/tasks/components/DeleteTask'
-import { TaskInterface } from 'interfaces/tasks/Task'
 
-import { INITIAL_TASK_STATE, SKELETON } from 'constants/tasks'
+import type { TaskInterface } from 'interfaces/tasks/Task'
+import { INITIAL_TASK_STATE } from 'constants/tasks'
+import { SKELETON } from 'constants/components'
 
 export default function Tasks (): JSX.Element {
   const [updateModalStatus, setUpdateModalStatus] = useState(false)

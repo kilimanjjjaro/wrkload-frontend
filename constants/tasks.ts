@@ -10,5 +10,3 @@ export const INITIAL_TASK_STATE: TaskInterface = {
   month: 'December',
   description: ''
 }
-
-export const SKELETON = Array.from(Array(8).keys())

@@ -1,8 +1,6 @@
-interface Props {
-  children: React.ReactNode
-}
+import type { ChildrenInterface } from 'interfaces/components'
 
-export default function AuthLayout ({ children }: Props): JSX.Element {
+export default function AuthLayout ({ children }: ChildrenInterface): JSX.Element {
   return (
     <main className='px-[5vw] flex items-center justify-center h-screen'>
       {children}

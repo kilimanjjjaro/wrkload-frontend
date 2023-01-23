@@ -1,9 +1,11 @@
 'use client'
 
 import { SetStateAction, Dispatch } from 'react'
+import dayjs from 'dayjs'
 import { CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import Paragraph from 'app/components/shared/Paragraph'
-import { TaskInterface } from 'interfaces/tasks/Task'
+
+import type { TaskInterface } from 'interfaces/tasks/Task'
 
 interface Props {
   task: TaskInterface
@@ -28,7 +30,7 @@ export default function Task ({ task, setUpdateModalStatus, setDeleteModalStatus
       <h3 className='mb-5 text-4xl font-bold break-word font-primaryFont'>{task.title}</h3>
       <Paragraph variant='sm'>{task.description}</Paragraph>
       <div className='flex flex-wrap gap-3 mt-4'>
-        <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Delivery date'><CalendarIcon className='w-4 stroke-width-2' /> {task.deliveredAt}</div>
+        <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Delivery date'><CalendarIcon className='w-4 stroke-width-2' /> {dayjs(task.deliveredAt).format('DD-MM-YYYY')}</div>
         <div className='flex items-center h-8 px-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Timing'><ClockIcon className='w-4 stroke-width-2' /> {task.timing}</div>
       </div>
 

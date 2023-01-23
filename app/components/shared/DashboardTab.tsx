@@ -1,14 +1,16 @@
 
+import { useContext, useState } from 'react'
+import { deleteCookie } from 'cookies-next'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import { deleteCookie } from 'cookies-next'
-import { useContext, useState } from 'react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/navigation'
 import api from 'utils/api'
+import { clearCache } from 'services/users/users'
 import { DataContext } from 'context/DataContext'
-import { UserInterface } from 'interfaces/users/User'
+
+import type { UserInterface } from 'interfaces/users/User'
 
 const PAGES = [
   { name: 'Tasks', link: '/tasks' },
@@ -34,7 +36,8 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
 
   const handleLogout = async (): Promise<void> => {
     await api.get('/auth/logout')
-    deleteCookie('uid')
+    await clearCache()
+    deleteCookie('_id')
     deleteCookie('accessToken')
     setIsLogged(false)
     router.push('/login')
@@ -64,7 +67,7 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
             {PAGES.map((page) => (
               <li className='transition ease-in-out duration-400 hover:-translate-x-1' key={page.link} onClick={() => setShowBox(!showBox)}><Link href={page.link}>{page.name}</Link></li>
             ))}
-            <button className='transition ease-in-out duration-400 hover:-translate-x-1' onClick={async () => await handleLogout()}>Log out</button>
+            <button className='transition ease-in-out duration-400 hover:-translate-x-1' onClick={() => { void handleLogout() }}>Log out</button>
           </ul>
           <div className='absolute w-8 p-2 transition ease-in-out bg-white cursor-pointer top-50 -left-12 group duration-400 hover:bg-dark-gray' onClick={() => setShowBox(!showBox)}>
             <XMarkIcon className='stroke-width-2 stroke-dark-gray group-hover:stroke-white' />

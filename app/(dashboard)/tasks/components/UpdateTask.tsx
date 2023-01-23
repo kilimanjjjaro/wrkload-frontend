@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { mutate } from 'swr'
 import { updateTask, tasksEndpoint as key } from 'services/tasks/tasks'
-import { updateTaskOptions } from 'utils/swrOptions'
+import { updateTaskOptions } from 'utils/swrTasksOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
-import { TaskInterface } from 'interfaces/tasks/Task'
+
+import type { TaskInterface } from 'interfaces/tasks/Task'
 
 interface Props {
   data: TaskInterface
@@ -17,7 +18,7 @@ interface Props {
 export default function UpdateTask ({ data, setModalStatus }: Props): JSX.Element {
   const [task, setTask] = useState(data)
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setTask({ ...task, [event.target.name]: event.target.value })
   }
 

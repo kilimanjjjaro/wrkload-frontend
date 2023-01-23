@@ -1,20 +1,8 @@
 import clsx from 'clsx'
 
-interface Props {
-  variant: 'primary' | 'alternative' | 'disabled'
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
-  onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void
-  value?: string | number
-  name: string
-  type: string
-  placeholder: string
-  autoComplete?: string
-  centerText?: boolean
-  required?: boolean
-  disabled?: boolean
-}
+import type { InputInterface } from 'interfaces/components'
 
-export default function Input ({ variant, onChange, onKeyUp, value, name, type, placeholder, autoComplete, centerText, required, disabled }: Props): JSX.Element {
+export default function Input ({ variant, onChange, onKeyUp, value, name, type, placeholder, autoComplete, centerText, required, disabled }: InputInterface): JSX.Element {
   return (
     <input
       className={clsx(

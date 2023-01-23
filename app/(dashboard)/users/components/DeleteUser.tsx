@@ -6,7 +6,8 @@ import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 import deleteUser from 'services/users/deleteUser'
-import { UserInterface } from 'interfaces/users/User'
+
+import type { UserInterface } from 'interfaces/users/User'
 
 interface Props {
   setModalStatus: (value: boolean) => void

@@ -1,7 +1,5 @@
-import { StaticImageData } from 'next/image'
-
 export default interface FeaturesInterface {
-  image: StaticImageData
+  image: string
   title: string
   description: string
 }

@@ -1,25 +1,19 @@
 
+import { useState } from 'react'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
-import { useState } from 'react'
 import addUser from 'services/users/addUser'
+import { INITIAL_USER_STATE } from 'constants/users'
 
 interface Props {
   modalStatus: boolean
   setModalStatus: (value: boolean) => void
 }
 
-const INITIAL_PROJECT_STATE = {
-  username: '',
-  role: 0,
-  email: '',
-  avatar: ''
-}
-
 const AddUser = ({ modalStatus, setModalStatus }: Props): JSX.Element => {
-  const [user, setUser] = useState(INITIAL_PROJECT_STATE)
+  const [user, setUser] = useState(INITIAL_USER_STATE)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setUser({ ...user, [event.target.name]: event.target.value })

@@ -1,7 +1,9 @@
 'use client'
 
-import { getCookie } from 'cookies-next'
 import { createContext, useEffect, useState } from 'react'
+import { getCookie } from 'cookies-next'
+
+import type { ChildrenInterface } from 'interfaces/components'
 
 interface DataContextValues {
   isLogged: boolean
@@ -15,7 +17,7 @@ const DEFAULT_VALUE: DataContextValues = {
 
 export const DataContext = createContext<DataContextValues>(DEFAULT_VALUE)
 
-const DataProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
+const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
   const [isLogged, setIsLogged] = useState(false)
   const accessToken = getCookie('accessToken')
 

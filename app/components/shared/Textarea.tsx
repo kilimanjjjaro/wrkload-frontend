@@ -1,15 +1,8 @@
 import clsx from 'clsx'
 
-interface Props {
-  variant: 'primary' | 'alternative'
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
-  value?: string
-  name: string
-  placeholder: string
-  centerText?: boolean
-}
+import type { TextareaInterface } from 'interfaces/components'
 
-export default function Textarea ({ variant, onChange, value, name, placeholder, centerText }: Props): JSX.Element {
+export default function Textarea ({ variant, onChange, value, name, placeholder, centerText }: TextareaInterface): JSX.Element {
   return (
     <textarea
       className={clsx(

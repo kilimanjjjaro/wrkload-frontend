@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { mutate } from 'swr'
 import { deleteTask, tasksEndpoint as key } from 'services/tasks/tasks'
-import { deleteTaskOptions } from 'utils/swrOptions'
+import { deleteTaskOptions } from 'utils/swrTasksOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
-import { TaskInterface } from 'interfaces/tasks/Task'
+
+import type { TaskInterface } from 'interfaces/tasks/Task'
 
 interface Props {
   data: TaskInterface

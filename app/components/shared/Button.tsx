@@ -1,14 +1,8 @@
 import clsx from 'clsx'
 
-interface Props {
-  type?: 'submit'
-  variant: 'primary' | 'secondary' | 'alternative'
-  onClick?: (() => void) | ((event: any) => void)
-  fullWidth?: Boolean
-  children: React.ReactNode
-}
+import type { ButtonInterface } from 'interfaces/components'
 
-export default function Button ({ type, variant, onClick, fullWidth, children }: Props): JSX.Element {
+export default function Button ({ type, variant, onClick, fullWidth, children }: ButtonInterface): JSX.Element {
   return (
     <>
       <button

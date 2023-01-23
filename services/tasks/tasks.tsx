@@ -1,6 +1,6 @@
 import { getCookie } from 'cookies-next'
-import { TaskInterface } from 'interfaces/tasks/Task'
 import api from 'utils/api'
+import type { TaskInterface } from 'interfaces/tasks/Task'
 
 const delay = async (): Promise<void> => await new Promise((resolve) => setTimeout(resolve, 1000))
 
