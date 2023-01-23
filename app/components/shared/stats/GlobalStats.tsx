@@ -14,10 +14,10 @@ export default function GlobalStats (): JSX.Element {
     <div className='mt-10 gap-x-10 columns-1 md:columns-2 xl:columns-4'>
       {stats.map((stat, index) => (
         <div key={index} className='mb-6 text-white bg-dark-gray md:mb-0 p-7'>
-          {stat.type === 'totalTasks' && <InboxStackIcon className='h-10 text-light-gray stroke-2' />}
-          {stat.type === 'totalMonthlyHours' && <ClockIcon className='h-10 text-light-gray stroke-2' />}
-          {stat.type === 'goals' && <BanknotesIcon className='h-10 text-light-gray stroke-2' />}
-          {stat.type === 'project' && <FireIcon className='h-10 text-light-gray stroke-2' />}
+          {stat.type === 'totalTasks' && <InboxStackIcon className='h-10 stroke-2 text-light-gray' />}
+          {stat.type === 'totalMonthlyHours' && <ClockIcon className='h-10 stroke-2 text-light-gray' />}
+          {stat.type === 'goals' && <BanknotesIcon className='h-10 stroke-2 text-light-gray' />}
+          {stat.type === 'project' && <FireIcon className='h-10 stroke-2 text-light-gray' />}
           <div className='flex items-center text-4xl font-extrabold gap-x-1 mt-7 font-secondaryFont'>
             {stat.value}
             {stat.avg === 'better' && <ArrowUpIcon className='w-4 stroke-custom-green stroke-4' />}

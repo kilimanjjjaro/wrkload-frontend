@@ -51,10 +51,10 @@ const AddTask = ({ setModalStatus }: Props): JSX.Element => {
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>
-              <ArrowRightIcon className='w-4 stroke-3' />
+              <ArrowRightIcon className='w-4 stroke-width-3' />
             </Button>
             <Button onClick={() => setModalStatus(false)} variant='alternative'>
-              <XMarkIcon className='w-4 stroke-3' />
+              <XMarkIcon className='w-4 stroke-width-3' />
             </Button>
           </div>
         </form>
