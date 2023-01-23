@@ -2,22 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.stroke-width-2 path {
-  stroke-width: 2 !important;
-}
-
-.stroke-width-3 path {
-  stroke-width: 3 !important;
-}
-
-.stroke-width-3-5 path {
-  stroke-width: 3.5 !important;
-}
-
-.stroke-width-4 path {
-  stroke-width: 4 !important;
-}
-
 textarea::-webkit-scrollbar {
   width: .5rem;
   cursor: pointer;

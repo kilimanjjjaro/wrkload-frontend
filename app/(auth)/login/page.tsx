@@ -50,7 +50,7 @@ export default function Login (): JSX.Element {
             <Input variant='primary' onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' centerText />
           </div>
           <Button variant='secondary'>
-            <LockClosedIcon className='w-4 stroke-width-3' />
+            <LockClosedIcon className='w-4 stroke-3' />
           </Button>
         </form>
         <div className='flex items-center mt-5 text-sm font-semibold font-secondaryFont'>

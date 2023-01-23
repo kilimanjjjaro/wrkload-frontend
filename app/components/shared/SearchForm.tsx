@@ -45,7 +45,7 @@ export default function SearchForm ({ setModalStatus, type }: Props): JSX.Elemen
             <Input variant='primary' onChange={handleChange} value={query} name='query' type='text' placeholder='Type and press enter' centerText required />
           </div>
           <Button onClick={handleCloseModal} variant='secondary'>
-            <XMarkIcon className='w-4 stroke-width-3' />
+            <XMarkIcon className='w-4 stroke-3' />
           </Button>
         </form>
       </div>

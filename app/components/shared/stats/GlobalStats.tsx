@@ -14,14 +14,14 @@ export default function GlobalStats (): JSX.Element {
     <div className='mt-10 gap-x-10 columns-1 md:columns-2 xl:columns-4'>
       {stats.map((stat, index) => (
         <div key={index} className='mb-6 text-white bg-dark-gray md:mb-0 p-7'>
-          {stat.type === 'totalTasks' && <InboxStackIcon className='h-10 text-light-gray stroke-width-2' />}
-          {stat.type === 'totalMonthlyHours' && <ClockIcon className='h-10 text-light-gray stroke-width-2' />}
-          {stat.type === 'goals' && <BanknotesIcon className='h-10 text-light-gray stroke-width-2' />}
-          {stat.type === 'project' && <FireIcon className='h-10 text-light-gray stroke-width-2' />}
+          {stat.type === 'totalTasks' && <InboxStackIcon className='h-10 text-light-gray stroke-2' />}
+          {stat.type === 'totalMonthlyHours' && <ClockIcon className='h-10 text-light-gray stroke-2' />}
+          {stat.type === 'goals' && <BanknotesIcon className='h-10 text-light-gray stroke-2' />}
+          {stat.type === 'project' && <FireIcon className='h-10 text-light-gray stroke-2' />}
           <div className='flex items-center text-4xl font-extrabold gap-x-1 mt-7 font-secondaryFont'>
             {stat.value}
-            {stat.avg === 'better' && <ArrowUpIcon className='w-4 stroke-custom-green stroke-width-4' />}
-            {stat.avg === 'worst' && <ArrowDownIcon className='w-4 stroke-custom-red stroke-width-4' />}
+            {stat.avg === 'better' && <ArrowUpIcon className='w-4 stroke-custom-green stroke-4' />}
+            {stat.avg === 'worst' && <ArrowDownIcon className='w-4 stroke-custom-red stroke-4' />}
           </div>
           {stat.type === 'totalTasks' && <span className='mt-1 text-3xl font-secondaryFont'>tasks uploaded last month.</span>}
           {stat.type === 'totalMonthlyHours' && <span className='mt-1 text-3xl font-secondaryFont'>hours worked last month.</span>}

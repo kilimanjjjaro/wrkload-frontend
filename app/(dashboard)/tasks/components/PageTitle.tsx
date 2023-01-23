@@ -8,6 +8,6 @@ export const PageTitle = (): JSX.Element => {
   const [project] = useState('Powgen')
 
   return (
-    <Headline variant='lg'>Tasks of <button className='inline-flex items-center transition ease-in-out duration-400 gap-x-1 2xl:gap-x-3 hover:text-dark-gray'><b>{project}</b> <ChevronDownIcon className='w-4md:w-6 2xl:w-8 stroke-width-3-5' /></button></Headline>
+    <Headline variant='lg'>Tasks of <button className='inline-flex items-center transition ease-in-out duration-400 gap-x-1 2xl:gap-x-3 hover:text-dark-gray'><b>{project}</b> <ChevronDownIcon className='w-4 md:w-6 2xl:w-8 stroke-3.5' /></button></Headline>
   )
 }

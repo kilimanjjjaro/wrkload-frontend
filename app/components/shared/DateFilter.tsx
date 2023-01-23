@@ -34,10 +34,10 @@ export default function DateFilter ({ dependency, setDependency }: Props): JSX.E
       <Input variant='primary' name='endingDate' type='date' placeholder='Ending date' required />
       <div className='flex gap-x-3'>
         <Button type='submit' variant='alternative' fullWidth>
-          <CheckIcon className='w-4 stroke-width-3' />
+          <CheckIcon className='w-4 stroke-3' />
         </Button>
         <Button onClick={() => setDependency(false)} variant='alternative' fullWidth>
-          <XMarkIcon className='w-4 stroke-width-3' />
+          <XMarkIcon className='w-4 stroke-3' />
         </Button>
       </div>
     </motion.div>

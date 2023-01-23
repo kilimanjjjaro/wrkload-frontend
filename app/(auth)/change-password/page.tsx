@@ -63,7 +63,7 @@ export default function ChangePassword (): JSX.Element {
               <Input variant='primary' onChange={handleChange} value={credentials.currentPassword} name='currentPassword' type='password' placeholder='Current Password' autoComplete='current-password' centerText />
             </div>
             <Button variant='secondary'>
-              <ArrowRightIcon className='w-4 stroke-width-3' />
+              <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </form>
         )}
@@ -74,7 +74,7 @@ export default function ChangePassword (): JSX.Element {
               <Input variant='primary' onChange={handleChange} value={credentials.confirmNewPassword} onKeyUp={handlePasswordValidation} name='confirmNewPassword' type='password' placeholder='Confirm new password' autoComplete='new-password' centerText />
             </div>
             <Button variant='secondary'>
-              <ArrowRightIcon className='w-4 stroke-width-3' />
+              <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </form>
         )}

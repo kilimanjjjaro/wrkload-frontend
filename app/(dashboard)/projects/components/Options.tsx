@@ -11,8 +11,8 @@ export const Options = (): JSX.Element => {
 
   return (
     <div className='hidden lg:flex gap-x-5'>
-      <Button onClick={() => setModalStatus(true)} variant='primary'><PlusIcon className='w-4 stroke-width-3' /></Button>
-      <Button variant='primary'><MagnifyingGlassIcon className='w-4 stroke-width-3' /></Button>
+      <Button onClick={() => setModalStatus(true)} variant='primary'><PlusIcon className='w-4 stroke-3' /></Button>
+      <Button variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
       <Modal dependency={modalStatus} close={() => setModalStatus(false)}>
         <AddProject modalStatus={modalStatus} setModalStatus={setModalStatus} />
       </Modal>

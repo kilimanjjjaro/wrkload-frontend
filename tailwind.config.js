@@ -48,6 +48,11 @@ module.exports = {
             strokeDashoffset: '-200'
           }
         }
+      },
+      strokeWidth: {
+        3: '3px',
+        3.5: '3.5px',
+        4: '4px'
       }
     }
   },

@@ -43,10 +43,10 @@ export default function AddProject ({ setModalStatus }: Props): JSX.Element {
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>
-              <ArrowRightIcon className='w-4 stroke-width-3' />
+              <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
             <Button onClick={handleCloseModal} variant='alternative'>
-              <XMarkIcon className='w-4 stroke-width-3' />
+              <XMarkIcon className='w-4 stroke-3' />
             </Button>
           </div>
         </form>

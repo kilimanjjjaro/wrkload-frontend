@@ -15,7 +15,7 @@ export default function Feedback ({ title, description }: Props): JSX.Element {
         <Headline variant='md'><b>{title}</b></Headline>
         <Paragraph variant='sm'>{description}</Paragraph>
         <Button variant='secondary'>
-          <ArrowLeftIcon className='w-4 stroke-width-3' />
+          <ArrowLeftIcon className='w-4 stroke-3' />
         </Button>
       </div>
     </div>

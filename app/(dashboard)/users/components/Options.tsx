@@ -5,7 +5,7 @@ export const Options = (): JSX.Element => {
   return (
     <>
       <div className='hidden lg:flex gap-x-5'>
-        <Button variant='primary'><MagnifyingGlassIcon className='w-4 stroke-width-3' /></Button>
+        <Button variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
       </div>
     </>
   )

@@ -70,7 +70,7 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
             <button className='transition ease-in-out duration-400 hover:-translate-x-1' onClick={() => { void handleLogout() }}>Log out</button>
           </ul>
           <div className='absolute w-8 p-2 transition ease-in-out bg-white cursor-pointer top-50 -left-12 group duration-400 hover:bg-dark-gray' onClick={() => setShowBox(!showBox)}>
-            <XMarkIcon className='stroke-width-2 stroke-dark-gray group-hover:stroke-white' />
+            <XMarkIcon className='stroke-2 stroke-dark-gray group-hover:stroke-white' />
           </div>
         </nav>
       </motion.div>

@@ -14,10 +14,10 @@ export const Options = (): JSX.Element => {
   return (
     <>
       <div className='flex items-start gap-x-5'>
-        <Button onClick={() => setAddTaskModalStatus(true)} variant='primary'><PlusIcon className='w-4 stroke-width-3' /></Button>
-        <Button onClick={() => setSearchModalStatus(true)} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-width-3' /></Button>
+        <Button onClick={() => setAddTaskModalStatus(true)} variant='primary'><PlusIcon className='w-4 stroke-3' /></Button>
+        <Button onClick={() => setSearchModalStatus(true)} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
         <div className='relative'>
-          <Button onClick={() => setDateFilterModalStatus(!(dateFilterModalStatus))} variant='primary'><CalendarIcon className='w-4 stroke-width-3' /></Button>
+          <Button onClick={() => setDateFilterModalStatus(!(dateFilterModalStatus))} variant='primary'><CalendarIcon className='w-4 stroke-3' /></Button>
           <DateFilter dependency={dateFilterModalStatus} setDependency={setDateFilterModalStatus} />
         </div>
       </div>

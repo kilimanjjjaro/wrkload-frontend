@@ -29,7 +29,7 @@ export default function NavBar (): JSX.Element {
             <div className='w-10 h-10 bg-dark-gray' />
           </div>
         )}
-        {(user === undefined && !isLoading) && <Button onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-width-3' /></Button>}
+        {(user === undefined && !isLoading) && <Button onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-3' /></Button>}
         {(user !== undefined && !isLoading) && <DashboardTab user={user} />}
       </div>
     </div>

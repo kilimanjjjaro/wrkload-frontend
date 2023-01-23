@@ -16,7 +16,7 @@ export default function HeroHeader (): JSX.Element {
         <div className='mb-8 md:w-1/2'>
           <Paragraph variant='normal'><b className='font-extrabold'>Easy-peasy!</b><br /> With wrkload you can track what you work on in a simple and organized way.</Paragraph>
         </div>
-        <Button variant='primary' onClick={() => router.push('/registry')}>Start now for free <ArrowRightIcon className='w-4 stroke-width-3' /></Button>
+        <Button variant='primary' onClick={() => router.push('/registry')}>Start now for free <ArrowRightIcon className='w-4 stroke-3' /></Button>
       </div>
       <div className='w-full bg-dark-gray h-2/3' />
     </div>

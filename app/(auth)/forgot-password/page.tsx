@@ -37,7 +37,7 @@ export default function ForgotPassword (): JSX.Element {
             <Input variant='primary' onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
           </div>
           <Button variant='secondary'>
-            <ArrowRightIcon className='w-4 stroke-width-3' />
+            <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </form>
       </div>

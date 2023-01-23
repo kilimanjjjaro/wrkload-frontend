@@ -60,7 +60,7 @@ export default function Register (): JSX.Element {
             <Input variant='primary' onChange={handleChange} onKeyUp={handlePasswordValidation} name='confirmPassword' value={credentials.confirmPassword} type='password' placeholder='Confirm Password' autoComplete='current-password' centerText />
           </div>
           <Button variant='secondary'>
-            <LockClosedIcon className='w-4 stroke-width-3' />
+            <LockClosedIcon className='w-4 stroke-3' />
           </Button>
         </form>
         <div className='flex items-center mt-5 text-sm font-semibold font-secondaryFont'>

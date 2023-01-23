@@ -49,7 +49,7 @@ export default function DeleteAccount (): JSX.Element {
             <Input variant='primary' onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' centerText />
           </div>
           <Button variant='secondary'>
-            <ArrowRightIcon className='w-4 stroke-width-3' />
+            <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </form>
       </div>
