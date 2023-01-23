@@ -10,3 +10,5 @@ export const INITIAL_TASK_STATE: TaskInterface = {
   month: 'December',
   description: ''
 }
+
+export const TASKS_ENDPOINT = '/tasks'

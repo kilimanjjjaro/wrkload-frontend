@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import useSWR from 'swr'
-import { getUsers, usersEndpoint as key } from 'services/users/users'
+import { getUsers } from 'services/users/getUsers'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
 import User from 'app/(dashboard)/users/components/User'
 import Skeleton from 'app/components/shared/Skeleton'
@@ -11,8 +11,8 @@ import UpdateUser from 'app/(dashboard)/users/components/UpdateUser'
 import DeleteUser from 'app/(dashboard)/users/components/DeleteUser'
 
 import type { UserInterface } from 'interfaces/users/User'
-import { INITIAL_USER_STATE } from 'constants/users'
 import { SKELETON } from 'constants/components'
+import { INITIAL_USER_STATE, USERS_ENDPOINT as key } from 'constants/users'
 
 export default function Users (): JSX.Element {
   const [updateModalStatus, setUpdateModalStatus] = useState(false)

@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 import { mutate } from 'swr'
-import { addTask, tasksEndpoint as key } from 'services/tasks/tasks'
+import { addTask } from 'services/tasks/addTask'
 import { addTaskOptions } from 'utils/swrTasksOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
@@ -9,7 +9,7 @@ import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
 
-import { INITIAL_TASK_STATE } from 'constants/tasks'
+import { INITIAL_TASK_STATE, TASKS_ENDPOINT as key } from 'constants/tasks'
 
 interface Props {
   setModalStatus: (value: boolean) => void

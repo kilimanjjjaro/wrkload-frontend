@@ -1,16 +1,5 @@
 import { UserInterface } from 'interfaces/users/User'
 
-export const addUserOptions = (newUser: UserInterface): any => {
-  return {
-    optimisticData: (users: UserInterface[]) => [...users, newUser]
-      .sort((a, b) => new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime()),
-    rollbackOnError: true,
-    populateCache: (added: UserInterface, users: UserInterface[]) => [...users, added]
-      .sort((a, b) => new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime()),
-    revalidate: false
-  }
-}
-
 export const updateUserOptions = (updatedUser: UserInterface): any => {
   return {
     optimisticData: (users: UserInterface[]) => {

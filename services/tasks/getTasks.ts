@@ -1,11 +1,12 @@
 import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
-import { USERS_ENDPOINT } from 'constants/users'
+import type { TaskInterface } from 'interfaces/tasks/Task'
+import { TASKS_ENDPOINT } from 'constants/tasks'
 
 const delay = async (): Promise<void> => await new Promise((resolve) => setTimeout(resolve, 500))
 
-export const deleteUser = async (_id: string): Promise<any> => {
+export const getTasks = async (): Promise<TaskInterface[]> => {
   await delay()
 
   const accessToken = getCookie('accessToken')
@@ -16,9 +17,7 @@ export const deleteUser = async (_id: string): Promise<any> => {
     }
   }
 
-  const response = await api.delete(`${USERS_ENDPOINT}/${_id}`, config)
+  const response = await api.get(TASKS_ENDPOINT, config)
 
-  console.log(response.data)
-
-  return response.data
+  return response.data.results
 }

@@ -1,20 +1,21 @@
-'use client'
-
 import { useState } from 'react'
+import { mutate } from 'swr'
+import { deleteUser } from 'services/users/deleteUser'
+import { deleteUserOptions } from 'utils/swrUsersOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
-import deleteUser from 'services/users/deleteUser'
 
 import type { UserInterface } from 'interfaces/users/User'
+import { USERS_ENDPOINT as key } from 'constants/users'
 
 interface Props {
-  setModalStatus: (value: boolean) => void
   data: UserInterface
+  setModalStatus: (value: boolean) => void
 }
 
-export default function DeleteUser ({ setModalStatus, data }: Props): JSX.Element {
+export default function DeleteUser ({ data, setModalStatus }: Props): JSX.Element {
   const [user, setUser] = useState(data)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -23,10 +24,14 @@ export default function DeleteUser ({ setModalStatus, data }: Props): JSX.Elemen
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
+    setModalStatus(false)
 
     try {
-      await deleteUser(user._id)
-      setModalStatus(false)
+      await mutate(
+        key,
+        deleteUser(user._id),
+        deleteUserOptions(user._id)
+      )
     } catch (error: any) {
       console.error(error.response.data)
     }

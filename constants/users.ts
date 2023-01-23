@@ -15,3 +15,5 @@ export const INITIAL_USER_STATE: UserInterface = {
   confirmationStatus: false,
   confirmationToken: ''
 }
+
+export const USERS_ENDPOINT = '/users'

@@ -1,11 +1,12 @@
 import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
+import type { UserInterface } from 'interfaces/users/User'
 import { USERS_ENDPOINT } from 'constants/users'
 
 const delay = async (): Promise<void> => await new Promise((resolve) => setTimeout(resolve, 500))
 
-export const deleteUser = async (_id: string): Promise<any> => {
+export const updateUser = async (user: UserInterface): Promise<UserInterface> => {
   await delay()
 
   const accessToken = getCookie('accessToken')
@@ -16,9 +17,10 @@ export const deleteUser = async (_id: string): Promise<any> => {
     }
   }
 
-  const response = await api.delete(`${USERS_ENDPOINT}/${_id}`, config)
+  const updatedUser = {
+    username: user.username
+  }
 
-  console.log(response.data)
-
-  return response.data
+  const response = await api.patch(`${USERS_ENDPOINT}/${user._id}`, updatedUser, config)
+  return response.data.updatedUser
 }

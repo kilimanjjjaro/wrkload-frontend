@@ -1,7 +1,5 @@
-import { Key } from 'react'
-
 export interface UserInterface {
-  _id: Key | undefined
+  _id: string
   role: number
   username: string
   email: string
@@ -13,7 +11,7 @@ export interface UserInterface {
 }
 
 export interface NewUserInterface {
-  _id: Key | undefined
+  _id: string
   role: number
   username: string
   password: string

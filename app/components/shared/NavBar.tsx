@@ -5,11 +5,13 @@ import useSWR from 'swr'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
-import { getUser, usersEndpoint as key } from 'services/users/users'
+import { getUser } from 'services/users/getUser'
 import { DataContext } from 'context/DataContext'
 import Logo from 'app/components/shared/Logo'
 import Button from 'app/components/shared/Button'
 import DashboardTab from 'app/components/shared/DashboardTab'
+
+import { USERS_ENDPOINT as key } from 'constants/users'
 
 export default function NavBar (): JSX.Element {
   const router = useRouter()

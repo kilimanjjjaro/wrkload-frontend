@@ -7,8 +7,8 @@ import Image from 'next/image'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/navigation'
 import api from 'utils/api'
-import { clearCache } from 'services/users/users'
 import { DataContext } from 'context/DataContext'
+import { clearCache } from 'services/clearCache'
 
 import type { UserInterface } from 'interfaces/users/User'
 

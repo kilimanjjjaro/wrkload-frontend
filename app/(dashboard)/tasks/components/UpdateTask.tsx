@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { mutate } from 'swr'
-import { updateTask, tasksEndpoint as key } from 'services/tasks/tasks'
+import { updateTask } from 'services/tasks/updateTask'
 import { updateTaskOptions } from 'utils/swrTasksOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
@@ -9,6 +9,7 @@ import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
 
 import type { TaskInterface } from 'interfaces/tasks/Task'
+import { TASKS_ENDPOINT as key } from 'constants/tasks'
 
 interface Props {
   data: TaskInterface

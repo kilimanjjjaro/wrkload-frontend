@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import useSWR from 'swr'
-import { tasksEndpoint as key, getTasks } from 'services/tasks/tasks'
+import { getTasks } from 'services/tasks/getTasks'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
 import Skeleton from 'app/components/shared/Skeleton'
 import Modal from 'app/components/shared/Modal'
@@ -11,7 +11,7 @@ import UpdateTask from 'app/(dashboard)/tasks/components/UpdateTask'
 import DeleteTask from 'app/(dashboard)/tasks/components/DeleteTask'
 
 import type { TaskInterface } from 'interfaces/tasks/Task'
-import { INITIAL_TASK_STATE } from 'constants/tasks'
+import { INITIAL_TASK_STATE, TASKS_ENDPOINT as key } from 'constants/tasks'
 import { SKELETON } from 'constants/components'
 
 export default function Tasks (): JSX.Element {
@@ -19,7 +19,9 @@ export default function Tasks (): JSX.Element {
   const [deleteModalStatus, setDeleteModalStatus] = useState(false)
   const [selectedTask, setSelectedTask] = useState<TaskInterface>(INITIAL_TASK_STATE)
 
-  const { data: tasks, isLoading } = useSWR(key, getTasks, { onSuccess: data => data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) })
+  const { data: tasks, isLoading, error } = useSWR(key, getTasks, { onSuccess: data => data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) })
+
+  if (error?.response.data.code === 'tasks/tasks-not-found') return <div>Tasks not found</div>
 
   return (
     <>
