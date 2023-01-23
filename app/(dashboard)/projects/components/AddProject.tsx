@@ -29,7 +29,8 @@ export default function AddProject ({ setModalStatus }: Props): JSX.Element {
     }
   }
 
-  const handleCloseModal = (): void => {
+  const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault()
     setModalStatus(false)
   }
 
@@ -45,7 +46,7 @@ export default function AddProject ({ setModalStatus }: Props): JSX.Element {
             <Button type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
-            <Button onClick={handleCloseModal} variant='alternative'>
+            <Button onClick={(event) => handleCloseModal(event)} variant='alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
           </div>

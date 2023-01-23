@@ -37,6 +37,11 @@ const AddTask = ({ setModalStatus }: Props): JSX.Element => {
     }
   }
 
+  const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault()
+    setModalStatus(false)
+  }
+
   return (
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center bg-white text-dark-gray md:w-96 min-w-auto'>
@@ -53,7 +58,7 @@ const AddTask = ({ setModalStatus }: Props): JSX.Element => {
             <Button type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-width-3' />
             </Button>
-            <Button onClick={() => setModalStatus(false)} variant='alternative'>
+            <Button onClick={(event) => handleCloseModal(event)} variant='alternative'>
               <XMarkIcon className='w-4 stroke-width-3' />
             </Button>
           </div>

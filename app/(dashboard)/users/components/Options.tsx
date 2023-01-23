@@ -8,7 +8,7 @@ export const Options = (): JSX.Element => {
   const [searchModalStatus, setSearchModalStatus] = useState(false)
   return (
     <>
-      <div className='hidden lg:flex gap-x-5'>
+      <div className='flex items-start gap-x-5'>
         <Button onClick={() => setSearchModalStatus(true)} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
       </div>
       <Modal modalStatus={searchModalStatus} setModalStatus={setSearchModalStatus}>

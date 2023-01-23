@@ -38,7 +38,7 @@ export default function UpdateTask ({ data, setModalStatus }: Props): JSX.Elemen
     }
   }
 
-  const handleCloseModal = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
     setModalStatus(false)
   }

@@ -37,7 +37,7 @@ export default function DeleteUser ({ data, setModalStatus }: Props): JSX.Elemen
     }
   }
 
-  const handleCloseModal = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleCloseModal = (event: React.FormEvent<HTMLButtonElement>): void => {
     event.preventDefault()
     setModalStatus(false)
   }
@@ -55,7 +55,7 @@ export default function DeleteUser ({ data, setModalStatus }: Props): JSX.Elemen
             <Button type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
-            <Button onClick={handleCloseModal} variant='alternative'>
+            <Button onClick={(event) => handleCloseModal(event)} variant='alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
           </div>

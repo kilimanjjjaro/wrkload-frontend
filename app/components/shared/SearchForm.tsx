@@ -31,7 +31,7 @@ export default function SearchForm ({ setModalStatus, type }: Props): JSX.Elemen
     }
   }
 
-  const handleCloseModal = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
     setModalStatus(false)
   }
@@ -44,7 +44,7 @@ export default function SearchForm ({ setModalStatus, type }: Props): JSX.Elemen
           <div className='flex flex-col mb-5 gap-y-3'>
             <Input variant='primary' onChange={handleChange} value={query} name='query' type='text' placeholder='Type and press enter' centerText required />
           </div>
-          <Button onClick={handleCloseModal} variant='secondary'>
+          <Button onClick={(event) => handleCloseModal(event)} variant='secondary'>
             <XMarkIcon className='w-4 stroke-3' />
           </Button>
         </form>

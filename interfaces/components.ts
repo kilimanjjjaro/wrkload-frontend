@@ -19,7 +19,7 @@ export interface PaginationInterface {
 export interface ButtonInterface {
   type?: 'submit'
   variant: 'primary' | 'secondary' | 'alternative'
-  onClick?: (() => void) | ((event: any) => void)
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   fullWidth?: Boolean
   children: React.ReactNode
 }
