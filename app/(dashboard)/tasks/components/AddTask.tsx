@@ -15,7 +15,7 @@ interface Props {
   setModalStatus: (value: boolean) => void
 }
 
-const AddTask = ({ setModalStatus }: Props): JSX.Element => {
+export default function AddTask ({ setModalStatus }: Props): JSX.Element {
   const [task, setTask] = useState(INITIAL_TASK_STATE)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
@@ -67,5 +67,3 @@ const AddTask = ({ setModalStatus }: Props): JSX.Element => {
     </div>
   )
 }
-
-export default AddTask

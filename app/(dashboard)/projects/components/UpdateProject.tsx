@@ -1,12 +1,16 @@
 'use client'
 
+import { useState } from 'react'
+import { mutate } from 'swr'
+import { updateProject } from 'services/projects/updateProject'
+import { updateProjectOptions } from 'utils/swrProjectsOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
-import { ProjectInterface } from 'interfaces/projects/Project'
-import { useState } from 'react'
-import updateProject from 'services/projects/updateProject'
+
+import type { ProjectInterface } from 'interfaces/projects/Project'
+import { PROJECTS_ENDPOINT as key } from 'constants/projects'
 
 interface Props {
   setModalStatus: (value: boolean) => void
@@ -22,10 +26,14 @@ export default function UpdateProject ({ setModalStatus, data }: Props): JSX.Ele
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
+    setModalStatus(false)
 
     try {
-      await updateProject(project)
-      setModalStatus(false)
+      await mutate(
+        key,
+        updateProject(project),
+        updateProjectOptions(project)
+      )
     } catch (error: any) {
       console.error(error.response)
     }

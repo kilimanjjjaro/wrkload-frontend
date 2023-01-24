@@ -27,7 +27,7 @@ export default function Users (): JSX.Element {
         {isLoading && SKELETON.map((_, index) => (
           <Skeleton type='user' key={index} />
         ))}
-        {users?.map((user: UserInterface) => (
+        {error === undefined && users?.map((user: UserInterface) => (
           <User key={user._id} user={user} setUpdateModalStatus={setUpdateModalStatus} setDeleteModalStatus={setDeleteModalStatus} setSelectedUser={setSelectedUser} />
         ))}
       </MasonryGrid>

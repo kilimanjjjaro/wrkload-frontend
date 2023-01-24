@@ -1,17 +1,22 @@
-import { Key } from 'react'
-import { AxiosResponse } from 'axios'
 import { getCookie } from 'cookies-next'
-import { ProjectInterface } from 'interfaces/projects/Project'
 import api from 'utils/api'
 
-export default async function deleteProject (_id: Key | undefined): Promise<AxiosResponse<ProjectInterface>> {
+import { PROJECTS_ENDPOINT } from 'constants/projects'
+
+const delay = async (): Promise<void> => await new Promise((resolve) => setTimeout(resolve, 500))
+
+export const deleteProject = async (_id: string): Promise<any> => {
+  await delay()
+
   const accessToken = getCookie('accessToken')
 
   const config = {
-    headers: { Authorization: `Bearer ${accessToken as string}` }
+    headers: {
+      Authorization: `Bearer ${accessToken as string}`
+    }
   }
 
-  const response = await api.delete(`/projects/${_id as string}`, config)
+  const response = await api.delete(`${PROJECTS_ENDPOINT}/${_id}`, config)
 
-  return response
+  return response.data
 }

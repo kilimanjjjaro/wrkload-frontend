@@ -1,19 +1,23 @@
 'use client'
 
 import { useState } from 'react'
+import { mutate } from 'swr'
+import { deleteProject } from 'services/projects/deleteProject'
+import { deleteProjectOptions } from 'utils/swrProjectsOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
-import deleteProject from 'services/projects/deleteProject'
-import { ProjectInterface } from 'interfaces/projects/Project'
+
+import type { ProjectInterface } from 'interfaces/projects/Project'
+import { PROJECTS_ENDPOINT as key } from 'constants/projects'
 
 interface Props {
-  setModalStatus: (value: boolean) => void
   data: ProjectInterface
+  setModalStatus: (value: boolean) => void
 }
 
-export default function DeleteProject ({ setModalStatus, data }: Props): JSX.Element {
+export default function DeleteProject ({ data, setModalStatus }: Props): JSX.Element {
   const [project, setProject] = useState(data)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -22,10 +26,14 @@ export default function DeleteProject ({ setModalStatus, data }: Props): JSX.Ele
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
+    setModalStatus(false)
 
     try {
-      await deleteProject(project._id)
-      setModalStatus(false)
+      await mutate(
+        key,
+        deleteProject(project._id),
+        deleteProjectOptions(project._id)
+      )
     } catch (error: any) {
       console.error(error.response)
     }

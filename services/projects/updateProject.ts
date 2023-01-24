@@ -1,16 +1,27 @@
-import { AxiosResponse } from 'axios'
 import { getCookie } from 'cookies-next'
-import { ProjectInterface } from 'interfaces/projects/Project'
 import api from 'utils/api'
 
-export default async function updateProject (project: ProjectInterface): Promise<AxiosResponse<ProjectInterface>> {
+import type { ProjectInterface } from 'interfaces/projects/Project'
+import { PROJECTS_ENDPOINT } from 'constants/projects'
+
+const delay = async (): Promise<void> => await new Promise((resolve) => setTimeout(resolve, 500))
+
+export const updateProject = async (project: ProjectInterface): Promise<ProjectInterface> => {
+  await delay()
+
   const accessToken = getCookie('accessToken')
 
   const config = {
-    headers: { Authorization: `Bearer ${accessToken as string}` }
+    headers: {
+      Authorization: `Bearer ${accessToken as string}`
+    }
   }
 
-  const response = await api.patch(`/projects/${project._id as string}`, { name: project.name }, config)
+  const updatedProject = {
+    name: project.name
+  }
 
-  return response
+  const response = await api.patch(`${PROJECTS_ENDPOINT}/${project._id}`, updatedProject, config)
+
+  return response.data.updatedProject
 }

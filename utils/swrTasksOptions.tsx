@@ -1,4 +1,4 @@
-import { TaskInterface } from 'interfaces/tasks/Task'
+import type { TaskInterface } from 'interfaces/tasks/Task'
 
 export const addTaskOptions = (newTask: TaskInterface): any => {
   return {

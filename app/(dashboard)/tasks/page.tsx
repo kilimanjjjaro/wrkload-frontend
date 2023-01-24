@@ -29,7 +29,7 @@ export default function Tasks (): JSX.Element {
         {isLoading && SKELETON.map((_, index) => (
           <Skeleton type='task' key={index} />
         ))}
-        {tasks?.map((task) => (
+        {error === undefined && tasks?.map((task) => (
           <Task key={task._id} task={task} setUpdateModalStatus={setUpdateModalStatus} setDeleteModalStatus={setDeleteModalStatus} setSelectedTask={setSelectedTask} />
         ))}
       </MasonryGrid>

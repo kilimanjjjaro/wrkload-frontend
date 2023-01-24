@@ -1,4 +1,4 @@
-import { UserInterface } from 'interfaces/users/User'
+import type { UserInterface } from 'interfaces/users/User'
 
 export const updateUserOptions = (updatedUser: UserInterface): any => {
   return {

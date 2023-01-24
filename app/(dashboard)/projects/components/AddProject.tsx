@@ -1,11 +1,14 @@
 
 import { useState } from 'react'
+import { mutate } from 'swr'
+import { addProject } from 'services/projects/addProject'
+import { addProjectOptions } from 'utils/swrProjectsOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
-import addProject from 'services/projects/addProject'
-import { INITIAL_PROJECT_STATE } from 'constants/projects'
+
+import { INITIAL_PROJECT_STATE, PROJECTS_ENDPOINT as key } from 'constants/projects'
 
 interface Props {
   setModalStatus: (value: boolean) => void
@@ -23,7 +26,11 @@ export default function AddProject ({ setModalStatus }: Props): JSX.Element {
     setModalStatus(false)
 
     try {
-      await addProject(project)
+      await mutate(
+        key,
+        addProject(project),
+        addProjectOptions(project)
+      )
     } catch (error: any) {
       console.error(error.response)
     }

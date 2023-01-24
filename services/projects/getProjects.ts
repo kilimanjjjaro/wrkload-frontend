@@ -6,7 +6,7 @@ import { PROJECTS_ENDPOINT } from 'constants/projects'
 
 const delay = async (): Promise<void> => await new Promise((resolve) => setTimeout(resolve, 500))
 
-export const addProject = async (project: ProjectInterface): Promise<ProjectInterface> => {
+export const getProjects = async (): Promise<ProjectInterface[]> => {
   await delay()
 
   const accessToken = getCookie('accessToken')
@@ -17,7 +17,7 @@ export const addProject = async (project: ProjectInterface): Promise<ProjectInte
     }
   }
 
-  const response = await api.post(PROJECTS_ENDPOINT, project, config)
+  const response = await api.get(PROJECTS_ENDPOINT, config)
 
-  return response.data.newProject
+  return response.data.projects
 }

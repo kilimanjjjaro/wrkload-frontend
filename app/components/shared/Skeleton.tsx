@@ -11,6 +11,7 @@ export default function Skeleton ({ type }: { type: string }): JSX.Element {
           </div>
         </div>
       )}
+
       {type === 'user' && (
         <div className='flex flex-col items-start bg-white p-7 [&>*]:animate-pulse'>
           <div className='w-20 h-20 mb-4 xl:mb-5 bg-light-gray' />
@@ -20,6 +21,13 @@ export default function Skeleton ({ type }: { type: string }): JSX.Element {
             <div className='w-2/6 h-8 bg-light-gray' />
             <div className='w-2/6 h-8 bg-light-gray' />
           </div>
+        </div>
+      )}
+
+      {type === 'project' && (
+        <div className='flex flex-col items-start bg-white p-7 [&>*]:animate-pulse'>
+          <div className='w-4/6 mb-4 xl:mb-5 h-9 bg-light-gray' />
+          <div className='w-2/6 h-8 mt-4 bg-light-gray' />
         </div>
       )}
     </>

@@ -17,3 +17,5 @@ export const PROJECTS = [
   { _id: 7, name: 'MSI', createdAt: '05/09/2022', totalTasks: '2 tasks' },
   { _id: 8, name: 'Figma', createdAt: '05/09/2022', totalTasks: '23 tasks' }
 ]
+
+export const PROJECTS_ENDPOINT = '/projects'
