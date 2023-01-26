@@ -39,6 +39,9 @@ interface DataContextValues {
   setUpdateUserModalStatus: Dispatch<SetStateAction<boolean>>
   deleteUserModalStatus: boolean
   setDeleteUserModalStatus: Dispatch<SetStateAction<boolean>>
+
+  searchModalStatus: boolean
+  setSearchModalStatus: Dispatch<SetStateAction<boolean>>
 };
 
 const DEFAULT_VALUE: DataContextValues = {
@@ -68,7 +71,10 @@ const DEFAULT_VALUE: DataContextValues = {
   updateUserModalStatus: false,
   setUpdateUserModalStatus: () => {},
   deleteUserModalStatus: false,
-  setDeleteUserModalStatus: () => {}
+  setDeleteUserModalStatus: () => {},
+
+  searchModalStatus: false,
+  setSearchModalStatus: () => {}
 }
 
 export const DataContext = createContext<DataContextValues>(DEFAULT_VALUE)
@@ -88,6 +94,8 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
   const [updateUserModalStatus, setUpdateUserModalStatus] = useState(false)
   const [deleteUserModalStatus, setDeleteUserModalStatus] = useState(false)
 
+  const [searchModalStatus, setSearchModalStatus] = useState(false)
+
   const [isLogged, setIsLogged] = useState(false)
   const accessToken = getCookie('accessToken')
 
@@ -98,7 +106,7 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
   }, [accessToken])
 
   return (
-    <DataContext.Provider value={{ isLogged, setIsLogged, selectedTask, setSelectedTask, addTaskModalStatus, setAddTaskModalStatus, updateTaskModalStatus, setUpdateTaskModalStatus, deleteTaskModalStatus, setDeleteTaskModalStatus, selectedProject, setSelectedProject, addProjectModalStatus, setAddProjectModalStatus, updateProjectModalStatus, setUpdateProjectModalStatus, deleteProjectModalStatus, setDeleteProjectModalStatus, selectedUser, setSelectedUser, updateUserModalStatus, setUpdateUserModalStatus, deleteUserModalStatus, setDeleteUserModalStatus }}>
+    <DataContext.Provider value={{ isLogged, setIsLogged, selectedTask, setSelectedTask, addTaskModalStatus, setAddTaskModalStatus, updateTaskModalStatus, setUpdateTaskModalStatus, deleteTaskModalStatus, setDeleteTaskModalStatus, selectedProject, setSelectedProject, addProjectModalStatus, setAddProjectModalStatus, updateProjectModalStatus, setUpdateProjectModalStatus, deleteProjectModalStatus, setDeleteProjectModalStatus, selectedUser, setSelectedUser, updateUserModalStatus, setUpdateUserModalStatus, deleteUserModalStatus, setDeleteUserModalStatus, searchModalStatus, setSearchModalStatus }}>
       {children}
     </DataContext.Provider>
   )
