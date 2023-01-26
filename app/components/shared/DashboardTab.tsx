@@ -32,7 +32,7 @@ const VARIANTS = {
 export default function DashboardTab ({ user }: { user: UserInterface }): JSX.Element {
   const router = useRouter()
   const { setIsLogged } = useContext(DataContext)
-  const [showBox, setShowBox] = useState(false)
+  const [showDashboardBox, setShowDashboardBox] = useState(false)
 
   const handleLogout = async (): Promise<void> => {
     await api.get('/auth/logout')
@@ -45,7 +45,7 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
 
   return (
     <>
-      <div className='flex items-center cursor-pointer group gap-x-3' onClick={() => setShowBox(!showBox)}>
+      <div className='flex items-center cursor-pointer group gap-x-3' onClick={() => setShowDashboardBox(!showDashboardBox)}>
         <div className='transition ease-in-out text-dark-gray duration-400 dark:text-white group-hover:text-white dark:group-hover:text-primary font-secondaryFont'>Welcome, {user.username}!</div>
         <Image
           className='object-cover w-10 h-10 transition ease-in-out border-4 border-dark-gray duration-400 group-hover:scale-90 group-hover:border-white dark:group-hover:border-primary'
@@ -57,7 +57,7 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
       </div>
       <motion.div
         className='absolute right-0 top-[57px]'
-        animate={showBox ? 'open' : 'closed'}
+        animate={showDashboardBox ? 'open' : 'closed'}
         variants={VARIANTS}
         transition={{ ease: 'easeInOut', duration: 0.4 }}
         initial={false}
@@ -65,11 +65,11 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
         <nav className='relative flex items-center'>
           <ul className='flex flex-col items-end self-start transition ease-in-out bg-white p-7 text-dark-gray duration-400 gap-y-1 font-secondaryFont'>
             {PAGES.map((page) => (
-              <li className='transition ease-in-out duration-400 hover:-translate-x-1' key={page.link} onClick={() => setShowBox(!showBox)}><Link href={page.link}>{page.name}</Link></li>
+              <li className='transition ease-in-out duration-400 hover:-translate-x-1' key={page.link} onClick={() => setShowDashboardBox(!showDashboardBox)}><Link href={page.link}>{page.name}</Link></li>
             ))}
             <button className='transition ease-in-out duration-400 hover:-translate-x-1' onClick={() => { void handleLogout() }}>Log out</button>
           </ul>
-          <div className='absolute w-8 p-2 transition ease-in-out bg-white cursor-pointer top-50 -left-12 group duration-400 hover:bg-dark-gray' onClick={() => setShowBox(!showBox)}>
+          <div className='absolute w-8 p-2 transition ease-in-out bg-white cursor-pointer top-50 -left-12 group duration-400 hover:bg-dark-gray' onClick={() => setShowDashboardBox(!showDashboardBox)}>
             <XMarkIcon className='stroke-2 stroke-dark-gray group-hover:stroke-white' />
           </div>
         </nav>

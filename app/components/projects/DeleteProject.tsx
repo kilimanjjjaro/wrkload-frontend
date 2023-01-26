@@ -10,10 +10,12 @@ import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 
 import { DataContext } from 'context/DataContext'
+import { ModalsContext } from 'context/ModalsContext'
 import { PROJECTS_ENDPOINT as key } from 'constants/projects'
 
 export default function DeleteProject (): JSX.Element {
-  const { setDeleteProjectModalStatus, selectedProject } = useContext(DataContext)
+  const { selectedProject } = useContext(DataContext)
+  const { setDeleteDataModalStatus } = useContext(ModalsContext)
 
   const [project, setProject] = useState(selectedProject)
 
@@ -23,7 +25,7 @@ export default function DeleteProject (): JSX.Element {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setDeleteProjectModalStatus(false)
+    setDeleteDataModalStatus(false)
 
     try {
       await mutate(
@@ -38,7 +40,7 @@ export default function DeleteProject (): JSX.Element {
 
   const handleCloseModal = (event: React.FormEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    setDeleteProjectModalStatus(false)
+    setDeleteDataModalStatus(false)
   }
 
   return (

@@ -9,10 +9,12 @@ import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
 
 import { DataContext } from 'context/DataContext'
+import { ModalsContext } from 'context/ModalsContext'
 import { TASKS_ENDPOINT as key } from 'constants/tasks'
 
 export default function UpdateTask (): JSX.Element {
-  const { setUpdateTaskModalStatus, selectedTask } = useContext(DataContext)
+  const { selectedTask } = useContext(DataContext)
+  const { setUpdateDataModalStatus } = useContext(ModalsContext)
 
   const [task, setTask] = useState(selectedTask)
 
@@ -22,7 +24,7 @@ export default function UpdateTask (): JSX.Element {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setUpdateTaskModalStatus(false)
+    setUpdateDataModalStatus(false)
 
     try {
       await mutate(
@@ -37,7 +39,7 @@ export default function UpdateTask (): JSX.Element {
 
   const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    setUpdateTaskModalStatus(false)
+    setUpdateDataModalStatus(false)
   }
 
   return (

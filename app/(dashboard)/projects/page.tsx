@@ -18,7 +18,7 @@ export default function Projects (): JSX.Element {
   const shouldRenderNotFoundSign = !isLoading && (data === undefined || data?.length === 0)
 
   return (
-    <div className='px-[5vw] w-full py-40 pb-36 bg-light-gray'>
+    <>
       <Header shouldRenderOptions={shouldRenderNotFoundSign} />
       <main>
         {shouldRenderSkeleton && <Loading />}
@@ -26,6 +26,6 @@ export default function Projects (): JSX.Element {
         {shouldRenderNotFoundSign && <NotFound />}
       </main>
       <Modals />
-    </div>
+    </>
   )
 }

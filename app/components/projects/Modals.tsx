@@ -5,22 +5,22 @@ import UpdateProject from 'app/components/projects/UpdateProject'
 import DeleteProject from 'app/components/projects/DeleteProject'
 import SearchForm from 'app/components/shared/SearchForm'
 
-import { DataContext } from 'context/DataContext'
+import { ModalsContext } from 'context/ModalsContext'
 
 export default function Modals (): JSX.Element {
-  const { addProjectModalStatus, setAddProjectModalStatus, updateProjectModalStatus, setUpdateProjectModalStatus, deleteProjectModalStatus, setDeleteProjectModalStatus, searchModalStatus, setSearchModalStatus } = useContext(DataContext)
+  const { addDataModalStatus, setAddDataModalStatus, updateDataModalStatus, setUpdateDataModalStatus, deleteDataModalStatus, setDeleteDataModalStatus, searchModalStatus, setSearchModalStatus } = useContext(ModalsContext)
 
   return (
     <>
-      <Modal modalStatus={updateProjectModalStatus} setModalStatus={setUpdateProjectModalStatus}>
+      <Modal modalStatus={updateDataModalStatus} setModalStatus={setUpdateDataModalStatus}>
         <UpdateProject />
       </Modal>
 
-      <Modal modalStatus={deleteProjectModalStatus} setModalStatus={setDeleteProjectModalStatus}>
+      <Modal modalStatus={deleteDataModalStatus} setModalStatus={setDeleteDataModalStatus}>
         <DeleteProject />
       </Modal>
 
-      <Modal modalStatus={addProjectModalStatus} setModalStatus={setAddProjectModalStatus}>
+      <Modal modalStatus={addDataModalStatus} setModalStatus={setAddDataModalStatus}>
         <AddProject />
       </Modal>
 

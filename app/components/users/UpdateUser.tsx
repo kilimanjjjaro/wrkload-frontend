@@ -8,10 +8,12 @@ import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 
 import { DataContext } from 'context/DataContext'
+import { ModalsContext } from 'context/ModalsContext'
 import { USERS_ENDPOINT as key } from 'constants/users'
 
 export default function UpdateUser (): JSX.Element {
-  const { setUpdateUserModalStatus, selectedUser } = useContext(DataContext)
+  const { selectedUser } = useContext(DataContext)
+  const { setUpdateDataModalStatus } = useContext(ModalsContext)
 
   const [user, setUser] = useState(selectedUser)
 
@@ -21,7 +23,7 @@ export default function UpdateUser (): JSX.Element {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setUpdateUserModalStatus(false)
+    setUpdateDataModalStatus(false)
 
     try {
       await mutate(
@@ -37,7 +39,7 @@ export default function UpdateUser (): JSX.Element {
 
   const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    setUpdateUserModalStatus(false)
+    setUpdateDataModalStatus(false)
   }
 
   return (

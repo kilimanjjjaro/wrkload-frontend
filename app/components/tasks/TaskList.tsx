@@ -6,24 +6,26 @@ import Pagination from 'app/components/shared/Pagination'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
 import Paragraph from 'app/components/shared/Paragraph'
 
-import type { TaskInterface } from 'interfaces/tasks/Task'
 import { DataContext } from 'context/DataContext'
+import { ModalsContext } from 'context/ModalsContext'
+import type { TaskInterface } from 'interfaces/tasks/Task'
 
 interface Props {
   tasks: TaskInterface[]
 }
 
 export default function TaskList ({ tasks }: Props): JSX.Element {
-  const { setSelectedTask, setUpdateTaskModalStatus, setDeleteTaskModalStatus } = useContext(DataContext)
+  const { setSelectedTask } = useContext(DataContext)
+  const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
 
   const handleUpdateTaskClick = (task: TaskInterface): void => {
     setSelectedTask(task)
-    setUpdateTaskModalStatus(true)
+    setUpdateDataModalStatus(true)
   }
 
   const handleDeleteTaskClick = (task: TaskInterface): void => {
     setSelectedTask(task)
-    setDeleteTaskModalStatus(true)
+    setDeleteDataModalStatus(true)
   }
 
   return (

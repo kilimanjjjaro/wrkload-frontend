@@ -4,24 +4,26 @@ import GlobalStats from 'app/components/shared/stats/GlobalStats'
 import Pagination from 'app/components/shared/Pagination'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
 
-import type { ProjectInterface } from 'interfaces/projects/Project'
 import { DataContext } from 'context/DataContext'
+import { ModalsContext } from 'context/ModalsContext'
+import type { ProjectInterface } from 'interfaces/projects/Project'
 
 interface Props {
   projects: ProjectInterface[]
 }
 
 export default function ProjectList ({ projects }: Props): JSX.Element {
-  const { setSelectedProject, setUpdateProjectModalStatus, setDeleteProjectModalStatus } = useContext(DataContext)
+  const { setSelectedProject } = useContext(DataContext)
+  const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
 
   const handleUpdateProjectClick = (project: ProjectInterface): void => {
     setSelectedProject(project)
-    setUpdateProjectModalStatus(true)
+    setUpdateDataModalStatus(true)
   }
 
   const handleDeleteProjectClick = (project: ProjectInterface): void => {
     setSelectedProject(project)
-    setDeleteProjectModalStatus(true)
+    setDeleteDataModalStatus(true)
   }
 
   return (

@@ -8,10 +8,12 @@ import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 
 import { DataContext } from 'context/DataContext'
+import { ModalsContext } from 'context/ModalsContext'
 import { USERS_ENDPOINT as key } from 'constants/users'
 
 export default function DeleteUser (): JSX.Element {
-  const { setDeleteUserModalStatus, selectedUser } = useContext(DataContext)
+  const { selectedUser } = useContext(DataContext)
+  const { setDeleteDataModalStatus } = useContext(ModalsContext)
 
   const [user, setUser] = useState(selectedUser)
 
@@ -21,7 +23,7 @@ export default function DeleteUser (): JSX.Element {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setDeleteUserModalStatus(false)
+    setDeleteDataModalStatus(false)
 
     try {
       await mutate(
@@ -36,7 +38,7 @@ export default function DeleteUser (): JSX.Element {
 
   const handleCloseModal = (event: React.FormEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    setDeleteUserModalStatus(false)
+    setDeleteDataModalStatus(false)
   }
 
   return (

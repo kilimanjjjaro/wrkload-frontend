@@ -6,24 +6,26 @@ import GlobalStats from 'app/components/shared/stats/GlobalStats'
 import Pagination from 'app/components/shared/Pagination'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
 
-import type { UserInterface } from 'interfaces/users/User'
 import { DataContext } from 'context/DataContext'
+import { ModalsContext } from 'context/ModalsContext'
+import type { UserInterface } from 'interfaces/users/User'
 
 interface Props {
   users: UserInterface[]
 }
 
 export default function UserList ({ users }: Props): JSX.Element {
-  const { setSelectedUser, setUpdateUserModalStatus, setDeleteUserModalStatus } = useContext(DataContext)
+  const { setSelectedUser } = useContext(DataContext)
+  const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
 
   const handleUpdateUserClick = (user: UserInterface): void => {
     setSelectedUser(user)
-    setUpdateUserModalStatus(true)
+    setUpdateDataModalStatus(true)
   }
 
   const handleDeleteUserClick = (user: UserInterface): void => {
     setSelectedUser(user)
-    setDeleteUserModalStatus(true)
+    setDeleteDataModalStatus(true)
   }
 
   return (

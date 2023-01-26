@@ -4,18 +4,18 @@ import UpdateUser from 'app/components/users/UpdateUser'
 import DeleteUser from 'app/components/users/DeleteUser'
 import SearchForm from 'app/components/shared/SearchForm'
 
-import { DataContext } from 'context/DataContext'
+import { ModalsContext } from 'context/ModalsContext'
 
 export default function Modals (): JSX.Element {
-  const { updateUserModalStatus, setUpdateUserModalStatus, deleteUserModalStatus, setDeleteUserModalStatus, searchModalStatus, setSearchModalStatus } = useContext(DataContext)
+  const { updateDataModalStatus, setUpdateDataModalStatus, deleteDataModalStatus, setDeleteDataModalStatus, searchModalStatus, setSearchModalStatus } = useContext(ModalsContext)
 
   return (
     <>
-      <Modal modalStatus={updateUserModalStatus} setModalStatus={setUpdateUserModalStatus}>
+      <Modal modalStatus={updateDataModalStatus} setModalStatus={setUpdateDataModalStatus}>
         <UpdateUser />
       </Modal>
 
-      <Modal modalStatus={deleteUserModalStatus} setModalStatus={setDeleteUserModalStatus}>
+      <Modal modalStatus={deleteDataModalStatus} setModalStatus={setDeleteDataModalStatus}>
         <DeleteUser />
       </Modal>
 

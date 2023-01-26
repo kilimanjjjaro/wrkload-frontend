@@ -10,10 +10,12 @@ import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 
 import { DataContext } from 'context/DataContext'
+import { ModalsContext } from 'context/ModalsContext'
 import { PROJECTS_ENDPOINT as key } from 'constants/projects'
 
 export default function UpdateProject (): JSX.Element {
-  const { setUpdateProjectModalStatus, selectedProject } = useContext(DataContext)
+  const { selectedProject } = useContext(DataContext)
+  const { setUpdateDataModalStatus } = useContext(ModalsContext)
 
   const [project, setProject] = useState(selectedProject)
 
@@ -23,7 +25,7 @@ export default function UpdateProject (): JSX.Element {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setUpdateProjectModalStatus(false)
+    setUpdateDataModalStatus(false)
 
     try {
       await mutate(
@@ -38,7 +40,7 @@ export default function UpdateProject (): JSX.Element {
 
   const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    setUpdateProjectModalStatus(false)
+    setUpdateDataModalStatus(false)
   }
 
   return (

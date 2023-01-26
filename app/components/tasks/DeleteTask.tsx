@@ -8,10 +8,12 @@ import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 
 import { DataContext } from 'context/DataContext'
+import { ModalsContext } from 'context/ModalsContext'
 import { TASKS_ENDPOINT as key } from 'constants/tasks'
 
 export default function DeleteTask (): JSX.Element {
-  const { setDeleteTaskModalStatus, selectedTask } = useContext(DataContext)
+  const { selectedTask } = useContext(DataContext)
+  const { setDeleteDataModalStatus } = useContext(ModalsContext)
 
   const [task, setTask] = useState(selectedTask)
 
@@ -21,7 +23,7 @@ export default function DeleteTask (): JSX.Element {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setDeleteTaskModalStatus(false)
+    setDeleteDataModalStatus(false)
 
     try {
       await mutate(
@@ -36,7 +38,7 @@ export default function DeleteTask (): JSX.Element {
 
   const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    setDeleteTaskModalStatus(false)
+    setDeleteDataModalStatus(false)
   }
 
   return (

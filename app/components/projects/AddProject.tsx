@@ -9,11 +9,11 @@ import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 
-import { DataContext } from 'context/DataContext'
+import { ModalsContext } from 'context/ModalsContext'
 import { INITIAL_PROJECT_STATE, PROJECTS_ENDPOINT as key } from 'constants/projects'
 
 export default function AddProject (): JSX.Element {
-  const { setAddProjectModalStatus } = useContext(DataContext)
+  const { setAddDataModalStatus } = useContext(ModalsContext)
 
   const [project, setProject] = useState(INITIAL_PROJECT_STATE)
 
@@ -23,7 +23,7 @@ export default function AddProject (): JSX.Element {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setAddProjectModalStatus(false)
+    setAddDataModalStatus(false)
 
     try {
       await mutate(
@@ -38,7 +38,7 @@ export default function AddProject (): JSX.Element {
 
   const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    setAddProjectModalStatus(false)
+    setAddDataModalStatus(false)
   }
 
   return (

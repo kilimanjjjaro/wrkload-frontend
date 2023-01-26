@@ -10,11 +10,11 @@ import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
 
-import { DataContext } from 'context/DataContext'
+import { ModalsContext } from 'context/ModalsContext'
 import { INITIAL_TASK_STATE, TASKS_ENDPOINT as key } from 'constants/tasks'
 
 export default function AddTask (): JSX.Element {
-  const { setAddTaskModalStatus } = useContext(DataContext)
+  const { setAddDataModalStatus } = useContext(ModalsContext)
 
   const [task, setTask] = useState(INITIAL_TASK_STATE)
 
@@ -24,7 +24,7 @@ export default function AddTask (): JSX.Element {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setAddTaskModalStatus(false)
+    setAddDataModalStatus(false)
 
     try {
       await mutate(
@@ -39,7 +39,7 @@ export default function AddTask (): JSX.Element {
 
   const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    setAddTaskModalStatus(false)
+    setAddDataModalStatus(false)
   }
 
   return (
