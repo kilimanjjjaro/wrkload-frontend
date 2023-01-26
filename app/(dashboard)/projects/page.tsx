@@ -1,48 +1,31 @@
 'use client'
 
-import { useState } from 'react'
 import useSWR from 'swr'
+import Header from 'app/components/projects/Header'
+import Loading from 'app/components/projects/Loading'
+import ProjectList from 'app/components/projects/ProjectList'
+import NotFound from 'app/components/projects/NotFound'
+import Modals from 'app/components/projects/Modals'
 import { getProjects } from 'services/projects/getProjects'
-import MasonryGrid from 'app/components/shared/MasonryGrid'
-import Skeleton from 'app/components/shared/Skeleton'
-import Modal from 'app/components/shared/Modal'
-import Project from 'app/(dashboard)/projects/components/Project'
-import UpdateProject from 'app/(dashboard)/projects/components/UpdateProject'
-import DeleteProject from 'app/(dashboard)/projects/components/DeleteProject'
 
-import type { ProjectInterface } from 'interfaces/projects/Project'
-import { INITIAL_PROJECT_STATE, PROJECTS_ENDPOINT as key } from 'constants/projects'
-import { SKELETON } from 'constants/components'
+import { PROJECTS_ENDPOINT as key } from 'constants/projects'
 
 export default function Projects (): JSX.Element {
-  const [updateModalStatus, setUpdateModalStatus] = useState(false)
-  const [deleteModalStatus, setDeleteModalStatus] = useState(false)
-  const [selectedProject, setSelectedProject] = useState<ProjectInterface>(INITIAL_PROJECT_STATE)
+  const { data, isLoading } = useSWR(key, getProjects, { onSuccess: data => data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) })
 
-  const { data: projects, isLoading, error } = useSWR(key, getProjects, { onSuccess: data => data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) })
-
-  if (error?.response.data.code === 'projects/projects-not-found') return <div>Projects not found</div>
-
-  console.log(error)
+  const shouldRenderProjects = data !== undefined && data.length >= 1 && !isLoading
+  const shouldRenderSkeleton = isLoading
+  const shouldRenderNotFoundSign = !isLoading && (data === undefined || data?.length === 0)
 
   return (
-    <>
-      <MasonryGrid>
-        {isLoading && SKELETON.map((_, index) => (
-          <Skeleton type='project' key={index} />
-        ))}
-        {error === undefined && projects?.map((project) => (
-          <Project key={project._id} project={project} setUpdateModalStatus={setUpdateModalStatus} setDeleteModalStatus={setDeleteModalStatus} setSelectedProject={setSelectedProject} />
-        ))}
-      </MasonryGrid>
-
-      <Modal modalStatus={updateModalStatus} setModalStatus={setUpdateModalStatus}>
-        <UpdateProject data={selectedProject} setModalStatus={setUpdateModalStatus} />
-      </Modal>
-
-      <Modal modalStatus={deleteModalStatus} setModalStatus={setDeleteModalStatus}>
-        <DeleteProject data={selectedProject} setModalStatus={setDeleteModalStatus} />
-      </Modal>
-    </>
+    <div className='px-[5vw] w-full py-40 pb-36 bg-light-gray'>
+      <Header shouldRenderOptions={shouldRenderNotFoundSign} />
+      <main>
+        {shouldRenderSkeleton && <Loading />}
+        {shouldRenderProjects && <ProjectList projects={data} />}
+        {shouldRenderNotFoundSign && <NotFound />}
+      </main>
+      <Modals />
+    </div>
   )
 }

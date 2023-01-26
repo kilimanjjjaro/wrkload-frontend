@@ -1,5 +1,6 @@
+'use client'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { mutate } from 'swr'
 import { addProject } from 'services/projects/addProject'
 import { addProjectOptions } from 'utils/swrProjectsOptions'
@@ -8,13 +9,12 @@ import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 
+import { DataContext } from 'context/DataContext'
 import { INITIAL_PROJECT_STATE, PROJECTS_ENDPOINT as key } from 'constants/projects'
 
-interface Props {
-  setModalStatus: (value: boolean) => void
-}
+export default function AddProject (): JSX.Element {
+  const { setAddProjectModalStatus } = useContext(DataContext)
 
-export default function AddProject ({ setModalStatus }: Props): JSX.Element {
   const [project, setProject] = useState(INITIAL_PROJECT_STATE)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -23,7 +23,7 @@ export default function AddProject ({ setModalStatus }: Props): JSX.Element {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setModalStatus(false)
+    setAddProjectModalStatus(false)
 
     try {
       await mutate(
@@ -38,7 +38,7 @@ export default function AddProject ({ setModalStatus }: Props): JSX.Element {
 
   const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    setModalStatus(false)
+    setAddProjectModalStatus(false)
   }
 
   return (

@@ -1,12 +1,12 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { PageTitle as TasksPageTitle } from 'app/(dashboard)/tasks/components/PageTitle'
-import { Options as TasksOptions } from 'app/(dashboard)/tasks/components/Options'
-import { PageTitle as ProjectsPageTitle } from 'app/(dashboard)/projects/components/PageTitle'
-import { Options as ProjectsOptions } from 'app/(dashboard)/projects/components/Options'
-import { PageTitle as UsersPageTitle } from 'app/(dashboard)/users/components/PageTitle'
-import { Options as UsersOptions } from 'app/(dashboard)/users/components/Options'
+import { PageTitle as TasksPageTitle } from 'app/components/tasks/PageTitle'
+import { Options as TasksOptions } from 'app/components/tasks/Options'
+import { PageTitle as ProjectsPageTitle } from 'app/components/projects/PageTitle'
+import { Options as ProjectsOptions } from 'app/components/projects/Options'
+import { PageTitle as UsersPageTitle } from 'app/components/users/PageTitle'
+import { Options as UsersOptions } from 'app/components/users/Options'
 
 export default function Header (): JSX.Element {
   const pathName = usePathname()
@@ -17,12 +17,6 @@ export default function Header (): JSX.Element {
         <header className='flex justify-between text-white'>
           <TasksPageTitle />
           <TasksOptions />
-        </header>}
-
-      {pathName === '/projects' &&
-        <header className='flex justify-between text-white'>
-          <ProjectsPageTitle />
-          <ProjectsOptions />
         </header>}
 
       {pathName === '/users' &&

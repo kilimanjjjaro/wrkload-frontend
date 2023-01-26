@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 
 export default function useDelayUnmount (dependency: boolean, delayTime: number): boolean {

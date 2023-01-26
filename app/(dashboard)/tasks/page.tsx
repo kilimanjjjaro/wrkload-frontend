@@ -1,46 +1,31 @@
 'use client'
 
-import { useState } from 'react'
 import useSWR from 'swr'
+import Header from 'app/components/tasks/Header'
+import Loading from 'app/components/tasks/Loading'
+import TaskList from 'app/components/tasks/TaskList'
+import NotFound from 'app/components/tasks/NotFound'
+import Modals from 'app/components/tasks/Modals'
 import { getTasks } from 'services/tasks/getTasks'
-import MasonryGrid from 'app/components/shared/MasonryGrid'
-import Skeleton from 'app/components/shared/Skeleton'
-import Modal from 'app/components/shared/Modal'
-import Task from 'app/(dashboard)/tasks/components/Task'
-import UpdateTask from 'app/(dashboard)/tasks/components/UpdateTask'
-import DeleteTask from 'app/(dashboard)/tasks/components/DeleteTask'
 
-import type { TaskInterface } from 'interfaces/tasks/Task'
-import { INITIAL_TASK_STATE, TASKS_ENDPOINT as key } from 'constants/tasks'
-import { SKELETON } from 'constants/components'
+import { TASKS_ENDPOINT as key } from 'constants/tasks'
 
 export default function Tasks (): JSX.Element {
-  const [updateModalStatus, setUpdateModalStatus] = useState(false)
-  const [deleteModalStatus, setDeleteModalStatus] = useState(false)
-  const [selectedTask, setSelectedTask] = useState<TaskInterface>(INITIAL_TASK_STATE)
+  const { data, isLoading } = useSWR(key, getTasks, { onSuccess: data => data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) })
 
-  const { data: tasks, isLoading, error } = useSWR(key, getTasks, { onSuccess: data => data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) })
-
-  if (error?.response.data.code === 'tasks/tasks-not-found') return <div>Tasks not found</div>
+  const shouldRenderTasks = data !== undefined && data.length >= 1 && !isLoading
+  const shouldRenderSkeleton = isLoading
+  const shouldRenderNotFoundSign = !isLoading && (data === undefined || data?.length === 0)
 
   return (
-    <>
-      <MasonryGrid>
-        {isLoading && SKELETON.map((_, index) => (
-          <Skeleton type='task' key={index} />
-        ))}
-        {error === undefined && tasks?.map((task) => (
-          <Task key={task._id} task={task} setUpdateModalStatus={setUpdateModalStatus} setDeleteModalStatus={setDeleteModalStatus} setSelectedTask={setSelectedTask} />
-        ))}
-      </MasonryGrid>
-
-      <Modal modalStatus={updateModalStatus} setModalStatus={setUpdateModalStatus}>
-        <UpdateTask data={selectedTask} setModalStatus={setUpdateModalStatus} />
-      </Modal>
-
-      <Modal modalStatus={deleteModalStatus} setModalStatus={setDeleteModalStatus}>
-        <DeleteTask data={selectedTask} setModalStatus={setDeleteModalStatus} />
-      </Modal>
-    </>
+    <div className='px-[5vw] w-full py-40 pb-36 bg-light-gray'>
+      <Header shouldRenderOptions={shouldRenderNotFoundSign} />
+      <main>
+        {shouldRenderSkeleton && <Loading />}
+        {shouldRenderTasks && <TaskList tasks={data} />}
+        {shouldRenderNotFoundSign && <NotFound />}
+      </main>
+      <Modals />
+    </div>
   )
 }

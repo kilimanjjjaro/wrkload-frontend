@@ -1,5 +1,6 @@
+'use client'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { mutate } from 'swr'
 import { addTask } from 'services/tasks/addTask'
 import { addTaskOptions } from 'utils/swrTasksOptions'
@@ -9,13 +10,12 @@ import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
 
+import { DataContext } from 'context/DataContext'
 import { INITIAL_TASK_STATE, TASKS_ENDPOINT as key } from 'constants/tasks'
 
-interface Props {
-  setModalStatus: (value: boolean) => void
-}
+export default function AddTask (): JSX.Element {
+  const { setAddTaskModalStatus } = useContext(DataContext)
 
-export default function AddTask ({ setModalStatus }: Props): JSX.Element {
   const [task, setTask] = useState(INITIAL_TASK_STATE)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
@@ -24,7 +24,7 @@ export default function AddTask ({ setModalStatus }: Props): JSX.Element {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setModalStatus(false)
+    setAddTaskModalStatus(false)
 
     try {
       await mutate(
@@ -39,7 +39,7 @@ export default function AddTask ({ setModalStatus }: Props): JSX.Element {
 
   const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    setModalStatus(false)
+    setAddTaskModalStatus(false)
   }
 
   return (

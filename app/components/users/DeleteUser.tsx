@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { mutate } from 'swr'
 import { deleteUser } from 'services/users/deleteUser'
 import { deleteUserOptions } from 'utils/swrUsersOptions'
@@ -7,16 +7,13 @@ import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 
-import type { UserInterface } from 'interfaces/users/User'
+import { DataContext } from 'context/DataContext'
 import { USERS_ENDPOINT as key } from 'constants/users'
 
-interface Props {
-  data: UserInterface
-  setModalStatus: (value: boolean) => void
-}
+export default function DeleteUser (): JSX.Element {
+  const { setDeleteUserModalStatus, selectedUser } = useContext(DataContext)
 
-export default function DeleteUser ({ data, setModalStatus }: Props): JSX.Element {
-  const [user, setUser] = useState(data)
+  const [user, setUser] = useState(selectedUser)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setUser({ ...user, [event.target.name]: event.target.value })
@@ -24,7 +21,7 @@ export default function DeleteUser ({ data, setModalStatus }: Props): JSX.Elemen
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setModalStatus(false)
+    setDeleteUserModalStatus(false)
 
     try {
       await mutate(
@@ -39,7 +36,7 @@ export default function DeleteUser ({ data, setModalStatus }: Props): JSX.Elemen
 
   const handleCloseModal = (event: React.FormEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    setModalStatus(false)
+    setDeleteUserModalStatus(false)
   }
 
   return (

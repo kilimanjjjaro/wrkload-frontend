@@ -4,8 +4,9 @@ import Button from 'app/components/shared/Button'
 import Modal from 'app/components/shared/Modal'
 import SearchForm from 'app/components/shared/SearchForm'
 
-export const Options = (): JSX.Element => {
+export default function Options (): JSX.Element {
   const [searchModalStatus, setSearchModalStatus] = useState(false)
+
   return (
     <>
       <div className='flex items-start gap-x-5'>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { mutate } from 'swr'
 import { deleteTask } from 'services/tasks/deleteTask'
 import { deleteTaskOptions } from 'utils/swrTasksOptions'
@@ -7,16 +7,13 @@ import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 
-import type { TaskInterface } from 'interfaces/tasks/Task'
+import { DataContext } from 'context/DataContext'
 import { TASKS_ENDPOINT as key } from 'constants/tasks'
 
-interface Props {
-  data: TaskInterface
-  setModalStatus: (value: boolean) => void
-}
+export default function DeleteTask (): JSX.Element {
+  const { setDeleteTaskModalStatus, selectedTask } = useContext(DataContext)
 
-export default function DeleteTask ({ data, setModalStatus }: Props): JSX.Element {
-  const [task, setTask] = useState(data)
+  const [task, setTask] = useState(selectedTask)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setTask({ ...task, [event.target.name]: event.target.value })
@@ -24,7 +21,7 @@ export default function DeleteTask ({ data, setModalStatus }: Props): JSX.Elemen
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setModalStatus(false)
+    setDeleteTaskModalStatus(false)
 
     try {
       await mutate(
@@ -39,7 +36,7 @@ export default function DeleteTask ({ data, setModalStatus }: Props): JSX.Elemen
 
   const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    setModalStatus(false)
+    setDeleteTaskModalStatus(false)
   }
 
   return (

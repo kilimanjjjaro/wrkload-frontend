@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { mutate } from 'swr'
 import { updateProject } from 'services/projects/updateProject'
 import { updateProjectOptions } from 'utils/swrProjectsOptions'
@@ -9,16 +9,13 @@ import Button from 'app/components/shared/Button'
 import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 
-import type { ProjectInterface } from 'interfaces/projects/Project'
+import { DataContext } from 'context/DataContext'
 import { PROJECTS_ENDPOINT as key } from 'constants/projects'
 
-interface Props {
-  setModalStatus: (value: boolean) => void
-  data: ProjectInterface
-}
+export default function UpdateProject (): JSX.Element {
+  const { setUpdateProjectModalStatus, selectedProject } = useContext(DataContext)
 
-export default function UpdateProject ({ setModalStatus, data }: Props): JSX.Element {
-  const [project, setProject] = useState(data)
+  const [project, setProject] = useState(selectedProject)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setProject({ ...project, [event.target.name]: event.target.value })
@@ -26,7 +23,7 @@ export default function UpdateProject ({ setModalStatus, data }: Props): JSX.Ele
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    setModalStatus(false)
+    setUpdateProjectModalStatus(false)
 
     try {
       await mutate(
@@ -41,7 +38,7 @@ export default function UpdateProject ({ setModalStatus, data }: Props): JSX.Ele
 
   const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    setModalStatus(false)
+    setUpdateProjectModalStatus(false)
   }
 
   return (
