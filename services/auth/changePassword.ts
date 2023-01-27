@@ -14,5 +14,5 @@ export default async function changePassword ({ email, oldPassword, newPassword 
     headers: { Authorization: 'Bearer' + ` ${accessToken as string}` }
   }
   const response = await api.patch('/auth/change-password', { email, oldPassword, newPassword }, config)
-  return response
+  return response.data
 }

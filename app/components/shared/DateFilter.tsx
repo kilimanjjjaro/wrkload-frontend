@@ -1,4 +1,4 @@
-import { SetStateAction, Dispatch } from 'react'
+import { Dispatch } from 'react'
 import { motion } from 'framer-motion'
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'app/components/shared/Button'
@@ -17,7 +17,7 @@ const VARIANTS = {
 
 interface Props {
   dependency: boolean
-  setDependency: Dispatch<SetStateAction<boolean>>
+  setDependency: Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function DateFilter ({ dependency, setDependency }: Props): JSX.Element {

@@ -1,10 +1,8 @@
-import { UserInterface } from 'interfaces/users/User'
-
 export const DEFAULT_AVATAR = 'http://localhost:3000/images/default-avatar.svg'
 
 export const DEFAULT_ROLE = 2
 
-export const INITIAL_USER_STATE: UserInterface = {
+export const INITIAL_USER_STATE = {
   _id: '',
   username: '',
   email: '',

@@ -2,15 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "~swiper/css";
+@import "~swiper/css/pagination";
+
 textarea::-webkit-scrollbar {
   width: .5rem;
   cursor: pointer;
 }
 
-textarea::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.4);
-}
-
 textarea::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.swiper-horizontal>.swiper-pagination-bullets {
+  bottom: 0;
+}
+
+.swiper-pagination {
+  display: flex;
+}
+
+.swiper-pagination-bullet {
+  width: 50%;
+  height: 5px;
+  border-radius: 0;
+  background: #000;
+  opacity: .2
+}
+
+.swiper-pagination-bullet-active {
+  background: #fff;
+  opacity: 1;
+}
+
+.swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 0;
 }

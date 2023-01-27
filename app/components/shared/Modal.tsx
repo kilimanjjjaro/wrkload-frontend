@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch } from 'react'
 import { motion } from 'framer-motion'
 import useDelayUnmount from 'hooks/useDelayUnmount'
 
@@ -7,7 +7,7 @@ import { BACKGROUND_VARIANTS, CONTENT_VARIANTS } from 'constants/framerMotion'
 interface Props {
   children: React.ReactNode
   modalStatus: boolean
-  setModalStatus: Dispatch<SetStateAction<boolean>>
+  setModalStatus: Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function Modal ({ children, modalStatus, setModalStatus }: Props): JSX.Element {

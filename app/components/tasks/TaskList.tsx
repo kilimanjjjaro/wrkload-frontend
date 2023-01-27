@@ -1,7 +1,7 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import dayjs from 'dayjs'
 import { CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
-import GlobalStats from 'app/components/shared/stats/GlobalStats'
+import Stats from 'app/components/tasks/Stats'
 import Pagination from 'app/components/shared/Pagination'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
 import Paragraph from 'app/components/shared/Paragraph'
@@ -17,6 +17,7 @@ interface Props {
 export default function TaskList ({ tasks }: Props): JSX.Element {
   const { setSelectedTask } = useContext(DataContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
+  const [shoundRenderStats, setShoundRenderStats] = useState(true)
 
   const handleUpdateTaskClick = (task: TaskInterface): void => {
     setSelectedTask(task)
@@ -31,6 +32,7 @@ export default function TaskList ({ tasks }: Props): JSX.Element {
   return (
     <>
       <MasonryGrid>
+        {shoundRenderStats && <Stats shouldRender={setShoundRenderStats} />}
         {tasks.map((task) => (
           <div key={task._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'>
             <h3 className='mb-5 text-4xl font-bold break-word font-primaryFont'>{task.title}</h3>
@@ -48,7 +50,6 @@ export default function TaskList ({ tasks }: Props): JSX.Element {
         ))}
       </MasonryGrid>
       <Pagination />
-      <GlobalStats />
     </>
   )
 }

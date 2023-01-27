@@ -1,19 +1,19 @@
 'use client'
 
-import { createContext, useState, Dispatch, SetStateAction } from 'react'
+import { createContext, useState, Dispatch } from 'react'
 
 import type { ChildrenInterface } from 'interfaces/components'
 
 interface ModalsContextValues {
   addDataModalStatus: boolean
-  setAddDataModalStatus: Dispatch<SetStateAction<boolean>>
+  setAddDataModalStatus: Dispatch<React.SetStateAction<boolean>>
   updateDataModalStatus: boolean
-  setUpdateDataModalStatus: Dispatch<SetStateAction<boolean>>
+  setUpdateDataModalStatus: Dispatch<React.SetStateAction<boolean>>
   deleteDataModalStatus: boolean
-  setDeleteDataModalStatus: Dispatch<SetStateAction<boolean>>
+  setDeleteDataModalStatus: Dispatch<React.SetStateAction<boolean>>
 
   searchModalStatus: boolean
-  setSearchModalStatus: Dispatch<SetStateAction<boolean>>
+  setSearchModalStatus: Dispatch<React.SetStateAction<boolean>>
 };
 
 const DEFAULT_MODALS_CONTEXT_VALUES: ModalsContextValues = {

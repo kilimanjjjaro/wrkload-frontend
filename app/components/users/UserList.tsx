@@ -2,7 +2,6 @@ import { useContext } from 'react'
 import Image from 'next/image'
 import dayjs from 'dayjs'
 import { EnvelopeIcon, PencilSquareIcon, TrashIcon, UserIcon } from '@heroicons/react/24/outline'
-import GlobalStats from 'app/components/shared/stats/GlobalStats'
 import Pagination from 'app/components/shared/Pagination'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
 
@@ -68,7 +67,6 @@ export default function UserList ({ users }: Props): JSX.Element {
         ))}
       </MasonryGrid>
       <Pagination />
-      <GlobalStats />
     </div>
   )
 }

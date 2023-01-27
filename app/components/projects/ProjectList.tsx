@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { InboxStackIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
-import GlobalStats from 'app/components/shared/stats/GlobalStats'
+import Stats from 'app/components/projects/Stats'
 import Pagination from 'app/components/shared/Pagination'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
 
@@ -29,6 +29,7 @@ export default function ProjectList ({ projects }: Props): JSX.Element {
   return (
     <>
       <MasonryGrid>
+        <Stats />
         {projects.map((project) => (
           <div key={project._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'>
             <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'>{project.name}</h3>
@@ -43,7 +44,6 @@ export default function ProjectList ({ projects }: Props): JSX.Element {
         ))}
       </MasonryGrid>
       <Pagination />
-      <GlobalStats />
     </>
   )
 }

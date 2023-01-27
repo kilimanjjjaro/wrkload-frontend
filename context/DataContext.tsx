@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useEffect, useState, Dispatch, SetStateAction } from 'react'
+import { createContext, useEffect, useState, Dispatch } from 'react'
 import { getCookie } from 'cookies-next'
 
 import type { ChildrenInterface } from 'interfaces/components'
@@ -13,14 +13,14 @@ import { INITIAL_USER_STATE } from 'constants/users'
 
 interface DataContextValues {
   isLogged: boolean
-  setIsLogged: Dispatch<SetStateAction<boolean>>
+  setIsLogged: Dispatch<React.SetStateAction<boolean>>
 
   selectedTask: TaskInterface
-  setSelectedTask: Dispatch<SetStateAction<TaskInterface>>
+  setSelectedTask: Dispatch<React.SetStateAction<TaskInterface>>
   selectedProject: ProjectInterface
-  setSelectedProject: Dispatch<SetStateAction<ProjectInterface>>
+  setSelectedProject: Dispatch<React.SetStateAction<ProjectInterface>>
   selectedUser: UserInterface
-  setSelectedUser: Dispatch<SetStateAction<UserInterface>>
+  setSelectedUser: Dispatch<React.SetStateAction<UserInterface>>
 };
 
 const DEFAULT_DATA_CONTEXT_VALUE: DataContextValues = {
@@ -48,6 +48,8 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
   useEffect(() => {
     if (accessToken !== undefined) {
       setIsLogged(true)
+    } else {
+      setIsLogged(false)
     }
   }, [accessToken])
 

@@ -19,8 +19,6 @@ export default async function register ({ username, email, password }: Credentia
     role: DEFAULT_ROLE
   }
   const response = await api.post('/auth/register', user)
-  const { accessToken, expiresIn } = response.data
-  setCookie('accessToken', accessToken, { maxAge: expiresIn })
-  sessionStorage.setItem('user', JSON.stringify(response.data.user))
-  return response
+  setCookie('_id', response.data._id)
+  return response.data
 }

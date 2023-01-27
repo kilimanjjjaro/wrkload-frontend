@@ -9,6 +9,5 @@ interface CredentialsInterface {
 
 export default async function resetPassword ({ newPassword, uid, resetPasswordToken }: CredentialsInterface): Promise<AxiosResponse> {
   const response = await api.patch(`/auth/reset-password/${uid}/${resetPasswordToken}`, { newPassword })
-  console.log(response)
-  return response
+  return response.data
 }

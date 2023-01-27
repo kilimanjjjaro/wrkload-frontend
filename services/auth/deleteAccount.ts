@@ -16,5 +16,5 @@ export default async function deleteAccount ({ email, password }: CredentialsInt
     headers: { Authorization: `Bearer ${accessToken as string}` }
   }
   const response = await api.delete(`/users/${user._id as string}`, config)
-  return response
+  return response.data
 }
