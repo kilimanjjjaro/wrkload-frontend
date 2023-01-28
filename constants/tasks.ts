@@ -8,7 +8,6 @@ export const INITIAL_TASK_STATE: TaskInterface = {
   createdAt: '',
   deliveredAt: '',
   timing: '',
-  month: 'December',
   description: ''
 }
 

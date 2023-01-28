@@ -22,7 +22,6 @@ export const updateTask = async (task: TaskInterface): Promise<TaskInterface> =>
     project: task.project,
     deliveredAt: task.deliveredAt,
     timing: task.timing,
-    month: task.month,
     description: task.description
   }
 

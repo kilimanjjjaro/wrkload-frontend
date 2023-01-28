@@ -13,6 +13,5 @@ export interface TaskInterface {
   createdAt: string
   deliveredAt: string
   timing: string
-  month: string
   description: string
 }
