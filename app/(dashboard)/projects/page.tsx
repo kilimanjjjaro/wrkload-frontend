@@ -7,22 +7,24 @@ import ProjectList from 'app/components/projects/ProjectList'
 import NotFound from 'app/components/projects/NotFound'
 import Modals from 'app/components/projects/Modals'
 import { getProjects } from 'services/projects/getProjects'
+import { sortProjects } from 'utils/sortData'
 
-import { PROJECTS_ENDPOINT as key } from 'constants/projects'
+import { getProjectStats } from 'services/stats/getProjectStats'
 
 export default function Projects (): JSX.Element {
-  const { data, isLoading } = useSWR(key, getProjects, { onSuccess: data => data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) })
+  const { data: projects, isLoading: isLoadingProjects } = useSWR('projects', getProjects, { onSuccess: data => sortProjects(data) })
+  const { data: stats, isLoading: isLoadingStats } = useSWR('projectStats', getProjectStats)
 
-  const shouldRenderProjects = data !== undefined && data.length >= 1 && !isLoading
-  const shouldRenderSkeleton = isLoading
-  const shouldRenderNotFoundSign = !isLoading && (data === undefined || data?.length === 0)
+  const shouldRenderProjects = projects !== undefined && projects.length >= 1 && stats !== undefined && !isLoadingProjects && !isLoadingStats
+  const shouldRenderSkeleton = isLoadingProjects || isLoadingStats
+  const shouldRenderNotFoundSign = (!isLoadingProjects || !isLoadingStats) && (projects === undefined || projects?.length === 0) && stats === undefined
 
   return (
     <>
       <Header shouldRenderOptions={shouldRenderNotFoundSign} />
       <main>
         {shouldRenderSkeleton && <Loading />}
-        {shouldRenderProjects && <ProjectList projects={data} />}
+        {shouldRenderProjects && <ProjectList projects={projects} stats={stats} />}
         {shouldRenderNotFoundSign && <NotFound />}
       </main>
       <Modals />

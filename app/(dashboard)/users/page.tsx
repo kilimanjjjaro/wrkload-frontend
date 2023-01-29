@@ -8,10 +8,8 @@ import NotFound from 'app/components/users/NotFound'
 import Modals from 'app/components/users/Modals'
 import { getUsers } from 'services/users/getUsers'
 
-import { USERS_ENDPOINT as key } from 'constants/users'
-
 export default function Users (): JSX.Element {
-  const { data, isLoading } = useSWR(key, getUsers, { onSuccess: data => data.sort((a, b) => new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime()) })
+  const { data, isLoading } = useSWR('users', getUsers, { onSuccess: data => data.sort((a, b) => new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime()) })
 
   const shouldRenderUsers = data !== undefined && data.length >= 1 && !isLoading
   const shouldRenderSkeleton = isLoading

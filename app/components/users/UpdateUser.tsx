@@ -27,7 +27,7 @@ export default function UpdateUser (): JSX.Element {
 
     try {
       await mutate(
-        key,
+        'users',
         updateUser(user),
         updateUserOptions(user)
       )
@@ -57,7 +57,7 @@ export default function UpdateUser (): JSX.Element {
             <Button type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
-            <Button onClick={(event) => handleCloseModal(event)} variant='alternative'>
+            <Button onClick={(event) => handleCloseModal(event)} variant='light-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
           </div>

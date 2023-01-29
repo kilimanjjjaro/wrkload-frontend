@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import dayjs from 'dayjs'
 import { CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import Stats from 'app/components/tasks/Stats'
@@ -8,16 +8,16 @@ import Paragraph from 'app/components/shared/Paragraph'
 
 import { DataContext } from 'context/DataContext'
 import { ModalsContext } from 'context/ModalsContext'
-import type { TaskInterface } from 'interfaces/tasks/Task'
+import type { TaskInterface, TaskStatsInterface } from 'interfaces/tasks/Task'
 
 interface Props {
   tasks: TaskInterface[]
+  stats: TaskStatsInterface
 }
 
-export default function TaskList ({ tasks }: Props): JSX.Element {
-  const { setSelectedTask } = useContext(DataContext)
+export default function TaskList ({ tasks, stats }: Props): JSX.Element {
+  const { setSelectedTask, shouldRenderStats } = useContext(DataContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
-  const [shoundRenderStats, setShoundRenderStats] = useState(true)
 
   const handleUpdateTaskClick = (task: TaskInterface): void => {
     setSelectedTask(task)
@@ -32,7 +32,7 @@ export default function TaskList ({ tasks }: Props): JSX.Element {
   return (
     <>
       <MasonryGrid>
-        {shoundRenderStats && <Stats shouldRender={setShoundRenderStats} />}
+        {shouldRenderStats && <Stats stats={stats} />}
         {tasks.map((task) => (
           <div key={task._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'>
             <h3 className='mb-5 text-4xl font-bold break-word font-primaryFont'>{task.title}</h3>

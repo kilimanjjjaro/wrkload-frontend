@@ -11,7 +11,7 @@ import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
 
 import { ModalsContext } from 'context/ModalsContext'
-import { INITIAL_TASK_STATE, TASKS_ENDPOINT as key } from 'constants/tasks'
+import { INITIAL_TASK_STATE } from 'constants/tasks'
 
 export default function AddTask (): JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
@@ -28,7 +28,7 @@ export default function AddTask (): JSX.Element {
 
     try {
       await mutate(
-        key,
+        'tasks',
         addTask(task),
         addTaskOptions(task)
       )
@@ -58,7 +58,7 @@ export default function AddTask (): JSX.Element {
             <Button type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-width-3' />
             </Button>
-            <Button onClick={(event) => handleCloseModal(event)} variant='alternative'>
+            <Button onClick={(event) => handleCloseModal(event)} variant='light-alternative'>
               <XMarkIcon className='w-4 stroke-width-3' />
             </Button>
           </div>

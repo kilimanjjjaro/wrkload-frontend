@@ -1,12 +1,12 @@
+import { sortTasks } from 'utils/sortData'
+
 import type { TaskInterface } from 'interfaces/tasks/Task'
 
 export const addTaskOptions = (newTask: TaskInterface): any => {
   return {
-    optimisticData: (tasks: TaskInterface[]) => [...tasks, newTask]
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
+    optimisticData: (tasks: TaskInterface[]) => sortTasks([...tasks, newTask]),
     rollbackOnError: true,
-    populateCache: (added: TaskInterface, tasks: TaskInterface[]) => [...tasks, added]
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
+    populateCache: (added: TaskInterface, tasks: TaskInterface[]) => sortTasks([...tasks, added]),
     revalidate: false
   }
 }
@@ -17,16 +17,14 @@ export const updateTaskOptions = (updatedTask: TaskInterface): any => {
       const prevTasks = tasks.filter(task => {
         return task._id !== updatedTask._id
       })
-      return [...prevTasks, updatedTask]
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      return sortTasks([...prevTasks, updatedTask])
     },
     rollbackOnError: true,
     populateCache: (updated: TaskInterface, tasks: TaskInterface[]) => {
       const prevTasks = tasks.filter(task => {
         return task._id !== updatedTask._id
       })
-      return [...prevTasks, updated]
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      return sortTasks([...prevTasks, updated])
     },
     revalidate: false
   }

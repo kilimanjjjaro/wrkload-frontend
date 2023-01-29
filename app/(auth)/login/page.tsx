@@ -59,11 +59,11 @@ export default function Login (): JSX.Element {
           <div className='w-[26%] h-[2px] bg-light-gray dark:bg-black' aria-hidden='true' />
         </div>
         <div className='flex gap-5 mt-5'>
-          <Button variant='alternative' fullWidth>
+          <Button variant='light-alternative' fullWidth>
             <GoogleLogo className='w-4' />
             Google
           </Button>
-          <Button variant='alternative' fullWidth>
+          <Button variant='light-alternative' fullWidth>
             <GitHubLogo className='w-4' />
             Github
           </Button>

@@ -1,12 +1,12 @@
+import { sortProjects } from './sortData'
+
 import type { ProjectInterface } from 'interfaces/projects/Project'
 
 export const addProjectOptions = (newProject: ProjectInterface): any => {
   return {
-    optimisticData: (projects: ProjectInterface[]) => [...projects, newProject]
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
+    optimisticData: (projects: ProjectInterface[]) => sortProjects([...projects, newProject]),
     rollbackOnError: true,
-    populateCache: (added: ProjectInterface, projects: ProjectInterface[]) => [...projects, added]
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
+    populateCache: (added: ProjectInterface, projects: ProjectInterface[]) => sortProjects([...projects, added]),
     revalidate: false
   }
 }
@@ -17,16 +17,14 @@ export const updateProjectOptions = (updatedProject: ProjectInterface): any => {
       const prevProjects = projects.filter(project => {
         return project._id !== updatedProject._id
       })
-      return [...prevProjects, updatedProject]
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      return sortProjects([...prevProjects, updatedProject])
     },
     rollbackOnError: true,
     populateCache: (updated: ProjectInterface, projects: ProjectInterface[]) => {
       const prevProjects = projects.filter(project => {
         return project._id !== updatedProject._id
       })
-      return [...prevProjects, updated]
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      return sortProjects([...prevProjects, updated])
     },
     revalidate: false
   }

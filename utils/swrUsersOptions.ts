@@ -1,3 +1,5 @@
+import { sortUsers } from 'utils/sortData'
+
 import type { UserInterface } from 'interfaces/users/User'
 
 export const updateUserOptions = (updatedUser: UserInterface): any => {
@@ -6,16 +8,14 @@ export const updateUserOptions = (updatedUser: UserInterface): any => {
       const prevUsers = users.filter(user => {
         return user._id !== updatedUser._id
       })
-      return [...prevUsers, updatedUser]
-        .sort((a, b) => new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime())
+      return sortUsers([...prevUsers, updatedUser])
     },
     rollbackOnError: true,
     populateCache: (updated: UserInterface, users: UserInterface[]) => {
       const prevUsers = users.filter(user => {
         return user._id !== updatedUser._id
       })
-      return [...prevUsers, updated]
-        .sort((a, b) => new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime())
+      return sortUsers([...prevUsers, updated])
     },
     revalidate: false
   }

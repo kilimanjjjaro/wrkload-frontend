@@ -4,3 +4,7 @@ export interface ProjectInterface {
   createdAt: string
   totalTasks: string
 }
+
+export interface ProjectStatsInterface {
+  bestProjectOfPastMonth: string
+}

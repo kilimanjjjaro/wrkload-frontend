@@ -9,7 +9,6 @@ import Input from 'app/components/shared/Input'
 
 import { DataContext } from 'context/DataContext'
 import { ModalsContext } from 'context/ModalsContext'
-import { TASKS_ENDPOINT as key } from 'constants/tasks'
 
 export default function DeleteTask (): JSX.Element {
   const { selectedTask } = useContext(DataContext)
@@ -27,7 +26,7 @@ export default function DeleteTask (): JSX.Element {
 
     try {
       await mutate(
-        key,
+        'tasks',
         deleteTask(task._id),
         deleteTaskOptions(task._id)
       )
@@ -53,7 +52,7 @@ export default function DeleteTask (): JSX.Element {
             <Button type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
-            <Button onClick={(event) => handleCloseModal(event)} variant='alternative'>
+            <Button onClick={(event) => handleCloseModal(event)} variant='light-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
           </div>

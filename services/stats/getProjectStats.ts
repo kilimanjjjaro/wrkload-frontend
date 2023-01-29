@@ -1,12 +1,12 @@
 import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
-import type { TaskInterface } from 'interfaces/tasks/Task'
-import { TASKS_ENDPOINT } from 'constants/tasks'
+import type { ProjectStatsInterface } from 'interfaces/projects/Project'
+import { PROJECTS_ENDPOINT } from 'constants/projects'
 
 const delay = async (): Promise<void> => await new Promise((resolve) => setTimeout(resolve, 500))
 
-export const getTasks = async (): Promise<TaskInterface[]> => {
+export const getProjectStats = async (): Promise<ProjectStatsInterface> => {
   await delay()
 
   const accessToken = getCookie('accessToken')
@@ -17,7 +17,7 @@ export const getTasks = async (): Promise<TaskInterface[]> => {
     }
   }
 
-  const response = await api.get(TASKS_ENDPOINT + '?project=Adidas', config)
+  const response = await api.get(PROJECTS_ENDPOINT, config)
 
-  return response.data.tasks
+  return response.data.stats
 }

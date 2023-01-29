@@ -6,13 +6,14 @@ import MasonryGrid from 'app/components/shared/MasonryGrid'
 
 import { DataContext } from 'context/DataContext'
 import { ModalsContext } from 'context/ModalsContext'
-import type { ProjectInterface } from 'interfaces/projects/Project'
+import type { ProjectInterface, ProjectStatsInterface } from 'interfaces/projects/Project'
 
 interface Props {
   projects: ProjectInterface[]
+  stats: ProjectStatsInterface
 }
 
-export default function ProjectList ({ projects }: Props): JSX.Element {
+export default function ProjectList ({ projects, stats }: Props): JSX.Element {
   const { setSelectedProject } = useContext(DataContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
 
@@ -29,7 +30,7 @@ export default function ProjectList ({ projects }: Props): JSX.Element {
   return (
     <>
       <MasonryGrid>
-        <Stats />
+        <Stats stats={stats} />
         {projects.map((project) => (
           <div key={project._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'>
             <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'>{project.name}</h3>

@@ -10,7 +10,7 @@ import Headline from 'app/components/shared/Headline'
 import Input from 'app/components/shared/Input'
 
 import { ModalsContext } from 'context/ModalsContext'
-import { INITIAL_PROJECT_STATE, PROJECTS_ENDPOINT as key } from 'constants/projects'
+import { INITIAL_PROJECT_STATE } from 'constants/projects'
 
 export default function AddProject (): JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
@@ -27,7 +27,7 @@ export default function AddProject (): JSX.Element {
 
     try {
       await mutate(
-        key,
+        'projects',
         addProject(project),
         addProjectOptions(project)
       )
@@ -53,7 +53,7 @@ export default function AddProject (): JSX.Element {
             <Button type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
-            <Button onClick={(event) => handleCloseModal(event)} variant='alternative'>
+            <Button onClick={(event) => handleCloseModal(event)} variant='light-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
           </div>

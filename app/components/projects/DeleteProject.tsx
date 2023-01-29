@@ -11,7 +11,6 @@ import Input from 'app/components/shared/Input'
 
 import { DataContext } from 'context/DataContext'
 import { ModalsContext } from 'context/ModalsContext'
-import { PROJECTS_ENDPOINT as key } from 'constants/projects'
 
 export default function DeleteProject (): JSX.Element {
   const { selectedProject } = useContext(DataContext)
@@ -29,7 +28,7 @@ export default function DeleteProject (): JSX.Element {
 
     try {
       await mutate(
-        key,
+        'projects',
         deleteProject(project._id),
         deleteProjectOptions(project._id)
       )
@@ -55,7 +54,7 @@ export default function DeleteProject (): JSX.Element {
             <Button type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
-            <Button onClick={(event) => handleCloseModal(event)} variant='alternative'>
+            <Button onClick={(event) => handleCloseModal(event)} variant='light-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
           </div>

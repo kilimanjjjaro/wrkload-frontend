@@ -7,22 +7,23 @@ import TaskList from 'app/components/tasks/TaskList'
 import NotFound from 'app/components/tasks/NotFound'
 import Modals from 'app/components/tasks/Modals'
 import { getTasks } from 'services/tasks/getTasks'
-
-import { TASKS_ENDPOINT as key } from 'constants/tasks'
+import { getTaskStats } from 'services/stats/getTaskStats'
+import { sortTasks } from 'utils/sortData'
 
 export default function Tasks (): JSX.Element {
-  const { data, isLoading } = useSWR(key, getTasks, { onSuccess: data => data.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) })
+  const { data: tasks, isLoading: isLoadingTasks } = useSWR('tasks', getTasks, { onSuccess: data => sortTasks(data) })
+  const { data: stats, isLoading: isLoadingStats } = useSWR('taskStats', getTaskStats)
 
-  const shouldRenderTasks = data !== undefined && data.length >= 1 && !isLoading
-  const shouldRenderSkeleton = isLoading
-  const shouldRenderNotFoundSign = !isLoading && (data === undefined || data?.length === 0)
+  const shouldRenderTasks = tasks !== undefined && tasks.length >= 1 && stats !== undefined && !isLoadingTasks && !isLoadingStats
+  const shouldRenderSkeleton = isLoadingTasks || isLoadingStats
+  const shouldRenderNotFoundSign = (!isLoadingTasks || !isLoadingStats) && (tasks === undefined || tasks?.length === 0) && stats === undefined
 
   return (
     <>
       <Header shouldRenderOptions={shouldRenderNotFoundSign} />
       <main>
         {shouldRenderSkeleton && <Loading />}
-        {shouldRenderTasks && <TaskList tasks={data} />}
+        {shouldRenderTasks && <TaskList tasks={tasks} stats={stats} />}
         {shouldRenderNotFoundSign && <NotFound />}
       </main>
       <Modals />
