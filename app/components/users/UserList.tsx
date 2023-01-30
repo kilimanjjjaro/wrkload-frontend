@@ -42,8 +42,8 @@ export default function UserList ({ users }: Props): JSX.Element {
                   height='80'
                 />
                 {!user.confirmationStatus && <div className='absolute top-0 left-0 w-3 h-3 bg-custom-red' title='Unconfirmed account' />}
-                {user.confirmationStatus && <div className='absolute top-0 left-0 w-3 h-3 bg-custom-yellow' title='Confirmed account' />}
-                {/* {validacion && <div className='absolute top-0 left-0 w-3 h-3 bg-custom-green' title='Online one hour ago' />} */}
+                {user.confirmationStatus && !user.recentlyActive && <div className='absolute top-0 left-0 w-3 h-3 bg-custom-yellow' title='Confirmed account' />}
+                {user.recentlyActive && <div className='absolute top-0 left-0 w-3 h-3 bg-custom-green' title='Online one hour ago' />}
               </div>
             )}
 

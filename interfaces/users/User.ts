@@ -6,6 +6,7 @@ export interface UserInterface {
   avatar: string
   registeredAt: string
   lastActiveAt: string
+  recentlyActive: boolean
   confirmationStatus: boolean
   confirmationToken: string
 }
