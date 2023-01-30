@@ -4,11 +4,7 @@ import api from 'utils/api'
 import type { TaskInterface } from 'interfaces/tasks/Task'
 import { TASKS_ENDPOINT } from 'constants/tasks'
 
-const delay = async (): Promise<void> => await new Promise((resolve) => setTimeout(resolve, 500))
-
-export const getTasks = async (): Promise<TaskInterface[]> => {
-  await delay()
-
+export const getTasks = async ({ selectedProjectToFetch }: { selectedProjectToFetch: string }): Promise<TaskInterface[]> => {
   const accessToken = getCookie('accessToken')
 
   const config = {
@@ -17,7 +13,7 @@ export const getTasks = async (): Promise<TaskInterface[]> => {
     }
   }
 
-  const response = await api.get(TASKS_ENDPOINT + '?project=Adidas', config)
+  const response = await api.get(`${TASKS_ENDPOINT}?project=${selectedProjectToFetch}`, config)
 
   return response.data.tasks
 }

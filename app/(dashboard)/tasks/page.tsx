@@ -9,14 +9,18 @@ import Modals from 'app/components/tasks/Modals'
 import { getTasks } from 'services/tasks/getTasks'
 import { getTaskStats } from 'services/stats/getTaskStats'
 import { sortTasks } from 'utils/sortData'
+import { useContext } from 'react'
+import { DataContext } from 'context/DataContext'
 
 export default function Tasks (): JSX.Element {
-  const { data: tasks, isLoading: isLoadingTasks } = useSWR('tasks', getTasks, { onSuccess: data => sortTasks(data) })
-  const { data: stats, isLoading: isLoadingStats } = useSWR('taskStats', getTaskStats)
+  const { selectedProjectToFetch } = useContext(DataContext)
 
-  const shouldRenderTasks = tasks !== undefined && tasks.length >= 1 && stats !== undefined && !isLoadingTasks && !isLoadingStats
+  const { data: tasks, isLoading: isLoadingTasks } = useSWR(selectedProjectToFetch !== '' ? 'tasks' : null, async () => await getTasks({ selectedProjectToFetch }), { onSuccess: data => sortTasks(data) })
+  const { data: stats, isLoading: isLoadingStats } = useSWR(selectedProjectToFetch !== '' ? 'taskStats' : null, async () => await getTaskStats({ selectedProjectToFetch }))
+
+  const shouldRenderTasks = tasks !== undefined && tasks.length >= 1 && stats !== undefined && !isLoadingTasks && !isLoadingStats && selectedProjectToFetch !== ''
   const shouldRenderSkeleton = isLoadingTasks || isLoadingStats
-  const shouldRenderNotFoundSign = (!isLoadingTasks || !isLoadingStats) && (tasks === undefined || tasks?.length === 0) && stats === undefined
+  const shouldRenderNotFoundSign = (!isLoadingTasks || !isLoadingStats) && (tasks === undefined || tasks?.length === 0) && stats === undefined && selectedProjectToFetch !== ''
 
   return (
     <>

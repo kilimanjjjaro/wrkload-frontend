@@ -4,11 +4,7 @@ import api from 'utils/api'
 import type { TaskInterface } from 'interfaces/tasks/Task'
 import { TASKS_ENDPOINT } from 'constants/tasks'
 
-const delay = async (): Promise<void> => await new Promise((resolve) => setTimeout(resolve, 500))
-
 export const updateTask = async (task: TaskInterface): Promise<TaskInterface> => {
-  await delay()
-
   const accessToken = getCookie('accessToken')
 
   const config = {

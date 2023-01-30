@@ -24,6 +24,9 @@ interface DataContextValues {
 
   shouldRenderStats: boolean
   setShouldRenderStats: Dispatch<React.SetStateAction<boolean>>
+
+  selectedProjectToFetch: string
+  setSelectedProjectToFetch: Dispatch<React.SetStateAction<string>>
 };
 
 const DEFAULT_DATA_CONTEXT_VALUE: DataContextValues = {
@@ -38,12 +41,16 @@ const DEFAULT_DATA_CONTEXT_VALUE: DataContextValues = {
   setSelectedUser: () => {},
 
   shouldRenderStats: false,
-  setShouldRenderStats: () => {}
+  setShouldRenderStats: () => {},
+
+  selectedProjectToFetch: '',
+  setSelectedProjectToFetch: () => {}
 }
 
 export const DataContext = createContext<DataContextValues>(DEFAULT_DATA_CONTEXT_VALUE)
 
 const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
+  const [selectedProjectToFetch, setSelectedProjectToFetch] = useState('')
   const [selectedTask, setSelectedTask] = useState<TaskInterface>(INITIAL_TASK_STATE)
   const [selectedProject, setSelectedProject] = useState<ProjectInterface>(INITIAL_PROJECT_STATE)
   const [selectedUser, setSelectedUser] = useState<UserInterface>(INITIAL_USER_STATE)
@@ -59,10 +66,6 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
   })
 
   useEffect(() => {
-    window.localStorage.setItem('showStats', JSON.stringify(shouldRenderStats))
-  }, [shouldRenderStats])
-
-  useEffect(() => {
     if (accessToken !== undefined) {
       setIsLogged(true)
     } else {
@@ -70,8 +73,12 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
     }
   }, [accessToken])
 
+  useEffect(() => {
+    window.localStorage.setItem('showStats', JSON.stringify(shouldRenderStats))
+  }, [shouldRenderStats])
+
   return (
-    <DataContext.Provider value={{ isLogged, setIsLogged, selectedTask, setSelectedTask, selectedProject, setSelectedProject, selectedUser, setSelectedUser, shouldRenderStats, setShouldRenderStats }}>
+    <DataContext.Provider value={{ isLogged, setIsLogged, selectedTask, setSelectedTask, selectedProject, setSelectedProject, selectedUser, setSelectedUser, shouldRenderStats, setShouldRenderStats, selectedProjectToFetch, setSelectedProjectToFetch }}>
       {children}
     </DataContext.Provider>
   )

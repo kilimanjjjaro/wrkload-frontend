@@ -1,10 +1,15 @@
-import { FireIcon } from '@heroicons/react/24/outline'
+import { useContext } from 'react'
+import { EyeSlashIcon, FireIcon } from '@heroicons/react/24/outline'
 
+import { DataContext } from 'context/DataContext'
 import type { ProjectStatsInterface } from 'interfaces/projects/Project'
 
 export default function Stats ({ stats }: { stats: ProjectStatsInterface }): JSX.Element {
+  const { shouldRenderStats, setShouldRenderStats } = useContext(DataContext)
+
   return (
-    <div className='text-white bg-dark-gray pt-7 pb-[34px] pr-7 pl-7'>
+    <div className='relative text-white bg-dark-gray pt-7 pb-[34px] pr-7 pl-7'>
+      <EyeSlashIcon className='absolute z-10 w-6 h-6 transition ease-in-out cursor-pointer stroke-2 duration-400 hover:text-white text-light-gray top-7 right-7' onClick={() => setShouldRenderStats(!shouldRenderStats)} />
       <FireIcon className='h-10 stroke-2 text-light-gray' />
       {stats.bestProjectOfPastMonth !== '' && (
         <>

@@ -1,13 +1,36 @@
 'use client'
 
-import { useState } from 'react'
-import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import Headline from 'app/components/shared/Headline'
+import { useContext, useEffect } from 'react'
+import useSWR, { mutate } from 'swr'
+import ProjectSelector from 'app/components/tasks/ProjectSelector'
+import { getProjects } from 'services/projects/getProjects'
+
+import { DataContext } from 'context/DataContext'
 
 export default function PageTitle (): JSX.Element {
-  const [project] = useState('Powgen')
+  const { selectedProjectToFetch } = useContext(DataContext)
+  const { data: projects, isLoading } = useSWR('projects', getProjects)
+  let sortedProjectNames: string[] = []
+
+  if (projects !== undefined) sortedProjectNames = projects?.map((project) => project.name).sort()
+
+  useEffect(() => {
+    const mutateData = async (): Promise<void> => {
+      await mutate('tasks')
+      await mutate('taskStats')
+    }
+    mutateData().catch((error) => console.error(error))
+  }, [selectedProjectToFetch])
+
+  const shouldRenderSkeleton = isLoading || sortedProjectNames.length === 0
 
   return (
-    <Headline variant='lg'>Tasks of <button className='inline-flex items-center transition ease-in-out duration-400 gap-x-1 2xl:gap-x-3 hover:text-dark-gray'><b>{project}</b> <ChevronDownIcon className='w-4 md:w-6 2xl:w-8 stroke-3.5' /></button></Headline>
+    <h2 className='flex text-6xl text-white gap-x-5 font-primaryFont'>
+      Tasks of
+      {shouldRenderSkeleton && <div className='w-56 bg-white h-14 animate-pulse' />}
+      {!shouldRenderSkeleton && (
+        <ProjectSelector projectNames={sortedProjectNames} />
+      )}
+    </h2>
   )
 }

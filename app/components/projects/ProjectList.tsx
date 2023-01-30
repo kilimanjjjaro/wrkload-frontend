@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default function ProjectList ({ projects, stats }: Props): JSX.Element {
-  const { setSelectedProject } = useContext(DataContext)
+  const { setSelectedProject, shouldRenderStats } = useContext(DataContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
 
   const handleUpdateProjectClick = (project: ProjectInterface): void => {
@@ -30,7 +30,7 @@ export default function ProjectList ({ projects, stats }: Props): JSX.Element {
   return (
     <>
       <MasonryGrid>
-        <Stats stats={stats} />
+        {shouldRenderStats && <Stats stats={stats} />}
         {projects.map((project) => (
           <div key={project._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'>
             <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'>{project.name}</h3>
