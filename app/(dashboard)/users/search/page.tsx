@@ -14,22 +14,20 @@ import { sortUsers } from 'utils/sortData'
 
 export default function SearchUsers (): JSX.Element {
   const params = useSearchParams()
-  const queryParam = params.get('query')
+  const query = params.get('query')
   const router = useRouter()
 
-  const { data: users, isLoading, isValidating } = useSWR('users', async () => await searchUsers({ query: queryParam }), { onSuccess: data => sortUsers(data), revalidate: false })
+  const { data, isLoading, isValidating } = useSWR('users', async () => await searchUsers({ query }), { onSuccess: data => sortUsers(data.users), revalidate: false })
 
-  console.log('users', users)
-
-  const shouldRenderTasks = users !== undefined && users.length >= 1 && !isLoading && !isValidating
   const shouldRenderSkeleton = isLoading || isValidating
-  const shouldRenderNotFoundSign = !isLoading && !isValidating && (users === undefined || users.length === 0)
+  const shouldRenderUsers = data !== undefined && data?.users.length >= 1 && !shouldRenderSkeleton
+  const shouldRenderNotFoundSign = !shouldRenderUsers && !shouldRenderSkeleton
 
   return (
     <>
       <header className='flex justify-between mb-10 text-white'>
         <h2 className='flex text-6xl font-bold text-white gap-x-5 font-primaryFont'>
-          Search results for: {queryParam}
+          Search results for: {query}
         </h2>
         {!shouldRenderNotFoundSign && (
           <div className='flex items-start gap-x-5'>
@@ -39,7 +37,7 @@ export default function SearchUsers (): JSX.Element {
       </header>
       <main>
         {shouldRenderSkeleton && <Loading />}
-        {shouldRenderTasks && <UserList users={users} />}
+        {shouldRenderUsers && <UserList data={data} />}
         {shouldRenderNotFoundSign && (
           <div className='flex flex-col items-center h-full mt-28 gap-y-5'>
             <Image

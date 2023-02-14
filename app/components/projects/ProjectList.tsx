@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { usePathname } from 'next/navigation'
 import { InboxStackIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import Stats from 'app/components/projects/Stats'
 import Pagination from 'app/components/shared/Pagination'
@@ -11,6 +12,7 @@ import type { FullProjectInterface, ProjectInterface } from 'interfaces/projects
 export default function ProjectList ({ data }: { data: FullProjectInterface }): JSX.Element {
   const { setSelectedProject, shouldRenderStats } = useContext(DataContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
+  const pathname = usePathname()
 
   const handleUpdateProjectClick = (project: ProjectInterface): void => {
     setSelectedProject(project)
@@ -29,7 +31,7 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
   return (
     <>
       <MasonryGrid>
-        {shouldRenderStats && stats !== undefined && <Stats stats={stats} />}
+        {shouldRenderStats && (stats !== undefined || stats !== null) && pathname?.includes('search') === false && <Stats stats={stats} />}
         {projects.map((project) => (
           <div key={project._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'>
             <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'>{project.name}</h3>

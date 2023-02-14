@@ -14,21 +14,21 @@ import { sortTasks } from 'utils/sortData'
 
 export default function SearchTasks (): JSX.Element {
   const params = useSearchParams()
-  const projectParam = params.get('project')
-  const queryParam = params.get('query')
+  const project = params.get('project')
+  const query = params.get('query')
   const router = useRouter()
 
-  const { data: tasks, isLoading, isValidating } = useSWR('tasks', async () => await searchTasks({ project: projectParam, query: queryParam }), { onSuccess: data => sortTasks(data), revalidate: false })
+  const { data, isLoading, isValidating } = useSWR('tasks', async () => await searchTasks({ project, query }), { onSuccess: data => sortTasks(data.tasks), revalidate: false })
 
-  const shouldRenderTasks = tasks !== undefined && tasks.length >= 1 && !isLoading && !isValidating
   const shouldRenderSkeleton = isLoading || isValidating
-  const shouldRenderNotFoundSign = !isLoading && !isValidating && (tasks === undefined || tasks.length === 0)
+  const shouldRenderTasks = data !== undefined && data?.tasks.length >= 1 && !shouldRenderSkeleton
+  const shouldRenderNotFoundSign = !shouldRenderTasks && !shouldRenderSkeleton
 
   return (
     <>
       <header className='flex justify-between mb-10 text-white'>
         <h2 className='flex text-6xl font-bold text-white gap-x-5 font-primaryFont'>
-          Search results for: {queryParam}
+          Search results for: {query}
         </h2>
         {!shouldRenderNotFoundSign && (
           <div className='flex items-start gap-x-5'>
@@ -38,7 +38,7 @@ export default function SearchTasks (): JSX.Element {
       </header>
       <main>
         {shouldRenderSkeleton && <Loading />}
-        {shouldRenderTasks && <TaskList tasks={tasks} />}
+        {shouldRenderTasks && <TaskList data={data} />}
         {shouldRenderNotFoundSign && (
           <div className='flex flex-col items-center h-full mt-28 gap-y-5'>
             <Image

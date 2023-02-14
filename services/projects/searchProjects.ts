@@ -15,6 +15,6 @@ export default async function searchProjects ({ query }: Props): Promise<any> {
   }
 
   const response = await api.get(`/projects?search=${query as string}`, config)
-  console.log(response.data)
-  return response.data.projects
+
+  return response.data
 }

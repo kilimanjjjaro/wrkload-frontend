@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { usePathname } from 'next/navigation'
 import dayjs from 'dayjs'
 import { CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import Stats from 'app/components/tasks/Stats'
@@ -13,6 +14,7 @@ import type { FullTaskInterface, TaskInterface } from 'interfaces/tasks/Task'
 export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.Element {
   const { setSelectedTask, shouldRenderStats } = useContext(DataContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
+  const pathname = usePathname()
 
   const handleUpdateTaskClick = (task: TaskInterface): void => {
     setSelectedTask(task)
@@ -31,7 +33,7 @@ export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.El
   return (
     <>
       <MasonryGrid>
-        {shouldRenderStats && (stats !== undefined || stats !== null) && <Stats stats={stats} />}
+        {shouldRenderStats && (stats !== undefined || stats !== null) && pathname?.includes('search') === false && <Stats stats={stats} />}
         {tasks.map((task) => (
           <div key={task._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'>
             <h3 className='mb-5 text-4xl font-bold break-word font-primaryFont'>{task.title}</h3>

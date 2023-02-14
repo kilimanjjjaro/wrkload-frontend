@@ -14,20 +14,20 @@ import { sortProjects } from 'utils/sortData'
 
 export default function SearchProjects (): JSX.Element {
   const params = useSearchParams()
-  const queryParam = params.get('query')
+  const query = params.get('query')
   const router = useRouter()
 
-  const { data: projects, isLoading, isValidating } = useSWR('projects', async () => await searchProjects({ query: queryParam }), { onSuccess: data => sortProjects(data), revalidate: false })
+  const { data, isLoading, isValidating } = useSWR('projects', async () => await searchProjects({ query }), { onSuccess: data => sortProjects(data.projects), revalidate: false })
 
-  const shouldRenderTasks = projects !== undefined && projects.length >= 1 && !isLoading && !isValidating
   const shouldRenderSkeleton = isLoading || isValidating
-  const shouldRenderNotFoundSign = !isLoading && !isValidating && (projects === undefined || projects.length === 0)
+  const shouldRenderProjects = data !== undefined && data?.projects.length >= 1 && !shouldRenderSkeleton
+  const shouldRenderNotFoundSign = !shouldRenderProjects && !shouldRenderSkeleton
 
   return (
     <>
       <header className='flex justify-between mb-10 text-white'>
         <h2 className='flex text-6xl font-bold text-white gap-x-5 font-primaryFont'>
-          Search results for: {queryParam}
+          Search results for: {query}
         </h2>
         {!shouldRenderNotFoundSign && (
           <div className='flex items-start gap-x-5'>
@@ -37,7 +37,7 @@ export default function SearchProjects (): JSX.Element {
       </header>
       <main>
         {shouldRenderSkeleton && <Loading />}
-        {shouldRenderTasks && <ProjectList projects={projects} />}
+        {shouldRenderProjects && <ProjectList data={data} />}
         {shouldRenderNotFoundSign && (
           <div className='flex flex-col items-center h-full mt-28 gap-y-5'>
             <Image

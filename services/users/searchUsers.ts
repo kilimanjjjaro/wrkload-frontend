@@ -15,5 +15,6 @@ export default async function searchUsers ({ query }: Props): Promise<any> {
   }
 
   const response = await api.get(`/users?search=${query as string}`, config)
-  return response.data.users
+
+  return response.data
 }

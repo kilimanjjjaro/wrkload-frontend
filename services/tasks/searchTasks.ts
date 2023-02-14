@@ -16,5 +16,6 @@ export default async function searchTasks ({ project, query }: Props): Promise<a
   }
 
   const response = await api.get(`/tasks?project=${project as string}&search=${query as string}`, config)
-  return response.data.tasks
+
+  return response.data
 }
