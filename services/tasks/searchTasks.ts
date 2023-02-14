@@ -2,12 +2,11 @@ import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
 interface Props {
-  type: string
   project: string | null
-  search: string | null
+  query: string | null
 }
 
-export default async function search ({ type, project, search }: Props): Promise<any> {
+export default async function searchTasks ({ project, query }: Props): Promise<any> {
   const accessToken = getCookie('accessToken')
 
   const config = {
@@ -16,6 +15,6 @@ export default async function search ({ type, project, search }: Props): Promise
     }
   }
 
-  const response = await api.get(`/${type}?project=${project as string}&search=${search as string}`, config)
-  return response.data
+  const response = await api.get(`/tasks?project=${project as string}&search=${query as string}`, config)
+  return response.data.tasks
 }

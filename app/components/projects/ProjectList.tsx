@@ -10,7 +10,7 @@ import type { ProjectInterface, ProjectStatsInterface } from 'interfaces/project
 
 interface Props {
   projects: ProjectInterface[]
-  stats: ProjectStatsInterface
+  stats?: ProjectStatsInterface
 }
 
 export default function ProjectList ({ projects, stats }: Props): JSX.Element {
@@ -30,7 +30,7 @@ export default function ProjectList ({ projects, stats }: Props): JSX.Element {
   return (
     <>
       <MasonryGrid>
-        {shouldRenderStats && <Stats stats={stats} />}
+        {shouldRenderStats && stats !== undefined && <Stats stats={stats} />}
         {projects.map((project) => (
           <div key={project._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'>
             <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'>{project.name}</h3>

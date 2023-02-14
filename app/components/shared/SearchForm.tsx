@@ -34,7 +34,9 @@ export default function SearchForm ({ type, setModalStatus }: Props): JSX.Elemen
         event.preventDefault()
 
         try {
-          router.push(`/${type}s/search?project=${selectedProjectToFetch}&search=${query}`)
+          if (type === 'task') router.push(`/tasks/search?project=${selectedProjectToFetch}&query=${query}`)
+          if (type === 'project') router.push(`/projects/search?query=${query}`)
+          if (type === 'user') router.push(`/users/search?query=${query}`)
           setModalStatus(false)
         } catch (error: any) {
           console.error(error.response)
@@ -52,7 +54,7 @@ export default function SearchForm ({ type, setModalStatus }: Props): JSX.Elemen
   return (
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center bg-white text-dark-gray md:w-96 min-w-auto'>
-        <Headline variant='md'><b>Search {type}</b></Headline>
+        <Headline variant='md'><b>Search {type}s</b></Headline>
         <form>
           <div className='flex flex-col mb-5 gap-y-3'>
             <Input variant='primary' onChange={handleChange} value={query} name='query' type='text' placeholder='Type and press enter' centerText required />

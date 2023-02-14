@@ -33,7 +33,7 @@ export default function ProjectSelector ({ projectNames }: Props): JSX.Element {
         <ChevronDownIcon className={clsx('w-4 md:w-6 2xl:w-8 stroke-3.5', open && 'rotate-180')} />
       </div>
       <ul
-        className={clsx('z-10 absolute font-secondaryFont top-full text-base bg-dark-gray mt-5 overflow-x-hidden overflow-y-auto', open && 'max-h-40', !open && 'max-h-0')}
+        className={clsx('z-20 absolute font-secondaryFont top-full text-base bg-dark-gray mt-5 overflow-x-hidden overflow-y-auto', open && 'max-h-40', !open && 'max-h-0')}
       >
         <div className='sticky top-0 flex items-center px-3 border-b border-light-gray'>
           <MagnifyingGlassIcon className='w-4 stroke-3 stroke-white' />

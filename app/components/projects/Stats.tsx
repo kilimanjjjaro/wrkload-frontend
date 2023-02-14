@@ -19,7 +19,7 @@ export default function Stats ({ stats }: { stats: ProjectStatsInterface }): JSX
           <span className='mt-1 text-3xl font-secondaryFont'>Project of<br /> the last month.</span>
         </>
       )}
-      {stats.bestProjectOfPastMonth === '' && <span className='block text-3xl font-secondaryFont mt-7'>We can&apos;t wait to show you stats but it looks like it&apos;s your first month.</span>}
+      {stats.bestProjectOfPastMonth === '' && <span className='block text-3xl font-secondaryFont mt-7'>We can&apos;t wait to show you stats but it looks like it&apos;s your first month or you didn&apos;t upload tasks last month.</span>}
     </div>
   )
 }
