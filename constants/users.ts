@@ -10,6 +10,7 @@ export const INITIAL_USER_STATE = {
   avatar: DEFAULT_AVATAR,
   registeredAt: '',
   lastActiveAt: '',
+  recentlyActive: false,
   confirmationStatus: false,
   confirmationToken: ''
 }
