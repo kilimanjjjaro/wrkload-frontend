@@ -15,12 +15,12 @@ import { DataContext } from 'context/DataContext'
 export default function Tasks (): JSX.Element {
   const { selectedProjectToFetch } = useContext(DataContext)
 
-  const { data: tasks, isLoading: isLoadingTasks } = useSWR(selectedProjectToFetch !== '' ? 'tasks' : null, async () => await getTasks({ selectedProjectToFetch }), { onSuccess: data => sortTasks(data) })
+  const { data: tasks, isLoading: isLoadingTasks, isValidating } = useSWR(selectedProjectToFetch !== '' ? 'tasks' : null, async () => await getTasks({ selectedProjectToFetch }), { onSuccess: data => sortTasks(data) })
   const { data: stats, isLoading: isLoadingStats } = useSWR(selectedProjectToFetch !== '' ? 'taskStats' : null, async () => await getTaskStats({ selectedProjectToFetch }))
 
-  const shouldRenderTasks = tasks !== undefined && tasks.length >= 1 && stats !== undefined && !isLoadingTasks && !isLoadingStats && selectedProjectToFetch !== ''
-  const shouldRenderSkeleton = isLoadingTasks || isLoadingStats
-  const shouldRenderNotFoundSign = (!isLoadingTasks || !isLoadingStats) && (tasks === undefined || tasks?.length === 0) && stats === undefined && selectedProjectToFetch !== ''
+  const shouldRenderSkeleton = isLoadingTasks || isLoadingStats || selectedProjectToFetch === '' || isValidating
+  const shouldRenderTasks = tasks !== undefined && tasks.length >= 1 && stats !== undefined && !isLoadingTasks && !isLoadingStats && !isValidating
+  const shouldRenderNotFoundSign = (!isLoadingTasks || !isLoadingStats || !isValidating) && (tasks === undefined || tasks?.length === 0) && stats === undefined && selectedProjectToFetch !== ''
 
   return (
     <>

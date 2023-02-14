@@ -12,7 +12,7 @@ import type { TaskInterface, TaskStatsInterface } from 'interfaces/tasks/Task'
 
 interface Props {
   tasks: TaskInterface[]
-  stats: TaskStatsInterface
+  stats?: TaskStatsInterface
 }
 
 export default function TaskList ({ tasks, stats }: Props): JSX.Element {
@@ -32,7 +32,7 @@ export default function TaskList ({ tasks, stats }: Props): JSX.Element {
   return (
     <>
       <MasonryGrid>
-        {shouldRenderStats && <Stats stats={stats} />}
+        {shouldRenderStats && stats !== undefined && <Stats stats={stats} />}
         {tasks.map((task) => (
           <div key={task._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'>
             <h3 className='mb-5 text-4xl font-bold break-word font-primaryFont'>{task.title}</h3>

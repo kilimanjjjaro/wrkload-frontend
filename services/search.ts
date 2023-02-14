@@ -1,8 +1,13 @@
-import { AxiosResponse } from 'axios'
 import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
-export default async function search (type: string, query: string): Promise<AxiosResponse> {
+interface Props {
+  type: string
+  project: string | null
+  search: string | null
+}
+
+export default async function search ({ type, project, search }: Props): Promise<any> {
   const accessToken = getCookie('accessToken')
 
   const config = {
@@ -11,7 +16,6 @@ export default async function search (type: string, query: string): Promise<Axio
     }
   }
 
-  const response = await api.get(`/${type}?query=${query}`, config)
-
-  return response
+  const response = await api.get(`/${type}?project=${project as string}&search=${search as string}`, config)
+  return response.data
 }
