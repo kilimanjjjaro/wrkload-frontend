@@ -1,10 +1,10 @@
 import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
-import type { TaskInterface } from 'interfaces/tasks/Task'
+import type { FullTaskInterface } from 'interfaces/tasks/Task'
 import { TASKS_ENDPOINT } from 'constants/tasks'
 
-export const getTasks = async ({ selectedProjectToFetch }: { selectedProjectToFetch: string }): Promise<TaskInterface[]> => {
+export const getTasks = async ({ project }: { project: string }): Promise<FullTaskInterface> => {
   const accessToken = getCookie('accessToken')
 
   const config = {
@@ -13,7 +13,7 @@ export const getTasks = async ({ selectedProjectToFetch }: { selectedProjectToFe
     }
   }
 
-  const response = await api.get(`${TASKS_ENDPOINT}?project=${selectedProjectToFetch}`, config)
+  const response = await api.get(`${TASKS_ENDPOINT}?project=${project}`, config)
 
-  return response.data.tasks
+  return response.data
 }

@@ -9,8 +9,6 @@ import type { TaskStatsInterface } from 'interfaces/tasks/Task'
 export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.Element {
   const { shouldRenderStats, setShouldRenderStats } = useContext(DataContext)
 
-  console.log(stats)
-
   return (
     <>
       {stats.totalTasksPastMonth >= 1 && (

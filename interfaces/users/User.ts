@@ -1,3 +1,5 @@
+import { PaginationInterface } from 'interfaces/components'
+
 export interface UserInterface {
   _id: string
   role: number
@@ -18,4 +20,10 @@ export interface NewUserInterface {
   password: string
   email: string
   avatar: string
+}
+
+export interface FullUserInterface {
+  status: string
+  pagination: PaginationInterface
+  users: UserInterface[]
 }

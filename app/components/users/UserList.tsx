@@ -7,13 +7,9 @@ import MasonryGrid from 'app/components/shared/MasonryGrid'
 
 import { DataContext } from 'context/DataContext'
 import { ModalsContext } from 'context/ModalsContext'
-import type { UserInterface } from 'interfaces/users/User'
+import type { FullUserInterface, UserInterface } from 'interfaces/users/User'
 
-interface Props {
-  users: UserInterface[]
-}
-
-export default function UserList ({ users }: Props): JSX.Element {
+export default function UserList ({ data }: { data: FullUserInterface }): JSX.Element {
   const { setSelectedUser } = useContext(DataContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
 
@@ -26,6 +22,9 @@ export default function UserList ({ users }: Props): JSX.Element {
     setSelectedUser(user)
     setDeleteDataModalStatus(true)
   }
+
+  const users = data?.users
+  const pagination = data?.pagination
 
   return (
     <div>
@@ -66,7 +65,7 @@ export default function UserList ({ users }: Props): JSX.Element {
           </div>
         ))}
       </MasonryGrid>
-      <Pagination />
+      <Pagination data={pagination} />
     </div>
   )
 }

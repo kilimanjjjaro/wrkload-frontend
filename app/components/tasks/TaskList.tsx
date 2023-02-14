@@ -8,14 +8,9 @@ import Paragraph from 'app/components/shared/Paragraph'
 
 import { DataContext } from 'context/DataContext'
 import { ModalsContext } from 'context/ModalsContext'
-import type { TaskInterface, TaskStatsInterface } from 'interfaces/tasks/Task'
+import type { FullTaskInterface, TaskInterface } from 'interfaces/tasks/Task'
 
-interface Props {
-  tasks: TaskInterface[]
-  stats?: TaskStatsInterface
-}
-
-export default function TaskList ({ tasks, stats }: Props): JSX.Element {
+export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.Element {
   const { setSelectedTask, shouldRenderStats } = useContext(DataContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
 
@@ -29,10 +24,14 @@ export default function TaskList ({ tasks, stats }: Props): JSX.Element {
     setDeleteDataModalStatus(true)
   }
 
+  const tasks = data?.tasks
+  const stats = data?.stats
+  const pagination = data?.pagination
+
   return (
     <>
       <MasonryGrid>
-        {shouldRenderStats && stats !== undefined && <Stats stats={stats} />}
+        {shouldRenderStats && (stats !== undefined || stats !== null) && <Stats stats={stats} />}
         {tasks.map((task) => (
           <div key={task._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'>
             <h3 className='mb-5 text-4xl font-bold break-word font-primaryFont'>{task.title}</h3>
@@ -49,7 +48,7 @@ export default function TaskList ({ tasks, stats }: Props): JSX.Element {
           </div>
         ))}
       </MasonryGrid>
-      <Pagination />
+      <Pagination data={pagination} />
     </>
   )
 }

@@ -1,3 +1,4 @@
+import type { PaginationInterface } from 'interfaces/components'
 import { Key } from 'react'
 
 export interface StatsTasksInterface {
@@ -20,4 +21,11 @@ export interface TaskStatsInterface {
   totalPastMonthTiming: number
   totalTasksPastMonth: number
   performance: string
+}
+
+export interface FullTaskInterface {
+  status: string
+  pagination: PaginationInterface
+  tasks: TaskInterface[]
+  stats: TaskStatsInterface
 }

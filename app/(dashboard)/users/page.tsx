@@ -10,18 +10,18 @@ import { getUsers } from 'services/users/getUsers'
 import { sortUsers } from 'utils/sortData'
 
 export default function Users (): JSX.Element {
-  const { data, isLoading } = useSWR('users', getUsers, { onSuccess: data => sortUsers(data) })
+  const { data, isLoading, isValidating } = useSWR('users', getUsers, { onSuccess: data => sortUsers(data.users) })
 
-  const shouldRenderUsers = data !== undefined && data.length >= 1 && !isLoading
-  const shouldRenderSkeleton = isLoading
-  const shouldRenderNotFoundSign = !isLoading && (data === undefined || data?.length === 0)
+  const shouldRenderSkeleton = isLoading || isValidating
+  const shouldRenderUsers = data !== undefined && data?.users.length >= 1 && !shouldRenderSkeleton
+  const shouldRenderNotFoundSign = !shouldRenderUsers && !shouldRenderSkeleton
 
   return (
     <>
       <Header shouldRenderOptions={shouldRenderNotFoundSign} />
       <main>
         {shouldRenderSkeleton && <Loading />}
-        {shouldRenderUsers && <UserList users={data} />}
+        {shouldRenderUsers && <UserList data={data} />}
         {shouldRenderNotFoundSign && <NotFound />}
       </main>
       <Modals />

@@ -9,22 +9,19 @@ import Modals from 'app/components/projects/Modals'
 import { getProjects } from 'services/projects/getProjects'
 import { sortProjects } from 'utils/sortData'
 
-import { getProjectStats } from 'services/stats/getProjectStats'
-
 export default function Projects (): JSX.Element {
-  const { data: projects, isLoading: isLoadingProjects, isValidating } = useSWR('projects', getProjects, { onSuccess: data => sortProjects(data) })
-  const { data: stats, isLoading: isLoadingStats } = useSWR('projectStats', getProjectStats)
+  const { data, isLoading, isValidating } = useSWR('projects', getProjects, { onSuccess: data => sortProjects(data.projects) })
 
-  const shouldRenderSkeleton = isLoadingProjects || isLoadingStats || isValidating
-  const shouldRenderProjects = projects !== undefined && projects.length >= 1 && stats !== undefined && !isLoadingProjects && !isLoadingStats && !isValidating
-  const shouldRenderNotFoundSign = (!isLoadingProjects || !isLoadingStats) && (projects === undefined || projects?.length === 0) && stats === undefined
+  const shouldRenderSkeleton = isLoading || isValidating
+  const shouldRenderProjects = data !== undefined && data?.projects.length >= 1 && !shouldRenderSkeleton
+  const shouldRenderNotFoundSign = !shouldRenderProjects && !shouldRenderSkeleton
 
   return (
     <>
       <Header shouldRenderOptions={shouldRenderNotFoundSign} />
       <main>
         {shouldRenderSkeleton && <Loading />}
-        {shouldRenderProjects && <ProjectList projects={projects} stats={stats} />}
+        {shouldRenderProjects && <ProjectList data={data} />}
         {shouldRenderNotFoundSign && <NotFound />}
       </main>
       <Modals />

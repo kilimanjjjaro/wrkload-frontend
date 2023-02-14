@@ -1,10 +1,10 @@
 import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
-import type { UserInterface } from 'interfaces/users/User'
+import type { FullUserInterface } from 'interfaces/users/User'
 import { USERS_ENDPOINT } from 'constants/users'
 
-export const getUsers = async (): Promise<UserInterface[]> => {
+export const getUsers = async (): Promise<FullUserInterface> => {
   const accessToken = getCookie('accessToken')
 
   const config = {
@@ -15,5 +15,5 @@ export const getUsers = async (): Promise<UserInterface[]> => {
 
   const response = await api.get(`${USERS_ENDPOINT}`, config)
 
-  return response.data.users
+  return response.data
 }

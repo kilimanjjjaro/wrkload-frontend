@@ -1,21 +1,21 @@
 import { sortUsers } from 'utils/sortData'
 
-import type { UserInterface } from 'interfaces/users/User'
+import type { FullUserInterface, UserInterface } from 'interfaces/users/User'
 
 export const updateUserOptions = (updatedUser: UserInterface): any => {
   return {
-    optimisticData: (users: UserInterface[]) => {
-      const prevUsers = users.filter(user => {
+    optimisticData: (data: FullUserInterface) => {
+      const prevUsers = data.users.filter(user => {
         return user._id !== updatedUser._id
       })
-      return sortUsers([...prevUsers, updatedUser])
+      return { ...data, users: sortUsers([...prevUsers, updatedUser]) }
     },
     rollbackOnError: true,
-    populateCache: (updated: UserInterface, users: UserInterface[]) => {
-      const prevUsers = users.filter(user => {
+    populateCache: (updated: UserInterface, data: FullUserInterface) => {
+      const prevUsers = data.users.filter(user => {
         return user._id !== updatedUser._id
       })
-      return sortUsers([...prevUsers, updated])
+      return { ...data, users: sortUsers([...prevUsers, updated]) }
     },
     revalidate: false
   }
@@ -23,16 +23,22 @@ export const updateUserOptions = (updatedUser: UserInterface): any => {
 
 export const deleteUserOptions = (_id: string): any => {
   return {
-    optimisticData: (users: UserInterface[]) => {
-      return users.filter(user => {
-        return user._id !== _id
-      })
+    optimisticData: (data: FullUserInterface) => {
+      return {
+        ...data,
+        users: data.users.filter(user => {
+          return user._id !== _id
+        })
+      }
     },
     rollbackOnError: true,
-    populateCache: (_: null, users: UserInterface[]) => {
-      return users.filter(user => {
-        return user._id !== _id
-      })
+    populateCache: (_: null, data: FullUserInterface) => {
+      return {
+        ...data,
+        users: data.users.filter(user => {
+          return user._id !== _id
+        })
+      }
     },
     revalidate: false
   }

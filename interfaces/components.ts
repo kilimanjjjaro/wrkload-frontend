@@ -8,14 +8,6 @@ export interface StatsInterface {
   avg?: string
 }
 
-export interface PaginationInterface {
-  totalResults: number
-  resultsPerPage: number
-  prevPage: number
-  page: number
-  nextPage: number
-}
-
 export interface ButtonInterface {
   type?: 'submit'
   variant: 'primary' | 'secondary' | 'light-alternative' | 'dark-alternative'
@@ -45,4 +37,12 @@ export interface TextareaInterface {
   name: string
   placeholder: string
   centerText?: boolean
+}
+
+export interface PaginationInterface {
+  totalResults: number
+  resultsPerPage: number
+  prevPage: number
+  page: number
+  nextPage: number
 }

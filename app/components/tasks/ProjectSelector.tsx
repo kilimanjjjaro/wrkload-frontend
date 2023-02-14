@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { DataContext } from 'context/DataContext'
+import { mutate } from 'swr'
 
 interface Props {
   projectNames: string[]
@@ -17,10 +18,14 @@ export default function ProjectSelector ({ projectNames }: Props): JSX.Element {
     setSelected(projectName)
     setSearchInputValue('')
     setOpen(false)
+    setSelectedProjectToFetch(projectName)
   }
 
   useEffect(() => {
-    setSelectedProjectToFetch(selected)
+    const mutateData = async (): Promise<void> => {
+      await mutate('tasks')
+    }
+    mutateData().catch((error) => console.error(error))
   }, [selected])
 
   return (

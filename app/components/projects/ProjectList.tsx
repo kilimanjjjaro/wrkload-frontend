@@ -6,14 +6,9 @@ import MasonryGrid from 'app/components/shared/MasonryGrid'
 
 import { DataContext } from 'context/DataContext'
 import { ModalsContext } from 'context/ModalsContext'
-import type { ProjectInterface, ProjectStatsInterface } from 'interfaces/projects/Project'
+import type { FullProjectInterface, ProjectInterface } from 'interfaces/projects/Project'
 
-interface Props {
-  projects: ProjectInterface[]
-  stats?: ProjectStatsInterface
-}
-
-export default function ProjectList ({ projects, stats }: Props): JSX.Element {
+export default function ProjectList ({ data }: { data: FullProjectInterface }): JSX.Element {
   const { setSelectedProject, shouldRenderStats } = useContext(DataContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
 
@@ -26,6 +21,10 @@ export default function ProjectList ({ projects, stats }: Props): JSX.Element {
     setSelectedProject(project)
     setDeleteDataModalStatus(true)
   }
+
+  const projects = data?.projects
+  const stats = data?.stats
+  const pagination = data?.pagination
 
   return (
     <>
@@ -44,7 +43,7 @@ export default function ProjectList ({ projects, stats }: Props): JSX.Element {
           </div>
         ))}
       </MasonryGrid>
-      <Pagination />
+      <Pagination data={pagination} />
     </>
   )
 }

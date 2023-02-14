@@ -1,28 +1,27 @@
 'use client'
 
 import { useContext, useEffect } from 'react'
-import useSWR, { mutate } from 'swr'
+import useSWR from 'swr'
 import ProjectSelector from 'app/components/tasks/ProjectSelector'
 import { getProjects } from 'services/projects/getProjects'
 
 import { DataContext } from 'context/DataContext'
 
 export default function PageTitle (): JSX.Element {
-  const { selectedProjectToFetch } = useContext(DataContext)
-  const { data: projects, isLoading } = useSWR('projects', getProjects)
+  const { setSelectedProjectToFetch } = useContext(DataContext)
   let sortedProjectNames: string[] = []
 
-  if (projects !== undefined) sortedProjectNames = projects?.map((project) => project.name).sort()
+  const { data, isLoading } = useSWR('projects', getProjects)
 
-  useEffect(() => {
-    const mutateData = async (): Promise<void> => {
-      await mutate('tasks')
-      await mutate('taskStats')
-    }
-    mutateData().catch((error) => console.error(error))
-  }, [selectedProjectToFetch])
+  if (data !== undefined) sortedProjectNames = data?.projects.map((project) => project.name).sort()
 
   const shouldRenderSkeleton = isLoading || sortedProjectNames.length === 0
+
+  useEffect(() => {
+    if (sortedProjectNames.length > 0) {
+      setSelectedProjectToFetch(sortedProjectNames[0])
+    }
+  }, [data])
 
   return (
     <h2 className='flex text-6xl text-white gap-x-5 font-primaryFont'>
