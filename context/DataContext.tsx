@@ -56,14 +56,12 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
   const [selectedUser, setSelectedUser] = useState<UserInterface>(INITIAL_USER_STATE)
   const [isLogged, setIsLogged] = useState(false)
   const accessToken = getCookie('accessToken')
-  const [shouldRenderStats, setShouldRenderStats] = useState(() => {
+  const [shouldRenderStats, setShouldRenderStats] = useState(true)
+
+  useEffect(() => {
     const showStats = window.localStorage.getItem('showStats')
-    if (showStats !== null) {
-      return JSON.parse(showStats)
-    } else {
-      return true
-    }
-  })
+    if (showStats !== null) setShouldRenderStats(JSON.parse(showStats))
+  }, [])
 
   useEffect(() => {
     if (accessToken !== undefined) {
@@ -72,10 +70,6 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
       setIsLogged(false)
     }
   }, [accessToken])
-
-  useEffect(() => {
-    window.localStorage.setItem('showStats', JSON.stringify(shouldRenderStats))
-  }, [shouldRenderStats])
 
   return (
     <DataContext.Provider value={{ isLogged, setIsLogged, selectedTask, setSelectedTask, selectedProject, setSelectedProject, selectedUser, setSelectedUser, shouldRenderStats, setShouldRenderStats, selectedProjectToFetch, setSelectedProjectToFetch }}>
