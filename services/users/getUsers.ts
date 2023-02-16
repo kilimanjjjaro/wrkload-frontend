@@ -1,10 +1,16 @@
 import { getCookie } from 'cookies-next'
 import api from 'utils/api'
-
 import type { FullUserInterface } from 'interfaces/users/User'
-import { USERS_ENDPOINT } from 'constants/users'
 
-export const getUsers = async (): Promise<FullUserInterface> => {
+export const getUsers = async ({ page }: { page: string | null }): Promise<FullUserInterface> => {
+  let currentPage: string
+
+  if (page === null) {
+    currentPage = '1'
+  } else {
+    currentPage = page
+  }
+
   const accessToken = getCookie('accessToken')
 
   const config = {
@@ -13,7 +19,7 @@ export const getUsers = async (): Promise<FullUserInterface> => {
     }
   }
 
-  const response = await api.get(`${USERS_ENDPOINT}`, config)
+  const response = await api.get(`/users?limit=8&page=${currentPage}`, config)
 
   return response.data
 }

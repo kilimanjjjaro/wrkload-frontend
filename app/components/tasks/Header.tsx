@@ -9,7 +9,7 @@ interface Props {
 export default function Header ({ shouldRenderOptions }: Props): JSX.Element {
   return (
     <header className={clsx(
-      'flex text-white mb-10',
+      'flex text-white mb-10 items-center',
       !shouldRenderOptions && 'justify-between',
       shouldRenderOptions && 'justify-center'
     )}

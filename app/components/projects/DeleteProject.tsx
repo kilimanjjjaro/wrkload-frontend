@@ -27,11 +27,7 @@ export default function DeleteProject (): JSX.Element {
     setDeleteDataModalStatus(false)
 
     try {
-      await mutate(
-        'projects',
-        deleteProject(project._id),
-        deleteProjectOptions(project._id)
-      )
+      await mutate('projects', deleteProject(project._id), deleteProjectOptions(project._id))
     } catch (error: any) {
       console.error(error.response)
     }

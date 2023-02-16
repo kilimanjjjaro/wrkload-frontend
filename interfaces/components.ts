@@ -14,6 +14,7 @@ export interface ButtonInterface {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   fullWidth?: Boolean
   children: React.ReactNode
+  disablePagination?: boolean
 }
 
 export interface InputInterface {

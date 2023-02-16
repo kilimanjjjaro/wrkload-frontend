@@ -1,10 +1,11 @@
 'use client'
 
+import { useEffect } from 'react'
 import useSWR from 'swr'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
-import Loading from 'app/components/tasks/Loading'
+import Skeleton from 'app/components/tasks/Skeleton'
 import TaskList from 'app/components/tasks/TaskList'
 import Button from 'app/components/shared/Button'
 import Modals from 'app/components/tasks/Modals'
@@ -16,9 +17,14 @@ export default function SearchTasks (): JSX.Element {
   const params = useSearchParams()
   const project = params.get('project')
   const query = params.get('query')
+  const page = params.get('page')
   const router = useRouter()
 
-  const { data, isLoading, isValidating } = useSWR('tasks', async () => await searchTasks({ project, query }), { onSuccess: data => sortTasks(data.tasks), revalidate: false })
+  const { data, isLoading, isValidating, mutate } = useSWR('tasks', async () => await searchTasks({ project, query, page }), { onSuccess: data => sortTasks(data.tasks), revalidate: false })
+
+  useEffect(() => {
+    mutate().catch((error) => console.error(error))
+  }, [page])
 
   const shouldRenderSkeleton = isLoading || isValidating
   const shouldRenderTasks = data !== undefined && data?.tasks.length >= 1 && !shouldRenderSkeleton
@@ -37,7 +43,7 @@ export default function SearchTasks (): JSX.Element {
         )}
       </header>
       <main>
-        {shouldRenderSkeleton && <Loading />}
+        {shouldRenderSkeleton && <Skeleton />}
         {shouldRenderTasks && <TaskList data={data} />}
         {shouldRenderNotFoundSign && (
           <div className='flex flex-col items-center h-full mt-28 gap-y-5'>

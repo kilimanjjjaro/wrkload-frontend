@@ -1,10 +1,11 @@
 'use client'
 
+import { useEffect } from 'react'
 import useSWR from 'swr'
 import Image from 'next/image'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
-import Loading from 'app/components/projects/Loading'
+import Skeleton from 'app/components/projects/Skeleton'
 import Modals from 'app/components/projects/Modals'
 import Button from 'app/components/shared/Button'
 import ProjectList from 'app/components/projects/ProjectList'
@@ -15,9 +16,14 @@ import { sortProjects } from 'utils/sortData'
 export default function SearchProjects (): JSX.Element {
   const params = useSearchParams()
   const query = params.get('query')
+  const page = params.get('page')
   const router = useRouter()
 
-  const { data, isLoading, isValidating } = useSWR('projects', async () => await searchProjects({ query }), { onSuccess: data => sortProjects(data.projects), revalidate: false })
+  const { data, isLoading, isValidating, mutate } = useSWR('projects', async () => await searchProjects({ query, page }), { onSuccess: data => sortProjects(data.projects), revalidate: false })
+
+  useEffect(() => {
+    mutate().catch((error) => console.error(error))
+  }, [page])
 
   const shouldRenderSkeleton = isLoading || isValidating
   const shouldRenderProjects = data !== undefined && data?.projects.length >= 1 && !shouldRenderSkeleton
@@ -36,7 +42,7 @@ export default function SearchProjects (): JSX.Element {
         )}
       </header>
       <main>
-        {shouldRenderSkeleton && <Loading />}
+        {shouldRenderSkeleton && <Skeleton />}
         {shouldRenderProjects && <ProjectList data={data} />}
         {shouldRenderNotFoundSign && (
           <div className='flex flex-col items-center h-full mt-28 gap-y-5'>

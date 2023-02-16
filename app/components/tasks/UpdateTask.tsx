@@ -26,11 +26,7 @@ export default function UpdateTask (): JSX.Element {
     setUpdateDataModalStatus(false)
 
     try {
-      await mutate(
-        'tasks',
-        updateTask(task),
-        updateTaskOptions(task)
-      )
+      await mutate('tasks', updateTask(task), updateTaskOptions(task))
     } catch (error) {
       console.error(error)
     }

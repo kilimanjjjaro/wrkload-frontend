@@ -1,10 +1,11 @@
 'use client'
 
+import { useEffect } from 'react'
 import useSWR from 'swr'
 import Image from 'next/image'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
-import Loading from 'app/components/users/Loading'
+import Skeleton from 'app/components/users/Skeleton'
 import Modals from 'app/components/users/Modals'
 import Button from 'app/components/shared/Button'
 import UserList from 'app/components/users/UserList'
@@ -15,9 +16,14 @@ import { sortUsers } from 'utils/sortData'
 export default function SearchUsers (): JSX.Element {
   const params = useSearchParams()
   const query = params.get('query')
+  const page = params.get('page')
   const router = useRouter()
 
-  const { data, isLoading, isValidating } = useSWR('users', async () => await searchUsers({ query }), { onSuccess: data => sortUsers(data.users), revalidate: false })
+  const { data, isLoading, isValidating, mutate } = useSWR('users', async () => await searchUsers({ query, page }), { onSuccess: data => sortUsers(data.users) })
+
+  useEffect(() => {
+    mutate().catch((error) => console.error(error))
+  }, [page])
 
   const shouldRenderSkeleton = isLoading || isValidating
   const shouldRenderUsers = data !== undefined && data?.users.length >= 1 && !shouldRenderSkeleton
@@ -36,7 +42,7 @@ export default function SearchUsers (): JSX.Element {
         )}
       </header>
       <main>
-        {shouldRenderSkeleton && <Loading />}
+        {shouldRenderSkeleton && <Skeleton />}
         {shouldRenderUsers && <UserList data={data} />}
         {shouldRenderNotFoundSign && (
           <div className='flex flex-col items-center h-full mt-28 gap-y-5'>

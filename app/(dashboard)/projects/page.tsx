@@ -1,16 +1,24 @@
 'use client'
 
+import { useEffect } from 'react'
 import useSWR from 'swr'
 import Header from 'app/components/projects/Header'
-import Loading from 'app/components/projects/Loading'
+import Skeleton from 'app/components/projects/Skeleton'
 import ProjectList from 'app/components/projects/ProjectList'
 import NotFound from 'app/components/projects/NotFound'
 import Modals from 'app/components/projects/Modals'
 import { getProjects } from 'services/projects/getProjects'
 import { sortProjects } from 'utils/sortData'
+import { useSearchParams } from 'next/navigation'
 
 export default function Projects (): JSX.Element {
-  const { data, isLoading, isValidating } = useSWR('projects', getProjects, { onSuccess: data => sortProjects(data.projects) })
+  const params = useSearchParams()
+  const page = params.get('page')
+  const { data, isLoading, isValidating, mutate } = useSWR('projects', async () => await getProjects({ page }), { onSuccess: data => sortProjects(data.projects) })
+
+  useEffect(() => {
+    mutate().catch((error) => console.error(error))
+  }, [page])
 
   const shouldRenderSkeleton = isLoading || isValidating
   const shouldRenderProjects = data !== undefined && data?.projects.length >= 1 && !shouldRenderSkeleton
@@ -20,7 +28,7 @@ export default function Projects (): JSX.Element {
     <>
       <Header shouldRenderOptions={shouldRenderNotFoundSign} />
       <main>
-        {shouldRenderSkeleton && <Loading />}
+        {shouldRenderSkeleton && <Skeleton />}
         {shouldRenderProjects && <ProjectList data={data} />}
         {shouldRenderNotFoundSign && <NotFound />}
       </main>

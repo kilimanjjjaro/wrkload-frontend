@@ -3,9 +3,18 @@ import api from 'utils/api'
 
 interface Props {
   query: string | null
+  page: string | null
 }
 
-export default async function searchProjects ({ query }: Props): Promise<any> {
+export default async function searchProjects ({ query, page }: Props): Promise<any> {
+  let currentPage: string
+
+  if (page === null) {
+    currentPage = '1'
+  } else {
+    currentPage = page
+  }
+
   const accessToken = getCookie('accessToken')
 
   const config = {
@@ -14,7 +23,7 @@ export default async function searchProjects ({ query }: Props): Promise<any> {
     }
   }
 
-  const response = await api.get(`/projects?search=${query as string}`, config)
+  const response = await api.get(`/projects?search=${query as string}&limit=1&page=${currentPage}`, config)
 
   return response.data
 }

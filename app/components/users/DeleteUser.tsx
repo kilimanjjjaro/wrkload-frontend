@@ -25,11 +25,7 @@ export default function DeleteUser (): JSX.Element {
     setDeleteDataModalStatus(false)
 
     try {
-      await mutate(
-        'users',
-        deleteUser(user._id),
-        deleteUserOptions(user._id)
-      )
+      await mutate('users', deleteUser(user._id), deleteUserOptions(user._id))
     } catch (error: any) {
       console.error(error.response)
     }

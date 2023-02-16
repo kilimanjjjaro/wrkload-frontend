@@ -4,7 +4,6 @@ import dayjs from 'dayjs'
 import { EnvelopeIcon, PencilSquareIcon, TrashIcon, UserIcon } from '@heroicons/react/24/outline'
 import Pagination from 'app/components/shared/Pagination'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
-
 import { DataContext } from 'context/DataContext'
 import { ModalsContext } from 'context/ModalsContext'
 import type { FullUserInterface, UserInterface } from 'interfaces/users/User'
@@ -27,10 +26,12 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
   const pagination = data?.pagination
 
   return (
-    <div>
+    <>
       <MasonryGrid>
         {users.map((user) => (
-          <div key={user._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'>
+          <div
+            key={user._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'
+          >
             {user.avatar !== undefined && (
               <div className='relative'>
                 <Image
@@ -66,6 +67,6 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
         ))}
       </MasonryGrid>
       <Pagination data={pagination} />
-    </div>
+    </>
   )
 }

@@ -26,11 +26,7 @@ export default function AddProject (): JSX.Element {
     setAddDataModalStatus(false)
 
     try {
-      await mutate(
-        'projects',
-        addProject(project),
-        addProjectOptions(project)
-      )
+      await mutate('projects', addProject(project), addProjectOptions(project))
     } catch (error: any) {
       console.error(error.response)
     }

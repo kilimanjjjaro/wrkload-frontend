@@ -1,10 +1,21 @@
 import { getCookie } from 'cookies-next'
 import api from 'utils/api'
-
 import type { FullTaskInterface } from 'interfaces/tasks/Task'
-import { TASKS_ENDPOINT } from 'constants/tasks'
 
-export const getTasks = async ({ project }: { project: string }): Promise<FullTaskInterface> => {
+interface Props {
+  page: string | null
+  project: string
+}
+
+export const getTasks = async ({ page, project }: Props): Promise<FullTaskInterface> => {
+  let currentPage: string
+
+  if (page === null) {
+    currentPage = '1'
+  } else {
+    currentPage = page
+  }
+
   const accessToken = getCookie('accessToken')
 
   const config = {
@@ -13,7 +24,7 @@ export const getTasks = async ({ project }: { project: string }): Promise<FullTa
     }
   }
 
-  const response = await api.get(`${TASKS_ENDPOINT}?project=${project}`, config)
+  const response = await api.get(`/tasks?project=${project}&limit=8&page=${currentPage}`, config)
 
   return response.data
 }

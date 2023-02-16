@@ -11,13 +11,11 @@ import Logo from 'app/components/shared/Logo'
 import Button from 'app/components/shared/Button'
 import DashboardTab from 'app/components/shared/DashboardTab'
 
-import { USERS_ENDPOINT as key } from 'constants/users'
-
 export default function NavBar (): JSX.Element {
   const router = useRouter()
   const { isLogged } = useContext(DataContext)
 
-  const { data: user, isLoading } = useSWR(isLogged ? `${key}/_id` : null, getUser)
+  const { data: user, isLoading } = useSWR(isLogged ? 'loggedUser' : null, getUser)
 
   return (
     <div className='fixed top-0 left-0 z-50 flex items-center justify-between w-full px-6 pt-6 mx-auto text md:pt-8 md:px-8'>

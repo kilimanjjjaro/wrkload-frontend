@@ -25,11 +25,7 @@ export default function DeleteTask (): JSX.Element {
     setDeleteDataModalStatus(false)
 
     try {
-      await mutate(
-        'tasks',
-        deleteTask(task._id),
-        deleteTaskOptions(task._id)
-      )
+      await mutate('tasks', deleteTask(task._id), deleteTaskOptions(task._id))
     } catch (error) {
       console.error(error)
     }

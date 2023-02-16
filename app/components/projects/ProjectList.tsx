@@ -4,7 +4,6 @@ import { InboxStackIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24
 import Stats from 'app/components/projects/Stats'
 import Pagination from 'app/components/shared/Pagination'
 import MasonryGrid from 'app/components/shared/MasonryGrid'
-
 import { DataContext } from 'context/DataContext'
 import { ModalsContext } from 'context/ModalsContext'
 import type { FullProjectInterface, ProjectInterface } from 'interfaces/projects/Project'
@@ -33,7 +32,9 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
       <MasonryGrid>
         {shouldRenderStats && (stats !== undefined || stats !== null) && pathname?.includes('search') === false && <Stats stats={stats} />}
         {projects.map((project) => (
-          <div key={project._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'>
+          <div
+            key={project._id} className='relative flex flex-col items-start transition ease-in-out bg-white hover:bg-white duration-400 text-dark-gray group p-7'
+          >
             <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'>{project.name}</h3>
 
             <div className='flex items-center h-8 px-4 mt-4 text-xs text-white bg-light-gray gap-x-1 font-secondaryFont' title='Total tasks'><InboxStackIcon className='w-4 stroke-2' />{project.totalTasks} tasks</div>

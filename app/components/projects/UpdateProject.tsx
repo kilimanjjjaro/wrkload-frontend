@@ -27,11 +27,7 @@ export default function UpdateProject (): JSX.Element {
     setUpdateDataModalStatus(false)
 
     try {
-      await mutate(
-        'projects',
-        updateProject(project),
-        updateProjectOptions(project)
-      )
+      await mutate('projects', updateProject(project), updateProjectOptions(project))
     } catch (error: any) {
       console.error(error.response)
     }

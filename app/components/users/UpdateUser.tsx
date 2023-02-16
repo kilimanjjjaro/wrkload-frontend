@@ -9,7 +9,6 @@ import Input from 'app/components/shared/Input'
 
 import { DataContext } from 'context/DataContext'
 import { ModalsContext } from 'context/ModalsContext'
-import { USERS_ENDPOINT as key } from 'constants/users'
 
 export default function UpdateUser (): JSX.Element {
   const { selectedUser } = useContext(DataContext)
@@ -26,12 +25,9 @@ export default function UpdateUser (): JSX.Element {
     setUpdateDataModalStatus(false)
 
     try {
-      await mutate(
-        'users',
-        updateUser(user),
-        updateUserOptions(user)
+      await mutate('users', updateUser(user), updateUserOptions(user)
       )
-      await mutate(`${key}/_id`)
+      await mutate('loggedUser')
     } catch (error: any) {
       console.error(error.response)
     }

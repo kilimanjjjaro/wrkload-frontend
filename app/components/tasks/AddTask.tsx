@@ -27,11 +27,7 @@ export default function AddTask (): JSX.Element {
     setAddDataModalStatus(false)
 
     try {
-      await mutate(
-        'tasks',
-        addTask(task),
-        addTaskOptions(task)
-      )
+      await mutate('tasks', addTask(task), addTaskOptions(task))
     } catch (error: any) {
       console.error(error)
     }
@@ -56,10 +52,10 @@ export default function AddTask (): JSX.Element {
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>
-              <ArrowRightIcon className='w-4 stroke-width-3' />
+              <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
             <Button onClick={(event) => handleCloseModal(event)} variant='light-alternative'>
-              <XMarkIcon className='w-4 stroke-width-3' />
+              <XMarkIcon className='w-4 stroke-3' />
             </Button>
           </div>
         </form>
