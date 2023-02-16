@@ -68,3 +68,5 @@ export default function ProjectSelector ({ projectNames }: Props): JSX.Element {
     </div>
   )
 }
+
+// Credits of base code: https://github.com/Sridhar-C-25/Custom-Dropdown-menu
