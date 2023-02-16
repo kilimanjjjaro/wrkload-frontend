@@ -15,7 +15,7 @@ export default function Users (): JSX.Element {
   const params = useSearchParams()
   const page = params.get('page')
 
-  const { data, isLoading, isValidating, mutate } = useSWR('users', async () => await getUsers({ page }), { onSuccess: data => sortUsers(data.users) })
+  const { data, isLoading, isValidating, mutate } = useSWR('users', async () => await getUsers({ page }), { onSuccess: data => sortUsers(data.users), revalidateIfStale: false })
 
   useEffect(() => {
     mutate().catch((error) => console.error(error))

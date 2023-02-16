@@ -17,7 +17,7 @@ export default function Tasks (): JSX.Element {
   const page = params.get('page')
   const { selectedProjectToFetch } = useContext(DataContext)
 
-  const { data, isLoading, isValidating, mutate } = useSWR(selectedProjectToFetch !== '' ? 'tasks' : null, async () => await getTasks({ page, project: selectedProjectToFetch }), { onSuccess: (data) => sortTasks(data.tasks) })
+  const { data, isLoading, isValidating, mutate } = useSWR(selectedProjectToFetch !== '' ? 'tasks' : null, async () => await getTasks({ page, project: selectedProjectToFetch }), { onSuccess: (data) => sortTasks(data.tasks), revalidateIfStale: false })
 
   useEffect(() => {
     mutate().catch((error) => console.error(error))

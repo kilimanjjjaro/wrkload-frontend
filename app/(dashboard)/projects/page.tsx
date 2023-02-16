@@ -14,7 +14,7 @@ import { useSearchParams } from 'next/navigation'
 export default function Projects (): JSX.Element {
   const params = useSearchParams()
   const page = params.get('page')
-  const { data, isLoading, isValidating, mutate } = useSWR('projects', async () => await getProjects({ page }), { onSuccess: data => sortProjects(data.projects) })
+  const { data, isLoading, isValidating, mutate } = useSWR('projects', async () => await getProjects({ page }), { onSuccess: data => sortProjects(data.projects), revalidateIfStale: false })
 
   useEffect(() => {
     mutate().catch((error) => console.error(error))

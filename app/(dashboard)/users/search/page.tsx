@@ -19,7 +19,7 @@ export default function SearchUsers (): JSX.Element {
   const page = params.get('page')
   const router = useRouter()
 
-  const { data, isLoading, isValidating, mutate } = useSWR('users', async () => await searchUsers({ query, page }), { onSuccess: data => sortUsers(data.users) })
+  const { data, isLoading, isValidating, mutate } = useSWR('users', async () => await searchUsers({ query, page }), { onSuccess: data => sortUsers(data.users), revalidateIfStale: false, revalidateOnFocus: false })
 
   useEffect(() => {
     mutate().catch((error) => console.error(error))
