@@ -11,10 +11,12 @@ import Input from 'app/components/shared/Input'
 import Textarea from 'app/components/shared/Textarea'
 
 import { ModalsContext } from 'context/ModalsContext'
+import { DataContext } from 'context/DataContext'
 import { INITIAL_TASK_STATE } from 'constants/tasks'
 
 export default function AddTask (): JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
+  const { selectedProjectToFetch } = useContext(DataContext)
 
   const [task, setTask] = useState(INITIAL_TASK_STATE)
 
@@ -27,6 +29,7 @@ export default function AddTask (): JSX.Element {
     setAddDataModalStatus(false)
 
     try {
+      task.project = selectedProjectToFetch
       await mutate('tasks', addTask(task), addTaskOptions(task))
     } catch (error: any) {
       console.error(error)
@@ -45,7 +48,6 @@ export default function AddTask (): JSX.Element {
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>
             <Input variant='primary' onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' required />
-            <Input variant='primary' onChange={handleChange} value={task.project} name='project' type='text' placeholder='Project' required />
             <Input variant='primary' onChange={handleChange} value={task.timing} name='timing' type='time' placeholder='Timing' required />
             <Input variant='primary' onChange={handleChange} value={task.deliveredAt} name='deliveredAt' type='date' placeholder='Delivered' required />
             <Textarea variant='primary' onChange={handleChange} value={task.description} name='description' placeholder='Description' />
