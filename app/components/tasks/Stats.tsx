@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper'
 import { ArrowDownIcon, ArrowUpIcon, ChartBarIcon, ClockIcon, EyeSlashIcon, InboxStackIcon } from '@heroicons/react/24/outline'
@@ -8,11 +8,13 @@ import type { TaskStatsInterface } from 'interfaces/tasks/Task'
 
 export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.Element {
   const { shouldRenderStats, setShouldRenderStats } = useContext(DataContext)
-  
-  const handleRenderStats = () => {
+
+  const handleRenderStats = (): void => {
     setShouldRenderStats(!shouldRenderStats)
     window.localStorage.setItem('showStats', JSON.stringify(!shouldRenderStats))
   }
+
+  const performanceText = stats.performance === 'better' ? 'better' : 'worse'
 
   return (
     <>
@@ -29,20 +31,27 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.El
         >
           <EyeSlashIcon className='absolute z-10 w-6 h-6 transition ease-in-out cursor-pointer stroke-2 duration-400 hover:text-white text-light-gray top-7 right-7' onClick={handleRenderStats} />
           <SwiperSlide className='text-white pt-7 pb-[33px] pr-7 pl-7'>
-            <InboxStackIcon className='h-10 stroke-2 text-light-gray' />
-            <div className='flex items-center text-4xl font-bold gap-x-1 mt-7 font-primaryFont'>
-              {stats.totalTasksPastMonth}
-              {stats.performance === 'better' && <ArrowUpIcon className='w-4 stroke-custom-green stroke-4' />}
-              {stats.performance === 'worst' && <ArrowDownIcon className='w-4 stroke-custom-red stroke-4' />}
-            </div>
-            <span className='mt-1 text-2xl font-secondaryFont'>tasks uploaded<br /> past month.</span>
-          </SwiperSlide>
-          <SwiperSlide className='text-white pt-7 pb-[33px] pr-7 pl-7'>
             <ClockIcon className='h-10 stroke-2 text-light-gray' />
             <div className='flex items-center text-4xl font-bold gap-x-1 mt-7 font-primaryFont'>
               {stats.totalPastMonthTiming}
+              {stats.performance === 'better' && (
+                <div className='relative flex items-center cursor-help group'>
+                  <ArrowUpIcon className='w-4 stroke-custom-green stroke-4' />
+                  <div className='absolute left-6 min-w-[167px] text-xs text-center text-dark-gray bg-light-gray p-2 invisible transition-all duration-400 ease-in-out opacity-0 group-hover:opacity-100 group-hover:visible'>
+                    Your current performance is being {performanceText}
+                  </div>
+                </div>
+              )}
+              {stats.performance === 'worst' && <ArrowDownIcon className='w-4 stroke-custom-red stroke-4' />}
             </div>
             <span className='mt-1 text-2xl font-secondaryFont'>hours worked<br /> past month.</span>
+          </SwiperSlide>
+          <SwiperSlide className='text-white pt-7 pb-[33px] pr-7 pl-7'>
+            <InboxStackIcon className='h-10 stroke-2 text-light-gray' />
+            <div className='flex items-center text-4xl font-bold gap-x-1 mt-7 font-primaryFont'>
+              {stats.totalTasksPastMonth}
+            </div>
+            <span className='mt-1 text-2xl font-secondaryFont'>tasks uploaded<br /> past month.</span>
           </SwiperSlide>
         </Swiper>
       )}
