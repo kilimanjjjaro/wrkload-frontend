@@ -1,14 +1,22 @@
 import { useContext, useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { mutate } from 'swr'
 import clsx from 'clsx'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { DataContext } from 'context/DataContext'
-import { mutate } from 'swr'
 
-interface Props {
-  projectNames: string[]
+const VARIANTS = {
+  open: { opacity: 1, y: 0, display: 'block' },
+  closed: {
+    opacity: 0,
+    y: -30,
+    transitionEnd: {
+      display: 'none'
+    }
+  }
 }
 
-export default function ProjectSelector ({ projectNames }: Props): JSX.Element {
+export default function ProjectSelector ({ projectNames }: { projectNames: string[] }): JSX.Element {
   const { setSelectedProjectToFetch } = useContext(DataContext)
   const [open, setOpen] = useState(false)
   const [selected, setSelected] = useState(projectNames[0])
@@ -37,10 +45,15 @@ export default function ProjectSelector ({ projectNames }: Props): JSX.Element {
         {selected}
         <ChevronDownIcon className={clsx('w-4 md:w-6 2xl:w-8 stroke-3.5', open && 'rotate-180')} />
       </div>
-      <ul
-        className={clsx('z-20 absolute font-secondaryFont top-full text-base bg-dark-gray mt-5 overflow-x-hidden overflow-y-auto', open && 'max-h-40', !open && 'max-h-0')}
+
+      <motion.ul
+        className={clsx('z-20 absolute font-secondaryFont top-full text-base bg-dark-gray mt-5 overflow-x-hidden overflow-y-auto custom-scrollbar max-h-[217px]')}
+        variants={VARIANTS}
+        initial={false}
+        animate={open ? 'open' : 'closed'}
+        transition={{ ease: 'easeInOut', duration: 0.6 }}
       >
-        <div className='sticky top-0 flex items-center px-3 border-b border-light-gray'>
+        <div className='sticky top-0 flex items-center px-3 border-b border-light-gray bg-dark-gray'>
           <MagnifyingGlassIcon className='w-4 stroke-3 stroke-white' />
           <input
             type='text'
@@ -64,7 +77,7 @@ export default function ProjectSelector ({ projectNames }: Props): JSX.Element {
             {projectName}
           </li>
         ))}
-      </ul>
+      </motion.ul>
     </div>
   )
 }
