@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { MoonIcon, SunIcon } from 'app/components/shared/ThemeIcons'
 
 export default function ThemeSelector (): JSX.Element {
-  const [darkMode, setDarkMode] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches)
+  const [darkMode, setDarkMode] = useState(window !== undefined ? window.matchMedia('(prefers-color-scheme: dark)').matches : true)
 
   const toggleTheme = (): void => {
     setDarkMode(!darkMode)
