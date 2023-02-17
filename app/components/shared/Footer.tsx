@@ -1,5 +1,5 @@
-import { MoonIcon } from '@heroicons/react/24/solid'
 import Languages from 'app/components/shared/Languages'
+import ThemeSelector from 'app/components/shared/ThemeSelector'
 
 export default function Footer (): JSX.Element {
   return (
@@ -9,7 +9,7 @@ export default function Footer (): JSX.Element {
       </span>
       <div className='flex gap-x-5'>
         <Languages />
-        <button><MoonIcon className='w-[18px] transition ease-in-out duration-400 hover:text-white' /></button>
+        <ThemeSelector />
       </div>
     </footer>
   )
