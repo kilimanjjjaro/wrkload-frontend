@@ -5,15 +5,26 @@
 @import "~swiper/css";
 @import "~swiper/css/pagination";
 
+/* Custom scrollbars */
 textarea::-webkit-scrollbar {
   width: .5rem;
   cursor: pointer;
 }
 
 textarea::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: .5rem;
+  cursor: pointer;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Custom swiper styles */
 .swiper-horizontal>.swiper-pagination-bullets {
   bottom: 0;
 }
