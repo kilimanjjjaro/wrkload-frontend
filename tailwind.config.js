@@ -15,13 +15,13 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: '#0500ff',
-        alternative: '#0d0d0d',
-        'light-gray': '#919191',
-        'dark-gray': '#404040',
-        'custom-red': '#e32626',
-        'custom-yellow': '#dfcd24',
-        'custom-green': '#34a400'
+        pink: '#e5c6e3',
+        'light-pink': '#e1d7e0',
+        black: '#121013',
+        white: '#f3ebf3',
+        red: '#e32626',
+        yellow: '#dfcd24',
+        green: '#34a400'
       },
       transitionDuration: {
         400: '400ms'

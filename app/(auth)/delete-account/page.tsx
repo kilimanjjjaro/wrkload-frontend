@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
-import Headline from 'app/components/shared/Headline'
-import Paragraph from 'app/components/shared/Paragraph'
-import Input from 'app/components/shared/Input'
-import Button from 'app/components/shared/Button'
+import Headline from 'components/shared/Headline'
+import Paragraph from 'components/shared/Paragraph'
+import Input from 'components/shared/Input'
+import Button from 'components/shared/Button'
 import deleteAccount from 'services/auth/deleteAccount'
 import { useRouter } from 'next/navigation'
 
@@ -37,7 +37,7 @@ export default function DeleteAccount (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center bg-white text-dark-gray md:w-96 min-w-auto'>
+      <div className='p-10 text-center bg-white text-black md:w-96 min-w-auto'>
         <Headline variant='md'><b>Delete account</b></Headline>
         <div className='flex flex-col mb-4 gap-y-3'>
           <Paragraph variant='sm'>Are you sure to continue? Your account and data will be permanently deleted.</Paragraph>

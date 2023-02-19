@@ -5,10 +5,10 @@ import useSWR from 'swr'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
-import Skeleton from 'app/components/tasks/Skeleton'
-import TaskList from 'app/components/tasks/TaskList'
-import Button from 'app/components/shared/Button'
-import Modals from 'app/components/tasks/Modals'
+import Skeleton from 'components/tasks/Skeleton'
+import TaskList from 'components/tasks/TaskList'
+import Button from 'components/shared/Button'
+import Modals from 'components/tasks/Modals'
 import notFoundImage from 'public/images/not-found.webp'
 import searchTasks from 'services/tasks/searchTasks'
 import { sortTasks } from 'utils/sortData'
@@ -52,7 +52,7 @@ export default function SearchTasks (): JSX.Element {
               src={notFoundImage}
               alt='Not found image'
             />
-            <span className='text-xl text-center font-secondaryFont text-dark-gray'>No search results found. <br className='hidden lg:block' />Please try again.</span>
+            <span className='text-xl text-center font-secondaryFont text-black'>No search results found. <br className='hidden lg:block' />Please try again.</span>
             <Button onClick={() => router.push('/tasks')} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
           </div>
         )}

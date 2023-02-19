@@ -3,14 +3,14 @@
 import { useContext, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
-import Header from 'app/components/tasks/Header'
-import Skeleton from 'app/components/tasks/Skeleton'
-import TaskList from 'app/components/tasks/TaskList'
-import NotFound from 'app/components/tasks/NotFound'
-import Modals from 'app/components/tasks/Modals'
+import Header from 'components/tasks/Header'
+import Skeleton from 'components/tasks/Skeleton'
+import TaskList from 'components/tasks/TaskList'
+import NotFound from 'components/tasks/NotFound'
+import Modals from 'components/tasks/Modals'
 import { getTasks } from 'services/tasks/getTasks'
 import { sortTasks } from 'utils/sortData'
-import { DataContext } from 'context/DataContext'
+import { DataContext } from 'contexts/DataContext'
 
 export default function Tasks (): JSX.Element {
   const params = useSearchParams()

@@ -1,4 +1,4 @@
-import HeroHeader from 'app/components/HeroHeader'
+import HeroHeader from 'components/home/HeroHeader'
 
 export default function Home (): JSX.Element {
   return (

@@ -3,14 +3,14 @@
 import { useContext, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
-import Headline from 'app/components/shared/Headline'
-import Input from 'app/components/shared/Input'
-import Button from 'app/components/shared/Button'
+import Headline from 'components/shared/Headline'
+import Input from 'components/shared/Input'
+import Button from 'components/shared/Button'
 import GitHubLogo from 'public/images/github.svg'
 import GoogleLogo from 'public/images/google.svg'
-import TextLink from 'app/components/shared/TextLink'
+import TextLink from 'components/shared/TextLink'
 import register from 'services/auth/register'
-import { DataContext } from 'context/DataContext'
+import { DataContext } from 'contexts/DataContext'
 
 const INITIAL_CREDENTIALS_STATE = {
   username: '',
@@ -50,7 +50,7 @@ export default function Register (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center bg-white text-dark-gray md:w-96 min-w-auto'>
+      <div className='p-10 text-center bg-white text-black md:w-96 min-w-auto'>
         <Headline variant='md'><b>Nice to meet you!</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
@@ -64,9 +64,9 @@ export default function Register (): JSX.Element {
           </Button>
         </form>
         <div className='flex items-center mt-5 text-sm font-semibold font-secondaryFont'>
-          <div className='w-[26%] h-[2px] bg-light-gray dark:bg-black' aria-hidden='true' />
+          <div className='w-[26%] h-[2px] bg-light-pink dark:bg-black' aria-hidden='true' />
           <span className='w-[48%]'>Maybe you use?</span>
-          <div className='w-[26%] h-[2px] bg-light-gray dark:bg-black' aria-hidden='true' />
+          <div className='w-[26%] h-[2px] bg-light-pink dark:bg-black' aria-hidden='true' />
         </div>
         <div className='flex gap-5 mt-5'>
           <Button variant='light-alternative' fullWidth>

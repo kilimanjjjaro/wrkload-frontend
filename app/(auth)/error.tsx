@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Feedback from 'app/components/shared/Feedback'
+import Feedback from 'components/shared/Feedback'
 
 interface Props {
   error: Error

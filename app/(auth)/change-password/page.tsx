@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
-import Headline from 'app/components/shared/Headline'
-import Input from 'app/components/shared/Input'
-import Button from 'app/components/shared/Button'
+import Headline from 'components/shared/Headline'
+import Input from 'components/shared/Input'
+import Button from 'components/shared/Button'
 import login from 'services/auth/login'
 import changePassword from 'services/auth/changePassword'
 
@@ -55,7 +55,7 @@ export default function ChangePassword (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center bg-white text-dark-gray md:w-96 min-w-auto'>
+      <div className='p-10 text-center bg-white text-black md:w-96 min-w-auto'>
         <Headline variant='md'><b>{step === 1 ? 'Change password' : 'Enter new password'}</b></Headline>
         {step === 1 && (
           <form onSubmit={(event) => { void handleStepOne(event) }}>
