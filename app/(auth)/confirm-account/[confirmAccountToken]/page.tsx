@@ -75,7 +75,7 @@ export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Elemen
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto'>
         <h2 className='text-xl leading-tight mb-7 md:mb-10 font-primaryFont md:text-3xl 2xl:text-4xl'><b>Done!</b></h2>
-        <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been confirmed. Please, log in.</Balancer></p>
+        <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been confirmed. <b>Please, log in.</b></Balancer></p>
         <Button onClick={() => router.push('/login')} variant='secondary'>
           <ArrowRightIcon className='w-4 stroke-3' />
         </Button>

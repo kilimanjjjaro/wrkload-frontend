@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
+import Paragraph from 'components/shared/Paragraph'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
 import login from 'services/auth/login'
@@ -41,6 +42,7 @@ export default function ChangePassword (): JSX.Element {
     try {
       await login({ email, password })
       // TODO: handle week password
+      // TODO: handle unlogged session
       setStep(2)
     } catch (error: any) {
       if (error.response.data.code === 'auth/invalid-credentials') {
@@ -112,8 +114,13 @@ export default function ChangePassword (): JSX.Element {
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center text-black bg-white md:w-96 min-w-auto'>
         <Headline variant='md'><b>{step === 1 ? 'Change password' : 'Enter new password'}</b></Headline>
+        <Paragraph variant='sm'>
+          <Balancer>
+            If you wish to change your password, <b>please complete the following form.</b>
+          </Balancer>
+        </Paragraph>
         {step === 1 && (
-          <form onSubmit={(event) => { void handleStepOne(event) }}>
+          <form className='mt-5' onSubmit={(event) => { void handleStepOne(event) }}>
             <div className='flex flex-col gap-3 mb-5'>
               <Input variant='primary' onChange={handleChange} value={credentials.currentPassword} name='currentPassword' type='password' placeholder='Current Password' centerText />
             </div>
@@ -123,7 +130,7 @@ export default function ChangePassword (): JSX.Element {
           </form>
         )}
         {step === 2 && (
-          <form onSubmit={(event) => { void handleStepTwo(event) }}>
+          <form className='mt-5' onSubmit={(event) => { void handleStepTwo(event) }}>
             <div className='flex flex-col gap-3 mb-5'>
               <Input variant='primary' onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' autoComplete='new-password' centerText />
               <Input variant='primary' onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' autoComplete='new-password' centerText />

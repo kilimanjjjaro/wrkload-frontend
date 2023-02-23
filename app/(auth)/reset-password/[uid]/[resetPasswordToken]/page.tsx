@@ -6,6 +6,7 @@ import Balancer from 'react-wrap-balancer'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Headline from 'components/shared/Headline'
+import Paragraph from 'components/shared/Paragraph'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
 import resetPassword from 'services/auth/resetPassword'
@@ -118,7 +119,12 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center text-black bg-white md:w-96 min-w-auto'>
         <Headline variant='md'><b>Reset password</b></Headline>
-        <form onSubmit={(event) => { void handleSubmit(event) }}>
+        <Paragraph variant='sm'>
+          <Balancer>
+            To reset your password, <b>please complete the following form.</b>
+          </Balancer>
+        </Paragraph>
+        <form className='mt-5' onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
             <Input variant='primary' onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' centerText />
             <Input variant='primary' onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' centerText />

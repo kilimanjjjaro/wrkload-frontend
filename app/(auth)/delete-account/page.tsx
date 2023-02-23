@@ -78,8 +78,7 @@ export default function DeleteAccount (): JSX.Element {
       <div className='p-10 text-center text-black bg-white md:w-96 min-w-auto'>
         <Headline variant='md'><b>Delete account</b></Headline>
         <div className='flex flex-col mb-4 gap-y-3'>
-          <Paragraph variant='sm'>Are you sure to continue? Your account and data will be permanently deleted.</Paragraph>
-          <Paragraph variant='sm'><strong>To confirm, complete the following form.</strong></Paragraph>
+          <Paragraph variant='sm'>Are you sure to continue? Your account and data will be permanently deleted. <b>To confirm, complete the following form.</b></Paragraph>
         </div>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>

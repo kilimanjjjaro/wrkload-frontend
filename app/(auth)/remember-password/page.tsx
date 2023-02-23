@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
+import Paragraph from 'components/shared/Paragraph'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
 import rememberPassword from 'services/auth/rememberPassword'
@@ -74,7 +75,12 @@ export default function RememberPassword (): JSX.Element {
     <div className='flex flex-col items-center gap-y-5'>
       <div className='p-10 text-center bg-white text-dark-gray md:w-96 min-w-auto'>
         <Headline variant='md'><b>Remember password</b></Headline>
-        <form onSubmit={(event) => { void handleSubmit(event) }}>
+        <Paragraph variant='sm'>
+          <Balancer>
+            If you forgot your password, <b>please complete the following form.</b>
+          </Balancer>
+        </Paragraph>
+        <form className='mt-5' onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
             <Input variant='primary' onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
           </div>
