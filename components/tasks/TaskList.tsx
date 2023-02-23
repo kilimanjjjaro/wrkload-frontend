@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { usePathname } from 'next/navigation'
 import dayjs from 'dayjs'
+import Balancer from 'react-wrap-balancer'
 import { CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import Stats from 'components/tasks/Stats'
 import Pagination from 'components/shared/Pagination'
@@ -39,9 +40,9 @@ export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.El
             key={task._id} className='relative flex flex-col items-start text-black transition ease-in-out bg-white hover:bg-white duration-400 group p-7'
           >
             <h3 className='mb-5 text-4xl font-bold break-word font-primaryFont'>
-              {task.title}
+              <Balancer>{task.title}</Balancer>
             </h3>
-            <Paragraph variant='sm'>{task.description}</Paragraph>
+            <Paragraph variant='sm'><Balancer>{task.description}</Balancer></Paragraph>
             <div className='flex flex-wrap gap-3 mt-4'>
               <div className='flex items-center h-8 px-4 text-xs text-black bg-light-pink gap-x-1 font-secondaryFont' title='Delivery date'>
                 <CalendarIcon className='w-4 stroke-2' />{' '}

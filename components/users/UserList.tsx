@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import Image from 'next/image'
+import Balancer from 'react-wrap-balancer'
 import dayjs from 'dayjs'
 import { EnvelopeIcon, PencilSquareIcon, TrashIcon, UserIcon } from '@heroicons/react/24/outline'
 import Pagination from 'components/shared/Pagination'
@@ -47,7 +48,7 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
               </div>
             )}
 
-            <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'>{user.username}</h3>
+            <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'><Balancer>{user.username}</Balancer></h3>
             <div className='flex mb-3 items-center h-6 px-2 text-[10px] font-bold text-gray-500 uppercase border-2 border-gray-500  gap-x-1 font-secondaryFont'>
               {user.role === 1 && 'Administrator'}
               {user.role === 2 && 'Project Manager'}

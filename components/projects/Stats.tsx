@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import Balancer from 'react-wrap-balancer'
 import { ChartBarIcon, EyeSlashIcon, FireIcon } from '@heroicons/react/24/outline'
 import { DataContext } from 'contexts/DataContext'
 import type { ProjectStatsInterface } from 'interfaces/projects/Project'
@@ -24,7 +25,7 @@ export default function Stats ({ stats }: { stats: ProjectStatsInterface }): JSX
           <span className='mt-1 text-3xl font-secondaryFont'>Project of<br /> the last month.</span>
         </>
       )}
-      {stats.bestProjectOfPastMonth === '' && <span className='block text-2xl font-secondaryFont mt-7'>We can&apos;t wait to show you stats but it looks like it&apos;s your first month or you didn&apos;t upload tasks last month.</span>}
+      {stats.bestProjectOfPastMonth === '' && <span className='block text-2xl font-secondaryFont mt-7'><Balancer>We can&apos;t wait to show you stats but it looks like it&apos;s your first month or you didn&apos;t upload tasks last month.</Balancer></span>}
     </div>
   )
 }

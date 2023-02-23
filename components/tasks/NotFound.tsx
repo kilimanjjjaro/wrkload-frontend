@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import Image from 'next/image'
+import Balancer from 'react-wrap-balancer'
 import { PlusIcon } from '@heroicons/react/24/outline'
 import notFoundImage from 'public/images/not-found.webp'
 import Button from 'components/shared/Button'
@@ -16,7 +17,7 @@ export default function NotFound (): JSX.Element {
         src={notFoundImage}
         alt='Not found image'
       />
-      <span className='text-xl text-center font-secondaryFont text-black'>There are no tasks to display, but there is a solution... <br className='hidden lg:block' /> You can add the first one right now.</span>
+      <span className='text-xl text-center text-black font-secondaryFont'><Balancer>There are no tasks to display, but there is a solution... You can add the first one right now.</Balancer></span>
       <Button onClick={() => setAddDataModalStatus(true)} variant='primary'><PlusIcon className='w-4 stroke-3' /></Button>
     </div>
   )
