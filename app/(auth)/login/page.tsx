@@ -2,7 +2,8 @@
 
 import { useContext, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { LockClosedIcon } from '@heroicons/react/24/outline'
+import Balancer from 'react-wrap-balancer'
+import { ArrowLeftIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
@@ -18,10 +19,10 @@ const INITIAL_CREDENTIALS_STATE = {
 }
 
 export default function Login (): JSX.Element {
-  const router = useRouter()
-  const { setIsLogged } = useContext(DataContext)
-
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
+  const [error, setError] = useState('')
+  const { setIsLogged } = useContext(DataContext)
+  const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value })
@@ -32,17 +33,44 @@ export default function Login (): JSX.Element {
     const { email, password } = credentials
 
     try {
-      await login({ email, password })
-      setIsLogged(true)
-      router.push('/tasks')
+      const response = await login({ email, password })
+
+      if (response.status === 'ok') {
+        setIsLogged(true)
+        router.push('/tasks')
+      }
     } catch (error: any) {
-      console.error(error.response)
+      setError(error.response.data.code)
     }
+  }
+
+  if (error.length >= 1) {
+    return (
+      <div className='flex flex-col items-center gap-y-5'>
+        <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto'>
+          <h2 className='text-xl leading-tight mb-7 md:mb-10 font-primaryFont md:text-3xl 2xl:text-4xl'><b>We have a problem!</b></h2>
+          <p className='mb-5 text-sm font-secondaryFont'>
+            <Balancer>
+              {error === 'auth/user-not-found' && 'No account associated with this email was found, please try again.'}
+              {error === 'auth/invalid-credentials' && 'The email or password are invalid. Please, try again.'}
+              {error === 'auth/account-not-confirmed' && (
+                <>
+                  This account has not been confirmed yet. <br /><b>Please, do this first.</b>
+                </>
+              )}
+            </Balancer>
+          </p>
+          <Button onClick={() => window.location.reload()} variant='secondary'>
+            <ArrowLeftIcon className='w-4 stroke-3' />
+          </Button>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center bg-white text-black md:w-96 min-w-auto'>
+      <div className='p-10 text-center text-black bg-white md:w-96 min-w-auto'>
         <Headline variant='md'><b>Welcome again!</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
@@ -70,7 +98,7 @@ export default function Login (): JSX.Element {
         </div>
       </div>
       <div className='flex gap-5 text-sm text-white '>
-        <TextLink link='/forgot-password'>Forgot password?</TextLink>
+        <TextLink link='/remember-password'>Forgot password?</TextLink>
         <div className='w-[2px] h-auto bg-white dark:bg-white' aria-hidden='true' />
         <TextLink link='/registry'>Not account yet?</TextLink>
       </div>

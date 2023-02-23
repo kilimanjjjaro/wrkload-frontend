@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios'
 import api from 'utils/api'
 
 interface CredentialsInterface {
@@ -7,7 +6,11 @@ interface CredentialsInterface {
   resetPasswordToken: string
 }
 
-export default async function resetPassword ({ newPassword, uid, resetPasswordToken }: CredentialsInterface): Promise<AxiosResponse> {
+interface ReturnInterface {
+  status: string
+}
+
+export default async function resetPassword ({ newPassword, uid, resetPasswordToken }: CredentialsInterface): Promise<ReturnInterface> {
   const response = await api.patch(`/auth/reset-password/${uid}/${resetPasswordToken}`, { newPassword })
   return response.data
 }

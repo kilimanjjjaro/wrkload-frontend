@@ -27,6 +27,12 @@ interface DataContextValues {
 
   selectedProjectToFetch: string
   setSelectedProjectToFetch: Dispatch<React.SetStateAction<string>>
+
+  error: string
+  setError: Dispatch<React.SetStateAction<string>>
+
+  success: string
+  setSuccess: Dispatch<React.SetStateAction<string>>
 };
 
 const DEFAULT_DATA_CONTEXT_VALUE: DataContextValues = {
@@ -44,7 +50,13 @@ const DEFAULT_DATA_CONTEXT_VALUE: DataContextValues = {
   setShouldRenderStats: () => {},
 
   selectedProjectToFetch: '',
-  setSelectedProjectToFetch: () => {}
+  setSelectedProjectToFetch: () => {},
+
+  error: '',
+  setError: () => {},
+
+  success: '',
+  setSuccess: () => {}
 }
 
 export const DataContext = createContext<DataContextValues>(DEFAULT_DATA_CONTEXT_VALUE)
@@ -57,6 +69,8 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
   const [isLogged, setIsLogged] = useState(false)
   const accessToken = getCookie('accessToken')
   const [shouldRenderStats, setShouldRenderStats] = useState(true)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
 
   useEffect(() => {
     const showStats = window.localStorage.getItem('showStats')
@@ -72,7 +86,25 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
   }, [accessToken])
 
   return (
-    <DataContext.Provider value={{ isLogged, setIsLogged, selectedTask, setSelectedTask, selectedProject, setSelectedProject, selectedUser, setSelectedUser, shouldRenderStats, setShouldRenderStats, selectedProjectToFetch, setSelectedProjectToFetch }}>
+    <DataContext.Provider value={{
+      isLogged,
+      setIsLogged,
+      selectedTask,
+      setSelectedTask,
+      selectedProject,
+      setSelectedProject,
+      selectedUser,
+      setSelectedUser,
+      shouldRenderStats,
+      setShouldRenderStats,
+      selectedProjectToFetch,
+      setSelectedProjectToFetch,
+      error,
+      setError,
+      success,
+      setSuccess
+    }}
+    >
       {children}
     </DataContext.Provider>
   )

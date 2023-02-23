@@ -5,17 +5,15 @@ import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
-import Paragraph from 'components/shared/Paragraph'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
-import deleteAccount from 'services/auth/deleteAccount'
+import resendConfirmationAccountLink from 'services/auth/resendConfirmationAccountLink'
 
 const INITIAL_CREDENTIALS_STATE = {
-  email: '',
-  password: ''
+  email: ''
 }
 
-export default function DeleteAccount (): JSX.Element {
+export default function ResendConfirmationAccountLink (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -27,10 +25,10 @@ export default function DeleteAccount (): JSX.Element {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    const { email, password } = credentials
+    const { email } = credentials
 
     try {
-      const response = await deleteAccount({ email, password })
+      const response = await resendConfirmationAccountLink({ email })
 
       if (response.status === 'ok') {
         setSuccess(true)
@@ -47,8 +45,8 @@ export default function DeleteAccount (): JSX.Element {
           <h2 className='text-xl leading-tight mb-7 md:mb-10 font-primaryFont md:text-3xl 2xl:text-4xl'><b>We have a problem!</b></h2>
           <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
-              {error === 'auth/invalid-credentials' && 'The email or password are invalid. Please, try again.'}
-              {error === 'auth/account-not-confirmed' && 'This account has not been confirmed yet. Please, do this first.'}
+              {error === 'auth/user-not-found' && 'No account associated with this email was found, please try again.'}
+              {error === 'auth/account-already-confirmed' && 'This account has already been confirmed, please try log in.'}
             </Balancer>
           </p>
           <Button onClick={() => router.push('/login')} variant='secondary'>
@@ -64,8 +62,8 @@ export default function DeleteAccount (): JSX.Element {
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto'>
           <h2 className='text-xl leading-tight mb-7 md:mb-10 font-primaryFont md:text-3xl 2xl:text-4xl'><b>Done!</b></h2>
-          <p className='mb-5 text-sm font-secondaryFont'><Balancer>Your account was deleted. <b>Thanks for this time!</b></Balancer></p>
-          <Button onClick={() => router.push('/')} variant='secondary'>
+          <p className='mb-5 text-sm font-secondaryFont'><Balancer>A link to confirm the account was sent again, <b>please check your inbox.</b></Balancer></p>
+          <Button onClick={() => router.push('/login')} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -75,16 +73,11 @@ export default function DeleteAccount (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center text-black bg-white md:w-96 min-w-auto'>
-        <Headline variant='md'><b>Delete account</b></Headline>
-        <div className='flex flex-col mb-4 gap-y-3'>
-          <Paragraph variant='sm'>Are you sure to continue? Your account and data will be permanently deleted.</Paragraph>
-          <Paragraph variant='sm'><strong>To confirm, complete the following form.</strong></Paragraph>
-        </div>
+      <div className='p-10 text-center bg-white text-dark-gray md:w-96 min-w-auto'>
+        <Headline variant='md'><b>Resend confirmation account link</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
-            <Input variant='primary' onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' centerText />
-            <Input variant='primary' onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' centerText />
+            <Input variant='primary' onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
           </div>
           <Button variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />

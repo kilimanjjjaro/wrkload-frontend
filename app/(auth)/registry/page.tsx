@@ -1,16 +1,16 @@
 'use client'
 
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { LockClosedIcon } from '@heroicons/react/24/outline'
+import Balancer from 'react-wrap-balancer'
+import { ArrowLeftIcon, ArrowRightIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
+import TextLink from 'components/shared/TextLink'
 import GitHubLogo from 'public/images/github.svg'
 import GoogleLogo from 'public/images/google.svg'
-import TextLink from 'components/shared/TextLink'
 import register from 'services/auth/register'
-import { DataContext } from 'contexts/DataContext'
 
 const INITIAL_CREDENTIALS_STATE = {
   username: '',
@@ -20,44 +20,90 @@ const INITIAL_CREDENTIALS_STATE = {
 }
 
 export default function Register (): JSX.Element {
-  const router = useRouter()
-  const { setIsLogged } = useContext(DataContext)
-
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState(false)
+  const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value })
   }
 
-  const handlePasswordValidation = (): void => {
-    if (credentials.password !== credentials.confirmPassword) {
-      console.log('Passwords do not match')
-    }
+  const handleClick = (): void => {
+    setError('')
+    router.refresh()
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    const { username, email, password } = credentials
+    const { username, email, password, confirmPassword } = credentials
 
     try {
-      await register({ username, email, password })
-      setIsLogged(true)
-      router.push('/tasks')
+      if (password !== confirmPassword) {
+        throw new Error('auth/different-passwords')
+      }
+
+      const response = await register({ username, email, password })
+      // TODO: handle week password
+
+      if (response.status === 'ok') {
+        setSuccess(true)
+      }
     } catch (error: any) {
-      console.error(error.response)
+      if (error.message === 'auth/different-passwords') {
+        setError('auth/different-passwords')
+        return
+      }
+
+      if (error.response.data.code === 'auth/email-already-exists') {
+        setError('auth/email-already-exists')
+      }
     }
+  }
+
+  if (error.length >= 1) {
+    return (
+      <div className='flex flex-col items-center gap-y-5'>
+        <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto'>
+          <h2 className='text-xl leading-tight mb-7 md:mb-10 font-primaryFont md:text-3xl 2xl:text-4xl'><b>We have a problem!</b></h2>
+          <p className='text-sm md:mb-5 font-secondaryFont'>
+            <Balancer>
+              {error === 'auth/different-passwords' && 'Passwords are not the same. Please, try again.'}
+              {error === 'auth/email-already-exists' && 'An account with this email already exists. Please, try another one or login.'}
+            </Balancer>
+          </p>
+          <Button onClick={handleClick} variant='secondary'>
+            <ArrowLeftIcon className='w-4 stroke-3' />
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
+  if (success) {
+    return (
+      <div className='flex flex-col items-center gap-y-5'>
+        <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto'>
+          <h2 className='text-xl leading-tight mb-7 md:mb-10 font-primaryFont md:text-3xl 2xl:text-4xl'><b>Done!</b></h2>
+          <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been created and an email will be sent to activate it.</Balancer></p>
+          <Button onClick={() => router.push('/login')} variant='secondary'>
+            <ArrowRightIcon className='w-4 stroke-3' />
+          </Button>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center bg-white text-black md:w-96 min-w-auto'>
+      <div className='p-10 text-center text-black bg-white md:w-96 min-w-auto'>
         <Headline variant='md'><b>Nice to meet you!</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
             <Input variant='primary' onChange={handleChange} value={credentials.username} name='username' type='text' placeholder='Username' centerText />
             <Input variant='primary' onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
-            <Input variant='primary' onChange={handleChange} onKeyUp={handlePasswordValidation} name='password' value={credentials.password} type='password' placeholder='Password' autoComplete='current-password' centerText />
-            <Input variant='primary' onChange={handleChange} onKeyUp={handlePasswordValidation} name='confirmPassword' value={credentials.confirmPassword} type='password' placeholder='Confirm Password' autoComplete='current-password' centerText />
+            <Input variant='primary' onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' centerText />
+            <Input variant='primary' onChange={handleChange} value={credentials.confirmPassword} name='confirmPassword' type='password' placeholder='Confirm Password' autoComplete='current-password' centerText />
           </div>
           <Button variant='secondary'>
             <LockClosedIcon className='w-4 stroke-3' />

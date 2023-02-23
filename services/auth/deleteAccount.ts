@@ -1,20 +1,22 @@
-import { AxiosResponse } from 'axios'
 import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 import login from 'services/auth/login'
 
-interface CredentialsInterface {
+interface Props {
   email: string
   password: string
 }
 
-export default async function deleteAccount ({ email, password }: CredentialsInterface): Promise<AxiosResponse> {
-  const { data } = await login({ email, password })
-  const { user } = data
+interface ResponseInterface {
+  status: string
+}
+
+export default async function deleteAccount ({ email, password }: Props): Promise<ResponseInterface> {
+  const { _id } = await login({ email, password })
   const accessToken = getCookie('accessToken')
   const config = {
     headers: { Authorization: `Bearer ${accessToken as string}` }
   }
-  const response = await api.delete(`/users/${user._id as string}`, config)
+  const response = await api.delete(`/users/${_id as string}`, config)
   return response.data
 }

@@ -1,11 +1,14 @@
-import { AxiosResponse } from 'axios'
 import api from 'utils/api'
 
-interface CredentialsInterface {
+interface Props {
   email: string
 }
 
-export default async function rememberPassword ({ email }: CredentialsInterface): Promise<AxiosResponse> {
-  const response = await api.post('/auth/forgot-password', { email })
+interface ReturnInterface {
+  status: string
+}
+
+export default async function rememberPassword ({ email }: Props): Promise<ReturnInterface> {
+  const response = await api.post('/auth/remember-password', { email })
   return response.data
 }

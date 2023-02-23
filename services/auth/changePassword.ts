@@ -1,14 +1,17 @@
-import { AxiosResponse } from 'axios'
 import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
-interface CredentialsInterface {
+interface Props {
   email: string
   oldPassword: string
   newPassword: string
 }
 
-export default async function changePassword ({ email, oldPassword, newPassword }: CredentialsInterface): Promise<AxiosResponse> {
+interface ReturnInterface {
+  status: string
+}
+
+export default async function changePassword ({ email, oldPassword, newPassword }: Props): Promise<ReturnInterface> {
   const accessToken = getCookie('accessToken')
   const config = {
     headers: { Authorization: 'Bearer' + ` ${accessToken as string}` }
