@@ -33,7 +33,7 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
       <MasonryGrid>
         {shouldRenderStats && (stats !== undefined || stats !== null) && pathname?.includes('search') === false && <Stats stats={stats} />}
         {projects.map((project) => (
-          <div
+          <article
             key={project._id} className='relative flex flex-col items-start text-black transition ease-in-out bg-white hover:bg-white duration-400 group p-7'
           >
             <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'><Balancer>{project.name}</Balancer></h3>
@@ -44,7 +44,7 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
               <div onClick={() => handleUpdateProjectClick(project)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-yellow hover:bg-pink'><PencilSquareIcon className='w-4 stroke-2' /></div>
               <div onClick={() => handleDeleteProjectClick(project)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-red hover:bg-pink'><TrashIcon className='w-4 stroke-2' /></div>
             </div>
-          </div>
+          </article>
         ))}
       </MasonryGrid>
       <Pagination data={pagination} />

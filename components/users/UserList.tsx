@@ -30,7 +30,7 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
     <>
       <MasonryGrid>
         {users.map((user) => (
-          <div
+          <article
             key={user._id} className='relative flex flex-col items-start text-black transition ease-in-out bg-white duration-400 group p-7'
           >
             {user.avatar !== undefined && (
@@ -64,7 +64,7 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
               <div onClick={() => handleUpdateUserClick(user)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-yellow hover:bg-pink'><PencilSquareIcon className='w-4 stroke-2' /></div>
               <div onClick={() => handleDeleteUserClick(user)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-red hover:bg-pink'><TrashIcon className='w-4 stroke-2' /></div>
             </div>
-          </div>
+          </article>
         ))}
       </MasonryGrid>
       <Pagination data={pagination} />

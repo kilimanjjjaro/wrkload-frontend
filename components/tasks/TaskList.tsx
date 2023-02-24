@@ -36,7 +36,7 @@ export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.El
       <MasonryGrid>
         {shouldRenderStats && (stats !== undefined || stats !== null) && pathname?.includes('search') === false && <Stats stats={stats} />}
         {tasks.map((task) => (
-          <div
+          <article
             key={task._id} className='relative flex flex-col items-start text-black transition ease-in-out bg-white hover:bg-white duration-400 group p-7'
           >
             <h3 className='mb-5 text-4xl font-bold break-word font-primaryFont'>
@@ -61,7 +61,7 @@ export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.El
                 <TrashIcon className='w-4 stroke-2' />
               </div>
             </div>
-          </div>
+          </article>
         ))}
       </MasonryGrid>
       <Pagination data={pagination} />
