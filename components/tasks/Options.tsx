@@ -19,7 +19,7 @@ export default function Options (): JSX.Element {
 
   return (
     <div className='flex items-start gap-x-5'>
-      <Button onClick={handleRenderStats} variant='dark-alternative'><EyeIcon className='w-4 stroke-3' /> {statsButtonText}</Button>
+      <Button onClick={handleRenderStats} variant='light-alternative'><EyeIcon className='w-4 stroke-3' /> {statsButtonText}</Button>
       <Button onClick={() => setAddDataModalStatus(true)} variant='primary'><PlusIcon className='w-4 stroke-3' /></Button>
       <Button onClick={() => setSearchModalStatus(true)} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
       <div className='relative'>

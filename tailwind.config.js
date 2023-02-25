@@ -15,10 +15,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        pink: '#e5c6e3',
-        'light-pink': '#e1d7e0',
-        black: '#121013',
-        white: '#f3ebf3',
+        blue: '#abb5d3',
+        'light-blue': '#cdd4e5',
+        black: '#0a0a0a',
+        white: '#efefef',
         red: '#e32626',
         yellow: '#dfcd24',
         green: '#34a400'

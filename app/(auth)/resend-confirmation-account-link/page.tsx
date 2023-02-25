@@ -42,8 +42,8 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
   if (error.length >= 1) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto'>
-          <h2 className='text-xl leading-tight mb-7 md:mb-10 font-primaryFont md:text-3xl 2xl:text-4xl'><b>We have a problem!</b></h2>
+        <div className='p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
+          <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
               {error === 'auth/user-not-found' && 'No account associated with this email was found, please try again.'}
@@ -61,8 +61,8 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
   if (success) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto'>
-          <h2 className='text-xl leading-tight mb-7 md:mb-10 font-primaryFont md:text-3xl 2xl:text-4xl'><b>Done!</b></h2>
+        <div className='p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
+          <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>A link to confirm the account was sent again, <b>please check your inbox.</b></Balancer></p>
           <Button onClick={() => router.push('/login')} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
@@ -74,8 +74,8 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center bg-white text-dark-gray md:w-96 min-w-auto'>
-        <Headline variant='md'><b>Resend confirmation account link</b></Headline>
+      <div className='p-10 text-center text-black bg-blue md:w-96 min-w-auto'>
+        <Headline variant='md'><Balancer>Resend confirmation account link</Balancer></Headline>
         <Paragraph variant='sm'>
           <Balancer>
             If the link to confirm your account has expired, <b>please complete the following form and we will send you a new one.</b>

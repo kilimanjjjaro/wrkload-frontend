@@ -46,9 +46,9 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
   return (
     <>
       <div className='flex items-center cursor-pointer group gap-x-3' onClick={() => setShowDashboardBox(!showDashboardBox)}>
-        <div className='text-black transition ease-in-out duration-400 dark:text-white group-hover:text-white dark:group-hover:text-pink font-secondaryFont'>Welcome, {user.username}!</div>
+        <div className='text-black transition ease-in-out duration-400 dark:text-white group-hover:text-white dark:group-hover:text-blue font-secondaryFont'>Welcome, {user.username}!</div>
         <Image
-          className='object-cover w-10 h-10 transition ease-in-out border-4 border-white duration-400 group-hover:scale-90 dark:group-hover:border-pink'
+          className='object-cover w-10 h-10 transition ease-in-out border-[3px] border-white duration-400 group-hover:scale-90 dark:group-hover:border-blue'
           src={user.avatar}
           alt={user.username}
           width={40}
@@ -63,13 +63,13 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
         initial={false}
       >
         <nav className='relative flex items-center'>
-          <ul className='flex flex-col items-end self-start text-black transition ease-in-out bg-pink p-7 duration-400 gap-y-1 font-secondaryFont'>
+          <ul className='flex flex-col items-end self-start text-black transition ease-in-out bg-blue p-7 duration-400 gap-y-1 font-secondaryFont'>
             {PAGES.map((page) => (
               <li className='transition ease-in-out duration-400 hover:-translate-x-1' key={page.link} onClick={() => setShowDashboardBox(!showDashboardBox)}><Link href={page.link}>{page.name}</Link></li>
             ))}
             <button className='transition ease-in-out duration-400 hover:-translate-x-1' onClick={() => { void handleLogout() }}>Log out</button>
           </ul>
-          <div className='absolute w-8 p-2 transition ease-in-out cursor-pointer bg-pink top-50 -left-12 group duration-400 hover:bg-white' onClick={() => setShowDashboardBox(!showDashboardBox)}>
+          <div className='absolute w-8 p-2 transition ease-in-out cursor-pointer bg-blue top-50 -left-12 group duration-400 hover:bg-white' onClick={() => setShowDashboardBox(!showDashboardBox)}>
             <XMarkIcon className='stroke-2 stroke-black' />
           </div>
         </nav>

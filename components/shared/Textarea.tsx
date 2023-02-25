@@ -7,7 +7,7 @@ export default function Textarea ({ variant, onChange, value, name, placeholder,
     <textarea
       className={clsx(
         'w-full py-[19px] px-5 text-sm leading-tight placeholder-opacity-100 appearance-none resize-none md:text-baseblock h-36 font-secondaryFont focus:outline-none focus:placeholder:opacity-0 transition duration-400 ease-in-out',
-        variant === 'primary' && 'text-black placeholder-black bg-light-pink/70 hover:bg-light-pink focus:bg-light-pink',
+        variant === 'primary' && 'text-black placeholder-black bg-light-blue',
         variant === 'alternative' && 'text-white placeholder-white bg-white',
         centerText !== undefined && 'text-center'
       )} value={value} onChange={onChange} name={name} placeholder={placeholder}

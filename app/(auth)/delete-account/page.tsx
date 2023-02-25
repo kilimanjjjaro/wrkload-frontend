@@ -43,8 +43,8 @@ export default function DeleteAccount (): JSX.Element {
   if (error.length >= 1) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto'>
-          <h2 className='text-xl leading-tight mb-7 md:mb-10 font-primaryFont md:text-3xl 2xl:text-4xl'><b>We have a problem!</b></h2>
+        <div className='p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
+          <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
               {error === 'auth/invalid-credentials' && 'The email or password are invalid. Please, try again.'}
@@ -62,8 +62,8 @@ export default function DeleteAccount (): JSX.Element {
   if (success) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto'>
-          <h2 className='text-xl leading-tight mb-7 md:mb-10 font-primaryFont md:text-3xl 2xl:text-4xl'><b>Done!</b></h2>
+        <div className='p-10 text-black text-cente bg-blue md:w-80 min-w-auto'>
+          <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>Your account was deleted. <b>Thanks for this time!</b></Balancer></p>
           <Button onClick={() => router.push('/')} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
@@ -75,8 +75,8 @@ export default function DeleteAccount (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center text-black bg-white md:w-96 min-w-auto'>
-        <Headline variant='md'><b>Delete account</b></Headline>
+      <div className='p-10 text-center text-black bg-blue md:w-96 min-w-auto'>
+        <Headline variant='md'><Balancer>Delete account</Balancer></Headline>
         <div className='flex flex-col mb-4 gap-y-3'>
           <Paragraph variant='sm'>Are you sure to continue? Your account and data will be permanently deleted. <b>To confirm, complete the following form.</b></Paragraph>
         </div>

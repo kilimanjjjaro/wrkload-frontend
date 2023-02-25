@@ -10,9 +10,9 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
   const { inter, spaceGrotesk } = fonts
 
   return (
-    <html lang='en' className='scroll-smooth '>
+    <html lang='en' className='scroll-smooth dark'>
       <head />
-      <body className={`bg-light-pink bg-white dark:bg-black antialiased ${inter.variable} ${spaceGrotesk.variable}`}>
+      <body className={`bg-light-blue bg-white dark:bg-black antialiased ${inter.variable} ${spaceGrotesk.variable}`}>
         <DataProvider>
           <NavBar />
           {children}

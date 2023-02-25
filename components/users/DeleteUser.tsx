@@ -38,7 +38,7 @@ export default function DeleteUser (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center bg-white text-black md:w-96 min-w-auto'>
+      <div className='p-10 text-center text-black bg-blue md:w-96 min-w-auto'>
         <Headline variant='md'><b>Sure to delete this user?</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>
@@ -49,7 +49,7 @@ export default function DeleteUser (): JSX.Element {
             <Button type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
-            <Button onClick={(event) => handleCloseModal(event)} variant='light-alternative'>
+            <Button onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
           </div>

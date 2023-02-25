@@ -16,9 +16,6 @@ export default function ThemeSelector (): JSX.Element {
 
     if (darkModeFromLocalStorage !== null) {
       setDarkMode(JSON.parse(darkModeFromLocalStorage))
-      window.localStorage.setItem('darkMode', darkModeFromLocalStorage)
-    } else {
-      setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
     }
   }, [])
 

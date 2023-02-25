@@ -77,8 +77,8 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
   if (error.length >= 1) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto'>
-          <h2 className='text-xl leading-tight mb-7 md:mb-10 font-primaryFont md:text-3xl 2xl:text-4xl'><b>We have a problem!</b></h2>
+        <div className='p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
+          <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p
             className={clsx(
               'text-sm font-secondaryFont',
@@ -104,8 +104,8 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
   if (success) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto'>
-          <h2 className='text-xl leading-tight mb-7 md:mb-10 font-primaryFont md:text-3xl 2xl:text-4xl'><b>Done!</b></h2>
+        <div className='p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
+          <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>You can now use your new password. <b>Please, log in again.</b></Balancer></p>
           <Button onClick={() => router.push('/login')} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
@@ -117,8 +117,8 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center text-black bg-white md:w-96 min-w-auto'>
-        <Headline variant='md'><b>Reset password</b></Headline>
+      <div className='p-10 text-center text-black bg-blue md:w-96 min-w-auto'>
+        <Headline variant='md'><Balancer>Reset password</Balancer></Headline>
         <Paragraph variant='sm'>
           <Balancer>
             To reset your password, <b>please complete the following form.</b>

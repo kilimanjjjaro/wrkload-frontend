@@ -47,8 +47,8 @@ export default function Login (): JSX.Element {
   if (error.length >= 1) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto'>
-          <h2 className='text-xl leading-tight mb-7 md:mb-10 font-primaryFont md:text-3xl 2xl:text-4xl'><b>We have a problem!</b></h2>
+        <div className='p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
+          <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
               {error === 'auth/user-not-found' && 'No account associated with this email was found, please try again.'}
@@ -70,8 +70,8 @@ export default function Login (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center text-black bg-white md:w-96 min-w-auto'>
-        <Headline variant='md'><b>Welcome again!</b></Headline>
+      <div className='p-10 text-center text-black bg-blue md:w-96 min-w-auto'>
+        <Headline variant='md'><Balancer>Welcome again!</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
             <Input variant='primary' onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
@@ -82,16 +82,16 @@ export default function Login (): JSX.Element {
           </Button>
         </form>
         <div className='flex items-center mt-5 text-sm font-semibold font-secondaryFont'>
-          <div className='w-[26%] h-[2px] bg-light-pink dark:bg-black' aria-hidden='true' />
+          <div className='w-[26%] h-[2px] bg-white dark:bg-black' aria-hidden='true' />
           <span className='w-[48%]'>Maybe you use?</span>
-          <div className='w-[26%] h-[2px] bg-light-pink dark:bg-black' aria-hidden='true' />
+          <div className='w-[26%] h-[2px] bg-white dark:bg-black' aria-hidden='true' />
         </div>
         <div className='flex gap-5 mt-5'>
-          <Button variant='light-alternative' fullWidth>
+          <Button variant='dark-alternative' fullWidth>
             <GoogleLogo className='w-4' />
             Google
           </Button>
-          <Button variant='light-alternative' fullWidth>
+          <Button variant='dark-alternative' fullWidth>
             <GitHubLogo className='w-4' />
             Github
           </Button>
