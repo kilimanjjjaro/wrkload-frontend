@@ -27,7 +27,8 @@ module.exports = {
         400: '400ms'
       },
       animation: {
-        'loading-square': 'strokeSpacing 2s ease-in-out infinite'
+        'loading-square': 'strokeSpacing 2s ease-in-out infinite',
+        skeleton: 'shine 2s ease-in-out infinite'
       },
       keyframes: {
         strokeSpacing: {
@@ -46,6 +47,11 @@ module.exports = {
           '100%': {
             strokeDasharray: '200 200',
             strokeDashoffset: '-200'
+          }
+        },
+        shine: {
+          to: {
+            backgroundPositionX: '-200%'
           }
         }
       },

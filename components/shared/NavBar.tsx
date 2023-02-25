@@ -22,9 +22,9 @@ export default function NavBar (): JSX.Element {
       <Link className='flex items-center h-10' href='/'><Logo /></Link>
       <div className='relative flex items-center h-10'>
         {(user === undefined && isLoading) && (
-          <div className='flex items-center gap-x-3 animate-pulse'>
-            <div className='w-32 h-5 bg-blue' />
-            <div className='w-10 h-10 bg-blue' />
+          <div className='flex items-center gap-x-3 animate-skeleton'>
+            <div className='w-32 h-5 bg-gradient-to-r from-blue via-light-blue to-blue bg-[length:200%_100%]' />
+            <div className='w-10 h-10 bg-gradient-to-r from-blue via-light-blue to-blue bg-[length:200%_100%]' />
           </div>
         )}
         {(user === undefined && !isLoading) && <Button onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-3' /></Button>}
