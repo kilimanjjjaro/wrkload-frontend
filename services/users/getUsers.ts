@@ -1,6 +1,6 @@
 import api from 'utils/api'
 import type { FullUserInterface } from 'interfaces/users/User'
-import getAccessToken from 'services/getAccessToken'
+import { getCookie } from 'cookies-next'
 
 export const getUsers = async ({ page }: { page: string | null }): Promise<FullUserInterface> => {
   let currentPage: string
@@ -11,7 +11,7 @@ export const getUsers = async ({ page }: { page: string | null }): Promise<FullU
     currentPage = page
   }
 
-  const accessToken = await getAccessToken()
+  const accessToken = getCookie('accessToken')
 
   const config = {
     headers: {

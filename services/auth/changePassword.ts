@@ -1,4 +1,4 @@
-import getAccessToken from 'services/getAccessToken'
+import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
 interface Props {
@@ -12,7 +12,7 @@ interface ReturnInterface {
 }
 
 export default async function changePassword ({ email, oldPassword, newPassword }: Props): Promise<ReturnInterface> {
-  const accessToken = await getAccessToken()
+  const accessToken = getCookie('accessToken')
 
   const config = {
     headers: { Authorization: 'Bearer' + ` ${accessToken as string}` }

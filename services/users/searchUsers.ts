@@ -1,4 +1,4 @@
-import getAccessToken from 'services/getAccessToken'
+import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
 interface Props {
@@ -15,7 +15,7 @@ export default async function searchUsers ({ query, page }: Props): Promise<any>
     currentPage = page
   }
 
-  const accessToken = await getAccessToken()
+  const accessToken = getCookie('accessToken')
 
   const config = {
     headers: {

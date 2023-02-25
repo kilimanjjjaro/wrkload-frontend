@@ -2,10 +2,10 @@ import api from 'utils/api'
 
 import type { TaskStatsInterface } from 'interfaces/tasks/Task'
 import { TASKS_ENDPOINT } from 'constants/tasks'
-import getAccessToken from 'services/getAccessToken'
+import { getCookie } from 'cookies-next'
 
 export const getTaskStats = async ({ selectedProjectToFetch }: { selectedProjectToFetch: string }): Promise<TaskStatsInterface> => {
-  const accessToken = await getAccessToken()
+  const accessToken = getCookie('accessToken')
 
   const config = {
     headers: {

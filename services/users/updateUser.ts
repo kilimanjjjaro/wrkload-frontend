@@ -2,10 +2,10 @@ import api from 'utils/api'
 
 import type { UserInterface } from 'interfaces/users/User'
 import { USERS_ENDPOINT } from 'constants/users'
-import getAccessToken from 'services/getAccessToken'
+import { getCookie } from 'cookies-next'
 
 export const updateUser = async (user: UserInterface): Promise<UserInterface> => {
-  const accessToken = await getAccessToken()
+  const accessToken = getCookie('accessToken')
 
   const config = {
     headers: {

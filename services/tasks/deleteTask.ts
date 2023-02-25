@@ -1,10 +1,10 @@
 import api from 'utils/api'
 
 import { TASKS_ENDPOINT } from 'constants/tasks'
-import getAccessToken from 'services/getAccessToken'
+import { getCookie } from 'cookies-next'
 
 export const deleteTask = async (_id: string): Promise<any> => {
-  const accessToken = await getAccessToken()
+  const accessToken = getCookie('accessToken')
 
   const config = {
     headers: {
