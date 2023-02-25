@@ -82,9 +82,9 @@ export default function Login (): JSX.Element {
           </Button>
         </form>
         <div className='flex items-center mt-5 text-sm font-semibold font-secondaryFont'>
-          <div className='w-[26%] h-[2px] bg-white dark:bg-black' aria-hidden='true' />
+          <div className='w-[26%] h-[2px] bg-black dark:bg-black' aria-hidden='true' />
           <span className='w-[48%]'>Maybe you use?</span>
-          <div className='w-[26%] h-[2px] bg-white dark:bg-black' aria-hidden='true' />
+          <div className='w-[26%] h-[2px] bg-black dark:bg-black' aria-hidden='true' />
         </div>
         <div className='flex gap-5 mt-5'>
           <Button variant='dark-alternative' fullWidth>
@@ -97,9 +97,9 @@ export default function Login (): JSX.Element {
           </Button>
         </div>
       </div>
-      <div className='flex gap-5 text-sm text-white '>
+      <div className='flex gap-5 text-sm'>
         <TextLink link='/remember-password'>Forgot password?</TextLink>
-        <div className='w-[2px] h-auto bg-white dark:bg-white' aria-hidden='true' />
+        <div className='w-[2px] h-auto bg-black dark:bg-white' aria-hidden='true' />
         <TextLink link='/registry'>Not account yet?</TextLink>
       </div>
     </div>

@@ -40,7 +40,7 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
     <div className='relative flex items-center justify-center bg-transparent'>
       <div
         onClick={() => setOpen(!open)}
-        className={clsx('flex gap-x-3 group cursor-pointer font-bold transition-colors ease-in-out duration-[0.6s] hover:text-white', selected === '' && 'text-white')}
+        className={clsx('flex gap-x-3 group cursor-pointer font-bold transition-colors ease-in-out duration-[0.6s] hover:text-blue dark:hover:text-white', selected === '' && 'text-white')}
       >
         {selected}
         <svg

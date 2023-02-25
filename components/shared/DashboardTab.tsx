@@ -46,9 +46,9 @@ export default function DashboardTab ({ user }: { user: UserInterface }): JSX.El
   return (
     <>
       <div className='flex items-center cursor-pointer group gap-x-3' onClick={() => setShowDashboardBox(!showDashboardBox)}>
-        <div className='text-black transition ease-in-out duration-400 dark:text-white group-hover:text-white dark:group-hover:text-blue font-secondaryFont'>Welcome, {user.username}!</div>
+        <div className='text-black transition ease-in-out duration-400 dark:text-white group-hover:text-blue dark:group-hover:text-blue font-secondaryFont'>Welcome, {user.username}!</div>
         <Image
-          className='object-cover w-10 h-10 transition ease-in-out border-[3px] border-white duration-400 group-hover:scale-90 dark:group-hover:border-blue'
+          className='object-cover w-10 h-10 transition ease-in-out border-[3px] border-black group-hover:border-blue dark:border-white duration-400 group-hover:scale-90 dark:group-hover:border-blue'
           src={user.avatar}
           alt={user.username}
           width={40}

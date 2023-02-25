@@ -32,7 +32,7 @@ export default function SearchProjects (): JSX.Element {
   return (
     <>
       <header className='flex justify-between mb-10 text-white'>
-        <h2 className='flex text-6xl font-bold text-blue gap-x-5 font-primaryFont'>
+        <h2 className='flex text-6xl font-bold text-black dark:text-blue gap-x-5 font-primaryFont'>
           Search results for: {query}
         </h2>
         {!shouldRenderNotFoundSign && (
@@ -47,11 +47,11 @@ export default function SearchProjects (): JSX.Element {
         {shouldRenderNotFoundSign && (
           <div className='flex flex-col items-center h-full mt-28 gap-y-5'>
             <Image
-              className='w-56'
+              className='w-72'
               src={notFoundImage}
               alt='Not found image'
             />
-            <span className='text-xl text-center text-black font-secondaryFont'>No search results found. <br className='hidden lg:block' />Please try again.</span>
+            <span className='text-xl text-center text-black dark:text-white font-secondaryFont'>No search results found. <br className='hidden lg:block' />Please try again.</span>
             <Button onClick={() => router.push('/projects')} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
           </div>
         )}

@@ -12,7 +12,7 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
   return (
     <html lang='en' className='scroll-smooth dark'>
       <head />
-      <body className={`bg-white dark:bg-black antialiased ${inter.variable} ${spaceGrotesk.variable}`}>
+      <body className={`bg-light-blue dark:bg-black transition-colors duration-400 ease-in-out antialiased ${inter.variable} ${spaceGrotesk.variable}`}>
         <DataProvider>
           <NavBar />
           {children}
