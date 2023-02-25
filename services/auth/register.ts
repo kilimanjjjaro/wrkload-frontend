@@ -20,6 +20,8 @@ export default async function register ({ username, email, password }: Props): P
     avatar: DEFAULT_AVATAR,
     role: DEFAULT_ROLE
   }
+
   const response = await api.post('/auth/register', user)
+
   return response.data
 }

@@ -1,11 +1,11 @@
-import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
 import type { ProjectStatsInterface } from 'interfaces/projects/Project'
 import { PROJECTS_ENDPOINT } from 'constants/projects'
+import getAccessToken from 'services/getAccessToken'
 
 export const getProjectStats = async (): Promise<ProjectStatsInterface> => {
-  const accessToken = getCookie('accessToken')
+  const accessToken = await getAccessToken()
 
   const config = {
     headers: {

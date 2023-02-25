@@ -6,5 +6,6 @@ interface ReturnInterface {
 
 export default async function resendConfirmationAccountLink ({ email }: { email: string }): Promise<ReturnInterface> {
   const response = await api.post('/auth/resend-confirm-account', { email })
+
   return response.data
 }

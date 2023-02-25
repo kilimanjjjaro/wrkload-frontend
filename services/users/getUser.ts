@@ -3,9 +3,11 @@ import api from 'utils/api'
 
 import type { UserInterface } from 'interfaces/users/User'
 import { USERS_ENDPOINT } from 'constants/users'
+import getAccessToken from 'services/getAccessToken'
 
 export const getUser = async (): Promise<UserInterface> => {
-  const { accessToken, _id } = getCookies()
+  const accessToken = await getAccessToken()
+  const { _id } = getCookies()
 
   const config = {
     headers: {

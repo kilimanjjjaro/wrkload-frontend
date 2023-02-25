@@ -1,10 +1,10 @@
-import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
 import { PROJECTS_ENDPOINT } from 'constants/projects'
+import getAccessToken from 'services/getAccessToken'
 
 export const deleteProject = async (_id: string): Promise<any> => {
-  const accessToken = getCookie('accessToken')
+  const accessToken = await getAccessToken()
 
   const config = {
     headers: {

@@ -12,5 +12,6 @@ interface ReturnInterface {
 
 export default async function resetPassword ({ newPassword, uid, resetPasswordToken }: CredentialsInterface): Promise<ReturnInterface> {
   const response = await api.patch(`/auth/reset-password/${uid}/${resetPasswordToken}`, { newPassword })
+
   return response.data
 }

@@ -1,10 +1,10 @@
-import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
 import { USERS_ENDPOINT } from 'constants/users'
+import getAccessToken from 'services/getAccessToken'
 
 export const deleteUser = async (_id: string): Promise<any> => {
-  const accessToken = getCookie('accessToken')
+  const accessToken = await getAccessToken()
 
   const config = {
     headers: {

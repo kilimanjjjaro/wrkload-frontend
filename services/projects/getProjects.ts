@@ -1,6 +1,6 @@
-import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 import type { FullProjectInterface } from 'interfaces/projects/Project'
+import getAccessToken from 'services/getAccessToken'
 
 interface Props {
   page: string | null
@@ -16,7 +16,7 @@ export const getProjects = async ({ page, noLimit }: Props): Promise<FullProject
     currentPage = page
   }
 
-  const accessToken = getCookie('accessToken')
+  const accessToken = await getAccessToken()
 
   const config = {
     headers: {

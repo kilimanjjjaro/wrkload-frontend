@@ -10,5 +10,6 @@ interface ReturnInterface {
 
 export default async function rememberPassword ({ email }: Props): Promise<ReturnInterface> {
   const response = await api.post('/auth/remember-password', { email })
+
   return response.data
 }

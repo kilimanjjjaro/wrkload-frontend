@@ -1,11 +1,11 @@
-import { getCookie } from 'cookies-next'
 import api from 'utils/api'
 
 import type { TaskInterface } from 'interfaces/tasks/Task'
 import { TASKS_ENDPOINT } from 'constants/tasks'
+import getAccessToken from 'services/getAccessToken'
 
 export const updateTask = async (task: TaskInterface): Promise<TaskInterface> => {
-  const accessToken = getCookie('accessToken')
+  const accessToken = await getAccessToken()
 
   const config = {
     headers: {

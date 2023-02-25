@@ -7,5 +7,6 @@ interface CredentialsInterface {
 
 export default async function confirmAccount ({ confirmAccountToken }: CredentialsInterface): Promise<AxiosResponse> {
   const response = await api.patch(`/auth/confirm-account/${confirmAccountToken}`)
+
   return response.data
 }
