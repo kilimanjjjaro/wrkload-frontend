@@ -1,5 +1,6 @@
 import { Dispatch } from 'react'
 import { motion } from 'framer-motion'
+import { useSwipeable } from 'react-swipeable'
 import useDelayUnmount from 'hooks/useDelayUnmount'
 
 import { BACKGROUND_VARIANTS, CONTENT_VARIANTS } from 'constants/framerMotion'
@@ -12,6 +13,11 @@ interface Props {
 
 export default function Modal ({ children, modalStatus, setModalStatus }: Props): JSX.Element {
   const renderChild = useDelayUnmount(modalStatus, 400)
+
+  const handlers = useSwipeable({
+    onSwipedDown: () => setModalStatus(false),
+    preventScrollOnSwipe: true
+  })
 
   return (
     <motion.div
@@ -30,7 +36,13 @@ export default function Modal ({ children, modalStatus, setModalStatus }: Props)
           initial='initial'
           animate={modalStatus ? 'open' : 'closed'}
           transition={{ ease: 'easeInOut', duration: 0.4 }}
-        >{children}
+        >
+          <div
+            className='w-1/2 h-[5px] mx-auto mb-2 bg-white'
+            {...handlers}
+          />
+          {children}
+
         </motion.div>
       )}
     </motion.div>
