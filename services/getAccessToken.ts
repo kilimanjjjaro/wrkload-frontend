@@ -10,11 +10,8 @@ export default async function getAccessToken (): Promise<CookieValueTypes> {
   if (isAccessTokenExpired || accessToken === undefined) {
     const response = await api.get('/auth/refreshToken')
 
-    console.log('Se ha renovado el accessToken')
-
     return response.data.accessToken
   } else {
-    console.log('El accessToken no ha expirado')
     return accessToken
   }
 }
