@@ -14,6 +14,10 @@ const INITIAL_CREDENTIALS_STATE = {
   email: ''
 }
 
+export const metadata = {
+  title: 'Resend confirmation account link'
+}
+
 export default function ResendConfirmationAccountLink (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')

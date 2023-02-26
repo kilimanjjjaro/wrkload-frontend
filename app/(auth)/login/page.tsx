@@ -18,6 +18,10 @@ const INITIAL_CREDENTIALS_STATE = {
   password: 'SGYvRAV4@wG43Tx'
 }
 
+export const metadata = {
+  title: 'Login'
+}
+
 export default function Login (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')

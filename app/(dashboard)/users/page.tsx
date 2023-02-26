@@ -11,6 +11,10 @@ import Modals from 'components/users/Modals'
 import { getUsers } from 'services/users/getUsers'
 import { sortUsers } from 'utils/sortData'
 
+export const metadata = {
+  title: 'Users'
+}
+
 export default function Users (): JSX.Element {
   const params = useSearchParams()
   const page = params.get('page')

@@ -13,6 +13,10 @@ import notFoundImage from 'public/images/not-found.webp'
 import searchTasks from 'services/tasks/searchTasks'
 import { sortTasks } from 'utils/sortData'
 
+export const metadata = {
+  title: 'Search tasks'
+}
+
 export default function SearchTasks (): JSX.Element {
   const params = useSearchParams()
   const project = params.get('project')

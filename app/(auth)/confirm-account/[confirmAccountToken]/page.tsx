@@ -14,6 +14,10 @@ interface ParamsInterface {
   }
 }
 
+export const metadata = {
+  title: 'Confirm account'
+}
+
 export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Element {
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState('')

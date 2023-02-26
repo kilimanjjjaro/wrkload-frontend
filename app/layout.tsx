@@ -2,9 +2,24 @@ import fonts from 'utils/fonts'
 import DataProvider from 'contexts/DataContext'
 import NavBar from 'components/shared/NavBar'
 import Footer from 'components/shared/Footer'
+import type { Metadata } from 'next'
 import 'app/globals.css'
 
 import type { ChildrenInterface } from 'interfaces/components'
+
+export const metadata: Metadata = {
+  title: { default: 'wrkload', template: '%s | wrkload' },
+  openGraph: {
+    siteName: 'wrkload',
+    authors: 'Kilimanjjjaro',
+    locale: 'en-US'
+  },
+  icons: {
+    icon: '/favicon.jpg',
+    shortcut: '/favicon.jpg',
+    apple: '/favicon.jpg'
+  }
+}
 
 export default function RootLayout ({ children }: ChildrenInterface): JSX.Element {
   const { inter, spaceGrotesk } = fonts

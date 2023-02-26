@@ -23,6 +23,10 @@ const INITIAL_CREDENTIALS_STATE = {
   confirmNewPassword: ''
 }
 
+export const metadata = {
+  title: 'Reset password'
+}
+
 export default function ResetPassword ({ params }: ParamsInterface): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')

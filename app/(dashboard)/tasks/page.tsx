@@ -12,6 +12,10 @@ import { getTasks } from 'services/tasks/getTasks'
 import { sortTasks } from 'utils/sortData'
 import { DataContext } from 'contexts/DataContext'
 
+export const metadata = {
+  title: 'Tasks'
+}
+
 export default function Tasks (): JSX.Element {
   const params = useSearchParams()
   const page = params.get('page')
