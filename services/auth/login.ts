@@ -16,6 +16,8 @@ interface ReturnInterface {
 export default async function login ({ email, password }: CredentialsInterface): Promise<ReturnInterface> {
   const response = await api.post('/auth/login', { email, password })
 
+  console.log(response)
+
   setCookie('_id', response.data._id)
 
   return response.data

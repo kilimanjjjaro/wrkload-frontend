@@ -40,11 +40,11 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
     <div className='relative flex items-center justify-center bg-transparent'>
       <div
         onClick={() => setOpen(!open)}
-        className={clsx('flex gap-x-3 group cursor-pointer font-bold transition-colors ease-in-out duration-[0.6s] hover:text-blue dark:hover:text-white', selected === '' && 'text-white')}
+        className={clsx('flex gap-x-3 group cursor-pointer font-bold transition-colors ease-in-out duration-400 hover:text-blue dark:hover:text-white', selected === '' && 'text-white')}
       >
         {selected}
         <svg
-          className={clsx('w-8 stroke-3.5 transition-transform ease-in-out duration-[0.6s]', open && 'rotate-180')}
+          className={clsx('w-8 stroke-3.5 transition-transform ease-in-out duration-400', open && 'rotate-180')}
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
           viewBox='0 0 24 24'
@@ -60,7 +60,7 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
         variants={VARIANTS}
         initial={false}
         animate={open ? 'open' : 'closed'}
-        transition={{ ease: 'easeInOut', duration: 0.6 }}
+        transition={{ ease: 'easeInOut', duration: 0.4 }}
       >
         <div className='sticky top-0 flex items-center px-3 border-b border-black bg-blue'>
           <MagnifyingGlassIcon className='w-4 stroke-3 stroke-black' />

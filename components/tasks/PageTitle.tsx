@@ -24,7 +24,7 @@ export default function PageTitle (): JSX.Element {
 
   return (
     <h2 className='flex text-6xl gap-x-5 font-primaryFont'>
-      Tasks of
+      <span className='transition-colors ease-in-out duration-400'>Tasks of</span>
       {shouldRenderSkeleton && <div className='w-56 bg-gradient-to-r from-blue via-light-blue to-blue bg-[length:200%_100%] h-14 animate-skeleton' />}
       {!shouldRenderSkeleton && (
         <ProjectSelector projectNames={sortedProjectNames} />
