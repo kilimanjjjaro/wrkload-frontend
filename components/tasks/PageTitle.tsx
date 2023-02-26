@@ -23,7 +23,7 @@ export default function PageTitle (): JSX.Element {
   }, [data])
 
   return (
-    <h2 className='flex text-6xl gap-x-5 font-primaryFont'>
+    <h2 className='flex flex-col text-6xl md:flex-row gap-x-5 font-primaryFont'>
       <span className='transition-colors ease-in-out duration-400'>Tasks of</span>
       {shouldRenderSkeleton && <div className='w-56 bg-gradient-to-r from-blue via-light-blue to-blue bg-[length:200%_100%] h-14 animate-skeleton' />}
       {!shouldRenderSkeleton && (

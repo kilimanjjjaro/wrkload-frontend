@@ -21,7 +21,7 @@ export default function Modal ({ children, modalStatus, setModalStatus }: Props)
 
   return (
     <motion.div
-      className='fixed top-0 left-0 z-10 flex items-center justify-center w-full h-full'
+      className='fixed top-0 left-0 z-10 flex items-end justify-center w-full h-full md:items-center'
       variants={BACKGROUND_VARIANTS}
       initial={false}
       animate={modalStatus ? 'open' : 'closed'}
@@ -31,14 +31,14 @@ export default function Modal ({ children, modalStatus, setModalStatus }: Props)
 
       {renderChild && (
         <motion.div
-          className='z-20'
+          className='z-20 w-full px-6'
           variants={CONTENT_VARIANTS}
           initial='initial'
           animate={modalStatus ? 'open' : 'closed'}
           transition={{ ease: 'easeInOut', duration: 0.4 }}
         >
           <div
-            className='w-1/2 h-[5px] mx-auto mb-2 bg-white'
+            className='block md:hidden w-1/2 h-[5px] mx-auto mb-2 bg-white'
             {...handlers}
           />
           {children}

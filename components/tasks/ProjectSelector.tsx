@@ -37,7 +37,7 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
   }, [selected])
 
   return (
-    <div className='relative flex items-center justify-center bg-transparent'>
+    <div className='relative flex items-center bg-transparent md:justify-center'>
       <div
         onClick={() => setOpen(!open)}
         className={clsx('flex gap-x-3 group cursor-pointer font-bold transition-colors ease-in-out duration-400 hover:text-blue dark:hover:text-white', selected === '' && 'text-white')}

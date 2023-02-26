@@ -81,7 +81,7 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
   if (error.length >= 1) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
+        <div className='p-6 md:p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
           <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p
             className={clsx(
@@ -108,7 +108,7 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
   if (success) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
+        <div className='p-6 md:p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>You can now use your new password. <b>Please, log in again.</b></Balancer></p>
           <Button onClick={() => router.push('/login')} variant='secondary'>
@@ -121,7 +121,7 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center text-black bg-blue md:w-96 min-w-auto'>
+      <div className='p-6 md:p-10 text-center text-black bg-blue md:w-96 min-w-auto'>
         <Headline variant='md'><Balancer>Reset password</Balancer></Headline>
         <Paragraph variant='sm'>
           <Balancer>

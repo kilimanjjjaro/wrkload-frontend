@@ -84,9 +84,9 @@ export default function ChangePassword (): JSX.Element {
   if (error.length >= 1) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto'>
           <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
-          <p className='text-sm md:mb-5 font-secondaryFont'>
+          <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
               {error === 'auth/different-passwords' && 'Passwords are not the same. Please, try again.'}
               {error === 'auth/invalid-credentials' && 'The email or password are invalid. Please, try again.'}
@@ -103,7 +103,7 @@ export default function ChangePassword (): JSX.Element {
   if (success) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>You can now use your new password. <b>Please, log in again.</b></Balancer></p>
           <Button onClick={() => router.push('/login')} variant='secondary'>
@@ -116,7 +116,7 @@ export default function ChangePassword (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center text-black bg-blue md:w-96 min-w-auto'>
+      <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto'>
         <Headline variant='md'><Balancer>{step === 1 ? 'Change password' : 'Enter new password'}</Balancer></Headline>
         <Paragraph variant='sm'>
           <Balancer>

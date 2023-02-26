@@ -39,7 +39,7 @@ export default function AddProject (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center text-black bg-blue md:w-96 min-w-auto'>
+      <div className='p-6 md:p-10 text-center text-black bg-blue md:w-96 min-w-auto w-full'>
         <Headline variant='md'><b>Add project</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>

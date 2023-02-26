@@ -10,7 +10,7 @@ export default function Paragraph ({ children, variant }: Props): JSX.Element {
     <p
       className={clsx(
         'break-word',
-        variant === 'normal' && 'text-base md:text-xl font-secondaryFont',
+        variant === 'normal' && 'text-xl font-secondaryFont',
         variant === 'sm' && 'text-sm font-secondaryFont'
       )}
     >{children}

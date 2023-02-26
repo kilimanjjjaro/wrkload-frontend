@@ -47,7 +47,7 @@ export default function DeleteAccount (): JSX.Element {
   if (error.length >= 1) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto'>
           <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
@@ -66,7 +66,7 @@ export default function DeleteAccount (): JSX.Element {
   if (success) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-10 text-black text-cente bg-blue md:w-80 min-w-auto'>
+        <div className='p-6 text-black md:p-10 text-cente bg-blue md:w-80 min-w-auto'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>Your account was deleted. <b>Thanks for this time!</b></Balancer></p>
           <Button onClick={() => router.push('/')} variant='secondary'>
@@ -79,9 +79,9 @@ export default function DeleteAccount (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-10 text-center text-black bg-blue md:w-96 min-w-auto'>
+      <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto'>
         <Headline variant='md'><Balancer>Delete account</Balancer></Headline>
-        <div className='flex flex-col mb-4 gap-y-3'>
+        <div className='flex flex-col mb-5 gap-y-3'>
           <Paragraph variant='sm'>Are you sure to continue? Your account and data will be permanently deleted. <b>To confirm, complete the following form.</b></Paragraph>
         </div>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
