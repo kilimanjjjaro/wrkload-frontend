@@ -31,24 +31,24 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
   return (
     <>
       <MasonryGrid>
-        {shouldRenderStats && (stats !== undefined || stats !== null) && pathname?.includes('search') === false && <Stats stats={stats} />}
+        {shouldRenderStats && (stats !== undefined || stats !== null) && !pathname?.includes('search') && <Stats stats={stats} />}
         {projects.map((project) => (
           <article
-            key={project._id} className='relative flex flex-col items-start text-black transition ease-in-out bg-white duration-400 group p-7'
+            key={project._id} className='relative flex flex-col items-start p-6 text-black transition ease-in-out bg-white rounded-3xl duration-400 group md:p-7'
           >
             <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'><Balancer>{project.name}</Balancer></h3>
 
-            <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black group/tooltip bg-blue gap-x-1 font-secondaryFont'>
+            <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip bg-blue gap-x-1 font-secondaryFont'>
               <InboxStackIcon className='w-4 stroke-2' />
               {project.totalTasks} tasks
-              <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-light-blue duration-400 group-hover/tooltip:opacity-100 group-hover/tooltip:visible'>
+              <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-light-blue duration-400 group-hover/tooltip:opacity-100 group-hover/tooltip:visible rounded-full'>
                 Total tasks
               </div>
             </div>
 
-            <div className='absolute left-0 flex justify-center w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 -top-[0.9rem] xl:opacity-0 gap-x-3 group-hover:opacity-100'>
-              <div onClick={() => handleUpdateProjectClick(project)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-yellow hover:bg-blue'><PencilSquareIcon className='w-4 stroke-2' /></div>
-              <div onClick={() => handleDeleteProjectClick(project)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-red hover:bg-blue'><TrashIcon className='w-4 stroke-2' /></div>
+            <div className='absolute right-6 md:right-0 flex flex-col md:flex-row items-end justify-end md:justify-center md:w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 md:-top-[0.9rem] xl:opacity-0 gap-3 group-hover:opacity-100'>
+              <div onClick={() => handleUpdateProjectClick(project)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-yellow hover:bg-blue rounded-full'><PencilSquareIcon className='w-4 stroke-2' /></div>
+              <div onClick={() => handleDeleteProjectClick(project)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-red hover:bg-blue rounded-full'><TrashIcon className='w-4 stroke-2' /></div>
             </div>
           </article>
         ))}

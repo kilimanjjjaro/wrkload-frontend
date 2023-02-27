@@ -37,7 +37,7 @@ textarea::-webkit-scrollbar-thumb {
 .swiper-pagination-bullet {
   width: 50%;
   height: 4px;
-  border-radius: 0;
+  border-radius: 9999px;
   background: transparent;
   opacity: 1;
   transition: all 0.4s ease-in-out;

@@ -68,9 +68,9 @@ export default function Register (): JSX.Element {
   if (error.length >= 1) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-6 md:p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
-          <p className='text-sm mb-5 font-secondaryFont'>
+          <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
               {error === 'auth/different-passwords' && 'Passwords are not the same. Please, try again.'}
               {error === 'auth/email-already-exists' && 'An account with this email already exists. Please, try another one or login.'}
@@ -87,7 +87,7 @@ export default function Register (): JSX.Element {
   if (success) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-6 md:p-10 text-center text-black bg-blue md:w-80 min-w-auto'>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been created and an email will be sent to activate it.</Balancer></p>
           <Button onClick={() => router.push('/login')} variant='secondary'>
@@ -100,7 +100,7 @@ export default function Register (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-6 md:p-10 text-center text-black bg-blue md:w-96 min-w-auto'>
+      <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
         <Headline variant='md'><Balancer>Nice to meet you!</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>

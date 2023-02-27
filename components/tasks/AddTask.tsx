@@ -2,6 +2,7 @@
 
 import { useContext, useState } from 'react'
 import { mutate } from 'swr'
+import Balancer from 'react-wrap-balancer'
 import { addTask } from 'services/tasks/addTask'
 import { addTaskOptions } from 'utils/swrTasksOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -43,8 +44,8 @@ export default function AddTask (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-6 md:p-10 text-center text-black bg-blue md:w-96 min-w-auto w-full'>
-        <Headline variant='md'><b>Add task</b></Headline>
+      <div className='w-full p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto  rounded-t-3xl md:rounded-3xl'>
+        <Headline variant='md'><Balancer>Add task</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>
             <Input variant='primary' onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' required />

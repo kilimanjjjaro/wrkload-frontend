@@ -31,34 +31,34 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
       <MasonryGrid>
         {users.map((user) => (
           <article
-            key={user._id} className='relative flex flex-col items-start text-black transition ease-in-out bg-white duration-400 group p-7'
+            key={user._id} className='relative flex flex-col items-start p-6 text-black transition ease-in-out bg-white rounded-3xl duration-400 group md:p-7'
           >
             {user.avatar !== undefined && (
               <div className='relative'>
                 <Image
-                  className='object-cover w-20 h-20 mb-4'
+                  className='object-cover w-20 h-20 mb-4 rounded-full'
                   src={user.avatar}
                   alt={user.username}
                   width='80'
                   height='80'
                 />
                 {user.confirmationStatus && (
-                  <div className='absolute top-0 left-0 flex justify-center w-3 h-3 group/tooltip-1 cursor-help bg-red'>
+                  <div className='absolute flex justify-center w-3 h-3 rounded-full top-1 left-1 group/tooltip-1 cursor-help bg-red'>
                     <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-light-blue duration-400 group-hover/tooltip-1:opacity-100 group-hover/tooltip-1:visible'>
                       Unconfirmed account
                     </div>
                   </div>
                 )}
                 {user.confirmationStatus && !user.recentlyActive && (
-                  <div className='absolute top-0 left-0 flex justify-center w-3 h-3 group/tooltip-2 cursor-help bg-yellow'>
-                    <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-4 bg-light-blue duration-400 group-hover/tooltip-2:opacity-100 group-hover/tooltip-2:visible'>
+                  <div className='absolute flex justify-center w-3 h-3 rounded-full top-1 left-1 group/tooltip-2 cursor-help bg-yellow'>
+                    <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-4 bg-light-blue rounded-3xl duration-400 group-hover/tooltip-2:opacity-100 group-hover/tooltip-2:visible'>
                       Confirmed account
                     </div>
                   </div>
                 )}
                 {user.recentlyActive && (
-                  <div className='absolute top-0 left-0 flex justify-center w-3 h-3 group/tooltip-3 cursor-help bg-green'>
-                    <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-4 bg-light-blue duration-400 group-hover/tooltip-3:opacity-100 group-hover/tooltip-3:visible'>
+                  <div className='absolute flex justify-center w-3 h-3 rounded-full top-1 left-1 group/tooltip-3 cursor-help bg-green'>
+                    <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-4 bg-light-blue rounded-3xl duration-400 group-hover/tooltip-3:opacity-100 group-hover/tooltip-3:visible'>
                       Recently active
                     </div>
                   </div>
@@ -67,32 +67,32 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
             )}
 
             <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'><Balancer>{user.username}</Balancer></h3>
-            <div className='flex mb-3 items-center h-6 px-2 text-[10px] font-bold text-gray-500 uppercase border-2 border-gray-500  gap-x-1 font-secondaryFont'>
+            <div className='flex mb-3 rounded-full items-center h-6 px-2 text-[10px] font-bold text-gray-500 uppercase border-2 border-gray-500 gap-x-1 font-secondaryFont'>
               {user.role === 1 && 'Administrator'}
               {user.role === 2 && 'Project Manager'}
               {user.role === 3 && 'Partner'}
             </div>
 
             <div className='flex flex-wrap gap-3 mt-4'>
-              <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black group/tooltip-1 bg-blue gap-x-1 font-secondaryFont'>
+              <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-1 bg-blue gap-x-1 font-secondaryFont'>
                 <EnvelopeIcon className='w-4 stroke-2' />
                 {user.email}
-                <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-light-blue duration-400 group-hover/tooltip-1:opacity-100 group-hover/tooltip-1:visible'>
+                <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-light-blue duration-400 group-hover/tooltip-1:opacity-100 group-hover/tooltip-1:visible rounded-full'>
                   E-mail
                 </div>
               </div>
-              <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black group/tooltip-2 bg-blue gap-x-1 font-secondaryFont'>
+              <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-2 bg-blue gap-x-1 font-secondaryFont'>
                 <UserIcon className='w-4 stroke-2' />
                 {dayjs(user.registeredAt).format('DD-MM-YYYY')}
-                <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-light-blue duration-400 group-hover/tooltip-2:opacity-100 group-hover/tooltip-2:visible'>
+                <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-light-blue duration-400 group-hover/tooltip-2:opacity-100 group-hover/tooltip-2:visible rounded-full'>
                   Registration date
                 </div>
               </div>
             </div>
 
-            <div className='absolute left-0 flex justify-center w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 -top-[0.9rem] xl:opacity-0 gap-x-3 group-hover:opacity-100'>
-              <div onClick={() => handleUpdateUserClick(user)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-yellow hover:bg-blue'><PencilSquareIcon className='w-4 stroke-2' /></div>
-              <div onClick={() => handleDeleteUserClick(user)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-red hover:bg-blue'><TrashIcon className='w-4 stroke-2' /></div>
+            <div className='absolute right-6 md:right-0 flex flex-col md:flex-row items-end justify-end md:justify-center md:w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 md:-top-[0.9rem] xl:opacity-0 gap-3 group-hover:opacity-100'>
+              <div onClick={() => handleUpdateUserClick(user)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-yellow hover:bg-blue rounded-full'><PencilSquareIcon className='w-4 stroke-2' /></div>
+              <div onClick={() => handleDeleteUserClick(user)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-red hover:bg-blue rounded-full'><TrashIcon className='w-4 stroke-2' /></div>
             </div>
           </article>
         ))}

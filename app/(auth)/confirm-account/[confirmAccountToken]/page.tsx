@@ -58,7 +58,7 @@ export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Elemen
   if (error.length >= 1) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto'>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
@@ -78,7 +78,7 @@ export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Elemen
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto'>
+      <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
         <Headline variant='md'><Balancer>Done!</Balancer></Headline>
         <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been confirmed. <b>Please, log in.</b></Balancer></p>
         <Button onClick={() => router.push('/login')} variant='secondary'>

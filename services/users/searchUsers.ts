@@ -23,7 +23,7 @@ export default async function searchUsers ({ query, page }: Props): Promise<any>
     }
   }
 
-  const response = await api.get(`/users?search=${query as string}&limit=1&page=${currentPage}`, config)
+  const response = await api.get(`/users?search=${query as string}&limit=8&page=${currentPage}`, config)
 
   return response.data
 }

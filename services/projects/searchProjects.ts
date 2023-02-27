@@ -23,7 +23,7 @@ export default async function searchProjects ({ query, page }: Props): Promise<a
     }
   }
 
-  const response = await api.get(`/projects?search=${query as string}&limit=1&page=${currentPage}`, config)
+  const response = await api.get(`/projects?search=${query as string}&limit=8&page=${currentPage}`, config)
 
   return response.data
 }

@@ -23,7 +23,7 @@ interface Props {
 export default function DateFilter ({ dependency, setDependency }: Props): JSX.Element {
   return (
     <motion.div
-      className='absolute right-0 z-10 flex flex-col mt-5 text-white bg-blue top-full p-7 gap-y-3'
+      className='absolute right-0 z-20 flex flex-col mt-5 text-white rounded-3xl bg-blue top-full p-7 gap-y-3'
       animate={dependency ? 'open' : 'closed'}
       variants={VARIANTS}
       transition={{ ease: 'easeInOut', duration: 0.4 }}

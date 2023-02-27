@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { mutate } from 'swr'
 import clsx from 'clsx'
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import { DataContext } from 'contexts/DataContext'
 
 const VARIANTS = {
@@ -43,20 +43,11 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
         className={clsx('flex gap-x-3 group cursor-pointer font-bold transition-colors ease-in-out duration-400 hover:text-blue dark:hover:text-white', selected === '' && 'text-white')}
       >
         {selected}
-        <svg
-          className={clsx('w-8 stroke-3.5 transition-transform ease-in-out duration-400', open && 'rotate-180')}
-          xmlns='http://www.w3.org/2000/svg'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
-          aria-hidden='true'
-        >
-          <path d='M19.5 8.25l-7.5 7.5-7.5-7.5' />
-        </svg>
+        <ChevronDownIcon className={clsx('w-8 stroke-3.5 transition-transform ease-in-out duration-400', open && 'rotate-180')} />
       </div>
 
       <motion.ul
-        className={clsx('z-20 absolute font-secondaryFont top-full text-base bg-blue mt-5 overflow-x-hidden overflow-y-auto custom-scrollbar max-h-[217px]')}
+        className={clsx('z-20 absolute rounded-xl font-secondaryFont top-full text-base bg-blue mt-5 overflow-x-hidden overflow-y-auto custom-scrollbar max-h-[217px]')}
         variants={VARIANTS}
         initial={false}
         animate={open ? 'open' : 'closed'}
@@ -85,7 +76,7 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
           >
             {projectName}
             <span className={clsx(
-              'absolute right-3 hidden px-[5px] tracking-wider uppercase bg-black text-[8px] text-white',
+              'absolute rounded-full right-3 hidden px-2 tracking-wider uppercase bg-black text-[8px] text-white',
               projectName.toLowerCase() === selected.toLowerCase() && '!flex'
             )}
             >

@@ -46,7 +46,7 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
   if (error.length >= 1) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto'>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
@@ -65,7 +65,7 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
   if (success) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
-        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto'>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>A link to confirm the account was sent again, <b>please check your inbox.</b></Balancer></p>
           <Button onClick={() => router.push('/login')} variant='secondary'>
@@ -78,7 +78,7 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto'>
+      <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
         <Headline variant='md'><Balancer>Resend confirmation account link</Balancer></Headline>
         <Paragraph variant='sm'>
           <Balancer>

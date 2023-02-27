@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import { mutate } from 'swr'
+import Balancer from 'react-wrap-balancer'
 import { deleteUser } from 'services/users/deleteUser'
 import { deleteUserOptions } from 'utils/swrUsersOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -38,8 +39,8 @@ export default function DeleteUser (): JSX.Element {
 
   return (
     <div className='flex flex-col items-center gap-y-5'>
-      <div className='w-full p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto'>
-        <Headline variant='md'><b>Sure to delete this user?</b></Headline>
+      <div className='w-full p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
+        <Headline variant='md'><Balancer>Sure to delete this user?</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>
             <Input variant='primary' onChange={handleChange} value={user.username} name='username' type='text' placeholder='Username' centerText required disabled />

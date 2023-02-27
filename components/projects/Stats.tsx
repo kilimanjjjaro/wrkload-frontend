@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import Balancer from 'react-wrap-balancer'
-import { ChartBarIcon, EyeSlashIcon, FireIcon } from '@heroicons/react/24/outline'
+import { PresentationChartLineIcon, EyeSlashIcon, FireIcon } from '@heroicons/react/24/outline'
 import { DataContext } from 'contexts/DataContext'
 import type { ProjectStatsInterface } from 'interfaces/projects/Project'
 
@@ -13,10 +13,10 @@ export default function Stats ({ stats }: { stats: ProjectStatsInterface }): JSX
   }
 
   return (
-    <div className='relative border-2 border-blue text-blue bg-light-blue dark:bg-black dark:text-blue dark:border-blue pt-7 pb-[34px] pr-7 pl-7'>
+    <div className='relative border-2 border-blue text-blue bg-light-blue dark:bg-black dark:text-blue dark:border-blue pt-6 md:pt-7 pb-[33px] pr-6 md:pr-7 pl-6 md:pl-7 rounded-3xl'>
       <EyeSlashIcon className='absolute z-10 w-6 h-6 transition ease-in-out cursor-pointer stroke-2 duration-400 hover:text-black dark:hover:text-white top-7 right-7' onClick={handleRenderStats} />
       {stats.bestProjectOfPastMonth !== '' && <FireIcon className='h-10 stroke-2' />}
-      {stats.bestProjectOfPastMonth === '' && <ChartBarIcon className='h-10 stroke-2' />}
+      {stats.bestProjectOfPastMonth === '' && <PresentationChartLineIcon className='h-10 stroke-2' />}
       {stats.bestProjectOfPastMonth !== '' && (
         <>
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
