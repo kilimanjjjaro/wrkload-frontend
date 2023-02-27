@@ -36,7 +36,7 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
             {user.avatar !== undefined && (
               <div className='relative'>
                 <Image
-                  className='object-cover w-20 h-20 mb-4 rounded-full'
+                  className='object-cover w-20 h-20 mb-4 border-[3px] border-black rounded-full'
                   src={user.avatar}
                   alt={user.username}
                   width='80'
@@ -66,8 +66,8 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
               </div>
             )}
 
-            <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'><Balancer>{user.username}</Balancer></h3>
-            <div className='flex mb-3 rounded-full items-center h-6 px-2 text-[10px] font-bold text-gray-500 uppercase border-2 border-gray-500 gap-x-1 font-secondaryFont'>
+            <h3 className='mb-1 text-4xl font-bold break-all font-primaryFont'><Balancer>{user.username}</Balancer></h3>
+            <div className='flex mb-3 rounded-full items-center h-6 px-2 text-[10px] font-bold text-black uppercase border-2 border-black gap-x-1 font-secondaryFont'>
               {user.role === 1 && 'Administrator'}
               {user.role === 2 && 'Project Manager'}
               {user.role === 3 && 'Partner'}
