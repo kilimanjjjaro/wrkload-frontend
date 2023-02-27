@@ -15,17 +15,17 @@ export default function Stats ({ stats }: { stats: ProjectStatsInterface }): JSX
   return (
     <div className='relative border-2 border-blue text-blue bg-light-blue dark:bg-black dark:text-blue dark:border-blue pt-6 md:pt-7 pb-[33px] pr-6 md:pr-7 pl-6 md:pl-7 rounded-3xl'>
       <EyeSlashIcon className='absolute z-10 w-6 h-6 transition ease-in-out cursor-pointer stroke-2 duration-400 hover:text-black dark:hover:text-white top-7 right-7' onClick={handleRenderStats} />
-      {stats.bestProjectOfPastMonth !== '' && <FireIcon className='h-10 stroke-2' />}
-      {stats.bestProjectOfPastMonth === '' && <PresentationChartLineIcon className='h-10 stroke-2' />}
-      {stats.bestProjectOfPastMonth !== '' && (
+      {stats?.bestProjectOfPastMonth !== '' && <FireIcon className='h-10 stroke-2' />}
+      {stats?.bestProjectOfPastMonth === '' && <PresentationChartLineIcon className='h-10 stroke-2' />}
+      {stats?.bestProjectOfPastMonth !== '' && (
         <>
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
-            {stats.bestProjectOfPastMonth}
+            {stats?.bestProjectOfPastMonth}
           </div>
           <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>Project of<br /> the last month.</span>
         </>
       )}
-      {stats.bestProjectOfPastMonth === '' && <span className='block text-2xl text-black dark:text-white font-secondaryFont mt-7'><Balancer>We can&apos;t wait to show you stats but it looks like it&apos;s your first month or you didn&apos;t upload tasks last month.</Balancer></span>}
+      {stats?.bestProjectOfPastMonth === '' && <span className='block text-2xl text-black dark:text-white font-secondaryFont mt-7'><Balancer>We can&apos;t wait to show you stats but it looks like it&apos;s your first month or you didn&apos;t upload tasks last month.</Balancer></span>}
     </div>
   )
 }

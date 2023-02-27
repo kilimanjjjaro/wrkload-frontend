@@ -130,8 +130,8 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
         </Paragraph>
         <form className='mt-5' onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
-            <Input variant='primary' onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' centerText />
-            <Input variant='primary' onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' centerText />
+            <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' centerText />
+            <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' centerText />
           </div>
           <Button variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />

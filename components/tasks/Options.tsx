@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { CalendarIcon, PresentationChartLineIcon, EyeIcon, MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { CalendarIcon, PresentationChartLineIcon, MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/outline'
 import Button from 'components/shared/Button'
 import DateFilter from 'components/shared/DateFilter'
 import { ModalsContext } from 'contexts/ModalsContext'

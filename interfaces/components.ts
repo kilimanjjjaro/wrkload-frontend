@@ -19,7 +19,6 @@ export interface ButtonInterface {
 }
 
 export interface InputInterface {
-  variant: 'primary' | 'alternative' | 'disabled'
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void
   value?: string | number
@@ -33,7 +32,6 @@ export interface InputInterface {
 }
 
 export interface TextareaInterface {
-  variant: 'primary' | 'alternative'
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
   value?: string
   name: string

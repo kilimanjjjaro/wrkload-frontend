@@ -14,7 +14,7 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.El
     window.localStorage.setItem('showStats', JSON.stringify(!shouldRenderStats))
   }
 
-  const performanceText = stats.performance === 'better' ? 'better' : 'worse'
+  const performanceText = stats?.performance === 'better' ? 'better' : 'worse'
 
   return (
     <>
@@ -37,7 +37,7 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.El
               {stats.performance === 'better' && (
                 <div className='relative flex items-center cursor-help group'>
                   <ArrowUpIcon className='w-4 stroke-green stroke-4' />
-                  <div className='absolute text-black left-6 w-max tracking-widest font-bold leading-none text-[8px] uppercase font-secondaryFont text-center bg-blue p-2 invisible transition-all duration-400 ease-in-out opacity-0 group-hover:opacity-100 group-hover:visible'>
+                  <div className='absolute text-black left-6 w-max tracking-widest font-bold leading-none text-[8px] uppercase font-secondaryFont text-center bg-blue p-2 invisible transition-all duration-400 ease-in-out opacity-0 group-hover:opacity-100 group-hover:visible rounded-full'>
                     Your current performance is being {performanceText}
                   </div>
                 </div>
@@ -55,7 +55,7 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.El
           </SwiperSlide>
         </Swiper>
       )}
-      {stats.totalTasksPastMonth < 1 && (
+      {stats?.totalTasksPastMonth < 1 && (
         <div className='relative text-blue border-blue dark:text-blue border-2 dark:border-blue p-6 md:pt-7 md:pb-[33px] md:pr-7 md:pl-7 rounded-3xl'>
           <EyeSlashIcon className='absolute z-10 w-6 h-6 transition ease-in-out cursor-pointer stroke-2 dark:text-blue duration-400 hover:text-black dark:hover:text-white top-7 right-7' onClick={handleRenderStats} />
           <PresentationChartLineIcon className='h-10 stroke-2' />

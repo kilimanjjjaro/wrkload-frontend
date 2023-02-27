@@ -45,10 +45,10 @@ export default function UpdateUser (): JSX.Element {
         <Headline variant='md'><Balancer>Update user</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>
-            <Input variant='primary' onChange={handleChange} value={user.username} name='username' type='text' placeholder='Username' centerText required />
-            <Input variant='primary' onChange={handleChange} value={user.role} name='role' type='number' placeholder='Role' centerText required />
-            <Input variant='primary' onChange={handleChange} value={user.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
-            {/* <Input variant='primary' onChange={handleChange} value={user.avatar} name='avatar' type='file' placeholder='Avatar' centerText required /> */}
+            <Input onChange={handleChange} value={user.username} name='username' type='text' placeholder='Username' centerText required />
+            <Input onChange={handleChange} value={user.role} name='role' type='number' placeholder='Role' centerText required />
+            <Input onChange={handleChange} value={user.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
+            {/* <Input onChange={handleChange} value={user.avatar} name='avatar' type='file' placeholder='Avatar' centerText required /> */}
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>

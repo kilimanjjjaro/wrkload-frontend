@@ -47,7 +47,7 @@ export default function SearchForm ({ type, setModalStatus }: Props): JSX.Elemen
         <Headline variant='md'><b>Search {type}s</b></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>
-            <Input variant='primary' onChange={handleChange} value={query} name='query' type='text' placeholder='What are you looking for?' centerText required />
+            <Input onChange={handleChange} value={query} name='query' type='text' placeholder='What are you looking for?' centerText required />
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>

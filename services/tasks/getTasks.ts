@@ -24,7 +24,7 @@ export const getTasks = async ({ page, project }: Props): Promise<FullTaskInterf
     }
   }
 
-  const response = await api.get(`/tasks?project=${project}&limit=1&page=${currentPage}`, config)
+  const response = await api.get(`/tasks?project=${project}&limit=8&page=${currentPage}`, config)
 
   return response.data
 }

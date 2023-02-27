@@ -126,7 +126,7 @@ export default function ChangePassword (): JSX.Element {
         {step === 1 && (
           <form className='mt-5' onSubmit={(event) => { void handleStepOne(event) }}>
             <div className='flex flex-col gap-3 mb-5'>
-              <Input variant='primary' onChange={handleChange} value={credentials.currentPassword} name='currentPassword' type='password' placeholder='Current Password' centerText />
+              <Input onChange={handleChange} value={credentials.currentPassword} name='currentPassword' type='password' placeholder='Current Password' centerText />
             </div>
             <Button variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
@@ -136,8 +136,8 @@ export default function ChangePassword (): JSX.Element {
         {step === 2 && (
           <form className='mt-5' onSubmit={(event) => { void handleStepTwo(event) }}>
             <div className='flex flex-col gap-3 mb-5'>
-              <Input variant='primary' onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' autoComplete='new-password' centerText />
-              <Input variant='primary' onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' autoComplete='new-password' centerText />
+              <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' autoComplete='new-password' centerText />
+              <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' autoComplete='new-password' centerText />
             </div>
             <Button variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />

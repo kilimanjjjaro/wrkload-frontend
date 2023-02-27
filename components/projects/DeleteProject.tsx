@@ -45,7 +45,7 @@ export default function DeleteProject (): JSX.Element {
         <Headline variant='md'><Balancer>Sure to delete this project?</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>
-            <Input variant='primary' onChange={handleChange} value={project.name} name='name' type='text' placeholder='Name' centerText required disabled />
+            <Input onChange={handleChange} value={project.name} name='name' type='text' placeholder='Name' centerText required disabled />
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>

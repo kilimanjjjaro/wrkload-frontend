@@ -87,7 +87,7 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
         </Paragraph>
         <form className='mt-5' onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
-            <Input variant='primary' onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
+            <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
           </div>
           <Button variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />

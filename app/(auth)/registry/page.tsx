@@ -104,10 +104,10 @@ export default function Register (): JSX.Element {
         <Headline variant='md'><Balancer>Nice to meet you!</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col gap-3 mb-5'>
-            <Input variant='primary' onChange={handleChange} value={credentials.username} name='username' type='text' placeholder='Username' centerText />
-            <Input variant='primary' onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
-            <Input variant='primary' onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' centerText />
-            <Input variant='primary' onChange={handleChange} value={credentials.confirmPassword} name='confirmPassword' type='password' placeholder='Confirm Password' autoComplete='current-password' centerText />
+            <Input onChange={handleChange} value={credentials.username} name='username' type='text' placeholder='Username' centerText />
+            <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
+            <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' centerText />
+            <Input onChange={handleChange} value={credentials.confirmPassword} name='confirmPassword' type='password' placeholder='Confirm Password' autoComplete='current-password' centerText />
           </div>
           <Button variant='secondary'>
             <LockClosedIcon className='w-4 stroke-3' />

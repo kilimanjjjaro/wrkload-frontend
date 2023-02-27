@@ -45,7 +45,7 @@ export default function UpdateProject (): JSX.Element {
         <Headline variant='md'><Balancer>Update project</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>
-            <Input variant='primary' onChange={handleChange} value={project.name} name='name' type='text' placeholder='Name' centerText required />
+            <Input onChange={handleChange} value={project.name} name='name' type='text' placeholder='Name' centerText required />
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>

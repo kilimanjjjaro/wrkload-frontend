@@ -44,11 +44,11 @@ export default function UpdateTask (): JSX.Element {
         <Headline variant='md'><Balancer>Update task</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-5 gap-y-3'>
-            <Input variant='primary' onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' required />
-            <Input variant='primary' onChange={handleChange} value={task.project} name='project' type='text' placeholder='Project' required />
-            <Input variant='primary' onChange={handleChange} value={task.timing} name='timing' type='time' placeholder='Timing' required />
-            <Input variant='primary' onChange={handleChange} value={task.deliveredAt} name='deliveredAt' type='date' placeholder='Delivered' required />
-            <Textarea variant='primary' onChange={handleChange} value={task.description} name='description' placeholder='Description' />
+            <Input onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' required />
+            <Input onChange={handleChange} value={task.project} name='project' type='text' placeholder='Project' required disabled />
+            <Input onChange={handleChange} value={task.timing} name='timing' type='time' placeholder='Timing' required />
+            <Input onChange={handleChange} value={task.deliveredAt} name='deliveredAt' type='date' placeholder='Delivered' required />
+            <Textarea onChange={handleChange} value={task.description} name='description' placeholder='Description' />
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>
