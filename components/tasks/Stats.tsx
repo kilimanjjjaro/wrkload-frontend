@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import Balancer from 'react-wrap-balancer'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper'
-import { ArrowDownIcon, ArrowUpIcon, PresentationChartLineIcon, ClockIcon, EyeSlashIcon, InboxStackIcon } from '@heroicons/react/24/outline'
+import { ArrowDownIcon, ArrowUpIcon, PresentationChartLineIcon, ClockIcon, EyeSlashIcon, RectangleStackIcon } from '@heroicons/react/24/outline'
 import { DataContext } from 'contexts/DataContext'
 import type { TaskStatsInterface } from 'interfaces/tasks/Task'
 
@@ -47,7 +47,7 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.El
             <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>hours worked<br /> past month.</span>
           </SwiperSlide>
           <SwiperSlide className=' p-6 md:pt-7 md:pb-[33px] md:pr-7 md:pl-7'>
-            <InboxStackIcon className='h-10 stroke-2' />
+            <RectangleStackIcon className='h-10 stroke-2' />
             <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
               {stats.totalTasksPastMonth}
             </div>

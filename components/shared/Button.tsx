@@ -18,7 +18,7 @@ export default function Button ({ type, variant, disablePagination, onClick, ful
         )}
         type={type} onClick={onClick}
         disabled={disablePagination}
-      ><span className='relative flex items-center justify-center gap-2 px-5 md:text-base'>{children}</span>
+      ><div className='relative flex items-center justify-center gap-2 px-5 md:text-base'>{children}</div>
       </button>
     </>
   )

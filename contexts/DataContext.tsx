@@ -74,11 +74,11 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
       setIsLogged(false)
     }
 
-    const refreshToken = setInterval(() => {
+    const refreshToken = setTimeout(() => {
       void getAccessToken()
     }, 14 * 60 * 1000)
 
-    return () => clearInterval(refreshToken)
+    return () => clearTimeout(refreshToken)
   }, [accessToken])
 
   return (

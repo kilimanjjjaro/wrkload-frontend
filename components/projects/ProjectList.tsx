@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { usePathname } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
-import { InboxStackIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
+import { RectangleStackIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import Stats from 'components/projects/Stats'
 import Pagination from 'components/shared/Pagination'
 import MasonryGrid from 'components/shared/MasonryGrid'
@@ -39,7 +39,7 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
             <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'><Balancer>{project.name}</Balancer></h3>
 
             <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip bg-blue gap-x-1 font-secondaryFont'>
-              <InboxStackIcon className='w-4 stroke-2' />
+              <RectangleStackIcon className='w-4 stroke-2' />
               {project.totalTasks} tasks
               <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-light-blue duration-400 group-hover/tooltip:opacity-100 group-hover/tooltip:visible rounded-full'>
                 Total tasks

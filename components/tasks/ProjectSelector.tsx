@@ -9,7 +9,7 @@ const VARIANTS = {
   open: { opacity: 1, y: 0, display: 'block' },
   closed: {
     opacity: 0,
-    y: -30,
+    y: -15,
     transitionEnd: {
       display: 'none'
     }
@@ -47,16 +47,16 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
       </div>
 
       <motion.ul
-        className={clsx('z-20 absolute rounded-xl font-secondaryFont top-full text-sm bg-blue mt-5 overflow-x-hidden overflow-y-auto custom-scrollbar max-h-[217px]')}
+        className={clsx('z-20 absolute rounded-xl font-secondaryFont top-full text-sm bg-blue mt-5 overflow-x-hidden overflow-y-auto custom-scrollbar max-h-56')}
         variants={VARIANTS}
         initial={false}
         animate={open ? 'open' : 'closed'}
         transition={{ ease: 'easeInOut', duration: 0.4 }}
       >
-        <div className='sticky top-0 flex items-center px-3 border-b border-black bg-blue'>
+        <div className='sticky top-0 flex items-center px-4 py-3 border-b border-black bg-blue'>
           <MagnifyingGlassIcon className='w-4 stroke-3 stroke-black' />
           <input
-            className='p-2 text-black outline-none bg-blue placeholder:text-black'
+            className='pl-2 text-black outline-none bg-blue placeholder:text-black'
             type='text'
             value={searchInputValue}
             onChange={(e) => setSearchInputValue(e.target.value.toLowerCase())}
@@ -66,7 +66,7 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
         {projectNames?.map((projectName) => (
           <li
             key={projectName}
-            className={clsx('p-3 flex items-center relative transition text-black ease-in-out duration-400 dark:hover:bg-light-blue hover:bg-white hover:text-black cursor-pointer', projectName.toLowerCase() === selected.toLowerCase() && 'dark:bg-light-blue bg-white text-black', projectName.toLowerCase().startsWith(searchInputValue) ? 'block' : 'hidden')}
+            className={clsx('py-3 px-4 flex items-center relative transition text-black ease-in-out duration-400 dark:hover:bg-light-blue hover:bg-white hover:text-black cursor-pointer', projectName.toLowerCase() === selected.toLowerCase() && 'dark:bg-light-blue bg-white text-black', projectName.toLowerCase().startsWith(searchInputValue) ? 'block' : 'hidden')}
             onClick={() => {
               if (projectName.toLowerCase() !== selected.toLowerCase()) {
                 void
