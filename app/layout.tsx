@@ -1,3 +1,5 @@
+'use client'
+
 import fonts from 'utils/fonts'
 import DataProvider from 'contexts/DataContext'
 import NavBar from 'components/shared/NavBar'
@@ -6,6 +8,7 @@ import type { Metadata } from 'next'
 import 'app/globals.css'
 
 import type { ChildrenInterface } from 'interfaces/components'
+import { AnimatePresence } from 'framer-motion'
 
 export const metadata: Metadata = {
   title: { default: 'wrkload', template: '%s | wrkload' },
@@ -25,11 +28,12 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
 
   return (
     <html lang='en' className='scroll-smooth dark'>
-      <head />
-      <body className={`bg-light-blue dark:bg-black transition-colors duration-400 ease-in-out antialiased ${inter.variable} ${spaceGrotesk.variable}`}>
+      <body className={`bg-light-blue dark:bg-black transition-colors duration-400 ease-in-out antialiased overflow-hidden ${inter.variable} ${spaceGrotesk.variable}`}>
         <DataProvider>
           <NavBar />
-          {children}
+          <AnimatePresence mode='wait'>
+            {children}
+          </AnimatePresence>
           <Footer />
         </DataProvider>
       </body>

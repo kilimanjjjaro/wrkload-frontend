@@ -3,10 +3,12 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
+import { motion } from 'framer-motion'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Button from 'components/shared/Button'
 import confirmAccount from 'services/auth/confirmAccount'
+import { PAGE_VARIANTS } from 'constants/framerMotion'
 
 interface ParamsInterface {
   params: {
@@ -57,7 +59,14 @@ export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Elemen
 
   if (error.length >= 1) {
     return (
-      <div className='flex flex-col items-center gap-y-5'>
+      <motion.div
+        className='flex flex-col items-center gap-y-5'
+        initial='initial'
+        animate='animate'
+        exit='exit'
+        variants={PAGE_VARIANTS}
+        transition={{ duration: 1, ease: 'easeInOut' }}
+      >
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
@@ -70,14 +79,21 @@ export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Elemen
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
-      </div>
+      </motion.div>
     )
   }
 
   if (loading) return <div className='text-white'>Loading...</div>
 
   return (
-    <div className='flex flex-col items-center gap-y-5'>
+    <motion.div
+      className='flex flex-col items-center gap-y-5'
+      initial='initial'
+      animate='animate'
+      exit='exit'
+      variants={PAGE_VARIANTS}
+      transition={{ duration: 1, ease: 'easeInOut' }}
+    >
       <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
         <Headline variant='md'><Balancer>Done!</Balancer></Headline>
         <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been confirmed. <b>Please, log in.</b></Balancer></p>
@@ -85,6 +101,6 @@ export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Elemen
           <ArrowRightIcon className='w-4 stroke-3' />
         </Button>
       </div>
-    </div>
+    </motion.div>
   )
 }

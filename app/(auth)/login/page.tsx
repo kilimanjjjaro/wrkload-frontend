@@ -3,6 +3,7 @@
 import { useContext, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
+import { motion } from 'framer-motion'
 import { ArrowLeftIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
@@ -12,6 +13,7 @@ import GitHubLogo from 'public/images/github.svg'
 import GoogleLogo from 'public/images/google.svg'
 import login from 'services/auth/login'
 import { DataContext } from 'contexts/DataContext'
+import { PAGE_VARIANTS } from 'constants/framerMotion'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: 'hola@kilimanjjjaro.com',
@@ -50,7 +52,14 @@ export default function Login (): JSX.Element {
 
   if (error.length >= 1) {
     return (
-      <div className='flex flex-col items-center gap-y-5'>
+      <motion.div
+        className='flex flex-col items-center gap-y-5'
+        initial='initial'
+        animate='animate'
+        exit='exit'
+        variants={PAGE_VARIANTS}
+        transition={{ duration: 1, ease: 'easeInOut' }}
+      >
         <div className='p-6 text-center text-black md:p-10ull bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
@@ -68,12 +77,19 @@ export default function Login (): JSX.Element {
             <ArrowLeftIcon className='w-4 stroke-3' />
           </Button>
         </div>
-      </div>
+      </motion.div>
     )
   }
 
   return (
-    <div className='flex flex-col items-center gap-y-5'>
+    <motion.div
+      className='flex flex-col items-center gap-y-5'
+      initial='initial'
+      animate='animate'
+      exit='exit'
+      variants={PAGE_VARIANTS}
+      transition={{ duration: 1, ease: 'easeInOut' }}
+    >
       <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
         <Headline variant='md'><Balancer>Welcome again!</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
@@ -106,6 +122,6 @@ export default function Login (): JSX.Element {
         <div className='w-[2px] h-auto bg-black dark:bg-white transition-colors duration-400 ease-in-out' aria-hidden='true' />
         <TextLink link='/registry'>Not account yet?</TextLink>
       </div>
-    </div>
+    </motion.div>
   )
 }

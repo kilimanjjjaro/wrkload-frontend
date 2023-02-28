@@ -18,3 +18,15 @@ export const CONTENT_VARIANTS = {
     }
   }
 }
+
+export const PAGE_VARIANTS = {
+  initial: {
+    opacity: 0
+  },
+  animate: {
+    opacity: 1
+  },
+  exit: {
+    opacity: 0
+  }
+}

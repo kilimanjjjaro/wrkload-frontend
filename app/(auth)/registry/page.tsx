@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
+import { motion } from 'framer-motion'
 import { ArrowLeftIcon, ArrowRightIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
@@ -11,6 +12,7 @@ import TextLink from 'components/shared/TextLink'
 import GitHubLogo from 'public/images/github.svg'
 import GoogleLogo from 'public/images/google.svg'
 import register from 'services/auth/register'
+import { PAGE_VARIANTS } from 'constants/framerMotion'
 
 const INITIAL_CREDENTIALS_STATE = {
   username: '',
@@ -67,7 +69,14 @@ export default function Register (): JSX.Element {
 
   if (error.length >= 1) {
     return (
-      <div className='flex flex-col items-center gap-y-5'>
+      <motion.div
+        className='flex flex-col items-center gap-y-5'
+        initial='initial'
+        animate='animate'
+        exit='exit'
+        variants={PAGE_VARIANTS}
+        transition={{ duration: 1, ease: 'easeInOut' }}
+      >
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
@@ -80,13 +89,20 @@ export default function Register (): JSX.Element {
             <ArrowLeftIcon className='w-4 stroke-3' />
           </Button>
         </div>
-      </div>
+      </motion.div>
     )
   }
 
   if (success) {
     return (
-      <div className='flex flex-col items-center gap-y-5'>
+      <motion.div
+        className='flex flex-col items-center gap-y-5'
+        initial='initial'
+        animate='animate'
+        exit='exit'
+        variants={PAGE_VARIANTS}
+        transition={{ duration: 1, ease: 'easeInOut' }}
+      >
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been created and an email will be sent to activate it.</Balancer></p>
@@ -94,12 +110,19 @@ export default function Register (): JSX.Element {
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
-      </div>
+      </motion.div>
     )
   }
 
   return (
-    <div className='flex flex-col items-center gap-y-5'>
+    <motion.div
+      className='flex flex-col items-center gap-y-5'
+      initial='initial'
+      animate='animate'
+      exit='exit'
+      variants={PAGE_VARIANTS}
+      transition={{ duration: 1, ease: 'easeInOut' }}
+    >
       <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
         <Headline variant='md'><Balancer>Nice to meet you!</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
@@ -132,6 +155,6 @@ export default function Register (): JSX.Element {
       <div className='flex gap-5 text-sm text-white '>
         <TextLink link='/login'>Already have an account?</TextLink>
       </div>
-    </div>
+    </motion.div>
   )
 }

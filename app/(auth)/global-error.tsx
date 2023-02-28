@@ -1,9 +1,11 @@
 'use client'
 
 import { useEffect } from 'react'
+import { motion } from 'framer-motion'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
+import { PAGE_VARIANTS } from 'constants/framerMotion'
 
 interface Props {
   error: Error
@@ -19,14 +21,20 @@ export default function GlobalError ({ error, reset }: Props): JSX.Element {
       <head />
       <body>
         <main className='px-[5vw] flex items-center justify-center h-screen'>
-          <div className='flex flex-col items-center gap-y-5'>
-            <div className='p-6 md:p-10 text-center text-white bg-black dark:text-black dark:bg-white md:w-80 min-w-auto'>
+          <motion.div
+            className='flex flex-col items-center gap-y-5'
+            initial='initial'
+            animate='animate'
+            exit='exit'
+            variants={PAGE_VARIANTS}
+          >
+            <div className='p-6 text-center text-white bg-black md:p-10 dark:text-black dark:bg-white md:w-80 min-w-auto'>
               <Headline variant='md'><b>Something went wrong!</b></Headline>
               <Button onClick={() => reset()} variant='secondary'>
                 <ArrowLeftIcon className='w-4 stroke-3' />
               </Button>
             </div>
-          </div>
+          </motion.div>
         </main>
       </body>
     </html>

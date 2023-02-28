@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import useSWR from 'swr'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 import Skeleton from 'components/projects/Skeleton'
@@ -12,6 +13,7 @@ import ProjectList from 'components/projects/ProjectList'
 import notFoundImage from 'public/images/not-found.webp'
 import searchProjects from 'services/projects/searchProjects'
 import { sortProjects } from 'utils/sortData'
+import { PAGE_VARIANTS } from 'constants/framerMotion'
 
 export const metadata = {
   title: 'Search projects'
@@ -34,7 +36,13 @@ export default function SearchProjects (): JSX.Element {
   const shouldRenderNotFoundSign = !shouldRenderProjects && !shouldRenderSkeleton
 
   return (
-    <>
+    <motion.div
+      initial='initial'
+      animate='animate'
+      exit='exit'
+      variants={PAGE_VARIANTS}
+      transition={{ duration: 1, ease: 'easeInOut' }}
+    >
       <header className='flex justify-between mb-10 text-white'>
         <h2 className='flex text-6xl font-bold text-black dark:text-blue gap-x-5 font-primaryFont'>
           Search results for: {query}
@@ -61,6 +69,6 @@ export default function SearchProjects (): JSX.Element {
         )}
       </main>
       <Modals />
-    </>
+    </motion.div>
   )
 }

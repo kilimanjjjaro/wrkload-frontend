@@ -25,7 +25,7 @@ export default function Modal ({ children, modalStatus, setModalStatus }: Props)
 
       {renderChild && (
         <motion.div
-          className='z-20 w-full'
+          className='z-20 w-full md:w-auto'
           variants={CONTENT_VARIANTS}
           initial='initial'
           animate={modalStatus ? 'open' : 'closed'}
