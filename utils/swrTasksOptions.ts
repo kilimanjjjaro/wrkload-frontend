@@ -18,7 +18,6 @@ export const addTaskOptions = (newTask: TaskInterface): any => {
 export const updateTaskOptions = (updatedTask: TaskInterface): any => {
   return {
     optimisticData: (data: FullTaskInterface) => {
-      console.log(updatedTask)
       const prevTasks = data.tasks.filter(task => {
         return task._id !== updatedTask._id
       })

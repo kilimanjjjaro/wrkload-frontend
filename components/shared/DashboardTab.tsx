@@ -46,21 +46,22 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
   return (
     <>
       <motion.nav
-        className='fixed bottom-0 md:mt-8 flex-col items-center w-full h-[85vh] md:h-auto gap-3 md:absolute md:top-0 md:w-auto justify-self-center'
+        className='fixed bottom-0 flex-col items-center w-full h-full gap-3 md:mt-8 md:h-auto md:absolute md:top-0 md:w-auto justify-self-center'
         animate={showDashboardBox ? 'open' : 'closed'}
         variants={VARIANTS}
         transition={{ ease: 'easeInOut', duration: 0.4 }}
         initial={false}
       >
-        <ul className='flex flex-col items-center justify-center order-2 w-full h-full gap-10 px-6 py-3 text-4xl text-black transition ease-in-out md:gap-4 md:text-base md:flex-row md:order-1 md:w-auto rounded-t-3xl md:rounded-3xl bg-blue duration-400 font-secondaryFont'>
+        <div className='fixed w-full block xl:hidden h-full -z-10 bg-light-blue dark:bg-black opacity-[0.97]' />
+        <ul className='flex flex-col items-center justify-center w-full h-full gap-10 text-4xl text-black md:gap-4 md:text-base md:flex-row md:w-auto rounded-t-3xl md:rounded-3xl font-secondaryFont'>
           {PAGES.map((page) => (
-            <li className='transition ease-in-out duration-400 md:hover:text-white' key={page.link} onClick={() => setShowDashboardBox(!showDashboardBox)}><Link href={page.link}>{page.name}</Link></li>
+            <li className='px-10 py-4 transition ease-in-out rounded-full cursor-pointer md:px-5 md:py-2 bg-blue duration-400 md:rounded-3xl md:hover:bg-black md:hover:text-white dark:md:hover:text-black dark:md:hover:bg-white' key={page.link} onClick={() => setShowDashboardBox(!showDashboardBox)}><Link href={page.link}>{page.name}</Link></li>
           ))}
-          <button className='transition ease-in-out duration-400 hover:text-white' onClick={() => { void handleLogout() }}>Log out</button>
+          <button className='px-10 py-4 transition ease-in-out rounded-full cursor-pointer md:px-5 md:py-2 bg-blue duration-400 md:rounded-3xl md:hover:bg-black md:hover:text-white dark:md:hover:text-black dark:md:hover:bg-white' onClick={() => { void handleLogout() }}>Log out</button>
+          <div className='p-2 transition xl:absolute xl:-bottom-full ease-in-out rounded-full cursor-pointer w-9 md:w-7 bg-blue duration-400 md:hover:bg-black [&>svg]:dark:md:hover:stroke-black [&>svg]:md:hover:stroke-white dark:md:hover:bg-white' onClick={() => setShowDashboardBox(!showDashboardBox)}>
+            <XMarkIcon className='transition ease-in-out stroke-2 stroke-black duration-400' />
+          </div>
         </ul>
-        <div className='order-1 p-2 transition ease-in-out rounded-full cursor-pointer w-9 md:order-2 md:w-7 bg-blue duration-400 md:hover:bg-white' onClick={() => setShowDashboardBox(!showDashboardBox)}>
-          <XMarkIcon className='stroke-2 stroke-black' />
-        </div>
       </motion.nav>
     </>
   )
