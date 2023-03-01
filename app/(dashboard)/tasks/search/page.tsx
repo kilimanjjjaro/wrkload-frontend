@@ -3,7 +3,6 @@
 import { useEffect } from 'react'
 import useSWR from 'swr'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 import Skeleton from 'components/tasks/Skeleton'
@@ -13,7 +12,6 @@ import Modals from 'components/tasks/Modals'
 import notFoundImage from 'public/images/not-found.webp'
 import searchTasks from 'services/tasks/searchTasks'
 import { sortTasks } from 'utils/sortData'
-import { PAGE_VARIANTS } from 'constants/framerMotion'
 
 export const metadata = {
   title: 'Search tasks'
@@ -37,13 +35,7 @@ export default function SearchTasks (): JSX.Element {
   const shouldRenderNotFoundSign = !shouldRenderTasks && !shouldRenderSkeleton
 
   return (
-    <motion.div
-      initial='initial'
-      animate='animate'
-      exit='exit'
-      variants={PAGE_VARIANTS}
-      transition={{ duration: 1, ease: 'easeInOut' }}
-    >
+    <>
       <header className='flex justify-between mb-10 text-white'>
         <h2 className='flex text-6xl font-bold text-black dark:text-blue gap-x-5 font-primaryFont'>
           Search results for: {query}
@@ -70,6 +62,6 @@ export default function SearchTasks (): JSX.Element {
         )}
       </main>
       <Modals />
-    </motion.div>
+    </>
   )
 }

@@ -3,7 +3,6 @@
 import { useContext, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
-import { motion } from 'framer-motion'
 import Header from 'components/tasks/Header'
 import Skeleton from 'components/tasks/Skeleton'
 import TaskList from 'components/tasks/TaskList'
@@ -12,7 +11,6 @@ import Modals from 'components/tasks/Modals'
 import { getTasks } from 'services/tasks/getTasks'
 import { sortTasks } from 'utils/sortData'
 import { DataContext } from 'contexts/DataContext'
-import { PAGE_VARIANTS } from 'constants/framerMotion'
 
 export const metadata = {
   title: 'Tasks'
@@ -34,13 +32,7 @@ export default function Tasks (): JSX.Element {
   const shouldRenderNotFoundSign = !shouldRenderTasks && !shouldRenderSkeleton
 
   return (
-    <motion.div
-      initial='initial'
-      animate='animate'
-      exit='exit'
-      variants={PAGE_VARIANTS}
-      transition={{ duration: 1, ease: 'easeInOut' }}
-    >
+    <>
       <Header shouldRenderOptions={shouldRenderNotFoundSign} />
       <main>
         {shouldRenderSkeleton && <Skeleton />}
@@ -48,6 +40,6 @@ export default function Tasks (): JSX.Element {
         {shouldRenderNotFoundSign && <NotFound />}
       </main>
       <Modals />
-    </motion.div>
+    </>
   )
 }

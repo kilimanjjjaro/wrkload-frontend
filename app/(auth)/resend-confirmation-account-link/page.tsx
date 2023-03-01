@@ -3,14 +3,12 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
-import { motion } from 'framer-motion'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Paragraph from 'components/shared/Paragraph'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
 import resendConfirmationAccountLink from 'services/auth/resendConfirmationAccountLink'
-import { PAGE_VARIANTS } from 'constants/framerMotion'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: ''
@@ -47,14 +45,7 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
 
   if (error.length >= 1) {
     return (
-      <motion.div
-        className='flex flex-col items-center gap-y-5'
-        initial='initial'
-        animate='animate'
-        exit='exit'
-        variants={PAGE_VARIANTS}
-        transition={{ duration: 1, ease: 'easeInOut' }}
-      >
+      <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
@@ -67,20 +58,13 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
-      </motion.div>
+      </div>
     )
   }
 
   if (success) {
     return (
-      <motion.div
-        className='flex flex-col items-center gap-y-5'
-        initial='initial'
-        animate='animate'
-        exit='exit'
-        variants={PAGE_VARIANTS}
-        transition={{ duration: 1, ease: 'easeInOut' }}
-      >
+      <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>A link to confirm the account was sent again, <b>please check your inbox.</b></Balancer></p>
@@ -88,19 +72,12 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
-      </motion.div>
+      </div>
     )
   }
 
   return (
-    <motion.div
-      className='flex flex-col items-center gap-y-5'
-      initial='initial'
-      animate='animate'
-      exit='exit'
-      variants={PAGE_VARIANTS}
-      transition={{ duration: 1, ease: 'easeInOut' }}
-    >
+    <div className='flex flex-col items-center gap-y-5'>
       <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
         <Headline variant='md'><Balancer>Resend confirmation account link</Balancer></Headline>
         <Paragraph variant='sm'>
@@ -117,6 +94,6 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
           </Button>
         </form>
       </div>
-    </motion.div>
+    </div>
   )
 }

@@ -1,17 +1,15 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
+import { AnimatePresence, motion } from 'framer-motion'
 import fonts from 'utils/fonts'
 import DataProvider from 'contexts/DataContext'
 import NavBar from 'components/shared/NavBar'
 import Footer from 'components/shared/Footer'
-import type { Metadata } from 'next'
+import type { ChildrenInterface } from 'interfaces/components'
 import 'app/globals.css'
 
-import type { ChildrenInterface } from 'interfaces/components'
-import { AnimatePresence } from 'framer-motion'
-
-export const metadata: Metadata = {
-  title: { default: 'wrkload', template: '%s | wrkload' },
+export const metadata = {
   openGraph: {
     siteName: 'wrkload',
     authors: 'Kilimanjjjaro',
@@ -24,6 +22,7 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout ({ children }: ChildrenInterface): JSX.Element {
+  const pathname = usePathname()
   const { inter, spaceGrotesk } = fonts
 
   return (
@@ -32,7 +31,15 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
         <DataProvider>
           <NavBar />
           <AnimatePresence mode='wait'>
-            {children}
+            <motion.div
+              className='opacity-0'
+              key={pathname}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, ease: 'easeInOut' }}
+            >
+              {children}
+            </motion.div>
           </AnimatePresence>
           <Footer />
         </DataProvider>

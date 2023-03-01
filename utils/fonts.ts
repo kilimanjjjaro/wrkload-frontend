@@ -1,4 +1,4 @@
-import { Inter, Space_Grotesk } from '@next/font/google'
+import { Inter, Space_Grotesk } from 'next/font/google'
 
 const inter = Inter({
   variable: '--inter-font',

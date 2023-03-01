@@ -3,7 +3,6 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
-import { motion } from 'framer-motion'
 import Header from 'components/users/Header'
 import Skeleton from 'components/users/Skeleton'
 import UserList from 'components/users/UserList'
@@ -11,7 +10,6 @@ import NotFound from 'components/users/NotFound'
 import Modals from 'components/users/Modals'
 import { getUsers } from 'services/users/getUsers'
 import { sortUsers } from 'utils/sortData'
-import { PAGE_VARIANTS } from 'constants/framerMotion'
 
 export const metadata = {
   title: 'Users'
@@ -32,13 +30,7 @@ export default function Users (): JSX.Element {
   const shouldRenderNotFoundSign = !shouldRenderUsers && !shouldRenderSkeleton
 
   return (
-    <motion.div
-      initial='initial'
-      animate='animate'
-      exit='exit'
-      variants={PAGE_VARIANTS}
-      transition={{ duration: 1, ease: 'easeInOut' }}
-    >
+    <>
       <Header shouldRenderOptions={shouldRenderNotFoundSign} />
       <main>
         {shouldRenderSkeleton && <Skeleton />}
@@ -46,6 +38,6 @@ export default function Users (): JSX.Element {
         {shouldRenderNotFoundSign && <NotFound />}
       </main>
       <Modals />
-    </motion.div>
+    </>
   )
 }
