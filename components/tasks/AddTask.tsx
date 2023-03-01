@@ -52,7 +52,7 @@ export default function AddTask (): JSX.Element {
           </Balancer>
         </Paragraph>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
-          <div className='flex flex-col mb-5 gap-y-3'>
+          <div className='flex flex-col mb-3 gap-y-3'>
             <Input onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' required />
             <Input onChange={handleChange} value={task.timing} name='timing' type='time' placeholder='Timing' required />
             <Input onChange={handleChange} value={task.deliveredAt} name='deliveredAt' type='date' placeholder='Delivered' required />

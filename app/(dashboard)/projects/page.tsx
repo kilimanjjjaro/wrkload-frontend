@@ -10,6 +10,7 @@ import Modals from 'components/projects/Modals'
 import { getProjects } from 'services/projects/getProjects'
 import { sortProjects } from 'utils/sortData'
 import { useSearchParams } from 'next/navigation'
+import PageTransition from 'components/shared/PageTransition'
 
 export const metadata = {
   title: 'Projects'
@@ -29,7 +30,7 @@ export default function Projects (): JSX.Element {
   const shouldRenderNotFoundSign = !shouldRenderProjects && !shouldRenderSkeleton
 
   return (
-    <>
+    <PageTransition>
       <Header shouldRenderOptions={shouldRenderNotFoundSign} />
       <main>
         {shouldRenderSkeleton && <Skeleton />}
@@ -37,6 +38,6 @@ export default function Projects (): JSX.Element {
         {shouldRenderNotFoundSign && <NotFound />}
       </main>
       <Modals />
-    </>
+    </PageTransition>
   )
 }

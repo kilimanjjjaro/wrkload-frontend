@@ -11,6 +11,7 @@ import Modals from 'components/tasks/Modals'
 import { getTasks } from 'services/tasks/getTasks'
 import { sortTasks } from 'utils/sortData'
 import { DataContext } from 'contexts/DataContext'
+import PageTransition from 'components/shared/PageTransition'
 
 export const metadata = {
   title: 'Tasks'
@@ -32,7 +33,7 @@ export default function Tasks (): JSX.Element {
   const shouldRenderNotFoundSign = !shouldRenderTasks && !shouldRenderSkeleton
 
   return (
-    <>
+    <PageTransition>
       <Header shouldRenderOptions={shouldRenderNotFoundSign} />
       <main>
         {shouldRenderSkeleton && <Skeleton />}
@@ -40,6 +41,6 @@ export default function Tasks (): JSX.Element {
         {shouldRenderNotFoundSign && <NotFound />}
       </main>
       <Modals />
-    </>
+    </PageTransition>
   )
 }

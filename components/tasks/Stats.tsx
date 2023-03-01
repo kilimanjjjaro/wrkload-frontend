@@ -30,14 +30,14 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.El
           grabCursor
         >
           <EyeSlashIcon className='absolute z-10 w-6 h-6 transition ease-in-out cursor-pointer stroke-2 duration-400 hover:text-black dark:hover:text-white top-7 right-7' onClick={handleRenderStats} />
-          <SwiperSlide className=' pt-6 md:pt-7 pb-[33px] pr-6 md:pr-7 pl-6 md:pl-7'>
+          <SwiperSlide className='pt-6 pl-6 pr-6 md:pt-7 pb-14 md:pr-7 md:pl-7'>
             <ClockIcon className='h-10 stroke-2' />
             <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
               {stats.totalPastMonthTiming}
               {stats.performance === 'better' && (
                 <div className='relative flex items-center cursor-help group'>
                   <ArrowUpIcon className='w-4 stroke-green stroke-4' />
-                  <div className='absolute text-black left-6 w-max tracking-widest font-bold leading-none text-[8px] uppercase font-secondaryFont text-center bg-blue p-2 invisible transition-all duration-400 ease-in-out opacity-0 group-hover:opacity-100 group-hover:visible rounded-full'>
+                  <div className='absolute text-black left-6 w-max tracking-widest font-bold leading-none text-[8px] uppercase font-secondaryFont text-center bg-blue py-[7px] px-[10px] invisible transition-all duration-400 ease-in-out opacity-0 group-hover:opacity-100 group-hover:visible rounded-full'>
                     Your current performance is being {performanceText}
                   </div>
                 </div>

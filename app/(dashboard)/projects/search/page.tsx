@@ -12,6 +12,7 @@ import ProjectList from 'components/projects/ProjectList'
 import notFoundImage from 'public/images/not-found.webp'
 import searchProjects from 'services/projects/searchProjects'
 import { sortProjects } from 'utils/sortData'
+import PageTransition from 'components/shared/PageTransition'
 
 export const metadata = {
   title: 'Search projects'
@@ -34,7 +35,7 @@ export default function SearchProjects (): JSX.Element {
   const shouldRenderNotFoundSign = !shouldRenderProjects && !shouldRenderSkeleton
 
   return (
-    <>
+    <PageTransition>
       <header className='flex justify-between mb-10 text-white'>
         <h2 className='flex text-6xl font-bold text-black dark:text-blue gap-x-5 font-primaryFont'>
           Search results for: {query}
@@ -61,6 +62,6 @@ export default function SearchProjects (): JSX.Element {
         )}
       </main>
       <Modals />
-    </>
+    </PageTransition>
   )
 }

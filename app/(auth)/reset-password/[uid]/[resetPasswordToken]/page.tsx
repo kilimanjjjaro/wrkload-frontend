@@ -10,6 +10,7 @@ import Paragraph from 'components/shared/Paragraph'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
 import resetPassword from 'services/auth/resetPassword'
+import PageTransition from 'components/shared/PageTransition'
 
 interface ParamsInterface {
   params: {
@@ -120,24 +121,26 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
   }
 
   return (
-    <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
-        <Headline variant='md'><Balancer>Reset password</Balancer></Headline>
-        <Paragraph variant='sm'>
-          <Balancer>
-            To reset your password, <b>please complete the following form.</b>
-          </Balancer>
-        </Paragraph>
-        <form className='mt-5' onSubmit={(event) => { void handleSubmit(event) }}>
-          <div className='flex flex-col gap-3 mb-5'>
-            <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' centerText />
-            <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' centerText />
-          </div>
-          <Button variant='secondary'>
-            <ArrowRightIcon className='w-4 stroke-3' />
-          </Button>
-        </form>
+    <PageTransition>
+      <div className='flex flex-col items-center gap-y-5'>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
+          <Headline variant='md'><Balancer>Reset password</Balancer></Headline>
+          <Paragraph variant='sm'>
+            <Balancer>
+              To reset your password, <b>please complete the following form.</b>
+            </Balancer>
+          </Paragraph>
+          <form className='mt-5' onSubmit={(event) => { void handleSubmit(event) }}>
+            <div className='flex flex-col gap-3 mb-3'>
+              <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' centerText />
+              <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' centerText />
+            </div>
+            <Button variant='secondary'>
+              <ArrowRightIcon className='w-4 stroke-3' />
+            </Button>
+          </form>
+        </div>
       </div>
-    </div>
+    </PageTransition>
   )
 }

@@ -12,6 +12,7 @@ import GitHubLogo from 'public/images/github.svg'
 import GoogleLogo from 'public/images/google.svg'
 import login from 'services/auth/login'
 import { DataContext } from 'contexts/DataContext'
+import PageTransition from 'components/shared/PageTransition'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: 'hola@kilimanjjjaro.com',
@@ -73,39 +74,51 @@ export default function Login (): JSX.Element {
   }
 
   return (
-    <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
-        <Headline variant='md'><Balancer>Welcome again!</Balancer></Headline>
-        <form onSubmit={(event) => { void handleSubmit(event) }}>
-          <div className='flex flex-col gap-3 mb-5'>
-            <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
-            <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' centerText />
+    <PageTransition>
+      <div className='flex flex-col items-center gap-y-5'>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
+          <Headline variant='md'><Balancer>Welcome again!</Balancer></Headline>
+          <form onSubmit={(event) => { void handleSubmit(event) }}>
+            <div className='flex flex-col gap-3 mb-3'>
+              <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
+              <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' centerText />
+            </div>
+            <Button variant='secondary'>
+              <LockClosedIcon className='w-4 stroke-3' />
+            </Button>
+          </form>
+          <div className='flex items-center mt-5 text-sm font-semibold font-secondaryFont'>
+            <div className='w-[26%] h-[2px] bg-black dark:bg-black' aria-hidden='true' />
+            <span className='w-[48%]'>Maybe you use?</span>
+            <div className='w-[26%] h-[2px] bg-black dark:bg-black' aria-hidden='true' />
           </div>
-          <Button variant='secondary'>
-            <LockClosedIcon className='w-4 stroke-3' />
-          </Button>
-        </form>
-        <div className='flex items-center mt-5 text-sm font-semibold font-secondaryFont'>
-          <div className='w-[26%] h-[2px] bg-black dark:bg-black' aria-hidden='true' />
-          <span className='w-[48%]'>Maybe you use?</span>
-          <div className='w-[26%] h-[2px] bg-black dark:bg-black' aria-hidden='true' />
+          <div className='flex gap-5 mt-5'>
+            <div className='relative flex justify-center w-full group'>
+              <Button variant='dark-alternative' fullWidth>
+                <GoogleLogo className='w-4' />
+                Google
+              </Button>
+              <div className='absolute invisible opacity-100 md:opacity-0 tracking-widest uppercase leading-none py-[7px] px-[10px] font-bold text-[8px] text-center transition-all ease-in-out top-8 bg-light-blue duration-400 group-hover:opacity-100 group-hover:visible rounded-full'>
+                Coming soon
+              </div>
+            </div>
+            <div className='relative flex justify-center w-full group'>
+              <Button variant='dark-alternative' fullWidth>
+                <GitHubLogo className='w-4' />
+                Github
+              </Button>
+              <div className='absolute invisible opacity-100 md:opacity-0 tracking-widest uppercase leading-none py-[7px] px-[10px] font-bold text-[8px] text-center transition-all ease-in-out top-8 bg-light-blue duration-400 group-hover:opacity-100 group-hover:visible rounded-full'>
+                Coming soon
+              </div>
+            </div>
+          </div>
         </div>
-        <div className='flex gap-5 mt-5'>
-          <Button variant='dark-alternative' fullWidth>
-            <GoogleLogo className='w-4' />
-            Google
-          </Button>
-          <Button variant='dark-alternative' fullWidth>
-            <GitHubLogo className='w-4' />
-            Github
-          </Button>
+        <div className='flex gap-5 text-sm'>
+          <TextLink link='/remember-password'>Forgot password?</TextLink>
+          <div className='w-[2px] h-auto bg-black dark:bg-white transition-colors duration-400 ease-in-out' aria-hidden='true' />
+          <TextLink link='/registry'>Not account yet?</TextLink>
         </div>
       </div>
-      <div className='flex gap-5 text-sm'>
-        <TextLink link='/remember-password'>Forgot password?</TextLink>
-        <div className='w-[2px] h-auto bg-black dark:bg-white transition-colors duration-400 ease-in-out' aria-hidden='true' />
-        <TextLink link='/registry'>Not account yet?</TextLink>
-      </div>
-    </div>
+    </PageTransition>
   )
 }

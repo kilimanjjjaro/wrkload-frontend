@@ -27,7 +27,10 @@ textarea::-webkit-scrollbar-thumb {
 
 /* Custom swiper styles */
 .swiper-horizontal>.swiper-pagination-bullets {
-  bottom: 0;
+  bottom: 1.5rem;
+  padding: 0 1.5rem;
+  gap: 0 1rem;
+
 }
 
 .swiper-pagination {
@@ -38,15 +41,16 @@ textarea::-webkit-scrollbar-thumb {
   width: 50%;
   height: 4px;
   border-radius: 9999px;
-  background: transparent;
+  background: #7686b7;
   opacity: 1;
   transition: all 0.4s ease-in-out;
 }
 
 .swiper-pagination-bullet-active {
-  background: #7686b7;
+  background: #efefef;
   opacity: 1;
 }
+
 
 .swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
 .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
@@ -56,4 +60,13 @@ textarea::-webkit-scrollbar-thumb {
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
   transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+
+@media (min-width: 1024px) {
+  .swiper-horizontal>.swiper-pagination-bullets {
+    bottom: 1.75rem;
+    padding: 0 1.75rem;
+    gap: 0 1rem;
+  }
 }

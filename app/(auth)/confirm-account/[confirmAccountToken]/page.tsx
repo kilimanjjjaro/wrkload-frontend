@@ -7,6 +7,7 @@ import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Button from 'components/shared/Button'
 import confirmAccount from 'services/auth/confirmAccount'
+import PageTransition from 'components/shared/PageTransition'
 
 interface ParamsInterface {
   params: {
@@ -77,14 +78,16 @@ export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Elemen
   if (loading) return <div className='text-white'>Loading...</div>
 
   return (
-    <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
-        <Headline variant='md'><Balancer>Done!</Balancer></Headline>
-        <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been confirmed. <b>Please, log in.</b></Balancer></p>
-        <Button onClick={() => router.push('/login')} variant='secondary'>
-          <ArrowRightIcon className='w-4 stroke-3' />
-        </Button>
+    <PageTransition>
+      <div className='flex flex-col items-center gap-y-5'>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
+          <Headline variant='md'><Balancer>Done!</Balancer></Headline>
+          <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been confirmed. <b>Please, log in.</b></Balancer></p>
+          <Button onClick={() => router.push('/login')} variant='secondary'>
+            <ArrowRightIcon className='w-4 stroke-3' />
+          </Button>
+        </div>
       </div>
-    </div>
+    </PageTransition>
   )
 }

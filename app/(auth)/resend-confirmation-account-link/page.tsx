@@ -9,6 +9,7 @@ import Paragraph from 'components/shared/Paragraph'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
 import resendConfirmationAccountLink from 'services/auth/resendConfirmationAccountLink'
+import PageTransition from 'components/shared/PageTransition'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: ''
@@ -77,23 +78,25 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
   }
 
   return (
-    <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
-        <Headline variant='md'><Balancer>Resend confirmation account link</Balancer></Headline>
-        <Paragraph variant='sm'>
-          <Balancer>
-            If the link to confirm your account has expired, <b>please complete the following form and we will send you a new one.</b>
-          </Balancer>
-        </Paragraph>
-        <form className='mt-5' onSubmit={(event) => { void handleSubmit(event) }}>
-          <div className='flex flex-col gap-3 mb-5'>
-            <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
-          </div>
-          <Button variant='secondary'>
-            <ArrowRightIcon className='w-4 stroke-3' />
-          </Button>
-        </form>
+    <PageTransition>
+      <div className='flex flex-col items-center gap-y-5'>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
+          <Headline variant='md'><Balancer>Resend confirmation account link</Balancer></Headline>
+          <Paragraph variant='sm'>
+            <Balancer>
+              If the link to confirm your account has expired, <b>please complete the following form and we will send you a new one.</b>
+            </Balancer>
+          </Paragraph>
+          <form className='mt-5' onSubmit={(event) => { void handleSubmit(event) }}>
+            <div className='flex flex-col gap-3 mb-3'>
+              <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
+            </div>
+            <Button variant='secondary'>
+              <ArrowRightIcon className='w-4 stroke-3' />
+            </Button>
+          </form>
+        </div>
       </div>
-    </div>
+    </PageTransition>
   )
 }

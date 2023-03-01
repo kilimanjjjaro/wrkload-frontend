@@ -41,14 +41,14 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
             <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip bg-blue gap-x-1 font-secondaryFont'>
               <RectangleStackIcon className='w-4 stroke-2' />
               {project.totalTasks} tasks
-              <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-light-blue duration-400 group-hover/tooltip:opacity-100 group-hover/tooltip:visible rounded-full'>
+              <div className='absolute invisible tracking-widest uppercase leading-none py-[7px] px-[10px] font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-light-blue duration-400 group-hover/tooltip:opacity-100 group-hover/tooltip:visible rounded-full'>
                 Total tasks
               </div>
             </div>
 
-            <div className='absolute right-6 md:right-0 flex flex-col md:flex-row items-end justify-end md:justify-center md:w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 md:-top-[0.9rem] xl:opacity-0 gap-3 group-hover:opacity-100'>
-              <div onClick={() => handleUpdateProjectClick(project)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-yellow hover:bg-blue rounded-full'><PencilSquareIcon className='w-4 stroke-2' /></div>
-              <div onClick={() => handleDeleteProjectClick(project)} className='flex items-center px-[0.82rem] transition ease-in-out cursor-pointer h-[1.8rem] duration-400 bg-red hover:bg-blue rounded-full'><TrashIcon className='w-4 stroke-2' /></div>
+            <div className='absolute right-6 md:right-0 flex flex-col md:flex-row items-end justify-end md:justify-center md:w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 md:-top-[0.9rem] xl:opacity-0 gap-2 md:gap-3 group-hover:opacity-100'>
+              <div onClick={() => handleUpdateProjectClick(project)} className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-yellow hover:bg-blue'><PencilSquareIcon className='w-4 stroke-2' /></div>
+              <div onClick={() => handleDeleteProjectClick(project)} className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-red hover:bg-blue'><TrashIcon className='w-4 stroke-2' /></div>
             </div>
           </article>
         ))}

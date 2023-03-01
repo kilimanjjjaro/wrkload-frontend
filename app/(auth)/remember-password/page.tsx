@@ -9,6 +9,7 @@ import Paragraph from 'components/shared/Paragraph'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
 import rememberPassword from 'services/auth/rememberPassword'
+import PageTransition from 'components/shared/PageTransition'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: ''
@@ -76,23 +77,25 @@ export default function RememberPassword (): JSX.Element {
   }
 
   return (
-    <div className='flex flex-col items-center gap-y-5'>
-      <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
-        <Headline variant='md'><Balancer>Remember password</Balancer></Headline>
-        <Paragraph variant='sm'>
-          <Balancer>
-            If you forgot your password, <b>please complete the following form.</b>
-          </Balancer>
-        </Paragraph>
-        <form className='mt-5' onSubmit={(event) => { void handleSubmit(event) }}>
-          <div className='flex flex-col gap-3 mb-5'>
-            <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
-          </div>
-          <Button variant='secondary'>
-            <ArrowRightIcon className='w-4 stroke-3' />
-          </Button>
-        </form>
+    <PageTransition>
+      <div className='flex flex-col items-center gap-y-5'>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
+          <Headline variant='md'>Remember password</Headline>
+          <Paragraph variant='sm'>
+            <Balancer>
+              If you forgot your password, <b>please complete the following form.</b>
+            </Balancer>
+          </Paragraph>
+          <form className='mt-5' onSubmit={(event) => { void handleSubmit(event) }}>
+            <div className='flex flex-col gap-3 mb-3'>
+              <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
+            </div>
+            <Button variant='secondary'>
+              <ArrowRightIcon className='w-4 stroke-3' />
+            </Button>
+          </form>
+        </div>
       </div>
-    </div>
+    </PageTransition>
   )
 }

@@ -12,6 +12,7 @@ import Modals from 'components/tasks/Modals'
 import notFoundImage from 'public/images/not-found.webp'
 import searchTasks from 'services/tasks/searchTasks'
 import { sortTasks } from 'utils/sortData'
+import PageTransition from 'components/shared/PageTransition'
 
 export const metadata = {
   title: 'Search tasks'
@@ -35,7 +36,7 @@ export default function SearchTasks (): JSX.Element {
   const shouldRenderNotFoundSign = !shouldRenderTasks && !shouldRenderSkeleton
 
   return (
-    <>
+    <PageTransition>
       <header className='flex justify-between mb-10 text-white'>
         <h2 className='flex text-6xl font-bold text-black dark:text-blue gap-x-5 font-primaryFont'>
           Search results for: {query}
@@ -62,6 +63,6 @@ export default function SearchTasks (): JSX.Element {
         )}
       </main>
       <Modals />
-    </>
+    </PageTransition>
   )
 }

@@ -43,7 +43,7 @@ export default function UpdateTask (): JSX.Element {
       <div className='w-full p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-t-3xl md:rounded-3xl'>
         <Headline variant='md'><Balancer>Update task</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
-          <div className='flex flex-col mb-5 gap-y-3'>
+          <div className='flex flex-col mb-3 gap-y-3'>
             <Input onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' required />
             <Input onChange={handleChange} value={task.project} name='project' type='text' placeholder='Project' required disabled />
             <Input onChange={handleChange} value={task.timing} name='timing' type='time' placeholder='Timing' required />

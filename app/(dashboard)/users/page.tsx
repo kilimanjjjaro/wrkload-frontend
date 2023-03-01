@@ -10,6 +10,7 @@ import NotFound from 'components/users/NotFound'
 import Modals from 'components/users/Modals'
 import { getUsers } from 'services/users/getUsers'
 import { sortUsers } from 'utils/sortData'
+import PageTransition from 'components/shared/PageTransition'
 
 export const metadata = {
   title: 'Users'
@@ -30,7 +31,7 @@ export default function Users (): JSX.Element {
   const shouldRenderNotFoundSign = !shouldRenderUsers && !shouldRenderSkeleton
 
   return (
-    <>
+    <PageTransition>
       <Header shouldRenderOptions={shouldRenderNotFoundSign} />
       <main>
         {shouldRenderSkeleton && <Skeleton />}
@@ -38,6 +39,6 @@ export default function Users (): JSX.Element {
         {shouldRenderNotFoundSign && <NotFound />}
       </main>
       <Modals />
-    </>
+    </PageTransition>
   )
 }

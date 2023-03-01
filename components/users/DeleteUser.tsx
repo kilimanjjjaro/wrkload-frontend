@@ -42,7 +42,7 @@ export default function DeleteUser (): JSX.Element {
       <div className='w-full p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
         <Headline variant='md'><Balancer>Sure to delete this user?</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
-          <div className='flex flex-col mb-5 gap-y-3'>
+          <div className='flex flex-col mb-3 gap-y-3'>
             <Input onChange={handleChange} value={user.username} name='username' type='text' placeholder='Username' centerText required disabled />
             <Input onChange={handleChange} value={user.email} name='email' type='email' placeholder='Email' centerText required disabled />
           </div>

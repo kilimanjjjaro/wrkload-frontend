@@ -1,6 +1,6 @@
 import type FeaturesInterface from 'interfaces/home/Features'
 
-export const SKELETON = Array.from(Array(8).keys())
+export const SKELETON = Array.from(Array(4).keys())
 
 export const MASONRY_BREAKPOINTS = {
   default: 4,

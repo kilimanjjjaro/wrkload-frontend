@@ -42,7 +42,7 @@ export default function DeleteTask (): JSX.Element {
       <div className='w-full p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-t-3xl md:rounded-3xl'>
         <Headline variant='md'><Balancer>Sure to delete this task?</Balancer></Headline>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
-          <div className='flex flex-col mb-5 gap-y-3'>
+          <div className='flex flex-col mb-3 gap-y-3'>
             <Input onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' centerText required disabled />
           </div>
           <div className='flex justify-center gap-x-3'>
