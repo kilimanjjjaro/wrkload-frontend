@@ -17,8 +17,13 @@ export default async function login ({ email, password }: CredentialsInterface):
   const response = await api.post('/auth/login', { email, password })
 
   setCookie('_id', response.data._id)
-  setCookie('accessToken', response.data.accessToken)
-  console.log(response.data)
+  setCookie('accessToken', response.data.accessToken, {
+    maxAge: response.data.expiresIn,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    httpOnly: true,
+    domain: 'https://wrkload.vercel.app'
+  })
 
   return response.data
 }
