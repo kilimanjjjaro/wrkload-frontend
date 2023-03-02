@@ -8,18 +8,6 @@ import Footer from 'components/shared/Footer'
 import type { ChildrenInterface } from 'interfaces/components'
 import 'app/globals.css'
 
-export const metadata = {
-  openGraph: {
-    siteName: 'wrkload',
-    authors: 'Kilimanjjjaro',
-    locale: 'en-US'
-  },
-  icons: {
-    icon: '/favicon.png',
-    apple: '/favicon.png'
-  }
-}
-
 export default function RootLayout ({ children }: ChildrenInterface): JSX.Element {
   const { inter, spaceGrotesk } = fonts
 
