@@ -13,6 +13,17 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
 
   return (
     <html lang='en' className='scroll-smooth dark'>
+      <head>
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <link href='/favicon.png' rel='shortcut icon' />
+        <meta property='og:description' content="wrkload is a web app where you can track what you've worked on in a simple and organized way." />
+        <meta property='og:site_name' content='wrkload' />
+        <meta property='og:locale' content='en-US' />
+        <meta property='og:image:url' content='https://wrkload.vercel.app/og.png' />
+        <meta property='og:image:width' content='800' />
+        <meta property='og:image:height' content='600' />
+        <meta property='og:type' content='website' />
+      </head>
       <body className={`bg-light-blue dark:bg-black transition-colors duration-400 ease-in-out antialiased ${inter.variable} ${spaceGrotesk.variable}`}>
         <DataProvider>
           <NavBar />
