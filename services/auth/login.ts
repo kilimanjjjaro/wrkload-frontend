@@ -19,7 +19,8 @@ export default async function login ({ email, password }: CredentialsInterface):
   setCookie('_id', response.data._id)
   setCookie('accessToken', response.data.accessToken, {
     maxAge: response.data.expiresIn,
-    secure: process.env.NODE_ENV === 'production'
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict'
     // httpOnly: true
   })
 
