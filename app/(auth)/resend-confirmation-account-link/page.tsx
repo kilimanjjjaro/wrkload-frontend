@@ -23,6 +23,7 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -34,6 +35,8 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
     const { email } = credentials
 
     try {
+      setIsLoading(true)
+
       const response = await resendConfirmationAccountLink({ email })
 
       if (response.status === 'ok') {
@@ -41,6 +44,8 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
       }
     } catch (error: any) {
       setError(error.response.data.code)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -91,7 +96,7 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
             <div className='flex flex-col gap-3 mb-3'>
               <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
             </div>
-            <Button variant='secondary'>
+            <Button variant='secondary' isLoading={isLoading}>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </form>

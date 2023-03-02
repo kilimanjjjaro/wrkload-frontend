@@ -28,6 +28,8 @@ interface DataContextValues {
   setError: Dispatch<React.SetStateAction<string>>
   success: string
   setSuccess: Dispatch<React.SetStateAction<string>>
+  isLoading: boolean
+  setIsLoading: Dispatch<React.SetStateAction<boolean>>
 };
 
 const DEFAULT_DATA_CONTEXT_VALUE: DataContextValues = {
@@ -46,7 +48,9 @@ const DEFAULT_DATA_CONTEXT_VALUE: DataContextValues = {
   error: '',
   setError: () => {},
   success: '',
-  setSuccess: () => {}
+  setSuccess: () => {},
+  isLoading: false,
+  setIsLoading: () => {}
 }
 
 export const DataContext = createContext<DataContextValues>(DEFAULT_DATA_CONTEXT_VALUE)
@@ -60,6 +64,7 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
   const [shouldRenderStats, setShouldRenderStats] = useState(true)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const accessToken = getCookie('accessToken')
 
   useEffect(() => {
@@ -98,7 +103,9 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
       error,
       setError,
       success,
-      setSuccess
+      setSuccess,
+      isLoading,
+      setIsLoading
     }}
     >
       {children}

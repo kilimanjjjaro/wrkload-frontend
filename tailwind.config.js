@@ -27,31 +27,27 @@ module.exports = {
         400: '400ms'
       },
       animation: {
-        'loading-square': 'strokeSpacing 2s ease-in-out infinite',
-        skeleton: 'shine 2s ease-in-out infinite'
+        skeleton: 'shine 2s ease-in-out infinite',
+        loading: 'loading 2s ease-out infinite'
       },
       keyframes: {
-        strokeSpacing: {
-          '0%': {
-            strokeDasharray: '0 200',
-            strokeDashoffset: '0'
-          },
-          '45%': {
-            strokeDasharray: '200 200',
-            strokeDashoffset: '0'
-          },
-          '90%': {
-            strokeDasharray: '200 200',
-            strokeDashoffset: '-200'
-          },
-          '100%': {
-            strokeDasharray: '200 200',
-            strokeDashoffset: '-200'
-          }
-        },
         shine: {
           to: {
             backgroundPositionX: '-200%'
+          }
+        },
+        loading: {
+          '0%': {
+            transform: 'translateY(100%)'
+          },
+          '25%': {
+            transform: 'translateY(150%)'
+          },
+          '50%': {
+            transform: 'translateY(0%)'
+          },
+          '100%': {
+            transform: 'translateY(-100%)'
           }
         }
       },

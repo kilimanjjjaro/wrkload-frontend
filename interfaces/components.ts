@@ -9,6 +9,7 @@ export interface StatsInterface {
 }
 
 export interface ButtonInterface {
+  className?: string
   type?: 'submit'
   variant: 'primary' | 'secondary' | 'light-alternative' | 'dark-alternative'
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -16,6 +17,7 @@ export interface ButtonInterface {
   autoWidth?: Boolean
   children: React.ReactNode
   disablePagination?: boolean
+  isLoading?: boolean
 }
 
 export interface InputInterface {

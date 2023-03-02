@@ -6,8 +6,8 @@ import Balancer from 'react-wrap-balancer'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Button from 'components/shared/Button'
-import confirmAccount from 'services/auth/confirmAccount'
 import PageTransition from 'components/shared/PageTransition'
+import confirmAccount from 'services/auth/confirmAccount'
 
 interface ParamsInterface {
   params: {
@@ -20,7 +20,7 @@ export const metadata = {
 }
 
 export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Element {
-  const [loading, setLoading] = useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState('')
   const router = useRouter()
 
@@ -37,7 +37,7 @@ export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Elemen
   }
 
   useEffect(() => {
-    setLoading(true)
+    setIsLoading(true)
 
     const sendConfirmAccount = async (): Promise<void> => {
       const { confirmAccountToken } = params
@@ -47,7 +47,7 @@ export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Elemen
       } catch (error: any) {
         setError(error.response.data.code)
       } finally {
-        setLoading(false)
+        setIsLoading(false)
       }
     }
 
@@ -75,7 +75,15 @@ export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Elemen
     )
   }
 
-  if (loading) return <div className='text-white'>Loading...</div>
+  if (isLoading) {
+    return (
+      <PageTransition>
+        <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl animate-pulse'>
+          <p className='font-secondaryFont'><Balancer>Checking account status, please wait.</Balancer></p>
+        </div>
+      </PageTransition>
+    )
+  }
 
   return (
     <PageTransition>

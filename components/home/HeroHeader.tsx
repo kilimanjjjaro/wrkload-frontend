@@ -19,7 +19,7 @@ export default function HeroHeader (): JSX.Element {
         </div>
         <Button variant='primary' onClick={() => router.push('/registry')} autoWidth>Start now for free <ArrowRightIcon className='w-4 stroke-3' /></Button>
       </div>
-      <div className='w-full h-40 bg-black dark:bg-blue md:h-2/3' />
+      <div className='w-full h-40 bg-black rounded-3xl dark:bg-blue md:h-2/3' />
     </div>
   )
 }

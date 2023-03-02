@@ -28,6 +28,7 @@ export default function ChangePassword (): JSX.Element {
   const [step, setStep] = useState(1)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -45,7 +46,8 @@ export default function ChangePassword (): JSX.Element {
     const { email, currentPassword: password } = credentials
 
     try {
-      await login({ email, password })
+      setIsLoading(true)
+      await login({ email: 'hola@kilimanjjjaro.com', password })
       // TODO: handle week password
       // TODO: handle unlogged session
       setStep(2)
@@ -53,6 +55,8 @@ export default function ChangePassword (): JSX.Element {
       if (error.response.data.code === 'auth/invalid-credentials') {
         setError('auth/invalid-credentials')
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -61,6 +65,7 @@ export default function ChangePassword (): JSX.Element {
     const { email, currentPassword: oldPassword, newPassword, confirmNewPassword } = credentials
 
     try {
+      setIsLoading(true)
       if (newPassword !== confirmNewPassword) {
         throw new Error('auth/different-passwords')
       }
@@ -79,6 +84,8 @@ export default function ChangePassword (): JSX.Element {
       if (error.response.data.code === 'auth/invalid-credentials') {
         setError('auth/invalid-credentials')
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -130,7 +137,7 @@ export default function ChangePassword (): JSX.Element {
               <div className='flex flex-col gap-3 mb-3'>
                 <Input onChange={handleChange} value={credentials.currentPassword} name='currentPassword' type='password' placeholder='Current Password' centerText />
               </div>
-              <Button variant='secondary'>
+              <Button variant='secondary' isLoading={isLoading}>
                 <ArrowRightIcon className='w-4 stroke-3' />
               </Button>
             </form>
@@ -141,7 +148,7 @@ export default function ChangePassword (): JSX.Element {
                 <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' autoComplete='new-password' centerText />
                 <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' autoComplete='new-password' centerText />
               </div>
-              <Button variant='secondary'>
+              <Button variant='secondary' isLoading={isLoading}>
                 <ArrowRightIcon className='w-4 stroke-3' />
               </Button>
             </form>

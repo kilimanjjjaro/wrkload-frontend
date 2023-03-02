@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
-import { ArrowLeftIcon, ArrowRightIcon, LockClosedIcon } from '@heroicons/react/24/outline'
+import { ArrowLeftIcon, ArrowRightIcon, LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
@@ -28,6 +28,7 @@ export default function Register (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -44,6 +45,8 @@ export default function Register (): JSX.Element {
     const { username, email, password, confirmPassword } = credentials
 
     try {
+      setIsLoading(true)
+
       if (password !== confirmPassword) {
         throw new Error('auth/different-passwords')
       }
@@ -63,6 +66,8 @@ export default function Register (): JSX.Element {
       if (error.response.data.code === 'auth/email-already-exists') {
         setError('auth/email-already-exists')
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -111,8 +116,9 @@ export default function Register (): JSX.Element {
               <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' centerText />
               <Input onChange={handleChange} value={credentials.confirmPassword} name='confirmPassword' type='password' placeholder='Confirm Password' autoComplete='current-password' centerText />
             </div>
-            <Button variant='secondary'>
-              <LockClosedIcon className='w-4 stroke-3' />
+            <Button className='group' variant='secondary' isLoading={isLoading}>
+              <LockClosedIcon className='w-4 transition-opacity duration-700 ease-in-out opacity-100 stroke-3 group-focus:opacity-0' />
+              <LockOpenIcon className='absolute w-4 transition-opacity duration-700 ease-in-out opacity-0 stroke-3 group-focus:opacity-100' />
             </Button>
           </form>
           <div className='flex items-center mt-5 text-sm font-semibold font-secondaryFont'>

@@ -32,6 +32,7 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -56,6 +57,8 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
     const { uid, resetPasswordToken } = params
 
     try {
+      setIsLoading(true)
+
       if (newPassword !== confirmNewPassword) {
         throw new Error('auth/different-passwords')
       }
@@ -76,6 +79,8 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
       if (error.response.data.code.length >= 1) {
         setError(error.response.data.code)
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -135,7 +140,7 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
               <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' centerText />
               <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' centerText />
             </div>
-            <Button variant='secondary'>
+            <Button variant='secondary' isLoading={isLoading}>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </form>
