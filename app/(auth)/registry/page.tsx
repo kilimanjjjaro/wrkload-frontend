@@ -20,10 +20,6 @@ const INITIAL_CREDENTIALS_STATE = {
   confirmPassword: ''
 }
 
-export const metadata = {
-  title: 'Registry'
-}
-
 export default function Register (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')

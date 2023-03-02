@@ -16,10 +16,6 @@ const INITIAL_CREDENTIALS_STATE = {
   password: ''
 }
 
-export const metadata = {
-  title: 'Delete account'
-}
-
 export default function DeleteAccount (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')

@@ -19,10 +19,6 @@ const INITIAL_CREDENTIALS_STATE = {
   confirmNewPassword: ''
 }
 
-export const metadata = {
-  title: 'Change Password'
-}
-
 export default function ChangePassword (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [step, setStep] = useState(1)

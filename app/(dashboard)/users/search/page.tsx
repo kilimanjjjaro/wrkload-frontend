@@ -14,10 +14,6 @@ import searchUsers from 'services/users/searchUsers'
 import { sortUsers } from 'utils/sortData'
 import PageTransition from 'components/shared/PageTransition'
 
-export const metadata = {
-  title: 'Search users'
-}
-
 export default function SearchUsers (): JSX.Element {
   const params = useSearchParams()
   const query = params.get('query')

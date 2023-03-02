@@ -12,10 +12,6 @@ import { sortProjects } from 'utils/sortData'
 import { useSearchParams } from 'next/navigation'
 import PageTransition from 'components/shared/PageTransition'
 
-export const metadata = {
-  title: 'Projects'
-}
-
 export default function Projects (): JSX.Element {
   const params = useSearchParams()
   const page = params.get('page')

@@ -15,10 +15,6 @@ const INITIAL_CREDENTIALS_STATE = {
   email: ''
 }
 
-export const metadata = {
-  title: 'Remember password'
-}
-
 export default function RememberPassword (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')

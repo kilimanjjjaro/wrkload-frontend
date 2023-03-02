@@ -13,10 +13,6 @@ import { sortTasks } from 'utils/sortData'
 import { DataContext } from 'contexts/DataContext'
 import PageTransition from 'components/shared/PageTransition'
 
-export const metadata = {
-  title: 'Tasks'
-}
-
 export default function Tasks (): JSX.Element {
   const params = useSearchParams()
   const page = params.get('page')
