@@ -17,7 +17,9 @@ export default async function login ({ email, password }: CredentialsInterface):
   const response = await api.post('/auth/login', { email, password })
 
   setCookie('_id', response.data._id)
-  setCookie('accessToken', response.data.accessToken)
+  setCookie('accessToken', response.data.accessToken, {
+    maxAge: response.data.expiresIn
+  })
 
   return response.data
 }
