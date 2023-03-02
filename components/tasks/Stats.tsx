@@ -30,7 +30,7 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.El
           grabCursor
         >
           <EyeSlashIcon className='absolute z-10 w-6 h-6 transition ease-in-out cursor-pointer stroke-2 duration-400 hover:text-black dark:hover:text-white top-7 right-7' onClick={handleRenderStats} />
-          <SwiperSlide className='pt-6 pl-6 pr-6 md:pt-7 pb-14 md:pr-7 md:pl-7'>
+          <SwiperSlide className='pt-6 pl-6 pr-6 md:pt-7 pb-[52px] md:pr-7 md:pl-7'>
             <ClockIcon className='h-10 stroke-2' />
             <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
               {stats.totalPastMonthTiming}
