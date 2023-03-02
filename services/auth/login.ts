@@ -21,8 +21,7 @@ export default async function login ({ email, password }: CredentialsInterface):
     maxAge: response.data.expiresIn,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
-    httpOnly: true,
-    domain: 'https://wrkload.vercel.app'
+    httpOnly: true
   })
 
   return response.data
