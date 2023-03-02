@@ -18,7 +18,8 @@ export default async function login ({ email, password }: CredentialsInterface):
 
   setCookie('_id', response.data._id)
   setCookie('accessToken', response.data.accessToken, {
-    maxAge: response.data.expiresIn
+    maxAge: response.data.expiresIn,
+    httpOnly: true
   })
 
   return response.data
