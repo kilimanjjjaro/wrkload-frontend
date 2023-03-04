@@ -10,8 +10,7 @@ export const addTaskOptions = (newTask: TaskInterface): any => {
     rollbackOnError: true,
     populateCache: (added: TaskInterface, data: FullTaskInterface) => {
       return { ...data, tasks: sortTasks([...data.tasks, added]) }
-    },
-    revalidate: false
+    }
   }
 }
 
@@ -29,8 +28,7 @@ export const updateTaskOptions = (updatedTask: TaskInterface): any => {
         return task._id !== updatedTask._id
       })
       return { ...data, tasks: sortTasks([...prevTasks, updated]) }
-    },
-    revalidate: false
+    }
   }
 }
 
@@ -52,7 +50,6 @@ export const deleteTaskOptions = (_id: string): any => {
           return task._id !== _id
         })
       }
-    },
-    revalidate: false
+    }
   }
 }

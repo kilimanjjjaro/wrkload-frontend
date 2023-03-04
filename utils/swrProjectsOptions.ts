@@ -10,8 +10,7 @@ export const addProjectOptions = (newProject: ProjectInterface): any => {
     rollbackOnError: true,
     populateCache: (added: ProjectInterface, data: FullProjectInterface) => {
       return { ...data, projects: sortProjects([...data.projects, added]) }
-    },
-    revalidate: false
+    }
   }
 }
 
@@ -29,8 +28,7 @@ export const updateProjectOptions = (updatedProject: ProjectInterface): any => {
         return project._id !== updatedProject._id
       })
       return { ...data, projects: sortProjects([...prevProjects, updated]) }
-    },
-    revalidate: false
+    }
   }
 }
 
@@ -52,7 +50,6 @@ export const deleteProjectOptions = (_id: string): any => {
           return project._id !== _id
         })
       }
-    },
-    revalidate: false
+    }
   }
 }

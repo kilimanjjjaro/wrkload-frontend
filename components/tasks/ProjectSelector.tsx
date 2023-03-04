@@ -27,6 +27,7 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
     setSearchInputValue('')
     setOpen(false)
     setSelectedProjectToFetch(projectName)
+    window.localStorage.setItem('selectedProject', projectName)
   }
 
   useEffect(() => {

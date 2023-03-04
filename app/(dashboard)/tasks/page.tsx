@@ -15,17 +15,22 @@ import PageTransition from 'components/shared/PageTransition'
 import { getProjects } from 'services/projects/getProjects'
 
 export default function Tasks (): JSX.Element {
+  const { selectedProjectToFetch, setSelectedProjectToFetch } = useContext(DataContext)
   let sortedProjectNames: string[] = []
   const params = useSearchParams()
   const page = params.get('page')
-  const { selectedProjectToFetch, setSelectedProjectToFetch } = useContext(DataContext)
 
   const { data: projects, isLoading: isLoadingProjects, isValidating: isValidatingProjects } = useSWR('projects', async () => await getProjects({ page: '1', noLimit: true }), { revalidateIfStale: false })
 
-  if (projects !== undefined) {
+  if (projects !== undefined && projects.projects.length > 0) {
     sortedProjectNames = projects.projects.map((project) => project.name).sort()
-    setSelectedProjectToFetch(sortedProjectNames[0])
   }
+
+  useEffect(() => {
+    if (sortedProjectNames !== undefined && sortedProjectNames.length > 0) {
+      setSelectedProjectToFetch(sortedProjectNames[0])
+    }
+  }, [projects])
 
   const { data: tasks, isLoading: isLoadingTasks, isValidating: isValidatingTasks, mutate } = useSWR(selectedProjectToFetch !== '' ? 'tasks' : null, async () => await getTasks({ page, project: selectedProjectToFetch }), { onSuccess: (data) => sortTasks(data.tasks), revalidateIfStale: false })
 

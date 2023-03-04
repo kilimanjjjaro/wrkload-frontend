@@ -20,6 +20,8 @@ export interface TaskInterface {
 export interface TaskStatsInterface {
   totalPastMonthTiming: number
   totalTasksPastMonth: number
+  totalCurrentMonthTiming: number
+  totalTasksCurrentMonth: number
   performance: string
 }
 
