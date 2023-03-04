@@ -4,7 +4,7 @@ import notFoundImage from 'public/images/not-found.webp'
 
 export default function NotFound (): JSX.Element {
   return (
-    <div className='flex flex-col items-center w-1/3 h-full mx-auto mt-28 gap-y-5'>
+    <div className='flex flex-col items-center h-full mx-auto mt-16 xl:w-1/3 2xl:mt-28 gap-y-5'>
       <Image
         className='w-72'
         src={notFoundImage}

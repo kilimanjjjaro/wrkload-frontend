@@ -25,7 +25,7 @@ export default function Options (): JSX.Element {
       </Button>
       <Button className='!w-auto' onClick={() => setAddDataModalStatus(true)} variant='primary'><PlusIcon className='w-4 stroke-3' /></Button>
       <Button className='!w-auto' onClick={() => setSearchModalStatus(true)} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
-      <div className='relative w-full md:w-auto'>
+      <div className='relative'>
         <Button className='!w-auto' onClick={() => setShowDateFilterBoxStatus(!(showDateFilterBoxStatus))} variant='primary'><CalendarIcon className='w-4 stroke-3' /></Button>
         <DateFilter dependency={showDateFilterBoxStatus} setDependency={setShowDateFilterBoxStatus} />
       </div>
