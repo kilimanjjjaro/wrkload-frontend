@@ -40,9 +40,9 @@ export default function Pagination ({ data }: { data: PaginationInterface }): JS
 
   return (
     <div className='flex justify-center mt-10 gap-x-5'>
-      <Button variant='primary' disablePagination={disablePrevPageButton} onClick={handlePrevPage} autoWidth><ArrowLeftIcon className='w-4 stroke-3' /></Button>
+      <Button className='!w-auto' variant='primary' disablePagination={disablePrevPageButton} onClick={handlePrevPage}><ArrowLeftIcon className='w-4 stroke-3' /></Button>
       <div className='self-center text-sm text-black transition-colors ease-in-out dark:text-white duration-400 font-secondaryFont'>Page {data.page} of {totalPages}</div>
-      <Button variant='primary' disablePagination={disableNextPageButton} onClick={handleNextPage} autoWidth><ArrowRightIcon className='w-4 stroke-3' /></Button>
+      <Button className='!w-auto' variant='primary' disablePagination={disableNextPageButton} onClick={handleNextPage}><ArrowRightIcon className='w-4 stroke-3' /></Button>
     </div>
   )
 }

@@ -47,13 +47,13 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
       </div>
 
       <motion.ul
-        className={clsx('z-20 absolute rounded-xl font-secondaryFont top-full text-sm bg-blue mt-5 overflow-x-hidden overflow-y-auto custom-scrollbar max-h-56')}
+        className={clsx('z-20 absolute rounded-xl font-secondaryFont top-full text-sm bg-blue mt-5 overflow-x-hidden overflow-y-auto custom-scrollbar max-h-[220px]')}
         variants={VARIANTS}
         initial={false}
         animate={open ? 'open' : 'closed'}
         transition={{ ease: 'easeInOut', duration: 0.4 }}
       >
-        <div className='sticky top-0 flex items-center px-4 py-3 border-b border-black bg-blue'>
+        <div className='sticky top-0 z-10 flex items-center px-4 py-3 border-b border-black bg-blue'>
           <MagnifyingGlassIcon className='w-4 stroke-3 stroke-black' />
           <input
             className='pl-2 text-black outline-none bg-blue placeholder:text-black'

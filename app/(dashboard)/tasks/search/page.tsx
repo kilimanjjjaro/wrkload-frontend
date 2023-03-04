@@ -54,7 +54,7 @@ export default function SearchTasks (): JSX.Element {
               alt='Not found image'
             />
             <span className='text-xl text-center text-black dark:text-white font-secondaryFont'>No search results found. <br className='hidden lg:block' />Please try again.</span>
-            <Button onClick={() => router.push('/tasks')} variant='primary' autoWidth><ArrowLeftIcon className='w-4 stroke-3' /></Button>
+            <Button className='!w-auto' onClick={() => router.push('/tasks')} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
           </div>
         )}
       </main>
