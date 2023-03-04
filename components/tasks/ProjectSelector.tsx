@@ -33,6 +33,7 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
     const mutateData = async (): Promise<void> => {
       await mutate('tasks')
     }
+
     mutateData().catch((error) => console.error(error))
   }, [selected])
 

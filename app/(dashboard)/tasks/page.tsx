@@ -20,27 +20,27 @@ export default function Tasks (): JSX.Element {
   const page = params.get('page')
   const { selectedProjectToFetch, setSelectedProjectToFetch } = useContext(DataContext)
 
-  const { data: projects, isLoading: isLoadingProjects } = useSWR('projects', async () => await getProjects({ page: '1', noLimit: true }), { revalidateIfStale: false })
+  const { data: projects, isLoading: isLoadingProjects, isValidating: isValidatingProjects } = useSWR('projects', async () => await getProjects({ page: '1', noLimit: true }), { revalidateIfStale: false })
 
   if (projects !== undefined) {
     sortedProjectNames = projects.projects.map((project) => project.name).sort()
     setSelectedProjectToFetch(sortedProjectNames[0])
   }
 
-  const { data: tasks, isLoading: isLoadingTasks, mutate } = useSWR(selectedProjectToFetch !== '' ? 'tasks' : null, async () => await getTasks({ page, project: selectedProjectToFetch }), { onSuccess: (data) => sortTasks(data.tasks), revalidateIfStale: false })
+  const { data: tasks, isLoading: isLoadingTasks, isValidating: isValidatingTasks, mutate } = useSWR(selectedProjectToFetch !== '' ? 'tasks' : null, async () => await getTasks({ page, project: selectedProjectToFetch }), { onSuccess: (data) => sortTasks(data.tasks), revalidateIfStale: false })
 
   useEffect(() => {
     mutate().catch((error) => console.error(error))
   }, [page, mutate])
 
   const noProjects = projects !== undefined && projects.projects.length === 0
-  const shouldRenderSkeleton = isLoadingTasks || isLoadingProjects
-  const shouldRenderTasks = tasks !== undefined && tasks.tasks.length > 0
-  const shouldRenderNotFound = (tasks !== undefined && tasks.tasks.length === 0) || (projects !== undefined && projects.projects.length === 0)
+  const shouldRenderSkeleton = isLoadingTasks || isLoadingProjects || isValidatingTasks || isValidatingProjects
+  const shouldRenderTasks = tasks !== undefined && tasks.tasks.length > 0 && !shouldRenderSkeleton
+  const shouldRenderNotFound = ((tasks !== undefined && tasks.tasks.length === 0) || (projects !== undefined && projects.projects.length === 0)) && !shouldRenderSkeleton
 
   return (
     <PageTransition>
-      <Header projectNames={sortedProjectNames} shouldRenderSkeleton={shouldRenderSkeleton} />
+      <Header projectNames={sortedProjectNames} shouldRenderNotFound={shouldRenderNotFound} />
       <main>
         {shouldRenderSkeleton && <Skeleton />}
         {shouldRenderTasks && <TaskList data={tasks} />}

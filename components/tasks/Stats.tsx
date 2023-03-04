@@ -18,7 +18,7 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.El
 
   return (
     <>
-      {stats.totalTasksPastMonth >= 1 && (
+      {stats?.totalTasksPastMonth >= 1 && (
         <Swiper
           className='relative w-full border-2 border-blue text-blue bg-light-blue dark:bg-black dark:text-blue dark:border-blue rounded-3xl'
           modules={[Autoplay, Pagination]}

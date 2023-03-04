@@ -15,7 +15,7 @@ export default function Modal ({ children, modalStatus, setModalStatus }: Props)
 
   return (
     <motion.div
-      className='fixed top-0 left-0 z-10 flex items-end justify-center w-full h-full md:items-center'
+      className='fixed top-0 left-0 z-20 flex items-end justify-center w-full h-full md:items-center'
       variants={BACKGROUND_VARIANTS}
       initial={false}
       animate={modalStatus ? 'open' : 'closed'}

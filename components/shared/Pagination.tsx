@@ -1,7 +1,6 @@
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import Button from 'components/shared/Button'
-
 import type { PaginationInterface } from 'interfaces/components'
 
 export default function Pagination ({ data }: { data: PaginationInterface }): JSX.Element {
@@ -9,7 +8,7 @@ export default function Pagination ({ data }: { data: PaginationInterface }): JS
   const pathname = usePathname()
   const params = useSearchParams()
   const query = params.get('query')
-  const totalPages = Math.ceil(data.totalResults / data.resultsPerPage)
+  const totalPages = Math.ceil(data?.totalResults / data?.resultsPerPage)
 
   const handlePrevPage = (): void => {
     if (pathname === '/tasks/search') {
@@ -35,13 +34,13 @@ export default function Pagination ({ data }: { data: PaginationInterface }): JS
     router.push(`${pathname}?page=${data.nextPage}`)
   }
 
-  const disablePrevPageButton = data.prevPage === null
-  const disableNextPageButton = data.nextPage === null
+  const disablePrevPageButton = data?.prevPage === null
+  const disableNextPageButton = data?.nextPage === null
 
   return (
     <div className='flex justify-center mt-10 gap-x-5'>
       <Button className='!w-auto' variant='primary' disablePagination={disablePrevPageButton} onClick={handlePrevPage}><ArrowLeftIcon className='w-4 stroke-3' /></Button>
-      <div className='self-center text-sm text-black transition-colors ease-in-out dark:text-white duration-400 font-secondaryFont'>Page {data.page} of {totalPages}</div>
+      <div className='self-center text-sm text-black transition-colors ease-in-out dark:text-white duration-400 font-secondaryFont'>Page {data?.page} of {totalPages}</div>
       <Button className='!w-auto' variant='primary' disablePagination={disableNextPageButton} onClick={handleNextPage}><ArrowRightIcon className='w-4 stroke-3' /></Button>
     </div>
   )
