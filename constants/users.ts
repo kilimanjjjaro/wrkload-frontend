@@ -1,4 +1,4 @@
-export const DEFAULT_AVATAR = 'http://localhost:3000/images/default-avatar.svg'
+export const DEFAULT_AVATAR = 'https://wrkload.vercel.app/images/default-avatar.svg'
 
 export const DEFAULT_ROLE = 2
 
