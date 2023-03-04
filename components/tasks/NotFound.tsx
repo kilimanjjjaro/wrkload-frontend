@@ -27,7 +27,7 @@ export default function NotFound ({ noProjects }: { noProjects: boolean }): JSX.
       )}
       {noProjects && (
         <>
-          <span className='text-xl text-center text-black dark:text-white font-secondaryFont'><Balancer>To create tasks, you must first create your first project.</Balancer></span>
+          <span className='text-xl text-center text-black dark:text-white font-secondaryFont'><Balancer>To create tasks, you need a project. Let&apos;s create one!</Balancer></span>
           <Button className='!w-auto' onClick={() => router.push('/projects')} variant='primary'><ArrowRightIcon className='w-4 stroke-3' /></Button>
         </>
       )}

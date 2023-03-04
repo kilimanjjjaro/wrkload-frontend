@@ -10,7 +10,7 @@ export default function NotFound (): JSX.Element {
         src={notFoundImage}
         alt='Not found image'
       />
-      <span className='text-xl text-center text-black dark:text-white font-secondaryFont'><Balancer>There are no users to display, but there is a solution... You can add the first one right now.</Balancer></span>
+      <span className='text-xl text-center text-black dark:text-white font-secondaryFont'><Balancer>We did not find users, but there is a solution... You can add the first one right now.</Balancer></span>
     </div>
   )
 }
