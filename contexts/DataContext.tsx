@@ -70,6 +70,12 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
   useEffect(() => {
     const showStats = window.localStorage.getItem('showStats')
     if (showStats !== null) setShouldRenderStats(JSON.parse(showStats))
+
+    const refreshToken = setTimeout(() => {
+      void getAccessToken()
+    }, 14 * 60 * 1000)
+
+    return () => clearTimeout(refreshToken)
   }, [])
 
   useEffect(() => {
@@ -78,12 +84,6 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
     } else {
       setIsLogged(false)
     }
-
-    const refreshToken = setTimeout(() => {
-      void getAccessToken()
-    }, 14 * 60 * 1000)
-
-    return () => clearTimeout(refreshToken)
   }, [accessToken])
 
   return (

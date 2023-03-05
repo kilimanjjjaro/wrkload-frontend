@@ -1,4 +1,5 @@
 import { setCookie } from 'cookies-next'
+import type { UserInterface } from 'interfaces/users/User'
 import api from 'utils/api'
 
 interface CredentialsInterface {
@@ -8,7 +9,7 @@ interface CredentialsInterface {
 
 interface ReturnInterface {
   status: string
-  _id: string
+  user: UserInterface
   accessToken: string
   expiresIn: number
 }
@@ -16,12 +17,12 @@ interface ReturnInterface {
 export default async function login ({ email, password }: CredentialsInterface): Promise<ReturnInterface> {
   const response = await api.post('/auth/login', { email, password })
 
-  setCookie('_id', response.data._id)
+  setCookie('_id', response.data.user._id)
+
   setCookie('accessToken', response.data.accessToken, {
     maxAge: response.data.expiresIn,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict'
-    // httpOnly: true
   })
 
   return response.data

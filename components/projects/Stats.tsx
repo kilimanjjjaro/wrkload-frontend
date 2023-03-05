@@ -12,11 +12,7 @@ export default function Stats ({ stats }: { stats: ProjectStatsInterface }): JSX
     window.localStorage.setItem('showStats', JSON.stringify(!shouldRenderStats))
   }
 
-  console.log(stats?.bestProjectOfPastMonth)
-
   const bestProjectOfPastMonth = stats?.bestProjectOfPastMonth !== ''
-
-  console.log(bestProjectOfPastMonth)
 
   return (
     <div className='relative border-2 border-blue text-blue bg-light-blue dark:bg-black dark:text-blue dark:border-blue pt-6 md:pt-7 pb-[33px] pr-6 md:pr-7 pl-6 md:pl-7 rounded-3xl'>
