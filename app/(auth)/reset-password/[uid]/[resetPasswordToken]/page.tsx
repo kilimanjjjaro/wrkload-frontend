@@ -136,30 +136,33 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
               <div className='relative flex items-center'>
                 <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' minLength={8} centerText required />
                 <div className={clsx(
-                  'absolute flex items-center gap-x-1 right-3 [&>svg]:w-[12px] [&>svg]:h-[12px] [&>svg]:stroke-transparent',
-                  credentials.newPassword.length > 0 && credentials.newPassword.length < 8 && '[&>svg]:!stroke-red',
-                  credentials.newPassword.length >= 7 && credentials.newPassword.length < 12 && '[&>svg]:!stroke-yellow',
-                  credentials.newPassword.length >= 11 && '[&>svg]:!stroke-green'
+                  'absolute flex items-center mt-[3px] gap-x-1 right-3',
+                  credentials.newPassword.length > 0 && credentials.newPassword.length < 8 && '[&>div]:!bg-red',
+                  credentials.newPassword.length >= 7 && credentials.newPassword.length < 12 && '[&>div]:!bg-yellow',
+                  credentials.newPassword.length >= 11 && '[&>div]:!bg-green'
                 )}
                 >
-                  {credentials.newPassword.length > 0 && (
-                    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' strokeWidth='3' stroke='currentColor'>
+                  {credentials.newPassword.length > 0 && <div className='w-[5px] h-[5px] rounded-full bg-transparent' />}
+                  {credentials.newPassword.length >= 7 && <div className='w-[5px] h-[5px] rounded-full bg-transparent' />}
+                  {credentials.newPassword.length >= 11 && <div className='w-[5px] h-[5px] rounded-full bg-transparent' />}
+                </div>
+              </div>
+              <div className='relative flex items-center'>
+                <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' centerText required />
+                <div className='absolute flex items-center gap-x-1 right-3'>
+                  {credentials.confirmNewPassword.length > 7 && credentials.confirmNewPassword === credentials.newPassword && (
+                    <svg className='w-[12px] h-[12px] stroke-green' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' strokeWidth='3' stroke='currentColor'>
                       <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
                     </svg>
                   )}
-                  {credentials.newPassword.length >= 7 && (
-                    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' strokeWidth='3' stroke='currentColor'>
-                      <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
-                    </svg>
-                  )}
-                  {credentials.newPassword.length >= 11 && (
-                    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' strokeWidth='3' stroke='currentColor'>
-                      <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
+
+                  {credentials.confirmNewPassword.length > 7 && credentials.confirmNewPassword !== credentials.newPassword && (
+                    <svg className='w-[12px] h-[12px] stroke-red' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth='1.5' stroke='currentColor'>
+                      <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
                     </svg>
                   )}
                 </div>
               </div>
-              <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' centerText required />
             </div>
             <Button variant='secondary' isLoading={isLoading}>
               <ArrowRightIcon className='w-4 stroke-3' />

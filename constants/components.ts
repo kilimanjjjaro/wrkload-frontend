@@ -1,5 +1,12 @@
 import type FeaturesInterface from 'interfaces/home/Features'
 
+export const PAGES = [
+  { name: 'Tasks', link: '/tasks', admin: false },
+  { name: 'Projects', link: '/projects', admin: false },
+  { name: 'Profile', link: '/profile', admin: false },
+  { name: 'Users', link: '/users', admin: true }
+]
+
 export const SKELETON = Array.from(Array(4).keys())
 
 export const MASONRY_BREAKPOINTS = {

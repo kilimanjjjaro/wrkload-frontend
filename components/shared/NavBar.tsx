@@ -22,7 +22,7 @@ export default function NavBar (): JSX.Element {
   return (
     <div className='fixed top-0 left-0 z-50 grid items-center justify-between w-full grid-cols-2 px-6 pt-6 mx-auto text md:pt-8 md:px-8'>
       <Link className='flex items-center h-12 md:h-10 justify-self-start' href='/'><Logo /></Link>
-      <DashboardTab showDashboardBox={showDashboardBox} setShowDashboardBox={setShowDashboardBox} />
+      {isLogged && <DashboardTab showDashboardBox={showDashboardBox} setShowDashboardBox={setShowDashboardBox} />}
       <div className='justify-self-end'>
         {(user === undefined && !isLoading) && <Button onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-3' /></Button>}
         {(user === undefined && isLoading) && (

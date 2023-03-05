@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
+import { getCookie } from 'cookies-next'
+import jwtDecode from 'jwt-decode'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Paragraph from 'components/shared/Paragraph'
@@ -27,6 +29,7 @@ export default function ChangePassword (): JSX.Element {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const accessToken = getCookie('accessToken')
   const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -39,9 +42,10 @@ export default function ChangePassword (): JSX.Element {
   }
 
   useEffect(() => {
-    const user = window.localStorage.getItem('user')
-    const { email } = JSON.parse(user as string)
-    setEmail(email)
+    if (accessToken !== undefined) {
+      const { email }: { email: string } = jwtDecode(accessToken as string)
+      setEmail(email)
+    }
   }, [])
 
   const handleStepOne = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
