@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import { usePathname } from 'next/navigation'
-import Balancer from 'react-wrap-balancer'
 import { RectangleStackIcon, PencilSquareIcon, TrashIcon, CalendarIcon } from '@heroicons/react/24/outline'
 import Stats from 'components/projects/Stats'
 import Pagination from 'components/shared/Pagination'
@@ -37,7 +36,7 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
           <article
             key={project._id} className='relative flex flex-col items-start p-6 text-black transition ease-in-out bg-white rounded-3xl duration-400 group md:p-7'
           >
-            <h3 className='mb-5 text-4xl font-bold break-all font-primaryFont'><Balancer>{project.name}</Balancer></h3>
+            <h3 className='block mb-5 text-4xl font-bold pr-7 xl:pr-0 font-primaryFont'>{project.name}</h3>
 
             <div className='flex flex-wrap gap-3 mt-4'>
               <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-1 bg-blue gap-x-1 font-secondaryFont'>

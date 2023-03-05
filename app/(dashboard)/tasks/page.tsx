@@ -27,7 +27,7 @@ export default function Tasks (): JSX.Element {
   }
 
   useEffect(() => {
-    if (sortedProjectNames !== undefined && sortedProjectNames.length > 0) {
+    if (sortedProjectNames.length > 0) {
       setSelectedProjectToFetch(sortedProjectNames[0])
     }
   }, [projects])

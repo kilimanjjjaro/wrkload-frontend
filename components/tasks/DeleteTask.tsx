@@ -46,11 +46,11 @@ export default function DeleteTask (): JSX.Element {
             <Input onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' centerText required disabled />
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button type='submit' variant='secondary'>
-              <ArrowRightIcon className='w-4 stroke-3' />
-            </Button>
             <Button onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
+            </Button>
+            <Button type='submit' variant='secondary'>
+              <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </div>
         </form>

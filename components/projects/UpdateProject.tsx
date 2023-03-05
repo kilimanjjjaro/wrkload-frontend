@@ -48,11 +48,11 @@ export default function UpdateProject (): JSX.Element {
             <Input onChange={handleChange} value={project.name} name='name' type='text' placeholder='Name' centerText required />
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button type='submit' variant='secondary'>
-              <ArrowRightIcon className='w-4 stroke-3' />
-            </Button>
             <Button onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
+            </Button>
+            <Button type='submit' variant='secondary'>
+              <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </div>
         </form>

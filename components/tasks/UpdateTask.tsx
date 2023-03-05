@@ -58,11 +58,11 @@ export default function UpdateTask (): JSX.Element {
             </div>
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button type='submit' variant='secondary'>
-              <ArrowRightIcon className='w-4 stroke-3' />
-            </Button>
             <Button onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
+            </Button>
+            <Button type='submit' variant='secondary'>
+              <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </div>
         </form>

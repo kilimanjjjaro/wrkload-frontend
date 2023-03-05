@@ -27,7 +27,6 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
     setSearchInputValue('')
     setOpen(false)
     setSelectedProjectToFetch(projectName)
-    window.localStorage.setItem('selectedProject', projectName)
   }
 
   useEffect(() => {
@@ -42,7 +41,7 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
     <div className='relative flex items-center bg-transparent md:justify-center'>
       <div
         onClick={() => setOpen(!open)}
-        className={clsx('flex gap-x-3 group cursor-pointer font-bold transition-colors ease-in-out duration-400 hover:text-blue dark:hover:text-white', selected === '' && 'text-white')}
+        className={clsx('flex gap-x-3 group cursor-pointer font-bold transition-colors ease-in-out duration-400 hover:text-blue dark:hover:text-white flex-wrap xl:flex-nowrap', selected === '' && 'text-white')}
       >
         {selected}
         <ChevronDownIcon className={clsx('w-8 stroke-3.5 transition-transform ease-in-out duration-400', open && 'rotate-180')} />

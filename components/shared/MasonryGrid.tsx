@@ -10,7 +10,7 @@ export default function MasonryGrid ({ children }: ChildrenInterface): JSX.Eleme
     <>
       <Masonry
         breakpointCols={MASONRY_BREAKPOINTS}
-        className='grid items-start md:grid-cols-4 gap-y-6 md:gap-y-0 gap-x-10'
+        className='grid items-start gap-6 md:gap-10 md:grid-cols-2 xl:grid-cols-4'
         columnClassName='!w-full grid gap-y-6 md:gap-y-10'
       >
         {children}

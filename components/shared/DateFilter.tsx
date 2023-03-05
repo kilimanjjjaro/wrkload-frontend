@@ -33,6 +33,9 @@ export default function DateFilter ({ dependency, setDependency }: Props): JSX.E
       <Input name='startingDate' type='date' placeholder='Starting date' required />
       <Input name='endingDate' type='date' placeholder='Ending date' required />
       <div className='flex gap-x-3'>
+        <Button onClick={() => setDependency(false)} variant='dark-alternative' fullWidth>
+          <XMarkIcon className='w-4 stroke-3' />
+        </Button>
         <div className='relative flex justify-center w-full group'>
           <Button type='submit' variant='dark-alternative' fullWidth>
             <CheckIcon className='w-4 stroke-3' />
@@ -41,9 +44,6 @@ export default function DateFilter ({ dependency, setDependency }: Props): JSX.E
             Coming soon
           </div>
         </div>
-        <Button onClick={() => setDependency(false)} variant='dark-alternative' fullWidth>
-          <XMarkIcon className='w-4 stroke-3' />
-        </Button>
       </div>
     </motion.div>
   )

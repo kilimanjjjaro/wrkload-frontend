@@ -10,6 +10,7 @@ import Paragraph from 'components/shared/Paragraph'
 import { DataContext } from 'contexts/DataContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import type { FullTaskInterface, TaskInterface } from 'interfaces/tasks/Task'
+import Headline from 'components/shared/Headline'
 
 export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.Element {
   const { setSelectedTask, shouldRenderStats } = useContext(DataContext)
@@ -34,14 +35,12 @@ export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.El
   return (
     <>
       <MasonryGrid>
-        {shouldRenderStats && (stats !== undefined || stats !== null) && !pathname?.includes('search') && <Stats stats={stats} />}
+        {shouldRenderStats && !pathname?.includes('search') && <Stats stats={stats} />}
         {tasks.map((task) => (
           <article
             key={task._id} className='relative flex flex-col items-start p-6 text-black transition ease-in-out bg-white rounded-3xl duration-400 group md:p-7'
           >
-            <h3 className='mb-5 text-4xl font-bold break-word font-primaryFont'>
-              <Balancer>{task.title}</Balancer>
-            </h3>
+            <Headline variant='md' className='mb-4 pr-7 xl:pr-0'>{task.title}</Headline>
 
             <Paragraph variant='sm'><Balancer>{task.description}</Balancer></Paragraph>
 

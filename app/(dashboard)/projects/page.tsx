@@ -17,6 +17,7 @@ export default function Projects (): JSX.Element {
   const page = params.get('page')
   const { data, isLoading, isValidating, mutate } = useSWR('projects', async () => await getProjects({ page }), { onSuccess: data => sortProjects(data.projects), revalidateIfStale: false })
 
+  // TODO: improve this
   useEffect(() => {
     mutate().catch((error) => console.error(error))
   }, [page])

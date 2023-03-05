@@ -51,11 +51,11 @@ export default function UpdateUser (): JSX.Element {
             {/* <Input onChange={handleChange} value={user.avatar} name='avatar' type='file' placeholder='Avatar' centerText required /> */}
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button type='submit' variant='secondary'>
-              <ArrowRightIcon className='w-4 stroke-3' />
-            </Button>
             <Button onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
+            </Button>
+            <Button type='submit' variant='secondary'>
+              <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </div>
         </form>

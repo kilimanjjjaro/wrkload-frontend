@@ -4,8 +4,9 @@ export const SKELETON = Array.from(Array(4).keys())
 
 export const MASONRY_BREAKPOINTS = {
   default: 4,
+  1280: 4,
   768: 2,
-  640: 1
+  1: 1
 }
 
 export const FEATURES: FeaturesInterface[] = [
