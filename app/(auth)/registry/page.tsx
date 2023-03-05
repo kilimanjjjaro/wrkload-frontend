@@ -136,7 +136,22 @@ export default function Register (): JSX.Element {
                   )}
                 </div>
               </div>
-              <Input onChange={handleChange} value={credentials.confirmPassword} name='confirmPassword' type='password' placeholder='Confirm Password' autoComplete='current-password' minLength={8} centerText required />
+              <div className='relative flex items-center'>
+                <Input onChange={handleChange} value={credentials.confirmPassword} name='confirmPassword' type='password' placeholder='Confirm Password' autoComplete='current-password' centerText required />
+                <div className='absolute flex items-center gap-x-1 right-3'>
+                  {credentials.confirmPassword.length > 7 && credentials.confirmPassword === credentials.password && (
+                    <svg className='w-[12px] h-[12px] stroke-green' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' strokeWidth='3' stroke='currentColor'>
+                      <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
+                    </svg>
+                  )}
+
+                  {credentials.confirmPassword.length > 7 && credentials.confirmPassword !== credentials.password && (
+                    <svg className='w-[12px] h-[12px] stroke-red' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth='1.5' stroke='currentColor'>
+                      <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
+                    </svg>
+                  )}
+                </div>
+              </div>
             </div>
             <Button className='group' variant='secondary' isLoading={isLoading}>
               <LockClosedIcon className='w-4 transition-opacity duration-700 ease-in-out opacity-100 stroke-3 group-focus:opacity-0' />

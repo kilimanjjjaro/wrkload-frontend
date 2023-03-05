@@ -60,6 +60,9 @@ export default function ChangePassword (): JSX.Element {
       // TODO: handle unlogged session
       setStep(2)
     } catch (error: any) {
+      if (error.response.data.error[0].param === 'email') {
+        setError('auth/expired-session')
+      }
       if (error.response.data.code === 'auth/invalid-credentials') {
         setError('auth/invalid-credentials')
       }
@@ -107,11 +110,19 @@ export default function ChangePassword (): JSX.Element {
             <Balancer>
               {error === 'auth/different-passwords' && 'Passwords are not the same. Please, try again.'}
               {error === 'auth/invalid-credentials' && 'The email or password are invalid. Please, try again.'}
+              {error === 'auth/expired-session' && 'Your session has expired. Please, log in again to change your password.'}
             </Balancer>
           </p>
-          <Button onClick={handleClick} variant='secondary'>
-            <ArrowLeftIcon className='w-4 stroke-3' />
-          </Button>
+          {error !== 'auth/expired-session' && (
+            <Button onClick={handleClick} variant='secondary'>
+              <ArrowLeftIcon className='w-4 stroke-3' />
+            </Button>
+          )}
+          {error === 'auth/expired-session' && (
+            <Button onClick={() => router.push('/login')} variant='secondary'>
+              <ArrowRightIcon className='w-4 stroke-3' />
+            </Button>
+          )}
         </div>
       </div>
     )
@@ -180,7 +191,23 @@ export default function ChangePassword (): JSX.Element {
                     )}
                   </div>
                 </div>
-                <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' autoComplete='new-password' minLength={8} centerText required />
+
+                <div className='relative flex items-center'>
+                  <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' autoComplete='new-password' centerText required />
+                  <div className='absolute flex items-center gap-x-1 right-3'>
+                    {credentials.confirmNewPassword.length > 7 && credentials.confirmNewPassword === credentials.newPassword && (
+                      <svg className='w-[12px] h-[12px] stroke-green' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' strokeWidth='3' stroke='currentColor'>
+                        <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
+                      </svg>
+                    )}
+
+                    {credentials.confirmNewPassword.length > 7 && credentials.confirmNewPassword !== credentials.newPassword && (
+                      <svg className='w-[12px] h-[12px] stroke-red' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth='1.5' stroke='currentColor'>
+                        <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
+                      </svg>
+                    )}
+                  </div>
+                </div>
               </div>
               <Button variant='secondary' isLoading={isLoading}>
                 <ArrowRightIcon className='w-4 stroke-3' />
