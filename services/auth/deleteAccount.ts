@@ -12,7 +12,7 @@ interface ResponseInterface {
 }
 
 export default async function deleteAccount ({ email, password }: Props): Promise<ResponseInterface> {
-  const { _id } = await login({ email, password })
+  const { user } = await login({ email, password })
 
   const accessToken = getCookie('accessToken')
 
@@ -20,7 +20,7 @@ export default async function deleteAccount ({ email, password }: Props): Promis
     headers: { Authorization: `Bearer ${accessToken as string}` }
   }
 
-  const response = await api.delete(`/users/${_id}`, config)
+  const response = await api.delete(`/users/${user._id}`, config)
 
   return response.data
 }
