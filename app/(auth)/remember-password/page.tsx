@@ -89,7 +89,7 @@ export default function RememberPassword (): JSX.Element {
           </Paragraph>
           <form className='mt-5' onSubmit={(event) => { void handleSubmit(event) }}>
             <div className='flex flex-col gap-3 mb-3'>
-              <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
+              <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText required />
             </div>
             <Button variant='secondary' isLoading={isLoading}>
               <ArrowRightIcon className='w-4 stroke-3' />

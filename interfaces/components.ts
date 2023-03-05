@@ -30,6 +30,9 @@ export interface InputInterface {
   centerText?: boolean
   required?: boolean
   disabled?: boolean
+  maxLength?: number
+  minLength?: number
+  className?: string
 }
 
 export interface TextareaInterface {
@@ -39,6 +42,7 @@ export interface TextareaInterface {
   placeholder: string
   centerText?: boolean
   className?: string
+  maxLength?: number
 }
 
 export interface PaginationInterface {

@@ -8,10 +8,8 @@ import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
 import Textarea from 'components/shared/Textarea'
-
 import { DataContext } from 'contexts/DataContext'
 import { ModalsContext } from 'contexts/ModalsContext'
-import clsx from 'clsx'
 import { CHARACTER_LIMIT } from 'constants/components'
 
 export default function UpdateTask (): JSX.Element {
@@ -53,8 +51,9 @@ export default function UpdateTask (): JSX.Element {
             <div className='relative'>
               <Textarea
                 onChange={handleChange} value={task.description} name='description' placeholder='Description'
+                maxLength={CHARACTER_LIMIT}
               />
-              <div className='absolute text-xs text-blue bottom-5 right-5 font-secondaryFont'>{task.description.length}/{CHARACTER_LIMIT}
+              <div className='absolute text-xs pointer-events-none text-blue bottom-5 right-5 font-secondaryFont'>{task.description.length}/{CHARACTER_LIMIT}
               </div>
             </div>
           </div>

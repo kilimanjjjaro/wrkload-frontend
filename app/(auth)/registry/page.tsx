@@ -12,6 +12,7 @@ import GitHubLogo from 'public/images/github.svg'
 import GoogleLogo from 'public/images/google.svg'
 import register from 'services/auth/register'
 import PageTransition from 'components/shared/PageTransition'
+import clsx from 'clsx'
 
 const INITIAL_CREDENTIALS_STATE = {
   username: '',
@@ -107,10 +108,35 @@ export default function Register (): JSX.Element {
           <Headline variant='md'><Balancer>Nice to meet you!</Balancer></Headline>
           <form onSubmit={(event) => { void handleSubmit(event) }}>
             <div className='flex flex-col gap-3 mb-3'>
-              <Input onChange={handleChange} value={credentials.username} name='username' type='text' placeholder='Username' centerText />
-              <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText />
-              <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' centerText />
-              <Input onChange={handleChange} value={credentials.confirmPassword} name='confirmPassword' type='password' placeholder='Confirm Password' autoComplete='current-password' centerText />
+              <Input onChange={handleChange} value={credentials.username} name='username' type='text' placeholder='Username' centerText required />
+              <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText required />
+              <div className='relative flex items-center'>
+                <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' minLength={8} centerText required />
+                <div className={clsx(
+                  'absolute flex items-center gap-x-1 right-3 [&>svg]:w-[12px] [&>svg]:h-[12px] [&>svg]:stroke-transparent',
+                  credentials.password.length > 0 && credentials.password.length < 8 && '[&>svg]:!stroke-red',
+                  credentials.password.length >= 7 && credentials.password.length < 12 && '[&>svg]:!stroke-yellow',
+                  credentials.password.length >= 11 && '[&>svg]:!stroke-green'
+                )}
+                >
+                  {credentials.password.length > 0 && (
+                    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' stroke-width='3' stroke='currentColor'>
+                      <path stroke-linecap='round' stroke-linejoin='round' d='M4.5 12.75l6 6 9-13.5' />
+                    </svg>
+                  )}
+                  {credentials.password.length >= 7 && (
+                    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' stroke-width='3' stroke='currentColor'>
+                      <path stroke-linecap='round' stroke-linejoin='round' d='M4.5 12.75l6 6 9-13.5' />
+                    </svg>
+                  )}
+                  {credentials.password.length >= 11 && (
+                    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' stroke-width='3' stroke='currentColor'>
+                      <path stroke-linecap='round' stroke-linejoin='round' d='M4.5 12.75l6 6 9-13.5' />
+                    </svg>
+                  )}
+                </div>
+              </div>
+              <Input onChange={handleChange} value={credentials.confirmPassword} name='confirmPassword' type='password' placeholder='Confirm Password' autoComplete='current-password' minLength={8} centerText required />
             </div>
             <Button className='group' variant='secondary' isLoading={isLoading}>
               <LockClosedIcon className='w-4 transition-opacity duration-700 ease-in-out opacity-100 stroke-3 group-focus:opacity-0' />

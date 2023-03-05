@@ -60,8 +60,9 @@ export default function AddTask (): JSX.Element {
             <div className='relative'>
               <Textarea
                 onChange={handleChange} value={task.description} name='description' placeholder='Description'
+                maxLength={CHARACTER_LIMIT}
               />
-              <div className='absolute text-xs text-blue bottom-5 right-5 font-secondaryFont'>{task.description.length}/{CHARACTER_LIMIT}
+              <div className='absolute text-xs pointer-events-none text-blue bottom-5 right-5 font-secondaryFont'>{task.description.length}/{CHARACTER_LIMIT}
               </div>
             </div>
           </div>

@@ -133,8 +133,33 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
           </Paragraph>
           <form className='mt-5' onSubmit={(event) => { void handleSubmit(event) }}>
             <div className='flex flex-col gap-3 mb-3'>
-              <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' centerText />
-              <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' centerText />
+              <div className='relative flex items-center'>
+                <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' minLength={8} centerText required />
+                <div className={clsx(
+                  'absolute flex items-center gap-x-1 right-3 [&>svg]:w-[12px] [&>svg]:h-[12px] [&>svg]:stroke-transparent',
+                  credentials.newPassword.length > 0 && credentials.newPassword.length < 8 && '[&>svg]:!stroke-red',
+                  credentials.newPassword.length >= 7 && credentials.newPassword.length < 12 && '[&>svg]:!stroke-yellow',
+                  credentials.newPassword.length >= 11 && '[&>svg]:!stroke-green'
+                )}
+                >
+                  {credentials.newPassword.length > 0 && (
+                    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' stroke-width='3' stroke='currentColor'>
+                      <path stroke-linecap='round' stroke-linejoin='round' d='M4.5 12.75l6 6 9-13.5' />
+                    </svg>
+                  )}
+                  {credentials.newPassword.length >= 7 && (
+                    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' stroke-width='3' stroke='currentColor'>
+                      <path stroke-linecap='round' stroke-linejoin='round' d='M4.5 12.75l6 6 9-13.5' />
+                    </svg>
+                  )}
+                  {credentials.newPassword.length >= 11 && (
+                    <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' stroke-width='3' stroke='currentColor'>
+                      <path stroke-linecap='round' stroke-linejoin='round' d='M4.5 12.75l6 6 9-13.5' />
+                    </svg>
+                  )}
+                </div>
+              </div>
+              <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' centerText required />
             </div>
             <Button variant='secondary' isLoading={isLoading}>
               <ArrowRightIcon className='w-4 stroke-3' />
