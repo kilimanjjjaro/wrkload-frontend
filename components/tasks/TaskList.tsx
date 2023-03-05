@@ -42,7 +42,9 @@ export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.El
             <h3 className='mb-5 text-4xl font-bold break-word font-primaryFont'>
               <Balancer>{task.title}</Balancer>
             </h3>
+
             <Paragraph variant='sm'><Balancer>{task.description}</Balancer></Paragraph>
+
             <div className='flex flex-wrap gap-3 mt-4'>
               <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-1 bg-blue gap-x-1 font-secondaryFont'>
                 <CalendarIcon className='w-4 stroke-2' />
@@ -51,6 +53,7 @@ export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.El
                   Delivery date
                 </div>
               </div>
+
               <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-2 bg-blue gap-x-1 font-secondaryFont'>
                 <ClockIcon className='w-4 stroke-2' />
                 {task.timing}
