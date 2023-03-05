@@ -40,6 +40,7 @@ export default function Login (): JSX.Element {
 
       if (response.status === 'ok') {
         setIsLogged(true)
+        window.localStorage.setItem('user', JSON.stringify(response.user))
         router.push('/tasks')
       }
     } catch (error: any) {

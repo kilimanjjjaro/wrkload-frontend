@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
@@ -21,6 +21,7 @@ const INITIAL_CREDENTIALS_STATE = {
 
 export default function ChangePassword (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
+  const [email, setEmail] = useState('')
   const [step, setStep] = useState(1)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -36,14 +37,20 @@ export default function ChangePassword (): JSX.Element {
     router.refresh()
   }
 
+  useEffect(() => {
+    const user = window.localStorage.getItem('user')
+    const { email } = JSON.parse(user as string)
+    setEmail(email)
+  }, [])
+
   const handleStepOne = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    // TODO: get email from logged user
-    const { email, currentPassword: password } = credentials
+    const { currentPassword: password } = credentials
 
     try {
       setIsLoading(true)
-      await login({ email: 'hola@kilimanjjjaro.com', password })
+
+      await login({ email, password })
       // TODO: handle week password
       // TODO: handle unlogged session
       setStep(2)
@@ -58,10 +65,11 @@ export default function ChangePassword (): JSX.Element {
 
   const handleStepTwo = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
-    const { email, currentPassword: oldPassword, newPassword, confirmNewPassword } = credentials
+    const { currentPassword: oldPassword, newPassword, confirmNewPassword } = credentials
 
     try {
       setIsLoading(true)
+
       if (newPassword !== confirmNewPassword) {
         throw new Error('auth/different-passwords')
       }
