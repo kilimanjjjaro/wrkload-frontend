@@ -11,6 +11,8 @@ import Textarea from 'components/shared/Textarea'
 
 import { DataContext } from 'contexts/DataContext'
 import { ModalsContext } from 'contexts/ModalsContext'
+import clsx from 'clsx'
+import { CHARACTER_LIMIT } from 'constants/components'
 
 export default function UpdateTask (): JSX.Element {
   const { selectedTask } = useContext(DataContext)
@@ -48,7 +50,13 @@ export default function UpdateTask (): JSX.Element {
             <Input onChange={handleChange} value={task.project} name='project' type='text' placeholder='Project' required disabled />
             <Input onChange={handleChange} value={task.timing} name='timing' type='time' placeholder='Timing' required />
             <Input onChange={handleChange} value={task.deliveredAt} name='deliveredAt' type='date' placeholder='Delivered' required />
-            <Textarea onChange={handleChange} value={task.description} name='description' placeholder='Description' />
+            <div className='relative'>
+              <Textarea
+                onChange={handleChange} value={task.description} name='description' placeholder='Description'
+              />
+              <div className='absolute text-xs text-blue bottom-5 right-5 font-secondaryFont'>{task.description.length}/{CHARACTER_LIMIT}
+              </div>
+            </div>
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>

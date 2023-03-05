@@ -9,7 +9,7 @@ export default function Options (): JSX.Element {
 
   return (
     <div className='flex items-start gap-x-5'>
-      <Button onClick={() => setSearchModalStatus(true)} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
+      <Button className='!w-auto' onClick={() => setSearchModalStatus(true)} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
     </div>
   )
 }

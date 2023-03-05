@@ -14,6 +14,7 @@ import Textarea from 'components/shared/Textarea'
 import { ModalsContext } from 'contexts/ModalsContext'
 import { DataContext } from 'contexts/DataContext'
 import { INITIAL_TASK_STATE } from 'constants/tasks'
+import { CHARACTER_LIMIT } from 'constants/components'
 
 export default function AddTask (): JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
@@ -56,7 +57,13 @@ export default function AddTask (): JSX.Element {
             <Input onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' required />
             <Input onChange={handleChange} value={task.timing} name='timing' type='time' placeholder='Timing' required />
             <Input onChange={handleChange} value={task.deliveredAt} name='deliveredAt' type='date' placeholder='Delivered' required />
-            <Textarea onChange={handleChange} value={task.description} name='description' placeholder='Description' />
+            <div className='relative'>
+              <Textarea
+                onChange={handleChange} value={task.description} name='description' placeholder='Description'
+              />
+              <div className='absolute text-xs text-blue bottom-5 right-5 font-secondaryFont'>{task.description.length}/{CHARACTER_LIMIT}
+              </div>
+            </div>
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button type='submit' variant='secondary'>

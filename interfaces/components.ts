@@ -38,6 +38,7 @@ export interface TextareaInterface {
   name: string
   placeholder: string
   centerText?: boolean
+  className?: string
 }
 
 export interface PaginationInterface {

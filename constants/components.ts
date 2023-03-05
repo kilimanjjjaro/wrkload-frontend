@@ -34,3 +34,5 @@ export const FEATURES: FeaturesInterface[] = [
       'Just upload your tasks and go have fun because only you have access to them.'
   }
 ]
+
+export const CHARACTER_LIMIT = 200
