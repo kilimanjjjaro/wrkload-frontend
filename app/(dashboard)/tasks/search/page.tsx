@@ -50,7 +50,8 @@ export default function SearchTasks (): JSX.Element {
           <div className='flex flex-col items-center h-full mt-28 gap-y-5'>
             <Image
               className='w-72'
-              src={notFoundImage}
+              priority
+        src={notFoundImage}
               alt='Not found image'
             />
             <span className='text-xl text-center text-black dark:text-white font-secondaryFont'>No search results found. <br className='hidden lg:block' />Please try again.</span>

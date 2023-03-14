@@ -17,6 +17,7 @@ export default function NotFound (): JSX.Element {
       <Headline className='font-bold text-center text-blue' variant='xl'>Page Not Found</Headline>
       <Image
         className='w-72'
+        priority
         src={notFoundImage}
         alt='Not found image'
       />

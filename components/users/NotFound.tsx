@@ -7,6 +7,7 @@ export default function NotFound (): JSX.Element {
     <div className='flex flex-col items-center h-full mx-auto mt-16 xl:w-1/3 2xl:mt-28 gap-y-5'>
       <Image
         className='w-72'
+        priority
         src={notFoundImage}
         alt='Not found image'
       />

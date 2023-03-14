@@ -49,6 +49,7 @@ export default function SearchProjects (): JSX.Element {
           <div className='flex flex-col items-center h-full mt-28 gap-y-5'>
             <Image
               className='w-72'
+              priority
               src={notFoundImage}
               alt='Not found image'
             />
