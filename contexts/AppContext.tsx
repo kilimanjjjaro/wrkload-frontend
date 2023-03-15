@@ -70,20 +70,15 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
   useEffect(() => {
     const showStats = window.localStorage.getItem('showStats')
     if (showStats !== null) setShouldRenderStats(JSON.parse(showStats))
-
-    if (accessToken === undefined && refreshToken !== undefined) {
-      void refreshAccessToken()
-      setIsLogged(true)
-    }
   }, [])
 
   useEffect(() => {
-    if (accessToken !== undefined) {
+    if (accessToken !== undefined && refreshToken !== undefined) {
       setIsLogged(true)
     } else {
-      setIsLogged(false)
+      void refreshAccessToken()
     }
-  }, [accessToken])
+  }, [accessToken, refreshToken])
 
   return (
     <AppContext.Provider value={{
