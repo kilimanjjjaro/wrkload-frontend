@@ -48,6 +48,12 @@ api.interceptors.response.use(
 
       if (response.data.accessToken !== undefined) {
         config.headers.Authorization = `Bearer ${response.data.accessToken}`
+
+        setCookie('accessToken', response.data.accessToken, {
+          maxAge: response.data.expiresIn,
+          sameSite: 'strict',
+          secure: process.env.NODE_ENV === 'production'
+        })
       }
 
       return await axios(config)
