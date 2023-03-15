@@ -25,6 +25,8 @@ api.interceptors.request.use(async (config) => {
   const { exp }: { exp: number } = jwtDecode(accessToken as string)
   const isExpired = dayjs.unix(exp).diff(dayjs()) < 1
 
+  console.log('isExpired', isExpired)
+
   if (!isExpired) return config
 
   const response: AxiosResponse<RefreshTokenInterface> = await axios({
