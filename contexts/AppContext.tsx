@@ -81,6 +81,7 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
 
     if (accessToken === undefined && refreshToken !== undefined) {
       void refreshAccessToken()
+      setIsLogged(true)
     }
   }, [accessToken, refreshToken])
 
