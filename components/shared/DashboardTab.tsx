@@ -52,6 +52,7 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
     await api.get('/auth/logout')
     await clearCache()
     deleteCookie('accessToken')
+    deleteCookie('refreshToken')
     setIsLogged(false)
     router.push('/login')
   }
