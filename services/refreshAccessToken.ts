@@ -7,7 +7,6 @@ export default async function refreshAccessToken (): Promise<void> {
   setCookie('accessToken', response.data.accessToken, {
     maxAge: 60 * 15,
     sameSite: 'strict',
-    httpOnly: true,
     secure: process.env.NODE_ENV === 'production'
   })
 }

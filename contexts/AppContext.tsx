@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useEffect, useState, Dispatch } from 'react'
-import { getCookie } from 'cookies-next'
+import { getCookies } from 'cookies-next'
 import type { ChildrenInterface } from 'interfaces/components'
 import type { TaskInterface } from 'interfaces/tasks/Task'
 import type { ProjectInterface } from 'interfaces/projects/Project'
@@ -65,7 +65,7 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const accessToken = getCookie('accessToken')
+  const { accessToken, refreshToken } = getCookies()
 
   useEffect(() => {
     const showStats = window.localStorage.getItem('showStats')
@@ -79,12 +79,10 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
       setIsLogged(false)
     }
 
-    const refreshToken = setInterval(() => {
+    if (accessToken === undefined && refreshToken !== undefined) {
       void refreshAccessToken()
-    }, 60 * 14 * 1000)
-
-    return () => clearInterval(refreshToken)
-  }, [accessToken])
+    }
+  }, [accessToken, refreshToken])
 
   return (
     <AppContext.Provider value={{
