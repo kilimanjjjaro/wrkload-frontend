@@ -9,7 +9,7 @@ import type { UserInterface } from 'interfaces/users/User'
 import { INITIAL_TASK_STATE } from 'constants/tasks'
 import { INITIAL_PROJECT_STATE } from 'constants/projects'
 import { INITIAL_USER_STATE } from 'constants/users'
-import getAccessToken from 'services/getAccessToken'
+import refreshAccessToken from 'services/refreshAccessToken'
 
 interface DataContextValues {
   selectedUser: UserInterface
@@ -75,7 +75,7 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
   useEffect(() => {
     if (accessToken !== undefined) {
       const refreshToken = setInterval(() => {
-        void getAccessToken()
+        void refreshAccessToken()
       }, 14 * 60 * 1000)
 
       setIsLogged(true)

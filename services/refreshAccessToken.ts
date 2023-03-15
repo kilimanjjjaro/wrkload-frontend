@@ -1,7 +1,7 @@
 import { setCookie } from 'cookies-next'
 import api from 'utils/api'
 
-export default async function getAccessToken (): Promise<void> {
+export default async function refreshAccessToken (): Promise<void> {
   const response = await api.get('/auth/refreshToken')
 
   setCookie('accessToken', response.data.accessToken, {
@@ -9,6 +9,4 @@ export default async function getAccessToken (): Promise<void> {
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict'
   })
-
-  return response.data
 }
