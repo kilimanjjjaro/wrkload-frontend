@@ -74,16 +74,16 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
 
   useEffect(() => {
     if (accessToken !== undefined) {
-      const refreshToken = setInterval(() => {
-        void refreshAccessToken()
-      }, 60 * 14 * 1000)
-
       setIsLogged(true)
-
-      return () => clearInterval(refreshToken)
     } else {
       setIsLogged(false)
     }
+
+    const refreshToken = setInterval(() => {
+      void refreshAccessToken()
+    }, 60 * 14 * 1000)
+
+    return () => clearInterval(refreshToken)
   }, [accessToken])
 
   return (
