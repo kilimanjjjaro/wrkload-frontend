@@ -9,18 +9,15 @@ interface RefreshTokenInterface {
   expiresIn: number
 }
 
-const accessToken = getCookie('accessToken')
-
 const privateApi = axios.create({
   baseURL: BASE_URL,
-  withCredentials: true,
-  headers: {
-    Authorization: `Bearer ${accessToken as string}`
-  }
+  withCredentials: true
 })
 
 privateApi.interceptors.request.use(
   async (config) => {
+    const accessToken = getCookie('accessToken')
+
     if (accessToken !== undefined) {
       config.headers.Authorization = `Bearer ${accessToken as string}`
     }
@@ -48,7 +45,7 @@ privateApi.interceptors.response.use((response) => response, async (error) => {
 
       setCookie('accessToken', response.data.accessToken, {
         maxAge: 10,
-        sameSite: 'none',
+        sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production'
       })
     }
