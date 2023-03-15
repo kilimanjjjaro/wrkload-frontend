@@ -1,6 +1,6 @@
-import axios from 'axios'
 import { setCookie } from 'cookies-next'
 import type { UserInterface } from 'interfaces/users/User'
+import api from 'utils/api'
 
 interface CredentialsInterface {
   email: string
@@ -15,16 +15,20 @@ interface ReturnInterface {
 }
 
 export default async function login ({ email, password }: CredentialsInterface): Promise<ReturnInterface> {
-  const response = await axios.post(`${process.env.NODE_ENV === 'production' ? 'https://wrkload-api-production.up.railway.app' : 'http://localhost:5000'}/api/v1/auth/login`, { email, password })
-  console.log(response)
+  const response = await api.post('/auth/login', { email, password })
 
-  const { accessToken, expiresIn } = response.data
-
-  console.log(response)
+  const { accessToken, refreshToken } = response.data
 
   setCookie('accessToken', accessToken, {
-    maxAge: expiresIn,
-    sameSite: 'strict',
+    maxAge: 10,
+    sameSite: 'none',
+    secure: process.env.NODE_ENV === 'production'
+  })
+
+  setCookie('refreshToken', refreshToken, {
+    maxAge: 60 * 60 * 24 * 30,
+    sameSite: 'none',
+    httpOnly: true,
     secure: process.env.NODE_ENV === 'production'
   })
 

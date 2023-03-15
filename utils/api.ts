@@ -37,7 +37,7 @@ api.interceptors.response.use(
     console.log('sent', config?.sent)
     console.log('status', error?.response?.status)
 
-    if (error?.response?.status === 401) {
+    if (error?.response?.status === 401 && config?.sent === undefined) {
       config.sent = true
       console.log('refreshing token...')
 
@@ -51,7 +51,7 @@ api.interceptors.response.use(
         config.headers.Authorization = `Bearer ${response.data.accessToken}`
 
         setCookie('accessToken', response.data.accessToken, {
-          maxAge: response.data.expiresIn,
+          maxAge: 10,
           sameSite: 'strict',
           secure: process.env.NODE_ENV === 'production'
         })
