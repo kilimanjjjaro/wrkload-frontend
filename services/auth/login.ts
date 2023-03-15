@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios'
 import { setCookie } from 'cookies-next'
 import type { UserInterface } from 'interfaces/users/User'
 import api from 'utils/api'
@@ -11,11 +12,11 @@ interface ReturnInterface {
   status: string
   user: UserInterface
   accessToken: string
-  expiresIn: number
+  refreshToken: string
 }
 
 export default async function login ({ email, password }: CredentialsInterface): Promise<ReturnInterface> {
-  const response = await api.post('/auth/login', { email, password })
+  const response: AxiosResponse<ReturnInterface> = await api.post('/auth/login', { email, password })
 
   const { accessToken, refreshToken } = response.data
 

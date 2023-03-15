@@ -65,8 +65,6 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
         setSuccess(true)
       }
     } catch (error: any) {
-      console.log(error)
-
       if (error.message === 'auth/different-passwords') {
         setError('auth/different-passwords')
         return

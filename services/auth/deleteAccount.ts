@@ -1,6 +1,5 @@
-import api from 'utils/api'
+import privateApi from 'utils/privateApi'
 import login from 'services/auth/login'
-import { getCookie } from 'cookies-next'
 
 interface Props {
   email: string
@@ -14,13 +13,7 @@ interface ResponseInterface {
 export default async function deleteAccount ({ email, password }: Props): Promise<ResponseInterface> {
   const { user } = await login({ email, password })
 
-  const accessToken = getCookie('accessToken')
-
-  const config = {
-    headers: { Authorization: `Bearer ${accessToken as string}` }
-  }
-
-  const response = await api.delete(`/users/${user._id}`, config)
+  const response = await privateApi.delete(`/users/${user._id}`)
 
   return response.data
 }

@@ -1,5 +1,4 @@
-import { getCookie } from 'cookies-next'
-import api from 'utils/api'
+import privateApi from 'utils/privateApi'
 
 interface Props {
   email: string
@@ -12,13 +11,7 @@ interface ReturnInterface {
 }
 
 export default async function changePassword ({ email, oldPassword, newPassword }: Props): Promise<ReturnInterface> {
-  const accessToken = getCookie('accessToken')
-
-  const config = {
-    headers: { Authorization: 'Bearer' + ` ${accessToken as string}` }
-  }
-
-  const response = await api.patch('/auth/change-password', { email, oldPassword, newPassword }, config)
+  const response = await privateApi.patch('/auth/change-password', { email, oldPassword, newPassword })
 
   return response.data
 }

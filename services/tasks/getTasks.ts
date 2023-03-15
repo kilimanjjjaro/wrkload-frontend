@@ -1,6 +1,5 @@
-import api from 'utils/api'
+import privateApi from 'utils/privateApi'
 import type { FullTaskInterface } from 'interfaces/tasks/Task'
-import { getCookie } from 'cookies-next'
 
 interface Props {
   page: string | null
@@ -16,15 +15,7 @@ export const getTasks = async ({ page, project }: Props): Promise<FullTaskInterf
     currentPage = page
   }
 
-  const accessToken = getCookie('accessToken')
-
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken as string}`
-    }
-  }
-
-  const response = await api.get(`/tasks?project=${project}&limit=8&page=${currentPage}`, config)
+  const response = await privateApi.get(`/tasks?project=${project}&limit=8&page=${currentPage}`)
 
   return response.data
 }
