@@ -76,7 +76,7 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
     if (accessToken !== undefined) {
       const refreshToken = setInterval(() => {
         void getAccessToken()
-      }, 14 * 60 * 10)
+      }, 14 * 60 * 1000)
 
       setIsLogged(true)
 
