@@ -17,16 +17,10 @@ interface ReturnInterface {
 export default async function login ({ email, password }: CredentialsInterface): Promise<ReturnInterface> {
   const response = await api.post('/auth/login', { email, password })
 
-  const { accessToken, refreshToken } = response.data
+  const { accessToken, expiresIn } = response.data
 
   setCookie('accessToken', accessToken, {
-    maxAge: 60 * 15,
-    sameSite: 'strict',
-    secure: process.env.NODE_ENV === 'production'
-  })
-
-  setCookie('refreshToken', refreshToken, {
-    maxAge: 60 * 60 * 24 * 30,
+    maxAge: expiresIn,
     sameSite: 'strict',
     secure: process.env.NODE_ENV === 'production'
   })

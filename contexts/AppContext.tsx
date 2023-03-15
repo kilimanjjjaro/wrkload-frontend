@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useEffect, useState, Dispatch } from 'react'
-import { getCookies } from 'cookies-next'
+import { getCookie } from 'cookies-next'
 import type { ChildrenInterface } from 'interfaces/components'
 import type { TaskInterface } from 'interfaces/tasks/Task'
 import type { ProjectInterface } from 'interfaces/projects/Project'
@@ -9,7 +9,6 @@ import type { UserInterface } from 'interfaces/users/User'
 import { INITIAL_TASK_STATE } from 'constants/tasks'
 import { INITIAL_PROJECT_STATE } from 'constants/projects'
 import { INITIAL_USER_STATE } from 'constants/users'
-import refreshAccessToken from 'services/refreshAccessToken'
 
 interface AppContextValues {
   selectedUser: UserInterface
@@ -65,7 +64,7 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const { accessToken, refreshToken } = getCookies()
+  const accessToken = getCookie('accessToken')
 
   useEffect(() => {
     const showStats = window.localStorage.getItem('showStats')
@@ -73,12 +72,10 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
   }, [])
 
   useEffect(() => {
-    if (accessToken !== undefined && refreshToken !== undefined) {
+    if (accessToken !== undefined) {
       setIsLogged(true)
-    } else {
-      void refreshAccessToken()
     }
-  }, [accessToken, refreshToken])
+  }, [accessToken])
 
   return (
     <AppContext.Provider value={{
