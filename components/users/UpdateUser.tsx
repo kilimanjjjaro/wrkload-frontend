@@ -8,11 +8,11 @@ import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
 
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 
 export default function UpdateUser (): JSX.Element {
-  const { selectedUser } = useContext(DataContext)
+  const { selectedUser } = useContext(AppContext)
   const { setUpdateDataModalStatus } = useContext(ModalsContext)
 
   const [user, setUser] = useState(selectedUser)

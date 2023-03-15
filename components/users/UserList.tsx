@@ -5,12 +5,12 @@ import dayjs from 'dayjs'
 import { EnvelopeIcon, PencilSquareIcon, TrashIcon, UserIcon } from '@heroicons/react/24/outline'
 import Pagination from 'components/shared/Pagination'
 import MasonryGrid from 'components/shared/MasonryGrid'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import type { FullUserInterface, UserInterface } from 'interfaces/users/User'
 
 export default function UserList ({ data }: { data: FullUserInterface }): JSX.Element {
-  const { setSelectedUser } = useContext(DataContext)
+  const { setSelectedUser } = useContext(AppContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
 
   const handleUpdateUserClick = (user: UserInterface): void => {

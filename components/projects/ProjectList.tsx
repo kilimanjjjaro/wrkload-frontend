@@ -4,13 +4,13 @@ import { RectangleStackIcon, PencilSquareIcon, TrashIcon, CalendarIcon } from '@
 import Stats from 'components/projects/Stats'
 import Pagination from 'components/shared/Pagination'
 import MasonryGrid from 'components/shared/MasonryGrid'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import type { FullProjectInterface, ProjectInterface } from 'interfaces/projects/Project'
 import dayjs from 'dayjs'
 
 export default function ProjectList ({ data }: { data: FullProjectInterface }): JSX.Element {
-  const { setSelectedProject, shouldRenderStats } = useContext(DataContext)
+  const { setSelectedProject, shouldRenderStats } = useContext(AppContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
   const pathname = usePathname()
 

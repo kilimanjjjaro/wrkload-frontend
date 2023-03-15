@@ -8,11 +8,11 @@ import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
 
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 
 export default function DeleteTask (): JSX.Element {
-  const { selectedTask } = useContext(DataContext)
+  const { selectedTask } = useContext(AppContext)
   const { setDeleteDataModalStatus } = useContext(ModalsContext)
 
   const [task, setTask] = useState(selectedTask)

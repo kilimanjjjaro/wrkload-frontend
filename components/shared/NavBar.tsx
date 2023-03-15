@@ -7,14 +7,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
 import { getUser } from 'services/users/getUser'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import Logo from 'components/shared/Logo'
 import Button from 'components/shared/Button'
 import DashboardTab from 'components/shared/DashboardTab'
 
 export default function NavBar (): JSX.Element {
   const [showDashboardBox, setShowDashboardBox] = useState(false)
-  const { isLogged } = useContext(DataContext)
+  const { isLogged } = useContext(AppContext)
   const router = useRouter()
 
   const { data: user, isLoading } = useSWR(isLogged ? 'loggedUser' : null, getUser)

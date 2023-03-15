@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/navigation'
 import { clearCache } from 'services/clearCache'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import api from 'utils/api'
 import { PAGES } from 'constants/components'
 
@@ -27,7 +27,7 @@ const VARIANTS = {
 }
 
 export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }: Props): JSX.Element {
-  const { setIsLogged } = useContext(DataContext)
+  const { setIsLogged } = useContext(AppContext)
   const [pages, setPages] = useState<typeof PAGES>([])
   const accessToken = getCookie('accessToken')
   const router = useRouter()

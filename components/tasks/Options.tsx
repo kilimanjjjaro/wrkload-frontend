@@ -3,11 +3,11 @@ import { CalendarIcon, PresentationChartLineIcon, MagnifyingGlassIcon, PlusIcon 
 import Button from 'components/shared/Button'
 import DateFilter from 'components/shared/DateFilter'
 import { ModalsContext } from 'contexts/ModalsContext'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 
 export default function Options (): JSX.Element {
   const { setAddDataModalStatus, setSearchModalStatus } = useContext(ModalsContext)
-  const { shouldRenderStats, setShouldRenderStats } = useContext(DataContext)
+  const { shouldRenderStats, setShouldRenderStats } = useContext(AppContext)
   const [showDateFilterBoxStatus, setShowDateFilterBoxStatus] = useState(false)
 
   const handleRenderStats = (): void => {

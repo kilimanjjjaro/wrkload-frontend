@@ -10,12 +10,12 @@ import NotFound from 'components/tasks/NotFound'
 import Modals from 'components/tasks/Modals'
 import { getTasks } from 'services/tasks/getTasks'
 import { sortTasks } from 'utils/sortData'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import PageTransition from 'components/shared/PageTransition'
 import { getProjects } from 'services/projects/getProjects'
 
 export default function Tasks (): JSX.Element {
-  const { selectedProjectToFetch, setSelectedProjectToFetch } = useContext(DataContext)
+  const { selectedProjectToFetch, setSelectedProjectToFetch } = useContext(AppContext)
   let sortedProjectNames: string[] = []
   const params = useSearchParams()
   const page = params.get('page')

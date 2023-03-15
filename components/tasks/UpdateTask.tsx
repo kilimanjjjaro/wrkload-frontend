@@ -8,12 +8,12 @@ import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
 import Textarea from 'components/shared/Textarea'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import { CHARACTER_LIMIT } from 'constants/components'
 
 export default function UpdateTask (): JSX.Element {
-  const { selectedTask } = useContext(DataContext)
+  const { selectedTask } = useContext(AppContext)
   const { setUpdateDataModalStatus } = useContext(ModalsContext)
 
   const [task, setTask] = useState(selectedTask)

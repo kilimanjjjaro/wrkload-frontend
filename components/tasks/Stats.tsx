@@ -3,11 +3,11 @@ import Balancer from 'react-wrap-balancer'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper'
 import { ArrowDownIcon, ArrowUpIcon, PresentationChartLineIcon, ClockIcon, EyeSlashIcon, RectangleStackIcon } from '@heroicons/react/24/outline'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import type { TaskStatsInterface } from 'interfaces/tasks/Task'
 
 export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.Element {
-  const { shouldRenderStats, setShouldRenderStats } = useContext(DataContext)
+  const { shouldRenderStats, setShouldRenderStats } = useContext(AppContext)
 
   const handleRenderStats = (): void => {
     setShouldRenderStats(!shouldRenderStats)

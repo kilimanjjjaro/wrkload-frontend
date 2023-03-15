@@ -4,10 +4,10 @@ import { useContext, useEffect } from 'react'
 import useSWR from 'swr'
 import ProjectSelector from 'components/tasks/ProjectSelector'
 import { getProjects } from 'services/projects/getProjects'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 
 export default function PageTitle (): JSX.Element {
-  const { setSelectedProjectToFetch } = useContext(DataContext)
+  const { setSelectedProjectToFetch } = useContext(AppContext)
   let sortedProjectNames: string[] = []
 
   const { data, isLoading } = useSWR('projects', async () => await getProjects({ page: '1', noLimit: true }), { revalidateIfStale: false })

@@ -6,14 +6,14 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Headline from 'components/shared/Headline'
 import PageTransition from 'components/shared/PageTransition'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import { getUser } from 'services/users/getUser'
 import Button from 'components/shared/Button'
 import Paragraph from 'components/shared/Paragraph'
 import { LockClosedIcon, UserMinusIcon, CloudArrowUpIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
 
 export default function Profile (): JSX.Element {
-  const { isLogged } = useContext(DataContext)
+  const { isLogged } = useContext(AppContext)
   const router = useRouter()
 
   const { data: user, isLoading } = useSWR(isLogged ? 'loggedUser' : null, getUser)

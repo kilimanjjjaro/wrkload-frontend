@@ -1,11 +1,11 @@
 import { useContext } from 'react'
 import Balancer from 'react-wrap-balancer'
 import { PresentationChartLineIcon, EyeSlashIcon, FireIcon } from '@heroicons/react/24/outline'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import type { ProjectStatsInterface } from 'interfaces/projects/Project'
 
 export default function Stats ({ stats }: { stats: ProjectStatsInterface }): JSX.Element {
-  const { shouldRenderStats, setShouldRenderStats } = useContext(DataContext)
+  const { shouldRenderStats, setShouldRenderStats } = useContext(AppContext)
 
   const handleRenderStats = (): void => {
     setShouldRenderStats(!shouldRenderStats)

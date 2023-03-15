@@ -7,7 +7,7 @@ import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
 
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 
 interface Props {
   type: string
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function SearchForm ({ type, setModalStatus }: Props): JSX.Element {
-  const { selectedProjectToFetch } = useContext(DataContext)
+  const { selectedProjectToFetch } = useContext(AppContext)
   const router = useRouter()
   const [query, setQuery] = useState('')
 

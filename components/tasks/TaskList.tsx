@@ -7,13 +7,13 @@ import Stats from 'components/tasks/Stats'
 import Pagination from 'components/shared/Pagination'
 import MasonryGrid from 'components/shared/MasonryGrid'
 import Paragraph from 'components/shared/Paragraph'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import type { FullTaskInterface, TaskInterface } from 'interfaces/tasks/Task'
 import Headline from 'components/shared/Headline'
 
 export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.Element {
-  const { setSelectedTask, shouldRenderStats } = useContext(DataContext)
+  const { setSelectedTask, shouldRenderStats } = useContext(AppContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } =
     useContext(ModalsContext)
   const pathname = usePathname()

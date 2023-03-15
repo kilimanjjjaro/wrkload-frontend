@@ -11,7 +11,7 @@ import TextLink from 'components/shared/TextLink'
 import GitHubLogo from 'public/images/github.svg'
 import GoogleLogo from 'public/images/google.svg'
 import login from 'services/auth/login'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import PageTransition from 'components/shared/PageTransition'
 
 const INITIAL_CREDENTIALS_STATE = {
@@ -23,7 +23,7 @@ export default function Login (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const { setIsLogged } = useContext(DataContext)
+  const { setIsLogged } = useContext(AppContext)
   const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {

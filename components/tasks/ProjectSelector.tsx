@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { mutate } from 'swr'
 import clsx from 'clsx'
 import { MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 
 const VARIANTS = {
   open: { opacity: 1, y: 0, display: 'block' },
@@ -17,7 +17,7 @@ const VARIANTS = {
 }
 
 export default function ProjectSelector ({ projectNames }: { projectNames: string[] }): JSX.Element {
-  const { setSelectedProjectToFetch } = useContext(DataContext)
+  const { setSelectedProjectToFetch } = useContext(AppContext)
   const [open, setOpen] = useState(false)
   const [selected, setSelected] = useState(projectNames[0])
   const [searchInputValue, setSearchInputValue] = useState('')

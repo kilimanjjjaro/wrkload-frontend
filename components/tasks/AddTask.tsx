@@ -12,13 +12,13 @@ import Paragraph from 'components/shared/Paragraph'
 import Input from 'components/shared/Input'
 import Textarea from 'components/shared/Textarea'
 import { ModalsContext } from 'contexts/ModalsContext'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 import { INITIAL_TASK_STATE } from 'constants/tasks'
 import { CHARACTER_LIMIT } from 'constants/components'
 
 export default function AddTask (): JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
-  const { selectedProjectToFetch } = useContext(DataContext)
+  const { selectedProjectToFetch } = useContext(AppContext)
 
   const [task, setTask] = useState(INITIAL_TASK_STATE)
 

@@ -5,11 +5,11 @@ import { PresentationChartLineIcon, MagnifyingGlassIcon, PlusIcon } from '@heroi
 import Button from 'components/shared/Button'
 
 import { ModalsContext } from 'contexts/ModalsContext'
-import { DataContext } from 'contexts/DataContext'
+import { AppContext } from 'contexts/AppContext'
 
 export default function Options (): JSX.Element {
   const { setAddDataModalStatus, setSearchModalStatus } = useContext(ModalsContext)
-  const { shouldRenderStats, setShouldRenderStats } = useContext(DataContext)
+  const { shouldRenderStats, setShouldRenderStats } = useContext(AppContext)
 
   const handleRenderStats = (): void => {
     setShouldRenderStats(!shouldRenderStats)

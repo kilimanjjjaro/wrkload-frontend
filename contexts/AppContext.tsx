@@ -11,7 +11,7 @@ import { INITIAL_PROJECT_STATE } from 'constants/projects'
 import { INITIAL_USER_STATE } from 'constants/users'
 import refreshAccessToken from 'services/refreshAccessToken'
 
-interface DataContextValues {
+interface AppContextValues {
   selectedUser: UserInterface
   setSelectedUser: Dispatch<React.SetStateAction<UserInterface>>
   isLogged: boolean
@@ -32,7 +32,7 @@ interface DataContextValues {
   setIsLoading: Dispatch<React.SetStateAction<boolean>>
 };
 
-const DEFAULT_DATA_CONTEXT_VALUE: DataContextValues = {
+const DEFAULT_APP_CONTEXT_VALUE: AppContextValues = {
   isLogged: false,
   setIsLogged: () => {},
   selectedUser: INITIAL_USER_STATE,
@@ -53,9 +53,9 @@ const DEFAULT_DATA_CONTEXT_VALUE: DataContextValues = {
   setIsLoading: () => {}
 }
 
-export const DataContext = createContext<DataContextValues>(DEFAULT_DATA_CONTEXT_VALUE)
+export const AppContext = createContext<AppContextValues>(DEFAULT_APP_CONTEXT_VALUE)
 
-const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
+const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
   const [selectedUser, setSelectedUser] = useState<UserInterface>(INITIAL_USER_STATE)
   const [isLogged, setIsLogged] = useState(false)
   const [selectedTask, setSelectedTask] = useState<TaskInterface>(INITIAL_TASK_STATE)
@@ -87,7 +87,7 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
   }, [accessToken])
 
   return (
-    <DataContext.Provider value={{
+    <AppContext.Provider value={{
       selectedUser,
       setSelectedUser,
       isLogged,
@@ -109,8 +109,8 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
     }}
     >
       {children}
-    </DataContext.Provider>
+    </AppContext.Provider>
   )
 }
 
-export default DataProvider
+export default AppProvider

@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import fonts from 'utils/fonts'
-import DataProvider from 'contexts/DataContext'
+import AppProvider from 'contexts/AppContext'
 import NavBar from 'components/shared/NavBar'
 import Footer from 'components/shared/Footer'
 import type { ChildrenInterface } from 'interfaces/components'
@@ -25,7 +25,7 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
         <meta property='og:type' content='website' />
       </head>
       <body className={`bg-light-blue dark:bg-black transition-colors duration-400 ease-in-out antialiased ${inter.variable} ${spaceGrotesk.variable}`}>
-        <DataProvider>
+        <AppProvider>
           <NavBar />
           <AnimatePresence>
             <motion.div
@@ -37,7 +37,7 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
             </motion.div>
           </AnimatePresence>
           <Footer />
-        </DataProvider>
+        </AppProvider>
       </body>
     </html>
   )
