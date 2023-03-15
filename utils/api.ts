@@ -34,8 +34,8 @@ api.interceptors.response.use(
   async (error) => {
     const config = error?.config
 
-    console.log(config?.sent)
-    console.log(error?.response?.status)
+    console.log('sent', config?.sent)
+    console.log('status', error?.response?.status)
 
     if (error?.response?.status === 401) {
       config.sent = true
