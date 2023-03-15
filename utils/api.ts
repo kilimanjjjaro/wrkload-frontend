@@ -44,7 +44,8 @@ api.interceptors.response.use(
       const response: AxiosResponse<RefreshTokenInterface> = await axios({
         method: 'GET',
         baseURL: BASE_URL,
-        url: '/auth/refreshToken'
+        url: '/auth/refreshToken',
+        withCredentials: true
       })
 
       if (response.data.accessToken !== undefined) {
