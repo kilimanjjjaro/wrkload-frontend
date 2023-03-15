@@ -80,9 +80,8 @@ const DataProvider = ({ children }: ChildrenInterface): JSX.Element => {
     }
 
     const refreshToken = setInterval(() => {
-      const response = getAccessToken()
-      console.log(response)
-    }, 14 * 60 * 2)
+      void getAccessToken()
+    }, 14 * 60 * 10)
 
     return () => clearInterval(refreshToken)
   }, [accessToken])
