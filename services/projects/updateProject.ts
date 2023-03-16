@@ -1,4 +1,4 @@
-import api from 'utils/api'
+import privateApi from 'utils/privateApi'
 
 import type { ProjectInterface } from 'interfaces/projects/Project'
 import { PROJECTS_ENDPOINT } from 'constants/projects'
@@ -17,7 +17,7 @@ export const updateProject = async (project: ProjectInterface): Promise<ProjectI
     name: project.name
   }
 
-  const response = await api.patch(`${PROJECTS_ENDPOINT}/${project._id}`, updatedProject, config)
+  const response = await privateApi.patch(`${PROJECTS_ENDPOINT}/${project._id}`, updatedProject, config)
 
   return response.data.updatedProject
 }

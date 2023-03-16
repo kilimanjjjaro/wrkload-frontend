@@ -1,6 +1,6 @@
-import api from 'utils/api'
-import type { FullUserInterface } from 'interfaces/users/User'
 import { getCookie } from 'cookies-next'
+import privateApi from 'utils/privateApi'
+import type { FullUserInterface } from 'interfaces/users/User'
 
 export const getUsers = async ({ page }: { page: string | null }): Promise<FullUserInterface> => {
   let currentPage: string
@@ -19,7 +19,7 @@ export const getUsers = async ({ page }: { page: string | null }): Promise<FullU
     }
   }
 
-  const response = await api.get(`/users?limit=8&page=${currentPage}`, config)
+  const response = await privateApi.get(`/users?limit=8&page=${currentPage}`, config)
 
   return response.data
 }

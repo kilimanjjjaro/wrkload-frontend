@@ -1,5 +1,5 @@
 import { getCookie } from 'cookies-next'
-import api from 'utils/api'
+import privateApi from 'utils/privateApi'
 
 interface Props {
   project: string | null
@@ -24,7 +24,7 @@ export default async function searchTasks ({ project, query, page }: Props): Pro
     }
   }
 
-  const response = await api.get(`/tasks?project=${project as string}&search=${query as string}&limit=8&page=${currentPage}`, config)
+  const response = await privateApi.get(`/tasks?project=${project as string}&search=${query as string}&limit=8&page=${currentPage}`, config)
 
   return response.data
 }

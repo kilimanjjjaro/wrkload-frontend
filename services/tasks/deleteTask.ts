@@ -1,4 +1,4 @@
-import api from 'utils/api'
+import privateApi from 'utils/privateApi'
 
 import { TASKS_ENDPOINT } from 'constants/tasks'
 import { getCookie } from 'cookies-next'
@@ -12,7 +12,7 @@ export const deleteTask = async (_id: string): Promise<any> => {
     }
   }
 
-  const response = await api.delete(`${TASKS_ENDPOINT}/${_id}`, config)
+  const response = await privateApi.delete(`${TASKS_ENDPOINT}/${_id}`, config)
 
   return response.data
 }

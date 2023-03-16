@@ -1,5 +1,5 @@
 import { getCookie } from 'cookies-next'
-import api from 'utils/api'
+import privateApi from 'utils/privateApi'
 
 interface Props {
   query: string | null
@@ -23,7 +23,7 @@ export default async function searchUsers ({ query, page }: Props): Promise<any>
     }
   }
 
-  const response = await api.get(`/users?search=${query as string}&limit=8&page=${currentPage}`, config)
+  const response = await privateApi.get(`/users?search=${query as string}&limit=8&page=${currentPage}`, config)
 
   return response.data
 }

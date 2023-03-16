@@ -1,4 +1,4 @@
-import api from 'utils/api'
+import privateApi from 'utils/privateApi'
 import type { FullProjectInterface } from 'interfaces/projects/Project'
 import { getCookie } from 'cookies-next'
 
@@ -25,10 +25,10 @@ export const getProjects = async ({ page, noLimit }: Props): Promise<FullProject
   }
 
   if (noLimit === true) {
-    const response = await api.get('/projects', config)
+    const response = await privateApi.get('/projects', config)
     return response.data
   } else {
-    const response = await api.get(`/projects?limit=8&page=${currentPage}`, config)
+    const response = await privateApi.get(`/projects?limit=8&page=${currentPage}`, config)
     return response.data
   }
 }

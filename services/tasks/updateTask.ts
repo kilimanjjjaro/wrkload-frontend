@@ -1,4 +1,4 @@
-import api from 'utils/api'
+import privateApi from 'utils/privateApi'
 
 import type { TaskInterface } from 'interfaces/tasks/Task'
 import { TASKS_ENDPOINT } from 'constants/tasks'
@@ -21,7 +21,7 @@ export const updateTask = async (task: TaskInterface): Promise<TaskInterface> =>
     description: task.description
   }
 
-  const response = await api.patch(`${TASKS_ENDPOINT}/${task._id}`, updatedTask, config)
+  const response = await privateApi.patch(`${TASKS_ENDPOINT}/${task._id}`, updatedTask, config)
 
   return response.data.updatedTask
 }

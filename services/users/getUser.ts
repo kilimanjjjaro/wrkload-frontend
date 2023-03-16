@@ -1,5 +1,5 @@
 import { getCookie } from 'cookies-next'
-import api from 'utils/api'
+import privateApi from 'utils/privateApi'
 
 import type { UserInterface } from 'interfaces/users/User'
 import { USERS_ENDPOINT } from 'constants/users'
@@ -15,7 +15,7 @@ export const getUser = async (): Promise<UserInterface> => {
     }
   }
 
-  const response = await api.get(`${USERS_ENDPOINT}/${uid}`, config)
+  const response = await privateApi.get(`${USERS_ENDPOINT}/${uid}`, config)
 
   return response.data.user
 }
