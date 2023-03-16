@@ -21,7 +21,7 @@ export default async function login ({ email, password }: CredentialsInterface):
   const { accessToken, refreshToken } = response.data
 
   setCookie('accessToken', accessToken, {
-    maxAge: 10,
+    maxAge: 60 * 1,
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production'
   })
