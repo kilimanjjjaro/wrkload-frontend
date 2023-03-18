@@ -22,13 +22,13 @@ export default async function login ({ email, password }: CredentialsInterface):
 
   setCookie('accessToken', accessToken, {
     maxAge: 60 * 1,
-    sameSite: 'lax',
+    sameSite: 'none',
     secure: process.env.NODE_ENV === 'production'
   })
 
   setCookie('refreshToken', refreshToken, {
     maxAge: 60 * 60 * 24 * 30,
-    sameSite: 'lax',
+    sameSite: 'none',
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production'
   })
