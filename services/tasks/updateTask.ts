@@ -5,11 +5,14 @@ import { TASKS_ENDPOINT } from 'constants/tasks'
 import { getCookie } from 'cookies-next'
 
 export const updateTask = async (task: TaskInterface): Promise<TaskInterface> => {
+  let config = {}
   const accessToken = getCookie('accessToken')
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken as string}`
+  if (accessToken !== undefined) {
+    config = {
+      headers: {
+        Authorization: `Bearer ${accessToken as string}`
+      }
     }
   }
 

@@ -6,12 +6,15 @@ import { USERS_ENDPOINT } from 'constants/users'
 import jwtDecode from 'jwt-decode'
 
 export const getUser = async (): Promise<UserInterface> => {
+  let config = {}
   const accessToken = getCookie('accessToken')
   const { uid }: { uid: string } = jwtDecode(accessToken as string)
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken as string}`
+  if (accessToken !== undefined) {
+    config = {
+      headers: {
+        Authorization: `Bearer ${accessToken as string}`
+      }
     }
   }
 

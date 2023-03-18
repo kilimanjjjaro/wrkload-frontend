@@ -5,11 +5,14 @@ import { PROJECTS_ENDPOINT } from 'constants/projects'
 import { getCookie } from 'cookies-next'
 
 export const updateProject = async (project: ProjectInterface): Promise<ProjectInterface> => {
+  let config = {}
   const accessToken = getCookie('accessToken')
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken as string}`
+  if (accessToken !== undefined) {
+    config = {
+      headers: {
+        Authorization: `Bearer ${accessToken as string}`
+      }
     }
   }
 

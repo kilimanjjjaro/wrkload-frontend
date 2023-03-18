@@ -4,11 +4,14 @@ import { TASKS_ENDPOINT } from 'constants/tasks'
 import { getCookie } from 'cookies-next'
 
 export const deleteTask = async (_id: string): Promise<any> => {
+  let config = {}
   const accessToken = getCookie('accessToken')
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken as string}`
+  if (accessToken !== undefined) {
+    config = {
+      headers: {
+        Authorization: `Bearer ${accessToken as string}`
+      }
     }
   }
 

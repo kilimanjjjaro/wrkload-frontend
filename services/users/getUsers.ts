@@ -3,19 +3,19 @@ import privateApi from 'utils/privateApi'
 import type { FullUserInterface } from 'interfaces/users/User'
 
 export const getUsers = async ({ page }: { page: string | null }): Promise<FullUserInterface> => {
-  let currentPage: string
+  let currentPage = '1'
+  let config = {}
+  const accessToken = getCookie('accessToken')
 
-  if (page === null) {
-    currentPage = '1'
-  } else {
+  if (page !== null) {
     currentPage = page
   }
 
-  const accessToken = getCookie('accessToken')
-
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken as string}`
+  if (accessToken !== undefined) {
+    config = {
+      headers: {
+        Authorization: `Bearer ${accessToken as string}`
+      }
     }
   }
 

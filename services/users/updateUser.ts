@@ -5,11 +5,14 @@ import { USERS_ENDPOINT } from 'constants/users'
 import { getCookie } from 'cookies-next'
 
 export const updateUser = async (user: UserInterface): Promise<UserInterface> => {
+  let config = {}
   const accessToken = getCookie('accessToken')
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${accessToken as string}`
+  if (accessToken !== undefined) {
+    config = {
+      headers: {
+        Authorization: `Bearer ${accessToken as string}`
+      }
     }
   }
 
