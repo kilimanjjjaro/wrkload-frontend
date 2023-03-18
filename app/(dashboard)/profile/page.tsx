@@ -1,29 +1,25 @@
 'use client'
 
 import { useContext } from 'react'
-import useSWR from 'swr'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Headline from 'components/shared/Headline'
 import PageTransition from 'components/shared/PageTransition'
 import { AppContext } from 'contexts/AppContext'
-import { getUser } from 'services/users/getUser'
 import Button from 'components/shared/Button'
 import Paragraph from 'components/shared/Paragraph'
 import { LockClosedIcon, UserMinusIcon, CloudArrowUpIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
 
 export default function Profile (): JSX.Element {
-  const { isLogged } = useContext(AppContext)
+  const { user } = useContext(AppContext)
   const router = useRouter()
-
-  const { data: user, isLoading } = useSWR(isLogged ? 'loggedUser' : null, getUser)
 
   return (
     <PageTransition>
       <Headline className='font-bold text-blue' variant='lg'>
         Profile
       </Headline>
-      {(user !== undefined && !isLoading) && (
+      {(user !== null) && (
         <div className='flex flex-col xl:w-1/2'>
           <Headline className='text-white !mb-4' variant='md'>Avatar</Headline>
           <Paragraph className='mb-5 text-white' variant='sm'>The recommended dimensions are 256x256 px.</Paragraph>
