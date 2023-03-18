@@ -20,18 +20,18 @@ export default async function login ({ email, password }: CredentialsInterface):
 
   const { user, accessToken, refreshToken } = response.data
 
-  // setCookie('accessToken', accessToken, {
-  //   maxAge: 60 * 1,
-  //   sameSite: 'lax',
-  //   secure: process.env.NODE_ENV === 'production'
-  // })
+  setCookie('accessToken', accessToken, {
+    maxAge: 60 * 1,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production'
+  })
 
-  // setCookie('refreshToken', refreshToken, {
-  //   maxAge: 60 * 60 * 24 * 30,
-  //   sameSite: 'lax',
-  //   httpOnly: true,
-  //   secure: process.env.NODE_ENV === 'production'
-  // })
+  setCookie('refreshToken', refreshToken, {
+    maxAge: 60 * 60 * 24 * 30,
+    sameSite: 'lax',
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production'
+  })
 
   window.localStorage.setItem('user', JSON.stringify(user))
 
