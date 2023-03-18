@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { deleteCookie, getCookie } from 'cookies-next'
-import jwtDecode from 'jwt-decode'
+import { deleteCookie } from 'cookies-next'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { XMarkIcon } from '@heroicons/react/24/outline'
@@ -27,14 +26,13 @@ const VARIANTS = {
 }
 
 export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }: Props): JSX.Element {
-  const { setIsLogged } = useContext(AppContext)
+  const { user, setUser } = useContext(AppContext)
   const [pages, setPages] = useState<typeof PAGES>([])
-  const accessToken = getCookie('accessToken')
   const router = useRouter()
 
   useEffect(() => {
-    if (accessToken !== undefined) {
-      const { role }: { role: number } = jwtDecode(accessToken as string)
+    if (user !== null) {
+      const { role } = user
       let filteredPages = PAGES
 
       if (role !== 1) {
@@ -45,7 +43,7 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
 
       setPages(filteredPages)
     }
-  }, [accessToken])
+  }, [])
 
   const handleLogout = async (): Promise<void> => {
     setShowDashboardBox(!showDashboardBox)
@@ -53,7 +51,7 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
     await clearCache()
     deleteCookie('accessToken')
     deleteCookie('refreshToken')
-    setIsLogged(false)
+    setUser(null)
     router.push('/login')
   }
 

@@ -23,7 +23,7 @@ export default function Login (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const { setIsLogged } = useContext(AppContext)
+  const { setUser } = useContext(AppContext)
   const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -39,7 +39,7 @@ export default function Login (): JSX.Element {
       const response = await login({ email, password })
 
       if (response.status === 'ok') {
-        setIsLogged(true)
+        setUser(response.user)
         router.push('/tasks')
       }
     } catch (error: any) {

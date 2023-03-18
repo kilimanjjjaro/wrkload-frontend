@@ -1,7 +1,6 @@
 'use client'
 
 import { createContext, useEffect, useState, Dispatch } from 'react'
-import { getCookie } from 'cookies-next'
 import type { ChildrenInterface } from 'interfaces/components'
 import type { TaskInterface } from 'interfaces/tasks/Task'
 import type { ProjectInterface } from 'interfaces/projects/Project'
@@ -11,10 +10,10 @@ import { INITIAL_PROJECT_STATE } from 'constants/projects'
 import { INITIAL_USER_STATE } from 'constants/users'
 
 interface AppContextValues {
+  user: UserInterface | null
+  setUser: Dispatch<React.SetStateAction<UserInterface | null>>
   selectedUser: UserInterface
   setSelectedUser: Dispatch<React.SetStateAction<UserInterface>>
-  isLogged: boolean
-  setIsLogged: Dispatch<React.SetStateAction<boolean>>
   selectedTask: TaskInterface
   setSelectedTask: Dispatch<React.SetStateAction<TaskInterface>>
   selectedProject: ProjectInterface
@@ -23,17 +22,11 @@ interface AppContextValues {
   setSelectedProjectToFetch: Dispatch<React.SetStateAction<string>>
   shouldRenderStats: boolean
   setShouldRenderStats: Dispatch<React.SetStateAction<boolean>>
-  error: string
-  setError: Dispatch<React.SetStateAction<string>>
-  success: string
-  setSuccess: Dispatch<React.SetStateAction<string>>
-  isLoading: boolean
-  setIsLoading: Dispatch<React.SetStateAction<boolean>>
 };
 
 const DEFAULT_APP_CONTEXT_VALUE: AppContextValues = {
-  isLogged: false,
-  setIsLogged: () => {},
+  user: null,
+  setUser: () => {},
   selectedUser: INITIAL_USER_STATE,
   setSelectedUser: () => {},
   selectedTask: INITIAL_TASK_STATE,
@@ -43,46 +36,37 @@ const DEFAULT_APP_CONTEXT_VALUE: AppContextValues = {
   selectedProjectToFetch: '',
   setSelectedProjectToFetch: () => {},
   shouldRenderStats: false,
-  setShouldRenderStats: () => {},
-  error: '',
-  setError: () => {},
-  success: '',
-  setSuccess: () => {},
-  isLoading: false,
-  setIsLoading: () => {}
+  setShouldRenderStats: () => {}
 }
 
 export const AppContext = createContext<AppContextValues>(DEFAULT_APP_CONTEXT_VALUE)
 
 const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
+  const [user, setUser] = useState<UserInterface | null>(null)
   const [selectedUser, setSelectedUser] = useState<UserInterface>(INITIAL_USER_STATE)
-  const [isLogged, setIsLogged] = useState(false)
   const [selectedTask, setSelectedTask] = useState<TaskInterface>(INITIAL_TASK_STATE)
   const [selectedProject, setSelectedProject] = useState<ProjectInterface>(INITIAL_PROJECT_STATE)
   const [selectedProjectToFetch, setSelectedProjectToFetch] = useState('')
   const [shouldRenderStats, setShouldRenderStats] = useState(true)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const accessToken = getCookie('accessToken')
 
   useEffect(() => {
+    const userFromLocalStorage = window.localStorage.getItem('user')
+    console.log('userFromLocalStorage', userFromLocalStorage)
+
+    if (userFromLocalStorage !== null) {
+      setUser(JSON.parse(userFromLocalStorage))
+    }
+
     const showStats = window.localStorage.getItem('showStats')
     if (showStats !== null) setShouldRenderStats(JSON.parse(showStats))
   }, [])
 
-  useEffect(() => {
-    if (accessToken !== undefined) {
-      setIsLogged(true)
-    }
-  }, [accessToken])
-
   return (
     <AppContext.Provider value={{
+      user,
+      setUser,
       selectedUser,
       setSelectedUser,
-      isLogged,
-      setIsLogged,
       selectedTask,
       setSelectedTask,
       selectedProject,
@@ -90,13 +74,7 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
       selectedProjectToFetch,
       setSelectedProjectToFetch,
       shouldRenderStats,
-      setShouldRenderStats,
-      error,
-      setError,
-      success,
-      setSuccess,
-      isLoading,
-      setIsLoading
+      setShouldRenderStats
     }}
     >
       {children}

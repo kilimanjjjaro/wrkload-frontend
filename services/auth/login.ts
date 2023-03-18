@@ -18,7 +18,7 @@ interface ReturnInterface {
 export default async function login ({ email, password }: CredentialsInterface): Promise<ReturnInterface> {
   const response: AxiosResponse<ReturnInterface> = await api.post('/auth/login', { email, password })
 
-  const { accessToken, refreshToken } = response.data
+  const { user, accessToken, refreshToken } = response.data
 
   setCookie('accessToken', accessToken, {
     maxAge: 60 * 1,
@@ -32,6 +32,8 @@ export default async function login ({ email, password }: CredentialsInterface):
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production'
   })
+
+  window.localStorage.setItem('user', JSON.stringify(user))
 
   return response.data
 }
