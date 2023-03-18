@@ -1,13 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
-import { deleteCookie } from 'cookies-next'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/navigation'
-import { clearCache } from 'services/clearCache'
 import { AppContext } from 'contexts/AppContext'
-import api from 'utils/api'
 import { PAGES } from 'constants/components'
+import logout from 'services/auth/logout'
 
 interface Props {
   showDashboardBox: boolean
@@ -47,11 +45,8 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
 
   const handleLogout = async (): Promise<void> => {
     setShowDashboardBox(!showDashboardBox)
-    await api.get('/auth/logout')
-    await clearCache()
-    deleteCookie('accessToken')
-    deleteCookie('refreshToken')
     setUser(null)
+    await logout()
     router.push('/login')
   }
 
