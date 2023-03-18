@@ -45,7 +45,7 @@ privateApi.interceptors.response.use((response) => response, async (error) => {
 
       setCookie('accessToken', response.data.accessToken, {
         maxAge: 60 * 1,
-        sameSite: 'none',
+        sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production'
       })
     }
