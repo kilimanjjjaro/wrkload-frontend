@@ -51,7 +51,6 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
 
   useEffect(() => {
     const userFromLocalStorage = window.localStorage.getItem('user')
-    console.log('userFromLocalStorage', userFromLocalStorage)
 
     if (userFromLocalStorage !== null) {
       setUser(JSON.parse(userFromLocalStorage))
