@@ -43,11 +43,11 @@ privateApi.interceptors.response.use((response) => response, async (error) => {
     if (response.data.accessToken !== undefined) {
       config.headers.Authorization = `Bearer ${response.data.accessToken}`
 
-      setCookie('accessToken', response.data.accessToken, {
-        maxAge: 60 * 1,
-        sameSite: 'lax',
-        secure: process.env.NODE_ENV === 'production'
-      })
+      // setCookie('accessToken', response.data.accessToken, {
+      //   maxAge: 60 * 1,
+      //   sameSite: 'lax',
+      //   secure: process.env.NODE_ENV === 'production'
+      // })
     }
 
     return await axios(config)
