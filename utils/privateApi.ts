@@ -10,8 +10,7 @@ interface RefreshTokenInterface {
 }
 
 const privateApi = axios.create({
-  baseURL: BASE_URL,
-  withCredentials: true
+  baseURL: BASE_URL
 })
 
 privateApi.interceptors.request.use(
@@ -36,8 +35,7 @@ privateApi.interceptors.response.use((response) => response, async (error) => {
     const response: AxiosResponse<RefreshTokenInterface> = await axios({
       method: 'GET',
       baseURL: BASE_URL,
-      url: '/auth/refreshToken',
-      withCredentials: true
+      url: '/auth/refreshToken'
     })
 
     setCookie('accessToken', response.data.accessToken, {
