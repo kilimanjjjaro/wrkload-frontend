@@ -41,9 +41,21 @@ textarea::-webkit-scrollbar-thumb {
   width: 50%;
   height: 2px;
   border-radius: 9999px;
-  background: #7686b7;
   opacity: 1;
   transition: all 0.4s ease-in-out;
+}
+
+.swiper-pagination-bullet {
+  background: #d2d7e3;
+}
+
+html.dark .swiper-pagination-bullet {
+  background: #7686b7;
+}
+
+.swiper-pagination-bullet-active {
+  background: #7686b7;
+  opacity: 1;
 }
 
 html.dark .swiper-pagination-bullet-active {
@@ -51,10 +63,7 @@ html.dark .swiper-pagination-bullet-active {
   opacity: 1;
 }
 
-.swiper-pagination-bullet-active {
-  background: #d2d7e3;
-  opacity: 1;
-}
+
 
 .swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
 .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {

@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -14,6 +14,14 @@ export default function NavBar (): JSX.Element {
   const [showDashboardBox, setShowDashboardBox] = useState(false)
   const { user } = useContext(AppContext)
   const router = useRouter()
+
+  useEffect(() => {
+    if (showDashboardBox) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [showDashboardBox])
 
   return (
     <div className='fixed top-0 left-0 z-50 grid items-center justify-between w-full grid-cols-2 px-6 pt-6 mx-auto text md:pt-8 md:px-8'>
