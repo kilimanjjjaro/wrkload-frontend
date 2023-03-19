@@ -44,21 +44,21 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
                 />
                 {user.confirmationStatus && (
                   <div className='absolute flex justify-center w-3 h-3 rounded-full top-1 left-1 group/tooltip-1 cursor-help bg-red'>
-                    <div className='absolute invisible tracking-widest uppercase leading-none py-[7px] px-[10px] font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-light-blue duration-400 group-hover/tooltip-1:opacity-100 group-hover/tooltip-1:visible'>
+                    <div className='absolute invisible tracking-widest uppercase leading-none py-[7px] px-[10px] font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-white dark:bg-light-blue duration-400 group-hover/tooltip-1:opacity-100 group-hover/tooltip-1:visible'>
                       Unconfirmed account
                     </div>
                   </div>
                 )}
                 {user.confirmationStatus && !user.recentlyActive && (
                   <div className='absolute flex justify-center w-3 h-3 rounded-full top-1 left-1 group/tooltip-2 cursor-help bg-yellow'>
-                    <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-4 bg-light-blue rounded-3xl duration-400 group-hover/tooltip-2:opacity-100 group-hover/tooltip-2:visible'>
+                    <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-4 bg-white dark:bg-light-blue rounded-3xl duration-400 group-hover/tooltip-2:opacity-100 group-hover/tooltip-2:visible'>
                       Confirmed account
                     </div>
                   </div>
                 )}
                 {user.recentlyActive && (
                   <div className='absolute flex justify-center w-3 h-3 rounded-full top-1 left-1 group/tooltip-3 cursor-help bg-green'>
-                    <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-4 bg-light-blue rounded-3xl duration-400 group-hover/tooltip-3:opacity-100 group-hover/tooltip-3:visible'>
+                    <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-4 bg-white dark:bg-light-blue rounded-3xl duration-400 group-hover/tooltip-3:opacity-100 group-hover/tooltip-3:visible'>
                       Recently active
                     </div>
                   </div>
@@ -77,14 +77,14 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
               <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-1 bg-blue gap-x-1 font-secondaryFont'>
                 <EnvelopeIcon className='w-4 stroke-2' />
                 {user.email}
-                <div className='absolute invisible tracking-widest uppercase leading-none py-[7px] px-[10px] font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-light-blue duration-400 group-hover/tooltip-1:opacity-100 group-hover/tooltip-1:visible rounded-full'>
+                <div className='absolute invisible tracking-widest uppercase leading-none py-[7px] px-[10px] font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-white dark:bg-light-blue duration-400 group-hover/tooltip-1:opacity-100 group-hover/tooltip-1:visible rounded-full'>
                   E-mail
                 </div>
               </div>
               <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-2 bg-blue gap-x-1 font-secondaryFont'>
                 <UserIcon className='w-4 stroke-2' />
                 {dayjs(user.registeredAt).format('DD-MM-YYYY')}
-                <div className='absolute invisible tracking-widest uppercase leading-none py-[7px] px-[10px] font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-light-blue duration-400 group-hover/tooltip-2:opacity-100 group-hover/tooltip-2:visible rounded-full'>
+                <div className='absolute invisible tracking-widest uppercase leading-none py-[7px] px-[10px] font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-white dark:bg-light-blue duration-400 group-hover/tooltip-2:opacity-100 group-hover/tooltip-2:visible rounded-full'>
                   Registration date
                 </div>
               </div>
