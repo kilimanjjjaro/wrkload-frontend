@@ -35,8 +35,8 @@ privateApi.interceptors.response.use((response) => response, async (error) => {
     const response: AxiosResponse<RefreshTokenInterface> = await axios({
       method: 'GET',
       baseURL: BASE_URL,
-      url: '/auth/refreshToken'
-      // withCredentials: true
+      url: '/auth/refreshToken',
+      withCredentials: true
     })
 
     setCookie('accessToken', response.data.accessToken, {
