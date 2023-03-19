@@ -8,6 +8,7 @@ import type { UserInterface } from 'interfaces/users/User'
 import { INITIAL_TASK_STATE } from 'constants/tasks'
 import { INITIAL_PROJECT_STATE } from 'constants/projects'
 import { INITIAL_USER_STATE } from 'constants/users'
+import { getCookie } from 'cookies-next'
 
 interface AppContextValues {
   user: UserInterface | null
@@ -59,6 +60,9 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
     const showStats = window.localStorage.getItem('showStats')
     if (showStats !== null) setShouldRenderStats(JSON.parse(showStats))
   }, [])
+
+  const cookie = getCookie('accessToken')
+  console.log('cookie', cookie)
 
   return (
     <AppContext.Provider value={{
