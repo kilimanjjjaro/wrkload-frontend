@@ -1,10 +1,10 @@
 import { deleteCookie } from 'cookies-next'
-import { clearCache } from 'services/clearCache'
+import { mutate } from 'swr'
 import api from 'utils/api'
 
 export default async function logout (): Promise<void> {
+  await api.get('/auth/logout')
+  await mutate(() => true, undefined, { revalidate: false })
   window.localStorage.removeItem('user')
   deleteCookie('accessToken')
-  await api.get('/auth/logout')
-  await clearCache()
 }

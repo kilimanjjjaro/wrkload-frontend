@@ -45,9 +45,9 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
 
   const handleLogout = async (): Promise<void> => {
     setShowDashboardBox(!showDashboardBox)
+    router.push('/login')
     setUser(null)
     await logout()
-    router.push('/login')
   }
 
   return (
