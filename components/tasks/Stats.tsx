@@ -21,7 +21,7 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.El
     <>
       {!emptyStats && (
         <Swiper
-          className='relative w-full bg-white border-2 border-blue text-blue dark:bg-black dark:text-blue dark:border-blue rounded-3xl'
+          className='relative w-full border-2 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl'
           modules={[Autoplay, Pagination]}
           spaceBetween={0}
           slidesPerView={1}
