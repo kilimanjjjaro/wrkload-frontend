@@ -4,8 +4,8 @@ import api from 'utils/api'
 
 export default async function logout (): Promise<void> {
   window.localStorage.removeItem('user')
-  await api.get('/auth/logout')
-  await clearCache()
   deleteCookie('accessToken')
   deleteCookie('refreshToken')
+  await api.get('/auth/logout')
+  await clearCache()
 }
