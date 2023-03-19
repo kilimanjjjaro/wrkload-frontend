@@ -67,7 +67,7 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
         {projectNames?.map((projectName) => (
           <li
             key={projectName}
-            className={clsx('py-3 px-4 flex items-center relative transition text-black ease-in-out duration-400 dark:hover:bg-light-blue hover:bg-white hover:text-black cursor-pointer', projectName.toLowerCase() === selected.toLowerCase() && 'dark:bg-light-blue bg-white text-black', projectName.toLowerCase().startsWith(searchInputValue) ? 'block' : 'hidden')}
+            className={clsx('py-3 px-4 flex items-center relative transition text-black ease-in-out duration-400 dark:hover:bg-light-blue hover:bg-white hover:text-black cursor-pointer', projectName.toLowerCase() === selected.toLowerCase() && 'bg-light-blue text-black', projectName.toLowerCase().startsWith(searchInputValue) ? 'block' : 'hidden')}
             onClick={() => {
               if (projectName.toLowerCase() !== selected.toLowerCase()) {
                 void
