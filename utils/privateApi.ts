@@ -10,7 +10,8 @@ interface RefreshTokenInterface {
 }
 
 const privateApi = axios.create({
-  baseURL: BASE_URL
+  baseURL: BASE_URL,
+  withCredentials: true
 })
 
 privateApi.interceptors.request.use(
