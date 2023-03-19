@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { getCookie, setCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next'
 
 const BASE_URL = `${process.env.NODE_ENV === 'production' ? 'https://wrkload-api-production.up.railway.app' : 'http://localhost:5000'}/api/v1`
 
@@ -40,12 +40,6 @@ privateApi.interceptors.response.use((response) => response, async (error) => {
 
     if (response.data.accessToken !== undefined) {
       config.headers.Authorization = `Bearer ${response.data.accessToken}`
-
-      setCookie('accessToken', response.data.accessToken, {
-        maxAge: 60 * 1,
-        sameSite: 'none',
-        secure: process.env.NODE_ENV === 'production'
-      })
     }
 
     return await axios(config)
