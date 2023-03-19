@@ -46,12 +46,12 @@ textarea::-webkit-scrollbar-thumb {
   transition: all 0.4s ease-in-out;
 }
 
-.swiper-pagination-bullet-active {
+body.dark .swiper-pagination-bullet-active {
   background: #efefef;
   opacity: 1;
 }
 
-body.dark .swiper-pagination-bullet-active {
+.swiper-pagination-bullet-active {
   background: #d2d7e3;
   opacity: 1;
 }
