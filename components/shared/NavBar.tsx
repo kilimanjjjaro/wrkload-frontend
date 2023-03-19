@@ -17,9 +17,11 @@ export default function NavBar (): JSX.Element {
 
   useEffect(() => {
     if (showDashboardBox) {
-      document.body.style.overflow = 'hidden'
+      document.body.classList.add('overflow-hidden')
+      document.body.classList.add('xl:overflow-visible')
     } else {
-      document.body.style.overflow = 'auto'
+      document.body.classList.remove('overflow-hidden')
+      document.body.classList.remove('xl:overflow-visible')
     }
   }, [showDashboardBox])
 
