@@ -38,7 +38,7 @@ export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.El
         {shouldRenderStats && !pathname?.includes('search') && <Stats stats={stats} />}
         {tasks.map((task) => (
           <article
-            key={task._id} className='relative flex flex-col items-start p-6 text-black transition ease-in-out bg-white rounded-3xl duration-400 group md:p-7'
+            key={task._id} className='relative flex flex-col items-start p-6 text-black transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
           >
             <Headline variant='md' className='mb-4 pr-7 xl:pr-0'>{task.title}</Headline>
 

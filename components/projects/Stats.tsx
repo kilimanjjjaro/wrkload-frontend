@@ -15,7 +15,7 @@ export default function Stats ({ stats }: { stats: ProjectStatsInterface }): JSX
   const bestProjectOfPastMonth = stats?.bestProjectOfPastMonth !== '' && stats?.bestProjectOfPastMonth !== undefined
 
   return (
-    <div className='relative border-2 border-blue text-blue bg-light-blue dark:bg-black dark:text-blue dark:border-blue pt-6 md:pt-7 pb-[33px] pr-6 md:pr-7 pl-6 md:pl-7 rounded-3xl'>
+    <div className='relative border-2 border-blue text-blue bg-white dark:bg-black dark:text-blue dark:border-blue pt-6 md:pt-7 pb-[33px] pr-6 md:pr-7 pl-6 md:pl-7 rounded-3xl'>
       <EyeSlashIcon className='absolute z-10 w-6 h-6 transition ease-in-out cursor-pointer stroke-2 duration-400 hover:text-black dark:hover:text-white top-7 right-7' onClick={handleRenderStats} />
       {bestProjectOfPastMonth && <FireIcon className='h-10 stroke-2' />}
       {!bestProjectOfPastMonth && <PresentationChartLineIcon className='h-10 stroke-2' />}

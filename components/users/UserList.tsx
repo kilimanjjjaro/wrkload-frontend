@@ -31,7 +31,7 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
       <MasonryGrid>
         {users.map((user) => (
           <article
-            key={user._id} className='relative flex flex-col items-start p-6 text-black transition ease-in-out bg-white rounded-3xl duration-400 group md:p-7'
+            key={user._id} className='relative flex flex-col items-start p-6 text-black transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
           >
             {user.avatar !== undefined && (
               <div className='relative'>

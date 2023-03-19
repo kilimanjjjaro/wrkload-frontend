@@ -24,7 +24,7 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
         <meta property='og:image:height' content='650' />
         <meta property='og:type' content='website' />
       </head>
-      <body className={`bg-light-blue dark:bg-black transition-colors duration-400 ease-in-out antialiased ${inter.variable} ${spaceGrotesk.variable}`}>
+      <body className={`bg-white dark:bg-black transition-colors duration-400 ease-in-out antialiased ${inter.variable} ${spaceGrotesk.variable}`}>
         <AppProvider>
           <NavBar />
           <AnimatePresence>
