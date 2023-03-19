@@ -51,6 +51,10 @@ textarea::-webkit-scrollbar-thumb {
   opacity: 1;
 }
 
+body.dark .swiper-pagination-bullet-active {
+  background: #d2d7e3;
+  opacity: 1;
+}
 
 .swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
 .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
