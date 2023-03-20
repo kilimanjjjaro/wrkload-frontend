@@ -7,4 +7,5 @@ export default async function logout (): Promise<void> {
   await mutate(() => true, undefined, { revalidate: false })
   window.localStorage.removeItem('user')
   deleteCookie('accessToken')
+  deleteCookie('isLogged')
 }

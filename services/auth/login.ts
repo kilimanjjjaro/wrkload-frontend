@@ -22,7 +22,7 @@ export default async function login ({ email, password }: CredentialsInterface):
 
   setCookie('accessToken', accessToken, {
     maxAge: expiresIn,
-    sameSite: 'none',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     secure: process.env.NODE_ENV === 'production'
   })
 

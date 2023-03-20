@@ -11,6 +11,7 @@ import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import type { FullTaskInterface, TaskInterface } from 'interfaces/tasks/Task'
 import Headline from 'components/shared/Headline'
+import clsx from 'clsx'
 
 export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.Element {
   const { setSelectedTask, shouldRenderStats } = useContext(AppContext)
@@ -40,9 +41,15 @@ export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.El
           <article
             key={task._id} className='relative flex flex-col items-start p-6 text-black transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
           >
-            <Headline variant='md' className='mb-4 pr-7 xl:pr-0'>{task.title}</Headline>
+            <Headline
+              variant='md' className={clsx(
+                'mb-4 pr-7 xl:pr-0',
+                task.description === '' && '!mb-0'
+              )}
+            >{task.title}
+            </Headline>
 
-            <Paragraph variant='sm'><Balancer>{task.description}</Balancer></Paragraph>
+            {task.description !== '' && <Paragraph variant='sm'><Balancer>{task.description}</Balancer></Paragraph>}
 
             <div className='flex flex-wrap gap-3 mt-4'>
               <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-1 bg-blue gap-x-1 font-secondaryFont'>

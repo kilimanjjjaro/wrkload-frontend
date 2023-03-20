@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useEffect, useState, Dispatch } from 'react'
+import { setCookie } from 'cookies-next'
 import type { ChildrenInterface } from 'interfaces/components'
 import type { TaskInterface } from 'interfaces/tasks/Task'
 import type { ProjectInterface } from 'interfaces/projects/Project'
@@ -54,6 +55,7 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
 
     if (userFromLocalStorage !== null) {
       setUser(JSON.parse(userFromLocalStorage))
+      setCookie('isLogged', true)
     }
 
     const showStats = window.localStorage.getItem('showStats')

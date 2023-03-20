@@ -13,6 +13,7 @@ import GoogleLogo from 'public/images/google.svg'
 import login from 'services/auth/login'
 import { AppContext } from 'contexts/AppContext'
 import PageTransition from 'components/shared/PageTransition'
+import { setCookie } from 'cookies-next'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: '',
@@ -40,6 +41,7 @@ export default function Login (): JSX.Element {
 
       if (response.status === 'ok') {
         setUser(response.user)
+        setCookie('isLogged', true)
         router.push('/tasks')
       }
     } catch (error: any) {
