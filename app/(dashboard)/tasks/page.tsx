@@ -3,6 +3,7 @@
 import { useContext, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
+import { Toaster } from 'sonner'
 import Header from 'components/tasks/Header'
 import Skeleton from 'components/tasks/Skeleton'
 import TaskList from 'components/tasks/TaskList'
@@ -52,6 +53,7 @@ export default function Tasks (): JSX.Element {
         {shouldRenderNotFound && <NotFound noProjects={noProjects} />}
       </main>
       <Modals />
+      <Toaster position='top-center' />
     </PageTransition>
   )
 }

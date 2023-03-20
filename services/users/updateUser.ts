@@ -1,10 +1,9 @@
 import privateApi from 'utils/privateApi'
-
-import type { UserInterface } from 'interfaces/users/User'
-import { USERS_ENDPOINT } from 'constants/users'
 import { getCookie } from 'cookies-next'
+import type { FullUserInterface, UserInterface } from 'interfaces/users/User'
+import { USERS_ENDPOINT } from 'constants/users'
 
-export const updateUser = async (user: UserInterface): Promise<UserInterface> => {
+export const updateUser = async (user: UserInterface): Promise<FullUserInterface> => {
   let config = {}
   const accessToken = getCookie('accessToken')
 

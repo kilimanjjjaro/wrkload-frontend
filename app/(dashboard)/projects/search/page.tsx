@@ -5,14 +5,15 @@ import useSWR from 'swr'
 import Image from 'next/image'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
+import { Toaster } from 'sonner'
 import Skeleton from 'components/projects/Skeleton'
 import Modals from 'components/projects/Modals'
 import Button from 'components/shared/Button'
+import PageTransition from 'components/shared/PageTransition'
 import ProjectList from 'components/projects/ProjectList'
 import notFoundImage from 'public/images/not-found.webp'
 import searchProjects from 'services/projects/searchProjects'
 import { sortProjects } from 'utils/sortData'
-import PageTransition from 'components/shared/PageTransition'
 
 export default function SearchProjects (): JSX.Element {
   const params = useSearchParams()
@@ -59,6 +60,7 @@ export default function SearchProjects (): JSX.Element {
         )}
       </main>
       <Modals />
+      <Toaster position='top-center' />
     </PageTransition>
   )
 }

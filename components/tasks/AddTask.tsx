@@ -3,6 +3,7 @@
 import { useContext, useState } from 'react'
 import { mutate } from 'swr'
 import Balancer from 'react-wrap-balancer'
+import { toast } from 'sonner'
 import { addTask } from 'services/tasks/addTask'
 import { addTaskOptions } from 'utils/swrTasksOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -32,7 +33,14 @@ export default function AddTask (): JSX.Element {
 
     try {
       task.project = selectedProjectToFetch
-      await mutate('tasks', addTask(task), addTaskOptions(task))
+
+      const response = await mutate('tasks', addTask(task), addTaskOptions(task))
+
+      if (response?.status === 'ok') {
+        toast.success('Task added successfully!')
+      } else {
+        toast.error('Something went wrong. Please, try again!')
+      }
     } catch (error: any) {
       console.error(error)
     }

@@ -1,10 +1,9 @@
-import privateApi from 'utils/privateApi'
-
-import type { ProjectInterface } from 'interfaces/projects/Project'
-import { PROJECTS_ENDPOINT } from 'constants/projects'
 import { getCookie } from 'cookies-next'
+import privateApi from 'utils/privateApi'
+import type { FullProjectInterface, ProjectInterface } from 'interfaces/projects/Project'
+import { PROJECTS_ENDPOINT } from 'constants/projects'
 
-export const addProject = async (project: ProjectInterface): Promise<ProjectInterface> => {
+export const addProject = async (project: ProjectInterface): Promise<FullProjectInterface> => {
   let config = {}
   const accessToken = getCookie('accessToken')
 

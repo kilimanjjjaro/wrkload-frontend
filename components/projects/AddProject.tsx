@@ -6,10 +6,10 @@ import Balancer from 'react-wrap-balancer'
 import { addProject } from 'services/projects/addProject'
 import { addProjectOptions } from 'utils/swrProjectsOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { toast } from 'sonner'
 import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
-
 import { ModalsContext } from 'contexts/ModalsContext'
 import { INITIAL_PROJECT_STATE } from 'constants/projects'
 
@@ -27,7 +27,13 @@ export default function AddProject (): JSX.Element {
     setAddDataModalStatus(false)
 
     try {
-      await mutate('projects', addProject(project), addProjectOptions(project))
+      const response = await mutate('projects', addProject(project), addProjectOptions(project))
+
+      if (response?.status === 'ok') {
+        toast.success('Project added successfully!')
+      } else {
+        toast.error('Something went wrong. Please, try again!')
+      }
     } catch (error: any) {
       console.error(error.response)
     }

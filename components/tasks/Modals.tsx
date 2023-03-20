@@ -4,7 +4,6 @@ import AddTask from 'components/tasks/AddTask'
 import UpdateTask from 'components/tasks/UpdateTask'
 import DeleteTask from 'components/tasks/DeleteTask'
 import SearchForm from 'components/shared/SearchForm'
-
 import { ModalsContext } from 'contexts/ModalsContext'
 
 export default function Modals (): JSX.Element {

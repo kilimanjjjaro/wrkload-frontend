@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import Button from 'components/shared/Button'
-
 import { ModalsContext } from 'contexts/ModalsContext'
 
 export default function Options (): JSX.Element {

@@ -5,6 +5,7 @@ import useSWR from 'swr'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
+import { Toaster } from 'sonner'
 import Skeleton from 'components/tasks/Skeleton'
 import TaskList from 'components/tasks/TaskList'
 import Button from 'components/shared/Button'
@@ -51,7 +52,7 @@ export default function SearchTasks (): JSX.Element {
             <Image
               className='w-72'
               priority
-        src={notFoundImage}
+              src={notFoundImage}
               alt='Not found image'
             />
             <span className='text-xl text-center text-black dark:text-white font-secondaryFont'>No search results found. <br className='hidden lg:block' />Please try again.</span>
@@ -60,6 +61,7 @@ export default function SearchTasks (): JSX.Element {
         )}
       </main>
       <Modals />
+      <Toaster position='top-center' />
     </PageTransition>
   )
 }

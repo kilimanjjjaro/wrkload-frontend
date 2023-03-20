@@ -6,10 +6,10 @@ import Balancer from 'react-wrap-balancer'
 import { updateProject } from 'services/projects/updateProject'
 import { updateProjectOptions } from 'utils/swrProjectsOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { toast } from 'sonner'
 import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
-
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 
@@ -28,7 +28,13 @@ export default function UpdateProject (): JSX.Element {
     setUpdateDataModalStatus(false)
 
     try {
-      await mutate('projects', updateProject(project), updateProjectOptions(project))
+      const response = await mutate('projects', updateProject(project), updateProjectOptions(project))
+
+      if (response?.status === 'ok') {
+        toast.success('Project updated successfully!')
+      } else {
+        toast.error('Something went wrong. Please, try again!')
+      }
     } catch (error: any) {
       console.error(error.response)
     }

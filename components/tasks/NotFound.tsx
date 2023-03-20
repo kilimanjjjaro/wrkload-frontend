@@ -5,7 +5,6 @@ import Balancer from 'react-wrap-balancer'
 import { ArrowRightIcon, PlusIcon } from '@heroicons/react/24/outline'
 import notFoundImage from 'public/images/not-found.webp'
 import Button from 'components/shared/Button'
-
 import { ModalsContext } from 'contexts/ModalsContext'
 
 export default function NotFound ({ noProjects }: { noProjects: boolean }): JSX.Element {

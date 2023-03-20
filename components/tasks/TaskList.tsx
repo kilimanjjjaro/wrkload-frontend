@@ -3,6 +3,7 @@ import { usePathname } from 'next/navigation'
 import dayjs from 'dayjs'
 import Balancer from 'react-wrap-balancer'
 import { CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
+import clsx from 'clsx'
 import Stats from 'components/tasks/Stats'
 import Pagination from 'components/shared/Pagination'
 import MasonryGrid from 'components/shared/MasonryGrid'
@@ -11,7 +12,6 @@ import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import type { FullTaskInterface, TaskInterface } from 'interfaces/tasks/Task'
 import Headline from 'components/shared/Headline'
-import clsx from 'clsx'
 
 export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.Element {
   const { setSelectedTask, shouldRenderStats } = useContext(AppContext)

@@ -4,10 +4,10 @@ import Balancer from 'react-wrap-balancer'
 import { deleteUser } from 'services/users/deleteUser'
 import { deleteUserOptions } from 'utils/swrUsersOptions'
 import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { toast } from 'sonner'
 import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
-
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 
@@ -26,7 +26,13 @@ export default function DeleteUser (): JSX.Element {
     setDeleteDataModalStatus(false)
 
     try {
-      await mutate('users', deleteUser(user._id), deleteUserOptions(user._id))
+      const response = await mutate('users', deleteUser(user._id), deleteUserOptions(user._id))
+
+      if (response?.status === 'ok') {
+        toast.success('User deleted successfully!')
+      } else {
+        toast.error('Something went wrong. Please, try again!')
+      }
     } catch (error: any) {
       console.error(error.response)
     }

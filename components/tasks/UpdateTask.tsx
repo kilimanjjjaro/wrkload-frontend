@@ -11,6 +11,7 @@ import Textarea from 'components/shared/Textarea'
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import { CHARACTER_LIMIT } from 'constants/components'
+import { toast } from 'sonner'
 
 export default function UpdateTask (): JSX.Element {
   const { selectedTask } = useContext(AppContext)
@@ -27,7 +28,13 @@ export default function UpdateTask (): JSX.Element {
     setUpdateDataModalStatus(false)
 
     try {
-      await mutate('tasks', updateTask(task), updateTaskOptions(task))
+      const response = await mutate('tasks', updateTask(task), updateTaskOptions(task))
+
+      if (response?.status === 'ok') {
+        toast.success('Task updated successfully!')
+      } else {
+        toast.error('Something went wrong. Please, try again!')
+      }
     } catch (error) {
       console.error(error)
     }

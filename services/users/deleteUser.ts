@@ -1,9 +1,9 @@
 import privateApi from 'utils/privateApi'
-
 import { USERS_ENDPOINT } from 'constants/users'
 import { getCookie } from 'cookies-next'
+import type { FullUserInterface } from 'interfaces/users/User'
 
-export const deleteUser = async (_id: string): Promise<any> => {
+export const deleteUser = async (_id: string): Promise<FullUserInterface> => {
   let config = {}
   const accessToken = getCookie('accessToken')
 
