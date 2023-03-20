@@ -5,6 +5,39 @@
 @import "~swiper/css";
 @import "~swiper/css/pagination";
 
+[data-sonner-toaster] {
+  display: flex;
+  justify-content: center;
+  top: 32px !important;
+}
+
+.optimistic-ui-feedback {
+  justify-content: center;
+  width: auto !important;
+  padding: 14px 20px !important;
+  height: 47.5px !important;
+  background: #d2d7e3 !important;
+  color: #0a0a0a !important;
+  border-radius: 9999px !important;
+  box-shadow: none !important;
+  border: none !important
+}
+
+@media (max-width: 600px) {
+  [data-sonner-toaster] {
+    display: flex;
+    justify-content: center;
+    left: 24px !important;
+    right: 24px !important;
+    top: 24px !important;
+    width: auto !important;
+  }
+
+  .optimistic-ui-feedback {
+    width: 100% !important;
+  }
+}
+
 /* Custom scrollbars */
 textarea::-webkit-scrollbar {
   width: .5rem;
@@ -62,8 +95,6 @@ html.dark .swiper-pagination-bullet-active {
   background: #efefef;
   opacity: 1;
 }
-
-
 
 .swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
 .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {

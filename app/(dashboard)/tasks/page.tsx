@@ -53,7 +53,7 @@ export default function Tasks (): JSX.Element {
         {shouldRenderNotFound && <NotFound noProjects={noProjects} />}
       </main>
       <Modals />
-      <Toaster position='top-center' />
+      <Toaster position='top-center' toastOptions={{ className: 'optimistic-ui-feedback' }} duration={400000} />
     </PageTransition>
   )
 }
