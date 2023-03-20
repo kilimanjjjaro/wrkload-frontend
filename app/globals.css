@@ -5,13 +5,14 @@
 @import "~swiper/css";
 @import "~swiper/css/pagination";
 
+/* Custom toast notifications */
 [data-sonner-toaster] {
   display: flex;
   justify-content: center;
   top: 32px !important;
 }
 
-.optimistic-ui-feedback {
+.optimistic-ui-notifications {
   justify-content: center;
   width: auto !important;
   padding: 14px 20px !important;
@@ -33,7 +34,7 @@
     width: auto !important;
   }
 
-  .optimistic-ui-feedback {
+  .optimistic-ui-notifications {
     width: 100% !important;
   }
 }

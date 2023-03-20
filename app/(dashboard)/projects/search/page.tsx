@@ -60,7 +60,7 @@ export default function SearchProjects (): JSX.Element {
         )}
       </main>
       <Modals />
-      <Toaster position='top-center' toastOptions={{ style: { padding: '14px 20px', height: 47.5, background: '#d2d7e3', color: '#0a0a0a', borderRadius: '9999px', boxShadow: 'none', border: 'none' } }} duration={4000} />
+      <Toaster position='top-center' toastOptions={{ className: 'optimistic-ui-notifications' }} duration={4000} />
     </PageTransition>
   )
 }
