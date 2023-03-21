@@ -55,7 +55,9 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
 
     if (userFromLocalStorage !== null) {
       setUser(JSON.parse(userFromLocalStorage))
-      setCookie('isLogged', true)
+      setCookie('isLogged', true, {
+        maxAge: 60 * 60 * 24 * 30
+      })
     }
 
     const showStats = window.localStorage.getItem('showStats')

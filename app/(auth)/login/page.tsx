@@ -41,7 +41,9 @@ export default function Login (): JSX.Element {
 
       if (response.status === 'ok') {
         setUser(response.user)
-        setCookie('isLogged', true)
+        setCookie('isLogged', true, {
+          maxAge: 60 * 60 * 24 * 30
+        })
         router.push('/tasks')
       }
     } catch (error: any) {
