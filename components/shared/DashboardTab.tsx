@@ -45,7 +45,7 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
 
   const handleLogout = async (): Promise<void> => {
     setShowDashboardBox(!showDashboardBox)
-    router.push('/login')
+    router.push('/')
     setUser(null)
     await logout()
   }
@@ -58,7 +58,7 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
       transition={{ ease: 'easeInOut', duration: 0.4 }}
       initial={false}
     >
-      <div className='fixed w-full block xl:hidden h-full -z-10 bg-light-blue dark:bg-black opacity-[0.97]' />
+      <div className='fixed w-full block xl:hidden h-full -z-10 bg-light-blue dark:bg-black opacity-[0.97]' onClick={() => setShowDashboardBox(!showDashboardBox)} />
       <ul className='flex flex-col items-center justify-center w-full gap-6 text-3xl text-black md:gap-4 md:text-xl md:flex-row md:w-auto rounded-t-3xl md:rounded-3xl font-secondaryFont'>
         {pages.map((page) => (
           <li className='px-8 py-4 transition ease-in-out rounded-full cursor-pointer md:px-6 md:py-2 bg-blue duration-400 md:rounded-3xl md:hover:bg-black md:hover:text-white dark:md:hover:text-black dark:md:hover:bg-white' key={page.link} onClick={() => setShowDashboardBox(!showDashboardBox)}><Link href={page.link}>{page.name}</Link></li>
