@@ -47,6 +47,7 @@ export default function Login (): JSX.Element {
         router.push('/tasks')
       }
     } catch (error: any) {
+      console.log(error)
       setError(error.response.data.code)
     } finally {
       setIsLoading(false)
