@@ -27,7 +27,7 @@ module.exports = {
         400: '400ms'
       },
       animation: {
-        skeleton: 'shine 3s ease-in-out infinite',
+        skeleton: 'shine 2.5s ease-in-out infinite',
         loading: 'loading 2s ease-out infinite'
       },
       keyframes: {
