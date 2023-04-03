@@ -7,8 +7,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      primaryFont: 'var(--space-grotesk-font), sans-serif',
-      secondaryFont: 'var(--inter-font), sans-serif'
+      primaryFont: 'var(--space-grotesk-font), system-ui, sans-serif',
+      secondaryFont: 'var(--inter-font), system-ui, sans-serif'
     },
     container: {
       center: true
