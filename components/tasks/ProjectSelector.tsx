@@ -19,7 +19,17 @@ const VARIANTS = {
 export default function ProjectSelector ({ projectNames }: { projectNames: string[] }): JSX.Element {
   const { setSelectedProjectToFetch } = useContext(AppContext)
   const [open, setOpen] = useState(false)
-  const [selected, setSelected] = useState(projectNames[0])
+  const [selected, setSelected] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const selectedProject = window.localStorage.getItem('selectedProject')
+      if (selectedProject !== null) {
+        return selectedProject
+      } else {
+        return projectNames[0]
+      }
+    }
+    return ''
+  })
   const [searchInputValue, setSearchInputValue] = useState('')
 
   const handleClick = async ({ projectName }: { projectName: string }): Promise<void> => {
@@ -27,6 +37,7 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
     setSearchInputValue('')
     setOpen(false)
     setSelectedProjectToFetch(projectName)
+    window.localStorage.setItem('selectedProject', projectName)
   }
 
   useEffect(() => {

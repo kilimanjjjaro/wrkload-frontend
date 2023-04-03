@@ -52,12 +52,17 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
 
   useEffect(() => {
     const userFromLocalStorage = window.localStorage.getItem('user')
+    const selectedProyectFromLocalStorage = window.localStorage.getItem('selectedProject')
 
     if (userFromLocalStorage !== null) {
       setUser(JSON.parse(userFromLocalStorage))
       setCookie('isLogged', true, {
         maxAge: 60 * 60 * 24 * 30
       })
+    }
+
+    if (selectedProyectFromLocalStorage !== null) {
+      setSelectedProjectToFetch(selectedProyectFromLocalStorage)
     }
 
     const showStats = window.localStorage.getItem('showStats')
