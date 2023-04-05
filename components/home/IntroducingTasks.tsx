@@ -42,11 +42,11 @@ export default function IntroducingTasks (): JSX.Element {
             className='relative flex transition ease-in-out border-2 p-7 border-blue dark:border-blue rounded-3xl duration-400 group will-change-transform'
           >
             <motion.div
-              className='absolute hidden left-0 right-0 xl:flex justify-center items-center w-[94px] transition-opacity duration-400 ease-in-out h-8 mx-auto text-sm text-black bg-blue dark:bg-white rounded-full -top-[1.05rem] font-secondaryFont group-hover:opacity-0'
+              className='absolute hidden left-0 right-0 xl:flex justify-center items-center w-[115px] transition-opacity duration-400 ease-in-out h-8 mx-auto text-sm text-black bg-blue dark:bg-white rounded-full -top-[1.05rem] font-secondaryFont group-hover:opacity-0'
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 4, ease: 'easeInOut', repeat: Infinity }}
             >
-              Hover me!
+              Play with me!
             </motion.div>
             <div data-atropos-offset='2' className='will-change-transform'>
               <h3 className='!leading-10 md:mb-6 text-3xl mb-[1.4rem] text-black dark:text-blue font-primaryFont md:text-4xl md:leading-tight font-bold'>Prototype the <br />Checkout Process <br />in Figma</h3>

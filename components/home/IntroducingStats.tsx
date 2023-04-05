@@ -39,11 +39,11 @@ export default function IntroducingStats (): JSX.Element {
             className='relative pb-6 transition ease-in-out border-2 pt-7 pr-7 pl-7 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 will-change-transform group'
           >
             <motion.div
-              className='absolute hidden left-0 right-0 xl:flex justify-center items-center w-[94px] transition-opacity duration-400 ease-in-out h-8 mx-auto text-sm text-black bg-blue dark:bg-white rounded-full -top-[1.05rem] font-secondaryFont group-hover:opacity-0'
+              className='absolute hidden left-0 right-0 xl:flex justify-center items-center w-[115px] transition-opacity duration-400 ease-in-out h-8 mx-auto text-sm text-black bg-blue dark:bg-white rounded-full -top-[1.05rem] font-secondaryFont group-hover:opacity-0'
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 4, ease: 'easeInOut', repeat: Infinity }}
             >
-              Hover me!
+              Play with me!
             </motion.div>
             <div data-atropos-offset='2' className='will-change-transform'>
               <RectangleStackIcon className='h-10 stroke-2' />
