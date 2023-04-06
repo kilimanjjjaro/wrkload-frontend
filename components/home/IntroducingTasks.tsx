@@ -1,9 +1,9 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
 import Balancer from 'react-wrap-balancer'
 import Atropos from 'atropos/react'
+import { motion } from 'framer-motion'
 import { ArrowRightIcon, CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import Masonry from 'react-masonry-css'
 import Headline from 'components/shared/Headline'
@@ -15,16 +15,20 @@ export default function IntroducingTasks (): JSX.Element {
   const router = useRouter()
 
   return (
-    <section className='grid items-center gap-10 md:h-screen md:grid-cols-2'>
-      <div className='overflow-hidden'>
-        <div className='flex flex-col items-start text-black transition-colors ease-in-out dark:text-blue duration-400'>
-          <Headline variant='2xl'><Balancer>Work, load your time and go have fun!</Balancer></Headline>
-          <div className='mb-8 dark:text-white md:w-1/2'>
-            <Paragraph variant='normal'><b className='font-extrabold'>Easy-peasy!</b></Paragraph>
-            <Paragraph variant='normal'>With wrkload you can track what you&apos;ve worked on in a simple and organized way.</Paragraph>
-          </div>
-          <Button className='!w-auto' variant='primary' onClick={() => router.push('/registry')}>Start now for free <ArrowRightIcon className='w-4 stroke-3' /></Button>
+    <motion.header
+      className='grid items-center gap-10 mb-20 mt-44 md:mt-0 md:mb-0 md:min-h-screen md:grid-cols-2'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1, ease: 'easeInOut' }}
+    >
+      <div className='flex flex-col items-start text-black transition-colors ease-in-out dark:text-blue duration-400'>
+        <Headline variant='2xl'><Balancer>Work, load your time and go have fun!</Balancer></Headline>
+        <div className='mb-8 dark:text-white md:w-2/3'>
+          <Paragraph variant='normal'><b className='font-extrabold'>Easy-peasy!</b></Paragraph>
+          <Paragraph variant='normal'><Balancer>With wrkload you can track what you&apos;ve worked on in a simple and organized way.</Balancer></Paragraph>
         </div>
+        <Button className='!w-auto' variant='primary' onClick={() => router.push('/registry')}>Start now for free <ArrowRightIcon className='w-4 stroke-3' /></Button>
       </div>
       <Masonry
         className='grid items-start md:grid-cols-2 gap-y-6 xl:gap-y-0'
@@ -41,13 +45,6 @@ export default function IntroducingTasks (): JSX.Element {
             data-atropos-offset='6'
             className='relative flex transition ease-in-out border-2 p-7 border-blue dark:border-blue rounded-3xl duration-400 group will-change-transform'
           >
-            <motion.div
-              className='absolute hidden left-0 right-0 xl:flex justify-center items-center w-[115px] transition-opacity duration-400 ease-in-out h-8 mx-auto text-sm text-black bg-blue dark:bg-white rounded-full -top-[1.05rem] font-secondaryFont group-hover:opacity-0'
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 4, ease: 'easeInOut', repeat: Infinity }}
-            >
-              Play with me!
-            </motion.div>
             <div data-atropos-offset='2' className='will-change-transform'>
               <h3 className='!leading-10 md:mb-6 text-3xl mb-[1.4rem] text-black dark:text-blue font-primaryFont md:text-4xl md:leading-tight font-bold'>Prototype the <br />Checkout Process <br />in Figma</h3>
               <p className='text-base text-black break-word font-secondaryFont dark:text-white'><Balancer>Created a prototype for the checkout process of an ecommerce app in Figma. Designed and tested different user flows to ensure a seamless checkout experience, and added interactive elements to enhance the user experience.</Balancer></p>
@@ -103,6 +100,6 @@ export default function IntroducingTasks (): JSX.Element {
           </div>
         </article>
       </Masonry>
-    </section>
+    </motion.header>
   )
 }

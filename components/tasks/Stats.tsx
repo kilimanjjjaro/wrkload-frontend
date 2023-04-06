@@ -44,7 +44,7 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.El
                   </div>
                 </div>
               </div>
-              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>hours worked<br /> the current month.</span>
+              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>hours worked<br /> in the current month.</span>
             </SwiperSlide>
           )}
           {stats?.totalTasksCurrentMonth > 0 && (
@@ -53,7 +53,7 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.El
               <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
                 {stats.totalTasksCurrentMonth}
               </div>
-              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>tasks uploaded<br /> the current month.</span>
+              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>tasks uploaded<br /> in the current month.</span>
             </SwiperSlide>
           )}
           {stats?.totalPastMonthTiming > 0 && (

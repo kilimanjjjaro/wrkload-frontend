@@ -1,6 +1,6 @@
 'use client'
 
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { inter, spaceGrotesk } from 'utils/fonts'
 import AppProvider from 'contexts/AppContext'
 import NavBar from 'components/shared/NavBar'
@@ -26,13 +26,7 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
         <AppProvider>
           <NavBar />
           <AnimatePresence>
-            <motion.div
-              initial={{ overflow: 'hidden' }}
-              animate={{ overflow: 'visible' }}
-              transition={{ delay: 2 }}
-            >
-              {children}
-            </motion.div>
+            {children}
           </AnimatePresence>
           <Footer />
         </AppProvider>

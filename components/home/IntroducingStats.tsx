@@ -1,9 +1,9 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
 import Balancer from 'react-wrap-balancer'
 import Atropos from 'atropos/react'
+import { motion } from 'framer-motion'
 import { ArrowRightIcon, ArrowUpIcon, ClockIcon, FireIcon, RectangleStackIcon } from '@heroicons/react/24/outline'
 import Masonry from 'react-masonry-css'
 import Headline from 'components/shared/Headline'
@@ -15,7 +15,13 @@ export default function IntroducingStats (): JSX.Element {
   const router = useRouter()
 
   return (
-    <section className='grid items-center gap-10 md:h-screen md:grid-cols-2'>
+    <motion.header
+      className='grid items-center gap-10 mb-20 mt-44 md:mt-0 md:mb-0 md:min-h-screen md:grid-cols-2'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1, ease: 'easeInOut' }}
+    >
       <div className='flex flex-col items-start text-black transition-colors ease-in-out dark:text-blue duration-400'>
         <Headline variant='2xl'><Balancer>All you need in one blink!</Balancer></Headline>
         <div className='mb-8 dark:text-white md:w-1/2'>
@@ -38,13 +44,6 @@ export default function IntroducingStats (): JSX.Element {
             data-atropos-offset='6'
             className='relative pb-6 transition ease-in-out border-2 pt-7 pr-7 pl-7 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 will-change-transform group'
           >
-            <motion.div
-              className='absolute hidden left-0 right-0 xl:flex justify-center items-center w-[115px] transition-opacity duration-400 ease-in-out h-8 mx-auto text-sm text-black bg-blue dark:bg-white rounded-full -top-[1.05rem] font-secondaryFont group-hover:opacity-0'
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 4, ease: 'easeInOut', repeat: Infinity }}
-            >
-              Play with me!
-            </motion.div>
             <div data-atropos-offset='2' className='will-change-transform'>
               <RectangleStackIcon className='h-10 stroke-2' />
               <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
@@ -56,7 +55,7 @@ export default function IntroducingStats (): JSX.Element {
                   </div>
                 </div>
               </div>
-              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>tasks uploaded<br /> the current month.</span>
+              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>tasks uploaded<br /> in the current month.</span>
             </div>
           </article>
         </Atropos>
@@ -78,9 +77,9 @@ export default function IntroducingStats (): JSX.Element {
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
             Nike
           </div>
-          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>Project of<br /> the last month.</span>
+          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>Project of<br /> the past month.</span>
         </article>
       </Masonry>
-    </section>
+    </motion.header>
   )
 }
