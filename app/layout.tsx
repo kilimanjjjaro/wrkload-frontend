@@ -1,6 +1,7 @@
 'use client'
 
 import { AnimatePresence } from 'framer-motion'
+import { ReactLenis } from '@studio-freight/react-lenis'
 import { inter, spaceGrotesk } from 'utils/fonts'
 import AppProvider from 'contexts/AppContext'
 import NavBar from 'components/shared/NavBar'
@@ -8,9 +9,14 @@ import Footer from 'components/shared/Footer'
 import type { ChildrenInterface } from 'interfaces/components'
 import 'app/globals.css'
 
+const LenisOptions = {
+  duration: 1,
+  smoothTouch: true
+}
+
 export default function RootLayout ({ children }: ChildrenInterface): JSX.Element {
   return (
-    <html lang='en' className='scroll-smooth dark'>
+    <html lang='en' className='dark'>
       <head>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link href='/favicon.png' rel='shortcut icon' />
@@ -26,7 +32,9 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
         <AppProvider>
           <NavBar />
           <AnimatePresence>
-            {children}
+            <ReactLenis root options={LenisOptions}>
+              {children}
+            </ReactLenis>
           </AnimatePresence>
           <Footer />
         </AppProvider>
