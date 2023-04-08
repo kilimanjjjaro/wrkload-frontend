@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import Atropos from 'atropos/react'
-import { motion } from 'framer-motion'
 import { ArrowRightIcon, CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import Masonry from 'react-masonry-css'
 import Headline from 'components/shared/Headline'
@@ -15,13 +14,7 @@ export default function IntroducingTasks (): JSX.Element {
   const router = useRouter()
 
   return (
-    <motion.header
-      className='grid items-center gap-10 mb-20 mt-44 md:mt-0 md:mb-0 md:min-h-screen md:grid-cols-2'
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1, ease: 'easeInOut' }}
-    >
+    <header className='grid items-center gap-10 mb-20 mt-44 md:mt-0 md:mb-0 md:min-h-screen md:grid-cols-2'>
       <div className='flex flex-col items-start text-black transition-colors ease-in-out dark:text-blue duration-400'>
         <Headline variant='2xl'><Balancer>Work, load your time and go have fun!</Balancer></Headline>
         <div className='mb-8 dark:text-white md:w-2/3'>
@@ -46,7 +39,7 @@ export default function IntroducingTasks (): JSX.Element {
             className='relative flex transition ease-in-out border-2 p-7 border-blue dark:border-blue rounded-3xl duration-400 group will-change-transform'
           >
             <div data-atropos-offset='2' className='will-change-transform'>
-              <h3 className='!leading-10 md:mb-6 text-3xl mb-[1.4rem] text-black dark:text-blue font-primaryFont md:text-4xl md:leading-tight font-bold'>Prototype the <br />Checkout Process <br />in Figma</h3>
+              <h3 className='!leading-10 md:mb-6 text-3xl mb-[1.4rem] text-black dark:text-blue font-primaryFont md:text-4xl md:leading-tight font-bold'><Balancer>Prototype the Checkout Process in Figma</Balancer></h3>
               <p className='text-base text-black break-word font-secondaryFont dark:text-white'><Balancer>Created a prototype for the checkout process of an ecommerce app in Figma. Designed and tested different user flows to ensure a seamless checkout experience, and added interactive elements to enhance the user experience.</Balancer></p>
               <div className='flex flex-wrap gap-3 mt-4'>
                 <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-1 bg-blue gap-x-1 font-secondaryFont'>
@@ -100,6 +93,6 @@ export default function IntroducingTasks (): JSX.Element {
           </div>
         </article>
       </Masonry>
-    </motion.header>
+    </header>
   )
 }

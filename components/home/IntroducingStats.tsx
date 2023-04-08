@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import Atropos from 'atropos/react'
-import { motion } from 'framer-motion'
 import { ArrowRightIcon, ArrowUpIcon, ClockIcon, FireIcon, RectangleStackIcon } from '@heroicons/react/24/outline'
 import Masonry from 'react-masonry-css'
 import Headline from 'components/shared/Headline'
@@ -15,13 +14,7 @@ export default function IntroducingStats (): JSX.Element {
   const router = useRouter()
 
   return (
-    <motion.header
-      className='grid items-center gap-10 mb-20 mt-44 md:mt-0 md:mb-0 md:min-h-screen md:grid-cols-2'
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1, ease: 'easeInOut' }}
-    >
+    <header className='grid items-center gap-10 mb-20 mt-44 md:mt-0 md:mb-0 md:min-h-screen md:grid-cols-2'>
       <div className='flex flex-col items-start text-black transition-colors ease-in-out dark:text-blue duration-400'>
         <Headline variant='2xl'><Balancer>All you need in one blink!</Balancer></Headline>
         <div className='mb-8 dark:text-white md:w-1/2'>
@@ -80,6 +73,6 @@ export default function IntroducingStats (): JSX.Element {
           <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>Project of<br /> the past month.</span>
         </article>
       </Masonry>
-    </motion.header>
+    </header>
   )
 }
