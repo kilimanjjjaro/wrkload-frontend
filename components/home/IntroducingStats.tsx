@@ -14,7 +14,7 @@ export default function IntroducingStats (): JSX.Element {
   const router = useRouter()
 
   return (
-    <header className='grid items-center gap-10 mb-20 mt-44 md:mt-0 md:mb-0 md:min-h-screen md:grid-cols-2'>
+    <section className='px-6 md:px-8 2xl:px-[5vw] sticky top-0 grid items-center gap-10 mb-20 bg-[#15171c] rounded-t-3xl mt-44 md:mt-0 md:mb-0 md:min-h-screen md:grid-cols-2'>
       <div className='flex flex-col items-start text-black transition-colors ease-in-out dark:text-blue duration-400'>
         <Headline variant='2xl'><Balancer>All you need in one blink!</Balancer></Headline>
         <div className='mb-8 dark:text-white md:w-1/2'>
@@ -73,6 +73,6 @@ export default function IntroducingStats (): JSX.Element {
           <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>Project of<br /> the past month.</span>
         </article>
       </Masonry>
-    </header>
+    </section>
   )
 }

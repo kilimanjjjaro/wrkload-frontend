@@ -6,19 +6,16 @@ import { inter, spaceGrotesk } from 'utils/fonts'
 import AppProvider from 'contexts/AppContext'
 import NavBar from 'components/shared/NavBar'
 import Footer from 'components/shared/Footer'
+import { LENIS_OPTIONS } from 'constants/components'
 import type { ChildrenInterface } from 'interfaces/components'
 import 'app/globals.css'
-
-const LenisOptions = {
-  duration: 1,
-  smoothTouch: true
-}
 
 export default function RootLayout ({ children }: ChildrenInterface): JSX.Element {
   return (
     <html lang='en' className='dark'>
       <head>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta name='description' content="wrkload is a web app where you can track what you've worked on in a simple and organized way." />
         <link href='/favicon.png' rel='shortcut icon' />
         <meta property='og:description' content="wrkload is a web app where you can track what you've worked on in a simple and organized way." />
         <meta property='og:site_name' content='wrkload' />
@@ -32,7 +29,7 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
         <AppProvider>
           <NavBar />
           <AnimatePresence>
-            <ReactLenis root options={LenisOptions}>
+            <ReactLenis root options={LENIS_OPTIONS}>
               {children}
             </ReactLenis>
           </AnimatePresence>

@@ -44,3 +44,7 @@ export const FEATURES: FeaturesInterface[] = [
 ]
 
 export const CHARACTER_LIMIT = 200
+
+export const LENIS_OPTIONS = {
+  duration: 1.2
+}
