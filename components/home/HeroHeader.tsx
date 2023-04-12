@@ -34,7 +34,7 @@ export default function HeroHeader (): JSX.Element {
           >
             <article
               data-atropos-offset='6'
-              className='relative flex transition ease-in-out border-2 p-7 border-blue dark:border-blue rounded-3xl duration-400 group will-change-transform'
+              className='relative flex pt-5 pb-6 pl-6 pr-6 transition ease-in-out border-2 border-blue dark:border-blue rounded-3xl duration-400 group will-change-transform'
             >
               <div data-atropos-offset='2' className='w-full'>
                 <h3 className='md:mb-6 text-3xl mb-[1.4rem] text-black dark:text-blue font-primaryFont md:text-4xl font-bold'><Balancer>Prototype the Checkout Page in Figma</Balancer></h3>
@@ -92,7 +92,7 @@ export default function HeroHeader (): JSX.Element {
           >
             <article
               data-atropos-offset='6'
-              className='relative flex transition ease-in-out border-2 p-7 border-blue dark:border-blue rounded-3xl duration-400 group will-change-transform'
+              className='relative flex pt-5 pb-6 pl-6 pr-6 transition ease-in-out border-2 border-blue dark:border-blue rounded-3xl duration-400 group will-change-transform'
             >
               <div data-atropos-offset='2' className='w-full'>
                 <h3 className='md:mb-6 text-3xl mb-[1.4rem] text-black dark:text-blue font-primaryFont md:text-4xl font-bold'><Balancer>Optimize the Website for SEO</Balancer></h3>

@@ -46,7 +46,7 @@ export default function IntroducingStats (): JSX.Element {
       }}
     >
       <motion.div
-        className='grid items-start gap-6 2xl:gap-10 md:grid-cols-2 xl:col-span-4 2xl:col-span-1'
+        className='grid items-start order-2 gap-6 xl:order-1 2xl:gap-10 md:grid-cols-2 xl:col-span-4 2xl:col-span-1'
         variants={CONTENT_VARIANTS}
         animate={isInViewContainer ? 'visible' : 'hidden'}
         initial='hidden'
@@ -56,7 +56,7 @@ export default function IntroducingStats (): JSX.Element {
           delay: 0.4
         }}
       >
-        <article className='pb-6 transition ease-in-out border-2 pt-7 pr-7 pl-7 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 group'>
+        <article className='pt-6 pb-5 pl-6 pr-6 transition ease-in-out border-2 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 group'>
           <RectangleStackIcon className='h-10 stroke-2' />
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
             87
@@ -70,7 +70,7 @@ export default function IntroducingStats (): JSX.Element {
           <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>tasks uploaded<br /> in the current month.</span>
         </article>
 
-        <article className='transition ease-in-out border-2 pt-7 pr-7 pb-6 pl-7 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 xl:scale-[0.75]'>
+        <article className='pt-6 pb-5 pl-6 pr-6 transition ease-in-out border-2 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 xl:scale-[0.75]'>
           <ClockIcon className='h-10 stroke-2' />
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
             102
@@ -78,7 +78,7 @@ export default function IntroducingStats (): JSX.Element {
           <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>hours worked<br /> the current month.</span>
         </article>
 
-        <article className='transition ease-in-out border-2 pt-7 pr-7 pb-6 pl-7 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 xl:scale-[0.75]'>
+        <article className='pt-6 pb-5 pl-6 pr-6 transition ease-in-out border-2 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 xl:scale-[0.75]'>
           <FireIcon className='h-10 stroke-2' />
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
             Nike
@@ -86,7 +86,7 @@ export default function IntroducingStats (): JSX.Element {
           <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>Project of<br /> the past month.</span>
         </article>
 
-        <article className='pb-6 transition ease-in-out border-2 pt-7 pr-7 pl-7 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 group'>
+        <article className='hidden pt-6 pb-5 pl-6 pr-6 transition ease-in-out border-2 xl:block border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 group'>
           <ClockIcon className='h-10 stroke-2' />
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
             48
@@ -101,7 +101,7 @@ export default function IntroducingStats (): JSX.Element {
         </article>
       </motion.div>
       <motion.div
-        className='flex flex-col items-start text-black transition-colors ease-in-out dark:text-blue duration-400 xl:col-start-6 xl:col-end-9 2xl:col-start-2 2xl:col-end-3'
+        className='flex flex-col items-start order-1 text-black transition-colors ease-in-out xl:order-2 dark:text-blue duration-400 xl:col-start-6 xl:col-end-9 2xl:col-start-2 2xl:col-end-3'
         variants={CONTENT_VARIANTS}
         animate={isInViewContainer ? 'visible' : 'hidden'}
         initial='hidden'
