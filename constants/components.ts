@@ -5,7 +5,7 @@ export const PAGES = [
   { name: 'Projects', link: '/projects', admin: false },
   { name: 'Profile', link: '/profile', admin: false },
   { name: 'Users', link: '/users', admin: true }
-] as const
+]
 
 export const SKELETON = Array.from(Array(4).keys())
 
