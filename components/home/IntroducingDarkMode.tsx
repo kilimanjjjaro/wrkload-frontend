@@ -31,11 +31,7 @@ const CONTENT_VARIANTS = {
 
 export default function IntroducingDarkMode (): JSX.Element {
   const containerRef = useRef(null)
-  const statsRef = useRef(null)
-  const contentRef = useRef(null)
   const isInViewContainer = useInView(containerRef, { once: true })
-  const isInViewStats = useInView(statsRef, { once: true })
-  const isInViewContent = useInView(contentRef, { once: true })
 
   return (
     <motion.section
@@ -50,14 +46,14 @@ export default function IntroducingDarkMode (): JSX.Element {
       }}
     >
       <motion.div
-        ref={statsRef}
         className='grid items-start gap-6 2xl:gap-10 md:grid-cols-2 xl:col-span-4 2xl:col-span-1'
         variants={CONTENT_VARIANTS}
-        animate={isInViewStats ? 'visible' : 'hidden'}
+        animate={isInViewContainer ? 'visible' : 'hidden'}
         initial='hidden'
         transition={{
           duration: 0.4,
-          ease: 'easeOut'
+          ease: 'easeOut',
+          delay: 0.4
         }}
       >
         <article className='pb-6 transition ease-in-out border-2 pt-7 pr-7 pl-7 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 group'>
@@ -105,15 +101,14 @@ export default function IntroducingDarkMode (): JSX.Element {
         </article>
       </motion.div>
       <motion.div
-        ref={contentRef}
         className='flex flex-col items-start text-black transition-colors ease-in-out dark:text-blue duration-400 xl:col-start-6 xl:col-end-9 2xl:col-start-2 2xl:col-end-3'
         variants={CONTENT_VARIANTS}
-        animate={isInViewContent ? 'visible' : 'hidden'}
+        animate={isInViewContainer ? 'visible' : 'hidden'}
         initial='hidden'
         transition={{
           duration: 0.4,
           ease: 'easeOut',
-          delay: 0.2
+          delay: 0.6
         }}
       >
         <Headline variant='2xl' className='!mb-10'><Balancer>Discover the Dark Side of wrkload!</Balancer></Headline>
