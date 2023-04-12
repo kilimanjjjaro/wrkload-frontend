@@ -5,7 +5,7 @@ export const PAGES = [
   { name: 'Projects', link: '/projects', admin: false },
   { name: 'Profile', link: '/profile', admin: false },
   { name: 'Users', link: '/users', admin: true }
-]
+] as const
 
 export const SKELETON = Array.from(Array(4).keys())
 
@@ -14,7 +14,7 @@ export const MASONRY_BREAKPOINTS = {
   1280: 4,
   768: 2,
   1: 1
-}
+} as const
 
 export const FEATURES: FeaturesInterface[] = [
   {
@@ -43,8 +43,8 @@ export const FEATURES: FeaturesInterface[] = [
   }
 ]
 
-export const CHARACTER_LIMIT = 200
+export const CHARACTER_LIMIT = 200 as const
 
 export const LENIS_OPTIONS = {
   duration: 1.2
-}
+} as const

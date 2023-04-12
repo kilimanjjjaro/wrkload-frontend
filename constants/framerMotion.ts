@@ -6,7 +6,7 @@ export const BACKGROUND_VARIANTS = {
       display: 'none'
     }
   }
-}
+} as const
 
 export const CONTENT_VARIANTS = {
   initial: { opacity: 0, y: 100, display: 'none' },
@@ -17,7 +17,7 @@ export const CONTENT_VARIANTS = {
       display: 'none'
     }
   }
-}
+} as const
 
 export const PAGE_VARIANTS = {
   initial: {
@@ -38,4 +38,4 @@ export const PAGE_VARIANTS = {
       ease: 'easeInOut'
     }
   }
-}
+} as const

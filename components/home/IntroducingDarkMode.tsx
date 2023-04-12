@@ -29,7 +29,7 @@ const CONTENT_VARIANTS = {
   }
 }
 
-export default function IntroducingStats (): JSX.Element {
+export default function IntroducingDarkMode (): JSX.Element {
   const containerRef = useRef(null)
   const statsRef = useRef(null)
   const contentRef = useRef(null)
@@ -40,7 +40,7 @@ export default function IntroducingStats (): JSX.Element {
   return (
     <motion.section
       ref={containerRef}
-      className='px-6 md:px-8 xl:px-[5.5vw] 2xl:px-[6vw] py-24 xl:sticky xl:top-0 grid items-center gap-6 2xl:gap-32 bg-[#e3e5ea] dark:bg-[#0f1012] md:min-h-screen md:grid-cols-2'
+      className='px-6 md:px-8 xl:px-[5.5vw] 2xl:px-[6vw] py-24 xl:sticky xl:top-0 grid items-center gap-6 2xl:gap-32 bg-[#ced2e0] dark:bg-[#14161a] md:min-h-screen md:grid-cols-2'
       variants={CONTAINER_VARIANTS}
       animate={isInViewContainer ? 'visible' : 'hidden'}
       initial='hidden'
@@ -117,9 +117,9 @@ export default function IntroducingStats (): JSX.Element {
           delay: 0.4
         }}
       >
-        <Headline variant='2xl' className='!mb-10'><Balancer>All you need in one blink!</Balancer></Headline>
+        <Headline variant='2xl' className='!mb-10 md:w-3/4'><Balancer>Discover the Dark Side of wrkload!</Balancer></Headline>
         <div className='dark:text-white md:w-3/4'>
-          <Paragraph variant='normal'>You can control in detail the time you worked on a project and extra data associated with it. All in the same place.</Paragraph>
+          <Paragraph variant='normal'>With our dark mode, you can enjoy a more relaxed and focused user experience. The interface will help you work without eye strain and optimize your device&apos;s battery.</Paragraph>
         </div>
       </motion.div>
     </motion.section>
