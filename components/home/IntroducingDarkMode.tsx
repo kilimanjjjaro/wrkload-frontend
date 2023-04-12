@@ -40,7 +40,7 @@ export default function IntroducingDarkMode (): JSX.Element {
   return (
     <motion.section
       ref={containerRef}
-      className='px-6 md:px-8 xl:px-[5.5vw] 2xl:px-[6vw] py-24 xl:sticky xl:top-0 grid items-center gap-6 2xl:gap-32 bg-[#ced2e0] dark:bg-[#14161a] md:min-h-screen md:grid-cols-2'
+      className='px-6 md:px-8 xl:px-[5vw] 2xl:px-[6vw] py-24 xl:sticky xl:top-0 grid items-center gap-8 xl:gap-0 2xl:gap-32 bg-[#ced2e0] dark:bg-[#121316] md:min-h-screen xl:grid-cols-8 2xl:grid-cols-2'
       variants={CONTAINER_VARIANTS}
       animate={isInViewContainer ? 'visible' : 'hidden'}
       initial='hidden'
@@ -51,14 +51,13 @@ export default function IntroducingDarkMode (): JSX.Element {
     >
       <motion.div
         ref={statsRef}
-        className='grid items-start gap-6 2xl:gap-10 md:grid-cols-2'
+        className='grid items-start gap-6 2xl:gap-10 md:grid-cols-2 xl:col-span-4 2xl:col-span-1'
         variants={CONTENT_VARIANTS}
         animate={isInViewStats ? 'visible' : 'hidden'}
         initial='hidden'
         transition={{
-          duration: 0.8,
-          ease: 'easeOut',
-          delay: 0.1
+          duration: 0.4,
+          ease: 'easeOut'
         }}
       >
         <article className='pb-6 transition ease-in-out border-2 pt-7 pr-7 pl-7 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 group'>
@@ -107,19 +106,19 @@ export default function IntroducingDarkMode (): JSX.Element {
       </motion.div>
       <motion.div
         ref={contentRef}
-        className='flex flex-col items-start text-black transition-colors ease-in-out dark:text-blue duration-400'
+        className='flex flex-col items-start text-black transition-colors ease-in-out dark:text-blue duration-400 xl:col-start-6 xl:col-end-9 2xl:col-start-2 2xl:col-end-3'
         variants={CONTENT_VARIANTS}
         animate={isInViewContent ? 'visible' : 'hidden'}
         initial='hidden'
         transition={{
-          duration: 0.8,
+          duration: 0.4,
           ease: 'easeOut',
-          delay: 0.4
+          delay: 0.2
         }}
       >
-        <Headline variant='2xl' className='!mb-10 md:w-3/4'><Balancer>Discover the Dark Side of wrkload!</Balancer></Headline>
-        <div className='dark:text-white md:w-3/4'>
-          <Paragraph variant='normal'>With our dark mode, you can enjoy a more relaxed and focused user experience. The interface will help you work without eye strain and optimize your device&apos;s battery.</Paragraph>
+        <Headline variant='2xl' className='!mb-10'><Balancer>Discover the Dark Side of wrkload!</Balancer></Headline>
+        <div className='dark:text-white'>
+          <Paragraph variant='normal'><Balancer>With our dark mode, you can enjoy a more relaxed and focused user experience. The interface will help you work without eye strain and optimize your device&apos;s battery.</Balancer></Paragraph>
         </div>
       </motion.div>
     </motion.section>

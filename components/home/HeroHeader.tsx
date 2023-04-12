@@ -15,16 +15,16 @@ export default function HeroHeader (): JSX.Element {
 
   return (
     <PageTransition>
-      <header className='px-6 md:px-8 xl:px-[5.5vw] 2xl:px-[6vw] grid items-center gap-6 2xl:gap-10 mb-20 mt-44 md:mt-0 md:mb-0 md:min-h-screen md:grid-cols-2'>
-        <div className='flex flex-col items-start text-black transition-colors ease-in-out dark:text-blue duration-400'>
+      <header className='px-6 md:px-8 xl:px-[5vw] 2xl:px-[6vw] grid items-center gap-8 xl:gap-20 2xl:gap-32 mb-20 mt-44 md:mt-0 md:mb-0 md:min-h-screen xl:grid-cols-8 2xl:grid-cols-2'>
+        <div className='flex flex-col items-start text-black transition-colors ease-in-out xl:col-span-3 2xl:col-span-1 dark:text-blue duration-400'>
           <Headline variant='2xl'><Balancer>Work, load your time and go have fun!</Balancer></Headline>
-          <div className='mb-8 dark:text-white 2xl:w-2/3'>
+          <div className='mb-8 dark:text-white'>
             <Paragraph variant='normal'><b className='font-extrabold'>Easy-peasy!</b></Paragraph>
             <Paragraph variant='normal'><Balancer>With wrkload you can track what you&apos;ve worked on in a simple and organized way.</Balancer></Paragraph>
           </div>
           <Button className='!w-auto' variant='primary' onClick={() => router.push('/registry')}>Start now for free <ArrowRightIcon className='w-4 stroke-3' /></Button>
         </div>
-        <div className='grid items-center gap-6 2xl:gap-10 md:grid-cols-2'>
+        <div className='grid items-center gap-6 xl:col-start-4 xl:col-end-9 2xl:col-start-2 2xl:col-end-3 2xl:gap-10 md:grid-cols-2'>
           <Atropos
             rotateXMax={100}
             rotateYMax={100}
@@ -66,7 +66,7 @@ export default function HeroHeader (): JSX.Element {
               </div>
             </article>
           </Atropos>
-          <article className='p-6 hidden 2xl:block xl:scale-[0.80] bg-light-blue dark:bg-blue md:p-7 rounded-3xl transition duration-400 ease-in-out'>
+          <article className='p-6 xl:scale-[0.80] bg-light-blue dark:bg-blue md:p-7 rounded-3xl transition duration-400 ease-in-out'>
             <div className='w-4/6 mb-4 xl:mb-5 h-9 bg-gradient-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-[length:200%_100%] rounded-full animate-skeleton' />
             <div className='w-full h-28 bg-gradient-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-[length:200%_100%] rounded-3xl animate-skeleton' />
             <div className='flex flex-wrap w-full gap-3 mt-4'>
@@ -83,6 +83,7 @@ export default function HeroHeader (): JSX.Element {
             </div>
           </article>
           <Atropos
+            className='hidden 2xl:block'
             rotateXMax={100}
             rotateYMax={100}
             activeOffset={200}
