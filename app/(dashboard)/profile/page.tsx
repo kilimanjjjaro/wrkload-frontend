@@ -20,32 +20,37 @@ export default function Profile (): JSX.Element {
         Profile
       </Headline>
       {(user !== null) && (
-        <div className='flex flex-col xl:w-1/2'>
-          <Headline className='text-white !mb-4' variant='md'>Avatar</Headline>
-          <Paragraph className='mb-5 text-white' variant='sm'>The recommended dimensions are 256x256 px.</Paragraph>
-          <div className='flex flex-col items-start gap-6 mb-12 xl:flex-row xl:items-center'>
-            <Image
-              className='object-cover border-4 border-black rounded-full dark:border-white'
-              src={user.avatar}
-              alt={user.username}
-              width={150}
-              height={150}
-            />
-            <div className='flex flex-col gap-4'>
-              <Button variant='primary'><CloudArrowUpIcon className='w-4 stroke-3' /> Upload avatar</Button>
-              {!user.avatar.includes('default-avatar.svg') && <Button variant='primary'><TrashIcon className='w-4 stroke-3' />Remove avatar</Button>}
+        <div className='flex flex-col gap-8 xl:w-1/2'>
+          <div className='flex flex-col gap-4'>
+            <Headline className='!mb-0 text-white' variant='md'>Avatar</Headline>
+            <Paragraph className='text-white ' variant='sm'>The recommended dimensions are 256x256 px.</Paragraph>
+            <div className='flex flex-col items-start gap-6 xl:flex-row xl:items-center'>
+              <Image
+                className='object-cover border-4 border-black rounded-full dark:border-white'
+                src={user.avatar}
+                alt={user.username}
+                width={150}
+                height={150}
+              />
+              <div className='flex flex-col gap-4'>
+                <Button variant='primary'><CloudArrowUpIcon className='w-4 stroke-3' /> Upload avatar</Button>
+                {!user.avatar.includes('default-avatar.svg') && <Button variant='primary'><TrashIcon className='w-4 stroke-3' />Remove avatar</Button>}
+              </div>
             </div>
           </div>
 
-          <Headline className='text-white !mb-4' variant='md'>Name</Headline>
-          <Paragraph className='text-white' variant='normal'>{user.username}</Paragraph>
+          <div className='flex flex-col gap-4'>
+            <Headline className='!mb-0 text-white' variant='md'>Name</Headline>
+            <Paragraph className='text-white' variant='normal'>{user.username}</Paragraph>
+          </div>
 
-          <Headline className='text-white mt-12 !mb-4' variant='md'>Email</Headline>
-          <Paragraph className='text-white' variant='normal'>{user.email}</Paragraph>
+          <div className='flex flex-col gap-4'>
+            <Headline className='!mb-0 text-white' variant='md'>Email</Headline>
+            <Paragraph className='text-white' variant='normal'>{user.email}</Paragraph>
+          </div>
 
-          <Button className='!w-auto' variant='primary'><PencilSquareIcon className='w-4 stroke-3' /> Update profile</Button>
-
-          <div className='flex flex-col gap-4 mt-12 xl:flex-row'>
+          <div className='flex flex-col items-start gap-4'>
+            <Button className='!w-auto' variant='primary'><PencilSquareIcon className='w-4 stroke-3' /> Update profile</Button>
             <Button className='!w-auto' variant='primary' onClick={() => router.push('/change-password')}><LockClosedIcon className='w-4 stroke-3' /> Change password</Button>
             <Button className='!w-auto' variant='primary' onClick={() => router.push('/delete-account')}><UserMinusIcon className='w-4 stroke-3' /> Delete account</Button>
           </div>

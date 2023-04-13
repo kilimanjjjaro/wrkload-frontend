@@ -56,7 +56,7 @@ export default function IntroducingStats (): JSX.Element {
           delay: 0.4
         }}
       >
-        <article className='pb-6 transition ease-in-out border-2 pt-7 pl-7 pr-7 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 group'>
+        <article className='pt-6 pb-5 pl-6 pr-6 transition ease-in-out border-2 md:pt-7 md:pb-6 md:pl-7 md:pr-7 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 group'>
           <RectangleStackIcon className='h-10 stroke-2' />
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
             87
@@ -70,23 +70,23 @@ export default function IntroducingStats (): JSX.Element {
           <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>tasks uploaded<br /> in the current month.</span>
         </article>
 
-        <article className='pt-7 pb-6 pl-7 pr-7 transition ease-in-out border-2 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 xl:scale-[0.75]'>
+        <article className='pt-6 pb-5 pl-6 pr-6 md:pt-7 md:pb-6 md:pl-7 md:pr-7 transition ease-in-out border-2 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 xl:scale-[0.75]'>
           <ClockIcon className='h-10 stroke-2' />
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
             102
           </div>
-          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>hours worked<br /> the current month.</span>
+          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>hours worked<br /> in the current month.</span>
         </article>
 
-        <article className='pt-7 pb-6 pl-7 pr-7 transition ease-in-out border-2 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 xl:scale-[0.75]'>
+        <article className='pt-6 pb-5 pl-6 pr-6 md:pt-7 md:pb-6 md:pl-7 md:pr-7 transition ease-in-out border-2 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 xl:scale-[0.75]'>
           <FireIcon className='h-10 stroke-2' />
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
             Nike
           </div>
-          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>Project of<br /> the past month.</span>
+          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>Project of<br /> last month.</span>
         </article>
 
-        <article className='hidden pb-6 transition ease-in-out border-2 pt-7 pl-7 pr-7 xl:block border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 group'>
+        <article className='hidden pt-6 pb-5 pl-6 pr-6 transition ease-in-out border-2 md:pt-7 md:pb-6 md:pl-7 md:pr-7 md:block border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 group'>
           <ClockIcon className='h-10 stroke-2' />
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
             48

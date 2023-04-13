@@ -21,7 +21,7 @@ export default function Users (): JSX.Element {
   const page = params.get('page')
   const accessToken = getCookie('accessToken')
 
-  const { data, isLoading, isValidating, mutate } = useSWR('users', async () => await getUsers({ page }), { onSuccess: data => sortUsers(data.users), revalidateIfStale: false })
+  const { data, isLoading, isValidating, mutate } = useSWR('users', async () => await getUsers({ page }), { onSuccess: data => sortUsers(data.users) })
 
   useEffect(() => {
     if (accessToken !== undefined) {

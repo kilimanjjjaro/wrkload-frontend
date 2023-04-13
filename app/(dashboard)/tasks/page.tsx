@@ -21,7 +21,7 @@ export default function Tasks (): JSX.Element {
   const params = useSearchParams()
   const page = params.get('page')
 
-  const { data: projects, isLoading: isLoadingProjects, isValidating: isValidatingProjects } = useSWR('projects', async () => await getProjects({ page: '1', noLimit: true }), { revalidateIfStale: false })
+  const { data: projects, isLoading: isLoadingProjects, isValidating: isValidatingProjects } = useSWR('projects', async () => await getProjects({ page: '1', noLimit: true }))
 
   if (projects !== undefined && projects.projects.length > 0) {
     sortedProjectNames = projects.projects.map((project) => project.name).sort()
@@ -33,7 +33,7 @@ export default function Tasks (): JSX.Element {
     }
   }, [projects])
 
-  const { data: tasks, isLoading: isLoadingTasks, isValidating: isValidatingTasks, mutate } = useSWR(selectedProjectToFetch !== '' ? 'tasks' : null, async () => await getTasks({ page, project: selectedProjectToFetch }), { onSuccess: (data) => sortTasks(data.tasks), revalidateIfStale: false })
+  const { data: tasks, isLoading: isLoadingTasks, isValidating: isValidatingTasks, mutate } = useSWR(selectedProjectToFetch !== '' ? 'tasks' : null, async () => await getTasks({ page, project: selectedProjectToFetch }), { onSuccess: (data) => sortTasks(data.tasks) })
 
   useEffect(() => {
     mutate().catch((error) => console.error(error))

@@ -35,7 +35,7 @@ function ParallaxText ({ children, baseVelocity = 100 }: Props): JSX.Element {
 
   return (
     <div className='flex overflow-hidden whitespace-nowrap flex-nowrap'>
-      <motion.div className='flex flex-nowrap whitespace-nowrap text-blue text-6xl leading-[1.2] font-primaryFont md:text-6xl xl:text-7xl 2xl:text-[5.5rem] xl:leading-[1.1]' style={{ x }}>
+      <motion.div className='flex flex-nowrap whitespace-nowrap text-blue text-6xl leading-[1.2] font-primaryFont md:text-6xl xl:text-7xl 2xl:text-[5.5rem] md:!leading-[1.1]' style={{ x }}>
         <span className='mr-6'>{children}</span>
         <span className='mr-6'>{children}</span>
         <span className='mr-6'>{children}</span>

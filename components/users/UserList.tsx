@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import Image from 'next/image'
-import Balancer from 'react-wrap-balancer'
 import dayjs from 'dayjs'
 import { EnvelopeIcon, PencilSquareIcon, TrashIcon, UserIcon } from '@heroicons/react/24/outline'
 import Pagination from 'components/shared/Pagination'
 import MasonryGrid from 'components/shared/MasonryGrid'
+import Headline from 'components/shared/Headline'
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import type { FullUserInterface, UserInterface } from 'interfaces/users/User'
@@ -66,7 +66,7 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
               </div>
             )}
 
-            <h3 className='mb-1 text-4xl font-bold break-all font-primaryFont'><Balancer>{user.username}</Balancer></h3>
+            <Headline variant='md' className='!mb-1'>{user.username}</Headline>
             <div className='flex mb-3 rounded-full items-center h-6 px-2 text-[10px] font-bold text-black uppercase border-2 border-black gap-x-1 font-secondaryFont'>
               {user.role === 1 && 'Administrator'}
               {user.role === 2 && 'Project Manager'}

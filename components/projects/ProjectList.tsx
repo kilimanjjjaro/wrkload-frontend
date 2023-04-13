@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { usePathname } from 'next/navigation'
 import { RectangleStackIcon, PencilSquareIcon, TrashIcon, CalendarIcon } from '@heroicons/react/24/outline'
 import Stats from 'components/projects/Stats'
+import Headline from 'components/shared/Headline'
 import Pagination from 'components/shared/Pagination'
 import MasonryGrid from 'components/shared/MasonryGrid'
 import { AppContext } from 'contexts/AppContext'
@@ -36,7 +37,7 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
           <article
             key={project._id} className='relative flex flex-col items-start p-6 text-black transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
           >
-            <h3 className='block mb-5 text-4xl font-bold pr-7 xl:pr-0 font-primaryFont'>{project.name}</h3>
+            <Headline variant='md' className='pr-10 !mb-4 xl:pr-0'>{project.name}</Headline>
 
             <div className='flex flex-wrap gap-3 mt-4'>
               <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-1 bg-blue gap-x-1 font-secondaryFont'>

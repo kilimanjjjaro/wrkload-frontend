@@ -15,7 +15,7 @@ export default function HeroHeader (): JSX.Element {
 
   return (
     <PageTransition>
-      <header className='px-6 md:px-8 xl:px-[5vw] 2xl:px-[6vw] grid items-center gap-8 xl:gap-20 2xl:gap-32 mb-20 mt-44 md:mt-0 md:mb-0 md:min-h-screen xl:grid-cols-8 2xl:grid-cols-2'>
+      <header className='px-6 md:px-8 xl:px-[5vw] 2xl:px-[6vw] grid items-center gap-8 xl:gap-20 2xl:gap-32 mb-20 mt-44 xl:mt-0 xl:mb-0 xl:min-h-screen xl:grid-cols-8 2xl:grid-cols-2'>
         <div className='flex flex-col items-start text-black transition-colors ease-in-out xl:col-span-3 2xl:col-span-1 dark:text-blue duration-400'>
           <Headline variant='2xl'><Balancer>Work, load your time and go have fun!</Balancer></Headline>
           <div className='mb-8 dark:text-white'>
@@ -34,10 +34,10 @@ export default function HeroHeader (): JSX.Element {
           >
             <article
               data-atropos-offset='6'
-              className='relative flex pt-6 transition ease-in-out border-2 pb-7 pl-7 pr-7 border-blue dark:border-blue rounded-3xl duration-400 group will-change-transform'
+              className='relative flex pt-5 pb-6 pl-6 pr-6 transition ease-in-out border-2 md:pt-6 md:pb-7 md:pl-7 md:pr-7 border-blue dark:border-blue rounded-3xl duration-400 group will-change-transform'
             >
               <div data-atropos-offset='2' className='w-full'>
-                <h3 className='md:mb-6 text-3xl mb-[1.4rem] text-black dark:text-blue font-primaryFont md:text-4xl font-bold'><Balancer>Prototype the Checkout Page in Figma</Balancer></h3>
+                <h3 className='md:mb-6 text-3xl mb-[1.4rem] text-black dark:text-blue font-primaryFont md:text-4xl font-bold pr-10 md:pr-0'><Balancer>Prototype the Checkout Page in Figma</Balancer></h3>
                 <p className='text-base text-black break-word font-secondaryFont dark:text-white'><Balancer>A prototype was created for the payment process of an e-commerce application in Figma. Different user flows were designed and tested to ensure a seamless payment experience.</Balancer></p>
                 <div className='flex flex-wrap gap-3 mt-4'>
                   <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-1 bg-blue gap-x-1 font-secondaryFont'>
@@ -92,7 +92,7 @@ export default function HeroHeader (): JSX.Element {
           >
             <article
               data-atropos-offset='6'
-              className='relative flex pt-6 transition ease-in-out border-2 pb-7 pl-7 pr-7 border-blue dark:border-blue rounded-3xl duration-400 group will-change-transform'
+              className='relative flex pt-5 pb-6 pl-6 pr-6 transition ease-in-out border-2 md:pt-6 md:pb-7 md:pl-7 md:pr-7 border-blue dark:border-blue rounded-3xl duration-400 group will-change-transform'
             >
               <div data-atropos-offset='2' className='w-full'>
                 <h3 className='md:mb-6 text-3xl mb-[1.4rem] text-black dark:text-blue font-primaryFont md:text-4xl font-bold'><Balancer>Optimize the Website for SEO</Balancer></h3>

@@ -10,7 +10,7 @@ export default function PageTitle (): JSX.Element {
   const { setSelectedProjectToFetch } = useContext(AppContext)
   let sortedProjectNames: string[] = []
 
-  const { data, isLoading } = useSWR('projects', async () => await getProjects({ page: '1', noLimit: true }), { revalidateIfStale: false })
+  const { data, isLoading } = useSWR('projects', async () => await getProjects({ page: '1', noLimit: true }))
 
   if (data !== undefined) sortedProjectNames = data?.projects.map((project) => project.name).sort()
 

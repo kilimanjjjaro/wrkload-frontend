@@ -22,7 +22,7 @@ export default function SearchTasks (): JSX.Element {
   const page = params.get('page')
   const router = useRouter()
 
-  const { data, isLoading, isValidating, mutate } = useSWR('tasks', async () => await searchTasks({ project, query, page }), { onSuccess: data => sortTasks(data.tasks), revalidateIfStale: false, revalidateOnFocus: false })
+  const { data, isLoading, isValidating, mutate } = useSWR('tasks', async () => await searchTasks({ project, query, page }), { onSuccess: data => sortTasks(data.tasks) })
 
   useEffect(() => {
     mutate().catch((error) => console.error(error))

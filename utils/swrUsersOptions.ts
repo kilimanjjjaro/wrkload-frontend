@@ -16,8 +16,7 @@ export const updateUserOptions = (updatedUser: UserInterface): any => {
         return user._id !== updatedUser._id
       })
       return { ...data, users: sortUsers([...prevUsers, updated]) }
-    },
-    revalidate: false
+    }
   }
 }
 
@@ -39,7 +38,6 @@ export const deleteUserOptions = (_id: string): any => {
           return user._id !== _id
         })
       }
-    },
-    revalidate: false
+    }
   }
 }

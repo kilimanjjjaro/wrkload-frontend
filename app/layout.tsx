@@ -1,5 +1,6 @@
 'use client'
 
+import { SWRConfig } from 'swr'
 import { AnimatePresence } from 'framer-motion'
 import { ReactLenis } from '@studio-freight/react-lenis'
 import { inter, spaceGrotesk } from 'utils/fonts'
@@ -26,15 +27,17 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
         <meta property='og:type' content='website' />
       </head>
       <body className={`bg-white dark:bg-black transition-colors duration-400 ease-in-out antialiased ${inter} ${spaceGrotesk}`}>
-        <AppProvider>
-          <NavBar />
-          <AnimatePresence>
-            <ReactLenis root options={LENIS_OPTIONS}>
-              {children}
-            </ReactLenis>
-          </AnimatePresence>
-          <Footer />
-        </AppProvider>
+        <SWRConfig value={{ revalidateOnFocus: false }}>
+          <AppProvider>
+            <NavBar />
+            <AnimatePresence>
+              <ReactLenis root options={LENIS_OPTIONS}>
+                {children}
+              </ReactLenis>
+            </AnimatePresence>
+            <Footer />
+          </AppProvider>
+        </SWRConfig>
       </body>
     </html>
   )
