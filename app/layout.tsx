@@ -2,6 +2,7 @@
 
 import { SWRConfig } from 'swr'
 import { AnimatePresence } from 'framer-motion'
+import { Toaster } from 'sonner'
 import { ReactLenis } from '@studio-freight/react-lenis'
 import { inter, spaceGrotesk } from 'utils/fonts'
 import AppProvider from 'contexts/AppContext'
@@ -35,6 +36,7 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
                 {children}
               </ReactLenis>
             </AnimatePresence>
+            <Toaster position='top-center' toastOptions={{ className: 'ui-notifications' }} duration={6000} />
             <Footer />
           </AppProvider>
         </SWRConfig>

@@ -14,6 +14,7 @@ import login from 'services/auth/login'
 import { AppContext } from 'contexts/AppContext'
 import PageTransition from 'components/shared/PageTransition'
 import { setCookie } from 'cookies-next'
+import { toast } from 'sonner'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: '',
@@ -46,6 +47,11 @@ export default function Login (): JSX.Element {
           maxAge: 60 * 60 * 24 * 30
         })
         router.push('/tasks')
+        if (response.user._id === '6439b01cf35b6e22570cd842') {
+          toast.message('Welcome to the tail version', {
+            description: 'Remember that this is a trial account. To access all the features, you must register.'
+          })
+        }
       }
     } catch (error: any) {
       setError(error.response.data.code)

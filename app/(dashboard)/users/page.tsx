@@ -3,7 +3,6 @@
 import { useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
-import { Toaster } from 'sonner'
 import jwtDecode from 'jwt-decode'
 import Header from 'components/users/Header'
 import Skeleton from 'components/users/Skeleton'
@@ -50,7 +49,6 @@ export default function Users (): JSX.Element {
         {shouldRenderNotFoundSign && <NotFound />}
       </main>
       <Modals />
-      <Toaster position='top-center' toastOptions={{ className: 'optimistic-ui-notifications' }} duration={4000} />
     </PageTransition>
   )
 }

@@ -31,10 +31,9 @@ export default function AddProject (): JSX.Element {
 
       if (response?.status === 'ok') {
         toast.success('Project added successfully!')
-      } else {
-        toast.error('Something went wrong. Please, try again!')
       }
     } catch (error: any) {
+      toast.error('Something went wrong. Please, try again!')
       console.error(error.response)
     }
   }

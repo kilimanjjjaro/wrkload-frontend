@@ -32,10 +32,9 @@ export default function UpdateTask (): JSX.Element {
 
       if (response?.status === 'ok') {
         toast.success('Task updated successfully!')
-      } else {
-        toast.error('Something went wrong. Please, try again!')
       }
     } catch (error) {
+      toast.error('Something went wrong. Please, try again!')
       console.error(error)
     }
   }

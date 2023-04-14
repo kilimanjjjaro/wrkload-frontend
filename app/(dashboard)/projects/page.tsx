@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react'
 import useSWR from 'swr'
-import { Toaster } from 'sonner'
 import Header from 'components/projects/Header'
 import Skeleton from 'components/projects/Skeleton'
 import ProjectList from 'components/projects/ProjectList'
@@ -36,7 +35,6 @@ export default function Projects (): JSX.Element {
         {shouldRenderNotFoundSign && <NotFound />}
       </main>
       <Modals />
-      <Toaster position='top-center' toastOptions={{ className: 'optimistic-ui-notifications' }} duration={4000} />
     </PageTransition>
   )
 }

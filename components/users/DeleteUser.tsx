@@ -30,10 +30,9 @@ export default function DeleteUser (): JSX.Element {
 
       if (response?.status === 'ok') {
         toast.success('User deleted successfully!')
-      } else {
-        toast.error('Something went wrong. Please, try again!')
       }
     } catch (error: any) {
+      toast.error('Something went wrong. Please, try again!')
       console.error(error.response)
     }
   }

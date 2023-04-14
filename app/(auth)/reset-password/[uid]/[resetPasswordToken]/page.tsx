@@ -90,6 +90,7 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
             )}
           >
             <Balancer>
+              {error === 'trial/permission-denied' && 'This is a trial account, to access this feature you must register.'}
               {error === 'auth/different-passwords' && 'Passwords are not the same. Please, try again.'}
               {error === 'token/token-expired' && 'Sorry, the reset password link has expired. Please request one again.'}
               {error === 'token/token-not-found' && 'Invalid link. Please, try again with the one that we sent you.'}

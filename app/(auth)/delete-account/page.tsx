@@ -52,6 +52,7 @@ export default function DeleteAccount (): JSX.Element {
           <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
+              {error === 'trial/permission-denied' && 'This is a trial account, to access this feature you must register.'}
               {error === 'auth/invalid-credentials' && 'The email or password are invalid. Please, try again.'}
               {error === 'auth/account-not-confirmed' && 'This account has not been confirmed yet. Please, do this first.'}
             </Balancer>

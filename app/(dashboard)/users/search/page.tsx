@@ -5,7 +5,6 @@ import useSWR from 'swr'
 import Image from 'next/image'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
-import { Toaster } from 'sonner'
 import Skeleton from 'components/users/Skeleton'
 import Modals from 'components/users/Modals'
 import Button from 'components/shared/Button'
@@ -60,7 +59,6 @@ export default function SearchUsers (): JSX.Element {
         )}
       </main>
       <Modals />
-      <Toaster position='top-center' toastOptions={{ className: 'optimistic-ui-notifications' }} duration={4000} />
     </PageTransition>
   )
 }

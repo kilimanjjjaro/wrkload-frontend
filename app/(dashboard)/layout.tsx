@@ -1,5 +1,4 @@
 import ModalsProvider from 'contexts/ModalsContext'
-
 import type { ChildrenInterface } from 'interfaces/components'
 
 export default function DashboardLayout ({ children }: ChildrenInterface): JSX.Element {

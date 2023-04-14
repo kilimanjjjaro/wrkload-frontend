@@ -12,16 +12,21 @@
   top: 32px !important;
 }
 
-.optimistic-ui-notifications {
+.ui-notifications {
   justify-content: center;
   width: auto !important;
   padding: 14px 20px !important;
-  height: 47.5px !important;
   background: #d2d7e3 !important;
   color: #0a0a0a !important;
-  border-radius: 9999px !important;
+  text-align: center;
+  font-family: var(--inter-font), system-ui, sans-serif;
+  border-radius: 1.5rem !important;
   box-shadow: none !important;
-  border: none !important
+  border: none !important;
+}
+
+.ui-notifications [data-title] {
+  font-weight: 600;
 }
 
 @media (max-width: 600px) {
@@ -34,7 +39,7 @@
     width: auto !important;
   }
 
-  .optimistic-ui-notifications {
+  .ui-notifications {
     width: 100% !important;
   }
 }

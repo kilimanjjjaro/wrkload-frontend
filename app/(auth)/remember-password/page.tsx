@@ -52,6 +52,7 @@ export default function RememberPassword (): JSX.Element {
           <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
+              {error === 'trial/permission-denied' && 'This is a trial account, to access this feature you must register.'}
               {error === 'auth/user-not-found' && 'No account associated with this email was found, please try again.'}
             </Balancer>
           </p>

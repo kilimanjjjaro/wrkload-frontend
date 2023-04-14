@@ -96,6 +96,10 @@ export default function ChangePassword (): JSX.Element {
       if (error.response.data.code === 'auth/invalid-credentials') {
         setError('auth/invalid-credentials')
       }
+
+      if (error.response.data.code === 'trial/permission-denied') {
+        setError('trial/permission-denied')
+      }
     } finally {
       setIsLoading(false)
     }
@@ -108,6 +112,7 @@ export default function ChangePassword (): JSX.Element {
           <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
+              {error === 'trial/permission-denied' && 'This is a trial account, to access this feature you must register.'}
               {error === 'auth/different-passwords' && 'Passwords are not the same. Please, try again.'}
               {error === 'auth/invalid-credentials' && 'The email or password are invalid. Please, try again.'}
               {error === 'auth/expired-session' && 'Your session has expired. Please, log in again to change your password.'}
