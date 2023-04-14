@@ -8,14 +8,14 @@ dependencies:
     specifier: ^10.15.1
     version: 10.15.1
   '@studio-freight/react-lenis':
-    specifier: ^0.0.14
-    version: 0.0.14(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^0.0.15
+    version: 0.0.15(react-dom@18.2.0)(react@18.2.0)
   '@types/node':
     specifier: 18.15.11
     version: 18.15.11
   '@types/react':
-    specifier: 18.0.33
-    version: 18.0.33
+    specifier: 18.0.35
+    version: 18.0.35
   '@types/react-dom':
     specifier: 18.0.11
     version: 18.0.11
@@ -41,8 +41,8 @@ dependencies:
     specifier: 13.3.0
     version: 13.3.0(eslint@8.38.0)(typescript@5.0.4)
   framer-motion:
-    specifier: 10.11.2
-    version: 10.11.2(react-dom@18.2.0)(react@18.2.0)
+    specifier: 10.12.2
+    version: 10.12.2(react-dom@18.2.0)(react@18.2.0)
   jwt-decode:
     specifier: 3.1.2
     version: 3.1.2
@@ -65,11 +65,11 @@ dependencies:
     specifier: 0.3.0
     version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
   swiper:
-    specifier: 9.2.0
-    version: 9.2.0
+    specifier: 9.2.2
+    version: 9.2.2
   swr:
-    specifier: 2.1.2
-    version: 2.1.2(react@18.2.0)
+    specifier: 2.1.3
+    version: 2.1.3(react@18.2.0)
   typescript:
     specifier: 5.0.4
     version: 5.0.4
@@ -1633,8 +1633,8 @@ packages:
     resolution: {integrity: sha512-g/cTDwra/6WsCGK6KTyfOlTAwJA5xFCJtRFNGM+Ge/oIOg2emLJKV+yTFATekjuCX4r7W5tcBp8LcQ2b+P6yuQ==}
     dev: false
 
-  /@studio-freight/react-lenis@0.0.14(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-YMDqVR4366FtEQKvx4x6e9EXzcv5GnoTryJRgqKzanO+vsjKAkubHtzJKOUjC+JcAe6dUk0R6Hw68LXXGcSB5g==}
+  /@studio-freight/react-lenis@0.0.15(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-3LIjbQ4ucJZ83j/Uyv9xeAa/5b1RRjBYvP6FsuvZoYxtBLsFvYMCQ19HoisN3bUGT7uw8u+Nxhz1XP37gee3Mw==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -1842,11 +1842,11 @@ packages:
   /@types/react-dom@18.0.11:
     resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
     dependencies:
-      '@types/react': 18.0.33
+      '@types/react': 18.0.35
     dev: false
 
-  /@types/react@18.0.33:
-    resolution: {integrity: sha512-sHxzVxeanvQyQ1lr8NSHaj0kDzcNiGpILEVt69g9S31/7PfMvNCKLKcsHw4lYKjs3cGNJjXSP4mYzX43QlnjNA==}
+  /@types/react@18.0.35:
+    resolution: {integrity: sha512-6Laome31HpetaIUGFWl1VQ3mdSImwxtFZ39rh059a1MNnKGqBpC88J6NJ8n/Is3Qx7CefDGLgf/KhN/sYCf7ag==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
@@ -3137,8 +3137,8 @@ packages:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
     dev: true
 
-  /framer-motion@10.11.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-IrwuC9regNOU99JoM/Z62CAMA3awGV6AcF7e3bcgXk/ZoNlGSt5aVq0J7UAwtLmCkwVlRvBkiMnvv2mZ1GW2pg==}
+  /framer-motion@10.12.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-DD3Ieqy4pjmL0qBtfNMqnU/IONchUqnhHtgFtu0Nq5jw7bhkksD/Cs4cNhLYd1vs7iB8Q+WInxuBeMmzIoA5Xg==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
@@ -4531,15 +4531,15 @@ packages:
       picocolors: 1.0.0
     dev: true
 
-  /swiper@9.2.0:
-    resolution: {integrity: sha512-lWK9toYumUQss+YuTL+Mt0+8twiMJEyzioER4bbS4rrGHlkeLrDM8uhtAmnpdijELrNscuNUujDgKoMQZfQGlQ==}
+  /swiper@9.2.2:
+    resolution: {integrity: sha512-rXicgpm8XRziyZ6TZ4NnZNb6FrhDH0M7X16WoHyzDp5HNHqXGe2BMXBQhfDDGUfhWcSIqeGSvPL9bQzK7Qr+dw==}
     engines: {node: '>= 4.7.0'}
     dependencies:
       ssr-window: 4.0.2
     dev: false
 
-  /swr@2.1.2(react@18.2.0):
-    resolution: {integrity: sha512-ocfaD2rnYZKqTDplCEX2bH5Z1++n2JSej9oYi7hVfXXWYm+0RP+H6fVrogWB0mtMclv1guk9kEnAzNLygOy9Hw==}
+  /swr@2.1.3(react@18.2.0):
+    resolution: {integrity: sha512-g3ApxIM4Fjbd6vvEAlW60hJlKcYxHb+wtehogTygrh6Jsw7wNagv9m4Oj5Gq6zvvZw0tcyhVGL9L0oISvl3sUw==}
     peerDependencies:
       react: ^16.11.0 || ^17.0.0 || ^18.0.0
     dependencies:
