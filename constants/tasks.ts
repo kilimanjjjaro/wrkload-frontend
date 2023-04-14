@@ -9,11 +9,11 @@ export const INITIAL_TASK_STATE: TaskInterface = {
   deliveredAt: '',
   timing: '',
   description: ''
-} as const
+}
 
 export const TASK_STATS: StatsInterface[] = [
   { type: 'totalTasks', value: '400', avg: 'better' },
   { type: 'totalMonthlyHours', value: '20', avg: 'worst' }
 ]
 
-export const TASKS_ENDPOINT = '/tasks' as const
+export const TASKS_ENDPOINT = '/tasks'

@@ -24,7 +24,7 @@ export default function Login (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const { setUser } = useContext(AppContext)
+  const { setUser, setIsLoggingIn } = useContext(AppContext)
   const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -37,6 +37,7 @@ export default function Login (): JSX.Element {
 
     try {
       setIsLoading(true)
+      setIsLoggingIn(true)
       const response = await login({ email, password })
 
       if (response.status === 'ok') {
@@ -50,6 +51,7 @@ export default function Login (): JSX.Element {
       setError(error.response.data.code)
     } finally {
       setIsLoading(false)
+      setIsLoggingIn(false)
     }
   }
 

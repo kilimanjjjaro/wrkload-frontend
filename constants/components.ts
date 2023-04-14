@@ -14,7 +14,7 @@ export const MASONRY_BREAKPOINTS = {
   1280: 4,
   768: 2,
   1: 1
-} as const
+}
 
 export const FEATURES: FeaturesInterface[] = [
   {
@@ -43,8 +43,8 @@ export const FEATURES: FeaturesInterface[] = [
   }
 ]
 
-export const CHARACTER_LIMIT = 200 as const
+export const CHARACTER_LIMIT = 200
 
 export const LENIS_OPTIONS = {
   duration: 1.2
-} as const
+}

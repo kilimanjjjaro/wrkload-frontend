@@ -6,12 +6,12 @@ export const INITIAL_PROJECT_STATE: ProjectInterface = {
   name: '',
   createdAt: '',
   totalTasks: ''
-} as const
+}
 
 export const PROJECT_STATS: StatsInterface = {
   type: 'project',
   value: 'Bioland',
   avg: ''
-} as const
+}
 
-export const PROJECTS_ENDPOINT = '/projects' as const
+export const PROJECTS_ENDPOINT = '/projects'

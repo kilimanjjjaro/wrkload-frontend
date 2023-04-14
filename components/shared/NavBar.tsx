@@ -12,7 +12,7 @@ import DashboardTab from 'components/shared/DashboardTab'
 
 export default function NavBar (): JSX.Element {
   const [showDashboardBox, setShowDashboardBox] = useState(false)
-  const { user } = useContext(AppContext)
+  const { user, isLoggingIn } = useContext(AppContext)
   const router = useRouter()
 
   useEffect(() => {
@@ -28,10 +28,16 @@ export default function NavBar (): JSX.Element {
   return (
     <div className='fixed top-0 left-0 z-50 grid items-center justify-between w-full grid-cols-2 px-6 pt-6 mx-auto text md:pt-8 md:px-8'>
       <Link className='flex items-center h-12 md:h-10 justify-self-start' href='/'><Logo /></Link>
-      {user !== null && <DashboardTab showDashboardBox={showDashboardBox} setShowDashboardBox={setShowDashboardBox} />}
+      {user !== null && !isLoggingIn && <DashboardTab showDashboardBox={showDashboardBox} setShowDashboardBox={setShowDashboardBox} />}
       <div className='justify-self-end'>
-        {user === null && <Button onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-3' /></Button>}
-        {user !== null && (
+        {user === null && !isLoggingIn && <Button onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-3' /></Button>}
+        {user === null && isLoggingIn && (
+          <div className='items-center flex gap-x-3 [&>*]:animate-skeleton'>
+            <div className='w-36 h-5 bg-gradient-to-r from-light-blue via-blue to-light-blue bg-[length:200%_100%] rounded-full hidden md:block' />
+            <div className='w-12 h-12 md:w-10 md:h-10 bg-gradient-to-r from-light-blue via-blue to-light-blue bg-[length:200%_100%] rounded-full' />
+          </div>
+        )}
+        {user !== null && !isLoggingIn && (
           <div className='flex items-center cursor-pointer justify-self-end group gap-x-3' onClick={() => setShowDashboardBox(!showDashboardBox)}>
             <div className='hidden text-black transition ease-in-out md:block duration-400 dark:text-white group-hover:text-blue dark:group-hover:text-blue font-secondaryFont'>
               Welcome, {user.username}!
