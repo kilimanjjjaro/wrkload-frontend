@@ -24,7 +24,7 @@ const VARIANTS = {
 }
 
 export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }: Props): JSX.Element {
-  const { user, setUser } = useContext(AppContext)
+  const { user, setUser, setIsLoggingIn } = useContext(AppContext)
   const [pages, setPages] = useState<typeof PAGES>([])
   const router = useRouter()
 
@@ -44,10 +44,12 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
   }, [])
 
   const handleLogout = async (): Promise<void> => {
+    setIsLoggingIn(true)
     setShowDashboardBox(!showDashboardBox)
-    router.push('/')
-    setUser(null)
     await logout()
+    setUser(null)
+    setIsLoggingIn(false)
+    router.push('/')
   }
 
   return (
