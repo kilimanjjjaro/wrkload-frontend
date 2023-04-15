@@ -36,7 +36,7 @@ export default function IntroducingDarkMode (): JSX.Element {
   return (
     <motion.section
       ref={containerRef}
-      className='px-6 md:px-8 xl:px-[5vw] 2xl:px-[6vw] py-24 xl:sticky xl:top-0 grid items-center gap-8 xl:gap-0 2xl:gap-32 bg-[#ced2e0] dark:bg-[#121316] md:min-h-screen xl:grid-cols-8 2xl:grid-cols-2'
+      className='px-6 md:px-8 xl:px-[5vw] 2xl:px-[6vw] py-24 xl:sticky xl:top-0 grid items-center gap-8 xl:gap-0 2xl:gap-32 bg-[#ced2e0] dark:bg-[#121316] md:min-h-screen xl:grid-cols-8 2xl:grid-cols-2 will-change-transform'
       variants={CONTAINER_VARIANTS}
       animate={isInViewContainer ? 'visible' : 'hidden'}
       initial='hidden'
@@ -46,7 +46,7 @@ export default function IntroducingDarkMode (): JSX.Element {
       }}
     >
       <motion.div
-        className='grid items-start order-2 gap-6 xl:order-1 2xl:gap-10 md:grid-cols-2 xl:col-span-4 2xl:col-span-1'
+        className='grid items-start order-2 gap-6 xl:order-1 2xl:gap-10 md:grid-cols-2 xl:col-span-4 2xl:col-span-1 will-change-transform'
         variants={CONTENT_VARIANTS}
         animate={isInViewContainer ? 'visible' : 'hidden'}
         initial='hidden'
@@ -101,7 +101,7 @@ export default function IntroducingDarkMode (): JSX.Element {
         </article>
       </motion.div>
       <motion.div
-        className='flex flex-col items-start order-1 text-black transition-colors ease-in-out xl:order-2 dark:text-blue duration-400 xl:col-start-6 xl:col-end-9 2xl:col-start-2 2xl:col-end-3'
+        className='flex flex-col items-start order-1 text-black transition-colors ease-in-out xl:order-2 dark:text-blue duration-400 xl:col-start-6 xl:col-end-9 2xl:col-start-2 2xl:col-end-3 will-change-transform'
         variants={CONTENT_VARIANTS}
         animate={isInViewContainer ? 'visible' : 'hidden'}
         initial='hidden'

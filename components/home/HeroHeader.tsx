@@ -34,7 +34,7 @@ export default function HeroHeader (): JSX.Element {
           >
             <article
               data-atropos-offset='6'
-              className='relative flex pt-5 pb-6 pl-6 pr-6 transition ease-in-out border-2 md:pt-6 md:pb-7 md:pl-7 md:pr-7 border-blue dark:border-blue rounded-3xl duration-400 group will-change-transform'
+              className='relative flex p-6 transition ease-in-out border-2 md:p-7 border-blue dark:border-blue rounded-3xl duration-400 group will-change-transform'
             >
               <div data-atropos-offset='2' className='w-full'>
                 <h3 className='md:mb-6 text-3xl mb-[1.4rem] text-black dark:text-blue font-primaryFont md:text-4xl font-bold pr-10 md:pr-0'><Balancer>Prototype the Checkout Page in Figma</Balancer></h3>

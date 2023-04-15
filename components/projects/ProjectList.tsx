@@ -37,9 +37,9 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
           <article
             key={project._id} className='relative flex flex-col items-start p-6 text-black transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
           >
-            <Headline variant='md' className='pr-10 !mb-4 xl:pr-0'>{project.name}</Headline>
+            <Headline variant='md' className='pr-10 xl:pr-0'>{project.name}</Headline>
 
-            <div className='flex flex-wrap gap-3 mt-4'>
+            <div className='flex flex-wrap gap-3'>
               <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-1 bg-blue gap-x-1 font-secondaryFont'>
                 <CalendarIcon className='w-4 stroke-2' />
                 {dayjs(project.createdAt).format('DD-MM-YYYY')}

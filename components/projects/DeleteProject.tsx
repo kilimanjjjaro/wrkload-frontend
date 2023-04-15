@@ -12,6 +12,7 @@ import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
+import Paragraph from 'components/shared/Paragraph'
 
 export default function DeleteProject (): JSX.Element {
   const { selectedProject } = useContext(AppContext)
@@ -48,6 +49,9 @@ export default function DeleteProject (): JSX.Element {
     <div className='flex flex-col items-center gap-y-5'>
       <div className='w-full p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-t-3xl md:rounded-3xl'>
         <Headline variant='md'><Balancer>Sure to delete this project?</Balancer></Headline>
+        <div className='flex flex-col mb-5 gap-y-3'>
+          <Paragraph variant='sm'>Are you sure to continue? This action will also delete the assigned tasks.</Paragraph>
+        </div>
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-3 gap-y-3'>
             <Input onChange={handleChange} value={project.name} name='name' type='text' placeholder='Name' centerText required disabled />
