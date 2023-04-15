@@ -48,6 +48,7 @@ export default function NavBar (): JSX.Element {
               alt={user.username}
               width={40}
               height={40}
+              priority
             />
           </div>
         )}

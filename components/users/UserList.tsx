@@ -36,11 +36,12 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
             {user.avatar !== undefined && (
               <div className='relative'>
                 <Image
-                  className='object-cover w-20 h-20 mb-4 border-[3px] border-black rounded-full'
+                  className='object-cover w-20 h-20 mb-4 border-[3px] bg-black border-black rounded-full'
                   src={user.avatar}
                   alt={user.username}
                   width='80'
                   height='80'
+                  priority
                 />
                 {user.confirmationStatus && (
                   <div className='absolute flex justify-center w-3 h-3 rounded-full top-1 left-1 group/tooltip-1 cursor-help bg-red'>
