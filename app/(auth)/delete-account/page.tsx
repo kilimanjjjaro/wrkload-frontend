@@ -90,7 +90,7 @@ export default function DeleteAccount (): JSX.Element {
           <form onSubmit={(event) => { void handleSubmit(event) }}>
             <div className='flex flex-col gap-3 mb-3'>
               <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' centerText required />
-              <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' centerText required />
+              <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' minLength={8} centerText required />
             </div>
             <Button variant='secondary' isLoading={isLoading}>
               <ArrowRightIcon className='w-4 stroke-3' />

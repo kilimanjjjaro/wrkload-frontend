@@ -135,19 +135,19 @@ export default function ResetPassword ({ params }: ParamsInterface): JSX.Element
               <div className='relative flex items-center'>
                 <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' minLength={8} centerText required />
                 <div className={clsx(
-                  'absolute flex items-center mt-[3px] gap-x-1 right-3',
+                  'absolute flex items-center gap-x-1 right-3 pt-[2px]',
                   credentials.newPassword.length > 0 && credentials.newPassword.length < 8 && '[&>div]:!bg-red',
                   credentials.newPassword.length >= 7 && credentials.newPassword.length < 12 && '[&>div]:!bg-yellow',
                   credentials.newPassword.length >= 11 && '[&>div]:!bg-green'
                 )}
                 >
-                  {credentials.newPassword.length > 0 && <div className='w-[5px] h-[5px] rounded-full bg-transparent' />}
-                  {credentials.newPassword.length >= 7 && <div className='w-[5px] h-[5px] rounded-full bg-transparent' />}
-                  {credentials.newPassword.length >= 11 && <div className='w-[5px] h-[5px] rounded-full bg-transparent' />}
+                  {credentials.newPassword.length > 0 && <div className='w-[5px] h-[5px] rounded-full' />}
+                  {credentials.newPassword.length >= 7 && <div className='w-[5px] h-[5px] rounded-full' />}
+                  {credentials.newPassword.length >= 11 && <div className='w-[5px] h-[5px] rounded-full' />}
                 </div>
               </div>
               <div className='relative flex items-center'>
-                <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' centerText required />
+                <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' minLength={8} centerText required />
                 <div className='absolute flex items-center gap-x-1 right-3'>
                   {credentials.confirmNewPassword.length > 7 && credentials.confirmNewPassword === credentials.newPassword && (
                     <svg className='w-[12px] h-[12px] stroke-green' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' strokeWidth='3' stroke='currentColor'>

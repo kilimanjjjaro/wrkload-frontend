@@ -9,7 +9,7 @@
 [data-sonner-toaster] {
   display: flex;
   justify-content: center;
-  top: 32px !important;
+  top: 30px !important;
 }
 
 .ui-notifications {

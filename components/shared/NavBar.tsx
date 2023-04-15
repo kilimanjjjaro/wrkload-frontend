@@ -43,7 +43,7 @@ export default function NavBar (): JSX.Element {
               Welcome, {user.username}!
             </div>
             <Image
-              className='object-cover w-12 h-12 md:w-10 md:h-10 rounded-full transition ease-in-out border-[3px] border-black group-hover:border-blue dark:border-white duration-400 md:group-hover:scale-90 md:dark:group-hover:border-blue'
+              className='object-cover w-12 h-12 md:w-10 md:h-10 rounded-full transition ease-in-out border-[3px] bg-black dark:bg-white border-black group-hover:border-blue dark:border-white duration-400 md:group-hover:scale-90 md:dark:group-hover:border-blue'
               src={user.avatar}
               alt={user.username}
               width={40}

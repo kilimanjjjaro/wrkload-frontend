@@ -160,7 +160,7 @@ export default function ChangePassword (): JSX.Element {
           {step === 1 && (
             <form className='mt-5' onSubmit={(event) => { void handleStepOne(event) }}>
               <div className='flex flex-col gap-3 mb-3'>
-                <Input onChange={handleChange} value={credentials.currentPassword} name='currentPassword' type='password' placeholder='Current Password' minLength={8} centerText required />
+                <Input onChange={handleChange} value={credentials.currentPassword} name='currentPassword' type='password' placeholder='Current Password' minLength={8} autoComplete='current-password' centerText required />
               </div>
               <Button variant='secondary' isLoading={isLoading}>
                 <ArrowRightIcon className='w-4 stroke-3' />
@@ -173,27 +173,15 @@ export default function ChangePassword (): JSX.Element {
                 <div className='relative flex items-center'>
                   <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' autoComplete='new-password' minLength={8} centerText required />
                   <div className={clsx(
-                    'absolute flex items-center gap-x-1 right-3 [&>svg]:w-[12px] [&>svg]:h-[12px] [&>svg]:stroke-transparent',
-                    credentials.newPassword.length > 0 && credentials.newPassword.length < 8 && '[&>svg]:!stroke-red',
-                    credentials.newPassword.length >= 7 && credentials.newPassword.length < 12 && '[&>svg]:!stroke-yellow',
-                    credentials.newPassword.length >= 11 && '[&>svg]:!stroke-green'
+                    'absolute flex items-center gap-x-1 right-3 pt-[2px]',
+                    credentials.newPassword.length > 0 && credentials.newPassword.length < 8 && '[&>div]:!bg-red',
+                    credentials.newPassword.length >= 7 && credentials.newPassword.length < 12 && '[&>div]:!bg-yellow',
+                    credentials.newPassword.length >= 11 && '[&>div]:!bg-green'
                   )}
                   >
-                    {credentials.newPassword.length > 0 && (
-                      <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' strokeWidth='3' stroke='currentColor'>
-                        <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
-                      </svg>
-                    )}
-                    {credentials.newPassword.length >= 7 && (
-                      <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' strokeWidth='3' stroke='currentColor'>
-                        <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
-                      </svg>
-                    )}
-                    {credentials.newPassword.length >= 11 && (
-                      <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' strokeWidth='3' stroke='currentColor'>
-                        <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
-                      </svg>
-                    )}
+                    {credentials.newPassword.length > 0 && <div className='w-[5px] h-[5px] rounded-full' />}
+                    {credentials.newPassword.length >= 7 && <div className='w-[5px] h-[5px] rounded-full' />}
+                    {credentials.newPassword.length >= 11 && <div className='w-[5px] h-[5px] rounded-full' />}
                   </div>
                 </div>
 
