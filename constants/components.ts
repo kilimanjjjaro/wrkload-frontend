@@ -7,13 +7,12 @@ export const PAGES = [
   { name: 'Users', link: '/users', admin: true }
 ]
 
-export const SKELETON = Array.from(Array(4).keys())
+export const SKELETON = Array.from(Array(8).keys())
 
 export const MASONRY_BREAKPOINTS = {
   default: 4,
-  1280: 4,
-  768: 2,
-  1: 1
+  1536: 3,
+  768: 2
 }
 
 export const FEATURES: FeaturesInterface[] = [

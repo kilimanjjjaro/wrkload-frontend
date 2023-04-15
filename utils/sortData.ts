@@ -3,7 +3,7 @@ import type { ProjectInterface } from 'interfaces/projects/Project'
 import type { UserInterface } from 'interfaces/users/User'
 
 export function sortTasks (tasks: TaskInterface[]): TaskInterface[] {
-  return tasks.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+  return tasks.sort((a, b) => new Date(b.deliveredAt).getTime() - new Date(a.deliveredAt).getTime())
 }
 
 export function sortProjects (projects: ProjectInterface[]): ProjectInterface[] {

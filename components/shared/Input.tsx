@@ -2,7 +2,7 @@ import clsx from 'clsx'
 
 import type { InputInterface } from 'interfaces/components'
 
-export default function Input ({ onChange, onKeyUp, value, name, type, placeholder, autoComplete, centerText, required, disabled, minLength, maxLength, className }: InputInterface): JSX.Element {
+export default function Input ({ onChange, value, name, type, placeholder, autoComplete, centerText, required, disabled, minLength, maxLength, className }: InputInterface): JSX.Element {
   return (
     <input
       className={clsx(
@@ -11,7 +11,16 @@ export default function Input ({ onChange, onKeyUp, value, name, type, placehold
         disabled === true && 'text-black placeholder-black bg-light-blue cursor-not-allowed hover:!bg-light-blue focus:!bg-light-blue',
         centerText !== undefined && 'text-center'
       )}
-      value={value} onChange={onChange} onKeyUp={onKeyUp} name={name} type={type} placeholder={placeholder} autoComplete={autoComplete} required={required} disabled={disabled} minLength={minLength} maxLength={maxLength}
+      value={value}
+      onChange={onChange}
+      name={name}
+      type={type}
+      placeholder={placeholder}
+      autoComplete={autoComplete}
+      required={required}
+      disabled={disabled}
+      minLength={minLength}
+      maxLength={maxLength}
     />
   )
 }

@@ -102,6 +102,10 @@ html.dark .swiper-pagination-bullet-active {
   opacity: 1;
 }
 
+.swiper-horizontal>.swiper-pagination-bullets {
+  gap: 0 0.8rem;
+}
+
 .swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
 .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
   margin: 0;

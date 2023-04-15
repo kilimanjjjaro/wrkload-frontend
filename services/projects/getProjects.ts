@@ -28,7 +28,7 @@ export const getProjects = async ({ page, noLimit }: Props): Promise<FullProject
     const response = await privateApi.get('/projects', config)
     return response.data
   } else {
-    const response = await privateApi.get(`/projects?limit=8&page=${currentPage}`, config)
+    const response = await privateApi.get(`/projects?limit=11&page=${currentPage}`, config)
     return response.data
   }
 }
