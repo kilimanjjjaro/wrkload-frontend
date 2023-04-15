@@ -43,7 +43,7 @@ export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.El
           >
             <Headline
               variant='md' className={clsx(
-                'mb-4 pr-10 xl:pr-0',
+                'pr-10 xl:pr-0',
                 task.description === '' && '!mb-0'
               )}
             >{task.title}

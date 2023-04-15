@@ -59,7 +59,7 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
       </div>
 
       <motion.ul
-        className={clsx('z-20 absolute rounded-xl font-secondaryFont top-full text-sm bg-blue mt-5 overflow-x-hidden overflow-y-auto custom-scrollbar max-h-[220px]')}
+        className={clsx('z-20 absolute rounded-xl font-secondaryFont top-full text-sm bg-blue mt-5 overflow-x-hidden')}
         variants={VARIANTS}
         initial={false}
         animate={open ? 'open' : 'closed'}

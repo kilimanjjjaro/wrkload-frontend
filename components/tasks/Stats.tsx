@@ -77,7 +77,7 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.El
         </Swiper>
       )}
       {emptyStats && (
-        <div className='relative text-blue border-blue dark:text-blue border-2 dark:border-blue p-6 md:pt-7 md:pb-[33px] md:pr-7 md:pl-7 rounded-3xl'>
+        <div className='relative p-6 border-2 text-blue border-blue dark:text-blue dark:border-blue md:p-7 rounded-3xl'>
           <EyeSlashIcon className='absolute z-10 w-6 h-6 transition ease-in-out cursor-pointer stroke-2 dark:text-blue duration-400 hover:text-black dark:hover:text-white top-7 right-7' onClick={handleRenderStats} />
           <PresentationChartLineIcon className='h-10 stroke-2' />
           <span className='block text-2xl text-black dark:text-white font-secondaryFont mt-7'><Balancer>We can&apos;t wait to show you stats but it looks like it&apos;s your first month or you didn&apos;t upload tasks last month.</Balancer></span>
