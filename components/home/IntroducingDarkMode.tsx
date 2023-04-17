@@ -6,7 +6,7 @@ import ReactCompareImage from 'react-compare-image'
 import Balancer from 'react-wrap-balancer'
 import Headline from 'components/shared/Headline'
 import Paragraph from 'components/shared/Paragraph'
-import { ArrowSmallLeftIcon, ArrowSmallRightIcon } from '@heroicons/react/24/outline'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 
 const CONTAINER_VARIANTS = {
   visible: {
@@ -68,8 +68,8 @@ export default function IntroducingDarkMode (): JSX.Element {
           sliderLineColor='#7686b7'
           handle={
             <div className='flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg'>
-              <ArrowSmallLeftIcon className='w-[17px] h-[17px] stroke-2 text-blue' />
-              <ArrowSmallRightIcon className='w-[17px] h-[17px] stroke-2 text-blue' />
+              <ChevronLeftIcon className='w-4 h-4 stroke-3 text-blue' />
+              <ChevronRightIcon className='w-4 h-4 stroke-3 text-blue' />
             </div>
           }
         />

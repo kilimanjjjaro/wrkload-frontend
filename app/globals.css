@@ -129,7 +129,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   }
 }
 
-/* Custom two-up slider */
+/* React Compare Image styles */
 div[data-testid="container"] {
   overflow: visible !important;
 }
