@@ -49,7 +49,7 @@ export default function Login (): JSX.Element {
         })
         router.push('/tasks')
         if (response.user._id === '6439b01cf35b6e22570cd842') {
-          toast.message('Welcome to the tail version', {
+          toast.message('Welcome to the trial mode', {
             description: 'This is a trial account, you must register to access all the features.'
           })
         }
