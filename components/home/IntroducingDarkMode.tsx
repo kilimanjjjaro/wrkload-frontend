@@ -1,12 +1,12 @@
 'use client'
 
-import 'two-up-element'
-import Image from 'next/image'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import ReactCompareImage from 'react-compare-image'
 import Balancer from 'react-wrap-balancer'
 import Headline from 'components/shared/Headline'
 import Paragraph from 'components/shared/Paragraph'
+import { ArrowSmallLeftIcon, ArrowSmallRightIcon } from '@heroicons/react/24/outline'
 
 const CONTAINER_VARIANTS = {
   visible: {
@@ -57,22 +57,22 @@ export default function IntroducingDarkMode (): JSX.Element {
           delay: 0.4
         }}
       >
-        <two-up className='my-two-up'>
-          <Image
-            className='rounded-3xl'
-            src='/images/dark-mode-1.jpg'
-            width={800}
-            height={600}
-            alt='Dark Mode'
-          />
-          <Image
-            className='rounded-3xl'
-            src='/images/dark-mode-2.jpg'
-            width={800}
-            height={600}
-            alt='Light Mode'
-          />
-        </two-up>
+        <ReactCompareImage
+          leftImage='/images/dark-mode-1.jpg'
+          leftImageAlt='Dark Mode'
+          leftImageCss={{ borderRadius: '1.5rem' }}
+          rightImage='/images/dark-mode-2.jpg'
+          rightImageAlt='Light Mode'
+          rightImageCss={{ borderRadius: '1.5rem' }}
+          sliderLineWidth={6}
+          sliderLineColor='#7686b7'
+          handle={
+            <div className='flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg'>
+              <ArrowSmallLeftIcon className='w-[17px] h-[17px] stroke-2 text-blue' />
+              <ArrowSmallRightIcon className='w-[17px] h-[17px] stroke-2 text-blue' />
+            </div>
+          }
+        />
       </motion.div>
       <motion.div
         className='flex flex-col items-start order-1 text-black transition-colors ease-in-out xl:order-2 dark:text-blue duration-400 xl:col-start-6 xl:col-end-9 2xl:col-start-2 2xl:col-end-3 will-change-transform'

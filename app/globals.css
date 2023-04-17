@@ -130,15 +130,11 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 /* Custom two-up slider */
-.styles_two-up-handle__2kVsP:before {
-  box-shadow: none !important;
-  background: #7686b7 !important;
+div[data-testid="container"] {
+  overflow: visible !important;
 }
 
-.styles_scrubber__39cN6 {
-  width: 50px !important;
-  height: 50px !important;
-  color: #7686b7 !important;
-  border: none !important;
-  padding: 14px 14px 12px 14px !important;
+div[data-testid="container"]>div>div:nth-child(1),
+div[data-testid="container"]>div>div:nth-child(3) {
+  box-shadow: none !important;
 }
