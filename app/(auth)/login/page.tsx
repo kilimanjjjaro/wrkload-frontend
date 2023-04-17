@@ -102,7 +102,7 @@ export default function Login (): JSX.Element {
           <Headline variant='md'><Balancer>Welcome again!</Balancer></Headline>
           {trialMode && (
             <div className='flex flex-col mb-5 gap-y-3'>
-              <Paragraph variant='sm'><Balancer>You are about to log in with our test account, you just have to click on the button, we have filled in the fields for you.</Balancer></Paragraph>
+              <Paragraph variant='sm'><Balancer><b>You are about to log in with our trial account</b>, we have filled in the fields for you.</Balancer></Paragraph>
             </div>
           )}
           <form onSubmit={(event) => { void handleSubmit(event) }}>

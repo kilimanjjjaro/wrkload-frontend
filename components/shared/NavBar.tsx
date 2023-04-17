@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { LockClosedIcon } from '@heroicons/react/24/outline'
+import { HeartIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 import { AppContext } from 'contexts/AppContext'
 import Logo from 'components/shared/Logo'
 import Button from 'components/shared/Button'
@@ -37,7 +37,7 @@ export default function NavBar (): JSX.Element {
       <div className='justify-self-end'>
         {user === null && !isLoggingIn && (
           <div className='flex items-center gap-x-5'>
-            <button className='transition ease-in-out font-secondaryFont hover:text-blue duration-400 dark:text-white dark:hover:text-blue' onClick={handleTrialMode}>Trial mode</button>
+            <button className='items-center hidden transition ease-in-out md:flex gap-x-2 font-secondaryFont hover:text-blue duration-400 dark:text-white dark:hover:text-blue' onClick={handleTrialMode}><HeartIcon className='w-4 stroke-3' /> Try it now!</button>
             <Button className='!w-auto' onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-3' /></Button>
           </div>
         )}

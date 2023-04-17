@@ -1,17 +1,25 @@
 'use client'
 
+import { useContext } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import Atropos from 'atropos/react'
-import { ArrowRightIcon, CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon, HeartIcon, CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import PageTransition from 'components/shared/PageTransition'
 import Headline from 'components/shared/Headline'
 import Paragraph from 'components/shared/Paragraph'
 import Button from 'components/shared/Button'
+import { AppContext } from 'contexts/AppContext'
 import 'atropos/css'
 
 export default function HeroHeader (): JSX.Element {
+  const { setTrialMode } = useContext(AppContext)
   const router = useRouter()
+
+  const handleTrialMode = (): void => {
+    setTrialMode(true)
+    router.push('/login')
+  }
 
   return (
     <PageTransition>
@@ -22,7 +30,10 @@ export default function HeroHeader (): JSX.Element {
             <Paragraph variant='normal'><b className='font-extrabold'>Easy-peasy!</b></Paragraph>
             <Paragraph variant='normal'><Balancer>With wrkload you can track what you&apos;ve worked on in a simple and organized way.</Balancer></Paragraph>
           </div>
-          <Button className='!w-auto' variant='primary' onClick={() => router.push('/registry')}>Start now for free <ArrowRightIcon className='w-4 stroke-3' /></Button>
+          <div className='flex items-center gap-x-5'>
+            <Button className='!w-auto' variant='primary' onClick={() => router.push('/registry')}>Start now for free <ArrowRightIcon className='w-4 stroke-3' /></Button>
+            <button className='flex items-center transition ease-in-out gap-x-2 md:hidden font-secondaryFont hover:text-blue duration-400 dark:text-white dark:hover:text-blue' onClick={handleTrialMode}><HeartIcon className='w-4 stroke-3' /> Try it now!</button>
+          </div>
         </div>
         <div className='grid items-center gap-6 md:gap-0 xl:col-start-4 xl:col-end-9 2xl:col-start-2 2xl:col-end-3 2xl:gap-10 md:grid-cols-2'>
           <Atropos
