@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+		"dbaeumer.vscode-eslint",
+    "standard.vscode-standard",
+		"usernamehw.errorlens",
+		"bradlc.vscode-tailwindcss",
+		"heybourn.headwind"
+	]
+}
