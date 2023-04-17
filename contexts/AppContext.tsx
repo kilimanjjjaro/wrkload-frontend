@@ -25,6 +25,8 @@ interface AppContextValues {
   setShouldRenderStats: Dispatch<React.SetStateAction<boolean>>
   isLoggingIn: boolean
   setIsLoggingIn: Dispatch<React.SetStateAction<boolean>>
+  trialMode: boolean
+  setTrialMode: Dispatch<React.SetStateAction<boolean>>
 };
 
 const DEFAULT_APP_CONTEXT_VALUE: AppContextValues = {
@@ -41,7 +43,9 @@ const DEFAULT_APP_CONTEXT_VALUE: AppContextValues = {
   shouldRenderStats: false,
   setShouldRenderStats: () => {},
   isLoggingIn: false,
-  setIsLoggingIn: () => {}
+  setIsLoggingIn: () => {},
+  trialMode: false,
+  setTrialMode: () => {}
 }
 
 export const AppContext = createContext<AppContextValues>(DEFAULT_APP_CONTEXT_VALUE)
@@ -54,6 +58,7 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
   const [selectedProjectToFetch, setSelectedProjectToFetch] = useState('')
   const [shouldRenderStats, setShouldRenderStats] = useState(true)
   const [isLoggingIn, setIsLoggingIn] = useState(false)
+  const [trialMode, setTrialMode] = useState(false)
 
   useEffect(() => {
     const userFromLocalStorage = window.localStorage.getItem('user')
@@ -89,7 +94,9 @@ const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
       shouldRenderStats,
       setShouldRenderStats,
       isLoggingIn,
-      setIsLoggingIn
+      setIsLoggingIn,
+      trialMode,
+      setTrialMode
     }}
     >
       {children}

@@ -1,10 +1,13 @@
 'use client'
 
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
+import { setCookie } from 'cookies-next'
+import { toast } from 'sonner'
 import { ArrowLeftIcon, LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
+import Paragraph from 'components/shared/Paragraph'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
 import TextLink from 'components/shared/TextLink'
@@ -13,8 +16,6 @@ import GoogleLogo from 'public/images/google.svg'
 import login from 'services/auth/login'
 import { AppContext } from 'contexts/AppContext'
 import PageTransition from 'components/shared/PageTransition'
-import { setCookie } from 'cookies-next'
-import { toast } from 'sonner'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: '',
@@ -25,7 +26,7 @@ export default function Login (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const { setUser, setIsLoggingIn } = useContext(AppContext)
+  const { setUser, setIsLoggingIn, trialMode } = useContext(AppContext)
   const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -61,6 +62,15 @@ export default function Login (): JSX.Element {
     }
   }
 
+  useEffect(() => {
+    if (trialMode) {
+      setCredentials({
+        email: 'wrkload@kilimanjjjaro.com',
+        password: 'Ec@z92!QWKFkmhY'
+      })
+    }
+  }, [trialMode])
+
   if (error.length >= 1) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
@@ -90,6 +100,11 @@ export default function Login (): JSX.Element {
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Welcome again!</Balancer></Headline>
+          {trialMode && (
+            <div className='flex flex-col mb-5 gap-y-3'>
+              <Paragraph variant='sm'><Balancer>You are about to log in with our test account, you just have to click on the button, we have filled in the fields for you.</Balancer></Paragraph>
+            </div>
+          )}
           <form onSubmit={(event) => { void handleSubmit(event) }}>
             <div className='flex flex-col gap-3 mb-3'>
               <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText required />

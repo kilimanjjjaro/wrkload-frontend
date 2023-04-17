@@ -12,8 +12,13 @@ import DashboardTab from 'components/shared/DashboardTab'
 
 export default function NavBar (): JSX.Element {
   const [showDashboardBox, setShowDashboardBox] = useState(false)
-  const { user, isLoggingIn } = useContext(AppContext)
+  const { user, isLoggingIn, setTrialMode } = useContext(AppContext)
   const router = useRouter()
+
+  const handleTrialMode = (): void => {
+    setTrialMode(true)
+    router.push('/login')
+  }
 
   useEffect(() => {
     if (showDashboardBox) {
@@ -30,7 +35,12 @@ export default function NavBar (): JSX.Element {
       <Link className='flex items-center h-12 md:h-10 justify-self-start' href='/'><Logo /></Link>
       {user !== null && !isLoggingIn && <DashboardTab showDashboardBox={showDashboardBox} setShowDashboardBox={setShowDashboardBox} />}
       <div className='justify-self-end'>
-        {user === null && !isLoggingIn && <Button onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-3' /></Button>}
+        {user === null && !isLoggingIn && (
+          <div className='flex items-center gap-x-5'>
+            <button className='transition ease-in-out font-secondaryFont hover:text-blue duration-400 dark:text-white dark:hover:text-blue' onClick={handleTrialMode}>Trial mode</button>
+            <Button className='!w-auto' onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-3' /></Button>
+          </div>
+        )}
         {user === null && isLoggingIn && (
           <div className='items-center flex gap-x-3 [&>*]:animate-skeleton'>
             <div className='w-36 h-5 bg-gradient-to-r from-light-blue via-blue to-light-blue bg-[length:200%_100%] rounded-full hidden md:block' />
