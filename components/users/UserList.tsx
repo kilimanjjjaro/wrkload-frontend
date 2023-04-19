@@ -9,7 +9,12 @@ import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import type { FullUserInterface, UserInterface } from 'interfaces/users/User'
 
-export default function UserList ({ data }: { data: FullUserInterface }): JSX.Element {
+interface Props {
+  data: FullUserInterface
+  isTrialAccount: boolean
+}
+
+export default function UserList ({ data, isTrialAccount }: Props): JSX.Element {
   const { setSelectedUser } = useContext(AppContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
 
@@ -23,8 +28,10 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
     setDeleteDataModalStatus(true)
   }
 
-  const users = data?.users
+  let users = data?.users
   const pagination = data?.pagination
+
+  if (isTrialAccount) users = users.filter((user) => user._id === '6439b01cf35b6e22570cd842')
 
   return (
     <>
@@ -67,9 +74,10 @@ export default function UserList ({ data }: { data: FullUserInterface }): JSX.El
               </div>
             )}
 
-            <Headline variant='md' className='!mb-1'>{user.username}</Headline>
+            <Headline variant='md' className='!mb-2'>{user.username}</Headline>
             <div className='flex mb-3 rounded-full items-center h-6 px-2 text-[10px] font-bold text-black uppercase border-2 border-black gap-x-1 font-secondaryFont'>
-              {user.role === 1 && 'Administrator'}
+              {user.role === 1 && user._id !== '6439b01cf35b6e22570cd842' && 'Administrator'}
+              {user.role === 1 && user._id === '6439b01cf35b6e22570cd842' && 'Trial user'}
               {user.role === 2 && 'Project Manager'}
               {user.role === 3 && 'Partner'}
             </div>

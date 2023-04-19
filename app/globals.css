@@ -12,6 +12,10 @@
   top: 30px !important;
 }
 
+[data-sonner-toast][data-expanded=false][data-front=false][data-styled=true]>* {
+  opacity: 0.5;
+}
+
 .ui-notifications {
   flex-direction: column;
   justify-content: center;
@@ -24,7 +28,7 @@
   font-family: var(--inter-font), system-ui, sans-serif;
   font-size: 14px !important;
   border-radius: 1.5rem !important;
-  box-shadow: none !important;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
   border: none !important;
 }
 

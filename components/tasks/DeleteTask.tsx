@@ -36,14 +36,22 @@ export default function DeleteTask (): JSX.Element {
           </>
         )
       }
-    } catch (error) {
-      toast(
-        <>
-          <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
-          <p>Something went wrong. Please, try again!</p>
-        </>
-      )
-      console.error(error)
+    } catch (error: any) {
+      if (error.response.data.code === 'trial/permission-denied') {
+        toast(
+          <>
+            <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
+            <p>You don&apos;t have permission to delete tasks!</p>
+          </>
+        )
+      } else {
+        toast(
+          <>
+            <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
+            <p>Something went wrong. Please, try again!</p>
+          </>
+        )
+      }
     }
   }
 

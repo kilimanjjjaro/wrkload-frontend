@@ -45,13 +45,21 @@ export default function AddTask (): JSX.Element {
         )
       }
     } catch (error: any) {
-      toast(
-        <>
-          <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
-          <p>Something went wrong. Please, try again!</p>
-        </>
-      )
-      console.error(error)
+      if (error.response.data.code === 'trial/permission-denied') {
+        toast(
+          <>
+            <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
+            <p>You don&apos;t have permission to add tasks!</p>
+          </>
+        )
+      } else {
+        toast(
+          <>
+            <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
+            <p>Something went wrong. Please, try again!</p>
+          </>
+        )
+      }
     }
   }
 
