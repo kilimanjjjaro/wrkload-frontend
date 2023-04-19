@@ -139,7 +139,7 @@ export default function Profile (): JSX.Element {
                 )}
               </div>
             </div>
-            <Paragraph className='dark:text-white' variant='sm'><Balancer>You can upload an image in jpg, jpeg, png or webp format and its size cannot be larger than 1 MB. The recommended resolution is 256x256px.</Balancer></Paragraph>
+            <Paragraph className='dark:text-white' variant='sm'><Balancer>You can upload an image in jpg, jpeg, png or webp format and its size cannot be larger than 5 MB. The recommended resolution is 256x256px.</Balancer></Paragraph>
           </div>
 
           <div className='flex flex-col gap-4 dark:text-white'>
