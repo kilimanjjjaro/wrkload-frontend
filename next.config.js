@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['wrkload.vercel.app']
+    domains: [
+      'wrkload.vercel.app',
+      'res.cloudinary.com'
+    ]
   },
   experimental: {
     appDir: true

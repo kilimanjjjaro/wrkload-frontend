@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import { setCookie } from 'cookies-next'
 import { toast } from 'sonner'
-import { ArrowLeftIcon, LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/outline'
+import { ArrowLeftIcon, HeartIcon, LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Paragraph from 'components/shared/Paragraph'
 import Input from 'components/shared/Input'
@@ -49,9 +49,13 @@ export default function Login (): JSX.Element {
         })
         router.push('/tasks')
         if (response.user._id === '6439b01cf35b6e22570cd842') {
-          toast.message('Welcome to the trial mode', {
-            description: 'This is a trial account, you must register to access all the features.'
-          })
+          toast(
+            <>
+              <HeartIcon className='w-4 stroke-blue stroke-3' />
+              <h3 className='font-bold'>Welcome to the trial mode</h3>
+              <p><Balancer>This is a trial account, you must register to access all the features.</Balancer></p>
+            </>
+          )
         }
       }
     } catch (error: any) {

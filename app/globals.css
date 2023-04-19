@@ -13,13 +13,16 @@
 }
 
 .ui-notifications {
+  flex-direction: column;
   justify-content: center;
   width: auto !important;
-  padding: 14px 20px !important;
+  height: auto !important;
+  padding: 16px 20px 14px 20px !important;
   background: #d2d7e3 !important;
   color: #0a0a0a !important;
   text-align: center;
   font-family: var(--inter-font), system-ui, sans-serif;
+  font-size: 14px !important;
   border-radius: 1.5rem !important;
   box-shadow: none !important;
   border: none !important;

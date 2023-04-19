@@ -41,7 +41,7 @@ export default function NavBar (): JSX.Element {
             <Button className='!w-auto' onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-3' /></Button>
           </div>
         )}
-        {user === null && isLoggingIn && (
+        {isLoggingIn && (
           <div className='items-center flex gap-x-3 [&>*]:animate-skeleton'>
             <div className='w-36 h-5 bg-gradient-to-r from-light-blue via-blue to-light-blue bg-[length:200%_100%] rounded-full hidden md:block' />
             <div className='w-12 h-12 md:w-10 md:h-10 bg-gradient-to-r from-light-blue via-blue to-light-blue bg-[length:200%_100%] rounded-full' />

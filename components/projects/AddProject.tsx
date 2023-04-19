@@ -5,7 +5,7 @@ import { mutate } from 'swr'
 import Balancer from 'react-wrap-balancer'
 import { addProject } from 'services/projects/addProject'
 import { addProjectOptions } from 'utils/swrProjectsOptions'
-import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon, CheckCircleIcon, ShieldExclamationIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { toast } from 'sonner'
 import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
@@ -30,10 +30,20 @@ export default function AddProject (): JSX.Element {
       const response = await mutate('projects', addProject(project), addProjectOptions(project))
 
       if (response?.status === 'ok') {
-        toast.success('Project added successfully!')
+        toast(
+          <>
+            <CheckCircleIcon className='w-5 stroke-blue stroke-3' />
+            <p>Project added successfully!</p>
+          </>
+        )
       }
     } catch (error: any) {
-      toast.error('Something went wrong. Please, try again!')
+      toast(
+        <>
+          <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
+          <p>Something went wrong. Please, try again!</p>
+        </>
+      )
       console.error(error.response)
     }
   }

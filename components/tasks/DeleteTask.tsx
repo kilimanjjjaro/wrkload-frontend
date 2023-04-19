@@ -3,7 +3,7 @@ import { mutate } from 'swr'
 import Balancer from 'react-wrap-balancer'
 import { deleteTask } from 'services/tasks/deleteTask'
 import { deleteTaskOptions } from 'utils/swrTasksOptions'
-import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon, CheckCircleIcon, ShieldExclamationIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { toast } from 'sonner'
 import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
@@ -29,10 +29,20 @@ export default function DeleteTask (): JSX.Element {
       const response = await mutate('tasks', deleteTask(task._id), deleteTaskOptions(task._id))
 
       if (response?.status === 'ok') {
-        toast.success('Task deleted successfully!')
+        toast(
+          <>
+            <CheckCircleIcon className='w-5 stroke-blue stroke-3' />
+            <p>Task deleted successfully!</p>
+          </>
+        )
       }
     } catch (error) {
-      toast.error('Something went wrong. Please, try again!')
+      toast(
+        <>
+          <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
+          <p>Something went wrong. Please, try again!</p>
+        </>
+      )
       console.error(error)
     }
   }

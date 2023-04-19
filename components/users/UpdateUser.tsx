@@ -3,7 +3,7 @@ import { mutate } from 'swr'
 import Balancer from 'react-wrap-balancer'
 import { updateUser } from 'services/users/updateUser'
 import { updateUserOptions } from 'utils/swrUsersOptions'
-import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon, CheckCircleIcon, ShieldExclamationIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { toast } from 'sonner'
 import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
@@ -29,10 +29,20 @@ export default function UpdateUser (): JSX.Element {
       const response = await mutate('users', updateUser(user), updateUserOptions(user))
 
       if (response?.status === 'ok') {
-        toast.success('User updated successfully!')
+        toast(
+          <>
+            <CheckCircleIcon className='w-5 stroke-blue stroke-3' />
+            <p>User updated successfully!</p>
+          </>
+        )
       }
     } catch (error: any) {
-      toast.error('Something went wrong. Please, try again!')
+      toast(
+        <>
+          <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
+          <p>Something went wrong. Please, try again!</p>
+        </>
+      )
       console.error(error.response)
     }
   }

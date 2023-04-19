@@ -47,3 +47,7 @@ export const CHARACTER_LIMIT = 200
 export const LENIS_OPTIONS = {
   duration: 1.2
 }
+
+export const ALLOWED_IMAGE_EXTENSIONS = /(\.jpg|\.jpeg|\.png|\.webp)$/i
+export const ALLOWED_IMAGE_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+export const ALLOWED_IMAGE_SIZE = 1024 * 1024

@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { XMarkIcon } from '@heroicons/react/24/outline'
+import { toast } from 'sonner'
+import { CheckCircleIcon, ShieldExclamationIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/navigation'
 import { AppContext } from 'contexts/AppContext'
 import { PAGES } from 'constants/components'
@@ -44,10 +45,30 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
   }, [])
 
   const handleLogout = async (): Promise<void> => {
-    setShowDashboardBox(!showDashboardBox)
-    await logout()
-    setUser(null)
-    router.push('/')
+    try {
+      setShowDashboardBox(!showDashboardBox)
+
+      const response = await logout()
+
+      if (response?.status === 'ok') {
+        setUser(null)
+        router.push('/')
+
+        toast(
+          <>
+            <CheckCircleIcon className='w-5 stroke-blue stroke-3' />
+            <p>Session ended successfully</p>
+          </>
+        )
+      }
+    } catch (error) {
+      toast(
+        <>
+          <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
+          <p>Something went wrong. Please, try again!</p>
+        </>
+      )
+    }
   }
 
   return (

@@ -27,3 +27,11 @@ export interface FullUserInterface {
   pagination: PaginationInterface
   users: UserInterface[]
 }
+
+export interface CleanUserInterface {
+  _id: string
+  email: string
+  role: number
+  username: string
+  avatar: string
+}

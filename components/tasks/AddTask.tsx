@@ -6,7 +6,7 @@ import Balancer from 'react-wrap-balancer'
 import { toast } from 'sonner'
 import { addTask } from 'services/tasks/addTask'
 import { addTaskOptions } from 'utils/swrTasksOptions'
-import { ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon, CheckCircleIcon, ShieldExclamationIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
 import Paragraph from 'components/shared/Paragraph'
@@ -37,10 +37,20 @@ export default function AddTask (): JSX.Element {
       const response = await mutate('tasks', addTask(task), addTaskOptions(task))
 
       if (response?.status === 'ok') {
-        toast.success('Task added successfully!')
+        toast(
+          <>
+            <CheckCircleIcon className='w-5 stroke-blue stroke-3' />
+            <p>Task added successfully!</p>
+          </>
+        )
       }
     } catch (error: any) {
-      toast.error('Something went wrong. Please, try again!')
+      toast(
+        <>
+          <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
+          <p>Something went wrong. Please, try again!</p>
+        </>
+      )
       console.error(error)
     }
   }
