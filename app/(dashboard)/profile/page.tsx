@@ -131,7 +131,7 @@ export default function Profile (): JSX.Element {
                 {avatar === null && (
                   <>
                     <label aria-label='Upload avatar' htmlFor='upload-avatar'><CloudArrowUpIcon className='w-5 transition ease-in-out cursor-pointer stroke-2 duration-400 stroke-black group-hover:stroke-blue dark:group-hover:stroke-black' /></label>
-                    <input className='hidden' type='file' name='avatar' id='upload-avatar' onChange={handleChange} />
+                    <input className='hidden' type='file' name='avatar' id='upload-avatar' accept='image/*' onChange={handleChange} />
                   </>
                 )}
                 {avatar !== null && (
