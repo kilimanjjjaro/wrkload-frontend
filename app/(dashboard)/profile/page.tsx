@@ -29,7 +29,7 @@ export default function Profile (): JSX.Element {
 
     if (file != null) {
       try {
-        if (file.size > ALLOWED_IMAGE_SIZE) throw new Error('The file size is too large. Please select an image with a maximum size of 2MB.')
+        if (file.size > ALLOWED_IMAGE_SIZE) throw new Error('The file size is too large. Please select an image with a maximum size of 5MB.')
 
         if (!ALLOWED_IMAGE_MIME_TYPES.includes(file.type)) throw new Error('This file type is not allowed. Please select an image (jpg, jpeg, png, webp).')
 
