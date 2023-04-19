@@ -1,6 +1,6 @@
 export const DEFAULT_AVATAR = 'https://wrkload.vercel.app/images/default-avatar.svg'
 
-export const DEFAULT_ROLE = 2
+export const DEFAULT_ROLE = 3
 
 export const INITIAL_USER_STATE = {
   _id: '',

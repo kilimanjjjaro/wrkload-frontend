@@ -77,9 +77,8 @@ export default function UserList ({ data, isTrialAccount }: Props): JSX.Element 
             <Headline variant='md' className='!mb-2'>{user.username}</Headline>
             <div className='flex mb-3 rounded-full items-center h-6 px-2 text-[10px] font-bold text-black uppercase border-2 border-black gap-x-1 font-secondaryFont'>
               {user.role === 1 && user._id !== '6439b01cf35b6e22570cd842' && 'Administrator'}
-              {user.role === 1 && user._id === '6439b01cf35b6e22570cd842' && 'Trial user'}
-              {user.role === 2 && 'Project Manager'}
-              {user.role === 3 && 'Partner'}
+              {user.role === 2 && user._id === '6439b01cf35b6e22570cd842' && 'Trial user'}
+              {user.role === 3 && user._id !== '6439b01cf35b6e22570cd842' && 'Partner'}
             </div>
 
             <div className='flex flex-wrap gap-3 mt-4'>

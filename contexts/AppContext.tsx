@@ -5,14 +5,14 @@ import { setCookie } from 'cookies-next'
 import type { ChildrenInterface } from 'interfaces/components'
 import type { TaskInterface } from 'interfaces/tasks/Task'
 import type { ProjectInterface } from 'interfaces/projects/Project'
-import type { UserInterface } from 'interfaces/users/User'
+import type { SecureUserInterface, UserInterface } from 'interfaces/users/User'
 import { INITIAL_TASK_STATE } from 'constants/tasks'
 import { INITIAL_PROJECT_STATE } from 'constants/projects'
 import { INITIAL_USER_STATE } from 'constants/users'
 
 interface AppContextValues {
-  user: UserInterface | null
-  setUser: Dispatch<React.SetStateAction<UserInterface | null>>
+  user: SecureUserInterface | null
+  setUser: Dispatch<React.SetStateAction<SecureUserInterface | null>>
   selectedUser: UserInterface
   setSelectedUser: Dispatch<React.SetStateAction<UserInterface>>
   selectedTask: TaskInterface
@@ -51,7 +51,7 @@ const DEFAULT_APP_CONTEXT_VALUE: AppContextValues = {
 export const AppContext = createContext<AppContextValues>(DEFAULT_APP_CONTEXT_VALUE)
 
 const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
-  const [user, setUser] = useState<UserInterface | null>(null)
+  const [user, setUser] = useState<SecureUserInterface | null>(null)
   const [selectedUser, setSelectedUser] = useState<UserInterface>(INITIAL_USER_STATE)
   const [selectedTask, setSelectedTask] = useState<TaskInterface>(INITIAL_TASK_STATE)
   const [selectedProject, setSelectedProject] = useState<ProjectInterface>(INITIAL_PROJECT_STATE)

@@ -28,10 +28,10 @@ export interface FullUserInterface {
   users: UserInterface[]
 }
 
-export interface CleanUserInterface {
+export interface SecureUserInterface {
   _id: string
   email: string
-  role: number
   username: string
   avatar: string
+  role: number
 }

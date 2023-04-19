@@ -34,7 +34,7 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
       const { role } = user
       let filteredPages = PAGES
 
-      if (role !== 1) {
+      if (role === 3) {
         filteredPages = PAGES.filter((page) => {
           return !page.admin
         })

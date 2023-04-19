@@ -12,7 +12,7 @@ export function middleware (request: NextRequest): NextResponse {
     if (accessToken !== undefined) {
       const { role }: { role: number } = jwtDecode(accessToken.value)
 
-      if (role !== 1) return NextResponse.redirect(new URL('/tasks', request.url))
+      if (role === 3) return NextResponse.redirect(new URL('/tasks', request.url))
     }
   }
 

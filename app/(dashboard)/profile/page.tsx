@@ -68,9 +68,9 @@ export default function Profile (): JSX.Element {
 
         const croppedImage = response.data.eager[0].secure_url
 
-        const user = await updateAvatar({ avatar: croppedImage })
+        const updatedUser = await updateAvatar({ avatar: croppedImage })
 
-        setUser(user)
+        setUser(updatedUser)
 
         toast(
           <>
