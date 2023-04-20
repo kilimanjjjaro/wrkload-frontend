@@ -45,7 +45,9 @@ export default function Login (): JSX.Element {
       if (response.status === 'ok') {
         setUser(response.user)
         setCookie('isLogged', true, {
-          maxAge: 60 * 60 * 24 * 30
+          maxAge: 60 * 60 * 24 * 30,
+          secure: true,
+          sameSite: 'strict'
         })
         router.push('/tasks')
         if (response.user._id === '6439b01cf35b6e22570cd842') {
