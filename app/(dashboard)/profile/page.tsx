@@ -114,18 +114,21 @@ export default function Profile (): JSX.Element {
                 />
               )}
               {avatar !== null && (
-                <AvatarEditor
-                  className={clsx(
-                    'rounded-full transition-all ease-in-out duration-400 bg-white border-[6px] border-black dark:bg-black dark:border-white dark:border-dashed',
-                    isLoading && 'animate-pulse'
-                  )}
-                  ref={editor}
-                  image={avatar}
-                  width={200}
-                  height={200}
-                  border={0}
-                  borderRadius={200}
-                />
+                <div className='relative group rounded-full transition-all ease-in-out duration-400 bg-white border-[6px] border-black dark:bg-black dark:border-white dark:border-dashed flex justify-center items-center'>
+                  <AvatarEditor
+                    className={clsx(
+                      'rounded-full opacity-20 group-hover:opacity-100 transition-opacity ease-in-out duration-400',
+                      isLoading && 'animate-pulse'
+                    )}
+                    ref={editor}
+                    image={avatar}
+                    width={200}
+                    height={200}
+                    border={0}
+                    borderRadius={200}
+                  />
+                  <svg className='absolute transition-all ease-in-out w-14 h-14 group-hover:opacity-0 duration-400 group-hover:invisible' viewBox='0 0 21 21' xmlns='http://www.w3.org/2000/svg'><g fill='none' fillRule='evenodd' stroke='#fff' strokeLinecap='round' strokeLinejoin='round' transform='translate(4 4)'><path d='m5.5 3.5h4v4' /><path d='m9.5 9.5v3' /><path d='m3.5 3.5h-3.5' /><path d='m3.5.5v9h9' /></g></svg>
+                </div>
               )}
               <div className='absolute flex items-center justify-center w-10 h-10 transition ease-in-out scale-95 rounded-full cursor-pointer will-change-transform bg-blue bottom-3 right-3 group hover:bg-black dark:hover:bg-white duration-400 hover:scale-100'>
                 {avatar === null && (
