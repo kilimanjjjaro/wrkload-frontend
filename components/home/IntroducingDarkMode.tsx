@@ -67,7 +67,7 @@ export default function IntroducingDarkMode (): JSX.Element {
           sliderLineWidth={6}
           sliderLineColor='#7686b7'
           handle={
-            <div className='flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg'>
+            <div className='flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-light-blue'>
               <ChevronLeftIcon className='w-4 h-4 stroke-3 text-blue' />
               <ChevronRightIcon className='w-4 h-4 stroke-3 text-blue' />
             </div>
