@@ -46,7 +46,7 @@ export default function ChangePassword (): JSX.Element {
       const { email }: { email: string } = jwtDecode(accessToken as string)
       setEmail(email)
     }
-  }, [])
+  }, [accessToken])
 
   const handleStepOne = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()

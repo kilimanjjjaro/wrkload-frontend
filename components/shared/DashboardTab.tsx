@@ -42,7 +42,7 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
 
       setPages(filteredPages)
     }
-  }, [])
+  }, [user])
 
   const handleLogout = async (): Promise<void> => {
     try {

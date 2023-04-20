@@ -25,7 +25,7 @@ export default function SearchTasks (): JSX.Element {
 
   useEffect(() => {
     mutate().catch((error) => console.error(error))
-  }, [page])
+  }, [page, mutate])
 
   const shouldRenderSkeleton = isLoading || isValidating
   const shouldRenderTasks = data !== undefined && data?.tasks.length >= 1 && !shouldRenderSkeleton

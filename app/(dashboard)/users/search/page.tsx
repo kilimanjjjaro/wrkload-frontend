@@ -48,7 +48,7 @@ export default function SearchUsers (): JSX.Element {
 
   useEffect(() => {
     mutate().catch((error) => console.error(error))
-  }, [page])
+  }, [page, mutate])
 
   const shouldRenderSkeleton = isLoading || isValidating
   const shouldRenderUsers = data !== undefined && data?.users.length >= 1 && !shouldRenderSkeleton

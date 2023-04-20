@@ -20,7 +20,7 @@ export default function Projects (): JSX.Element {
   // TODO: improve this
   useEffect(() => {
     mutate().catch((error) => console.error(error))
-  }, [page])
+  }, [page, mutate])
 
   const shouldRenderSkeleton = isLoading || isValidating
   const shouldRenderProjects = data !== undefined && data?.projects.length >= 1 && !shouldRenderSkeleton

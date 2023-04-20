@@ -35,7 +35,7 @@ export default function HeroHeader (): JSX.Element {
             <button className='flex items-center transition ease-in-out gap-x-2 md:hidden font-secondaryFont hover:text-blue duration-400 dark:text-white dark:hover:text-blue' onClick={handleTrialMode}><HeartIcon className='w-4 stroke-3' /> Try it now!</button>
           </div>
         </div>
-        <div className='grid items-center gap-6 md:gap-0 xl:col-start-4 xl:col-end-9 2xl:col-start-2 2xl:col-end-3 2xl:gap-10 md:grid-cols-2'>
+        <div className='grid items-center gap-6 xl:gap-0 xl:col-start-4 xl:col-end-9 2xl:col-start-2 2xl:col-end-3 2xl:gap-10 md:grid-cols-2'>
           <Atropos
             rotateXMax={100}
             rotateYMax={100}

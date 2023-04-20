@@ -24,7 +24,7 @@ export default function SearchProjects (): JSX.Element {
 
   useEffect(() => {
     mutate().catch((error) => console.error(error))
-  }, [page])
+  }, [page, mutate])
 
   const shouldRenderSkeleton = isLoading || isValidating
   const shouldRenderProjects = data !== undefined && data?.projects.length >= 1 && !shouldRenderSkeleton
