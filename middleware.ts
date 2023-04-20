@@ -8,8 +8,8 @@ export function middleware (request: NextRequest): NextResponse {
 
   if (isLogged === undefined) return NextResponse.redirect(new URL('/', request.url))
 
-  if (request.nextUrl.pathname.startsWith('/users')) {
-    if (accessToken !== undefined) {
+  if (accessToken !== undefined) {
+    if (request.nextUrl.pathname.startsWith('/users')) {
       const { role }: { role: number } = jwtDecode(accessToken.value)
 
       if (role === 3) return NextResponse.redirect(new URL('/tasks', request.url))

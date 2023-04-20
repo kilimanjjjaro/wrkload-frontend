@@ -1,10 +1,14 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 import Image from 'next/image'
+import { getCookie } from 'cookies-next'
+import jwtDecode from 'jwt-decode'
+import { toast } from 'sonner'
+import Balancer from 'react-wrap-balancer'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { ArrowLeftIcon } from '@heroicons/react/24/outline'
+import { ArrowLeftIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
 import Skeleton from 'components/users/Skeleton'
 import Modals from 'components/users/Modals'
 import Button from 'components/shared/Button'
@@ -15,12 +19,32 @@ import { sortUsers } from 'utils/sortData'
 import PageTransition from 'components/shared/PageTransition'
 
 export default function SearchUsers (): JSX.Element {
+  const [isTrialAccount, setIsTrialAccount] = useState(false)
   const params = useSearchParams()
   const query = params.get('query')
   const page = params.get('page')
   const router = useRouter()
+  const accessToken = getCookie('accessToken')
 
   const { data, isLoading, isValidating, mutate } = useSWR('users', async () => await searchUsers({ query, page }), { onSuccess: data => sortUsers(data.users) })
+
+  useEffect(() => {
+    if (accessToken !== undefined) {
+      const { uid }: { uid: string } = jwtDecode(accessToken as string)
+
+      if (uid === '6439b01cf35b6e22570cd842') {
+        setIsTrialAccount(true)
+
+        toast(
+          <>
+            <ShieldCheckIcon className='w-4 stroke-blue stroke-3' />
+            <h3 className='font-bold'>How data do we store?</h3>
+            <p><Balancer>These are all the data we store of you. Only admins and trial accounts can view this page.</Balancer></p>
+          </>
+        )
+      }
+    }
+  }, [accessToken])
 
   useEffect(() => {
     mutate().catch((error) => console.error(error))
@@ -44,7 +68,7 @@ export default function SearchUsers (): JSX.Element {
       </header>
       <main>
         {shouldRenderSkeleton && <Skeleton />}
-        {shouldRenderUsers && <UserList data={data} />}
+        {shouldRenderUsers && <UserList data={data} isTrialAccount={isTrialAccount} />}
         {shouldRenderNotFoundSign && (
           <div className='flex flex-col items-center h-full mt-28 gap-y-5'>
             <Image
