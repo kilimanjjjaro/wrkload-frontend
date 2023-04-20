@@ -30,8 +30,9 @@ export default function UserList ({ data, isTrialAccount }: Props): JSX.Element 
 
   let users = data?.users
   const pagination = data?.pagination
+  const trialAccountId = '6439b01cf35b6e22570cd842'
 
-  if (isTrialAccount) users = users.filter((user) => user._id === '6439b01cf35b6e22570cd842')
+  if (isTrialAccount) users = users.filter((user) => user._id === trialAccountId)
 
   return (
     <>
@@ -76,9 +77,9 @@ export default function UserList ({ data, isTrialAccount }: Props): JSX.Element 
 
             <Headline variant='md' className='!mb-2'>{user.username}</Headline>
             <div className='flex mb-3 rounded-full items-center h-6 px-2 text-[10px] font-bold text-black uppercase border-2 border-black gap-x-1 font-secondaryFont'>
-              {user.role === 1 && user._id !== '6439b01cf35b6e22570cd842' && 'Administrator'}
-              {user.role === 2 && user._id === '6439b01cf35b6e22570cd842' && 'Trial user'}
-              {user.role === 3 && user._id !== '6439b01cf35b6e22570cd842' && 'Partner'}
+              {user.role === 1 && user._id !== trialAccountId && 'Administrator'}
+              {user.role === 2 && user._id === trialAccountId && 'Trial user'}
+              {user.role === 3 && user._id !== trialAccountId && 'Partner'}
             </div>
 
             <div className='flex flex-wrap gap-3 mt-4'>
