@@ -47,7 +47,7 @@ export default function IntroducingDarkMode (): JSX.Element {
       }}
     >
       <motion.div
-        className='order-2 w-full p-6 md:p-10 md:grid-cols-2 xl:col-span-4 2xl:col-span-1 xl:order-1 will-change-transform bg-blue rounded-3xl'
+        className='relative flex justify-center order-2 w-full p-6 md:p-10 md:grid-cols-2 xl:col-span-4 2xl:col-span-1 xl:order-1 will-change-transform bg-blue rounded-3xl group'
         variants={CONTENT_VARIANTS}
         animate={isInViewContainer ? 'visible' : 'hidden'}
         initial='hidden'
@@ -73,6 +73,9 @@ export default function IntroducingDarkMode (): JSX.Element {
             </div>
           }
         />
+        <div className='absolute -top-2 text-black tracking-widest font-bold leading-none text-[8px] uppercase font-secondaryFont text-center bg-light-blue py-[7px] px-[10px] rounded-full opacity-100 group-hover:opacity-0 transition-opacity ease-in-out duration-400 animate-bounce'>
+          Move the slider line to see the difference!
+        </div>
       </motion.div>
       <motion.div
         className='flex flex-col items-start order-1 text-black transition-colors ease-in-out xl:order-2 dark:text-blue duration-400 xl:col-start-6 xl:col-end-9 2xl:col-start-2 2xl:col-end-3 will-change-transform'
