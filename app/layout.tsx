@@ -36,7 +36,7 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
                 {children}
               </ReactLenis>
             </AnimatePresence>
-            <Toaster position='top-center' toastOptions={{ className: 'ui-notifications' }} duration={6000} />
+            <Toaster position='top-center' toastOptions={{ className: 'ui-notifications' }} duration={5000} />
             <Footer />
           </AppProvider>
         </SWRConfig>

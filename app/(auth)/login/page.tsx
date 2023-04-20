@@ -55,7 +55,7 @@ export default function Login (): JSX.Element {
             <>
               <HeartIcon className='w-4 stroke-blue stroke-3' />
               <h3 className='font-bold'>Welcome to the trial mode</h3>
-              <p><Balancer>This is a trial account, you must register to access all the features.</Balancer></p>
+              <p><Balancer>You must register to access all the features.</Balancer></p>
             </>
           )
         }
