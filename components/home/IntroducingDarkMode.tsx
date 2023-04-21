@@ -58,10 +58,10 @@ export default function IntroducingDarkMode (): JSX.Element {
         }}
       >
         <ReactCompareImage
-          leftImage='/images/dark-mode-1.jpg'
+          leftImage='/images/dark-mode-1.webp'
           leftImageAlt='Dark Mode'
           leftImageCss={{ borderRadius: '1.5rem' }}
-          rightImage='/images/dark-mode-2.jpg'
+          rightImage='/images/dark-mode-2.webp'
           rightImageAlt='Light Mode'
           rightImageCss={{ borderRadius: '1.5rem' }}
           sliderLineWidth={6}
