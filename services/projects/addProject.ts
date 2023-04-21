@@ -15,7 +15,11 @@ export const addProject = async (project: ProjectInterface): Promise<FullProject
     }
   }
 
-  const response = await privateApi.post(PROJECTS_ENDPOINT, project, config)
+  const newProject = {
+    title: project.name
+  }
+
+  const response = await privateApi.post(PROJECTS_ENDPOINT, newProject, config)
 
   return response.data.newProject
 }

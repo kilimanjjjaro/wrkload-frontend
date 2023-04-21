@@ -67,7 +67,6 @@ export default function UpdateUser (): JSX.Element {
         <form onSubmit={(event) => { void handleSubmit(event) }}>
           <div className='flex flex-col mb-3 gap-y-3'>
             <Input onChange={handleChange} value={user.username} name='username' type='text' placeholder='Username' centerText required />
-            <Input onChange={handleChange} value={user.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText required />
           </div>
           <div className='flex justify-center gap-x-3'>
             <Button onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
