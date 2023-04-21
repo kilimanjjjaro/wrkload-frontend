@@ -146,7 +146,7 @@ export default function Profile (): JSX.Element {
           </div>
 
           <div className='flex flex-col gap-4 dark:text-white'>
-            <Headline className='!mb-0' variant='md'>Name</Headline>
+            <Headline className='!mb-0' variant='md'>Username</Headline>
             <Paragraph variant='normal'>{user.username}</Paragraph>
           </div>
 
