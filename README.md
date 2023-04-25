@@ -16,6 +16,7 @@ Is a web app where you can track what you've worked on in a simple and organized
 - **Data fetching:** SWR was used to efficiently and optimally manage client-side data fetching. This library allowed us to automatically have a global state with persistence through cookies and avoid the use of libraries such as Redux or similar ones. Data is obtained or sent using Axios and SWR takes care of caching them so that they can be consumed from any part of the application.
 - **Optimistic UI:** actions that the user performs that involve data fetching from the server have no delay. Interface changes take effect instantly without waiting for the server to validate them. If there is a failure, a notification is displayed and the interface is rolled back to the previous state. This is achieved thanks to SWR, when the user initiates a data exchange, the cache is mutated at the same time as the request to the server is initiated, so the data that the user has is up-to-date. Once the server returns a positive response, the cache is revalidated to ensure that local and remote data are synchronized.
 - **Improving readability:** React Wrap Balancer was used to prevent word imbalance per line, making the reading experience more fluid and visually balanced texts.
+- **Avatars:** To manage them, we use the Cloudinary API to perform some optimizations and convert the images to .webp format.
 
 ## Built With
 
