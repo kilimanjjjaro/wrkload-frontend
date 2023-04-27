@@ -10,6 +10,7 @@ import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
 import PageTransition from 'components/shared/PageTransition'
 import deleteAccount from 'services/auth/deleteAccount'
+import { SERVER_RESPONSE_STATUS } from 'constants/components'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: '',
@@ -35,7 +36,7 @@ export default function DeleteAccount (): JSX.Element {
       setIsLoading(true)
       const response = await deleteAccount({ email, password })
 
-      if (response.status === 'ok') {
+      if (response.status === SERVER_RESPONSE_STATUS.OK) {
         setSuccess(true)
       }
     } catch (error: any) {

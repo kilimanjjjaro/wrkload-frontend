@@ -10,12 +10,13 @@ import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
 import rememberPassword from 'services/auth/rememberPassword'
 import PageTransition from 'components/shared/PageTransition'
+import { SERVER_RESPONSE_STATUS } from 'constants/components'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: ''
 }
 
-export default function RememberPassword(): JSX.Element {
+export default function RememberPassword (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -35,7 +36,7 @@ export default function RememberPassword(): JSX.Element {
 
       const response = await rememberPassword({ email })
 
-      if (response.status === 'ok') {
+      if (response.status === SERVER_RESPONSE_STATUS.OK) {
         setSuccess(true)
       }
     } catch (error: any) {

@@ -13,6 +13,7 @@ import GoogleLogo from 'public/images/google.svg'
 import register from 'services/auth/register'
 import PageTransition from 'components/shared/PageTransition'
 import clsx from 'clsx'
+import { SERVER_RESPONSE_STATUS } from 'constants/components'
 
 const INITIAL_CREDENTIALS_STATE = {
   username: '',
@@ -49,9 +50,8 @@ export default function Register (): JSX.Element {
       }
 
       const response = await register({ username, email, password })
-      // TODO: handle week password
 
-      if (response.status === 'ok') {
+      if (response.status === SERVER_RESPONSE_STATUS.OK) {
         setSuccess(true)
       }
     } catch (error: any) {

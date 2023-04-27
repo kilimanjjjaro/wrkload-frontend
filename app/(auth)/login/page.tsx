@@ -16,6 +16,7 @@ import GoogleLogo from 'public/images/google.svg'
 import login from 'services/auth/login'
 import { AppContext } from 'contexts/AppContext'
 import PageTransition from 'components/shared/PageTransition'
+import { SERVER_RESPONSE_STATUS } from 'constants/components'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: '',
@@ -42,7 +43,9 @@ export default function Login (): JSX.Element {
       setIsLoggingIn(true)
       const response = await login({ email, password })
 
-      if (response.status === 'ok') {
+      console.log(response)
+
+      if (response.status === SERVER_RESPONSE_STATUS.OK) {
         setUser(response.user)
         setCookie('isLogged', true, {
           maxAge: 60 * 60 * 24 * 30,

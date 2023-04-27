@@ -11,6 +11,7 @@ import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
 import resetPassword from 'services/auth/resetPassword'
 import PageTransition from 'components/shared/PageTransition'
+import { SERVER_RESPONSE_STATUS } from 'constants/components'
 
 interface ParamsInterface {
   params: {
@@ -24,7 +25,7 @@ const INITIAL_CREDENTIALS_STATE = {
   confirmNewPassword: ''
 }
 
-export default function ResetPassword({ params }: ParamsInterface): JSX.Element {
+export default function ResetPassword ({ params }: ParamsInterface): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -61,7 +62,7 @@ export default function ResetPassword({ params }: ParamsInterface): JSX.Element 
 
       const response = await resetPassword({ newPassword, uid, resetPasswordToken })
 
-      if (response.status === 'ok') {
+      if (response.status === SERVER_RESPONSE_STATUS.OK) {
         setSuccess(true)
       }
     } catch (error: any) {

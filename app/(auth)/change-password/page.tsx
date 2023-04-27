@@ -14,6 +14,7 @@ import login from 'services/auth/login'
 import changePassword from 'services/auth/changePassword'
 import PageTransition from 'components/shared/PageTransition'
 import clsx from 'clsx'
+import { SERVER_RESPONSE_STATUS } from 'constants/components'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: '',
@@ -22,7 +23,7 @@ const INITIAL_CREDENTIALS_STATE = {
   confirmNewPassword: ''
 }
 
-export default function ChangePassword(): JSX.Element {
+export default function ChangePassword (): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [email, setEmail] = useState('')
   const [step, setStep] = useState(1)
@@ -84,7 +85,7 @@ export default function ChangePassword(): JSX.Element {
 
       const response = await changePassword({ email, oldPassword, newPassword })
 
-      if (response.status === 'ok') {
+      if (response.status === SERVER_RESPONSE_STATUS.OK) {
         setSuccess(true)
       }
     } catch (error: any) {
