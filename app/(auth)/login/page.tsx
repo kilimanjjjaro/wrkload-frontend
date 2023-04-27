@@ -43,8 +43,6 @@ export default function Login (): JSX.Element {
       setIsLoggingIn(true)
       const response = await login({ email, password })
 
-      console.log(response)
-
       if (response.status === SERVER_RESPONSE_STATUS.OK) {
         setUser(response.user)
         setCookie('isLogged', true, {
