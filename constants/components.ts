@@ -51,3 +51,8 @@ export const LENIS_OPTIONS = {
 export const ALLOWED_IMAGE_EXTENSIONS = /(\.jpg|\.jpeg|\.png|\.webp)$/i
 export const ALLOWED_IMAGE_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 export const ALLOWED_IMAGE_SIZE = 5 * 1024 * 1024
+
+export const SERVER_RESPONSE_STATUS = {
+  OK: 'ok',
+  ERROR: 'error'
+}

@@ -14,7 +14,7 @@ interface Props {
   setModalStatus: (value: boolean) => void
 }
 
-export default function SearchForm({ type, setModalStatus }: Props): JSX.Element {
+export default function SearchForm ({ type, setModalStatus }: Props): JSX.Element {
   const { selectedProjectToFetch } = useContext(AppContext)
   const router = useRouter()
   const [query, setQuery] = useState('')

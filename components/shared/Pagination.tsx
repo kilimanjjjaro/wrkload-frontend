@@ -3,7 +3,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import Button from 'components/shared/Button'
 import type { PaginationInterface } from 'interfaces/components'
 
-export default function Pagination({ data }: { data: PaginationInterface }): JSX.Element {
+export default function Pagination ({ data }: { data: PaginationInterface }): JSX.Element {
   const router = useRouter()
   const pathname = usePathname()
   const params = useSearchParams()

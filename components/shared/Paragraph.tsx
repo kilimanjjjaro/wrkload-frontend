@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { PARAGRAPH_VARIANTS } from 'constants/variants'
 
 interface Props {
   children?: React.ReactNode
@@ -11,9 +12,9 @@ export default function Paragraph ({ className, children, variant }: Props): JSX
     <p
       className={clsx(
         'break-word',
-        variant === 'normal' && 'text-xl font-secondaryFont',
-        variant === 'sm' && 'text-base font-secondaryFont',
-        variant === 'xs' && 'text-xs -mt-4 md:-mt-8 mb-6 md:mb-10 font-secondaryFont',
+        variant === 'normal' && PARAGRAPH_VARIANTS.NORMAL,
+        variant === 'sm' && PARAGRAPH_VARIANTS.SM,
+        variant === 'xs' && PARAGRAPH_VARIANTS.XS,
         className
       )}
     >{children}

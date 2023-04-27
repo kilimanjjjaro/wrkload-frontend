@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-
+import { TEXTAREA_VARIANTS } from 'constants/variants'
 import type { TextareaInterface } from 'interfaces/components'
 
 export default function Textarea ({ className, onChange, value, name, placeholder, centerText, maxLength }: TextareaInterface): JSX.Element {
@@ -7,7 +7,7 @@ export default function Textarea ({ className, onChange, value, name, placeholde
     <textarea
       className={clsx(
         'w-full py-[19px] px-5 text-sm leading-tight placeholder-opacity-100 appearance-none resize-none block h-[150px] md:h-[161px] font-secondaryFont focus:outline-none focus:placeholder:opacity-0 transition duration-400 ease-in-out rounded-3xl text-black placeholder-black bg-light-blue hover:bg-white focus:bg-white',
-        centerText !== undefined && 'text-center',
+        centerText !== undefined && TEXTAREA_VARIANTS.CENTERED,
         className
       )}
       value={value}
