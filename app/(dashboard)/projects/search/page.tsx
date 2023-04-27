@@ -14,7 +14,7 @@ import notFoundImage from 'public/images/not-found.webp'
 import searchProjects from 'services/projects/searchProjects'
 import { sortProjects } from 'utils/sortData'
 
-export default function SearchProjects (): JSX.Element {
+export default function SearchProjects(): JSX.Element {
   const params = useSearchParams()
   const query = params.get('query')
   const page = params.get('page')
@@ -54,7 +54,7 @@ export default function SearchProjects (): JSX.Element {
               alt='Not found image'
             />
             <span className='text-xl text-center text-black dark:text-white font-secondaryFont'>No search results found. <br className='hidden lg:block' />Please try again.</span>
-            <Button className='!w-auto' onClick={() => router.push('/projects')} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
+            <Button ariaLabel='Go to projects' className='!w-auto' onClick={() => router.push('/projects')} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
           </div>
         )}
       </main>

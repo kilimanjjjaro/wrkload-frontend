@@ -79,7 +79,7 @@ export default function Register (): JSX.Element {
               {error === 'auth/email-already-exists' && 'An account with this email already exists. Please, try another one or login.'}
             </Balancer>
           </p>
-          <Button onClick={handleClick} variant='secondary'>
+          <Button ariaLabel='Try again' onClick={handleClick} variant='secondary'>
             <ArrowLeftIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -93,7 +93,7 @@ export default function Register (): JSX.Element {
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been created and an email will be sent to activate it.</Balancer></p>
-          <Button onClick={() => router.push('/login')} variant='secondary'>
+          <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -141,7 +141,7 @@ export default function Register (): JSX.Element {
                 </div>
               </div>
             </div>
-            <Button className='group' variant='secondary' isLoading={isLoading}>
+            <Button ariaLabel='Registry' className='group' variant='secondary' isLoading={isLoading}>
               <LockClosedIcon className='w-4 transition-opacity duration-700 ease-in-out opacity-100 stroke-3 group-focus:opacity-0' />
               <LockOpenIcon className='absolute w-4 transition-opacity duration-700 ease-in-out opacity-0 stroke-3 group-focus:opacity-100' />
             </Button>

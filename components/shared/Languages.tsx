@@ -34,7 +34,7 @@ export default function Languages (): JSX.Element {
         damping: 10
       }}
     >
-      <button className='flex items-center gap-1 transition ease-in-out duration-400 font-secondaryFont' onClick={() => setShowDropdown(!showDropdown)}><LanguageIcon className='w-[18px] transition ease-in-out duration-400 hover:text-blue dark:hover:text-white' /></button>
+      <button aria-label='Change language' className='flex items-center gap-1 transition ease-in-out duration-400 font-secondaryFont' onClick={() => setShowDropdown(!showDropdown)}><LanguageIcon className='w-[18px] transition ease-in-out duration-400 hover:text-blue dark:hover:text-white' /></button>
       <motion.ul
         className='absolute top-0 flex items-center gap-3 text-sm font-secondaryFont group' animate={showDropdown ? 'open' : 'closed'}
         initial={false}

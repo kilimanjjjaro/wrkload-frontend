@@ -14,7 +14,7 @@ import searchTasks from 'services/tasks/searchTasks'
 import { sortTasks } from 'utils/sortData'
 import PageTransition from 'components/shared/PageTransition'
 
-export default function SearchTasks (): JSX.Element {
+export default function SearchTasks(): JSX.Element {
   const params = useSearchParams()
   const project = params.get('project')
   const query = params.get('query')
@@ -55,7 +55,7 @@ export default function SearchTasks (): JSX.Element {
               alt='Not found image'
             />
             <span className='text-xl text-center text-black dark:text-white font-secondaryFont'>No search results found. <br className='hidden lg:block' />Please try again.</span>
-            <Button className='!w-auto' onClick={() => router.push('/tasks')} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
+            <Button ariaLabel='Go to tasks' className='!w-auto' onClick={() => router.push('/tasks')} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
           </div>
         )}
       </main>

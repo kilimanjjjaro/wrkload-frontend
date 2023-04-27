@@ -11,7 +11,7 @@ import Input from 'components/shared/Input'
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 
-export default function DeleteUser (): JSX.Element {
+export default function DeleteUser(): JSX.Element {
   const { selectedUser } = useContext(AppContext)
   const { setDeleteDataModalStatus } = useContext(ModalsContext)
 
@@ -70,10 +70,10 @@ export default function DeleteUser (): JSX.Element {
             <Input onChange={handleChange} value={user.email} name='email' type='email' placeholder='Email' centerText required disabled />
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
+            <Button ariaLabel='Close' onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
-            <Button type='submit' variant='secondary'>
+            <Button ariaLabel='Delete' type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </div>

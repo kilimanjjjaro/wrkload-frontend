@@ -15,7 +15,7 @@ interface ParamsInterface {
   }
 }
 
-export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Element {
+export default function ConfirmAccount({ params }: ParamsInterface): JSX.Element {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState('')
   const router = useRouter()
@@ -63,7 +63,7 @@ export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Elemen
               {error === 'token/token-expired' && 'Sorry, the confirmation link has expired. Please request one again.'}
             </Balancer>
           </p>
-          <Button onClick={handleClick} variant='secondary'>
+          <Button ariaLabel='Next' onClick={handleClick} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -87,7 +87,7 @@ export default function ConfirmAccount ({ params }: ParamsInterface): JSX.Elemen
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been confirmed. <b>Please, log in.</b></Balancer></p>
-          <Button onClick={() => router.push('/login')} variant='secondary'>
+          <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>

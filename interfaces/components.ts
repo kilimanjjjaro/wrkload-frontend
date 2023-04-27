@@ -17,6 +17,7 @@ export interface ButtonInterface {
   children: React.ReactNode
   disablePagination?: boolean
   isLoading?: boolean
+  ariaLabel?: string
 }
 
 export interface InputInterface {

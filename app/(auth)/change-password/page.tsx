@@ -22,7 +22,7 @@ const INITIAL_CREDENTIALS_STATE = {
   confirmNewPassword: ''
 }
 
-export default function ChangePassword (): JSX.Element {
+export default function ChangePassword(): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [email, setEmail] = useState('')
   const [step, setStep] = useState(1)
@@ -119,12 +119,12 @@ export default function ChangePassword (): JSX.Element {
             </Balancer>
           </p>
           {error !== 'auth/expired-session' && (
-            <Button onClick={handleClick} variant='secondary'>
+            <Button ariaLabel='Go back' onClick={handleClick} variant='secondary'>
               <ArrowLeftIcon className='w-4 stroke-3' />
             </Button>
           )}
           {error === 'auth/expired-session' && (
-            <Button onClick={() => router.push('/login')} variant='secondary'>
+            <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           )}
@@ -139,7 +139,7 @@ export default function ChangePassword (): JSX.Element {
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>You can now use your new password. <b>Please, log in again.</b></Balancer></p>
-          <Button onClick={() => router.push('/login')} variant='secondary'>
+          <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -162,7 +162,7 @@ export default function ChangePassword (): JSX.Element {
               <div className='flex flex-col gap-3 mb-3'>
                 <Input onChange={handleChange} value={credentials.currentPassword} name='currentPassword' type='password' placeholder='Current Password' minLength={8} autoComplete='current-password' centerText required />
               </div>
-              <Button variant='secondary' isLoading={isLoading}>
+              <Button ariaLabel='Next' variant='secondary' isLoading={isLoading}>
                 <ArrowRightIcon className='w-4 stroke-3' />
               </Button>
             </form>
@@ -202,7 +202,7 @@ export default function ChangePassword (): JSX.Element {
                   </div>
                 </div>
               </div>
-              <Button variant='secondary' isLoading={isLoading}>
+              <Button ariaLabel='Submit' variant='secondary' isLoading={isLoading}>
                 <ArrowRightIcon className='w-4 stroke-3' />
               </Button>
             </form>

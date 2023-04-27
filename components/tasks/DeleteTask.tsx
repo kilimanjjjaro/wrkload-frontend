@@ -11,7 +11,7 @@ import Input from 'components/shared/Input'
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 
-export default function DeleteTask (): JSX.Element {
+export default function DeleteTask(): JSX.Element {
   const { selectedTask } = useContext(AppContext)
   const { setDeleteDataModalStatus } = useContext(ModalsContext)
 
@@ -69,10 +69,10 @@ export default function DeleteTask (): JSX.Element {
             <Input onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' centerText required disabled />
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
+            <Button ariaLabel='Close' onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
-            <Button type='submit' variant='secondary'>
+            <Button ariaLabel='Delete' type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </div>

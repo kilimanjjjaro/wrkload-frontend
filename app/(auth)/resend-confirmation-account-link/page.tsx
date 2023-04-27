@@ -15,7 +15,7 @@ const INITIAL_CREDENTIALS_STATE = {
   email: ''
 }
 
-export default function ResendConfirmationAccountLink (): JSX.Element {
+export default function ResendConfirmationAccountLink(): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -56,7 +56,7 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
               {error === 'auth/account-already-confirmed' && 'This account has already been confirmed, please try log in.'}
             </Balancer>
           </p>
-          <Button onClick={() => router.push('/login')} variant='secondary'>
+          <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -92,7 +92,7 @@ export default function ResendConfirmationAccountLink (): JSX.Element {
             <div className='flex flex-col gap-3 mb-3'>
               <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText required />
             </div>
-            <Button variant='secondary' isLoading={isLoading}>
+            <Button ariaLabel='Submit' variant='secondary' isLoading={isLoading}>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </form>

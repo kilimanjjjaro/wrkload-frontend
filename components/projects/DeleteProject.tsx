@@ -14,7 +14,7 @@ import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import Paragraph from 'components/shared/Paragraph'
 
-export default function DeleteProject (): JSX.Element {
+export default function DeleteProject(): JSX.Element {
   const { selectedProject } = useContext(AppContext)
   const { setDeleteDataModalStatus } = useContext(ModalsContext)
 
@@ -75,10 +75,10 @@ export default function DeleteProject (): JSX.Element {
             <Input onChange={handleChange} value={project.name} name='name' type='text' placeholder='Name' centerText required disabled />
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
+            <Button ariaLabel='Close' onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
-            <Button type='submit' variant='secondary'>
+            <Button ariaLabel='Delete' type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </div>

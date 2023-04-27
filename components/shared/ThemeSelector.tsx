@@ -28,6 +28,6 @@ export default function ThemeSelector (): JSX.Element {
   }, [darkMode])
 
   return (
-    <button className='transition ease-in-out duration-400 hover:text-blue dark:hover:text-white' onClick={toggleTheme}>{darkMode ? <MoonIcon /> : <SunIcon />}</button>
+    <button aria-label='Dark mode' className='transition ease-in-out duration-400 hover:text-blue dark:hover:text-white' onClick={toggleTheme}>{darkMode ? <MoonIcon /> : <SunIcon />}</button>
   )
 }

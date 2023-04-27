@@ -57,7 +57,7 @@ export default function DeleteAccount (): JSX.Element {
               {error === 'auth/account-not-confirmed' && 'This account has not been confirmed yet. Please, do this first.'}
             </Balancer>
           </p>
-          <Button onClick={() => router.push('/login')} variant='secondary'>
+          <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -71,7 +71,7 @@ export default function DeleteAccount (): JSX.Element {
         <div className='p-6 text-black md:p-10 text-cente bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>Your account was deleted. <b>Thanks for this time!</b></Balancer></p>
-          <Button onClick={() => router.push('/')} variant='secondary'>
+          <Button ariaLabel='Go home' onClick={() => router.push('/')} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -92,7 +92,7 @@ export default function DeleteAccount (): JSX.Element {
               <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' centerText required />
               <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' minLength={8} centerText required />
             </div>
-            <Button variant='secondary' isLoading={isLoading}>
+            <Button ariaLabel='Submit' variant='secondary' isLoading={isLoading}>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </form>

@@ -17,7 +17,7 @@ import { AppContext } from 'contexts/AppContext'
 import { INITIAL_TASK_STATE } from 'constants/tasks'
 import { CHARACTER_LIMIT } from 'constants/components'
 
-export default function AddTask (): JSX.Element {
+export default function AddTask(): JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
   const { selectedProjectToFetch } = useContext(AppContext)
 
@@ -92,10 +92,10 @@ export default function AddTask (): JSX.Element {
             </div>
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
+            <Button ariaLabel='Close' onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
-            <Button type='submit' variant='secondary'>
+            <Button ariaLabel='Submit' type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </div>

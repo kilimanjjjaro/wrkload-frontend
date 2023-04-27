@@ -18,7 +18,7 @@ import searchUsers from 'services/users/searchUsers'
 import { sortUsers } from 'utils/sortData'
 import PageTransition from 'components/shared/PageTransition'
 
-export default function SearchUsers (): JSX.Element {
+export default function SearchUsers(): JSX.Element {
   const [isTrialAccount, setIsTrialAccount] = useState(false)
   const params = useSearchParams()
   const query = params.get('query')
@@ -78,7 +78,7 @@ export default function SearchUsers (): JSX.Element {
               alt='Not found image'
             />
             <span className='text-xl text-center text-black dark:text-white font-secondaryFont'>No search results found. <br className='hidden lg:block' />Please try again.</span>
-            <Button className='!w-auto' onClick={() => router.push('/users')} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
+            <Button ariaLabel='Go to users' className='!w-auto' onClick={() => router.push('/users')} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
           </div>
         )}
       </main>

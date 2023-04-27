@@ -13,7 +13,7 @@ import Input from 'components/shared/Input'
 import { ModalsContext } from 'contexts/ModalsContext'
 import { INITIAL_PROJECT_STATE } from 'constants/projects'
 
-export default function AddProject (): JSX.Element {
+export default function AddProject(): JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
 
   const [project, setProject] = useState(INITIAL_PROJECT_STATE)
@@ -70,10 +70,10 @@ export default function AddProject (): JSX.Element {
             <Input onChange={handleChange} value={project.name} name='name' type='text' placeholder='Name' centerText required />
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
+            <Button ariaLabel='Close' onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
-            <Button type='submit' variant='secondary'>
+            <Button ariaLabel='Submit' type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </div>

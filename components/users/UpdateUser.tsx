@@ -11,7 +11,7 @@ import Input from 'components/shared/Input'
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 
-export default function UpdateUser (): JSX.Element {
+export default function UpdateUser(): JSX.Element {
   const { selectedUser } = useContext(AppContext)
   const { setUpdateDataModalStatus } = useContext(ModalsContext)
 
@@ -69,10 +69,10 @@ export default function UpdateUser (): JSX.Element {
             <Input onChange={handleChange} value={user.username} name='username' type='text' placeholder='Username' centerText required />
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
+            <Button ariaLabel='Close' onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
-            <Button type='submit' variant='secondary'>
+            <Button ariaLabel='Update' type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </div>

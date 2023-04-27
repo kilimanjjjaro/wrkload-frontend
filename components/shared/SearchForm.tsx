@@ -14,7 +14,7 @@ interface Props {
   setModalStatus: (value: boolean) => void
 }
 
-export default function SearchForm ({ type, setModalStatus }: Props): JSX.Element {
+export default function SearchForm({ type, setModalStatus }: Props): JSX.Element {
   const { selectedProjectToFetch } = useContext(AppContext)
   const router = useRouter()
   const [query, setQuery] = useState('')
@@ -50,10 +50,10 @@ export default function SearchForm ({ type, setModalStatus }: Props): JSX.Elemen
             <Input onChange={handleChange} value={query} name='query' type='text' placeholder='What are you looking for?' centerText required />
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
+            <Button ariaLabel='Close' onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
-            <Button type='submit' variant='secondary'>
+            <Button ariaLabel='Search' type='submit' variant='secondary'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </div>

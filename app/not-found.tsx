@@ -9,7 +9,7 @@ import Headline from 'components/shared/Headline'
 import notFoundImage from 'public/images/not-found.webp'
 import Paragraph from 'components/shared/Paragraph'
 
-export default function NotFound (): JSX.Element {
+export default function NotFound(): JSX.Element {
   const router = useRouter()
 
   return (
@@ -22,7 +22,7 @@ export default function NotFound (): JSX.Element {
         alt='Not found image'
       />
       <Paragraph className='text-white' variant='normal'><Balancer>Sorry, we couldn&apos;t find what you were looking for, please try again.</Balancer></Paragraph>
-      <Button className='!w-auto' onClick={() => router.back()} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
+      <Button ariaLabel='Go back' className='!w-auto' onClick={() => router.back()} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
     </div>
   )
 }

@@ -2,10 +2,11 @@ import clsx from 'clsx'
 
 import type { ButtonInterface } from 'interfaces/components'
 
-export default function Button ({ className, type, variant, disablePagination, onClick, children, isLoading }: ButtonInterface): JSX.Element {
+export default function Button ({ className, type, variant, disablePagination, onClick, children, isLoading, ariaLabel }: ButtonInterface): JSX.Element {
   return (
     <>
       <button
+        aria-label={ariaLabel}
         className={clsx(
           'relative w-full h-10 overflow-hidden text-sm transition duration-400 ease-in-out font-secondaryFont before:top-0 before:left-0 before:w-full before:h-full before:translate-y-full before:absolute rounded-full before:transition before:duration-400 before:ease-in-out md:hover:before:translate-y-0',
           variant === 'primary' && 'text-black bg-blue dark:bg-white dark:text-black md:hover:text-blue md:dark:hover:text-black before:bg-black dark:before:bg-blue',

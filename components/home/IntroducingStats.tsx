@@ -31,7 +31,11 @@ const CONTENT_VARIANTS = {
 
 export default function IntroducingStats (): JSX.Element {
   const containerRef = useRef(null)
+  const leftColumnRef = useRef(null)
+  const rightColumnRef = useRef(null)
   const isInViewContainer = useInView(containerRef, { once: true })
+  const isInViewLeftColumn = useInView(leftColumnRef, { once: true })
+  const isInViewRightColumn = useInView(rightColumnRef, { once: true })
 
   return (
     <motion.section
@@ -46,14 +50,15 @@ export default function IntroducingStats (): JSX.Element {
       }}
     >
       <motion.div
+        ref={leftColumnRef}
         className='grid items-start order-2 gap-6 xl:order-1 2xl:gap-10 md:grid-cols-2 xl:col-span-4 2xl:col-span-1 will-change-transform'
         variants={CONTENT_VARIANTS}
-        animate={isInViewContainer ? 'visible' : 'hidden'}
+        animate={isInViewLeftColumn ? 'visible' : 'hidden'}
         initial='hidden'
         transition={{
           duration: 0.4,
           ease: 'easeOut',
-          delay: 0.4
+          delay: 0.2
         }}
       >
         <article className='p-6 transition ease-in-out border-2 md:p-7 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 group'>
@@ -101,14 +106,15 @@ export default function IntroducingStats (): JSX.Element {
         </article>
       </motion.div>
       <motion.div
+        ref={rightColumnRef}
         className='flex flex-col items-start order-1 text-black transition-colors ease-in-out xl:order-2 dark:text-blue duration-400 xl:col-start-6 xl:col-end-9 2xl:col-start-2 2xl:col-end-3 will-change-transform'
         variants={CONTENT_VARIANTS}
-        animate={isInViewContainer ? 'visible' : 'hidden'}
+        animate={isInViewRightColumn ? 'visible' : 'hidden'}
         initial='hidden'
         transition={{
           duration: 0.4,
           ease: 'easeOut',
-          delay: 0.6
+          delay: 0.4
         }}
       >
         <Headline variant='2xl' className='!mb-10'><Balancer>All you need in one blink!</Balancer></Headline>

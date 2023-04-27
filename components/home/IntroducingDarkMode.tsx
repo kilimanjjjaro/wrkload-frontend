@@ -32,7 +32,11 @@ const CONTENT_VARIANTS = {
 
 export default function IntroducingDarkMode (): JSX.Element {
   const containerRef = useRef(null)
+  const leftColumnRef = useRef(null)
+  const rightColumnRef = useRef(null)
   const isInViewContainer = useInView(containerRef, { once: true })
+  const isInViewLeftColumn = useInView(leftColumnRef, { once: true })
+  const isInViewRightColumn = useInView(rightColumnRef, { once: true })
 
   return (
     <motion.section
@@ -47,14 +51,15 @@ export default function IntroducingDarkMode (): JSX.Element {
       }}
     >
       <motion.div
+        ref={leftColumnRef}
         className='relative flex justify-center order-2 w-full p-6 md:p-10 md:grid-cols-2 xl:col-span-4 2xl:col-span-1 xl:order-1 will-change-transform bg-blue rounded-3xl group'
         variants={CONTENT_VARIANTS}
-        animate={isInViewContainer ? 'visible' : 'hidden'}
+        animate={isInViewLeftColumn ? 'visible' : 'hidden'}
         initial='hidden'
         transition={{
           duration: 0.4,
           ease: 'easeOut',
-          delay: 0.4
+          delay: 0.2
         }}
       >
         <ReactCompareImage
@@ -78,14 +83,15 @@ export default function IntroducingDarkMode (): JSX.Element {
         </div>
       </motion.div>
       <motion.div
+        ref={rightColumnRef}
         className='flex flex-col items-start order-1 text-black transition-colors ease-in-out xl:order-2 dark:text-blue duration-400 xl:col-start-6 xl:col-end-9 2xl:col-start-2 2xl:col-end-3 will-change-transform'
         variants={CONTENT_VARIANTS}
-        animate={isInViewContainer ? 'visible' : 'hidden'}
+        animate={isInViewRightColumn ? 'visible' : 'hidden'}
         initial='hidden'
         transition={{
           duration: 0.4,
           ease: 'easeOut',
-          delay: 0.6
+          delay: 0.4
         }}
       >
         <Headline variant='2xl' className='!mb-10'><Balancer>Discover the Dark Side of wrkload!</Balancer></Headline>

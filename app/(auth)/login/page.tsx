@@ -93,7 +93,7 @@ export default function Login (): JSX.Element {
               )}
             </Balancer>
           </p>
-          <Button onClick={() => window.location.reload()} variant='secondary'>
+          <Button ariaLabel='Try again' onClick={() => window.location.reload()} variant='secondary'>
             <ArrowLeftIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -116,7 +116,7 @@ export default function Login (): JSX.Element {
               <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText required />
               <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' minLength={8} centerText required />
             </div>
-            <Button className='group' variant='secondary' isLoading={isLoading}>
+            <Button ariaLabel='Login' className='group' variant='secondary' isLoading={isLoading}>
               <LockClosedIcon className='w-4 transition-opacity duration-700 ease-in-out opacity-100 stroke-3 group-focus:opacity-0' />
               <LockOpenIcon className='absolute w-4 transition-opacity duration-700 ease-in-out opacity-0 stroke-3 group-focus:opacity-100' />
             </Button>
