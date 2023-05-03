@@ -12,6 +12,8 @@ export default async function logout (): Promise<LogoutResponseInterface> {
   if (response.data.status === 'ok') {
     await mutate(() => true, undefined, { revalidate: false })
     window.localStorage.removeItem('user')
+    window.localStorage.removeItem('selectedProject')
+    window.localStorage.removeItem('darkMode')
     deleteCookie('accessToken')
     deleteCookie('isLogged')
   }
