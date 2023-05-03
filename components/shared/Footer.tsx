@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
+// import { motion } from 'framer-motion'
 import ThemeSelector from 'components/shared/ThemeSelector'
 import Languages from 'components/shared/Languages'
-import GitHubLogo from 'public/images/github.svg'
+// import GitHubLogo from 'public/images/github.svg'
 
 export default function Footer (): JSX.Element {
   return (
@@ -10,7 +10,7 @@ export default function Footer (): JSX.Element {
       <div className='flex gap-x-5'>
         <Languages />
         <ThemeSelector />
-        <motion.a
+        {/* <motion.a
           className='will-change-transform'
           href='https://github.com/kilimanjjjaro/wrkload-frontend'
           aria-label='See repository in Github'
@@ -25,7 +25,7 @@ export default function Footer (): JSX.Element {
           }}
         >
           <GitHubLogo className='w-[18px] transition ease-in-out duration-400 fill-black dark:fill-blue hover:fill-blue dark:hover:fill-white' />
-        </motion.a>
+        </motion.a> */}
       </div>
     </footer>
   )
