@@ -35,7 +35,7 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
         {shouldRenderStats && (stats !== undefined || stats !== null) && !pathname?.includes('search') && <Stats stats={stats} />}
         {projects.map((project) => (
           <article
-            key={project._id} className='relative flex flex-col items-start p-6 text-black break-words transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
+            key={project._id} className='relative flex flex-col items-start p-6 text-black break-all transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
           >
             <Headline variant='md' className='pr-10 xl:pr-0'>{project.name}</Headline>
 
