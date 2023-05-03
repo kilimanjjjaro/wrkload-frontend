@@ -13,6 +13,7 @@ export default function Footer (): JSX.Element {
         <motion.a
           className='will-change-transform'
           href='https://github.com/kilimanjjjaro/wrkload-frontend'
+          aria-label='See repository in Github'
           target='_blank'
           rel='noopener noreferrer'
           initial={{ scale: 0 }}
