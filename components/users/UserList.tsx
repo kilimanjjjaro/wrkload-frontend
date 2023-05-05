@@ -14,7 +14,7 @@ interface Props {
   isTrialAccount: boolean
 }
 
-export default function UserList ({ data, isTrialAccount }: Props): JSX.Element {
+export default function UserList({ data, isTrialAccount }: Props): JSX.Element {
   const { setSelectedUser } = useContext(AppContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
 
@@ -39,7 +39,7 @@ export default function UserList ({ data, isTrialAccount }: Props): JSX.Element 
       <MasonryGrid>
         {users.map((user) => (
           <article
-            key={user._id} className='relative flex flex-col items-start p-6 text-black break-all transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
+            key={user._id} className='relative flex flex-col items-start p-6 text-black break-words transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
           >
             {user.avatar !== undefined && (
               <div className='relative'>
