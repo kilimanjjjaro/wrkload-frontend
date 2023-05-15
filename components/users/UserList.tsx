@@ -14,7 +14,7 @@ interface Props {
   isTrialAccount: boolean
 }
 
-export default function UserList({ data, isTrialAccount }: Props): JSX.Element {
+export default function UserList ({ data, isTrialAccount }: Props): JSX.Element {
   const { setSelectedUser } = useContext(AppContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
 
@@ -53,7 +53,7 @@ export default function UserList({ data, isTrialAccount }: Props): JSX.Element {
                 />
                 {!user.confirmationStatus && (
                   <div className='absolute flex justify-center w-3 h-3 rounded-full top-1 left-1 group/tooltip-1 cursor-help bg-red'>
-                    <div className='absolute invisible tracking-widest uppercase leading-none py-[7px] px-[10px] font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-7 bg-white dark:bg-light-blue duration-400 group-hover/tooltip-1:opacity-100 group-hover/tooltip-1:visible'>
+                    <div className='absolute invisible tracking-widest uppercase leading-none p-2 font-bold text-[8px] text-center transition-all ease-in-out opacity-0 top-4 bg-white dark:bg-light-blue rounded-3xl duration-400 group-hover/tooltip-1:opacity-100 group-hover/tooltip-1:visible'>
                       Unconfirmed account
                     </div>
                   </div>
