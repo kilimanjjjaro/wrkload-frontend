@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import Balancer from 'react-wrap-balancer'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Pagination } from 'swiper'
+import { Autoplay, Pagination } from 'swiper/modules'
 import { ArrowDownIcon, ArrowUpIcon, PresentationChartLineIcon, ClockIcon, EyeSlashIcon, RectangleStackIcon } from '@heroicons/react/24/outline'
 import { AppContext } from 'contexts/AppContext'
 import type { TaskStatsInterface } from 'interfaces/tasks/Task'

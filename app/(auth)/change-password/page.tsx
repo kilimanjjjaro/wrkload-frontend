@@ -5,15 +5,16 @@ import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import { getCookie } from 'cookies-next'
 import jwtDecode from 'jwt-decode'
+import clsx from 'clsx'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Paragraph from 'components/shared/Paragraph'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
+import PageTransition from 'components/shared/PageTransition'
 import login from 'services/auth/login'
 import changePassword from 'services/auth/changePassword'
-import PageTransition from 'components/shared/PageTransition'
-import clsx from 'clsx'
+import logout from 'services/auth/logout'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
 
 const INITIAL_CREDENTIALS_STATE = {
@@ -87,6 +88,7 @@ export default function ChangePassword (): JSX.Element {
 
       if (response.status === SERVER_RESPONSE_STATUS.OK) {
         setSuccess(true)
+        await logout()
       }
     } catch (error: any) {
       if (error.message === 'auth/different-passwords') {
@@ -125,9 +127,11 @@ export default function ChangePassword (): JSX.Element {
             </Button>
           )}
           {error === 'auth/expired-session' && (
-            <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
-              <ArrowRightIcon className='w-4 stroke-3' />
-            </Button>
+            <a aria-label='Login' className='block relative w-full h-10 overflow-hidden text-sm transition duration-400 ease-in-out font-secondaryFont before:block before:top-0 before:left-0 before:w-full before:h-full before:translate-y-full before:absolute rounded-full before:transition before:duration-400 before:ease-in-out md:hover:before:translate-y-0 text-blue dark:text-blue bg-black md:dark:hover:text-black md:hover:text-black before:bg-white' href='/login'>
+              <div className='relative flex items-center justify-center gap-2 px-5 md:text-base'>
+                <ArrowRightIcon className='w-4 stroke-3' />
+              </div>
+            </a>
           )}
         </div>
       </div>
@@ -140,9 +144,11 @@ export default function ChangePassword (): JSX.Element {
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>You can now use your new password. <b>Please, log in again.</b></Balancer></p>
-          <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
-            <ArrowRightIcon className='w-4 stroke-3' />
-          </Button>
+          <a aria-label='Login' className='block relative w-full h-10 overflow-hidden text-sm transition duration-400 ease-in-out font-secondaryFont before:block before:top-0 before:left-0 before:w-full before:h-full before:translate-y-full before:absolute rounded-full before:transition before:duration-400 before:ease-in-out md:hover:before:translate-y-0 text-blue dark:text-blue bg-black md:dark:hover:text-black md:hover:text-black before:bg-white' href='/login'>
+            <div className='relative flex items-center justify-center gap-2 px-5 md:text-base'>
+              <ArrowRightIcon className='w-4 stroke-3' />
+            </div>
+          </a>
         </div>
       </div>
     )
