@@ -12,16 +12,11 @@
     "@heroicons/react": "2.0.18",
     "@motionone/utils": "10.16.3",
     "@studio-freight/react-lenis": "0.0.36",
-    "@types/node": "20.8.8",
-    "@types/react": "18.2.32",
-    "@types/react-dom": "18.2.14",
     "atropos": "2.0.2",
     "axios": "1.5.1",
     "clsx": "2.0.0",
     "cookies-next": "4.0.0",
     "dayjs": "1.11.10",
-    "eslint": "8.52.0",
-    "eslint-config-next": "13.5.6",
     "framer-motion": "10.16.4",
     "jwt-decode": "3.1.2",
     "next": "13.2.4",
@@ -33,16 +28,22 @@
     "react-wrap-balancer": "1.1.0",
     "sonner": "1.0.3",
     "swiper": "11.0.2",
-    "swr": "2.2.4",
-    "typescript": "5.2.2"
+    "swr": "2.2.4"
   },
   "devDependencies": {
     "@svgr/webpack": "8.1.0",
+    "@types/node": "20.8.9",
+    "@types/react": "18.2.32",
     "@types/react-avatar-editor": "13.0.1",
+    "@types/react-dom": "18.2.14",
     "autoprefixer": "10.4.16",
+    "eslint": "8.52.0",
+    "eslint-config-next": "13.5.6",
+    "eslint-config-prettier": "^9.0.0",
     "postcss": "8.4.31",
     "tailwindcss": "3.3.5",
-    "ts-standard": "12.0.2"
+    "ts-standard": "12.0.2",
+    "typescript": "5.2.2"
   },
   "volta": {
     "node": "20.9.0"

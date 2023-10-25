@@ -24,7 +24,7 @@ const INITIAL_CREDENTIALS_STATE = {
   confirmNewPassword: ''
 }
 
-export default function ChangePassword (): JSX.Element {
+export default function ChangePassword(): JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [email, setEmail] = useState('')
   const [step, setStep] = useState(1)
@@ -45,12 +45,14 @@ export default function ChangePassword (): JSX.Element {
 
   useEffect(() => {
     if (accessToken !== undefined) {
-      const { email }: { email: string } = jwtDecode(accessToken as string)
+      const { email }: { email: string } = jwtDecode(accessToken)
       setEmail(email)
     }
   }, [accessToken])
 
-  const handleStepOne = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleStepOne = async (
+    event: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault()
     const { currentPassword: password } = credentials
 
@@ -73,9 +75,15 @@ export default function ChangePassword (): JSX.Element {
     }
   }
 
-  const handleStepTwo = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleStepTwo = async (
+    event: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault()
-    const { currentPassword: oldPassword, newPassword, confirmNewPassword } = credentials
+    const {
+      currentPassword: oldPassword,
+      newPassword,
+      confirmNewPassword
+    } = credentials
 
     try {
       setIsLoading(true)
@@ -112,22 +120,36 @@ export default function ChangePassword (): JSX.Element {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
-          <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
+          <Headline variant='md'>
+            <Balancer>We have a problem!</Balancer>
+          </Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
-              {error === 'trial/permission-denied' && 'This is a trial account, to access this feature you must register.'}
-              {error === 'auth/different-passwords' && 'Passwords are not the same. Please, try again.'}
-              {error === 'auth/invalid-credentials' && 'The email or password are invalid. Please, try again.'}
-              {error === 'auth/expired-session' && 'Your session has expired. Please, log in again to change your password.'}
+              {error === 'trial/permission-denied' &&
+                'This is a trial account, to access this feature you must register.'}
+              {error === 'auth/different-passwords' &&
+                'Passwords are not the same. Please, try again.'}
+              {error === 'auth/invalid-credentials' &&
+                'The email or password are invalid. Please, try again.'}
+              {error === 'auth/expired-session' &&
+                'Your session has expired. Please, log in again to change your password.'}
             </Balancer>
           </p>
           {error !== 'auth/expired-session' && (
-            <Button ariaLabel='Go back' onClick={handleClick} variant='secondary'>
+            <Button
+              ariaLabel='Go back'
+              onClick={handleClick}
+              variant='secondary'
+            >
               <ArrowLeftIcon className='w-4 stroke-3' />
             </Button>
           )}
           {error === 'auth/expired-session' && (
-            <a aria-label='Login' className='block relative w-full h-10 overflow-hidden text-sm transition duration-400 ease-in-out font-secondaryFont before:block before:top-0 before:left-0 before:w-full before:h-full before:translate-y-full before:absolute rounded-full before:transition before:duration-400 before:ease-in-out md:hover:before:translate-y-0 text-blue dark:text-blue bg-black md:dark:hover:text-black md:hover:text-black before:bg-white' href='/login'>
+            <a
+              aria-label='Login'
+              className='block relative w-full h-10 overflow-hidden text-sm transition duration-400 ease-in-out font-secondaryFont before:block before:top-0 before:left-0 before:w-full before:h-full before:translate-y-full before:absolute rounded-full before:transition before:duration-400 before:ease-in-out md:hover:before:translate-y-0 text-blue dark:text-blue bg-black md:dark:hover:text-black md:hover:text-black before:bg-white'
+              href='/login'
+            >
               <div className='relative flex items-center justify-center gap-2 px-5 md:text-base'>
                 <ArrowRightIcon className='w-4 stroke-3' />
               </div>
@@ -142,9 +164,19 @@ export default function ChangePassword (): JSX.Element {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
-          <Headline variant='md'><Balancer>Done!</Balancer></Headline>
-          <p className='mb-5 text-sm font-secondaryFont'><Balancer>You can now use your new password. <b>Please, log in again.</b></Balancer></p>
-          <a aria-label='Login' className='block relative w-full h-10 overflow-hidden text-sm transition duration-400 ease-in-out font-secondaryFont before:block before:top-0 before:left-0 before:w-full before:h-full before:translate-y-full before:absolute rounded-full before:transition before:duration-400 before:ease-in-out md:hover:before:translate-y-0 text-blue dark:text-blue bg-black md:dark:hover:text-black md:hover:text-black before:bg-white' href='/login'>
+          <Headline variant='md'>
+            <Balancer>Done!</Balancer>
+          </Headline>
+          <p className='mb-5 text-sm font-secondaryFont'>
+            <Balancer>
+              You can now use your new password. <b>Please, log in again.</b>
+            </Balancer>
+          </p>
+          <a
+            aria-label='Login'
+            className='block relative w-full h-10 overflow-hidden text-sm transition duration-400 ease-in-out font-secondaryFont before:block before:top-0 before:left-0 before:w-full before:h-full before:translate-y-full before:absolute rounded-full before:transition before:duration-400 before:ease-in-out md:hover:before:translate-y-0 text-blue dark:text-blue bg-black md:dark:hover:text-black md:hover:text-black before:bg-white'
+            href='/login'
+          >
             <div className='relative flex items-center justify-center gap-2 px-5 md:text-base'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </div>
@@ -158,58 +190,148 @@ export default function ChangePassword (): JSX.Element {
     <PageTransition>
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
-          <Headline variant='md'><Balancer>{step === 1 ? 'Change password' : 'Enter new password'}</Balancer></Headline>
+          <Headline variant='md'>
+            <Balancer>
+              {step === 1 ? 'Change password' : 'Enter new password'}
+            </Balancer>
+          </Headline>
           <Paragraph variant='sm'>
             <Balancer>
-              If you wish to change your password, <b>please complete the following form.</b>
+              If you wish to change your password,{' '}
+              <b>please complete the following form.</b>
             </Balancer>
           </Paragraph>
           {step === 1 && (
-            <form className='mt-5' onSubmit={(event) => { void handleStepOne(event) }}>
+            <form
+              className='mt-5'
+              onSubmit={(event) => {
+                void handleStepOne(event)
+              }}
+            >
               <div className='flex flex-col gap-3 mb-3'>
-                <Input onChange={handleChange} value={credentials.currentPassword} name='currentPassword' type='password' placeholder='Current Password' minLength={8} autoComplete='current-password' centerText required />
+                <Input
+                  onChange={handleChange}
+                  value={credentials.currentPassword}
+                  name='currentPassword'
+                  type='password'
+                  placeholder='Current Password'
+                  minLength={8}
+                  autoComplete='current-password'
+                  centerText
+                  required
+                />
               </div>
-              <Button ariaLabel='Next' variant='secondary' isLoading={isLoading}>
+              <Button
+                ariaLabel='Next'
+                variant='secondary'
+                isLoading={isLoading}
+              >
                 <ArrowRightIcon className='w-4 stroke-3' />
               </Button>
             </form>
           )}
           {step === 2 && (
-            <form className='mt-5' onSubmit={(event) => { void handleStepTwo(event) }}>
+            <form
+              className='mt-5'
+              onSubmit={(event) => {
+                void handleStepTwo(event)
+              }}
+            >
               <div className='flex flex-col gap-3 mb-3'>
                 <div className='relative flex items-center'>
-                  <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' autoComplete='new-password' minLength={8} centerText required />
-                  <div className={clsx(
-                    'absolute flex items-center gap-x-1 right-3 pt-[2px]',
-                    credentials.newPassword.length > 0 && credentials.newPassword.length < 8 && '[&>div]:!bg-red',
-                    credentials.newPassword.length >= 7 && credentials.newPassword.length < 12 && '[&>div]:!bg-yellow',
-                    credentials.newPassword.length >= 11 && '[&>div]:!bg-green'
-                  )}
+                  <Input
+                    onChange={handleChange}
+                    value={credentials.newPassword}
+                    name='newPassword'
+                    type='password'
+                    placeholder='New password'
+                    autoComplete='new-password'
+                    minLength={8}
+                    centerText
+                    required
+                  />
+                  <div
+                    className={clsx(
+                      'absolute flex items-center gap-x-1 right-3 pt-[2px]',
+                      credentials.newPassword.length > 0 &&
+                        credentials.newPassword.length < 8 &&
+                        '[&>div]:!bg-red',
+                      credentials.newPassword.length >= 7 &&
+                        credentials.newPassword.length < 12 &&
+                        '[&>div]:!bg-yellow',
+                      credentials.newPassword.length >= 11 &&
+                        '[&>div]:!bg-green'
+                    )}
                   >
-                    {credentials.newPassword.length > 0 && <div className='w-[5px] h-[5px] rounded-full' />}
-                    {credentials.newPassword.length >= 7 && <div className='w-[5px] h-[5px] rounded-full' />}
-                    {credentials.newPassword.length >= 11 && <div className='w-[5px] h-[5px] rounded-full' />}
+                    {credentials.newPassword.length > 0 && (
+                      <div className='w-[5px] h-[5px] rounded-full' />
+                    )}
+                    {credentials.newPassword.length >= 7 && (
+                      <div className='w-[5px] h-[5px] rounded-full' />
+                    )}
+                    {credentials.newPassword.length >= 11 && (
+                      <div className='w-[5px] h-[5px] rounded-full' />
+                    )}
                   </div>
                 </div>
 
                 <div className='relative flex items-center'>
-                  <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' autoComplete='new-password' centerText required />
+                  <Input
+                    onChange={handleChange}
+                    value={credentials.confirmNewPassword}
+                    name='confirmNewPassword'
+                    type='password'
+                    placeholder='Confirm new password'
+                    autoComplete='new-password'
+                    centerText
+                    required
+                  />
                   <div className='absolute flex items-center gap-x-1 right-3'>
-                    {credentials.confirmNewPassword.length > 7 && credentials.confirmNewPassword === credentials.newPassword && (
-                      <svg className='w-[12px] h-[12px] stroke-green' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' strokeWidth='3' stroke='currentColor'>
-                        <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
-                      </svg>
-                    )}
+                    {credentials.confirmNewPassword.length > 7 &&
+                      credentials.confirmNewPassword ===
+                        credentials.newPassword && (
+                        <svg
+                          className='w-[12px] h-[12px] stroke-green'
+                          xmlns='http://www.w3.org/2000/svg'
+                          fill='none'
+                          viewBox='0 0 20 20'
+                          strokeWidth='3'
+                          stroke='currentColor'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            d='M4.5 12.75l6 6 9-13.5'
+                          />
+                        </svg>
+                      )}
 
-                    {credentials.confirmNewPassword.length > 7 && credentials.confirmNewPassword !== credentials.newPassword && (
-                      <svg className='w-[12px] h-[12px] stroke-red' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth='1.5' stroke='currentColor'>
-                        <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
-                      </svg>
-                    )}
+                    {credentials.confirmNewPassword.length > 7 &&
+                      credentials.confirmNewPassword !==
+                        credentials.newPassword && (
+                        <svg
+                          className='w-[12px] h-[12px] stroke-red'
+                          xmlns='http://www.w3.org/2000/svg'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                          strokeWidth='1.5'
+                          stroke='currentColor'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            d='M6 18L18 6M6 6l12 12'
+                          />
+                        </svg>
+                      )}
                   </div>
                 </div>
               </div>
-              <Button ariaLabel='Submit' variant='secondary' isLoading={isLoading}>
+              <Button
+                ariaLabel='Submit'
+                variant='secondary'
+                isLoading={isLoading}
+              >
                 <ArrowRightIcon className='w-4 stroke-3' />
               </Button>
             </form>

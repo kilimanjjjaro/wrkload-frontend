@@ -1,9 +1,8 @@
 {
   "recommendations": [
-		"dbaeumer.vscode-eslint",
-    "standard.vscode-standard",
-		"usernamehw.errorlens",
-		"bradlc.vscode-tailwindcss",
-		"heybourn.headwind"
-	]
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    "usernamehw.errorlens",
+    "meganrogge.template-string-converter"
+  ]
 }

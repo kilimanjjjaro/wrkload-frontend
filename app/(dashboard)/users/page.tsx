@@ -14,17 +14,21 @@ import { sortUsers } from 'utils/sortData'
 import { getCookie } from 'cookies-next'
 import jwtDecode from 'jwt-decode'
 
-export default function Users (): JSX.Element {
+export default function Users(): JSX.Element {
   const [isTrialAccount, setIsTrialAccount] = useState(false)
   const accessToken = getCookie('accessToken')
   const params = useSearchParams()
   const page = params.get('page')
 
-  const { data, isLoading, isValidating, mutate } = useSWR('users', async () => await getUsers({ page }), { onSuccess: data => sortUsers(data.users) })
+  const { data, isLoading, isValidating, mutate } = useSWR(
+    'users',
+    async () => await getUsers({ page }),
+    { onSuccess: (data) => sortUsers(data.users) }
+  )
 
   useEffect(() => {
     if (accessToken !== undefined) {
-      const { uid }: { uid: string } = jwtDecode(accessToken as string)
+      const { uid }: { uid: string } = jwtDecode(accessToken)
 
       if (uid === '6439b01cf35b6e22570cd842') {
         setIsTrialAccount(true)
@@ -37,7 +41,8 @@ export default function Users (): JSX.Element {
   }, [page, mutate])
 
   const shouldRenderSkeleton = isLoading || isValidating
-  const shouldRenderUsers = data !== undefined && data?.users.length >= 1 && !shouldRenderSkeleton
+  const shouldRenderUsers =
+    data !== undefined && data?.users.length >= 1 && !shouldRenderSkeleton
   const shouldRenderNotFoundSign = !shouldRenderUsers && !shouldRenderSkeleton
 
   return (
@@ -45,7 +50,9 @@ export default function Users (): JSX.Element {
       <Header shouldRenderOptions={shouldRenderNotFoundSign} />
       <main>
         {shouldRenderSkeleton && <Skeleton />}
-        {shouldRenderUsers && <UserList data={data} isTrialAccount={isTrialAccount} />}
+        {shouldRenderUsers && (
+          <UserList data={data} isTrialAccount={isTrialAccount} />
+        )}
         {shouldRenderNotFoundSign && <NotFound />}
       </main>
       <Modals />
