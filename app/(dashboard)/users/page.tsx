@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
+import { getCookie } from 'cookies-next'
+import { jwtDecode } from 'jwt-decode'
 import Header from 'components/users/Header'
 import Skeleton from 'components/users/Skeleton'
 import UserList from 'components/users/UserList'
@@ -11,8 +13,6 @@ import Modals from 'components/users/Modals'
 import PageTransition from 'components/shared/PageTransition'
 import { getUsers } from 'services/users/getUsers'
 import { sortUsers } from 'utils/sortData'
-import { getCookie } from 'cookies-next'
-import jwtDecode from 'jwt-decode'
 
 export default function Users(): JSX.Element {
   const [isTrialAccount, setIsTrialAccount] = useState(false)

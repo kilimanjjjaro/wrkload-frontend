@@ -1,9 +1,8 @@
 import { getCookie } from 'cookies-next'
+import { jwtDecode } from 'jwt-decode'
 import privateApi from 'utils/privateApi'
-
-import type { UserInterface } from 'interfaces/users/User'
 import { USERS_ENDPOINT } from 'constants/users'
-import jwtDecode from 'jwt-decode'
+import type { UserInterface } from 'interfaces/users/User'
 
 export const getUser = async (): Promise<UserInterface> => {
   let config = {}
@@ -13,7 +12,7 @@ export const getUser = async (): Promise<UserInterface> => {
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
