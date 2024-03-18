@@ -4,6 +4,7 @@ import { SWRConfig } from 'swr'
 import { AnimatePresence } from 'framer-motion'
 import { Toaster } from 'sonner'
 import { ReactLenis } from '@studio-freight/react-lenis'
+import { Analytics } from "@vercel/analytics/react"
 import { inter, spaceGrotesk } from 'utils/fonts'
 import AppProvider from 'contexts/AppContext'
 import NavBar from 'components/shared/NavBar'
@@ -38,6 +39,7 @@ export default function RootLayout ({ children }: ChildrenInterface): JSX.Elemen
             <Footer />
           </AppProvider>
         </SWRConfig>
+        <Analytics />
       </body>
     </html>
   )

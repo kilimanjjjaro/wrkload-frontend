@@ -12,6 +12,7 @@
     "@heroicons/react": "2.0.18",
     "@motionone/utils": "10.16.3",
     "@studio-freight/react-lenis": "0.0.36",
+    "@vercel/analytics": "^1.2.2",
     "atropos": "2.0.2",
     "axios": "1.6.0",
     "clsx": "2.0.0",
