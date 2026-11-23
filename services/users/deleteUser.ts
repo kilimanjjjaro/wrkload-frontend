@@ -10,12 +10,12 @@ export const deleteUser = async (_id: string): Promise<FullUserInterface> => {
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
 
-  const response = await privateApi.delete(`${USERS_ENDPOINT}/${_id}`, config)
+  const response = await privateApi.delete<FullUserInterface>(`${USERS_ENDPOINT}/${_id}`, config)
 
   return response.data
 }

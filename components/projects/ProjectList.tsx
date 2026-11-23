@@ -25,14 +25,12 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
     setDeleteDataModalStatus(true)
   }
 
-  const projects = data?.projects
-  const stats = data?.stats
-  const pagination = data?.pagination
+  const { projects, stats, pagination } = data
 
   return (
     <>
       <MasonryGrid>
-        {shouldRenderStats && (stats !== undefined || stats !== null) && !pathname?.includes('search') && <Stats stats={stats} />}
+        {shouldRenderStats && !pathname.includes('search') && <Stats stats={stats} />}
         {projects.map((project) => (
           <article
             key={project._id} className='relative flex flex-col items-start p-6 text-black wrap-break-word transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
@@ -57,8 +55,8 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
             </div>
 
             <div className='absolute right-6 md:right-0 flex flex-col md:flex-row items-end justify-end md:justify-center md:w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 md:top-[-0.9rem] xl:opacity-0 gap-2 md:gap-3 group-hover:opacity-100'>
-              <div onClick={() => handleUpdateProjectClick(project)} className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-yellow hover:bg-blue'><PencilSquareIcon className='w-4 stroke-2' /></div>
-              <div onClick={() => handleDeleteProjectClick(project)} className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-red hover:bg-blue'><TrashIcon className='w-4 stroke-2' /></div>
+              <div onClick={() => { handleUpdateProjectClick(project); }} className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-yellow hover:bg-blue'><PencilSquareIcon className='w-4 stroke-2' /></div>
+              <div onClick={() => { handleDeleteProjectClick(project); }} className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-red hover:bg-blue'><TrashIcon className='w-4 stroke-2' /></div>
             </div>
           </article>
         ))}

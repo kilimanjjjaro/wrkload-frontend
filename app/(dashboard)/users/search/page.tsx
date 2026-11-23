@@ -17,6 +17,8 @@ import UserList from 'components/users/UserList'
 import notFoundImage from 'public/images/not-found.webp'
 import searchUsers from 'services/users/searchUsers'
 import { sortUsers } from 'utils/sortData'
+import { MIN_LENGTH } from 'constants/math'
+import { logError } from 'utils/logError'
 
 export default function SearchUsers(): React.JSX.Element {
   const params = useSearchParams()
@@ -52,12 +54,12 @@ export default function SearchUsers(): React.JSX.Element {
   }, [isTrialAccount])
 
   useEffect(() => {
-    mutate().catch((error) => console.error(error))
+    mutate().catch(logError)
   }, [page, mutate])
 
   const shouldRenderSkeleton = isLoading || isValidating
   const shouldRenderUsers =
-    data !== undefined && data?.users.length >= 1 && !shouldRenderSkeleton
+    data !== undefined && data.users.length >= MIN_LENGTH && !shouldRenderSkeleton
   const shouldRenderNotFoundSign = !shouldRenderUsers && !shouldRenderSkeleton
 
   return (
@@ -68,7 +70,7 @@ export default function SearchUsers(): React.JSX.Element {
         </h2>
         {!shouldRenderNotFoundSign && (
           <div className='flex items-start gap-x-5'>
-            <Button onClick={() => router.push('/users')} variant='primary'>
+            <Button onClick={() => { router.push('/users'); }} variant='primary'>
               <ArrowLeftIcon className='w-4 stroke-3' /> Go to users
             </Button>
           </div>
@@ -94,7 +96,7 @@ export default function SearchUsers(): React.JSX.Element {
             <Button
               ariaLabel='Go to users'
               className='w-auto!'
-              onClick={() => router.push('/users')}
+              onClick={() => { router.push('/users'); }}
               variant='primary'
             >
               <ArrowLeftIcon className='w-4 stroke-3' />

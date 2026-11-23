@@ -13,6 +13,7 @@ import PageTransition from 'components/shared/PageTransition'
 import deleteAccount from 'services/auth/deleteAccount'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
 import { apiErrorCode } from 'utils/errors'
+import { MIN_LENGTH } from 'constants/math'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: '',
@@ -30,7 +31,7 @@ export default function DeleteAccount (): React.JSX.Element {
     setCredentials({ ...credentials, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     const { email, password } = credentials
 
@@ -48,7 +49,7 @@ export default function DeleteAccount (): React.JSX.Element {
     }
   }
 
-  if (error.length >= 1) {
+  if (error.length >= MIN_LENGTH) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
@@ -60,7 +61,7 @@ export default function DeleteAccount (): React.JSX.Element {
               {error === 'auth/account-not-confirmed' && 'This account has not been confirmed yet. Please, do this first.'}
             </Balancer>
           </p>
-          <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
+          <Button ariaLabel='Login' onClick={() => { router.push('/login'); }} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>

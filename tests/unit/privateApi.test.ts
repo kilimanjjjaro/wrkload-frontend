@@ -12,10 +12,13 @@ import {
   authorizationOf,
   clearCookies,
   createAdapter,
+  firstConfigOf,
   readCookie
 } from '../utils/axios'
 
-const originalAdapter = axios.defaults.adapter
+const {
+  defaults: { adapter: originalAdapter }
+} = axios
 
 beforeEach(() => {
   clearCookies()
@@ -37,7 +40,7 @@ describe('privateApi', () => {
 
     await privateApi.get('/tasks')
 
-    const [[config]] = adapter.mock.calls
+    const config = firstConfigOf(adapter)
     expect(`${config.baseURL ?? ''}${config.url ?? ''}`).toBe(
       `${LOCAL_API_URL}/tasks`
     )

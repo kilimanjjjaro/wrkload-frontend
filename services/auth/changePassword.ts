@@ -11,7 +11,7 @@ interface ReturnInterface {
 }
 
 export default async function changePassword ({ email, oldPassword, newPassword }: Props): Promise<ReturnInterface> {
-  const response = await privateApi.patch('/auth/change-password', { email, oldPassword, newPassword })
+  const response = await privateApi.patch<ReturnInterface>('/auth/change-password', { email, oldPassword, newPassword })
 
   return response.data
 }

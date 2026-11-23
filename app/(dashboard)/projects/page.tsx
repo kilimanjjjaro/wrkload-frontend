@@ -11,6 +11,8 @@ import { getProjects } from 'services/projects/getProjects'
 import { sortProjects } from 'utils/sortData'
 import { useSearchParams } from 'next/navigation'
 import PageTransition from 'components/shared/PageTransition'
+import { MIN_LENGTH } from 'constants/math'
+import { logError } from 'utils/logError'
 
 export default function Projects (): React.JSX.Element {
   const params = useSearchParams()
@@ -19,11 +21,11 @@ export default function Projects (): React.JSX.Element {
 
   // TODO: improve this
   useEffect(() => {
-    mutate().catch((error) => console.error(error))
+    mutate().catch(logError)
   }, [page, mutate])
 
   const shouldRenderSkeleton = isLoading || isValidating
-  const shouldRenderProjects = data !== undefined && data?.projects.length >= 1 && !shouldRenderSkeleton
+  const shouldRenderProjects = data !== undefined && data.projects.length >= MIN_LENGTH && !shouldRenderSkeleton
   const shouldRenderNotFoundSign = !shouldRenderProjects && !shouldRenderSkeleton
 
   return (

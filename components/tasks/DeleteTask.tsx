@@ -22,7 +22,7 @@ export default function DeleteTask(): React.JSX.Element {
     setTask({ ...task, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     setDeleteDataModalStatus(false)
 
@@ -70,7 +70,7 @@ export default function DeleteTask(): React.JSX.Element {
             <Input onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' centerText required disabled />
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button ariaLabel='Close' onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
+            <Button ariaLabel='Close' onClick={(event) => { handleCloseModal(event); }} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
             <Button ariaLabel='Delete' type='submit' variant='secondary'>

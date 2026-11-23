@@ -28,7 +28,7 @@ export default function AddTask(): React.JSX.Element {
     setTask({ ...task, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     setAddDataModalStatus(false)
 
@@ -93,7 +93,7 @@ export default function AddTask(): React.JSX.Element {
             </div>
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button ariaLabel='Close' onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
+            <Button ariaLabel='Close' onClick={(event) => { handleCloseModal(event); }} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
             <Button ariaLabel='Submit' type='submit' variant='secondary'>

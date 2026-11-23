@@ -1,8 +1,9 @@
 'use client'
 
-import { createContext, useState, Dispatch } from 'react'
+import { createContext, useState, type Dispatch } from 'react'
 
 import type { ChildrenInterface } from 'interfaces/components'
+import { noop } from 'utils/noop'
 
 interface ModalsContextValues {
   addDataModalStatus: boolean
@@ -18,14 +19,14 @@ interface ModalsContextValues {
 
 const DEFAULT_MODALS_CONTEXT_VALUES: ModalsContextValues = {
   addDataModalStatus: false,
-  setAddDataModalStatus: () => {},
+  setAddDataModalStatus: noop,
   updateDataModalStatus: false,
-  setUpdateDataModalStatus: () => {},
+  setUpdateDataModalStatus: noop,
   deleteDataModalStatus: false,
-  setDeleteDataModalStatus: () => {},
+  setDeleteDataModalStatus: noop,
 
   searchModalStatus: false,
-  setSearchModalStatus: () => {}
+  setSearchModalStatus: noop
 }
 
 export const ModalsContext = createContext<ModalsContextValues>(DEFAULT_MODALS_CONTEXT_VALUES)

@@ -1,12 +1,18 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { isAxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios'
 import { getCookie, setCookie } from 'cookies-next/client'
+import { HTTP_STATUS_UNAUTHORIZED } from 'constants/http'
+import { toError } from 'utils/errors'
 
 const BASE_URL = `${process.env.NODE_ENV === 'production' ? 'https://wrkload-api.onrender.com' : 'http://localhost:5000'}/api/v1`
 
 interface RefreshTokenInterface {
   status: string
-  accessToken: string
+  accessToken?: string
   expiresIn: number
+}
+
+interface RetriableRequestConfig extends InternalAxiosRequestConfig {
+  sent?: boolean
 }
 
 const privateApi = axios.create({
@@ -14,22 +20,24 @@ const privateApi = axios.create({
 })
 
 privateApi.interceptors.request.use(
-  async (config) => {
+  (config) => {
     const accessToken = getCookie('accessToken')
 
     if (accessToken !== undefined) {
-      config.headers.Authorization = `Bearer ${accessToken as string}`
+      config.headers.set('Authorization', `Bearer ${accessToken}`)
     }
 
     return config
   },
-  async (error) => await Promise.reject(error)
+  (error: unknown) => {
+    throw toError(error)
+  }
 )
 
-privateApi.interceptors.response.use((response) => response, async (error) => {
-  const config = error?.config
+privateApi.interceptors.response.use((response) => response, async (error: unknown) => {
+  const config: RetriableRequestConfig | undefined = isAxiosError(error) ? error.config : undefined
 
-  if (error?.response?.status === 401 && config?.sent === undefined) {
+  if (isAxiosError(error) && error.response?.status === HTTP_STATUS_UNAUTHORIZED && config !== undefined && config.sent === undefined) {
     config.sent = true
 
     const response: AxiosResponse<RefreshTokenInterface> = await axios({
@@ -45,12 +53,12 @@ privateApi.interceptors.response.use((response) => response, async (error) => {
     })
 
     if (response.data.accessToken !== undefined) {
-      config.headers.Authorization = `Bearer ${response.data.accessToken}`
+      config.headers.set('Authorization', `Bearer ${response.data.accessToken}`)
     }
 
     return await axios(config)
   }
-  return await Promise.reject(error)
+  throw toError(error)
 }
 )
 

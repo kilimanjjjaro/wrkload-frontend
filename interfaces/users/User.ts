@@ -1,4 +1,4 @@
-import { PaginationInterface } from 'interfaces/components'
+import type { PaginationInterface } from 'interfaces/components'
 
 export interface UserInterface {
   _id: string
@@ -24,7 +24,7 @@ export interface NewUserInterface {
 
 export interface FullUserInterface {
   status: string
-  pagination: PaginationInterface
+  pagination: PaginationInterface | null
   users: UserInterface[]
 }
 

@@ -19,16 +19,16 @@ export const getProjects = async ({ page, noLimit }: Props): Promise<FullProject
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
 
   if (noLimit === true) {
-    const response = await privateApi.get('/projects', config)
+    const response = await privateApi.get<FullProjectInterface>('/projects', config)
     return response.data
   } else {
-    const response = await privateApi.get(`/projects?limit=11&page=${currentPage}`, config)
+    const response = await privateApi.get<FullProjectInterface>(`/projects?limit=11&page=${currentPage}`, config)
     return response.data
   }
 }

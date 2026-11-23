@@ -4,7 +4,7 @@ import { PresentationChartLineIcon, EyeSlashIcon, FireIcon } from '@heroicons/re
 import { AppContext } from 'contexts/AppContext'
 import type { ProjectStatsInterface } from 'interfaces/projects/Project'
 
-export default function Stats ({ stats }: { stats: ProjectStatsInterface }): React.JSX.Element {
+export default function Stats ({ stats }: { stats: ProjectStatsInterface | undefined }): React.JSX.Element {
   const { shouldRenderStats, setShouldRenderStats } = useContext(AppContext)
 
   const handleRenderStats = (): void => {
@@ -12,7 +12,8 @@ export default function Stats ({ stats }: { stats: ProjectStatsInterface }): Rea
     window.localStorage.setItem('showStats', JSON.stringify(!shouldRenderStats))
   }
 
-  const bestProjectOfPastMonth = stats?.bestProjectOfPastMonth !== '' && stats?.bestProjectOfPastMonth !== undefined
+  const bestProject = stats?.bestProjectOfPastMonth
+  const bestProjectOfPastMonth = bestProject !== '' && bestProject !== undefined
 
   return (
     <div className='relative p-6 border-2 border-blue text-blue dark:text-blue dark:border-blue md:p-7 rounded-3xl'>
@@ -22,7 +23,7 @@ export default function Stats ({ stats }: { stats: ProjectStatsInterface }): Rea
       {bestProjectOfPastMonth && (
         <>
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
-            {stats?.bestProjectOfPastMonth}
+            {bestProject}
           </div>
           <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>Project of<br /> last month.</span>
         </>

@@ -7,7 +7,7 @@ import type { UserInterface } from 'interfaces/users/User'
 export const getUser = async (): Promise<UserInterface> => {
   let config = {}
   const accessToken = getCookie('accessToken')
-  const { uid }: { uid: string } = jwtDecode(accessToken as string)
+  const { uid } = jwtDecode<{ uid: string }>(String(accessToken))
 
   if (accessToken !== undefined) {
     config = {
@@ -17,7 +17,7 @@ export const getUser = async (): Promise<UserInterface> => {
     }
   }
 
-  const response = await privateApi.get(`${USERS_ENDPOINT}/${uid}`, config)
+  const response = await privateApi.get<{ user: UserInterface }>(`${USERS_ENDPOINT}/${uid}`, config)
 
   return response.data.user
 }

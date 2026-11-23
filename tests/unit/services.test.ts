@@ -22,9 +22,11 @@ import {
 import {
   clearCookies,
   createAdapter,
+  firstConfigOf,
   readCookie,
   readDecodedCookie
 } from '../utils/axios'
+import { NO_STORED_ITEMS } from '../constants/unit'
 
 const USER = {
   _id: '6439b01cf35b6e22570cd000',
@@ -40,7 +42,9 @@ const ACCESS_TOKEN = [
   'signature'
 ].join('.')
 
-const originalAdapter = api.defaults.adapter
+const {
+  defaults: { adapter: originalAdapter }
+} = api
 
 const respondWith = (data: unknown) => {
   const adapter = createAdapter(() => ({ status: HTTP_STATUS_OK, data }))
@@ -80,7 +84,7 @@ describe('auth services', () => {
     const response = await login({ email: USER.email, password: 'password' })
 
     expect(response.user).toEqual(USER)
-    expect(requestOf(adapter.mock.calls[0][0])).toEqual({
+    expect(requestOf(firstConfigOf(adapter))).toEqual({
       method: 'post',
       url: '/auth/login',
       data: { email: USER.email, password: 'password' }
@@ -101,7 +105,7 @@ describe('auth services', () => {
 
     expect(readCookie('accessToken')).toBeUndefined()
     expect(readCookie('isLogged')).toBeUndefined()
-    expect(window.localStorage.length).toBe(0)
+    expect(window.localStorage.length).toBe(NO_STORED_ITEMS)
   })
 
   it('registers with the default avatar and role', async () => {
@@ -113,7 +117,7 @@ describe('auth services', () => {
       password: 'password'
     })
 
-    expect(requestOf(adapter.mock.calls[0][0])).toEqual({
+    expect(requestOf(firstConfigOf(adapter))).toEqual({
       method: 'post',
       url: '/auth/register',
       data: {
@@ -166,7 +170,7 @@ describe('data services', () => {
 
     await searchTasks({ project: 'R&D', query: 'a&b', page: null })
 
-    expect(adapter.mock.calls[0][0].url).toBe(
+    expect(firstConfigOf(adapter).url).toBe(
       '/tasks?project=R%26D&search=a%26b&limit=8&page=1'
     )
   })
@@ -186,7 +190,7 @@ describe('data services', () => {
     })
 
     expect(response).toEqual(newTask)
-    expect(requestOf(adapter.mock.calls[0][0])).toEqual({
+    expect(requestOf(firstConfigOf(adapter))).toEqual({
       method: 'post',
       url: '/tasks',
       data: {
@@ -216,7 +220,7 @@ describe('data services', () => {
 
     await getUsers({ page: null })
 
-    expect(adapter.mock.calls[0][0].url).toBe('/users?limit=8&page=1')
+    expect(firstConfigOf(adapter).url).toBe('/users?limit=8&page=1')
   })
 
   it('gets the user of the access token', async () => {
@@ -224,7 +228,7 @@ describe('data services', () => {
     const adapter = respondWith({ status: 'ok', user: USER })
 
     expect(await getUser()).toEqual(USER)
-    expect(adapter.mock.calls[0][0].url).toBe(`/users/${USER._id}`)
+    expect(firstConfigOf(adapter).url).toBe(`/users/${USER._id}`)
   })
 
   it('updates the avatar and stores the updated user', async () => {
@@ -233,7 +237,7 @@ describe('data services', () => {
     const adapter = respondWith({ status: 'ok', user: updated })
 
     expect(await updateAvatar({ avatar: updated.avatar })).toEqual(updated)
-    expect(requestOf(adapter.mock.calls[0][0])).toEqual({
+    expect(requestOf(firstConfigOf(adapter))).toEqual({
       method: 'patch',
       url: `/users/${USER._id}`,
       data: { avatar: updated.avatar }

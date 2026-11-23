@@ -1,7 +1,9 @@
+import { HIDDEN_OPACITY, MODAL_CONTENT_OFFSET_Y, NO_OFFSET, PAGE_ENTER_DELAY, PAGE_FADE_DURATION, TRANSITION_DELAY, VISIBLE_OPACITY } from 'constants/animation'
+
 export const BACKGROUND_VARIANTS = {
-  open: { opacity: 1, display: 'flex' },
+  open: { opacity: VISIBLE_OPACITY, display: 'flex' },
   closed: {
-    opacity: 0,
+    opacity: HIDDEN_OPACITY,
     transitionEnd: {
       display: 'none'
     }
@@ -9,10 +11,10 @@ export const BACKGROUND_VARIANTS = {
 }
 
 export const CONTENT_VARIANTS = {
-  initial: { opacity: 0, y: 100, display: 'none' },
-  open: { opacity: 1, y: 0, display: 'block', transition: { delay: 0.2 } },
+  initial: { opacity: HIDDEN_OPACITY, y: MODAL_CONTENT_OFFSET_Y, display: 'none' },
+  open: { opacity: VISIBLE_OPACITY, y: NO_OFFSET, display: 'block', transition: { delay: TRANSITION_DELAY } },
   closed: {
-    opacity: 0,
+    opacity: HIDDEN_OPACITY,
     transitionEnd: {
       display: 'none'
     }
@@ -21,20 +23,20 @@ export const CONTENT_VARIANTS = {
 
 export const PAGE_VARIANTS = {
   initial: {
-    opacity: 0
+    opacity: HIDDEN_OPACITY
   },
   animate: {
-    opacity: 1,
+    opacity: VISIBLE_OPACITY,
     transition: {
-      duration: 1,
+      duration: PAGE_FADE_DURATION,
       ease: 'easeInOut',
-      delay: 1.2
+      delay: PAGE_ENTER_DELAY
     }
   },
   exit: {
-    opacity: 0,
+    opacity: HIDDEN_OPACITY,
     transition: {
-      duration: 1,
+      duration: PAGE_FADE_DURATION,
       ease: 'easeInOut'
     }
   }

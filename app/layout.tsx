@@ -2,7 +2,7 @@ import type { Viewport } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import { inter, spaceGrotesk } from 'utils/fonts'
 import Providers from 'app/providers'
-import { DESCRIPTION, pageMetadata } from 'constants/metadata'
+import { DESCRIPTION, VIEWPORT_INITIAL_SCALE, pageMetadata } from 'constants/metadata'
 import type { ChildrenInterface } from 'interfaces/components'
 import 'app/globals.css'
 
@@ -14,7 +14,7 @@ export const metadata = {
 
 export const viewport: Viewport = {
   width: 'device-width',
-  initialScale: 1
+  initialScale: VIEWPORT_INITIAL_SCALE
 }
 
 export default function RootLayout ({ children }: ChildrenInterface): React.JSX.Element {

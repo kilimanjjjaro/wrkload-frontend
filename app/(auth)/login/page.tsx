@@ -18,6 +18,8 @@ import { AppContext } from 'contexts/AppContext'
 import PageTransition from 'components/shared/PageTransition'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
 import { apiErrorCode } from 'utils/errors'
+import { MIN_LENGTH } from 'constants/math'
+import { LOGGED_IN_MAX_AGE_SECONDS } from 'constants/auth'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: '',
@@ -48,7 +50,7 @@ export default function Login (): React.JSX.Element {
     setCredentials({ ...credentials, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     const { email, password } = credentials
 
@@ -60,7 +62,7 @@ export default function Login (): React.JSX.Element {
       if (response.status === SERVER_RESPONSE_STATUS.OK) {
         setUser(response.user)
         setCookie('isLogged', true, {
-          maxAge: 60 * 60 * 24 * 30,
+          maxAge: LOGGED_IN_MAX_AGE_SECONDS,
           secure: true,
           sameSite: 'strict'
         })
@@ -83,7 +85,7 @@ export default function Login (): React.JSX.Element {
     }
   }
 
-  if (error.length >= 1) {
+  if (error.length >= MIN_LENGTH) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
@@ -99,7 +101,7 @@ export default function Login (): React.JSX.Element {
               )}
             </Balancer>
           </p>
-          <Button ariaLabel='Try again' onClick={() => window.location.reload()} variant='secondary'>
+          <Button ariaLabel='Try again' onClick={() => { window.location.reload(); }} variant='secondary'>
             <ArrowLeftIcon className='w-4 stroke-3' />
           </Button>
         </div>

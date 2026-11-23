@@ -17,6 +17,11 @@ import Paragraph from 'components/shared/Paragraph'
 import { AppContext } from 'contexts/AppContext'
 import { updateAvatar } from 'services/users/updateAvatar'
 import { ALLOWED_IMAGE_SIZE, ALLOWED_IMAGE_MIME_TYPES } from 'constants/components'
+import { FIRST_INDEX } from 'constants/math'
+
+interface CloudinaryUploadResponse {
+  eager: Array<{ secure_url: string }>
+}
 
 export default function Profile (): React.JSX.Element {
   const { user, setUser, setIsLoggingIn } = useContext(AppContext)
@@ -26,9 +31,9 @@ export default function Profile (): React.JSX.Element {
   const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const file = event.target.files?.[0]
+    const file = event.target.files?.[FIRST_INDEX]
 
-    if (file != null) {
+    if (file !== undefined) {
       try {
         if (file.size > ALLOWED_IMAGE_SIZE) throw new Error('The file size is too large. Please select an image with a maximum size of 5MB.')
 
@@ -59,7 +64,7 @@ export default function Profile (): React.JSX.Element {
       formData.append('folder', 'wrkload/avatars')
 
       try {
-        const response = await axios.post(
+        const { data } = await axios.post<CloudinaryUploadResponse>(
           'https://api.cloudinary.com/v1_1/dfzzgyj7r/image/upload',
           formData,
           {
@@ -67,7 +72,8 @@ export default function Profile (): React.JSX.Element {
           }
         )
 
-        const croppedImage = response.data.eager[0].secure_url
+        const { eager } = data
+        const [{ secure_url: croppedImage }] = eager
 
         const updatedUser = await updateAvatar({ avatar: croppedImage })
 
@@ -167,8 +173,8 @@ export default function Profile (): React.JSX.Element {
                 Coming soon
               </div>
             </div>
-            <Button className='w-auto!' variant='primary' onClick={() => router.push('/change-password')}><LockClosedIcon className='w-4 stroke-3' /> Change password</Button>
-            <Button className='w-auto!' variant='primary' onClick={() => router.push('/delete-account')}><UserMinusIcon className='w-4 stroke-3' /> Delete account</Button>
+            <Button className='w-auto!' variant='primary' onClick={() => { router.push('/change-password'); }}><LockClosedIcon className='w-4 stroke-3' /> Change password</Button>
+            <Button className='w-auto!' variant='primary' onClick={() => { router.push('/delete-account'); }}><UserMinusIcon className='w-4 stroke-3' /> Delete account</Button>
           </div>
         </div>
       )}

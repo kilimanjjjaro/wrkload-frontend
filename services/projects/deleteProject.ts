@@ -10,12 +10,12 @@ export const deleteProject = async (_id: string): Promise<FullProjectInterface> 
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
 
-  const response = await privateApi.delete(`${PROJECTS_ENDPOINT}/${_id}`, config)
+  const response = await privateApi.delete<FullProjectInterface>(`${PROJECTS_ENDPOINT}/${_id}`, config)
 
   return response.data
 }

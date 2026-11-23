@@ -2,7 +2,7 @@ import type { Page } from '@playwright/test'
 import { ADMIN, PARTNER, PASSWORDS, PROJECTS, TRIAL } from '../constants/fixtures'
 import { HOME_MAX_DIFF_PIXEL_RATIO } from '../constants/e2e'
 import { FakeApi } from '../utils/fake-api'
-import { expect, logIn, test, useLightTheme } from '../utils/fixtures'
+import { expect, fill, logIn, test, useLightTheme } from '../utils/fixtures'
 import {
   freezeTime,
   prepareRealTime,
@@ -62,28 +62,25 @@ const closeModal = async (page: Page) => {
   await settle(page)
 }
 
-const fill = async (page: Page, fields: Record<string, string>) => {
-  for (const [name, value] of Object.entries(fields)) {
-    await page.locator(`[name="${name}"]`).fill(value)
-  }
-}
-
 test.describe('public pages', () => {
   for (const theme of ['dark', 'light'] as const) {
-    test(`home in ${theme} mode`, async ({ page, api }) => {
-      void api
+    test(`home in ${theme} mode`, async ({ page }) => {
       if (theme === 'light') await useLightTheme(page)
       await prepareRealTime(page)
       await page.goto('/')
       await settleRealTime(page)
 
-      for (const [section, heading] of HOME_SECTIONS) {
-        if (heading !== undefined) await scrollToText(page, heading)
-        await expect(page).toHaveScreenshot(`home-${theme}-${section}.png`, {
-          mask: [page.locator(MARQUEE_ROWS)],
-          maxDiffPixelRatio: HOME_MAX_DIFF_PIXEL_RATIO
-        })
-      }
+      await HOME_SECTIONS.reduce<Promise<void>>(
+        async (previous, [section, heading]) => {
+          await previous
+          if (heading !== undefined) await scrollToText(page, heading)
+          await expect(page).toHaveScreenshot(`home-${theme}-${section}.png`, {
+            mask: [page.locator(MARQUEE_ROWS)],
+            maxDiffPixelRatio: HOME_MAX_DIFF_PIXEL_RATIO
+          })
+        },
+        Promise.resolve()
+      )
     })
   }
 
@@ -99,15 +96,13 @@ test.describe('public pages', () => {
     ['confirm-account-error', '/confirm-account/used-token'],
     ['not-found', '/missing-page']
   ] as const) {
-    test(name, async ({ page, api }) => {
-      void api
+    test(name, async ({ page }) => {
       await open(page, path)
       await capture(page, name)
     })
   }
 
-  test('login in light mode', async ({ page, api }) => {
-    void api
+  test('login in light mode', async ({ page }) => {
     await useLightTheme(page)
     await open(page, '/login')
     await capture(page, 'login-light')
@@ -115,8 +110,7 @@ test.describe('public pages', () => {
 })
 
 test.describe('auth states', () => {
-  test('login error', async ({ page, api }) => {
-    void api
+  test('login error', async ({ page }) => {
     await open(page, '/login')
     await fill(page, { email: PARTNER.email, password: 'wrong-password' })
     await page.getByRole('button', { name: 'Login' }).click()
@@ -124,8 +118,7 @@ test.describe('auth states', () => {
     await capture(page, 'login-error')
   })
 
-  test('trial login', async ({ page, api, isMobile }) => {
-    void api
+  test('trial login', async ({ page, isMobile }) => {
     await open(page, '/')
     await page
       .getByRole('button', { name: 'Try now!' })
@@ -136,8 +129,7 @@ test.describe('auth states', () => {
     await capture(page, 'login-trial')
   })
 
-  test('registry success', async ({ page, api }) => {
-    void api
+  test('registry success', async ({ page }) => {
     await open(page, '/registry')
     await fill(page, {
       username: 'Dave',
@@ -152,8 +144,7 @@ test.describe('auth states', () => {
     await capture(page, 'registry-success')
   })
 
-  test('registry error', async ({ page, api }) => {
-    void api
+  test('registry error', async ({ page }) => {
     await open(page, '/registry')
     await fill(page, {
       username: 'Alice',
@@ -166,8 +157,7 @@ test.describe('auth states', () => {
     await capture(page, 'registry-error')
   })
 
-  test('remember password success', async ({ page, api }) => {
-    void api
+  test('remember password success', async ({ page }) => {
     await open(page, '/remember-password')
     await fill(page, { email: PARTNER.email })
     await page.getByRole('button', { name: 'Submit' }).click()
@@ -175,8 +165,7 @@ test.describe('auth states', () => {
     await capture(page, 'remember-password-success')
   })
 
-  test('remember password error', async ({ page, api }) => {
-    void api
+  test('remember password error', async ({ page }) => {
     await open(page, '/remember-password')
     await fill(page, { email: TRIAL.email })
     await page.getByRole('button', { name: 'Submit' }).click()
@@ -184,8 +173,7 @@ test.describe('auth states', () => {
     await capture(page, 'remember-password-error')
   })
 
-  test('delete account error', async ({ page, api }) => {
-    void api
+  test('delete account error', async ({ page }) => {
     await open(page, '/delete-account')
     await fill(page, { email: PARTNER.email, password: 'wrong-password' })
     await page.getByRole('button', { name: 'Submit' }).click()
@@ -193,8 +181,7 @@ test.describe('auth states', () => {
     await capture(page, 'delete-account-error')
   })
 
-  test('reset password success', async ({ page, api }) => {
-    void api
+  test('reset password success', async ({ page }) => {
     await open(page, '/reset-password/uid/valid-token')
     await fill(page, {
       newPassword: 'new-password-1',
@@ -205,8 +192,7 @@ test.describe('auth states', () => {
     await capture(page, 'reset-password-success')
   })
 
-  test('change password steps', async ({ page, api }) => {
-    void api
+  test('change password steps', async ({ page }) => {
     await logIn(page, PARTNER)
     await open(page, '/change-password')
     await fill(page, { currentPassword: PASSWORDS[PARTNER.email] })
@@ -221,21 +207,18 @@ test.describe('tasks', () => {
     await logIn(page, PARTNER)
   })
 
-  test('list with stats', async ({ page, api }) => {
-    void api
+  test('list with stats', async ({ page }) => {
     await open(page, '/tasks')
     await capture(page, 'tasks')
   })
 
-  test('list in light mode', async ({ page, api }) => {
-    void api
+  test('list in light mode', async ({ page }) => {
     await useLightTheme(page)
     await open(page, '/tasks')
     await capture(page, 'tasks-light')
   })
 
-  test('list without stats', async ({ page, api }) => {
-    void api
+  test('list without stats', async ({ page }) => {
     await page.addInitScript(() => {
       window.localStorage.setItem('showStats', 'false')
     })
@@ -243,8 +226,7 @@ test.describe('tasks', () => {
     await capture(page, 'tasks-without-stats')
   })
 
-  test('modals', async ({ page, api }) => {
-    void api
+  test('modals', async ({ page }) => {
     await open(page, '/tasks')
 
     await page.getByRole('button', { name: 'Add task' }).click()
@@ -261,32 +243,28 @@ test.describe('tasks', () => {
     await capture(page, 'tasks-delete')
   })
 
-  test('search modal', async ({ page, api }) => {
-    void api
+  test('search modal', async ({ page }) => {
     await open(page, '/tasks')
     await page.getByRole('button', { name: 'Search task' }).click()
     await settle(page)
     await capture(page, 'tasks-search-modal')
   })
 
-  test('date filter', async ({ page, api }) => {
-    void api
+  test('date filter', async ({ page }) => {
     await open(page, '/tasks')
     await page.getByRole('button', { name: 'Filter' }).first().click()
     await settle(page)
     await capture(page, 'tasks-date-filter')
   })
 
-  test('project selector', async ({ page, api }) => {
-    void api
+  test('project selector', async ({ page }) => {
     await open(page, '/tasks')
     await page.getByText('Agency Site', { exact: true }).first().click()
     await settle(page)
     await capture(page, 'tasks-project-selector')
   })
 
-  test('empty project', async ({ page, api }) => {
-    void api
+  test('empty project', async ({ page }) => {
     await open(page, '/tasks')
     await page.getByText('Agency Site', { exact: true }).first().click()
     await page.getByRole('listitem').filter({ hasText: 'Branding' }).click()
@@ -300,20 +278,17 @@ test.describe('tasks', () => {
     await capture(page, 'tasks-without-projects')
   })
 
-  test('search results', async ({ page, api }) => {
-    void api
+  test('search results', async ({ page }) => {
     await open(page, '/tasks/search?project=Agency%20Site&query=form')
     await capture(page, 'tasks-search')
   })
 
-  test('search without results', async ({ page, api }) => {
-    void api
+  test('search without results', async ({ page }) => {
     await open(page, '/tasks/search?project=Agency%20Site&query=nothing')
     await capture(page, 'tasks-search-empty')
   })
 
-  test('dashboard tab', async ({ page, api }) => {
-    void api
+  test('dashboard tab', async ({ page }) => {
     await open(page, '/tasks')
     await page.getByRole('img', { name: PARTNER.username }).click()
     await settle(page)
@@ -326,14 +301,12 @@ test.describe('projects', () => {
     await logIn(page, PARTNER)
   })
 
-  test('list with stats', async ({ page, api }) => {
-    void api
+  test('list with stats', async ({ page }) => {
     await open(page, '/projects')
     await capture(page, 'projects')
   })
 
-  test('modals', async ({ page, api }) => {
-    void api
+  test('modals', async ({ page }) => {
     await open(page, '/projects')
 
     await page.getByRole('button', { name: 'Add project' }).click()
@@ -345,8 +318,7 @@ test.describe('projects', () => {
     await capture(page, 'projects-update')
   })
 
-  test('delete modal', async ({ page, api }) => {
-    void api
+  test('delete modal', async ({ page }) => {
     await open(page, '/projects')
     await deleteCard(page, 'Branding')
     await capture(page, 'projects-delete')
@@ -358,8 +330,7 @@ test.describe('projects', () => {
     await capture(page, 'projects-empty')
   })
 
-  test('search results', async ({ page, api }) => {
-    void api
+  test('search results', async ({ page }) => {
     await open(page, '/projects/search?query=site')
     await capture(page, 'projects-search')
   })
@@ -370,36 +341,31 @@ test.describe('users', () => {
     await logIn(page, ADMIN)
   })
 
-  test('list', async ({ page, api }) => {
-    void api
+  test('list', async ({ page }) => {
     await open(page, '/users')
     await capture(page, 'users')
   })
 
-  test('modals', async ({ page, api }) => {
-    void api
+  test('modals', async ({ page }) => {
     await open(page, '/users')
     await editCard(page, PARTNER.username)
     await capture(page, 'users-update')
   })
 
-  test('delete modal', async ({ page, api }) => {
-    void api
+  test('delete modal', async ({ page }) => {
     await open(page, '/users')
     await deleteCard(page, PARTNER.username)
     await capture(page, 'users-delete')
   })
 
-  test('search results', async ({ page, api }) => {
-    void api
+  test('search results', async ({ page }) => {
     await open(page, '/users/search?query=a')
     await capture(page, 'users-search')
   })
 })
 
 test.describe('profile', () => {
-  test('profile', async ({ page, api }) => {
-    void api
+  test('profile', async ({ page }) => {
     await logIn(page, PARTNER)
     await open(page, '/profile')
     await capture(page, 'profile')
@@ -419,8 +385,7 @@ test.describe('toasts', () => {
     await settle(page)
   }
 
-  test('success', async ({ page, api }) => {
-    void api
+  test('success', async ({ page }) => {
     await logIn(page, PARTNER)
     await open(page, '/projects')
     await deleteCard(page, 'Branding')
@@ -439,8 +404,7 @@ test.describe('toasts', () => {
     await captureToast(page, 'toast-error')
   })
 
-  test('information', async ({ page, api }) => {
-    void api
+  test('information', async ({ page }) => {
     await logIn(page, TRIAL)
     await open(page, '/users/search?query=a')
     await captureToast(page, 'toast-information')

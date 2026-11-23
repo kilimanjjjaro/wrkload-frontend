@@ -13,11 +13,14 @@ export const test = base.extend<{
   api: FakeApi
   browserErrors: BrowserError[]
 }>({
-  api: async ({ page }, provide) => {
-    const api = new FakeApi()
-    await api.install(page)
-    await provide(api)
-  },
+  api: [
+    async ({ page }, provide) => {
+      const api = new FakeApi()
+      await api.install(page)
+      await provide(api)
+    },
+    { auto: true }
+  ],
   browserErrors: [
     async ({ page }, provide) => {
       const errors: BrowserError[] = []
@@ -77,4 +80,11 @@ export const visit = async (page: Page, path: string) => {
   const response = await page.goto(path)
   await page.waitForLoadState('networkidle')
   return response
+}
+
+export const fill = async (page: Page, fields: Record<string, string>) => {
+  await Object.entries(fields).reduce(async (previous, [name, value]) => {
+    await previous
+    await page.locator(`[name="${name}"]`).fill(value)
+  }, Promise.resolve())
 }

@@ -19,12 +19,12 @@ export default async function searchProjects ({ query, page }: Props): Promise<F
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
 
-  const response = await privateApi.get(`/projects?search=${query as string}&limit=8&page=${currentPage}`, config)
+  const response = await privateApi.get<FullProjectInterface>(`/projects?search=${String(query)}&limit=8&page=${currentPage}`, config)
 
   return response.data
 }

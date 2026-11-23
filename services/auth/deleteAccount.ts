@@ -13,7 +13,7 @@ interface ResponseInterface {
 export default async function deleteAccount ({ email, password }: Props): Promise<ResponseInterface> {
   const { user } = await login({ email, password })
 
-  const response = await privateApi.delete(`/users/${user._id}`)
+  const response = await privateApi.delete<ResponseInterface>(`/users/${user._id}`)
 
   return response.data
 }

@@ -3,11 +3,10 @@
 import { useEffect } from 'react'
 import { MoonIcon, SunIcon } from 'components/shared/ThemeIcons'
 import useStoredState from 'hooks/useStoredState'
-
-const parseDarkMode = (stored: string): boolean => JSON.parse(stored)
+import { parseStoredBoolean } from 'utils/storage'
 
 export default function ThemeSelector (): React.JSX.Element {
-  const [darkMode, setDarkMode] = useStoredState('darkMode', parseDarkMode, true)
+  const [darkMode, setDarkMode] = useStoredState('darkMode', parseStoredBoolean, true)
 
   const toggleTheme = (): void => {
     setDarkMode(!darkMode)

@@ -22,7 +22,7 @@ export default function UpdateUser(): React.JSX.Element {
     setUser({ ...user, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     setUpdateDataModalStatus(false)
 
@@ -70,7 +70,7 @@ export default function UpdateUser(): React.JSX.Element {
             <Input onChange={handleChange} value={user.username} name='username' type='text' placeholder='Username' centerText required />
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button ariaLabel='Close' onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
+            <Button ariaLabel='Close' onClick={(event) => { handleCloseModal(event); }} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
             <Button ariaLabel='Update' type='submit' variant='secondary'>

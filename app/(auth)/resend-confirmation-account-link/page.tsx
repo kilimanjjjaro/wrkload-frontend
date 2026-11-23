@@ -12,6 +12,7 @@ import resendConfirmationAccountLink from 'services/auth/resendConfirmationAccou
 import PageTransition from 'components/shared/PageTransition'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
 import { apiErrorCode } from 'utils/errors'
+import { MIN_LENGTH } from 'constants/math'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: ''
@@ -28,7 +29,7 @@ export default function ResendConfirmationAccountLink (): React.JSX.Element {
     setCredentials({ ...credentials, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     const { email } = credentials
 
@@ -47,7 +48,7 @@ export default function ResendConfirmationAccountLink (): React.JSX.Element {
     }
   }
 
-  if (error.length >= 1) {
+  if (error.length >= MIN_LENGTH) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
@@ -58,7 +59,7 @@ export default function ResendConfirmationAccountLink (): React.JSX.Element {
               {error === 'auth/account-already-confirmed' && 'This account has already been confirmed, please try log in.'}
             </Balancer>
           </p>
-          <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
+          <Button ariaLabel='Login' onClick={() => { router.push('/login'); }} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -72,7 +73,7 @@ export default function ResendConfirmationAccountLink (): React.JSX.Element {
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>A link to confirm the account was sent again, <b>please check your inbox.</b></Balancer></p>
-          <Button onClick={() => router.push('/login')} variant='secondary'>
+          <Button onClick={() => { router.push('/login'); }} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>

@@ -13,6 +13,8 @@ import Modals from 'components/users/Modals'
 import PageTransition from 'components/shared/PageTransition'
 import { getUsers } from 'services/users/getUsers'
 import { sortUsers } from 'utils/sortData'
+import { MIN_LENGTH } from 'constants/math'
+import { logError } from 'utils/logError'
 
 export default function Users(): React.JSX.Element {
   const accessToken = getCookie('accessToken')
@@ -29,12 +31,12 @@ export default function Users(): React.JSX.Element {
   )
 
   useEffect(() => {
-    mutate().catch((error) => console.error(error))
+    mutate().catch(logError)
   }, [page, mutate])
 
   const shouldRenderSkeleton = isLoading || isValidating
   const shouldRenderUsers =
-    data !== undefined && data?.users.length >= 1 && !shouldRenderSkeleton
+    data !== undefined && data.users.length >= MIN_LENGTH && !shouldRenderSkeleton
   const shouldRenderNotFoundSign = !shouldRenderUsers && !shouldRenderSkeleton
 
   return (

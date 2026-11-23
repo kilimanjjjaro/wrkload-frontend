@@ -24,8 +24,8 @@ export default function Options(): React.JSX.Element {
         <PresentationChartLineIcon className='w-4 stroke-3' />
         <span className='hidden md:inline-block'>{statsButtonText}</span>
       </Button>
-      <Button ariaLabel='Add project' className='w-auto!' onClick={() => setAddDataModalStatus(true)} variant='primary'><PlusIcon className='w-4 stroke-3' /></Button>
-      <Button ariaLabel='Search project' className='w-auto!' onClick={() => setSearchModalStatus(true)} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
+      <Button ariaLabel='Add project' className='w-auto!' onClick={() => { setAddDataModalStatus(true); }} variant='primary'><PlusIcon className='w-4 stroke-3' /></Button>
+      <Button ariaLabel='Search project' className='w-auto!' onClick={() => { setSearchModalStatus(true); }} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
     </div>
   )
 }

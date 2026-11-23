@@ -19,12 +19,12 @@ export const getTasks = async ({ page, project }: Props): Promise<FullTaskInterf
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
 
-  const response = await privateApi.get(`/tasks?project=${project}&limit=11&page=${currentPage}`, config)
+  const response = await privateApi.get<FullTaskInterface>(`/tasks?project=${project}&limit=11&page=${currentPage}`, config)
 
   return response.data
 }

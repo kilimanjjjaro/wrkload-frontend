@@ -48,8 +48,7 @@ const DASHBOARD_PAGES = [
 
 test.describe('public pages render without errors', () => {
   for (const { path, title, heading } of PUBLIC_PAGES) {
-    test(path, async ({ page, api, browserErrors }) => {
-      void api
+    test(path, async ({ page, browserErrors }) => {
       const response = await visit(page, path)
 
       expect(response?.status()).toBe(HTTP_STATUS_OK)
@@ -61,8 +60,7 @@ test.describe('public pages render without errors', () => {
     })
   }
 
-  test('the meta description and Open Graph data', async ({ page, api }) => {
-    void api
+  test('the meta description and Open Graph data', async ({ page }) => {
     await visit(page, '/')
 
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
@@ -75,23 +73,20 @@ test.describe('public pages render without errors', () => {
     )
   })
 
-  test('loads the vercel analytics script', async ({ page, api }) => {
-    void api
+  test('loads the vercel analytics script', async ({ page }) => {
     const analytics = page.waitForRequest('**/_vercel/insights/script.js')
     await visit(page, '/')
 
     expect((await analytics).method()).toBe('GET')
   })
 
-  test('unknown pages answer 404', async ({ page, api }) => {
-    void api
+  test('unknown pages answer 404', async ({ page }) => {
     const response = await visit(page, '/missing-page')
 
     expect(response?.status()).toBe(HTTP_STATUS_NOT_FOUND)
   })
 
-  test('unknown pages show the app not found page', async ({ page, api }) => {
-    void api
+  test('unknown pages show the app not found page', async ({ page }) => {
     await visit(page, '/missing-page')
 
     await expect(
@@ -103,8 +98,7 @@ test.describe('public pages render without errors', () => {
 
 test.describe('dashboard pages render without errors', () => {
   for (const { path, title, heading } of DASHBOARD_PAGES) {
-    test(path, async ({ page, api, browserErrors }) => {
-      void api
+    test(path, async ({ page, browserErrors }) => {
       await logIn(page, path === '/users' ? ADMIN : PARTNER)
       const response = await visit(page, path)
 

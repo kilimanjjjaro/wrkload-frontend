@@ -2,8 +2,7 @@
 
 import { useCallback, useMemo, useState, useSyncExternalStore } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
-
-const subscribe = (): (() => void) => () => {}
+import { subscribeToNothing } from 'utils/noop'
 
 export default function useStoredState<T> (
   key: string,
@@ -11,7 +10,7 @@ export default function useStoredState<T> (
   fallback: T
 ): [T, Dispatch<SetStateAction<T>>] {
   const stored = useSyncExternalStore(
-    subscribe,
+    subscribeToNothing,
     () => window.localStorage.getItem(key),
     () => null
   )

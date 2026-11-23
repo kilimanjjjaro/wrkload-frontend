@@ -28,7 +28,7 @@ export default function HeroHeader (): React.JSX.Element {
           <Paragraph variant='normal'><Balancer>With wrkload you can track what you&apos;ve worked on in a simple and organized way.</Balancer></Paragraph>
         </div>
         <div className='flex items-center gap-x-5'>
-          <Button className='w-auto!' variant='primary' onClick={() => router.push('/registry')}>Start now for free <ArrowRightIcon className='w-4 stroke-3' /></Button>
+          <Button className='w-auto!' variant='primary' onClick={() => { router.push('/registry'); }}>Start now for free <ArrowRightIcon className='w-4 stroke-3' /></Button>
           <button className='flex items-center transition ease-in-out gap-x-2 md:hidden font-secondaryFont hover:text-blue duration-400 dark:text-white dark:hover:text-blue' onClick={handleTrialMode}><HeartIcon className='w-4 stroke-3' /> Try now!</button>
         </div>
       </div>

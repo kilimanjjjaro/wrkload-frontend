@@ -1,17 +1,27 @@
 import type { Page, Request, Route } from '@playwright/test'
 import {
-  ACCESS_TOKEN_EXPIRES_IN,
   API_URL,
   HTTP_STATUS_CREATED,
   HTTP_STATUS_FORBIDDEN,
+  HTTP_STATUS_NO_CONTENT,
   HTTP_STATUS_NOT_FOUND,
-  HTTP_STATUS_OK,
   HTTP_STATUS_UNAUTHORIZED,
   ROLE_PARTNER,
   TRIAL_ACCOUNT_ID
 } from '../constants/api'
 import {
-  PASSWORDS,
+  CREATED_AT,
+  DATE_START_INDEX,
+  FIRST_ID,
+  HEX_RADIX,
+  ID_INCREMENT,
+  ID_LENGTH,
+  NEW_PROJECT_TASKS,
+  NOT_FOUND_INDEX,
+  NO_RESULTS,
+  SINGLE_ITEM
+} from '../constants/fake-api'
+import {
   PROJECTS,
   PROJECT_STATS,
   TASKS,
@@ -23,18 +33,23 @@ import type {
   FixtureTask,
   FixtureUser
 } from '../constants/fixtures'
+import { authReply } from './fake-auth'
+import {
+  bodyOf,
+  capitalize,
+  fail,
+  matches,
+  ok,
+  paginate,
+  secureUser,
+  text,
+  trialDenied,
+  trialError,
+  uidFromToken
+} from './fake-api-replies'
+import type { RecordedRequest, Reply } from './fake-api-replies'
 
-export interface RecordedRequest {
-  method: string
-  path: string
-  query: Record<string, string>
-  body: unknown
-}
-
-interface Reply {
-  status: number
-  body: unknown
-}
+export { accessTokenFor } from './fake-api-replies'
 
 interface FakeApiOptions {
   users?: FixtureUser[]
@@ -42,88 +57,31 @@ interface FakeApiOptions {
   tasks?: FixtureTask[]
 }
 
-const HTTP_STATUS_NO_CONTENT = 204
-const FIRST_PAGE = 1
-const VALID_TOKEN = 'valid-token'
-const ID_LENGTH = 24
-const HEX_RADIX = 16
-
-const ok = (body: object, status = HTTP_STATUS_OK): Reply => ({
-  status,
-  body: { status: 'ok', ...body }
+const taskFrom = (
+  body: Record<string, unknown>,
+  _id: string,
+  authorId: string
+): FixtureTask => ({
+  _id,
+  authorId,
+  createdAt: CREATED_AT,
+  updatedAt: '',
+  title: text(body.title) ?? '',
+  project: text(body.project) ?? '',
+  timing: text(body.timing) ?? '',
+  deliveredAt: (text(body.deliveredAt) ?? '').slice(
+    DATE_START_INDEX,
+    'YYYY-MM-DD'.length
+  ),
+  description: text(body.description) ?? ''
 })
-
-const fail = (status: number, code: string, message: string): Reply => ({
-  status,
-  body: { status: 'error', code, message }
-})
-
-const encode = (value: object) =>
-  Buffer.from(JSON.stringify(value)).toString('base64url')
-
-export const accessTokenFor = (user: FixtureUser) =>
-  [
-    encode({ alg: 'HS256', typ: 'JWT' }),
-    encode({ uid: user._id, role: user.role, email: user.email }),
-    'signature'
-  ].join('.')
-
-const uidFromToken = (authorization: string | undefined) => {
-  const payload = authorization?.split(' ')[1]?.split('.')[1]
-  if (payload === undefined) return undefined
-  const decoded: unknown = JSON.parse(
-    Buffer.from(payload, 'base64url').toString()
-  )
-  return typeof decoded === 'object' &&
-    decoded !== null &&
-    'uid' in decoded &&
-    typeof decoded.uid === 'string'
-    ? decoded.uid
-    : undefined
-}
-
-const capitalize = (text: string) =>
-  text
-    .split(' ')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
-
-const secureUser = (user: FixtureUser) => ({
-  _id: user._id,
-  email: user.email,
-  username: user.username,
-  avatar: user.avatar,
-  role: user.role
-})
-
-const paginate = <T>(items: T[], query: Record<string, string>) => {
-  const limit = Number(query.limit ?? items.length)
-  const page = Number(query.page ?? FIRST_PAGE)
-  const start = (page - FIRST_PAGE) * limit
-  const totalPages = Math.ceil(items.length / limit)
-
-  return {
-    docs: items.slice(start, start + limit),
-    pagination: {
-      totalResults: items.length,
-      resultsPerPage: limit,
-      prevPage: page > FIRST_PAGE ? page - FIRST_PAGE : null,
-      page,
-      nextPage: page < totalPages ? page + FIRST_PAGE : null
-    }
-  }
-}
-
-const matches = (text: string, search: string | undefined) =>
-  search === undefined ||
-  text.toLowerCase().includes(search.replace(/^"|"$/g, '').toLowerCase())
 
 export class FakeApi {
   readonly users: FixtureUser[]
   readonly projects: FixtureProject[]
   readonly tasks: FixtureTask[]
   readonly requests: RecordedRequest[] = []
-  private nextId = 1
+  private nextId = FIRST_ID
   private lastUser: FixtureUser | undefined
 
   constructor(options: FakeApiOptions = {}) {
@@ -145,7 +103,8 @@ export class FakeApi {
   }
 
   private newId() {
-    const id = (this.nextId++).toString(HEX_RADIX)
+    const id = this.nextId.toString(HEX_RADIX)
+    this.nextId += ID_INCREMENT
     return `64f${id.padStart(ID_LENGTH - '64f'.length, '0')}`
   }
 
@@ -190,9 +149,17 @@ export class FakeApi {
   }
 
   private reply(recorded: RecordedRequest, request: Request): Reply {
-    const [resource, id, extra] = recorded.path.split('/').slice(1)
+    const [, resource, id, extra] = recorded.path.split('/')
 
-    if (resource === 'auth') return this.auth(recorded, id, extra)
+    if (resource === 'auth') {
+      return authReply({
+        recorded,
+        action: id,
+        param: extra,
+        users: this.users,
+        lastUser: this.lastUser
+      })
+    }
 
     const user = this.sessionUser(request)
     if (user === undefined) {
@@ -208,155 +175,12 @@ export class FakeApi {
     return this.userRoutes(recorded, user, id)
   }
 
-  private body(recorded: RecordedRequest) {
-    return (recorded.body ?? {}) as Record<string, string>
-  }
-
-  private auth(recorded: RecordedRequest, action: string, param?: string) {
-    const body = this.body(recorded)
-    const user = this.users.find(
-      (candidate) => candidate.email === body.email?.toLowerCase()
-    )
-
-    switch (`${recorded.method} ${action}`) {
-      case 'POST login':
-        if (user === undefined) {
-          return fail(
-            HTTP_STATUS_FORBIDDEN,
-            'auth/user-not-found',
-            'Wrong email or password'
-          )
-        }
-        if (!user.confirmationStatus) {
-          return fail(
-            HTTP_STATUS_UNAUTHORIZED,
-            'auth/account-not-confirmed',
-            'Please check your email to confirm account'
-          )
-        }
-        if (PASSWORDS[user.email] !== body.password) {
-          return fail(
-            HTTP_STATUS_FORBIDDEN,
-            'auth/invalid-credentials',
-            'Wrong email or password'
-          )
-        }
-        return ok({
-          user: secureUser(user),
-          accessToken: accessTokenFor(user),
-          expiresIn: ACCESS_TOKEN_EXPIRES_IN
-        })
-      case 'POST register':
-        return user === undefined
-          ? ok({}, HTTP_STATUS_CREATED)
-          : fail(
-              HTTP_STATUS_FORBIDDEN,
-              'auth/email-already-exists',
-              'User already exists'
-            )
-      case 'POST remember-password':
-        if (user === undefined) {
-          return fail(
-            HTTP_STATUS_FORBIDDEN,
-            'auth/user-not-found',
-            'Check your email for reset your password'
-          )
-        }
-        return user._id === TRIAL_ACCOUNT_ID
-          ? fail(
-              HTTP_STATUS_UNAUTHORIZED,
-              'trial/permission-denied',
-              'This is a trial account'
-            )
-          : ok({})
-      case 'POST resend-confirm-account':
-        if (user === undefined) {
-          return fail(
-            HTTP_STATUS_FORBIDDEN,
-            'auth/user-not-found',
-            'Wrong email or password'
-          )
-        }
-        return user.confirmationStatus
-          ? fail(
-              HTTP_STATUS_UNAUTHORIZED,
-              'auth/account-already-confirmed',
-              'This account is already confirmed'
-            )
-          : ok({}, HTTP_STATUS_CREATED)
-      case 'PATCH change-password':
-        if (user?._id === TRIAL_ACCOUNT_ID) {
-          return fail(
-            HTTP_STATUS_UNAUTHORIZED,
-            'trial/permission-denied',
-            'This is a trial account'
-          )
-        }
-        if (
-          user === undefined ||
-          PASSWORDS[user.email] !== body.oldPassword ||
-          body.oldPassword === body.newPassword
-        ) {
-          return fail(
-            HTTP_STATUS_FORBIDDEN,
-            'auth/invalid-credentials',
-            'Wrong email or password'
-          )
-        }
-        return ok({}, HTTP_STATUS_CREATED)
-      case 'PATCH reset-password':
-        return recorded.path.endsWith(`/${VALID_TOKEN}`)
-          ? ok({}, HTTP_STATUS_CREATED)
-          : fail(
-              HTTP_STATUS_UNAUTHORIZED,
-              'token/invalid-signature',
-              'Invalid token signature'
-            )
-      case 'PATCH confirm-account':
-        return param === VALID_TOKEN
-          ? ok({}, HTTP_STATUS_CREATED)
-          : fail(
-              HTTP_STATUS_UNAUTHORIZED,
-              'auth/account-already-confirmed',
-              'This account is already confirmed'
-            )
-      case 'GET logout':
-        return ok({})
-      case 'GET refreshToken':
-        return this.lastUser === undefined
-          ? fail(
-              HTTP_STATUS_UNAUTHORIZED,
-              'token/token-not-found',
-              'Token not found'
-            )
-          : ok(
-              {
-                accessToken: accessTokenFor(this.lastUser),
-                expiresIn: ACCESS_TOKEN_EXPIRES_IN
-              },
-              HTTP_STATUS_CREATED
-            )
-      default:
-        return fail(HTTP_STATUS_NOT_FOUND, 'test/unknown-route', recorded.path)
-    }
-  }
-
-  private trialError(user: FixtureUser) {
-    return user._id === TRIAL_ACCOUNT_ID
-      ? fail(
-          HTTP_STATUS_UNAUTHORIZED,
-          'trial/permission-denied',
-          'This is a trial account'
-        )
-      : undefined
-  }
-
   private taskRoutes(
     recorded: RecordedRequest,
     user: FixtureUser,
     id?: string
   ): Reply {
-    const body = this.body(recorded)
+    const body = bodyOf(recorded)
     const index = this.tasks.findIndex((task) => task._id === id)
 
     if (recorded.method === 'GET') {
@@ -367,38 +191,28 @@ export class FakeApi {
           task.project === project &&
           matches(task.title, recorded.query.search)
       )
-      if (tasks.length === 0) {
+      if (tasks.length === NO_RESULTS) {
         return ok({ pagination: null, tasks: [], stats: null })
       }
       const { docs, pagination } = paginate(tasks, recorded.query)
       return ok({ pagination, tasks: docs, stats: TASK_STATS })
     }
 
-    const trialError = this.trialError(user)
-    if (trialError !== undefined) return trialError
+    const denied = trialError(user)
+    if (denied !== undefined) return denied
 
     if (recorded.method === 'POST') {
-      const newTask: FixtureTask = {
-        _id: this.newId(),
-        authorId: user._id,
-        createdAt: '2026-11-15T12:00:00-03:00',
-        updatedAt: '',
-        title: body.title,
-        project: body.project,
-        timing: body.timing,
-        deliveredAt: body.deliveredAt.slice(0, 'YYYY-MM-DD'.length),
-        description: body.description ?? ''
-      }
+      const newTask = taskFrom(body, this.newId(), user._id)
       this.tasks.push(newTask)
       return ok({ newTask }, HTTP_STATUS_CREATED)
     }
 
-    if (index === -1) {
+    if (index === NOT_FOUND_INDEX) {
       return fail(HTTP_STATUS_NOT_FOUND, 'tasks/task-not-found', 'Task not found')
     }
 
     if (recorded.method === 'DELETE') {
-      this.tasks.splice(index, 1)
+      this.tasks.splice(index, SINGLE_ITEM)
       return ok({})
     }
 
@@ -412,7 +226,7 @@ export class FakeApi {
     user: FixtureUser,
     id?: string
   ): Reply {
-    const body = this.body(recorded)
+    const body = bodyOf(recorded)
     const index = this.projects.findIndex((project) => project._id === id)
 
     if (recorded.method === 'GET') {
@@ -421,18 +235,18 @@ export class FakeApi {
           project.authorId === user._id &&
           matches(project.name, recorded.query.search)
       )
-      if (projects.length === 0) {
+      if (projects.length === NO_RESULTS) {
         return ok({ pagination: null, projects: [] })
       }
       const { docs, pagination } = paginate(projects, recorded.query)
       return ok({ pagination, projects: docs, stats: PROJECT_STATS })
     }
 
-    const trialError = this.trialError(user)
-    if (trialError !== undefined) return trialError
+    const denied = trialError(user)
+    if (denied !== undefined) return denied
 
     if (recorded.method === 'POST') {
-      const name = capitalize(body.name)
+      const name = capitalize(text(body.name) ?? '')
       if (
         this.projects.some(
           (project) => project.name === name && project.authorId === user._id
@@ -448,14 +262,14 @@ export class FakeApi {
         _id: this.newId(),
         name,
         authorId: user._id,
-        createdAt: '2026-11-15T12:00:00-03:00',
-        totalTasks: 0
+        createdAt: CREATED_AT,
+        totalTasks: NEW_PROJECT_TASKS
       }
       this.projects.push(newProject)
       return ok({ newProject }, HTTP_STATUS_CREATED)
     }
 
-    if (index === -1) {
+    if (index === NOT_FOUND_INDEX) {
       return fail(
         HTTP_STATUS_NOT_FOUND,
         'projects/project-not-found',
@@ -464,11 +278,14 @@ export class FakeApi {
     }
 
     if (recorded.method === 'DELETE') {
-      this.projects.splice(index, 1)
+      this.projects.splice(index, SINGLE_ITEM)
       return ok({})
     }
 
-    const updatedProject = { ...this.projects[index], name: body.name }
+    const updatedProject = {
+      ...this.projects[index],
+      name: text(body.name) ?? ''
+    }
     this.projects[index] = updatedProject
     return ok({ updatedProject })
   }
@@ -478,7 +295,7 @@ export class FakeApi {
     user: FixtureUser,
     id?: string
   ): Reply {
-    const body = this.body(recorded)
+    const body = bodyOf(recorded)
     const target = this.users.find((candidate) => candidate._id === id)
     const permissionDenied = fail(
       HTTP_STATUS_UNAUTHORIZED,
@@ -491,7 +308,7 @@ export class FakeApi {
       const users = this.users.filter((candidate) =>
         matches(candidate.username, recorded.query.search)
       )
-      if (users.length === 0) return ok({ pagination: null, users: [] })
+      if (users.length === NO_RESULTS) return ok({ pagination: null, users: [] })
       const { docs, pagination } = paginate(users, recorded.query)
       return ok({ pagination, users: docs })
     }
@@ -506,16 +323,10 @@ export class FakeApi {
 
     if (recorded.method === 'GET') return ok({ user: target })
 
-    if (target._id === TRIAL_ACCOUNT_ID) {
-      return fail(
-        HTTP_STATUS_UNAUTHORIZED,
-        'trial/permission-denied',
-        'This is a trial account'
-      )
-    }
+    if (target._id === TRIAL_ACCOUNT_ID) return trialDenied()
 
     if (recorded.method === 'DELETE') {
-      this.users.splice(this.users.indexOf(target), 1)
+      this.users.splice(this.users.indexOf(target), SINGLE_ITEM)
       return ok({})
     }
 

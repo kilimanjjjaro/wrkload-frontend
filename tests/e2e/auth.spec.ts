@@ -5,14 +5,13 @@ import {
   TRIAL,
   UNCONFIRMED
 } from '../constants/fixtures'
-import { QUICK_TIMEOUT_MS } from '../constants/e2e'
-import { expect, logIn, test, visit } from '../utils/fixtures'
-
-const fill = async (page: Page, fields: Record<string, string>) => {
-  for (const [name, value] of Object.entries(fields)) {
-    await page.locator(`[name="${name}"]`).fill(value)
-  }
-}
+import { ROLE_PARTNER } from '../constants/api'
+import {
+  FIRST_REQUEST,
+  QUICK_TIMEOUT_MS,
+  SINGLE_REQUEST
+} from '../constants/e2e'
+import { expect, fill, logIn, test, visit } from '../utils/fixtures'
 
 const cookieValue = async (page: Page, name: string) =>
   (await page.context().cookies()).find((cookie) => cookie.name === name)
@@ -25,7 +24,7 @@ test.describe('login', () => {
     await page.getByRole('button', { name: 'Login' }).click()
 
     await page.waitForURL('**/tasks')
-    expect(api.requestsTo('POST', '/auth/login')[0].body).toEqual({
+    expect(api.requestsTo('POST', '/auth/login')[FIRST_REQUEST].body).toEqual({
       email: PARTNER.email,
       password: PASSWORDS[PARTNER.email]
     })
@@ -57,8 +56,7 @@ test.describe('login', () => {
       message: 'This account has not been confirmed yet'
     }
   ]) {
-    test(`explains ${name}`, async ({ page, api }) => {
-      void api
+    test(`explains ${name}`, async ({ page }) => {
       await visit(page, '/login')
       await fill(page, { email, password })
       await page.getByRole('button', { name: 'Login' }).click()
@@ -70,12 +68,7 @@ test.describe('login', () => {
     })
   }
 
-  test('fills the trial credentials and welcomes the trial user', async ({
-    page,
-    api,
-    isMobile
-  }) => {
-    void api
+  test('fills the trial credentials and welcomes the trial user', async ({ page, isMobile }) => {
     await visit(page, '/')
     await page
       .getByRole('button', { name: 'Try now!' })
@@ -103,19 +96,16 @@ test.describe('registry', () => {
     await page.getByRole('button', { name: 'Registry' }).click()
 
     await expect(page.getByRole('heading', { name: 'Done!' })).toBeVisible()
-    expect(api.requestsTo('POST', '/auth/register')[0].body).toEqual({
+    expect(api.requestsTo('POST', '/auth/register')[FIRST_REQUEST].body).toEqual({
       username: 'Dave',
       email: 'dave@wrkload.test',
       password: 'dave-password',
       avatar: 'https://wrkload.vercel.app/images/default-avatar.svg',
-      role: 3
+      role: ROLE_PARTNER
     })
   })
 
-  test('rejects different passwords without calling the api', async ({
-    page,
-    api
-  }) => {
+  test('rejects different passwords without calling the api', async ({ page, api }) => {
     await visit(page, '/registry')
     await fill(page, {
       username: 'Dave',
@@ -131,8 +121,7 @@ test.describe('registry', () => {
     expect(api.requestsTo('POST', '/auth/register')).toEqual([])
   })
 
-  test('explains an email that already exists', async ({ page, api }) => {
-    void api
+  test('explains an email that already exists', async ({ page }) => {
     await visit(page, '/registry')
     await fill(page, {
       username: 'Alice',
@@ -157,16 +146,12 @@ test.describe('password recovery', () => {
     await expect(
       page.getByText('An email has been sent to forgot your password.')
     ).toBeVisible()
-    expect(api.requestsTo('POST', '/auth/remember-password')[0].body).toEqual(
+    expect(api.requestsTo('POST', '/auth/remember-password')[FIRST_REQUEST].body).toEqual(
       { email: PARTNER.email }
     )
   })
 
-  test('explains that the trial account cannot reset its password', async ({
-    page,
-    api
-  }) => {
-    void api
+  test('explains that the trial account cannot reset its password', async ({ page }) => {
     await visit(page, '/remember-password')
     await fill(page, { email: TRIAL.email })
     await page.getByRole('button', { name: 'Submit' }).click()
@@ -191,7 +176,7 @@ test.describe('password recovery', () => {
       api.requestsTo(
         'PATCH',
         `/auth/reset-password/${PARTNER._id}/valid-token`
-      )[0].body
+      )[FIRST_REQUEST].body
     ).toEqual({ newPassword: 'new-password-1' })
   })
 
@@ -204,7 +189,7 @@ test.describe('password recovery', () => {
       page.getByText('A link to confirm the account was sent again')
     ).toBeVisible()
     expect(api.requestsTo('POST', '/auth/resend-confirm-account')).toHaveLength(
-      1
+      SINGLE_REQUEST
     )
   })
 })
@@ -218,11 +203,10 @@ test.describe('account confirmation', () => {
     ).toBeVisible()
     expect(
       api.requestsTo('PATCH', '/auth/confirm-account/valid-token')
-    ).toHaveLength(1)
+    ).toHaveLength(SINGLE_REQUEST)
   })
 
-  test('explains a link that was already used', async ({ page, api }) => {
-    void api
+  test('explains a link that was already used', async ({ page }) => {
     await visit(page, '/confirm-account/used-token')
 
     await expect(
@@ -246,16 +230,15 @@ test.describe('account settings', () => {
     await expect(
       page.getByText('You can now use your new password.')
     ).toBeVisible()
-    expect(api.requestsTo('PATCH', '/auth/change-password')[0].body).toEqual({
+    expect(api.requestsTo('PATCH', '/auth/change-password')[FIRST_REQUEST].body).toEqual({
       email: PARTNER.email,
       oldPassword: PASSWORDS[PARTNER.email],
       newPassword: 'new-password-1'
     })
-    expect(api.requestsTo('GET', '/auth/logout')).toHaveLength(1)
+    expect(api.requestsTo('GET', '/auth/logout')).toHaveLength(SINGLE_REQUEST)
   })
 
-  test.fail('explains a wrong current password', async ({ page, api }) => {
-    void api
+  test.fail('explains a wrong current password', async ({ page }) => {
     await logIn(page, PARTNER)
     await visit(page, '/change-password')
     await fill(page, { currentPassword: 'wrong-password' })
@@ -274,7 +257,7 @@ test.describe('account settings', () => {
     await expect(
       page.getByText('Your account was deleted. Thanks for this time!')
     ).toBeVisible()
-    expect(api.requestsTo('DELETE', `/users/${PARTNER._id}`)).toHaveLength(1)
+    expect(api.requestsTo('DELETE', `/users/${PARTNER._id}`)).toHaveLength(SINGLE_REQUEST)
   })
 
   test('logs out from the dashboard tab', async ({ page, api }) => {
@@ -285,7 +268,7 @@ test.describe('account settings', () => {
 
     await page.waitForURL((url) => url.pathname === '/')
     await expect(page.getByText('Session ended successfully')).toBeVisible()
-    expect(api.requestsTo('GET', '/auth/logout')).toHaveLength(1)
+    expect(api.requestsTo('GET', '/auth/logout')).toHaveLength(SINGLE_REQUEST)
     expect(await cookieValue(page, 'isLogged')).toBeUndefined()
   })
 })

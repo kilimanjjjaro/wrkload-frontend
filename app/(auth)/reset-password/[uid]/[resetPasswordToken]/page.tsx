@@ -13,10 +13,20 @@ import resetPassword from 'services/auth/resetPassword'
 import PageTransition from 'components/shared/PageTransition'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
 import { apiErrorCode } from 'utils/errors'
+import { MIN_LENGTH } from 'constants/math'
+import PasswordStrength from 'components/shared/PasswordStrength'
+import PasswordMatch from 'components/shared/PasswordMatch'
 
 const INITIAL_CREDENTIALS_STATE = {
   newPassword: '',
   confirmNewPassword: ''
+}
+
+const ERROR_MESSAGES: Partial<Record<string, string>> = {
+  'trial/permission-denied': 'This is a trial account, to access this feature you must register.',
+  'auth/different-passwords': 'Passwords are not the same. Please, try again.',
+  'token/token-expired': 'Sorry, the reset password link has expired. Please request one again.',
+  'token/token-not-found': 'Invalid link. Please, try again with the one that we sent you.'
 }
 
 export default function ResetPassword (): React.JSX.Element {
@@ -43,7 +53,7 @@ export default function ResetPassword (): React.JSX.Element {
     }
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     const { newPassword, confirmNewPassword } = credentials
     const { uid, resetPasswordToken } = params
@@ -68,7 +78,7 @@ export default function ResetPassword (): React.JSX.Element {
 
       const code = apiErrorCode(error)
 
-      if (code !== undefined && code.length >= 1) {
+      if (code !== undefined && code.length >= MIN_LENGTH) {
         setError(code)
       }
     } finally {
@@ -76,7 +86,7 @@ export default function ResetPassword (): React.JSX.Element {
     }
   }
 
-  if (error.length >= 1) {
+  if (error.length >= MIN_LENGTH) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
@@ -88,10 +98,7 @@ export default function ResetPassword (): React.JSX.Element {
             )}
           >
             <Balancer>
-              {error === 'trial/permission-denied' && 'This is a trial account, to access this feature you must register.'}
-              {error === 'auth/different-passwords' && 'Passwords are not the same. Please, try again.'}
-              {error === 'token/token-expired' && 'Sorry, the reset password link has expired. Please request one again.'}
-              {error === 'token/token-not-found' && 'Invalid link. Please, try again with the one that we sent you.'}
+              {ERROR_MESSAGES[error]}
             </Balancer>
           </p>
           {(error === 'auth/different-passwords' || error === 'token/token-expired') && (
@@ -110,7 +117,7 @@ export default function ResetPassword (): React.JSX.Element {
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>You can now use your new password. <b>Please, log in again.</b></Balancer></p>
-          <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
+          <Button ariaLabel='Login' onClick={() => { router.push('/login'); }} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -132,33 +139,11 @@ export default function ResetPassword (): React.JSX.Element {
             <div className='flex flex-col gap-3 mb-3'>
               <div className='relative flex items-center'>
                 <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' minLength={8} centerText required />
-                <div className={clsx(
-                  'absolute flex items-center gap-x-1 right-3 pt-[2px]',
-                  credentials.newPassword.length > 0 && credentials.newPassword.length < 8 && '[&>div]:bg-red!',
-                  credentials.newPassword.length >= 7 && credentials.newPassword.length < 12 && '[&>div]:bg-yellow!',
-                  credentials.newPassword.length >= 11 && '[&>div]:bg-green!'
-                )}
-                >
-                  {credentials.newPassword.length > 0 && <div className='w-[5px] h-[5px] rounded-full' />}
-                  {credentials.newPassword.length >= 7 && <div className='w-[5px] h-[5px] rounded-full' />}
-                  {credentials.newPassword.length >= 11 && <div className='w-[5px] h-[5px] rounded-full' />}
-                </div>
+                <PasswordStrength password={credentials.newPassword} />
               </div>
               <div className='relative flex items-center'>
                 <Input onChange={handleChange} value={credentials.confirmNewPassword} name='confirmNewPassword' type='password' placeholder='Confirm new password' minLength={8} centerText required />
-                <div className='absolute flex items-center gap-x-1 right-3'>
-                  {credentials.confirmNewPassword.length > 7 && credentials.confirmNewPassword === credentials.newPassword && (
-                    <svg className='w-[12px] h-[12px] stroke-green' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' strokeWidth='3' stroke='currentColor'>
-                      <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
-                    </svg>
-                  )}
-
-                  {credentials.confirmNewPassword.length > 7 && credentials.confirmNewPassword !== credentials.newPassword && (
-                    <svg className='w-[12px] h-[12px] stroke-red' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth='1.5' stroke='currentColor'>
-                      <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
-                    </svg>
-                  )}
-                </div>
+                <PasswordMatch password={credentials.newPassword} confirmation={credentials.confirmNewPassword} />
               </div>
             </div>
             <Button ariaLabel='Submit' variant='secondary' isLoading={isLoading}>

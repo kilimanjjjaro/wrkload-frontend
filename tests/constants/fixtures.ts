@@ -1,4 +1,4 @@
-import { ROLE_ADMIN, ROLE_PARTNER, TRIAL_ACCOUNT_ID } from './api'
+import { ROLE_ADMIN, ROLE_PARTNER, ROLE_TRIAL, TRIAL_ACCOUNT_ID } from './api'
 
 export interface FixtureUser {
   _id: string
@@ -63,7 +63,7 @@ export const TRIAL: FixtureUser = {
   username: 'Trial',
   email: 'wrkload@kilimanjjjaro.com',
   avatar: AVATAR,
-  role: 2,
+  role: ROLE_TRIAL,
   registeredAt: '2025-04-14T10:00:00-03:00',
   lastActiveAt: '2026-11-14T18:00:00-03:00',
   recentlyActive: false,
@@ -91,36 +91,17 @@ export const PASSWORDS: Record<string, string> = {
   [UNCONFIRMED.email]: 'carol-password'
 }
 
-const project = (
-  index: number,
-  name: string,
-  authorId: string,
-  createdAt: string,
-  totalTasks: number
-): FixtureProject => ({
-  _id: `64b00000000000000000000${index}`,
-  name,
-  authorId,
-  createdAt,
-  totalTasks
-})
-
-export const PROJECTS = [
-  project(1, 'Agency Site', PARTNER._id, '2026-05-01T10:00:00-03:00', 4),
-  project(2, 'Mobile App', PARTNER._id, '2026-06-01T10:00:00-03:00', 2),
-  project(3, 'Branding', PARTNER._id, '2026-07-01T10:00:00-03:00', 0),
-  project(4, 'Admin Panel', ADMIN._id, '2026-02-01T10:00:00-03:00', 1)
-]
+type TaskFields = Pick<
+  FixtureTask,
+  'title' | 'project' | 'timing' | 'deliveredAt' | 'description'
+>
 
 const task = (
-  index: number,
-  fields: Pick<
-    FixtureTask,
-    'title' | 'project' | 'timing' | 'deliveredAt' | 'description'
-  >,
+  _id: string,
+  fields: TaskFields,
   authorId = PARTNER._id
 ): FixtureTask => ({
-  _id: `64c0000000000000000000${String(index).padStart(2, '0')}`,
+  _id,
   authorId,
   createdAt: `${fields.deliveredAt}T09:00:00-03:00`,
   updatedAt: '',
@@ -128,42 +109,42 @@ const task = (
 })
 
 export const TASKS = [
-  task(1, {
+  task('64c000000000000000000001', {
     title: 'Landing page',
     project: 'Agency Site',
     timing: '02:30',
     deliveredAt: '2026-11-12',
     description: 'Hero, features and footer sections.'
   }),
-  task(2, {
+  task('64c000000000000000000002', {
     title: 'Checkout flow',
     project: 'Agency Site',
     timing: '01:45',
     deliveredAt: '2026-11-05',
     description: ''
   }),
-  task(3, {
+  task('64c000000000000000000003', {
     title: 'Pricing table',
     project: 'Agency Site',
     timing: '01:00',
     deliveredAt: '2026-10-20',
     description: 'Three plans with a yearly toggle.'
   }),
-  task(4, {
+  task('64c000000000000000000004', {
     title: 'Contact form',
     project: 'Agency Site',
     timing: '00:45',
     deliveredAt: '2026-10-02',
     description: 'Validation and success message.'
   }),
-  task(5, {
+  task('64c000000000000000000005', {
     title: 'Onboarding screens',
     project: 'Mobile App',
     timing: '03:00',
     deliveredAt: '2026-11-10',
     description: 'Four steps with illustrations.'
   }),
-  task(6, {
+  task('64c000000000000000000006', {
     title: 'Push notifications',
     project: 'Mobile App',
     timing: '02:00',
@@ -171,7 +152,7 @@ export const TASKS = [
     description: ''
   }),
   task(
-    7,
+    '64c000000000000000000007',
     {
       title: 'Users table',
       project: 'Admin Panel',
@@ -183,11 +164,50 @@ export const TASKS = [
   )
 ]
 
+type ProjectFields = Omit<FixtureProject, 'totalTasks'>
+
+const project = (fields: ProjectFields): FixtureProject => ({
+  ...fields,
+  totalTasks: TASKS.filter((fixture) => fixture.project === fields.name).length
+})
+
+export const PROJECTS = [
+  project({
+    _id: '64b000000000000000000001',
+    name: 'Agency Site',
+    authorId: PARTNER._id,
+    createdAt: '2026-05-01T10:00:00-03:00'
+  }),
+  project({
+    _id: '64b000000000000000000002',
+    name: 'Mobile App',
+    authorId: PARTNER._id,
+    createdAt: '2026-06-01T10:00:00-03:00'
+  }),
+  project({
+    _id: '64b000000000000000000003',
+    name: 'Branding',
+    authorId: PARTNER._id,
+    createdAt: '2026-07-01T10:00:00-03:00'
+  }),
+  project({
+    _id: '64b000000000000000000004',
+    name: 'Admin Panel',
+    authorId: ADMIN._id,
+    createdAt: '2026-02-01T10:00:00-03:00'
+  })
+]
+
+const PAST_MONTH_TIMING_HOURS = 1
+const PAST_MONTH_TASKS = 2
+const CURRENT_MONTH_TIMING_HOURS = 4
+const CURRENT_MONTH_TASKS = 2
+
 export const TASK_STATS = {
-  totalPastMonthTiming: 1,
-  totalTasksPastMonth: 2,
-  totalCurrentMonthTiming: 4,
-  totalTasksCurrentMonth: 2,
+  totalPastMonthTiming: PAST_MONTH_TIMING_HOURS,
+  totalTasksPastMonth: PAST_MONTH_TASKS,
+  totalCurrentMonthTiming: CURRENT_MONTH_TIMING_HOURS,
+  totalTasksCurrentMonth: CURRENT_MONTH_TASKS,
   performance: 'better'
 }
 

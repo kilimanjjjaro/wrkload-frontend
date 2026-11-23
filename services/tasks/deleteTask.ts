@@ -11,12 +11,12 @@ export const deleteTask = async (_id: string): Promise<FullTaskInterface> => {
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
 
-  const response = await privateApi.delete(`${TASKS_ENDPOINT}/${_id}`, config)
+  const response = await privateApi.delete<FullTaskInterface>(`${TASKS_ENDPOINT}/${_id}`, config)
 
   return response.data
 }

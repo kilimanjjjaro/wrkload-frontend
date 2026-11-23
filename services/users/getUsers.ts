@@ -14,12 +14,12 @@ export const getUsers = async ({ page }: { page: string | null }): Promise<FullU
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
 
-  const response = await privateApi.get(`/users?limit=8&page=${currentPage}`, config)
+  const response = await privateApi.get<FullUserInterface>(`/users?limit=8&page=${currentPage}`, config)
 
   return response.data
 }

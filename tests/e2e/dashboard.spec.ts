@@ -1,6 +1,18 @@
 import type { Page } from '@playwright/test'
 import { ADMIN, PARTNER, TRIAL } from '../constants/fixtures'
-import { QUICK_TIMEOUT_MS } from '../constants/e2e'
+import {
+  AGENCY_SITE_TASK_CARDS,
+  ALL_USER_CARDS,
+  FIRST_REQUEST,
+  LAST_REQUEST,
+  MOBILE_APP_TASK_CARDS,
+  NO_ELEMENTS,
+  NO_TASKS,
+  PARTNER_PROJECT_CARDS,
+  QUICK_TIMEOUT_MS,
+  SINGLE_ELEMENT,
+  SINGLE_REQUEST
+} from '../constants/e2e'
 import { FakeApi } from '../utils/fake-api'
 import { expect, logIn, test, visit } from '../utils/fixtures'
 
@@ -28,18 +40,15 @@ test.describe('tasks', () => {
     await logIn(page, PARTNER)
   })
 
-  test('lists the tasks of the first project with its stats', async ({
-    page,
-    api
-  }) => {
+  test('lists the tasks of the first project with its stats', async ({ page, api }) => {
     await visit(page, '/tasks')
 
-    await expect(page.locator('article')).toHaveCount(4)
+    await expect(page.locator('article')).toHaveCount(AGENCY_SITE_TASK_CARDS)
     await expect(card(page, 'Landing page')).toContainText('12-11-2026')
     await expect(card(page, 'Landing page')).toContainText('02:30')
     await expect(page.getByText('hours worked').first()).toBeVisible()
     await expect(page.getByText('Page 1 of 1')).toBeVisible()
-    expect(api.requestsTo('GET', '/tasks')[0].query).toEqual({
+    expect(api.requestsTo('GET', '/tasks')[FIRST_REQUEST].query).toEqual({
       project: 'Agency Site',
       limit: '11',
       page: '1'
@@ -52,7 +61,7 @@ test.describe('tasks', () => {
     await page.getByRole('listitem').filter({ hasText: 'Mobile App' }).click()
 
     await expect(card(page, 'Onboarding screens')).toBeVisible()
-    await expect(page.locator('article')).toHaveCount(2)
+    await expect(page.locator('article')).toHaveCount(MOBILE_APP_TASK_CARDS)
     expect(
       await page.evaluate(() => window.localStorage.getItem('selectedProject'))
     ).toBe('Mobile App')
@@ -61,13 +70,12 @@ test.describe('tasks', () => {
     ).toContain('Mobile App')
   })
 
-  test('hides the stats and remembers it', async ({ page, api, isMobile }) => {
+  test('hides the stats and remembers it', async ({ page, isMobile }) => {
     test.skip(isMobile, 'The stats button shows its text from md')
-    void api
     await visit(page, '/tasks')
     await visibleButton(page, 'Hide stats').click()
 
-    await expect(page.getByText('hours worked')).toHaveCount(0)
+    await expect(page.getByText('hours worked')).toHaveCount(NO_ELEMENTS)
     expect(
       await page.evaluate(() => window.localStorage.getItem('showStats'))
     ).toBe('false')
@@ -89,7 +97,7 @@ test.describe('tasks', () => {
     await visibleButton(page, 'Submit').click()
 
     await expect(card(page, 'Newsletter')).toBeVisible()
-    expect(api.requestsTo('POST', '/tasks')[0].body).toEqual({
+    expect(api.requestsTo('POST', '/tasks')[FIRST_REQUEST].body).toEqual({
       title: 'Newsletter',
       project: 'Agency Site',
       timing: '01:15',
@@ -98,8 +106,27 @@ test.describe('tasks', () => {
     })
   })
 
-  test.fail('confirms the added task', async ({ page, api }) => {
-    void api
+  test('adds the first task to an empty project', async ({ page, api }) => {
+    await visit(page, '/tasks')
+    await page.getByText('Agency Site', { exact: true }).first().click()
+    await page.getByRole('listitem').filter({ hasText: 'Branding' }).click()
+    await page.getByRole('button', { name: 'Add task' }).first().click()
+    await page.locator('[name="title"]').filter({ visible: true }).fill('Logo')
+    await page.locator('[name="timing"]').filter({ visible: true }).fill('02:00')
+    await page
+      .locator('[name="deliveredAt"]')
+      .filter({ visible: true })
+      .fill('2026-11-14')
+    await visibleButton(page, 'Submit').click()
+
+    await expect(card(page, 'Logo')).toBeVisible()
+    expect(api.requestsTo('POST', '/tasks')[FIRST_REQUEST].body).toMatchObject({
+      title: 'Logo',
+      project: 'Branding'
+    })
+  })
+
+  test.fail('confirms the added task', async ({ page }) => {
     await visit(page, '/tasks')
     await page.getByRole('button', { name: 'Add task' }).click()
     await page.locator('[name="title"]').filter({ visible: true }).fill('Newsletter')
@@ -125,7 +152,7 @@ test.describe('tasks', () => {
 
     await expect(card(page, 'Landing page v2')).toBeVisible()
     expect(
-      api.requestsTo('PATCH', '/tasks/64c000000000000000000001')[0].body
+      api.requestsTo('PATCH', '/tasks/64c000000000000000000001')[FIRST_REQUEST].body
     ).toMatchObject({ title: 'Landing page v2', project: 'Agency Site' })
   })
 
@@ -135,10 +162,10 @@ test.describe('tasks', () => {
     await visibleButton(page, 'Delete').click()
 
     await expect(page.getByText('Task deleted successfully!')).toBeVisible()
-    await expect(card(page, 'Checkout flow')).toHaveCount(0)
+    await expect(card(page, 'Checkout flow')).toHaveCount(NO_ELEMENTS)
     expect(
       api.requestsTo('DELETE', '/tasks/64c000000000000000000002')
-    ).toHaveLength(1)
+    ).toHaveLength(SINGLE_REQUEST)
   })
 
   test('searches the tasks of the project', async ({ page, api }) => {
@@ -152,7 +179,7 @@ test.describe('tasks', () => {
       page.getByRole('heading', { name: 'Search results for: form' })
     ).toBeVisible()
     await expect(card(page, 'Contact form')).toBeVisible()
-    expect(api.requestsTo('GET', '/tasks').at(-1)?.query).toEqual({
+    expect(api.requestsTo('GET', '/tasks').at(LAST_REQUEST)?.query).toEqual({
       project: 'Agency Site',
       search: 'form',
       limit: '8',
@@ -171,8 +198,7 @@ test.describe('tasks', () => {
 })
 
 test.describe('trial account', () => {
-  test('cannot add tasks', async ({ page, api }) => {
-    void api
+  test('cannot add tasks', async ({ page }) => {
     await logIn(page, TRIAL)
     await new FakeApi({
       projects: [
@@ -181,7 +207,7 @@ test.describe('trial account', () => {
           name: 'Demo',
           authorId: TRIAL._id,
           createdAt: '2026-01-01T10:00:00-03:00',
-          totalTasks: 0
+          totalTasks: NO_TASKS
         }
       ]
     }).install(page)
@@ -206,16 +232,13 @@ test.describe('projects', () => {
     await logIn(page, PARTNER)
   })
 
-  test('lists the projects with the best project of last month', async ({
-    page,
-    api
-  }) => {
+  test('lists the projects with the best project of last month', async ({ page, api }) => {
     await visit(page, '/projects')
 
-    await expect(page.locator('article')).toHaveCount(3)
+    await expect(page.locator('article')).toHaveCount(PARTNER_PROJECT_CARDS)
     await expect(card(page, 'Agency Site')).toContainText('4 tasks')
     await expect(page.getByText('Project of last month.')).toBeVisible()
-    expect(api.requestsTo('GET', '/projects')[0].query).toEqual({
+    expect(api.requestsTo('GET', '/projects')[FIRST_REQUEST].query).toEqual({
       limit: '11',
       page: '1'
     })
@@ -228,7 +251,7 @@ test.describe('projects', () => {
     await page.locator('[name="name"]').filter({ visible: true }).fill('docs')
     await visibleButton(page, 'Submit').click()
     await expect(card(page, 'Docs')).toBeVisible()
-    expect(api.requestsTo('POST', '/projects')[0].body).toEqual({ name: 'docs' })
+    expect(api.requestsTo('POST', '/projects')[FIRST_REQUEST].body).toEqual({ name: 'docs' })
 
     await openCardAction(page, 'Branding', 'edit')
     await page
@@ -241,42 +264,36 @@ test.describe('projects', () => {
     await openCardAction(page, 'Brand Book', 'delete')
     await visibleButton(page, 'Delete').click()
     await expect(page.getByText('Project deleted successfully!')).toBeVisible()
-    await expect(card(page, 'Brand Book')).toHaveCount(0)
+    await expect(card(page, 'Brand Book')).toHaveCount(NO_ELEMENTS)
   })
 })
 
 test.describe('users', () => {
-  test('shows every user to an admin', async ({ page, api }) => {
-    void api
+  test('shows every user to an admin', async ({ page }) => {
     await logIn(page, ADMIN)
     await visit(page, '/users')
 
-    await expect(page.locator('article')).toHaveCount(4)
+    await expect(page.locator('article')).toHaveCount(ALL_USER_CARDS)
     await expect(card(page, 'Bob')).toContainText('Administrator')
     await expect(card(page, 'Alice')).toContainText('Partner')
     await expect(card(page, 'Trial')).toContainText('Trial user')
   })
 
-  test('shows only the trial user to the trial account', async ({
-    page,
-    api
-  }) => {
-    void api
+  test('shows only the trial user to the trial account', async ({ page }) => {
     await logIn(page, TRIAL)
     await visit(page, '/users')
 
-    await expect(page.locator('article')).toHaveCount(1)
+    await expect(page.locator('article')).toHaveCount(SINGLE_ELEMENT)
     await expect(card(page, 'Trial')).toBeVisible()
   })
 
-  test('hides the users link from partners', async ({ page, api }) => {
-    void api
+  test('hides the users link from partners', async ({ page }) => {
     await logIn(page, PARTNER)
     await visit(page, '/tasks')
     await page.getByRole('img', { name: PARTNER.username }).click()
 
     await expect(page.getByRole('link', { name: 'Projects' })).toBeVisible()
-    await expect(page.getByRole('link', { name: 'Users' })).toHaveCount(0)
+    await expect(page.getByRole('link', { name: 'Users' })).toHaveCount(NO_ELEMENTS)
   })
 
   test('deletes a user', async ({ page, api }) => {
@@ -288,13 +305,12 @@ test.describe('users', () => {
     await expect(page.getByText('User deleted successfully!')).toBeVisible()
     expect(
       api.requestsTo('DELETE', '/users/64a000000000000000000003')
-    ).toHaveLength(1)
+    ).toHaveLength(SINGLE_REQUEST)
   })
 })
 
 test.describe('profile', () => {
-  test('shows the user data and its links', async ({ page, api }) => {
-    void api
+  test('shows the user data and its links', async ({ page }) => {
     await logIn(page, PARTNER)
     await visit(page, '/profile')
 
@@ -303,8 +319,7 @@ test.describe('profile', () => {
     await page.waitForURL('**/change-password')
   })
 
-  test('rejects avatars of other types', async ({ page, api }) => {
-    void api
+  test('rejects avatars of other types', async ({ page }) => {
     await logIn(page, PARTNER)
     await visit(page, '/profile')
     await page.locator('#upload-avatar').setInputFiles({

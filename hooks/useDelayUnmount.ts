@@ -14,9 +14,9 @@ export default function useDelayUnmount (dependency: boolean, delayTime: number)
   useEffect(() => {
     if (!isLeaving) return
 
-    const timeoutId = window.setTimeout(() => setIsLeaving(false), delayTime)
+    const timeoutId = window.setTimeout(() => { setIsLeaving(false); }, delayTime)
 
-    return () => clearTimeout(timeoutId)
+    return () => { clearTimeout(timeoutId); }
   }, [isLeaving, delayTime])
 
   return dependency || isLeaving

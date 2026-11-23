@@ -10,7 +10,7 @@ export const updateUser = async (user: UserInterface): Promise<FullUserInterface
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
@@ -19,6 +19,6 @@ export const updateUser = async (user: UserInterface): Promise<FullUserInterface
     username: user.username
   }
 
-  const response = await privateApi.patch(`${USERS_ENDPOINT}/${user._id}`, updatedUser, config)
+  const response = await privateApi.patch<{ updatedUser: FullUserInterface }>(`${USERS_ENDPOINT}/${user._id}`, updatedUser, config)
   return response.data.updatedUser
 }

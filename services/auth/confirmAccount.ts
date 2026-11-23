@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios'
+import type { AxiosResponse } from 'axios'
 import api from 'utils/api'
 
 interface CredentialsInterface {
@@ -6,7 +6,7 @@ interface CredentialsInterface {
 }
 
 export default async function confirmAccount ({ confirmAccountToken }: CredentialsInterface): Promise<AxiosResponse> {
-  const response = await api.patch(`/auth/confirm-account/${confirmAccountToken}`)
+  const response = await api.patch<AxiosResponse>(`/auth/confirm-account/${confirmAccountToken}`)
 
   return response.data
 }

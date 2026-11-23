@@ -1,4 +1,4 @@
-import { PaginationInterface } from 'interfaces/components'
+import type { PaginationInterface } from 'interfaces/components'
 
 export interface ProjectInterface {
   _id: string
@@ -8,12 +8,12 @@ export interface ProjectInterface {
 }
 
 export interface ProjectStatsInterface {
-  bestProjectOfPastMonth: string
+  bestProjectOfPastMonth?: string
 }
 
 export interface FullProjectInterface {
   status: string
-  pagination: PaginationInterface
+  pagination: PaginationInterface | null
   projects: ProjectInterface[]
-  stats: ProjectStatsInterface
+  stats?: ProjectStatsInterface
 }

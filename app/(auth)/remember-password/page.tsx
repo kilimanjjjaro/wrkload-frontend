@@ -12,6 +12,7 @@ import rememberPassword from 'services/auth/rememberPassword'
 import PageTransition from 'components/shared/PageTransition'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
 import { apiErrorCode } from 'utils/errors'
+import { MIN_LENGTH } from 'constants/math'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: ''
@@ -28,7 +29,7 @@ export default function RememberPassword (): React.JSX.Element {
     setCredentials({ ...credentials, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     const { email } = credentials
 
@@ -47,7 +48,7 @@ export default function RememberPassword (): React.JSX.Element {
     }
   }
 
-  if (error.length >= 1) {
+  if (error.length >= MIN_LENGTH) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
@@ -58,7 +59,7 @@ export default function RememberPassword (): React.JSX.Element {
               {error === 'auth/user-not-found' && 'No account associated with this email was found, please try again.'}
             </Balancer>
           </p>
-          <Button ariaLabel='Try again' onClick={() => window.location.reload()} variant='secondary'>
+          <Button ariaLabel='Try again' onClick={() => { window.location.reload(); }} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -72,7 +73,7 @@ export default function RememberPassword (): React.JSX.Element {
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>An email has been sent to forgot your password.</Balancer></p>
-          <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
+          <Button ariaLabel='Login' onClick={() => { router.push('/login'); }} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>

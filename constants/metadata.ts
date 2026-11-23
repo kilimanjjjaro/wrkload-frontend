@@ -21,3 +21,4 @@ export const pageMetadata = (title: string, path?: string): Metadata => ({
     ...(path === undefined ? {} : { url: `${SITE_URL}${path}` })
   }
 })
+export const VIEWPORT_INITIAL_SCALE = 1

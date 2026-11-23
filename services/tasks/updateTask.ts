@@ -10,7 +10,7 @@ export const updateTask = async (task: TaskInterface): Promise<FullTaskInterface
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
@@ -23,7 +23,7 @@ export const updateTask = async (task: TaskInterface): Promise<FullTaskInterface
     description: task.description
   }
 
-  const response = await privateApi.patch(`${TASKS_ENDPOINT}/${task._id}`, updatedTask, config)
+  const response = await privateApi.patch<{ updatedTask: FullTaskInterface }>(`${TASKS_ENDPOINT}/${task._id}`, updatedTask, config)
 
   return response.data.updatedTask
 }

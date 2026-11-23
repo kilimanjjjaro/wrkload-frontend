@@ -1,15 +1,20 @@
 import type { Page } from '@playwright/test'
 import {
   ANIMATIONS_TIMEOUT_MS,
+  FIRST_SLIDE_INDEX,
+  INSTANT_SLIDE_MS,
+  NATIVE_TEXT_BALANCING,
+  PAGE_START_PX,
   SCROLL_OFFSET_PX,
+  SCROLL_PASSES,
   SETTLE_MS,
   TEST_NOW
 } from '../constants/e2e'
 
 const enableNativeTextBalancing = async (page: Page) => {
-  await page.addInitScript(() => {
-    Object.assign(window, { __wrap_n: 1 })
-  })
+  await page.addInitScript((mode) => {
+    Object.assign(window, { __wrap_n: mode })
+  }, NATIVE_TEXT_BALANCING)
 }
 
 export const prepareRealTime = async (page: Page) => {
@@ -51,17 +56,22 @@ interface SwiperElement extends HTMLElement {
 }
 
 const stopSliders = async (page: Page) => {
-  await page.evaluate(() => {
-    for (const element of document.querySelectorAll<SwiperElement>('.swiper')) {
-      element.swiper?.autoplay.stop()
-      element.swiper?.slideTo(0, 0)
-    }
-  })
+  await page.evaluate(
+    ({ index, speed }) => {
+      for (const element of document.querySelectorAll<SwiperElement>(
+        '.swiper'
+      )) {
+        element.swiper?.autoplay.stop()
+        element.swiper?.slideTo(index, speed)
+      }
+    },
+    { index: FIRST_SLIDE_INDEX, speed: INSTANT_SLIDE_MS }
+  )
 }
 
 const waitForEntranceAnimations = async (page: Page) => {
   await page.waitForFunction(
-    () =>
+    (viewportTop) =>
       Array.from(
         document.querySelectorAll<HTMLElement>('.will-change-transform')
       )
@@ -71,41 +81,48 @@ const waitForEntranceAnimations = async (page: Page) => {
         )
         .filter((element) => {
           const { top, bottom } = element.getBoundingClientRect()
-          return bottom > 0 && top < window.innerHeight
+          return bottom > viewportTop && top < window.innerHeight
         })
         .every((element) => {
           const style = getComputedStyle(element)
           return style.transform === 'none' && style.opacity === '1'
         }),
-    undefined,
+    PAGE_START_PX,
     { timeout: ANIMATIONS_TIMEOUT_MS }
   )
 }
 
-const SCROLL_PASSES = 2
+const scrollOnceToText = async (page: Page, text: string) => {
+  await page
+    .getByText(text)
+    .first()
+    .evaluate(
+      (element, { offset, start }) => {
+        const pageTopOf = (node: Element | null): number =>
+          node instanceof HTMLElement
+            ? node.offsetTop + pageTopOf(node.offsetParent)
+            : start
+        window.scrollTo(start, pageTopOf(element) - offset)
+      },
+      { offset: SCROLL_OFFSET_PX, start: PAGE_START_PX }
+    )
+  await page.waitForTimeout(SETTLE_MS)
+}
 
 export const scrollToText = async (page: Page, text: string) => {
-  for (let pass = 0; pass < SCROLL_PASSES; pass++) {
-    await page
-      .getByText(text)
-      .first()
-      .evaluate((element, offset) => {
-        let top = 0
-        let node: HTMLElement | null = element as HTMLElement
-        while (node !== null) {
-          top += node.offsetTop
-          node = node.offsetParent as HTMLElement | null
-        }
-        window.scrollTo(0, top - offset)
-      }, SCROLL_OFFSET_PX)
-    await page.waitForTimeout(SETTLE_MS)
-  }
+  await Array.from({ length: SCROLL_PASSES }).reduce<Promise<void>>(
+    async (previous) => {
+      await previous
+      await scrollOnceToText(page, text)
+    },
+    Promise.resolve()
+  )
   await waitForEntranceAnimations(page)
 }
 
 export const scrollToTop = async (page: Page) => {
-  await page.evaluate(() => {
-    window.scrollTo(0, 0)
-  })
+  await page.evaluate((start) => {
+    window.scrollTo(start, start)
+  }, PAGE_START_PX)
   await page.clock.runFor(SETTLE_MS)
 }

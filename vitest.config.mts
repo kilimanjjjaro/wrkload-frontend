@@ -14,7 +14,7 @@ const ROOT_FOLDERS = [
 export default defineConfig({
   resolve: {
     alias: ROOT_FOLDERS.map((folder) => ({
-      find: new RegExp(`^${folder}/`),
+      find: new RegExp(`^${folder}/`, 'v'),
       replacement: fileURLToPath(new URL(`./${folder}/`, import.meta.url))
     }))
   },

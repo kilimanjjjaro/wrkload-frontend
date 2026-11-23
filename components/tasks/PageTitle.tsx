@@ -5,6 +5,7 @@ import useSWR from 'swr'
 import ProjectSelector from 'components/tasks/ProjectSelector'
 import { getProjects } from 'services/projects/getProjects'
 import { AppContext } from 'contexts/AppContext'
+import { EMPTY_LENGTH, FIRST_INDEX } from 'constants/math'
 
 export default function PageTitle (): React.JSX.Element {
   const { setSelectedProjectToFetch } = useContext(AppContext)
@@ -12,13 +13,13 @@ export default function PageTitle (): React.JSX.Element {
 
   const { data, isLoading } = useSWR('projects', async () => await getProjects({ page: '1', noLimit: true }))
 
-  if (data !== undefined) sortedProjectNames = data?.projects.map((project) => project.name).sort()
+  if (data !== undefined) sortedProjectNames = data.projects.map((project) => project.name).sort()
 
-  const shouldRenderSkeleton = isLoading || sortedProjectNames.length === 0
+  const shouldRenderSkeleton = isLoading || sortedProjectNames.length === EMPTY_LENGTH
 
   useEffect(() => {
-    if (sortedProjectNames.length > 0) {
-      setSelectedProjectToFetch(sortedProjectNames[0])
+    if (sortedProjectNames.length > EMPTY_LENGTH) {
+      setSelectedProjectToFetch(sortedProjectNames[FIRST_INDEX])
     }
   }, [data])
 

@@ -23,7 +23,7 @@ export default function AddProject(): React.JSX.Element {
     setProject({ ...project, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     setAddDataModalStatus(false)
 
@@ -71,7 +71,7 @@ export default function AddProject(): React.JSX.Element {
             <Input onChange={handleChange} value={project.name} name='name' type='text' placeholder='Name' centerText required />
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button ariaLabel='Close' onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
+            <Button ariaLabel='Close' onClick={(event) => { handleCloseModal(event); }} variant='dark-alternative'>
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
             <Button ariaLabel='Submit' type='submit' variant='secondary'>

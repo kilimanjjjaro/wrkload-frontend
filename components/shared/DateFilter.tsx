@@ -1,14 +1,15 @@
-import { Dispatch } from 'react'
+import type { Dispatch } from 'react'
 import { motion } from 'motion/react'
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'components/shared/Button'
 import Input from 'components/shared/Input'
+import { DATE_FILTER_OFFSET_X, HIDDEN_OPACITY, NO_OFFSET, TRANSITION_DURATION, VISIBLE_OPACITY } from 'constants/animation'
 
 const VARIANTS = {
-  open: { opacity: 1, x: 0, display: 'flex' },
+  open: { opacity: VISIBLE_OPACITY, x: NO_OFFSET, display: 'flex' },
   closed: {
-    opacity: 0,
-    x: 40,
+    opacity: HIDDEN_OPACITY,
+    x: DATE_FILTER_OFFSET_X,
     transitionEnd: {
       display: 'none'
     }
@@ -26,14 +27,14 @@ export default function DateFilter({ dependency, setDependency }: Props): React.
       className='absolute right-0 z-20 flex flex-col mt-5 text-white rounded-3xl bg-blue top-full p-7 gap-y-3'
       animate={dependency ? 'open' : 'closed'}
       variants={VARIANTS}
-      transition={{ ease: 'easeInOut', duration: 0.4 }}
+      transition={{ ease: 'easeInOut', duration: TRANSITION_DURATION }}
       initial={false}
     >
       <h4 className='text-sm font-bold text-center text-black font-secondaryFont'>Date range filter</h4>
       <Input name='startingDate' type='date' placeholder='Starting date' required />
       <Input name='endingDate' type='date' placeholder='Ending date' required />
       <div className='flex gap-x-3'>
-        <Button ariaLabel='Close' onClick={() => setDependency(false)} variant='dark-alternative' fullWidth>
+        <Button ariaLabel='Close' onClick={() => { setDependency(false); }} variant='dark-alternative' fullWidth>
           <XMarkIcon className='w-4 stroke-3' />
         </Button>
         <div className='relative flex justify-center w-full group'>

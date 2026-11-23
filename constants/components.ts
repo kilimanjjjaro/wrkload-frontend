@@ -7,12 +7,18 @@ export const PAGES = [
   { name: 'Users', link: '/users', admin: true }
 ]
 
-export const SKELETON = Array.from(Array(8).keys())
+const SKELETON_ITEMS = 8
+export const SKELETON = Array.from(Array(SKELETON_ITEMS).keys())
 
+const MASONRY_DEFAULT_COLUMNS = 4
+const XXL_BREAKPOINT_PX = 1536
+const XXL_COLUMNS = 3
+const MD_BREAKPOINT_PX = 768
+const MD_COLUMNS = 2
 export const MASONRY_BREAKPOINTS = {
-  default: 4,
-  1536: 3,
-  768: 2
+  default: MASONRY_DEFAULT_COLUMNS,
+  [XXL_BREAKPOINT_PX]: XXL_COLUMNS,
+  [MD_BREAKPOINT_PX]: MD_COLUMNS
 }
 
 export const FEATURES: FeaturesInterface[] = [
@@ -44,13 +50,18 @@ export const FEATURES: FeaturesInterface[] = [
 
 export const CHARACTER_LIMIT = 200
 
+export const STATS_AUTOPLAY_DELAY_MS = 4000
+
+const LENIS_DURATION = 1.2
 export const LENIS_OPTIONS = {
-  duration: 1.2
+  duration: LENIS_DURATION
 }
 
-export const ALLOWED_IMAGE_EXTENSIONS = /(\.jpg|\.jpeg|\.png|\.webp)$/i
 export const ALLOWED_IMAGE_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp']
-export const ALLOWED_IMAGE_SIZE = 5 * 1024 * 1024
+const MAX_IMAGE_SIZE_MB = 5
+const BYTES_PER_KILOBYTE = 1024
+const KILOBYTES_PER_MEGABYTE = 1024
+export const ALLOWED_IMAGE_SIZE = MAX_IMAGE_SIZE_MB * KILOBYTES_PER_MEGABYTE * BYTES_PER_KILOBYTE
 
 export const SERVER_RESPONSE_STATUS = {
   OK: 'ok',

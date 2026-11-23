@@ -9,6 +9,8 @@ import Button from 'components/shared/Button'
 import PageTransition from 'components/shared/PageTransition'
 import confirmAccount from 'services/auth/confirmAccount'
 import { apiErrorCode } from 'utils/errors'
+import { MIN_LENGTH } from 'constants/math'
+import { logError } from 'utils/logError'
 
 export default function ConfirmAccount(): React.JSX.Element {
   const params = useParams<{ confirmAccountToken: string }>()
@@ -41,12 +43,10 @@ export default function ConfirmAccount(): React.JSX.Element {
       }
     }
 
-    if (params.confirmAccountToken !== undefined) {
-      sendConfirmAccount().catch((error: unknown) => console.error(error))
-    }
+    sendConfirmAccount().catch(logError)
   }, [params])
 
-  if (error.length >= 1) {
+  if (error.length >= MIN_LENGTH) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
@@ -81,7 +81,7 @@ export default function ConfirmAccount(): React.JSX.Element {
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been confirmed. <b>Please, log in.</b></Balancer></p>
-          <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
+          <Button ariaLabel='Login' onClick={() => { router.push('/login'); }} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>

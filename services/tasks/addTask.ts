@@ -11,7 +11,7 @@ export const addTask = async (task: TaskInterface): Promise<FullTaskInterface> =
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
@@ -24,7 +24,7 @@ export const addTask = async (task: TaskInterface): Promise<FullTaskInterface> =
     description: task.description
   }
 
-  const response = await privateApi.post(TASKS_ENDPOINT, newTask, config)
+  const response = await privateApi.post<{ newTask: FullTaskInterface }>(TASKS_ENDPOINT, newTask, config)
 
   return response.data.newTask
 }

@@ -49,9 +49,18 @@ export const readCookie = (name: string) =>
   document.cookie
     .split('; ')
     .find((cookie) => cookie.startsWith(`${name}=`))
-    ?.slice(name.length + 1)
+    ?.slice(`${name}=`.length)
 
 export const readDecodedCookie = (name: string) => {
   const value = readCookie(name)
   return value === undefined ? undefined : decodeURIComponent(value)
+}
+
+export const firstConfigOf = (adapter: ReturnType<typeof createAdapter>) => {
+  const {
+    mock: {
+      calls: [[config]]
+    }
+  } = adapter
+  return config
 }

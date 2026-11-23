@@ -10,7 +10,7 @@ export const addProject = async (project: ProjectInterface): Promise<FullProject
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
@@ -19,7 +19,7 @@ export const addProject = async (project: ProjectInterface): Promise<FullProject
     name: project.name
   }
 
-  const response = await privateApi.post(PROJECTS_ENDPOINT, newProject, config)
+  const response = await privateApi.post<{ newProject: FullProjectInterface }>(PROJECTS_ENDPOINT, newProject, config)
 
   return response.data.newProject
 }

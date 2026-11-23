@@ -10,7 +10,7 @@ export const updateProject = async (project: ProjectInterface): Promise<FullProj
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
@@ -19,7 +19,7 @@ export const updateProject = async (project: ProjectInterface): Promise<FullProj
     name: project.name
   }
 
-  const response = await privateApi.patch(`${PROJECTS_ENDPOINT}/${project._id}`, updatedProject, config)
+  const response = await privateApi.patch<{ updatedProject: FullProjectInterface }>(`${PROJECTS_ENDPOINT}/${project._id}`, updatedProject, config)
 
   return response.data.updatedProject
 }

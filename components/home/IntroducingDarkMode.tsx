@@ -7,26 +7,27 @@ import Balancer from 'react-wrap-balancer'
 import Headline from 'components/shared/Headline'
 import Paragraph from 'components/shared/Paragraph'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import { HIDDEN_OPACITY, NO_OFFSET, SECOND_COLUMN_DELAY, SECTION_REVEAL_DURATION, SECTION_REVEAL_OFFSET_Y, TRANSITION_DELAY, TRANSITION_DURATION, VISIBLE_OPACITY } from 'constants/animation'
 
 const CONTAINER_VARIANTS = {
   visible: {
     borderRadius: '0rem',
-    y: 0
+    y: NO_OFFSET
   },
   hidden: {
     borderRadius: '20rem 20rem 0rem 0rem',
-    y: 200
+    y: SECTION_REVEAL_OFFSET_Y
   }
 }
 
 const CONTENT_VARIANTS = {
   visible: {
-    opacity: 1,
-    y: 0
+    opacity: VISIBLE_OPACITY,
+    y: NO_OFFSET
   },
   hidden: {
-    opacity: 0,
-    y: 200
+    opacity: HIDDEN_OPACITY,
+    y: SECTION_REVEAL_OFFSET_Y
   }
 }
 
@@ -46,7 +47,7 @@ export default function IntroducingDarkMode (): React.JSX.Element {
       animate={isInViewContainer ? 'visible' : 'hidden'}
       initial='hidden'
       transition={{
-        duration: 0.8,
+        duration: SECTION_REVEAL_DURATION,
         ease: 'easeOut'
       }}
     >
@@ -57,9 +58,9 @@ export default function IntroducingDarkMode (): React.JSX.Element {
         animate={isInViewLeftColumn ? 'visible' : 'hidden'}
         initial='hidden'
         transition={{
-          duration: 0.4,
+          duration: TRANSITION_DURATION,
           ease: 'easeOut',
-          delay: 0.2
+          delay: TRANSITION_DELAY
         }}
       >
         <ReactCompareImage
@@ -89,9 +90,9 @@ export default function IntroducingDarkMode (): React.JSX.Element {
         animate={isInViewRightColumn ? 'visible' : 'hidden'}
         initial='hidden'
         transition={{
-          duration: 0.4,
+          duration: TRANSITION_DURATION,
           ease: 'easeOut',
-          delay: 0.4
+          delay: SECOND_COLUMN_DELAY
         }}
       >
         <Headline variant='2xl' className='mb-10!'><Balancer>Discover the Dark Side of wrkload!</Balancer></Headline>

@@ -49,7 +49,7 @@ export interface TextareaInterface {
 export interface PaginationInterface {
   totalResults: number
   resultsPerPage: number
-  prevPage: number
+  prevPage: number | null
   page: number
-  nextPage: number
+  nextPage: number | null
 }

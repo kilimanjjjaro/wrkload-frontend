@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import ThemeSelector from 'components/shared/ThemeSelector'
 import Languages from 'components/shared/Languages'
 import GitHubLogo from 'public/images/github.svg'
+import { FULL_SCALE, HIDDEN_SCALE, SPRING_DAMPING, SPRING_STIFFNESS } from 'constants/animation'
 
 export default function Footer (): React.JSX.Element {
   return (
@@ -16,12 +17,12 @@ export default function Footer (): React.JSX.Element {
           aria-label='See repository in Github'
           target='_blank'
           rel='noopener noreferrer'
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
+          initial={{ scale: HIDDEN_SCALE }}
+          animate={{ scale: FULL_SCALE }}
           transition={{
             type: 'spring',
-            stiffness: 200,
-            damping: 10
+            stiffness: SPRING_STIFFNESS,
+            damping: SPRING_DAMPING
           }}
         >
           <GitHubLogo className='w-[18px] transition ease-in-out duration-400 fill-black dark:fill-blue hover:fill-blue dark:hover:fill-white' />

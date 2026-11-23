@@ -12,9 +12,11 @@ import GitHubLogo from 'public/images/github.svg'
 import GoogleLogo from 'public/images/google.svg'
 import register from 'services/auth/register'
 import PageTransition from 'components/shared/PageTransition'
-import clsx from 'clsx'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
 import { apiErrorCode } from 'utils/errors'
+import { MIN_LENGTH } from 'constants/math'
+import PasswordStrength from 'components/shared/PasswordStrength'
+import PasswordMatch from 'components/shared/PasswordMatch'
 
 const INITIAL_CREDENTIALS_STATE = {
   username: '',
@@ -39,7 +41,7 @@ export default function Register (): React.JSX.Element {
     router.refresh()
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     const { username, email, password, confirmPassword } = credentials
 
@@ -69,7 +71,7 @@ export default function Register (): React.JSX.Element {
     }
   }
 
-  if (error.length >= 1) {
+  if (error.length >= MIN_LENGTH) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
@@ -94,7 +96,7 @@ export default function Register (): React.JSX.Element {
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been created and an email will be sent to activate it.</Balancer></p>
-          <Button ariaLabel='Login' onClick={() => router.push('/login')} variant='secondary'>
+          <Button ariaLabel='Login' onClick={() => { router.push('/login'); }} variant='secondary'>
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -113,33 +115,11 @@ export default function Register (): React.JSX.Element {
               <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText required />
               <div className='relative flex items-center'>
                 <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' minLength={8} centerText required />
-                <div className={clsx(
-                  'absolute flex items-center gap-x-1 right-3 pt-[2px]',
-                  credentials.password.length > 0 && credentials.password.length < 8 && '[&>div]:bg-red!',
-                  credentials.password.length >= 7 && credentials.password.length < 12 && '[&>div]:bg-yellow!',
-                  credentials.password.length >= 11 && '[&>div]:bg-green!'
-                )}
-                >
-                  {credentials.password.length > 0 && <div className='w-[5px] h-[5px] rounded-full' />}
-                  {credentials.password.length >= 7 && <div className='w-[5px] h-[5px] rounded-full' />}
-                  {credentials.password.length >= 11 && <div className='w-[5px] h-[5px] rounded-full' />}
-                </div>
+                <PasswordStrength password={credentials.password} />
               </div>
               <div className='relative flex items-center'>
                 <Input onChange={handleChange} value={credentials.confirmPassword} name='confirmPassword' type='password' placeholder='Confirm Password' autoComplete='current-password' minLength={8} centerText required />
-                <div className='absolute flex items-center gap-x-1 right-3'>
-                  {credentials.confirmPassword.length > 7 && credentials.confirmPassword === credentials.password && (
-                    <svg className='w-[12px] h-[12px] stroke-green' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' strokeWidth='3' stroke='currentColor'>
-                      <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 12.75l6 6 9-13.5' />
-                    </svg>
-                  )}
-
-                  {credentials.confirmPassword.length > 7 && credentials.confirmPassword !== credentials.password && (
-                    <svg className='w-[12px] h-[12px] stroke-red' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth='1.5' stroke='currentColor'>
-                      <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
-                    </svg>
-                  )}
-                </div>
+                <PasswordMatch password={credentials.password} confirmation={credentials.confirmPassword} />
               </div>
             </div>
             <Button ariaLabel='Registry' className='group' variant='secondary' isLoading={isLoading}>

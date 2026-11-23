@@ -13,6 +13,8 @@ import notFoundImage from 'public/images/not-found.webp'
 import searchTasks from 'services/tasks/searchTasks'
 import { sortTasks } from 'utils/sortData'
 import PageTransition from 'components/shared/PageTransition'
+import { MIN_LENGTH } from 'constants/math'
+import { logError } from 'utils/logError'
 
 export default function SearchTasks(): React.JSX.Element {
   const params = useSearchParams()
@@ -24,11 +26,11 @@ export default function SearchTasks(): React.JSX.Element {
   const { data, isLoading, isValidating, mutate } = useSWR('tasks', async () => await searchTasks({ project, query, page }), { onSuccess: data => sortTasks(data.tasks) })
 
   useEffect(() => {
-    mutate().catch((error) => console.error(error))
+    mutate().catch(logError)
   }, [page, mutate])
 
   const shouldRenderSkeleton = isLoading || isValidating
-  const shouldRenderTasks = data !== undefined && data?.tasks.length >= 1 && !shouldRenderSkeleton
+  const shouldRenderTasks = data !== undefined && data.tasks.length >= MIN_LENGTH && !shouldRenderSkeleton
   const shouldRenderNotFoundSign = !shouldRenderTasks && !shouldRenderSkeleton
 
   return (
@@ -39,7 +41,7 @@ export default function SearchTasks(): React.JSX.Element {
         </h2>
         {!shouldRenderNotFoundSign && (
           <div className='flex items-start gap-x-5'>
-            <Button onClick={() => router.push('/tasks')} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /> Go to tasks</Button>
+            <Button onClick={() => { router.push('/tasks'); }} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /> Go to tasks</Button>
           </div>
         )}
       </header>
@@ -55,7 +57,7 @@ export default function SearchTasks(): React.JSX.Element {
               alt='Not found image'
             />
             <span className='text-xl text-center text-black dark:text-white font-secondaryFont'>No search results found. <br className='hidden lg:block' />Please try again.</span>
-            <Button ariaLabel='Go to tasks' className='w-auto!' onClick={() => router.push('/tasks')} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
+            <Button ariaLabel='Go to tasks' className='w-auto!' onClick={() => { router.push('/tasks'); }} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
           </div>
         )}
       </main>

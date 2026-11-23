@@ -7,7 +7,7 @@ interface LogoutResponseInterface {
 }
 
 export default async function logout (): Promise<LogoutResponseInterface> {
-  const response = await api.get('/auth/logout')
+  const response = await api.get<LogoutResponseInterface>('/auth/logout')
 
   if (response.data.status === 'ok') {
     await mutate(() => true, undefined, { revalidate: false })
