@@ -274,6 +274,29 @@ test.describe('account settings', () => {
     )
   })
 
+  test.fail('ends the session after deleting the account', async ({ page }) => {
+    await logIn(page, PARTNER)
+    await visit(page, '/delete-account')
+    await fill(page, {
+      email: PARTNER.email,
+      password: PASSWORDS[PARTNER.email]
+    })
+    await page.getByRole('button', { name: 'Submit' }).click()
+    await expect(
+      page.getByText('Your account was deleted. Thanks for this time!')
+    ).toBeVisible()
+
+    await expect
+      .poll(async () => await cookieValue(page, 'isLogged'), {
+        timeout: QUICK_TIMEOUT_MS
+      })
+      .toBeUndefined()
+    expect(await cookieValue(page, 'accessToken')).toBeUndefined()
+    expect(
+      await page.evaluate(() => window.localStorage.getItem('user'))
+    ).toBeNull()
+  })
+
   test('logs out from the dashboard tab', async ({ page, api }) => {
     await logIn(page, PARTNER)
     await visit(page, '/tasks')

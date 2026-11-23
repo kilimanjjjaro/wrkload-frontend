@@ -162,6 +162,51 @@ test.describe('tasks', () => {
     })
   })
 
+  test.fail(
+    'adds tasks to the remembered project after a reload',
+    async ({ page, api }) => {
+      await page.addInitScript(() => {
+        window.localStorage.setItem('selectedProject', 'Mobile App')
+      })
+      await visit(page, '/tasks')
+      await expect(card(page, 'Onboarding screens')).toBeVisible()
+      await page.getByRole('button', { name: 'Add task' }).click()
+      await page
+        .locator('[name="title"]')
+        .filter({ visible: true })
+        .fill('Release notes')
+      await page
+        .locator('[name="timing"]')
+        .filter({ visible: true })
+        .fill('01:00')
+      await page
+        .locator('[name="deliveredAt"]')
+        .filter({ visible: true })
+        .fill('2026-11-14')
+      await visibleButton(page, 'Submit').click()
+
+      await expect(card(page, 'Release notes')).toBeVisible()
+      expect(
+        api.requestsTo('POST', '/tasks')[FIRST_REQUEST].body
+      ).toMatchObject({ project: 'Mobile App' })
+      await expect(card(page, 'Onboarding screens')).toBeVisible()
+    }
+  )
+
+  test.fail('confirms the updated task', async ({ page }) => {
+    await visit(page, '/tasks')
+    await openCardAction(page, 'Landing page', 'edit')
+    await page
+      .locator('[name="title"]')
+      .filter({ visible: true })
+      .fill('Landing page v2')
+    await visibleButton(page, 'Update').click()
+
+    await expect(page.getByText('Task updated successfully!')).toBeVisible({
+      timeout: QUICK_TIMEOUT_MS
+    })
+  })
+
   test('updates a task', async ({ page, api }) => {
     await visit(page, '/tasks')
     await openCardAction(page, 'Landing page', 'edit')
@@ -205,6 +250,23 @@ test.describe('tasks', () => {
       search: 'form',
       limit: '8',
       page: '1'
+    })
+  })
+
+  test.fail('searches text with special characters', async ({ page, api }) => {
+    await visit(page, '/tasks')
+    await page.getByRole('button', { name: 'Search task' }).click()
+    await page.locator('[name="query"]').filter({ visible: true }).fill('R&D')
+    await visibleButton(page, 'Search').click()
+
+    await expect(
+      page.getByRole('heading', { name: 'Search results for: R&D' })
+    ).toBeVisible({ timeout: QUICK_TIMEOUT_MS })
+    expect(
+      api.requestsTo('GET', '/tasks').at(LAST_REQUEST)?.query
+    ).toMatchObject({
+      project: 'Agency Site',
+      search: 'R&D'
     })
   })
 
@@ -294,6 +356,37 @@ test.describe('projects', () => {
     await visibleButton(page, 'Delete').click()
     await expect(page.getByText('Project deleted successfully!')).toBeVisible()
     await expect(card(page, 'Brand Book')).toHaveCount(NO_ELEMENTS)
+  })
+})
+
+test.describe('project notifications', () => {
+  test.beforeEach(async ({ page }) => {
+    await logIn(page, PARTNER)
+  })
+
+  test.fail('confirms the added project', async ({ page }) => {
+    await visit(page, '/projects')
+    await page.getByRole('button', { name: 'Add project' }).click()
+    await page.locator('[name="name"]').filter({ visible: true }).fill('docs')
+    await visibleButton(page, 'Submit').click()
+
+    await expect(page.getByText('Project added successfully!')).toBeVisible({
+      timeout: QUICK_TIMEOUT_MS
+    })
+  })
+
+  test.fail('confirms the updated project', async ({ page }) => {
+    await visit(page, '/projects')
+    await openCardAction(page, 'Branding', 'edit')
+    await page
+      .locator('[name="name"]')
+      .filter({ visible: true })
+      .fill('Brand Book')
+    await visibleButton(page, 'Update').click()
+
+    await expect(page.getByText('Project updated successfully!')).toBeVisible({
+      timeout: QUICK_TIMEOUT_MS
+    })
   })
 })
 
