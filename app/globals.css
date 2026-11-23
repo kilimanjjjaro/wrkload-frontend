@@ -29,8 +29,14 @@
   border: none !important;
 }
 
-.ui-notifications [data-title] {
-  font-weight: 600;
+.ui-notifications[data-sonner-toast][data-styled=true] [data-content] {
+  align-items: center;
+  gap: 6px;
+}
+
+.ui-notifications[data-sonner-toast][data-styled=true] [data-title] {
+  display: contents;
+  font-weight: inherit;
 }
 
 @media (max-width: 600px) {
