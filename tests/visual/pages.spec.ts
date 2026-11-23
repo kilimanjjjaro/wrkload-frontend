@@ -1,5 +1,5 @@
 import type { Page } from '@playwright/test'
-import { ADMIN, PARTNER, PASSWORDS, TRIAL } from '../constants/fixtures'
+import { ADMIN, PARTNER, PASSWORDS, PROJECTS, TRIAL } from '../constants/fixtures'
 import { HOME_MAX_DIFF_PIXEL_RATIO } from '../constants/e2e'
 import { FakeApi } from '../utils/fake-api'
 import { expect, logIn, test, useLightTheme } from '../utils/fixtures'
@@ -403,5 +403,46 @@ test.describe('profile', () => {
     await logIn(page, PARTNER)
     await open(page, '/profile')
     await capture(page, 'profile')
+  })
+})
+
+test.describe('toasts', () => {
+  const captureToast = async (page: Page, name: string) => {
+    await expect(page.locator('[data-sonner-toast]')).toBeVisible()
+    await expect(page).toHaveScreenshot(`${name}.png`, {
+      mask: [page.locator(ANIMATED_IMAGES)]
+    })
+  }
+
+  const confirmDelete = async (page: Page) => {
+    await page.getByRole('button', { name: 'Delete' }).filter({ visible: true }).click()
+    await settle(page)
+  }
+
+  test('success', async ({ page, api }) => {
+    void api
+    await logIn(page, PARTNER)
+    await open(page, '/projects')
+    await deleteCard(page, 'Branding')
+    await confirmDelete(page)
+    await captureToast(page, 'toast-success')
+  })
+
+  test('error', async ({ page }) => {
+    await new FakeApi({
+      projects: PROJECTS.map((project) => ({ ...project, authorId: TRIAL._id }))
+    }).install(page)
+    await logIn(page, TRIAL)
+    await open(page, '/projects')
+    await deleteCard(page, 'Branding')
+    await confirmDelete(page)
+    await captureToast(page, 'toast-error')
+  })
+
+  test('information', async ({ page, api }) => {
+    void api
+    await logIn(page, TRIAL)
+    await open(page, '/users/search?query=a')
+    await captureToast(page, 'toast-information')
   })
 })
