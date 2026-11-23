@@ -13,7 +13,7 @@ export interface ButtonInterface {
   type?: 'submit'
   variant: 'primary' | 'secondary' | 'light-alternative' | 'dark-alternative'
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  fullWidth?: Boolean
+  fullWidth?: boolean
   children: React.ReactNode
   disablePagination?: boolean
   isLoading?: boolean
@@ -49,7 +49,7 @@ export interface TextareaInterface {
 export interface PaginationInterface {
   totalResults: number
   resultsPerPage: number
-  prevPage: number
+  prevPage: number | null
   page: number
-  nextPage: number
+  nextPage: number | null
 }

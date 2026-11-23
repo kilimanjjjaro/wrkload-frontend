@@ -1,5 +1,5 @@
 import type { PaginationInterface } from 'interfaces/components'
-import { Key } from 'react'
+import type { Key } from 'react'
 
 export interface StatsTasksInterface {
   id: Key | undefined
@@ -27,7 +27,7 @@ export interface TaskStatsInterface {
 
 export interface FullTaskInterface {
   status: string
-  pagination: PaginationInterface
+  pagination: PaginationInterface | null
   tasks: TaskInterface[]
-  stats: TaskStatsInterface
+  stats: TaskStatsInterface | null
 }

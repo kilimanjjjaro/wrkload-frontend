@@ -6,24 +6,45 @@ import DeleteTask from 'components/tasks/DeleteTask'
 import SearchForm from 'components/shared/SearchForm'
 import { ModalsContext } from 'contexts/ModalsContext'
 
-export default function Modals (): JSX.Element {
-  const { addDataModalStatus, setAddDataModalStatus, updateDataModalStatus, setUpdateDataModalStatus, deleteDataModalStatus, setDeleteDataModalStatus, searchModalStatus, setSearchModalStatus } = useContext(ModalsContext)
+export default function Modals(): React.JSX.Element {
+  const {
+    addDataModalStatus,
+    setAddDataModalStatus,
+    updateDataModalStatus,
+    setUpdateDataModalStatus,
+    deleteDataModalStatus,
+    setDeleteDataModalStatus,
+    searchModalStatus,
+    setSearchModalStatus
+  } = useContext(ModalsContext)
 
   return (
     <>
-      <Modal modalStatus={updateDataModalStatus} setModalStatus={setUpdateDataModalStatus}>
+      <Modal
+        modalStatus={updateDataModalStatus}
+        setModalStatus={setUpdateDataModalStatus}
+      >
         <UpdateTask />
       </Modal>
 
-      <Modal modalStatus={deleteDataModalStatus} setModalStatus={setDeleteDataModalStatus}>
+      <Modal
+        modalStatus={deleteDataModalStatus}
+        setModalStatus={setDeleteDataModalStatus}
+      >
         <DeleteTask />
       </Modal>
 
-      <Modal modalStatus={addDataModalStatus} setModalStatus={setAddDataModalStatus}>
+      <Modal
+        modalStatus={addDataModalStatus}
+        setModalStatus={setAddDataModalStatus}
+      >
         <AddTask />
       </Modal>
 
-      <Modal modalStatus={searchModalStatus} setModalStatus={setSearchModalStatus}>
+      <Modal
+        modalStatus={searchModalStatus}
+        setModalStatus={setSearchModalStatus}
+      >
         <SearchForm type='task' setModalStatus={setSearchModalStatus} />
       </Modal>
     </>

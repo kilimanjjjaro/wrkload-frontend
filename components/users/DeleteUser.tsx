@@ -3,15 +3,21 @@ import { mutate } from 'swr'
 import Balancer from 'react-wrap-balancer'
 import { deleteUser } from 'services/users/deleteUser'
 import { deleteUserOptions } from 'utils/swrUsersOptions'
-import { ArrowRightIcon, CheckCircleIcon, ShieldExclamationIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowRightIcon,
+  CheckCircleIcon,
+  ShieldExclamationIcon,
+  XMarkIcon
+} from '@heroicons/react/24/outline'
 import { toast } from 'sonner'
 import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
+import { apiErrorCode } from 'utils/errors'
 
-export default function DeleteUser(): JSX.Element {
+export default function DeleteUser(): React.JSX.Element {
   const { selectedUser } = useContext(AppContext)
   const { setDeleteDataModalStatus } = useContext(ModalsContext)
 
@@ -21,12 +27,18 @@ export default function DeleteUser(): JSX.Element {
     setUser({ ...user, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (
+    event: React.SubmitEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault()
     setDeleteDataModalStatus(false)
 
     try {
-      const response = await mutate('users', deleteUser(user._id), deleteUserOptions(user._id))
+      const response = await mutate(
+        'users',
+        deleteUser(user._id),
+        deleteUserOptions(user._id)
+      )
 
       if (response?.status === 'ok') {
         toast(
@@ -36,8 +48,8 @@ export default function DeleteUser(): JSX.Element {
           </>
         )
       }
-    } catch (error: any) {
-      if (error.response.data.code === 'trial/permission-denied') {
+    } catch (error) {
+      if (apiErrorCode(error) === 'trial/permission-denied') {
         toast(
           <>
             <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
@@ -55,7 +67,9 @@ export default function DeleteUser(): JSX.Element {
     }
   }
 
-  const handleCloseModal = (event: React.FormEvent<HTMLButtonElement>): void => {
+  const handleCloseModal = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ): void => {
     event.preventDefault()
     setDeleteDataModalStatus(false)
   }
@@ -63,14 +77,44 @@ export default function DeleteUser(): JSX.Element {
   return (
     <div className='flex flex-col items-center gap-y-5'>
       <div className='w-full p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
-        <Headline variant='md'><Balancer>Sure to delete this user?</Balancer></Headline>
-        <form onSubmit={(event) => { void handleSubmit(event) }}>
+        <Headline variant='md'>
+          <Balancer>Sure to delete this user?</Balancer>
+        </Headline>
+        <form
+          onSubmit={(event) => {
+            void handleSubmit(event)
+          }}
+        >
           <div className='flex flex-col mb-3 gap-y-3'>
-            <Input onChange={handleChange} value={user.username} name='username' type='text' placeholder='Username' centerText required disabled />
-            <Input onChange={handleChange} value={user.email} name='email' type='email' placeholder='Email' centerText required disabled />
+            <Input
+              onChange={handleChange}
+              value={user.username}
+              name='username'
+              type='text'
+              placeholder='Username'
+              centerText
+              required
+              disabled
+            />
+            <Input
+              onChange={handleChange}
+              value={user.email}
+              name='email'
+              type='email'
+              placeholder='Email'
+              centerText
+              required
+              disabled
+            />
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button ariaLabel='Close' onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
+            <Button
+              ariaLabel='Close'
+              onClick={(event) => {
+                handleCloseModal(event)
+              }}
+              variant='dark-alternative'
+            >
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
             <Button ariaLabel='Delete' type='submit' variant='secondary'>

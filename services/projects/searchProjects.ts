@@ -1,12 +1,16 @@
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import privateApi from 'utils/privateApi'
+import type { FullProjectInterface } from 'interfaces/projects/Project'
 
 interface Props {
   query: string | null
   page: string | null
 }
 
-export default async function searchProjects ({ query, page }: Props): Promise<any> {
+export default async function searchProjects({
+  query,
+  page
+}: Props): Promise<FullProjectInterface> {
   let currentPage = '1'
   let config = {}
   const accessToken = getCookie('accessToken')
@@ -18,12 +22,15 @@ export default async function searchProjects ({ query, page }: Props): Promise<a
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
 
-  const response = await privateApi.get(`/projects?search=${query as string}&limit=8&page=${currentPage}`, config)
+  const response = await privateApi.get<FullProjectInterface>(
+    `/projects?search=${String(query)}&limit=8&page=${currentPage}`,
+    config
+  )
 
   return response.data
 }

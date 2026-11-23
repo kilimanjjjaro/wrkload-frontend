@@ -1,21 +1,35 @@
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
+import type { Transition, Variants } from 'motion/react'
+import {
+  FULL_SCALE,
+  NO_ROTATION,
+  SPRING_DAMPING,
+  SPRING_STIFFNESS
+} from 'constants/animation'
 
-const transition = {
+const MOON_INITIAL_SCALE = 0.6
+const MOON_INITIAL_ROTATION = 90
+const TAP_SCALE = 0.95
+const TAP_ROTATION = 15
+const RAYS_INITIAL_ROTATION = 45
+const CORE_INITIAL_SCALE = 1.5
+
+const transition: Transition = {
   type: 'spring',
-  stiffness: 200,
-  damping: 10
+  stiffness: SPRING_STIFFNESS,
+  damping: SPRING_DAMPING
 }
 
-export const MoonIcon = (): JSX.Element => {
-  const variants = {
-    initial: { scale: 0.6, rotate: 90 },
-    animate: { scale: 1, rotate: 0, transition },
-    whileTap: { scale: 0.95, rotate: 15 }
+export const MoonIcon = (): React.JSX.Element => {
+  const variants: Variants = {
+    initial: { scale: MOON_INITIAL_SCALE, rotate: MOON_INITIAL_ROTATION },
+    animate: { scale: FULL_SCALE, rotate: NO_ROTATION, transition },
+    whileTap: { scale: TAP_SCALE, rotate: TAP_ROTATION }
   }
 
   return (
     <motion.svg
-      className='outline-0 [&>*]:outline-0'
+      className='outline-0 *:outline-0'
       xmlns='http://www.w3.org/2000/svg'
       width='18px'
       height='18px'
@@ -37,22 +51,22 @@ export const MoonIcon = (): JSX.Element => {
   )
 }
 
-export const SunIcon = (): JSX.Element => {
-  const whileTap = { scale: 0.95, rotate: 15 }
+export const SunIcon = (): React.JSX.Element => {
+  const whileTap = { scale: TAP_SCALE, rotate: TAP_ROTATION }
 
-  const raysVariants = {
-    initial: { rotate: 45 },
-    animate: { rotate: 0, transition }
+  const raysVariants: Variants = {
+    initial: { rotate: RAYS_INITIAL_ROTATION },
+    animate: { rotate: NO_ROTATION, transition }
   }
 
-  const coreVariants = {
-    initial: { scale: 1.5 },
-    animate: { scale: 1, transition }
+  const coreVariants: Variants = {
+    initial: { scale: CORE_INITIAL_SCALE },
+    animate: { scale: FULL_SCALE, transition }
   }
 
   return (
     <motion.svg
-      className='origin-center outline-0 [&>*]:outline-0'
+      className='origin-center outline-0 *:outline-0'
       key='sun'
       width='1em'
       height='1em'

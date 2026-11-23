@@ -1,7 +1,13 @@
 'use client'
 
-import { createContext, useEffect, useState, Dispatch } from 'react'
-import { setCookie } from 'cookies-next'
+import {
+  createContext,
+  useEffect,
+  useState,
+  useSyncExternalStore,
+  type Dispatch
+} from 'react'
+import { setCookie } from 'cookies-next/client'
 import type { ChildrenInterface } from 'interfaces/components'
 import type { TaskInterface } from 'interfaces/tasks/Task'
 import type { ProjectInterface } from 'interfaces/projects/Project'
@@ -9,6 +15,10 @@ import type { SecureUserInterface, UserInterface } from 'interfaces/users/User'
 import { INITIAL_TASK_STATE } from 'constants/tasks'
 import { INITIAL_PROJECT_STATE } from 'constants/projects'
 import { INITIAL_USER_STATE } from 'constants/users'
+import useStoredState from 'hooks/useStoredState'
+import { noop, subscribeToNothing } from 'utils/noop'
+import { parseStoredBoolean, parseStoredUser } from 'utils/storage'
+import { LOGGED_IN_MAX_AGE_SECONDS } from 'constants/auth'
 
 interface AppContextValues {
   user: SecureUserInterface | null
@@ -27,77 +37,93 @@ interface AppContextValues {
   setIsLoggingIn: Dispatch<React.SetStateAction<boolean>>
   trialMode: boolean
   setTrialMode: Dispatch<React.SetStateAction<boolean>>
-};
+}
 
 const DEFAULT_APP_CONTEXT_VALUE: AppContextValues = {
   user: null,
-  setUser: () => {},
+  setUser: noop,
   selectedUser: INITIAL_USER_STATE,
-  setSelectedUser: () => {},
+  setSelectedUser: noop,
   selectedTask: INITIAL_TASK_STATE,
-  setSelectedTask: () => {},
+  setSelectedTask: noop,
   selectedProject: INITIAL_PROJECT_STATE,
-  setSelectedProject: () => {},
+  setSelectedProject: noop,
   selectedProjectToFetch: '',
-  setSelectedProjectToFetch: () => {},
+  setSelectedProjectToFetch: noop,
   shouldRenderStats: false,
-  setShouldRenderStats: () => {},
+  setShouldRenderStats: noop,
   isLoggingIn: false,
-  setIsLoggingIn: () => {},
+  setIsLoggingIn: noop,
   trialMode: false,
-  setTrialMode: () => {}
+  setTrialMode: noop
 }
 
-export const AppContext = createContext<AppContextValues>(DEFAULT_APP_CONTEXT_VALUE)
+const parseText = (stored: string): string => stored
 
-const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
-  const [user, setUser] = useState<SecureUserInterface | null>(null)
-  const [selectedUser, setSelectedUser] = useState<UserInterface>(INITIAL_USER_STATE)
-  const [selectedTask, setSelectedTask] = useState<TaskInterface>(INITIAL_TASK_STATE)
-  const [selectedProject, setSelectedProject] = useState<ProjectInterface>(INITIAL_PROJECT_STATE)
-  const [selectedProjectToFetch, setSelectedProjectToFetch] = useState('')
-  const [shouldRenderStats, setShouldRenderStats] = useState(true)
+export const AppContext = createContext<AppContextValues>(
+  DEFAULT_APP_CONTEXT_VALUE
+)
+
+const AppProvider = ({ children }: ChildrenInterface): React.JSX.Element => {
+  const [user, setUser] = useStoredState<SecureUserInterface | null>(
+    'user',
+    parseStoredUser,
+    null
+  )
+  const [selectedUser, setSelectedUser] =
+    useState<UserInterface>(INITIAL_USER_STATE)
+  const [selectedTask, setSelectedTask] =
+    useState<TaskInterface>(INITIAL_TASK_STATE)
+  const [selectedProject, setSelectedProject] = useState<ProjectInterface>(
+    INITIAL_PROJECT_STATE
+  )
+  const [selectedProjectToFetch, setSelectedProjectToFetch] = useStoredState(
+    'selectedProject',
+    parseText,
+    ''
+  )
+  const [shouldRenderStats, setShouldRenderStats] = useStoredState(
+    'showStats',
+    parseStoredBoolean,
+    true
+  )
   const [isLoggingIn, setIsLoggingIn] = useState(false)
   const [trialMode, setTrialMode] = useState(false)
 
-  useEffect(() => {
-    const userFromLocalStorage = window.localStorage.getItem('user')
-    const selectedProyectFromLocalStorage = window.localStorage.getItem('selectedProject')
+  const hasStoredUser = useSyncExternalStore(
+    subscribeToNothing,
+    () => window.localStorage.getItem('user') !== null,
+    () => false
+  )
 
-    if (userFromLocalStorage !== null) {
-      setUser(JSON.parse(userFromLocalStorage))
+  useEffect(() => {
+    if (hasStoredUser) {
       setCookie('isLogged', true, {
-        maxAge: 60 * 60 * 24 * 30
+        maxAge: LOGGED_IN_MAX_AGE_SECONDS
       })
     }
-
-    if (selectedProyectFromLocalStorage !== null) {
-      setSelectedProjectToFetch(selectedProyectFromLocalStorage)
-    }
-
-    const showStats = window.localStorage.getItem('showStats')
-    if (showStats !== null) setShouldRenderStats(JSON.parse(showStats))
-  }, [])
+  }, [hasStoredUser])
 
   return (
-    <AppContext.Provider value={{
-      user,
-      setUser,
-      selectedUser,
-      setSelectedUser,
-      selectedTask,
-      setSelectedTask,
-      selectedProject,
-      setSelectedProject,
-      selectedProjectToFetch,
-      setSelectedProjectToFetch,
-      shouldRenderStats,
-      setShouldRenderStats,
-      isLoggingIn,
-      setIsLoggingIn,
-      trialMode,
-      setTrialMode
-    }}
+    <AppContext.Provider
+      value={{
+        user,
+        setUser,
+        selectedUser,
+        setSelectedUser,
+        selectedTask,
+        setSelectedTask,
+        selectedProject,
+        setSelectedProject,
+        selectedProjectToFetch,
+        setSelectedProjectToFetch,
+        shouldRenderStats,
+        setShouldRenderStats,
+        isLoggingIn,
+        setIsLoggingIn,
+        trialMode,
+        setTrialMode
+      }}
     >
       {children}
     </AppContext.Provider>

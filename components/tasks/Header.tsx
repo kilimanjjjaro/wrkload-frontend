@@ -1,18 +1,26 @@
 import ProjectSelector from 'components/tasks/ProjectSelector'
 import Options from 'components/tasks/Options'
+import { EMPTY_LENGTH, MIN_LENGTH } from 'constants/math'
 
 interface Props {
   projectNames: string[]
   shouldRenderNotFound: boolean
 }
 
-export default function Header ({ projectNames, shouldRenderNotFound }: Props): JSX.Element {
+export default function Header({
+  projectNames,
+  shouldRenderNotFound
+}: Props): React.JSX.Element {
   return (
     <header className='flex flex-col justify-between mb-10 text-black xl:items-center xl:flex-row dark:text-blue gap-y-8'>
       <h2 className='flex flex-col flex-wrap text-6xl md:flex-row gap-x-5 font-primaryFont'>
-        <span className='transition-colors ease-in-out duration-400'>Tasks of</span>
-        {projectNames.length === 0 && <div className='w-56 rounded-full bg-gradient-to-r from-white dark:from-light-blue via-blue dark:via-blue to-white dark:to-light-blue bg-[length:200%_100%] h-14 animate-skeleton' />}
-        {projectNames.length >= 1 && (
+        <span className='transition-colors ease-in-out duration-400'>
+          Tasks of
+        </span>
+        {projectNames.length === EMPTY_LENGTH && (
+          <div className='w-56 rounded-full bg-linear-to-r from-white dark:from-light-blue via-blue dark:via-blue to-white dark:to-light-blue bg-size-[200%_100%] h-14 animate-skeleton' />
+        )}
+        {projectNames.length >= MIN_LENGTH && (
           <ProjectSelector projectNames={projectNames} />
         )}
       </h2>

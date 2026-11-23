@@ -1,5 +1,5 @@
-import { StatsInterface } from 'interfaces/components'
-import { TaskInterface } from 'interfaces/tasks/Task'
+import type { StatsInterface } from 'interfaces/components'
+import type { TaskInterface } from 'interfaces/tasks/Task'
 
 export const INITIAL_TASK_STATE: TaskInterface = {
   _id: '',

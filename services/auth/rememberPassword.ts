@@ -8,8 +8,12 @@ interface ReturnInterface {
   status: string
 }
 
-export default async function rememberPassword ({ email }: Props): Promise<ReturnInterface> {
-  const response = await api.post('/auth/remember-password', { email })
+export default async function rememberPassword({
+  email
+}: Props): Promise<ReturnInterface> {
+  const response = await api.post<ReturnInterface>('/auth/remember-password', {
+    email
+  })
 
   return response.data
 }

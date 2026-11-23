@@ -1,5 +1,6 @@
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import privateApi from 'utils/privateApi'
+import type { FullTaskInterface } from 'interfaces/tasks/Task'
 
 interface Props {
   project: string | null
@@ -7,7 +8,11 @@ interface Props {
   page: string | null
 }
 
-export default async function searchTasks ({ project, query, page }: Props): Promise<any> {
+export default async function searchTasks({
+  project,
+  query,
+  page
+}: Props): Promise<FullTaskInterface> {
   let currentPage = '1'
   let config = {}
   const accessToken = getCookie('accessToken')
@@ -19,12 +24,15 @@ export default async function searchTasks ({ project, query, page }: Props): Pro
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
 
-  const response = await privateApi.get(`/tasks?project=${project as string}&search=${query as string}&limit=8&page=${currentPage}`, config)
+  const response = await privateApi.get<FullTaskInterface>(
+    `/tasks?project=${String(project)}&search=${String(query)}&limit=8&page=${currentPage}`,
+    config
+  )
 
   return response.data
 }

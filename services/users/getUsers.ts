@@ -1,8 +1,12 @@
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import privateApi from 'utils/privateApi'
 import type { FullUserInterface } from 'interfaces/users/User'
 
-export const getUsers = async ({ page }: { page: string | null }): Promise<FullUserInterface> => {
+export const getUsers = async ({
+  page
+}: {
+  page: string | null
+}): Promise<FullUserInterface> => {
   let currentPage = '1'
   let config = {}
   const accessToken = getCookie('accessToken')
@@ -14,12 +18,15 @@ export const getUsers = async ({ page }: { page: string | null }): Promise<FullU
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
 
-  const response = await privateApi.get(`/users?limit=8&page=${currentPage}`, config)
+  const response = await privateApi.get<FullUserInterface>(
+    `/users?limit=8&page=${currentPage}`,
+    config
+  )
 
   return response.data
 }

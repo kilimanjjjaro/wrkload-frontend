@@ -1,0 +1,16 @@
+export const FIRST_PAGE = 1
+export const FIRST_ID = 1
+export const ID_INCREMENT = 1
+export const ID_LENGTH = 24
+export const HEX_RADIX = 16
+export const VALID_TOKEN = 'valid-token'
+export const BEARER_TOKEN_INDEX = 1
+export const JWT_PAYLOAD_INDEX = 1
+export const FIRST_LETTER_INDEX = 0
+export const REST_OF_WORD_INDEX = 1
+export const NO_RESULTS = 0
+export const NOT_FOUND_INDEX = -1
+export const SINGLE_ITEM = 1
+export const DATE_START_INDEX = 0
+export const NEW_PROJECT_TASKS = 0
+export const CREATED_AT = '2026-11-15T12:00:00-03:00'

@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { isAxiosError } from 'axios'
 import Balancer from 'react-wrap-balancer'
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import { jwtDecode } from 'jwt-decode'
-import clsx from 'clsx'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Paragraph from 'components/shared/Paragraph'
@@ -16,6 +16,14 @@ import login from 'services/auth/login'
 import changePassword from 'services/auth/changePassword'
 import logout from 'services/auth/logout'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
+import { apiErrorCode } from 'utils/errors'
+import type { ApiErrorData } from 'utils/errors'
+import { FIRST_INDEX, MIN_LENGTH } from 'constants/math'
+import PasswordStrength from 'components/shared/PasswordStrength'
+import PasswordMatch from 'components/shared/PasswordMatch'
+
+const FIRST_STEP = 1
+const SECOND_STEP = 2
 
 const INITIAL_CREDENTIALS_STATE = {
   email: '',
@@ -24,10 +32,19 @@ const INITIAL_CREDENTIALS_STATE = {
   confirmNewPassword: ''
 }
 
-export default function ChangePassword(): JSX.Element {
+const ERROR_MESSAGES: Partial<Record<string, string>> = {
+  'trial/permission-denied':
+    'This is a trial account, to access this feature you must register.',
+  'auth/different-passwords': 'Passwords are not the same. Please, try again.',
+  'auth/invalid-credentials':
+    'The email or password are invalid. Please, try again.',
+  'auth/expired-session':
+    'Your session has expired. Please, log in again to change your password.'
+}
+
+export default function ChangePassword(): React.JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
-  const [email, setEmail] = useState('')
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(FIRST_STEP)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -43,15 +60,13 @@ export default function ChangePassword(): JSX.Element {
     router.refresh()
   }
 
-  useEffect(() => {
-    if (accessToken !== undefined) {
-      const { email }: { email: string } = jwtDecode(accessToken)
-      setEmail(email)
-    }
-  }, [accessToken])
+  const email =
+    accessToken === undefined
+      ? ''
+      : jwtDecode<{ email: string }>(accessToken).email
 
   const handleStepOne = async (
-    event: React.FormEvent<HTMLFormElement>
+    event: React.SubmitEvent<HTMLFormElement>
   ): Promise<void> => {
     event.preventDefault()
     const { currentPassword: password } = credentials
@@ -62,12 +77,15 @@ export default function ChangePassword(): JSX.Element {
       await login({ email, password })
       // TODO: handle week password
       // TODO: handle unlogged session
-      setStep(2)
-    } catch (error: any) {
-      if (error.response.data.error[0].param === 'email') {
+      setStep(SECOND_STEP)
+    } catch (error) {
+      if (
+        isAxiosError<ApiErrorData>(error) &&
+        error.response?.data.error[FIRST_INDEX].param === 'email'
+      ) {
         setError('auth/expired-session')
       }
-      if (error.response.data.code === 'auth/invalid-credentials') {
+      if (apiErrorCode(error) === 'auth/invalid-credentials') {
         setError('auth/invalid-credentials')
       }
     } finally {
@@ -76,7 +94,7 @@ export default function ChangePassword(): JSX.Element {
   }
 
   const handleStepTwo = async (
-    event: React.FormEvent<HTMLFormElement>
+    event: React.SubmitEvent<HTMLFormElement>
   ): Promise<void> => {
     event.preventDefault()
     const {
@@ -98,17 +116,20 @@ export default function ChangePassword(): JSX.Element {
         setSuccess(true)
         await logout()
       }
-    } catch (error: any) {
-      if (error.message === 'auth/different-passwords') {
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        error.message === 'auth/different-passwords'
+      ) {
         setError('auth/different-passwords')
         return
       }
 
-      if (error.response.data.code === 'auth/invalid-credentials') {
+      if (apiErrorCode(error) === 'auth/invalid-credentials') {
         setError('auth/invalid-credentials')
       }
 
-      if (error.response.data.code === 'trial/permission-denied') {
+      if (apiErrorCode(error) === 'trial/permission-denied') {
         setError('trial/permission-denied')
       }
     } finally {
@@ -116,7 +137,7 @@ export default function ChangePassword(): JSX.Element {
     }
   }
 
-  if (error.length >= 1) {
+  if (error.length >= MIN_LENGTH) {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
@@ -124,16 +145,7 @@ export default function ChangePassword(): JSX.Element {
             <Balancer>We have a problem!</Balancer>
           </Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
-            <Balancer>
-              {error === 'trial/permission-denied' &&
-                'This is a trial account, to access this feature you must register.'}
-              {error === 'auth/different-passwords' &&
-                'Passwords are not the same. Please, try again.'}
-              {error === 'auth/invalid-credentials' &&
-                'The email or password are invalid. Please, try again.'}
-              {error === 'auth/expired-session' &&
-                'Your session has expired. Please, log in again to change your password.'}
-            </Balancer>
+            <Balancer>{ERROR_MESSAGES[error]}</Balancer>
           </p>
           {error !== 'auth/expired-session' && (
             <Button
@@ -192,7 +204,7 @@ export default function ChangePassword(): JSX.Element {
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
           <Headline variant='md'>
             <Balancer>
-              {step === 1 ? 'Change password' : 'Enter new password'}
+              {step === FIRST_STEP ? 'Change password' : 'Enter new password'}
             </Balancer>
           </Headline>
           <Paragraph variant='sm'>
@@ -201,7 +213,7 @@ export default function ChangePassword(): JSX.Element {
               <b>please complete the following form.</b>
             </Balancer>
           </Paragraph>
-          {step === 1 && (
+          {step === FIRST_STEP && (
             <form
               className='mt-5'
               onSubmit={(event) => {
@@ -230,7 +242,7 @@ export default function ChangePassword(): JSX.Element {
               </Button>
             </form>
           )}
-          {step === 2 && (
+          {step === SECOND_STEP && (
             <form
               className='mt-5'
               onSubmit={(event) => {
@@ -250,29 +262,7 @@ export default function ChangePassword(): JSX.Element {
                     centerText
                     required
                   />
-                  <div
-                    className={clsx(
-                      'absolute flex items-center gap-x-1 right-3 pt-[2px]',
-                      credentials.newPassword.length > 0 &&
-                        credentials.newPassword.length < 8 &&
-                        '[&>div]:!bg-red',
-                      credentials.newPassword.length >= 7 &&
-                        credentials.newPassword.length < 12 &&
-                        '[&>div]:!bg-yellow',
-                      credentials.newPassword.length >= 11 &&
-                        '[&>div]:!bg-green'
-                    )}
-                  >
-                    {credentials.newPassword.length > 0 && (
-                      <div className='w-[5px] h-[5px] rounded-full' />
-                    )}
-                    {credentials.newPassword.length >= 7 && (
-                      <div className='w-[5px] h-[5px] rounded-full' />
-                    )}
-                    {credentials.newPassword.length >= 11 && (
-                      <div className='w-[5px] h-[5px] rounded-full' />
-                    )}
-                  </div>
+                  <PasswordStrength password={credentials.newPassword} />
                 </div>
 
                 <div className='relative flex items-center'>
@@ -286,45 +276,10 @@ export default function ChangePassword(): JSX.Element {
                     centerText
                     required
                   />
-                  <div className='absolute flex items-center gap-x-1 right-3'>
-                    {credentials.confirmNewPassword.length > 7 &&
-                      credentials.confirmNewPassword ===
-                        credentials.newPassword && (
-                        <svg
-                          className='w-[12px] h-[12px] stroke-green'
-                          xmlns='http://www.w3.org/2000/svg'
-                          fill='none'
-                          viewBox='0 0 20 20'
-                          strokeWidth='3'
-                          stroke='currentColor'
-                        >
-                          <path
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            d='M4.5 12.75l6 6 9-13.5'
-                          />
-                        </svg>
-                      )}
-
-                    {credentials.confirmNewPassword.length > 7 &&
-                      credentials.confirmNewPassword !==
-                        credentials.newPassword && (
-                        <svg
-                          className='w-[12px] h-[12px] stroke-red'
-                          xmlns='http://www.w3.org/2000/svg'
-                          fill='none'
-                          viewBox='0 0 24 24'
-                          strokeWidth='1.5'
-                          stroke='currentColor'
-                        >
-                          <path
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            d='M6 18L18 6M6 6l12 12'
-                          />
-                        </svg>
-                      )}
-                  </div>
+                  <PasswordMatch
+                    password={credentials.newPassword}
+                    confirmation={credentials.confirmNewPassword}
+                  />
                 </div>
               </div>
               <Button

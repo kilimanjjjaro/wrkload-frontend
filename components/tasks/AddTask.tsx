@@ -6,7 +6,12 @@ import Balancer from 'react-wrap-balancer'
 import { toast } from 'sonner'
 import { addTask } from 'services/tasks/addTask'
 import { addTaskOptions } from 'utils/swrTasksOptions'
-import { ArrowRightIcon, CheckCircleIcon, ShieldExclamationIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowRightIcon,
+  CheckCircleIcon,
+  ShieldExclamationIcon,
+  XMarkIcon
+} from '@heroicons/react/24/outline'
 import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
 import Paragraph from 'components/shared/Paragraph'
@@ -16,25 +21,34 @@ import { ModalsContext } from 'contexts/ModalsContext'
 import { AppContext } from 'contexts/AppContext'
 import { INITIAL_TASK_STATE } from 'constants/tasks'
 import { CHARACTER_LIMIT } from 'constants/components'
+import { apiErrorCode } from 'utils/errors'
 
-export default function AddTask(): JSX.Element {
+export default function AddTask(): React.JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
   const { selectedProjectToFetch } = useContext(AppContext)
 
   const [task, setTask] = useState(INITIAL_TASK_STATE)
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     setTask({ ...task, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (
+    event: React.SubmitEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault()
     setAddDataModalStatus(false)
 
     try {
-      task.project = selectedProjectToFetch
+      const newTask = { ...task, project: selectedProjectToFetch }
 
-      const response = await mutate('tasks', addTask(task), addTaskOptions(task))
+      const response = await mutate(
+        'tasks',
+        addTask(newTask),
+        addTaskOptions(newTask)
+      )
 
       if (response?.status === 'ok') {
         toast(
@@ -44,8 +58,8 @@ export default function AddTask(): JSX.Element {
           </>
         )
       }
-    } catch (error: any) {
-      if (error.response.data.code === 'trial/permission-denied') {
+    } catch (error) {
+      if (apiErrorCode(error) === 'trial/permission-denied') {
         toast(
           <>
             <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
@@ -63,7 +77,9 @@ export default function AddTask(): JSX.Element {
     }
   }
 
-  const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  const handleCloseModal = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ): void => {
     event.preventDefault()
     setAddDataModalStatus(false)
   }
@@ -71,28 +87,66 @@ export default function AddTask(): JSX.Element {
   return (
     <div className='flex flex-col items-center gap-y-5'>
       <div className='w-full p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-t-3xl md:rounded-3xl'>
-        <Headline variant='md'><Balancer>Add task</Balancer></Headline>
+        <Headline variant='md'>
+          <Balancer>Add task</Balancer>
+        </Headline>
         <Paragraph variant='xs'>
           <Balancer>
-            If you want to add a new task to another project, go to that project or create it.
+            If you want to add a new task to another project, go to that project
+            or create it.
           </Balancer>
         </Paragraph>
-        <form onSubmit={(event) => { void handleSubmit(event) }}>
+        <form
+          onSubmit={(event) => {
+            void handleSubmit(event)
+          }}
+        >
           <div className='flex flex-col mb-3 gap-y-3'>
-            <Input onChange={handleChange} value={task.title} name='title' type='text' placeholder='Title' required />
-            <Input onChange={handleChange} value={task.timing} name='timing' type='time' placeholder='Timing' required />
-            <Input onChange={handleChange} value={task.deliveredAt} name='deliveredAt' type='date' placeholder='Delivered' required />
+            <Input
+              onChange={handleChange}
+              value={task.title}
+              name='title'
+              type='text'
+              placeholder='Title'
+              required
+            />
+            <Input
+              onChange={handleChange}
+              value={task.timing}
+              name='timing'
+              type='time'
+              placeholder='Timing'
+              required
+            />
+            <Input
+              onChange={handleChange}
+              value={task.deliveredAt}
+              name='deliveredAt'
+              type='date'
+              placeholder='Delivered'
+              required
+            />
             <div className='relative'>
               <Textarea
-                onChange={handleChange} value={task.description} name='description' placeholder='Description'
+                onChange={handleChange}
+                value={task.description}
+                name='description'
+                placeholder='Description'
                 maxLength={CHARACTER_LIMIT}
               />
-              <div className='absolute text-xs pointer-events-none text-blue bottom-5 right-5 font-secondaryFont'>{task.description.length}/{CHARACTER_LIMIT}
+              <div className='absolute text-xs pointer-events-none text-blue bottom-5 right-5 font-secondaryFont'>
+                {task.description.length}/{CHARACTER_LIMIT}
               </div>
             </div>
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button ariaLabel='Close' onClick={(event) => handleCloseModal(event)} variant='dark-alternative'>
+            <Button
+              ariaLabel='Close'
+              onClick={(event) => {
+                handleCloseModal(event)
+              }}
+              variant='dark-alternative'
+            >
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
             <Button ariaLabel='Submit' type='submit' variant='secondary'>

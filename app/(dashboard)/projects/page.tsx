@@ -11,20 +11,30 @@ import { getProjects } from 'services/projects/getProjects'
 import { sortProjects } from 'utils/sortData'
 import { useSearchParams } from 'next/navigation'
 import PageTransition from 'components/shared/PageTransition'
+import { MIN_LENGTH } from 'constants/math'
+import { logError } from 'utils/logError'
 
-export default function Projects (): JSX.Element {
+export default function Projects(): React.JSX.Element {
   const params = useSearchParams()
   const page = params.get('page')
-  const { data, isLoading, isValidating, mutate } = useSWR('projects', async () => await getProjects({ page }), { onSuccess: data => sortProjects(data.projects) })
+  const { data, isLoading, isValidating, mutate } = useSWR(
+    'projects',
+    async () => await getProjects({ page }),
+    { onSuccess: (data) => sortProjects(data.projects) }
+  )
 
   // TODO: improve this
   useEffect(() => {
-    mutate().catch((error) => console.error(error))
+    mutate().catch(logError)
   }, [page, mutate])
 
   const shouldRenderSkeleton = isLoading || isValidating
-  const shouldRenderProjects = data !== undefined && data?.projects.length >= 1 && !shouldRenderSkeleton
-  const shouldRenderNotFoundSign = !shouldRenderProjects && !shouldRenderSkeleton
+  const shouldRenderProjects =
+    data !== undefined &&
+    data.projects.length >= MIN_LENGTH &&
+    !shouldRenderSkeleton
+  const shouldRenderNotFoundSign =
+    !shouldRenderProjects && !shouldRenderSkeleton
 
   return (
     <PageTransition>

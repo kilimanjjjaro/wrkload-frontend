@@ -1,5 +1,4 @@
-import { AxiosResponse } from 'axios'
-import { setCookie } from 'cookies-next'
+import { setCookie } from 'cookies-next/client'
 import type { UserInterface } from 'interfaces/users/User'
 import api from 'utils/api'
 
@@ -15,10 +14,16 @@ interface ReturnInterface {
   expiresIn: number
 }
 
-export default async function login ({ email, password }: CredentialsInterface): Promise<ReturnInterface> {
-  const response: AxiosResponse<ReturnInterface> = await api.post('/auth/login', { email, password })
+export default async function login({
+  email,
+  password
+}: CredentialsInterface): Promise<ReturnInterface> {
+  const { data } = await api.post<ReturnInterface>('/auth/login', {
+    email,
+    password
+  })
 
-  const { user, accessToken, expiresIn } = response.data
+  const { user, accessToken, expiresIn } = data
 
   setCookie('accessToken', accessToken, {
     maxAge: expiresIn,
@@ -28,5 +33,5 @@ export default async function login ({ email, password }: CredentialsInterface):
 
   window.localStorage.setItem('user', JSON.stringify(user))
 
-  return response.data
+  return data
 }

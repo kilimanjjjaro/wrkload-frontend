@@ -1,18 +1,31 @@
 import { useContext } from 'react'
 import { usePathname } from 'next/navigation'
-import { RectangleStackIcon, PencilSquareIcon, TrashIcon, CalendarIcon } from '@heroicons/react/24/outline'
+import {
+  RectangleStackIcon,
+  PencilSquareIcon,
+  TrashIcon,
+  CalendarIcon
+} from '@heroicons/react/24/outline'
 import Stats from 'components/projects/Stats'
 import Headline from 'components/shared/Headline'
 import Pagination from 'components/shared/Pagination'
 import MasonryGrid from 'components/shared/MasonryGrid'
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
-import type { FullProjectInterface, ProjectInterface } from 'interfaces/projects/Project'
+import type {
+  FullProjectInterface,
+  ProjectInterface
+} from 'interfaces/projects/Project'
 import dayjs from 'dayjs'
 
-export default function ProjectList ({ data }: { data: FullProjectInterface }): JSX.Element {
+export default function ProjectList({
+  data
+}: {
+  data: FullProjectInterface
+}): React.JSX.Element {
   const { setSelectedProject, shouldRenderStats } = useContext(AppContext)
-  const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
+  const { setUpdateDataModalStatus, setDeleteDataModalStatus } =
+    useContext(ModalsContext)
   const pathname = usePathname()
 
   const handleUpdateProjectClick = (project: ProjectInterface): void => {
@@ -25,19 +38,22 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
     setDeleteDataModalStatus(true)
   }
 
-  const projects = data?.projects
-  const stats = data?.stats
-  const pagination = data?.pagination
+  const { projects, stats, pagination } = data
 
   return (
     <>
       <MasonryGrid>
-        {shouldRenderStats && (stats !== undefined || stats !== null) && !pathname?.includes('search') && <Stats stats={stats} />}
+        {shouldRenderStats && !pathname.includes('search') && (
+          <Stats stats={stats} />
+        )}
         {projects.map((project) => (
           <article
-            key={project._id} className='relative flex flex-col items-start p-6 text-black break-words transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
+            key={project._id}
+            className='relative flex flex-col items-start p-6 text-black wrap-break-word transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
           >
-            <Headline variant='md' className='pr-10 xl:pr-0'>{project.name}</Headline>
+            <Headline variant='md' className='pr-10 xl:pr-0'>
+              {project.name}
+            </Headline>
 
             <div className='flex flex-wrap gap-3'>
               <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-1 bg-blue gap-x-1 font-secondaryFont'>
@@ -56,9 +72,23 @@ export default function ProjectList ({ data }: { data: FullProjectInterface }): 
               </div>
             </div>
 
-            <div className='absolute right-6 md:right-0 flex flex-col md:flex-row items-end justify-end md:justify-center md:w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 md:-top-[0.9rem] xl:opacity-0 gap-2 md:gap-3 group-hover:opacity-100'>
-              <div onClick={() => handleUpdateProjectClick(project)} className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-yellow hover:bg-blue'><PencilSquareIcon className='w-4 stroke-2' /></div>
-              <div onClick={() => handleDeleteProjectClick(project)} className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-red hover:bg-blue'><TrashIcon className='w-4 stroke-2' /></div>
+            <div className='absolute right-6 md:right-0 flex flex-col md:flex-row items-end justify-end md:justify-center md:w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 md:top-[-0.9rem] xl:opacity-0 gap-2 md:gap-3 group-hover:opacity-100'>
+              <div
+                onClick={() => {
+                  handleUpdateProjectClick(project)
+                }}
+                className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-yellow hover:bg-blue'
+              >
+                <PencilSquareIcon className='w-4 stroke-2' />
+              </div>
+              <div
+                onClick={() => {
+                  handleDeleteProjectClick(project)
+                }}
+                className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-red hover:bg-blue'
+              >
+                <TrashIcon className='w-4 stroke-2' />
+              </div>
             </div>
           </article>
         ))}

@@ -1,13 +1,16 @@
 import privateApi from 'utils/privateApi'
 import type { FullTaskInterface } from 'interfaces/tasks/Task'
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 
 interface Props {
   page: string | null
   project: string
 }
 
-export const getTasks = async ({ page, project }: Props): Promise<FullTaskInterface> => {
+export const getTasks = async ({
+  page,
+  project
+}: Props): Promise<FullTaskInterface> => {
   let currentPage = '1'
   let config = {}
   const accessToken = getCookie('accessToken')
@@ -19,12 +22,15 @@ export const getTasks = async ({ page, project }: Props): Promise<FullTaskInterf
   if (accessToken !== undefined) {
     config = {
       headers: {
-        Authorization: `Bearer ${accessToken as string}`
+        Authorization: `Bearer ${accessToken}`
       }
     }
   }
 
-  const response = await privateApi.get(`/tasks?project=${project}&limit=11&page=${currentPage}`, config)
+  const response = await privateApi.get<FullTaskInterface>(
+    `/tasks?project=${project}&limit=11&page=${currentPage}`,
+    config
+  )
 
   return response.data
 }

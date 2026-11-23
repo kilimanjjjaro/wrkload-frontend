@@ -12,5 +12,5 @@ const spaceGroteskFont = Space_Grotesk({
   preload: true
 })
 
-export const inter = interFont.variable
-export const spaceGrotesk = spaceGroteskFont.variable
+export const { variable: inter } = interFont
+export const { variable: spaceGrotesk } = spaceGroteskFont

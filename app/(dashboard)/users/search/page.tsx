@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import useSWR from 'swr'
 import Image from 'next/image'
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import { jwtDecode } from 'jwt-decode'
 import { toast } from 'sonner'
 import Balancer from 'react-wrap-balancer'
@@ -17,14 +17,18 @@ import UserList from 'components/users/UserList'
 import notFoundImage from 'public/images/not-found.webp'
 import searchUsers from 'services/users/searchUsers'
 import { sortUsers } from 'utils/sortData'
+import { MIN_LENGTH } from 'constants/math'
+import { logError } from 'utils/logError'
 
-export default function SearchUsers(): JSX.Element {
-  const [isTrialAccount, setIsTrialAccount] = useState(false)
+export default function SearchUsers(): React.JSX.Element {
   const params = useSearchParams()
   const query = params.get('query')
   const page = params.get('page')
   const router = useRouter()
   const accessToken = getCookie('accessToken')
+  const isTrialAccount =
+    accessToken !== undefined &&
+    jwtDecode<{ uid: string }>(accessToken).uid === '6439b01cf35b6e22570cd842'
 
   const { data, isLoading, isValidating, mutate } = useSWR(
     'users',
@@ -33,35 +37,31 @@ export default function SearchUsers(): JSX.Element {
   )
 
   useEffect(() => {
-    if (accessToken !== undefined) {
-      const { uid }: { uid: string } = jwtDecode(accessToken)
-
-      if (uid === '6439b01cf35b6e22570cd842') {
-        setIsTrialAccount(true)
-
-        toast(
-          <>
-            <ShieldCheckIcon className='w-4 stroke-blue stroke-3' />
-            <h3 className='font-bold'>How data do we store?</h3>
-            <p>
-              <Balancer>
-                These are all the data we store of you. Only admins and trial
-                accounts can view this page.
-              </Balancer>
-            </p>
-          </>
-        )
-      }
+    if (isTrialAccount) {
+      toast(
+        <>
+          <ShieldCheckIcon className='w-4 stroke-blue stroke-3' />
+          <h3 className='font-bold'>How data do we store?</h3>
+          <p>
+            <Balancer>
+              These are all the data we store of you. Only admins and trial
+              accounts can view this page.
+            </Balancer>
+          </p>
+        </>
+      )
     }
-  }, [accessToken])
+  }, [isTrialAccount])
 
   useEffect(() => {
-    mutate().catch((error) => console.error(error))
+    mutate().catch(logError)
   }, [page, mutate])
 
   const shouldRenderSkeleton = isLoading || isValidating
   const shouldRenderUsers =
-    data !== undefined && data?.users.length >= 1 && !shouldRenderSkeleton
+    data !== undefined &&
+    data.users.length >= MIN_LENGTH &&
+    !shouldRenderSkeleton
   const shouldRenderNotFoundSign = !shouldRenderUsers && !shouldRenderSkeleton
 
   return (
@@ -72,7 +72,12 @@ export default function SearchUsers(): JSX.Element {
         </h2>
         {!shouldRenderNotFoundSign && (
           <div className='flex items-start gap-x-5'>
-            <Button onClick={() => router.push('/users')} variant='primary'>
+            <Button
+              onClick={() => {
+                router.push('/users')
+              }}
+              variant='primary'
+            >
               <ArrowLeftIcon className='w-4 stroke-3' /> Go to users
             </Button>
           </div>
@@ -87,7 +92,7 @@ export default function SearchUsers(): JSX.Element {
           <div className='flex flex-col items-center h-full mt-28 gap-y-5'>
             <Image
               className='w-72'
-              priority
+              preload
               src={notFoundImage}
               alt='Not found image'
             />
@@ -97,8 +102,10 @@ export default function SearchUsers(): JSX.Element {
             </span>
             <Button
               ariaLabel='Go to users'
-              className='!w-auto'
-              onClick={() => router.push('/users')}
+              className='w-auto!'
+              onClick={() => {
+                router.push('/users')
+              }}
               variant='primary'
             >
               <ArrowLeftIcon className='w-4 stroke-3' />
