@@ -28,7 +28,7 @@ export default async function searchProjects({
   }
 
   const response = await privateApi.get<FullProjectInterface>(
-    `/projects?search=${String(query)}&limit=8&page=${currentPage}`,
+    `/projects?search=${encodeURIComponent(String(query))}&limit=8&page=${currentPage}`,
     config
   )
 

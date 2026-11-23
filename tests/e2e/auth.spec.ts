@@ -247,7 +247,7 @@ test.describe('account settings', () => {
     expect(api.requestsTo('GET', '/auth/logout')).toHaveLength(SINGLE_REQUEST)
   })
 
-  test.fail('explains a wrong current password', async ({ page }) => {
+  test('explains a wrong current password', async ({ page }) => {
     await logIn(page, PARTNER)
     await visit(page, '/change-password')
     await fill(page, { currentPassword: 'wrong-password' })
@@ -272,6 +272,29 @@ test.describe('account settings', () => {
     expect(api.requestsTo('DELETE', `/users/${PARTNER._id}`)).toHaveLength(
       SINGLE_REQUEST
     )
+  })
+
+  test('ends the session after deleting the account', async ({ page }) => {
+    await logIn(page, PARTNER)
+    await visit(page, '/delete-account')
+    await fill(page, {
+      email: PARTNER.email,
+      password: PASSWORDS[PARTNER.email]
+    })
+    await page.getByRole('button', { name: 'Submit' }).click()
+    await expect(
+      page.getByText('Your account was deleted. Thanks for this time!')
+    ).toBeVisible()
+
+    await expect
+      .poll(async () => await cookieValue(page, 'isLogged'), {
+        timeout: QUICK_TIMEOUT_MS
+      })
+      .toBeUndefined()
+    expect(await cookieValue(page, 'accessToken')).toBeUndefined()
+    expect(
+      await page.evaluate(() => window.localStorage.getItem('user'))
+    ).toBeNull()
   })
 
   test('logs out from the dashboard tab', async ({ page, api }) => {

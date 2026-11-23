@@ -20,13 +20,15 @@ export default function Pagination({
     if (pathname === '/tasks/search') {
       const project = params.get('project')
       router.push(
-        `/tasks/search?project=${String(project)}&query=${String(query)}&page=${String(data?.prevPage)}`
+        `/tasks/search?project=${encodeURIComponent(String(project))}&query=${encodeURIComponent(String(query))}&page=${String(data?.prevPage)}`
       )
       return
     }
 
     if (query !== null && pathname !== '/tasks/search') {
-      router.push(`${pathname}?query=${query}&page=${String(data?.prevPage)}`)
+      router.push(
+        `${pathname}?query=${encodeURIComponent(query)}&page=${String(data?.prevPage)}`
+      )
       return
     }
 
@@ -37,13 +39,15 @@ export default function Pagination({
     if (pathname === '/tasks/search') {
       const project = params.get('project')
       router.push(
-        `/tasks/search?project=${String(project)}&query=${String(query)}&page=${String(data?.nextPage)}`
+        `/tasks/search?project=${encodeURIComponent(String(project))}&query=${encodeURIComponent(String(query))}&page=${String(data?.nextPage)}`
       )
       return
     }
 
     if (query !== null && pathname !== '/tasks/search') {
-      router.push(`${pathname}?query=${query}&page=${String(data?.nextPage)}`)
+      router.push(
+        `${pathname}?query=${encodeURIComponent(query)}&page=${String(data?.nextPage)}`
+      )
       return
     }
 

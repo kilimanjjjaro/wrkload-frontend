@@ -28,7 +28,7 @@ export default async function searchUsers({
   }
 
   const response = await privateApi.get<FullUserInterface>(
-    `/users?search=${String(query)}&limit=8&page=${currentPage}`,
+    `/users?search=${encodeURIComponent(String(query))}&limit=8&page=${currentPage}`,
     config
   )
 

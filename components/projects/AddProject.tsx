@@ -35,20 +35,14 @@ export default function AddProject(): React.JSX.Element {
     setAddDataModalStatus(false)
 
     try {
-      const response = await mutate(
-        'projects',
-        addProject(project),
-        addProjectOptions(project)
-      )
+      await mutate('projects', addProject(project), addProjectOptions(project))
 
-      if (response?.status === 'ok') {
-        toast(
-          <>
-            <CheckCircleIcon className='w-5 stroke-blue stroke-3' />
-            <p>Project added successfully!</p>
-          </>
-        )
-      }
+      toast(
+        <>
+          <CheckCircleIcon className='w-5 stroke-blue stroke-3' />
+          <p>Project added successfully!</p>
+        </>
+      )
     } catch (error) {
       if (apiErrorCode(error) === 'trial/permission-denied') {
         toast(

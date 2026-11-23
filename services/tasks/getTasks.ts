@@ -28,7 +28,7 @@ export const getTasks = async ({
   }
 
   const response = await privateApi.get<FullTaskInterface>(
-    `/tasks?project=${project}&limit=11&page=${currentPage}`,
+    `/tasks?project=${encodeURIComponent(project)}&limit=11&page=${currentPage}`,
     config
   )
 
