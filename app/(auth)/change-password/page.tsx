@@ -81,7 +81,7 @@ export default function ChangePassword(): React.JSX.Element {
     } catch (error) {
       if (
         isAxiosError<ApiErrorData>(error) &&
-        error.response?.data.error[FIRST_INDEX].param === 'email'
+        error.response?.data.error?.[FIRST_INDEX].param === 'email'
       ) {
         setError('auth/expired-session')
       }

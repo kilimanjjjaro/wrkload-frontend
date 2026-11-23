@@ -247,7 +247,7 @@ test.describe('account settings', () => {
     expect(api.requestsTo('GET', '/auth/logout')).toHaveLength(SINGLE_REQUEST)
   })
 
-  test.fail('explains a wrong current password', async ({ page }) => {
+  test('explains a wrong current password', async ({ page }) => {
     await logIn(page, PARTNER)
     await visit(page, '/change-password')
     await fill(page, { currentPassword: 'wrong-password' })
