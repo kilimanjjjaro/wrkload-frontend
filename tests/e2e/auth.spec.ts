@@ -274,7 +274,7 @@ test.describe('account settings', () => {
     )
   })
 
-  test.fail('ends the session after deleting the account', async ({ page }) => {
+  test('ends the session after deleting the account', async ({ page }) => {
     await logIn(page, PARTNER)
     await visit(page, '/delete-account')
     await fill(page, {

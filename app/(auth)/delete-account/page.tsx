@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
@@ -11,6 +11,8 @@ import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
 import PageTransition from 'components/shared/PageTransition'
 import deleteAccount from 'services/auth/deleteAccount'
+import logout from 'services/auth/logout'
+import { AppContext } from 'contexts/AppContext'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
 import { apiErrorCode } from 'utils/errors'
 import { MIN_LENGTH } from 'constants/math'
@@ -25,6 +27,7 @@ export default function DeleteAccount(): React.JSX.Element {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const { setUser } = useContext(AppContext)
   const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -43,6 +46,8 @@ export default function DeleteAccount(): React.JSX.Element {
 
       if (response.status === SERVER_RESPONSE_STATUS.OK) {
         setSuccess(true)
+        setUser(null)
+        await logout()
       }
     } catch (error) {
       setError(apiErrorCode(error) ?? '')
