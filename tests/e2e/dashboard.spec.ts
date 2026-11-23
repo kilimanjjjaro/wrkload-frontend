@@ -140,7 +140,7 @@ test.describe('tasks', () => {
     })
   })
 
-  test.fail('confirms the added task', async ({ page }) => {
+  test('confirms the added task', async ({ page }) => {
     await visit(page, '/tasks')
     await page.getByRole('button', { name: 'Add task' }).click()
     await page
@@ -193,7 +193,7 @@ test.describe('tasks', () => {
     }
   )
 
-  test.fail('confirms the updated task', async ({ page }) => {
+  test('confirms the updated task', async ({ page }) => {
     await visit(page, '/tasks')
     await openCardAction(page, 'Landing page', 'edit')
     await page
@@ -364,7 +364,7 @@ test.describe('project notifications', () => {
     await logIn(page, PARTNER)
   })
 
-  test.fail('confirms the added project', async ({ page }) => {
+  test('confirms the added project', async ({ page }) => {
     await visit(page, '/projects')
     await page.getByRole('button', { name: 'Add project' }).click()
     await page.locator('[name="name"]').filter({ visible: true }).fill('docs')
@@ -375,7 +375,7 @@ test.describe('project notifications', () => {
     })
   })
 
-  test.fail('confirms the updated project', async ({ page }) => {
+  test('confirms the updated project', async ({ page }) => {
     await visit(page, '/projects')
     await openCardAction(page, 'Branding', 'edit')
     await page

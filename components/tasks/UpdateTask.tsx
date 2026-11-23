@@ -38,20 +38,14 @@ export default function UpdateTask(): React.JSX.Element {
     setUpdateDataModalStatus(false)
 
     try {
-      const response = await mutate(
-        'tasks',
-        updateTask(task),
-        updateTaskOptions(task)
-      )
+      await mutate('tasks', updateTask(task), updateTaskOptions(task))
 
-      if (response?.status === 'ok') {
-        toast(
-          <>
-            <CheckCircleIcon className='w-5 stroke-blue stroke-3' />
-            <p>Task updated successfully!</p>
-          </>
-        )
-      }
+      toast(
+        <>
+          <CheckCircleIcon className='w-5 stroke-blue stroke-3' />
+          <p>Task updated successfully!</p>
+        </>
+      )
     } catch (error) {
       if (apiErrorCode(error) === 'trial/permission-denied') {
         toast(
