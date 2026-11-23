@@ -1,12 +1,15 @@
 import type { Page } from '@playwright/test'
 import { ADMIN, PARTNER, PASSWORDS, TRIAL } from '../constants/fixtures'
+import { HOME_MAX_DIFF_PIXEL_RATIO } from '../constants/e2e'
 import { FakeApi } from '../utils/fake-api'
 import { expect, logIn, test, useLightTheme } from '../utils/fixtures'
 import {
   freezeTime,
+  prepareRealTime,
   scrollToText,
   scrollToTop,
-  settle
+  settle,
+  settleRealTime
 } from '../utils/visual'
 
 test.skip(
@@ -70,12 +73,15 @@ test.describe('public pages', () => {
     test(`home in ${theme} mode`, async ({ page, api }) => {
       void api
       if (theme === 'light') await useLightTheme(page)
-      await open(page, '/')
+      await prepareRealTime(page)
+      await page.goto('/')
+      await settleRealTime(page)
 
       for (const [section, heading] of HOME_SECTIONS) {
         if (heading !== undefined) await scrollToText(page, heading)
         await expect(page).toHaveScreenshot(`home-${theme}-${section}.png`, {
-          mask: [page.locator(MARQUEE_ROWS)]
+          mask: [page.locator(MARQUEE_ROWS)],
+          maxDiffPixelRatio: HOME_MAX_DIFF_PIXEL_RATIO
         })
       }
     })

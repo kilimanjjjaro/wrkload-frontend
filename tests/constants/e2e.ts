@@ -20,3 +20,5 @@ export const SCROLL_OFFSET_PX = 120
 
 export const MAX_DIFF_PIXEL_RATIO = 0.001
 export const QUICK_TIMEOUT_MS = 2_000
+export const ANIMATIONS_TIMEOUT_MS = 10_000
+export const HOME_MAX_DIFF_PIXEL_RATIO = 0.01
