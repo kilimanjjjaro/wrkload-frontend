@@ -27,7 +27,9 @@ const openCardAction = async (
   await card(page, title).hover()
   await card(page, title)
     .locator(
-      action === 'edit' ? 'div.cursor-pointer.bg-yellow' : 'div.cursor-pointer.bg-red'
+      action === 'edit'
+        ? 'div.cursor-pointer.bg-yellow'
+        : 'div.cursor-pointer.bg-red'
     )
     .click()
 }
@@ -40,7 +42,10 @@ test.describe('tasks', () => {
     await logIn(page, PARTNER)
   })
 
-  test('lists the tasks of the first project with its stats', async ({ page, api }) => {
+  test('lists the tasks of the first project with its stats', async ({
+    page,
+    api
+  }) => {
     await visit(page, '/tasks')
 
     await expect(page.locator('article')).toHaveCount(AGENCY_SITE_TASK_CARDS)
@@ -84,8 +89,14 @@ test.describe('tasks', () => {
   test('adds a task to the selected project', async ({ page, api }) => {
     await visit(page, '/tasks')
     await page.getByRole('button', { name: 'Add task' }).click()
-    await page.locator('[name="title"]').filter({ visible: true }).fill('Newsletter')
-    await page.locator('[name="timing"]').filter({ visible: true }).fill('01:15')
+    await page
+      .locator('[name="title"]')
+      .filter({ visible: true })
+      .fill('Newsletter')
+    await page
+      .locator('[name="timing"]')
+      .filter({ visible: true })
+      .fill('01:15')
     await page
       .locator('[name="deliveredAt"]')
       .filter({ visible: true })
@@ -112,7 +123,10 @@ test.describe('tasks', () => {
     await page.getByRole('listitem').filter({ hasText: 'Branding' }).click()
     await page.getByRole('button', { name: 'Add task' }).first().click()
     await page.locator('[name="title"]').filter({ visible: true }).fill('Logo')
-    await page.locator('[name="timing"]').filter({ visible: true }).fill('02:00')
+    await page
+      .locator('[name="timing"]')
+      .filter({ visible: true })
+      .fill('02:00')
     await page
       .locator('[name="deliveredAt"]')
       .filter({ visible: true })
@@ -129,8 +143,14 @@ test.describe('tasks', () => {
   test.fail('confirms the added task', async ({ page }) => {
     await visit(page, '/tasks')
     await page.getByRole('button', { name: 'Add task' }).click()
-    await page.locator('[name="title"]').filter({ visible: true }).fill('Newsletter')
-    await page.locator('[name="timing"]').filter({ visible: true }).fill('01:15')
+    await page
+      .locator('[name="title"]')
+      .filter({ visible: true })
+      .fill('Newsletter')
+    await page
+      .locator('[name="timing"]')
+      .filter({ visible: true })
+      .fill('01:15')
     await page
       .locator('[name="deliveredAt"]')
       .filter({ visible: true })
@@ -152,7 +172,8 @@ test.describe('tasks', () => {
 
     await expect(card(page, 'Landing page v2')).toBeVisible()
     expect(
-      api.requestsTo('PATCH', '/tasks/64c000000000000000000001')[FIRST_REQUEST].body
+      api.requestsTo('PATCH', '/tasks/64c000000000000000000001')[FIRST_REQUEST]
+        .body
     ).toMatchObject({ title: 'Landing page v2', project: 'Agency Site' })
   })
 
@@ -214,7 +235,10 @@ test.describe('trial account', () => {
     await visit(page, '/tasks')
     await page.getByRole('button', { name: 'Add task' }).first().click()
     await page.locator('[name="title"]').filter({ visible: true }).fill('Demo')
-    await page.locator('[name="timing"]').filter({ visible: true }).fill('01:00')
+    await page
+      .locator('[name="timing"]')
+      .filter({ visible: true })
+      .fill('01:00')
     await page
       .locator('[name="deliveredAt"]')
       .filter({ visible: true })
@@ -232,7 +256,10 @@ test.describe('projects', () => {
     await logIn(page, PARTNER)
   })
 
-  test('lists the projects with the best project of last month', async ({ page, api }) => {
+  test('lists the projects with the best project of last month', async ({
+    page,
+    api
+  }) => {
     await visit(page, '/projects')
 
     await expect(page.locator('article')).toHaveCount(PARTNER_PROJECT_CARDS)
@@ -251,7 +278,9 @@ test.describe('projects', () => {
     await page.locator('[name="name"]').filter({ visible: true }).fill('docs')
     await visibleButton(page, 'Submit').click()
     await expect(card(page, 'Docs')).toBeVisible()
-    expect(api.requestsTo('POST', '/projects')[FIRST_REQUEST].body).toEqual({ name: 'docs' })
+    expect(api.requestsTo('POST', '/projects')[FIRST_REQUEST].body).toEqual({
+      name: 'docs'
+    })
 
     await openCardAction(page, 'Branding', 'edit')
     await page
@@ -293,7 +322,9 @@ test.describe('users', () => {
     await page.getByRole('img', { name: PARTNER.username }).click()
 
     await expect(page.getByRole('link', { name: 'Projects' })).toBeVisible()
-    await expect(page.getByRole('link', { name: 'Users' })).toHaveCount(NO_ELEMENTS)
+    await expect(page.getByRole('link', { name: 'Users' })).toHaveCount(
+      NO_ELEMENTS
+    )
   })
 
   test('deletes a user', async ({ page, api }) => {
@@ -328,8 +359,6 @@ test.describe('profile', () => {
       buffer: Buffer.from('GIF89a')
     })
 
-    await expect(
-      page.getByText('This file type is not allowed.')
-    ).toBeVisible()
+    await expect(page.getByText('This file type is not allowed.')).toBeVisible()
   })
 })

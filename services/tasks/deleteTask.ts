@@ -16,7 +16,10 @@ export const deleteTask = async (_id: string): Promise<FullTaskInterface> => {
     }
   }
 
-  const response = await privateApi.delete<FullTaskInterface>(`${TASKS_ENDPOINT}/${_id}`, config)
+  const response = await privateApi.delete<FullTaskInterface>(
+    `${TASKS_ENDPOINT}/${_id}`,
+    config
+  )
 
   return response.data
 }

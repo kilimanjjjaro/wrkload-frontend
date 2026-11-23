@@ -17,7 +17,10 @@ export const getUser = async (): Promise<UserInterface> => {
     }
   }
 
-  const response = await privateApi.get<{ user: UserInterface }>(`${USERS_ENDPOINT}/${uid}`, config)
+  const response = await privateApi.get<{ user: UserInterface }>(
+    `${USERS_ENDPOINT}/${uid}`,
+    config
+  )
 
   return response.data.user
 }

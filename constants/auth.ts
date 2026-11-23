@@ -1,4 +1,8 @@
-import { HOURS_PER_DAY, MINUTES_PER_HOUR, SECONDS_PER_MINUTE } from 'constants/math'
+import {
+  HOURS_PER_DAY,
+  MINUTES_PER_HOUR,
+  SECONDS_PER_MINUTE
+} from 'constants/math'
 
 export const PASSWORD_MEDIUM_LENGTH = 7
 export const PASSWORD_MIN_LENGTH = 8

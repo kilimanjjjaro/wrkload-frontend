@@ -6,13 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "eslint .",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "test:e2e": "playwright test --project=desktop --project=mobile",
     "test:visual": "playwright test --project=visual-desktop --project=visual-mobile",
     "test:visual:update": "playwright test --project=visual-desktop --project=visual-mobile --update-snapshots",
-    "test:all": "pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm test:e2e && pnpm test:visual"
+    "test:all": "pnpm format:check && pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm test:e2e && pnpm test:visual"
   },
   "dependencies": {
     "@heroicons/react": "2.2.0",
@@ -51,6 +53,7 @@
     "eslint-config-prettier": "10.1.8",
     "jsdom": "31.0.1",
     "postcss": "8.5.33",
+    "prettier": "3.10.1",
     "tailwindcss": "4.3.5",
     "typescript": "6.0.3",
     "vitest": "5.1.1"

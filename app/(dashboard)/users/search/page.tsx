@@ -39,17 +39,17 @@ export default function SearchUsers(): React.JSX.Element {
   useEffect(() => {
     if (isTrialAccount) {
       toast(
-          <>
-            <ShieldCheckIcon className='w-4 stroke-blue stroke-3' />
-            <h3 className='font-bold'>How data do we store?</h3>
-            <p>
-              <Balancer>
-                These are all the data we store of you. Only admins and trial
-                accounts can view this page.
-              </Balancer>
-            </p>
-          </>
-        )
+        <>
+          <ShieldCheckIcon className='w-4 stroke-blue stroke-3' />
+          <h3 className='font-bold'>How data do we store?</h3>
+          <p>
+            <Balancer>
+              These are all the data we store of you. Only admins and trial
+              accounts can view this page.
+            </Balancer>
+          </p>
+        </>
+      )
     }
   }, [isTrialAccount])
 
@@ -59,7 +59,9 @@ export default function SearchUsers(): React.JSX.Element {
 
   const shouldRenderSkeleton = isLoading || isValidating
   const shouldRenderUsers =
-    data !== undefined && data.users.length >= MIN_LENGTH && !shouldRenderSkeleton
+    data !== undefined &&
+    data.users.length >= MIN_LENGTH &&
+    !shouldRenderSkeleton
   const shouldRenderNotFoundSign = !shouldRenderUsers && !shouldRenderSkeleton
 
   return (
@@ -70,7 +72,12 @@ export default function SearchUsers(): React.JSX.Element {
         </h2>
         {!shouldRenderNotFoundSign && (
           <div className='flex items-start gap-x-5'>
-            <Button onClick={() => { router.push('/users'); }} variant='primary'>
+            <Button
+              onClick={() => {
+                router.push('/users')
+              }}
+              variant='primary'
+            >
               <ArrowLeftIcon className='w-4 stroke-3' /> Go to users
             </Button>
           </div>
@@ -96,7 +103,9 @@ export default function SearchUsers(): React.JSX.Element {
             <Button
               ariaLabel='Go to users'
               className='w-auto!'
-              onClick={() => { router.push('/users'); }}
+              onClick={() => {
+                router.push('/users')
+              }}
               variant='primary'
             >
               <ArrowLeftIcon className='w-4 stroke-3' />

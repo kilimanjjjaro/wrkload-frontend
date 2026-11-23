@@ -14,8 +14,14 @@ interface ReturnInterface {
   expiresIn: number
 }
 
-export default async function login ({ email, password }: CredentialsInterface): Promise<ReturnInterface> {
-  const { data } = await api.post<ReturnInterface>('/auth/login', { email, password })
+export default async function login({
+  email,
+  password
+}: CredentialsInterface): Promise<ReturnInterface> {
+  const { data } = await api.post<ReturnInterface>('/auth/login', {
+    email,
+    password
+  })
 
   const { user, accessToken, expiresIn } = data
 

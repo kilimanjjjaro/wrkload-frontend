@@ -8,7 +8,11 @@ interface Props {
   page: string | null
 }
 
-export default async function searchTasks ({ project, query, page }: Props): Promise<FullTaskInterface> {
+export default async function searchTasks({
+  project,
+  query,
+  page
+}: Props): Promise<FullTaskInterface> {
   let currentPage = '1'
   let config = {}
   const accessToken = getCookie('accessToken')
@@ -25,7 +29,10 @@ export default async function searchTasks ({ project, query, page }: Props): Pro
     }
   }
 
-  const response = await privateApi.get<FullTaskInterface>(`/tasks?project=${String(project)}&search=${String(query)}&limit=8&page=${currentPage}`, config)
+  const response = await privateApi.get<FullTaskInterface>(
+    `/tasks?project=${String(project)}&search=${String(query)}&limit=8&page=${currentPage}`,
+    config
+  )
 
   return response.data
 }

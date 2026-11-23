@@ -7,7 +7,10 @@ interface Props {
   page: string | null
 }
 
-export default async function searchProjects ({ query, page }: Props): Promise<FullProjectInterface> {
+export default async function searchProjects({
+  query,
+  page
+}: Props): Promise<FullProjectInterface> {
   let currentPage = '1'
   let config = {}
   const accessToken = getCookie('accessToken')
@@ -24,7 +27,10 @@ export default async function searchProjects ({ query, page }: Props): Promise<F
     }
   }
 
-  const response = await privateApi.get<FullProjectInterface>(`/projects?search=${String(query)}&limit=8&page=${currentPage}`, config)
+  const response = await privateApi.get<FullProjectInterface>(
+    `/projects?search=${String(query)}&limit=8&page=${currentPage}`,
+    config
+  )
 
   return response.data
 }

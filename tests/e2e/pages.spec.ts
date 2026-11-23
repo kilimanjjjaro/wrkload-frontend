@@ -1,17 +1,19 @@
 import { ADMIN, PARTNER } from '../constants/fixtures'
 import { HTTP_STATUS_OK, HTTP_STATUS_NOT_FOUND } from '../constants/api'
-import {
-  expect,
-  logIn,
-  test,
-  unexpectedErrors,
-  visit
-} from '../utils/fixtures'
+import { expect, logIn, test, unexpectedErrors, visit } from '../utils/fixtures'
 
 const PUBLIC_PAGES = [
-  { path: '/', title: 'wrkload', heading: 'Work, load your time and go have fun!' },
+  {
+    path: '/',
+    title: 'wrkload',
+    heading: 'Work, load your time and go have fun!'
+  },
   { path: '/login', title: 'Login - wrkload', heading: 'Welcome again!' },
-  { path: '/registry', title: 'Registry - wrkload', heading: 'Nice to meet you!' },
+  {
+    path: '/registry',
+    title: 'Registry - wrkload',
+    heading: 'Nice to meet you!'
+  },
   {
     path: '/remember-password',
     title: 'Remember password - wrkload',
@@ -92,7 +94,9 @@ test.describe('public pages render without errors', () => {
     await expect(
       page.getByRole('heading', { name: 'Page Not Found' })
     ).toBeVisible()
-    await expect(page.getByRole('img', { name: 'Not found image' })).toBeVisible()
+    await expect(
+      page.getByRole('img', { name: 'Not found image' })
+    ).toBeVisible()
   })
 })
 

@@ -3,7 +3,12 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
-import { ArrowLeftIcon, ArrowRightIcon, LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  LockClosedIcon,
+  LockOpenIcon
+} from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
 import Button from 'components/shared/Button'
@@ -25,7 +30,7 @@ const INITIAL_CREDENTIALS_STATE = {
   confirmPassword: ''
 }
 
-export default function Register (): React.JSX.Element {
+export default function Register(): React.JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -41,7 +46,9 @@ export default function Register (): React.JSX.Element {
     router.refresh()
   }
 
-  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (
+    event: React.SubmitEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault()
     const { username, email, password, confirmPassword } = credentials
 
@@ -58,7 +65,10 @@ export default function Register (): React.JSX.Element {
         setSuccess(true)
       }
     } catch (error) {
-      if (error instanceof Error && error.message === 'auth/different-passwords') {
+      if (
+        error instanceof Error &&
+        error.message === 'auth/different-passwords'
+      ) {
         setError('auth/different-passwords')
         return
       }
@@ -75,14 +85,22 @@ export default function Register (): React.JSX.Element {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
-          <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
+          <Headline variant='md'>
+            <Balancer>We have a problem!</Balancer>
+          </Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
-              {error === 'auth/different-passwords' && 'Passwords are not the same. Please, try again.'}
-              {error === 'auth/email-already-exists' && 'An account with this email already exists. Please, try another one or login.'}
+              {error === 'auth/different-passwords' &&
+                'Passwords are not the same. Please, try again.'}
+              {error === 'auth/email-already-exists' &&
+                'An account with this email already exists. Please, try another one or login.'}
             </Balancer>
           </p>
-          <Button ariaLabel='Try again' onClick={handleClick} variant='secondary'>
+          <Button
+            ariaLabel='Try again'
+            onClick={handleClick}
+            variant='secondary'
+          >
             <ArrowLeftIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -94,9 +112,22 @@ export default function Register (): React.JSX.Element {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
-          <Headline variant='md'><Balancer>Done!</Balancer></Headline>
-          <p className='mb-5 text-sm font-secondaryFont'><Balancer>The account has been created and an email will be sent to activate it.</Balancer></p>
-          <Button ariaLabel='Login' onClick={() => { router.push('/login'); }} variant='secondary'>
+          <Headline variant='md'>
+            <Balancer>Done!</Balancer>
+          </Headline>
+          <p className='mb-5 text-sm font-secondaryFont'>
+            <Balancer>
+              The account has been created and an email will be sent to activate
+              it.
+            </Balancer>
+          </p>
+          <Button
+            ariaLabel='Login'
+            onClick={() => {
+              router.push('/login')
+            }}
+            variant='secondary'
+          >
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -108,21 +139,72 @@ export default function Register (): React.JSX.Element {
     <PageTransition>
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
-          <Headline variant='md'><Balancer>Nice to meet you!</Balancer></Headline>
-          <form onSubmit={(event) => { void handleSubmit(event) }}>
+          <Headline variant='md'>
+            <Balancer>Nice to meet you!</Balancer>
+          </Headline>
+          <form
+            onSubmit={(event) => {
+              void handleSubmit(event)
+            }}
+          >
             <div className='flex flex-col gap-3 mb-3'>
-              <Input onChange={handleChange} value={credentials.username} name='username' type='text' placeholder='Username' centerText required />
-              <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText required />
+              <Input
+                onChange={handleChange}
+                value={credentials.username}
+                name='username'
+                type='text'
+                placeholder='Username'
+                centerText
+                required
+              />
+              <Input
+                onChange={handleChange}
+                value={credentials.email}
+                name='email'
+                type='email'
+                placeholder='Email'
+                autoComplete='email'
+                centerText
+                required
+              />
               <div className='relative flex items-center'>
-                <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' minLength={8} centerText required />
+                <Input
+                  onChange={handleChange}
+                  value={credentials.password}
+                  name='password'
+                  type='password'
+                  placeholder='Password'
+                  autoComplete='current-password'
+                  minLength={8}
+                  centerText
+                  required
+                />
                 <PasswordStrength password={credentials.password} />
               </div>
               <div className='relative flex items-center'>
-                <Input onChange={handleChange} value={credentials.confirmPassword} name='confirmPassword' type='password' placeholder='Confirm Password' autoComplete='current-password' minLength={8} centerText required />
-                <PasswordMatch password={credentials.password} confirmation={credentials.confirmPassword} />
+                <Input
+                  onChange={handleChange}
+                  value={credentials.confirmPassword}
+                  name='confirmPassword'
+                  type='password'
+                  placeholder='Confirm Password'
+                  autoComplete='current-password'
+                  minLength={8}
+                  centerText
+                  required
+                />
+                <PasswordMatch
+                  password={credentials.password}
+                  confirmation={credentials.confirmPassword}
+                />
               </div>
             </div>
-            <Button ariaLabel='Registry' className='group' variant='secondary' isLoading={isLoading}>
+            <Button
+              ariaLabel='Registry'
+              className='group'
+              variant='secondary'
+              isLoading={isLoading}
+            >
               <LockClosedIcon className='w-4 transition-opacity duration-700 ease-in-out opacity-100 stroke-3 group-focus:opacity-0' />
               <LockOpenIcon className='absolute w-4 transition-opacity duration-700 ease-in-out opacity-0 stroke-3 group-focus:opacity-100' />
             </Button>

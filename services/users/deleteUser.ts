@@ -15,7 +15,10 @@ export const deleteUser = async (_id: string): Promise<FullUserInterface> => {
     }
   }
 
-  const response = await privateApi.delete<FullUserInterface>(`${USERS_ENDPOINT}/${_id}`, config)
+  const response = await privateApi.delete<FullUserInterface>(
+    `${USERS_ENDPOINT}/${_id}`,
+    config
+  )
 
   return response.data
 }

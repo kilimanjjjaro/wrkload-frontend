@@ -24,20 +24,39 @@ interface RenderFlagsInput {
   shouldRenderSkeleton: boolean
 }
 
-const renderFlags = ({ tasks, projects, shouldRenderSkeleton }: RenderFlagsInput) => {
+const renderFlags = ({
+  tasks,
+  projects,
+  shouldRenderSkeleton
+}: RenderFlagsInput) => {
   const noProjects = projects?.projects.length === EMPTY_LENGTH
-  const tasksToRender = tasks !== undefined && tasks.tasks.length > EMPTY_LENGTH && !shouldRenderSkeleton ? tasks : undefined
-  const shouldRenderNotFound = (tasks?.tasks.length === EMPTY_LENGTH || noProjects) && !shouldRenderSkeleton
+  const tasksToRender =
+    tasks !== undefined &&
+    tasks.tasks.length > EMPTY_LENGTH &&
+    !shouldRenderSkeleton
+      ? tasks
+      : undefined
+  const shouldRenderNotFound =
+    (tasks?.tasks.length === EMPTY_LENGTH || noProjects) &&
+    !shouldRenderSkeleton
   return { noProjects, tasksToRender, shouldRenderNotFound }
 }
 
-export default function Tasks (): React.JSX.Element {
-  const { selectedProjectToFetch, setSelectedProjectToFetch } = useContext(AppContext)
+export default function Tasks(): React.JSX.Element {
+  const { selectedProjectToFetch, setSelectedProjectToFetch } =
+    useContext(AppContext)
   let sortedProjectNames: string[] = []
   const params = useSearchParams()
   const page = params.get('page')
 
-  const { data: projects, isLoading: isLoadingProjects, isValidating: isValidatingProjects } = useSWR('projects', async () => await getProjects({ page: '1', noLimit: true }))
+  const {
+    data: projects,
+    isLoading: isLoadingProjects,
+    isValidating: isValidatingProjects
+  } = useSWR(
+    'projects',
+    async () => await getProjects({ page: '1', noLimit: true })
+  )
 
   if (projects !== undefined && projects.projects.length > EMPTY_LENGTH) {
     sortedProjectNames = projects.projects.map((project) => project.name).sort()
@@ -49,18 +68,38 @@ export default function Tasks (): React.JSX.Element {
     }
   }, [projects])
 
-  const { data: tasks, isLoading: isLoadingTasks, isValidating: isValidatingTasks, mutate } = useSWR(selectedProjectToFetch === '' ? null : 'tasks', async () => await getTasks({ page, project: selectedProjectToFetch }), { onSuccess: (data) => sortTasks(data.tasks) })
+  const {
+    data: tasks,
+    isLoading: isLoadingTasks,
+    isValidating: isValidatingTasks,
+    mutate
+  } = useSWR(
+    selectedProjectToFetch === '' ? null : 'tasks',
+    async () => await getTasks({ page, project: selectedProjectToFetch }),
+    { onSuccess: (data) => sortTasks(data.tasks) }
+  )
 
   useEffect(() => {
     mutate().catch(logError)
   }, [page, mutate])
 
-  const shouldRenderSkeleton = isLoadingTasks || isLoadingProjects || isValidatingTasks || isValidatingProjects
-  const { noProjects, tasksToRender, shouldRenderNotFound } = renderFlags({ tasks, projects, shouldRenderSkeleton })
+  const shouldRenderSkeleton =
+    isLoadingTasks ||
+    isLoadingProjects ||
+    isValidatingTasks ||
+    isValidatingProjects
+  const { noProjects, tasksToRender, shouldRenderNotFound } = renderFlags({
+    tasks,
+    projects,
+    shouldRenderSkeleton
+  })
 
   return (
     <PageTransition>
-      <Header projectNames={sortedProjectNames} shouldRenderNotFound={shouldRenderNotFound} />
+      <Header
+        projectNames={sortedProjectNames}
+        shouldRenderNotFound={shouldRenderNotFound}
+      />
       <main>
         {shouldRenderSkeleton && <Skeleton />}
         {tasksToRender !== undefined && <TaskList data={tasksToRender} />}

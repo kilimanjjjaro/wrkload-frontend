@@ -1,6 +1,11 @@
 import { motion } from 'motion/react'
 import type { Transition, Variants } from 'motion/react'
-import { FULL_SCALE, NO_ROTATION, SPRING_DAMPING, SPRING_STIFFNESS } from 'constants/animation'
+import {
+  FULL_SCALE,
+  NO_ROTATION,
+  SPRING_DAMPING,
+  SPRING_STIFFNESS
+} from 'constants/animation'
 
 const MOON_INITIAL_SCALE = 0.6
 const MOON_INITIAL_ROTATION = 90

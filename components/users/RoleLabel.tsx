@@ -6,10 +6,15 @@ interface Props {
   trialAccountId: string
 }
 
-export default function RoleLabel ({ user, trialAccountId }: Props): React.JSX.Element {
+export default function RoleLabel({
+  user,
+  trialAccountId
+}: Props): React.JSX.Element {
   return (
     <>
-      {user.role === ADMIN_ROLE && user._id !== trialAccountId && 'Administrator'}
+      {user.role === ADMIN_ROLE &&
+        user._id !== trialAccountId &&
+        'Administrator'}
       {user.role === TRIAL_ROLE && user._id === trialAccountId && 'Trial user'}
       {user.role === PARTNER_ROLE && user._id !== trialAccountId && 'Partner'}
     </>

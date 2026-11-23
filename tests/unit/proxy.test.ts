@@ -6,9 +6,7 @@ import { ROLE_ADMIN, ROLE_PARTNER, ROLE_TRIAL } from '../constants/api'
 const ORIGIN = 'https://wrkload.test'
 
 const tokenWithRole = (role: number) =>
-  ['header', btoa(JSON.stringify({ uid: 'user', role })), 'signature'].join(
-    '.'
-  )
+  ['header', btoa(JSON.stringify({ uid: 'user', role })), 'signature'].join('.')
 
 const request = (path: string, cookies: Record<string, string> = {}) => {
   const cookie = Object.entries(cookies)
@@ -22,16 +20,21 @@ const redirectOf = (response: Response) => response.headers.get('location')
 
 describe('proxy', () => {
   it('runs on the dashboard pages', () => {
-    expect(config.matcher).toEqual(['/tasks', '/projects', '/profile', '/users'])
+    expect(config.matcher).toEqual([
+      '/tasks',
+      '/projects',
+      '/profile',
+      '/users'
+    ])
   })
 
   it.each(['/tasks', '/projects', '/profile', '/users'])(
     'sends visitors without a session from %s to the home page',
     (path) => {
       expect(redirectOf(proxy(request(path)))).toBe(`${ORIGIN}/`)
-      expect(
-        redirectOf(proxy(request(path, { isLogged: 'false' })))
-      ).toBe(`${ORIGIN}/`)
+      expect(redirectOf(proxy(request(path, { isLogged: 'false' })))).toBe(
+        `${ORIGIN}/`
+      )
     }
   )
 
@@ -61,7 +64,10 @@ describe('proxy', () => {
     'lets role %i see the users page',
     (role) => {
       const response = proxy(
-        request('/users', { isLogged: 'true', accessToken: tokenWithRole(role) })
+        request('/users', {
+          isLogged: 'true',
+          accessToken: tokenWithRole(role)
+        })
       )
 
       expect(redirectOf(response)).toBeNull()

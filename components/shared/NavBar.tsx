@@ -10,7 +10,7 @@ import Logo from 'components/shared/Logo'
 import Button from 'components/shared/Button'
 import DashboardTab from 'components/shared/DashboardTab'
 
-export default function NavBar (): React.JSX.Element {
+export default function NavBar(): React.JSX.Element {
   const [showDashboardBox, setShowDashboardBox] = useState(false)
   const { user, isLoggingIn, setTrialMode } = useContext(AppContext)
   const router = useRouter()
@@ -32,13 +32,36 @@ export default function NavBar (): React.JSX.Element {
 
   return (
     <div className='fixed top-0 left-0 z-50 grid items-center justify-between w-full grid-cols-2 px-6 pt-6 mx-auto text md:pt-8 md:px-8'>
-      <Link className='flex items-center h-12 md:h-10 justify-self-start' href='/'><Logo /></Link>
-      {user !== null && !isLoggingIn && <DashboardTab showDashboardBox={showDashboardBox} setShowDashboardBox={setShowDashboardBox} />}
+      <Link
+        className='flex items-center h-12 md:h-10 justify-self-start'
+        href='/'
+      >
+        <Logo />
+      </Link>
+      {user !== null && !isLoggingIn && (
+        <DashboardTab
+          showDashboardBox={showDashboardBox}
+          setShowDashboardBox={setShowDashboardBox}
+        />
+      )}
       <div className='justify-self-end'>
         {user === null && !isLoggingIn && (
           <div className='flex items-center gap-x-5'>
-            <button className='items-center hidden transition ease-in-out md:flex gap-x-2 font-secondaryFont hover:text-blue duration-400 dark:text-white dark:hover:text-blue' onClick={handleTrialMode}><HeartIcon className='w-4 stroke-3' /> Try now!</button>
-            <Button className='w-auto!' onClick={() => { router.push('/login'); }} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-3' /></Button>
+            <button
+              className='items-center hidden transition ease-in-out md:flex gap-x-2 font-secondaryFont hover:text-blue duration-400 dark:text-white dark:hover:text-blue'
+              onClick={handleTrialMode}
+            >
+              <HeartIcon className='w-4 stroke-3' /> Try now!
+            </button>
+            <Button
+              className='w-auto!'
+              onClick={() => {
+                router.push('/login')
+              }}
+              variant='primary'
+            >
+              Log in <LockClosedIcon className='w-4 stroke-3' />
+            </Button>
           </div>
         )}
         {isLoggingIn && (
@@ -48,7 +71,12 @@ export default function NavBar (): React.JSX.Element {
           </div>
         )}
         {user !== null && !isLoggingIn && (
-          <div className='flex items-center cursor-pointer justify-self-end group gap-x-3' onClick={() => { setShowDashboardBox(!showDashboardBox); }}>
+          <div
+            className='flex items-center cursor-pointer justify-self-end group gap-x-3'
+            onClick={() => {
+              setShowDashboardBox(!showDashboardBox)
+            }}
+          >
             <div className='hidden text-black transition ease-in-out md:block duration-400 dark:text-white group-hover:text-blue dark:group-hover:text-blue font-secondaryFont'>
               Welcome, {user.username}!
             </div>

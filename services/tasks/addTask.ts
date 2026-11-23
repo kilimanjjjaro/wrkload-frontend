@@ -4,7 +4,9 @@ import type { FullTaskInterface, TaskInterface } from 'interfaces/tasks/Task'
 import { TASKS_ENDPOINT } from 'constants/tasks'
 import { getCookie } from 'cookies-next/client'
 
-export const addTask = async (task: TaskInterface): Promise<FullTaskInterface> => {
+export const addTask = async (
+  task: TaskInterface
+): Promise<FullTaskInterface> => {
   let config = {}
   const accessToken = getCookie('accessToken')
 
@@ -24,7 +26,11 @@ export const addTask = async (task: TaskInterface): Promise<FullTaskInterface> =
     description: task.description
   }
 
-  const response = await privateApi.post<{ newTask: FullTaskInterface }>(TASKS_ENDPOINT, newTask, config)
+  const response = await privateApi.post<{ newTask: FullTaskInterface }>(
+    TASKS_ENDPOINT,
+    newTask,
+    config
+  )
 
   return response.data.newTask
 }

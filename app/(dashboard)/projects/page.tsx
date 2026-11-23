@@ -14,10 +14,14 @@ import PageTransition from 'components/shared/PageTransition'
 import { MIN_LENGTH } from 'constants/math'
 import { logError } from 'utils/logError'
 
-export default function Projects (): React.JSX.Element {
+export default function Projects(): React.JSX.Element {
   const params = useSearchParams()
   const page = params.get('page')
-  const { data, isLoading, isValidating, mutate } = useSWR('projects', async () => await getProjects({ page }), { onSuccess: data => sortProjects(data.projects) })
+  const { data, isLoading, isValidating, mutate } = useSWR(
+    'projects',
+    async () => await getProjects({ page }),
+    { onSuccess: (data) => sortProjects(data.projects) }
+  )
 
   // TODO: improve this
   useEffect(() => {
@@ -25,8 +29,12 @@ export default function Projects (): React.JSX.Element {
   }, [page, mutate])
 
   const shouldRenderSkeleton = isLoading || isValidating
-  const shouldRenderProjects = data !== undefined && data.projects.length >= MIN_LENGTH && !shouldRenderSkeleton
-  const shouldRenderNotFoundSign = !shouldRenderProjects && !shouldRenderSkeleton
+  const shouldRenderProjects =
+    data !== undefined &&
+    data.projects.length >= MIN_LENGTH &&
+    !shouldRenderSkeleton
+  const shouldRenderNotFoundSign =
+    !shouldRenderProjects && !shouldRenderSkeleton
 
   return (
     <PageTransition>

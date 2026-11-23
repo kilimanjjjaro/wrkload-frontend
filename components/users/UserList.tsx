@@ -1,6 +1,11 @@
 import { useContext } from 'react'
 import dayjs from 'dayjs'
-import { EnvelopeIcon, PencilSquareIcon, TrashIcon, UserIcon } from '@heroicons/react/24/outline'
+import {
+  EnvelopeIcon,
+  PencilSquareIcon,
+  TrashIcon,
+  UserIcon
+} from '@heroicons/react/24/outline'
 import Pagination from 'components/shared/Pagination'
 import MasonryGrid from 'components/shared/MasonryGrid'
 import Headline from 'components/shared/Headline'
@@ -15,9 +20,13 @@ interface Props {
   isTrialAccount: boolean
 }
 
-export default function UserList ({ data, isTrialAccount }: Props): React.JSX.Element {
+export default function UserList({
+  data,
+  isTrialAccount
+}: Props): React.JSX.Element {
   const { setSelectedUser } = useContext(AppContext)
-  const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
+  const { setUpdateDataModalStatus, setDeleteDataModalStatus } =
+    useContext(ModalsContext)
 
   const handleUpdateUserClick = (user: UserInterface): void => {
     setSelectedUser(user)
@@ -33,18 +42,22 @@ export default function UserList ({ data, isTrialAccount }: Props): React.JSX.El
   const { pagination } = data
   const trialAccountId = '6439b01cf35b6e22570cd842'
 
-  if (isTrialAccount) users = users.filter((user) => user._id === trialAccountId)
+  if (isTrialAccount)
+    users = users.filter((user) => user._id === trialAccountId)
 
   return (
     <>
       <MasonryGrid>
         {users.map((user) => (
           <article
-            key={user._id} className='relative flex flex-col items-start p-6 text-black wrap-break-word transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
+            key={user._id}
+            className='relative flex flex-col items-start p-6 text-black wrap-break-word transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
           >
             <UserAvatar user={user} />
 
-            <Headline variant='md' className='mb-2!'>{user.username}</Headline>
+            <Headline variant='md' className='mb-2!'>
+              {user.username}
+            </Headline>
             <div className='flex mb-3 rounded-full items-center h-6 px-2 text-[10px] font-bold text-black uppercase border-2 border-black gap-x-1 font-secondaryFont'>
               <RoleLabel user={user} trialAccountId={trialAccountId} />
             </div>
@@ -67,8 +80,22 @@ export default function UserList ({ data, isTrialAccount }: Props): React.JSX.El
             </div>
 
             <div className='absolute right-6 md:right-0 flex flex-col md:flex-row items-end justify-end md:justify-center md:w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 md:top-[-0.9rem] xl:opacity-0 gap-2 md:gap-3 group-hover:opacity-100'>
-              <div onClick={() => { handleUpdateUserClick(user); }} className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-yellow hover:bg-blue'><PencilSquareIcon className='w-4 stroke-2' /></div>
-              <div onClick={() => { handleDeleteUserClick(user); }} className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-red hover:bg-blue'><TrashIcon className='w-4 stroke-2' /></div>
+              <div
+                onClick={() => {
+                  handleUpdateUserClick(user)
+                }}
+                className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-yellow hover:bg-blue'
+              >
+                <PencilSquareIcon className='w-4 stroke-2' />
+              </div>
+              <div
+                onClick={() => {
+                  handleDeleteUserClick(user)
+                }}
+                className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-red hover:bg-blue'
+              >
+                <TrashIcon className='w-4 stroke-2' />
+              </div>
             </div>
           </article>
         ))}

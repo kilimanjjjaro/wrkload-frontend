@@ -1,7 +1,11 @@
 import Image from 'next/image'
 import type { UserInterface } from 'interfaces/users/User'
 
-export default function UserAvatar ({ user }: { user: UserInterface }): React.JSX.Element {
+export default function UserAvatar({
+  user
+}: {
+  user: UserInterface
+}): React.JSX.Element {
   return (
     <div className='relative'>
       <Image

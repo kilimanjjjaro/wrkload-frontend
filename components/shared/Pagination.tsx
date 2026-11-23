@@ -3,21 +3,32 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import Button from 'components/shared/Button'
 import type { PaginationInterface } from 'interfaces/components'
 
-export default function Pagination ({ data }: { data: PaginationInterface | null }): React.JSX.Element {
+export default function Pagination({
+  data
+}: {
+  data: PaginationInterface | null
+}): React.JSX.Element {
   const router = useRouter()
   const pathname = usePathname()
   const params = useSearchParams()
   const query = params.get('query')
-  const totalPages = Math.ceil(Number(data?.totalResults) / Number(data?.resultsPerPage))
+  const totalPages = Math.ceil(
+    Number(data?.totalResults) / Number(data?.resultsPerPage)
+  )
 
   const handlePrevPage = (): void => {
     if (pathname === '/tasks/search') {
       const project = params.get('project')
-      router.push(`/tasks/search?project=${String(project)}&query=${String(query)}&page=${String(data?.prevPage)}`)
+      router.push(
+        `/tasks/search?project=${String(project)}&query=${String(query)}&page=${String(data?.prevPage)}`
+      )
       return
     }
 
-    if (query !== null && pathname !== '/tasks/search') { router.push(`${pathname}?query=${query}&page=${String(data?.prevPage)}`); return; }
+    if (query !== null && pathname !== '/tasks/search') {
+      router.push(`${pathname}?query=${query}&page=${String(data?.prevPage)}`)
+      return
+    }
 
     router.push(`${pathname}?page=${String(data?.prevPage)}`)
   }
@@ -25,11 +36,16 @@ export default function Pagination ({ data }: { data: PaginationInterface | null
   const handleNextPage = (): void => {
     if (pathname === '/tasks/search') {
       const project = params.get('project')
-      router.push(`/tasks/search?project=${String(project)}&query=${String(query)}&page=${String(data?.nextPage)}`)
+      router.push(
+        `/tasks/search?project=${String(project)}&query=${String(query)}&page=${String(data?.nextPage)}`
+      )
       return
     }
 
-    if (query !== null && pathname !== '/tasks/search') { router.push(`${pathname}?query=${query}&page=${String(data?.nextPage)}`); return; }
+    if (query !== null && pathname !== '/tasks/search') {
+      router.push(`${pathname}?query=${query}&page=${String(data?.nextPage)}`)
+      return
+    }
 
     router.push(`${pathname}?page=${String(data?.nextPage)}`)
   }
@@ -39,9 +55,27 @@ export default function Pagination ({ data }: { data: PaginationInterface | null
 
   return (
     <div className='flex justify-center mt-10 gap-x-5'>
-      <Button ariaLabel='Prev page' className='w-auto!' variant='primary' disablePagination={disablePrevPageButton} onClick={handlePrevPage}><ArrowLeftIcon className='w-4 stroke-3' /></Button>
-      <div className='self-center text-sm text-black transition-colors ease-in-out dark:text-white duration-400 font-secondaryFont'>Page {data?.page} of {totalPages}</div>
-      <Button ariaLabel='Next page' className='w-auto!' variant='primary' disablePagination={disableNextPageButton} onClick={handleNextPage}><ArrowRightIcon className='w-4 stroke-3' /></Button>
+      <Button
+        ariaLabel='Prev page'
+        className='w-auto!'
+        variant='primary'
+        disablePagination={disablePrevPageButton}
+        onClick={handlePrevPage}
+      >
+        <ArrowLeftIcon className='w-4 stroke-3' />
+      </Button>
+      <div className='self-center text-sm text-black transition-colors ease-in-out dark:text-white duration-400 font-secondaryFont'>
+        Page {data?.page} of {totalPages}
+      </div>
+      <Button
+        ariaLabel='Next page'
+        className='w-auto!'
+        variant='primary'
+        disablePagination={disableNextPageButton}
+        onClick={handleNextPage}
+      >
+        <ArrowRightIcon className='w-4 stroke-3' />
+      </Button>
     </div>
   )
 }

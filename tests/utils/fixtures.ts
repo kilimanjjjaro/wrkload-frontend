@@ -47,17 +47,20 @@ export const logIn = async (page: Page, user: FixtureUser) => {
     { name: 'isLogged', value: 'true', url: E2E_BASE_URL },
     { name: 'accessToken', value: accessTokenFor(user), url: E2E_BASE_URL }
   ])
-  await page.addInitScript((storedUser) => {
-    if (window.localStorage.getItem('user') === null) {
-      window.localStorage.setItem('user', storedUser)
-    }
-  }, JSON.stringify({
-    _id: user._id,
-    email: user.email,
-    username: user.username,
-    avatar: user.avatar,
-    role: user.role
-  }))
+  await page.addInitScript(
+    (storedUser) => {
+      if (window.localStorage.getItem('user') === null) {
+        window.localStorage.setItem('user', storedUser)
+      }
+    },
+    JSON.stringify({
+      _id: user._id,
+      email: user.email,
+      username: user.username,
+      avatar: user.avatar,
+      role: user.role
+    })
+  )
 }
 
 export const useLightTheme = async (page: Page) => {
@@ -72,7 +75,8 @@ export const unexpectedErrors = (errors: BrowserError[]) =>
   errors.filter(
     (error) =>
       !EXPECTED_ERRORS.some(
-        (expected) => error.url.includes(expected) || error.text.includes(expected)
+        (expected) =>
+          error.url.includes(expected) || error.text.includes(expected)
       )
   )
 

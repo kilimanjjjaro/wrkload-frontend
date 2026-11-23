@@ -4,6 +4,8 @@ import { pageMetadata } from 'constants/metadata'
 
 export const metadata = pageMetadata('Users - wrkload', '/users')
 
-export default function UsersLayout ({ children }: ChildrenInterface): React.JSX.Element {
+export default function UsersLayout({
+  children
+}: ChildrenInterface): React.JSX.Element {
   return <Suspense>{children}</Suspense>
 }

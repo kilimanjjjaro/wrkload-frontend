@@ -5,7 +5,12 @@ import { mutate } from 'swr'
 import Balancer from 'react-wrap-balancer'
 import { addProject } from 'services/projects/addProject'
 import { addProjectOptions } from 'utils/swrProjectsOptions'
-import { ArrowRightIcon, CheckCircleIcon, ShieldExclamationIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowRightIcon,
+  CheckCircleIcon,
+  ShieldExclamationIcon,
+  XMarkIcon
+} from '@heroicons/react/24/outline'
 import { toast } from 'sonner'
 import Button from 'components/shared/Button'
 import Headline from 'components/shared/Headline'
@@ -23,12 +28,18 @@ export default function AddProject(): React.JSX.Element {
     setProject({ ...project, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (
+    event: React.SubmitEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault()
     setAddDataModalStatus(false)
 
     try {
-      const response = await mutate('projects', addProject(project), addProjectOptions(project))
+      const response = await mutate(
+        'projects',
+        addProject(project),
+        addProjectOptions(project)
+      )
 
       if (response?.status === 'ok') {
         toast(
@@ -57,7 +68,9 @@ export default function AddProject(): React.JSX.Element {
     }
   }
 
-  const handleCloseModal = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  const handleCloseModal = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ): void => {
     event.preventDefault()
     setAddDataModalStatus(false)
   }
@@ -65,13 +78,33 @@ export default function AddProject(): React.JSX.Element {
   return (
     <div className='flex flex-col items-center gap-y-5'>
       <div className='w-full p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-t-3xl md:rounded-3xl'>
-        <Headline variant='md'><Balancer>Add project</Balancer></Headline>
-        <form onSubmit={(event) => { void handleSubmit(event) }}>
+        <Headline variant='md'>
+          <Balancer>Add project</Balancer>
+        </Headline>
+        <form
+          onSubmit={(event) => {
+            void handleSubmit(event)
+          }}
+        >
           <div className='flex flex-col mb-3 gap-y-3'>
-            <Input onChange={handleChange} value={project.name} name='name' type='text' placeholder='Name' centerText required />
+            <Input
+              onChange={handleChange}
+              value={project.name}
+              name='name'
+              type='text'
+              placeholder='Name'
+              centerText
+              required
+            />
           </div>
           <div className='flex justify-center gap-x-3'>
-            <Button ariaLabel='Close' onClick={(event) => { handleCloseModal(event); }} variant='dark-alternative'>
+            <Button
+              ariaLabel='Close'
+              onClick={(event) => {
+                handleCloseModal(event)
+              }}
+              variant='dark-alternative'
+            >
               <XMarkIcon className='w-4 stroke-3' />
             </Button>
             <Button ariaLabel='Submit' type='submit' variant='secondary'>

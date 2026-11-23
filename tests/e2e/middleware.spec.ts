@@ -2,7 +2,10 @@ import { ADMIN, PARTNER, TRIAL } from '../constants/fixtures'
 import { accessTokenFor } from '../utils/fake-api'
 import { expect, test } from '../utils/fixtures'
 
-test.skip(({ isMobile }) => isMobile, 'The redirects do not depend on the device')
+test.skip(
+  ({ isMobile }) => isMobile,
+  'The redirects do not depend on the device'
+)
 
 const PROTECTED_PATHS = ['/tasks', '/projects', '/profile', '/users']
 const NO_REDIRECTS = 0

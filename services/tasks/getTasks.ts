@@ -7,7 +7,10 @@ interface Props {
   project: string
 }
 
-export const getTasks = async ({ page, project }: Props): Promise<FullTaskInterface> => {
+export const getTasks = async ({
+  page,
+  project
+}: Props): Promise<FullTaskInterface> => {
   let currentPage = '1'
   let config = {}
   const accessToken = getCookie('accessToken')
@@ -24,7 +27,10 @@ export const getTasks = async ({ page, project }: Props): Promise<FullTaskInterf
     }
   }
 
-  const response = await privateApi.get<FullTaskInterface>(`/tasks?project=${project}&limit=11&page=${currentPage}`, config)
+  const response = await privateApi.get<FullTaskInterface>(
+    `/tasks?project=${project}&limit=11&page=${currentPage}`,
+    config
+  )
 
   return response.data
 }

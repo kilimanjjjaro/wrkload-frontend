@@ -1,9 +1,14 @@
 import { getCookie } from 'cookies-next/client'
 import privateApi from 'utils/privateApi'
-import type { FullProjectInterface, ProjectInterface } from 'interfaces/projects/Project'
+import type {
+  FullProjectInterface,
+  ProjectInterface
+} from 'interfaces/projects/Project'
 import { PROJECTS_ENDPOINT } from 'constants/projects'
 
-export const updateProject = async (project: ProjectInterface): Promise<FullProjectInterface> => {
+export const updateProject = async (
+  project: ProjectInterface
+): Promise<FullProjectInterface> => {
   let config = {}
   const accessToken = getCookie('accessToken')
 
@@ -19,7 +24,9 @@ export const updateProject = async (project: ProjectInterface): Promise<FullProj
     name: project.name
   }
 
-  const response = await privateApi.patch<{ updatedProject: FullProjectInterface }>(`${PROJECTS_ENDPOINT}/${project._id}`, updatedProject, config)
+  const response = await privateApi.patch<{
+    updatedProject: FullProjectInterface
+  }>(`${PROJECTS_ENDPOINT}/${project._id}`, updatedProject, config)
 
   return response.data.updatedProject
 }

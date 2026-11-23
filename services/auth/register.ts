@@ -12,7 +12,11 @@ interface ReturnInterface {
   status: string
 }
 
-export default async function register ({ username, email, password }: Props): Promise<ReturnInterface> {
+export default async function register({
+  username,
+  email,
+  password
+}: Props): Promise<ReturnInterface> {
   const user = {
     username,
     email,

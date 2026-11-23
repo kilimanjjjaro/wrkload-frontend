@@ -3,6 +3,8 @@ import { pageMetadata } from 'constants/metadata'
 
 export const metadata = pageMetadata('Confirm account - wrkload')
 
-export default function ConfirmAccountTokenLayout ({ children }: ChildrenInterface): React.JSX.Element {
+export default function ConfirmAccountTokenLayout({
+  children
+}: ChildrenInterface): React.JSX.Element {
   return <>{children}</>
 }

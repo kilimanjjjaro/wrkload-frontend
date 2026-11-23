@@ -7,7 +7,10 @@ interface Props {
   page: string | null
 }
 
-export default async function searchUsers ({ query, page }: Props): Promise<FullUserInterface> {
+export default async function searchUsers({
+  query,
+  page
+}: Props): Promise<FullUserInterface> {
   let currentPage = '1'
   let config = {}
   const accessToken = getCookie('accessToken')
@@ -24,7 +27,10 @@ export default async function searchUsers ({ query, page }: Props): Promise<Full
     }
   }
 
-  const response = await privateApi.get<FullUserInterface>(`/users?search=${String(query)}&limit=8&page=${currentPage}`, config)
+  const response = await privateApi.get<FullUserInterface>(
+    `/users?search=${String(query)}&limit=8&page=${currentPage}`,
+    config
+  )
 
   return response.data
 }

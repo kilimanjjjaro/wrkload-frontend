@@ -57,11 +57,16 @@ export const LENIS_OPTIONS = {
   duration: LENIS_DURATION
 }
 
-export const ALLOWED_IMAGE_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+export const ALLOWED_IMAGE_MIME_TYPES = [
+  'image/jpeg',
+  'image/png',
+  'image/webp'
+]
 const MAX_IMAGE_SIZE_MB = 5
 const BYTES_PER_KILOBYTE = 1024
 const KILOBYTES_PER_MEGABYTE = 1024
-export const ALLOWED_IMAGE_SIZE = MAX_IMAGE_SIZE_MB * KILOBYTES_PER_MEGABYTE * BYTES_PER_KILOBYTE
+export const ALLOWED_IMAGE_SIZE =
+  MAX_IMAGE_SIZE_MB * KILOBYTES_PER_MEGABYTE * BYTES_PER_KILOBYTE
 
 export const SERVER_RESPONSE_STATUS = {
   OK: 'ok',

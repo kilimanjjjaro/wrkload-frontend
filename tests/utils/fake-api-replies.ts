@@ -1,4 +1,8 @@
-import { HTTP_STATUS_OK, HTTP_STATUS_UNAUTHORIZED, TRIAL_ACCOUNT_ID } from '../constants/api'
+import {
+  HTTP_STATUS_OK,
+  HTTP_STATUS_UNAUTHORIZED,
+  TRIAL_ACCOUNT_ID
+} from '../constants/api'
 import {
   BEARER_TOKEN_INDEX,
   FIRST_LETTER_INDEX,

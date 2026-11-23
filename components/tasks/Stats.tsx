@@ -2,7 +2,12 @@ import { useContext } from 'react'
 import Balancer from 'react-wrap-balancer'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper/modules'
-import { PresentationChartLineIcon, ClockIcon, EyeSlashIcon, RectangleStackIcon } from '@heroicons/react/24/outline'
+import {
+  PresentationChartLineIcon,
+  ClockIcon,
+  EyeSlashIcon,
+  RectangleStackIcon
+} from '@heroicons/react/24/outline'
 import { AppContext } from 'contexts/AppContext'
 import type { TaskStatsInterface } from 'interfaces/tasks/Task'
 import { MIN_COUNT, NONE } from 'constants/math'
@@ -11,11 +16,17 @@ import PerformanceIndicator from 'components/tasks/PerformanceIndicator'
 
 const NO_STATS: Partial<TaskStatsInterface> = {}
 
-const isBelowMinimum = (value: number | undefined): boolean => value !== undefined && value < MIN_COUNT
+const isBelowMinimum = (value: number | undefined): boolean =>
+  value !== undefined && value < MIN_COUNT
 
-const isPositive = (value: number | undefined): boolean => value !== undefined && value > NONE
+const isPositive = (value: number | undefined): boolean =>
+  value !== undefined && value > NONE
 
-export default function Stats ({ stats }: { stats: TaskStatsInterface | null }): React.JSX.Element {
+export default function Stats({
+  stats
+}: {
+  stats: TaskStatsInterface | null
+}): React.JSX.Element {
   const { shouldRenderStats, setShouldRenderStats } = useContext(AppContext)
 
   const handleRenderStats = (): void => {
@@ -23,8 +34,16 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface | null }):
     window.localStorage.setItem('showStats', JSON.stringify(!shouldRenderStats))
   }
 
-  const { totalPastMonthTiming, totalTasksPastMonth, totalCurrentMonthTiming, totalTasksCurrentMonth, performance } = stats ?? NO_STATS
-  const emptyStats = isBelowMinimum(totalTasksPastMonth) && isBelowMinimum(totalTasksCurrentMonth)
+  const {
+    totalPastMonthTiming,
+    totalTasksPastMonth,
+    totalCurrentMonthTiming,
+    totalTasksCurrentMonth,
+    performance
+  } = stats ?? NO_STATS
+  const emptyStats =
+    isBelowMinimum(totalTasksPastMonth) &&
+    isBelowMinimum(totalTasksCurrentMonth)
 
   return (
     <>
@@ -39,7 +58,10 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface | null }):
           pagination={{ clickable: true }}
           grabCursor
         >
-          <EyeSlashIcon className='absolute z-10 w-6 h-6 transition ease-in-out cursor-pointer stroke-2 duration-400 hover:text-black dark:hover:text-white top-7 right-7' onClick={handleRenderStats} />
+          <EyeSlashIcon
+            className='absolute z-10 w-6 h-6 transition ease-in-out cursor-pointer stroke-2 duration-400 hover:text-black dark:hover:text-white top-7 right-7'
+            onClick={handleRenderStats}
+          />
           {isPositive(totalCurrentMonthTiming) && (
             <SwiperSlide className='pt-6 pl-6 pr-6 md:pt-7 pb-[45px] md:pb-[51px] md:pr-7 md:pl-7'>
               <ClockIcon className='h-10 stroke-2' />
@@ -47,7 +69,10 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface | null }):
                 {totalCurrentMonthTiming}
                 <PerformanceIndicator performance={performance} />
               </div>
-              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>hours worked<br /> in the current month.</span>
+              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>
+                hours worked
+                <br /> in the current month.
+              </span>
             </SwiperSlide>
           )}
           {isPositive(totalTasksCurrentMonth) && (
@@ -56,7 +81,10 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface | null }):
               <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
                 {totalTasksCurrentMonth}
               </div>
-              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>tasks uploaded<br /> in the current month.</span>
+              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>
+                tasks uploaded
+                <br /> in the current month.
+              </span>
             </SwiperSlide>
           )}
           {isPositive(totalPastMonthTiming) && (
@@ -65,7 +93,10 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface | null }):
               <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
                 {totalPastMonthTiming}
               </div>
-              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>hours worked<br /> last month.</span>
+              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>
+                hours worked
+                <br /> last month.
+              </span>
             </SwiperSlide>
           )}
           {isPositive(totalTasksPastMonth) && (
@@ -74,16 +105,27 @@ export default function Stats ({ stats }: { stats: TaskStatsInterface | null }):
               <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
                 {totalTasksPastMonth}
               </div>
-              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>tasks uploaded<br /> last month.</span>
+              <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>
+                tasks uploaded
+                <br /> last month.
+              </span>
             </SwiperSlide>
           )}
         </Swiper>
       )}
       {emptyStats && (
         <div className='relative p-6 border-2 text-blue border-blue dark:text-blue dark:border-blue md:p-7 rounded-3xl'>
-          <EyeSlashIcon className='absolute z-10 w-6 h-6 transition ease-in-out cursor-pointer stroke-2 dark:text-blue duration-400 hover:text-black dark:hover:text-white top-7 right-7' onClick={handleRenderStats} />
+          <EyeSlashIcon
+            className='absolute z-10 w-6 h-6 transition ease-in-out cursor-pointer stroke-2 dark:text-blue duration-400 hover:text-black dark:hover:text-white top-7 right-7'
+            onClick={handleRenderStats}
+          />
           <PresentationChartLineIcon className='h-10 stroke-2' />
-          <span className='block text-2xl text-black dark:text-white font-secondaryFont mt-7'><Balancer>We can&apos;t wait to show you stats but it looks like it&apos;s your first month or you didn&apos;t upload tasks last month.</Balancer></span>
+          <span className='block text-2xl text-black dark:text-white font-secondaryFont mt-7'>
+            <Balancer>
+              We can&apos;t wait to show you stats but it looks like it&apos;s
+              your first month or you didn&apos;t upload tasks last month.
+            </Balancer>
+          </span>
         </div>
       )}
     </>

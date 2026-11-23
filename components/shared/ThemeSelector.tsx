@@ -5,8 +5,12 @@ import { MoonIcon, SunIcon } from 'components/shared/ThemeIcons'
 import useStoredState from 'hooks/useStoredState'
 import { parseStoredBoolean } from 'utils/storage'
 
-export default function ThemeSelector (): React.JSX.Element {
-  const [darkMode, setDarkMode] = useStoredState('darkMode', parseStoredBoolean, true)
+export default function ThemeSelector(): React.JSX.Element {
+  const [darkMode, setDarkMode] = useStoredState(
+    'darkMode',
+    parseStoredBoolean,
+    true
+  )
 
   const toggleTheme = (): void => {
     setDarkMode(!darkMode)
@@ -22,6 +26,12 @@ export default function ThemeSelector (): React.JSX.Element {
   }, [darkMode])
 
   return (
-    <button aria-label='Dark mode' className='transition ease-in-out duration-400 hover:text-blue dark:hover:text-white' onClick={toggleTheme}>{darkMode ? <MoonIcon /> : <SunIcon />}</button>
+    <button
+      aria-label='Dark mode'
+      className='transition ease-in-out duration-400 hover:text-blue dark:hover:text-white'
+      onClick={toggleTheme}
+    >
+      {darkMode ? <MoonIcon /> : <SunIcon />}
+    </button>
   )
 }

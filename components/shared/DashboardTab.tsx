@@ -2,13 +2,23 @@ import { useContext } from 'react'
 import { motion } from 'motion/react'
 import Link from 'next/link'
 import { toast } from 'sonner'
-import { CheckCircleIcon, ShieldExclamationIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import {
+  CheckCircleIcon,
+  ShieldExclamationIcon,
+  XMarkIcon
+} from '@heroicons/react/24/outline'
 import { useRouter } from 'next/navigation'
 import { AppContext } from 'contexts/AppContext'
 import { PAGES } from 'constants/components'
 import logout from 'services/auth/logout'
 import { PARTNER_ROLE } from 'constants/users'
-import { DASHBOARD_TAB_OFFSET_Y, HIDDEN_OPACITY, NO_OFFSET, TRANSITION_DURATION, VISIBLE_OPACITY } from 'constants/animation'
+import {
+  DASHBOARD_TAB_OFFSET_Y,
+  HIDDEN_OPACITY,
+  NO_OFFSET,
+  TRANSITION_DURATION,
+  VISIBLE_OPACITY
+} from 'constants/animation'
 
 interface Props {
   showDashboardBox: boolean
@@ -26,7 +36,10 @@ const VARIANTS = {
   }
 }
 
-export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }: Props): React.JSX.Element {
+export default function DashboardTab({
+  showDashboardBox,
+  setShowDashboardBox
+}: Props): React.JSX.Element {
   const { user, setUser } = useContext(AppContext)
   const router = useRouter()
 
@@ -72,14 +85,39 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
       transition={{ ease: 'easeInOut', duration: TRANSITION_DURATION }}
       initial={false}
     >
-      <div className='fixed w-full block xl:hidden h-full -z-10 bg-light-blue dark:bg-black opacity-[0.97]' onClick={() => { setShowDashboardBox(!showDashboardBox); }} />
+      <div
+        className='fixed w-full block xl:hidden h-full -z-10 bg-light-blue dark:bg-black opacity-[0.97]'
+        onClick={() => {
+          setShowDashboardBox(!showDashboardBox)
+        }}
+      />
       <ul className='flex flex-col items-center justify-center gap-6 text-3xl text-black xl:gap-4 xl:text-xl xl:flex-row xl:w-auto rounded-t-3xl xl:rounded-3xl font-secondaryFont'>
         {pages.map((page) => (
-          <li className='px-8 py-4 transition ease-in-out rounded-full cursor-pointer xl:px-6 xl:py-2 bg-blue duration-400 xl:rounded-3xl xl:hover:bg-black xl:hover:text-white dark:xl:hover:text-black dark:xl:hover:bg-white' key={page.link} onClick={() => { setShowDashboardBox(!showDashboardBox); }}><Link href={page.link}>{page.name}</Link></li>
+          <li
+            className='px-8 py-4 transition ease-in-out rounded-full cursor-pointer xl:px-6 xl:py-2 bg-blue duration-400 xl:rounded-3xl xl:hover:bg-black xl:hover:text-white dark:xl:hover:text-black dark:xl:hover:bg-white'
+            key={page.link}
+            onClick={() => {
+              setShowDashboardBox(!showDashboardBox)
+            }}
+          >
+            <Link href={page.link}>{page.name}</Link>
+          </li>
         ))}
-        <button className='px-8 py-4 transition ease-in-out rounded-full cursor-pointer xl:px-5 xl:py-2 bg-blue duration-400 xl:rounded-3xl xl:hover:bg-black xl:hover:text-white dark:xl:hover:text-black dark:xl:hover:bg-white' onClick={() => { void handleLogout() }}>Log out</button>
+        <button
+          className='px-8 py-4 transition ease-in-out rounded-full cursor-pointer xl:px-5 xl:py-2 bg-blue duration-400 xl:rounded-3xl xl:hover:bg-black xl:hover:text-white dark:xl:hover:text-black dark:xl:hover:bg-white'
+          onClick={() => {
+            void handleLogout()
+          }}
+        >
+          Log out
+        </button>
       </ul>
-      <div className='p-2 transition xl:absolute xl:mt-4 xl:top-full ease-in-out rounded-full cursor-pointer w-9 xl:w-7 bg-blue duration-400 xl:hover:bg-black dark:xl:hover:[&>svg]:stroke-black xl:hover:[&>svg]:stroke-white dark:xl:hover:bg-white' onClick={() => { setShowDashboardBox(!showDashboardBox); }}>
+      <div
+        className='p-2 transition xl:absolute xl:mt-4 xl:top-full ease-in-out rounded-full cursor-pointer w-9 xl:w-7 bg-blue duration-400 xl:hover:bg-black dark:xl:hover:[&>svg]:stroke-black xl:hover:[&>svg]:stroke-white dark:xl:hover:bg-white'
+        onClick={() => {
+          setShowDashboardBox(!showDashboardBox)
+        }}
+      >
         <XMarkIcon className='transition ease-in-out stroke-2 stroke-black duration-400' />
       </div>
     </motion.nav>

@@ -33,10 +33,13 @@ const INITIAL_CREDENTIALS_STATE = {
 }
 
 const ERROR_MESSAGES: Partial<Record<string, string>> = {
-  'trial/permission-denied': 'This is a trial account, to access this feature you must register.',
+  'trial/permission-denied':
+    'This is a trial account, to access this feature you must register.',
   'auth/different-passwords': 'Passwords are not the same. Please, try again.',
-  'auth/invalid-credentials': 'The email or password are invalid. Please, try again.',
-  'auth/expired-session': 'Your session has expired. Please, log in again to change your password.'
+  'auth/invalid-credentials':
+    'The email or password are invalid. Please, try again.',
+  'auth/expired-session':
+    'Your session has expired. Please, log in again to change your password.'
 }
 
 export default function ChangePassword(): React.JSX.Element {
@@ -76,7 +79,10 @@ export default function ChangePassword(): React.JSX.Element {
       // TODO: handle unlogged session
       setStep(SECOND_STEP)
     } catch (error) {
-      if (isAxiosError<ApiErrorData>(error) && error.response?.data.error[FIRST_INDEX].param === 'email') {
+      if (
+        isAxiosError<ApiErrorData>(error) &&
+        error.response?.data.error[FIRST_INDEX].param === 'email'
+      ) {
         setError('auth/expired-session')
       }
       if (apiErrorCode(error) === 'auth/invalid-credentials') {
@@ -111,7 +117,10 @@ export default function ChangePassword(): React.JSX.Element {
         await logout()
       }
     } catch (error) {
-      if (error instanceof Error && error.message === 'auth/different-passwords') {
+      if (
+        error instanceof Error &&
+        error.message === 'auth/different-passwords'
+      ) {
         setError('auth/different-passwords')
         return
       }
@@ -136,9 +145,7 @@ export default function ChangePassword(): React.JSX.Element {
             <Balancer>We have a problem!</Balancer>
           </Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
-            <Balancer>
-              {ERROR_MESSAGES[error]}
-            </Balancer>
+            <Balancer>{ERROR_MESSAGES[error]}</Balancer>
           </p>
           {error !== 'auth/expired-session' && (
             <Button
@@ -269,7 +276,10 @@ export default function ChangePassword(): React.JSX.Element {
                     centerText
                     required
                   />
-                  <PasswordMatch password={credentials.newPassword} confirmation={credentials.confirmNewPassword} />
+                  <PasswordMatch
+                    password={credentials.newPassword}
+                    confirmation={credentials.confirmNewPassword}
+                  />
                 </div>
               </div>
               <Button

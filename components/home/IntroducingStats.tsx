@@ -3,10 +3,25 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'motion/react'
 import Balancer from 'react-wrap-balancer'
-import { ArrowUpIcon, ArrowDownIcon, ClockIcon, FireIcon, RectangleStackIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowUpIcon,
+  ArrowDownIcon,
+  ClockIcon,
+  FireIcon,
+  RectangleStackIcon
+} from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
 import Paragraph from 'components/shared/Paragraph'
-import { HIDDEN_OPACITY, NO_OFFSET, SECOND_COLUMN_DELAY, SECTION_REVEAL_DURATION, SECTION_REVEAL_OFFSET_Y, TRANSITION_DELAY, TRANSITION_DURATION, VISIBLE_OPACITY } from 'constants/animation'
+import {
+  HIDDEN_OPACITY,
+  NO_OFFSET,
+  SECOND_COLUMN_DELAY,
+  SECTION_REVEAL_DURATION,
+  SECTION_REVEAL_OFFSET_Y,
+  TRANSITION_DELAY,
+  TRANSITION_DURATION,
+  VISIBLE_OPACITY
+} from 'constants/animation'
 
 const CONTAINER_VARIANTS = {
   visible: {
@@ -30,7 +45,7 @@ const CONTENT_VARIANTS = {
   }
 }
 
-export default function IntroducingStats (): React.JSX.Element {
+export default function IntroducingStats(): React.JSX.Element {
   const containerRef = useRef(null)
   const leftColumnRef = useRef(null)
   const rightColumnRef = useRef(null)
@@ -73,7 +88,10 @@ export default function IntroducingStats (): React.JSX.Element {
               </div>
             </div>
           </div>
-          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>tasks uploaded<br /> in the current month.</span>
+          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>
+            tasks uploaded
+            <br /> in the current month.
+          </span>
         </article>
 
         <article className='p-6 md:p-7 transition ease-in-out border-2 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 xl:scale-[0.75]'>
@@ -81,7 +99,10 @@ export default function IntroducingStats (): React.JSX.Element {
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
             102
           </div>
-          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>hours worked<br /> in the current month.</span>
+          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>
+            hours worked
+            <br /> in the current month.
+          </span>
         </article>
 
         <article className='p-6 md:p-7 transition ease-in-out border-2 border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 xl:scale-[0.75]'>
@@ -89,7 +110,10 @@ export default function IntroducingStats (): React.JSX.Element {
           <div className='flex items-center text-4xl font-bold text-black dark:text-white gap-x-1 mt-7 font-primaryFont'>
             Nike
           </div>
-          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>Project of<br /> last month.</span>
+          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>
+            Project of
+            <br /> last month.
+          </span>
         </article>
 
         <article className='hidden p-6 transition ease-in-out border-2 md:p-7 md:block border-blue text-blue dark:text-blue dark:border-blue rounded-3xl duration-400 group'>
@@ -103,7 +127,10 @@ export default function IntroducingStats (): React.JSX.Element {
               </div>
             </div>
           </div>
-          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>hours worked<br /> last month.</span>
+          <span className='mt-1 text-2xl text-black dark:text-white font-secondaryFont'>
+            hours worked
+            <br /> last month.
+          </span>
         </article>
       </motion.div>
       <motion.div
@@ -118,9 +145,16 @@ export default function IntroducingStats (): React.JSX.Element {
           delay: SECOND_COLUMN_DELAY
         }}
       >
-        <Headline variant='2xl' className='mb-10!'><Balancer>All you need in one blink!</Balancer></Headline>
+        <Headline variant='2xl' className='mb-10!'>
+          <Balancer>All you need in one blink!</Balancer>
+        </Headline>
         <div className='dark:text-white'>
-          <Paragraph variant='normal'><Balancer>You can control in detail the time you worked on a project and extra data associated with it. All in the same place.</Balancer></Paragraph>
+          <Paragraph variant='normal'>
+            <Balancer>
+              You can control in detail the time you worked on a project and
+              extra data associated with it. All in the same place.
+            </Balancer>
+          </Paragraph>
         </div>
       </motion.div>
     </motion.section>

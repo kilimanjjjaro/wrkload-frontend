@@ -14,7 +14,9 @@ interface AxiosInterface {
   user: UserInterface
 }
 
-export const updateAvatar = async ({ avatar }: Props): Promise<UserInterface> => {
+export const updateAvatar = async ({
+  avatar
+}: Props): Promise<UserInterface> => {
   let config = {}
   let _id = ''
   const accessToken = getCookie('accessToken')
@@ -33,7 +35,11 @@ export const updateAvatar = async ({ avatar }: Props): Promise<UserInterface> =>
     }
   }
 
-  const response: AxiosResponse<AxiosInterface> = await privateApi.patch(`${USERS_ENDPOINT}/${_id}`, { avatar }, config)
+  const response: AxiosResponse<AxiosInterface> = await privateApi.patch(
+    `${USERS_ENDPOINT}/${_id}`,
+    { avatar },
+    config
+  )
 
   window.localStorage.setItem('user', JSON.stringify(response.data.user))
 

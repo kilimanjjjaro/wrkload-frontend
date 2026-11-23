@@ -4,6 +4,8 @@ import { pageMetadata } from 'constants/metadata'
 
 export const metadata = pageMetadata('Projects - wrkload', '/projects')
 
-export default function ProjectsLayout ({ children }: ChildrenInterface): React.JSX.Element {
+export default function ProjectsLayout({
+  children
+}: ChildrenInterface): React.JSX.Element {
   return <Suspense>{children}</Suspense>
 }

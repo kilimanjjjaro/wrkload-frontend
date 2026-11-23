@@ -2,7 +2,12 @@ import { useContext } from 'react'
 import { usePathname } from 'next/navigation'
 import dayjs from 'dayjs'
 import Balancer from 'react-wrap-balancer'
-import { CalendarIcon, ClockIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
+import {
+  CalendarIcon,
+  ClockIcon,
+  PencilSquareIcon,
+  TrashIcon
+} from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Stats from 'components/tasks/Stats'
 import Pagination from 'components/shared/Pagination'
@@ -13,7 +18,11 @@ import { ModalsContext } from 'contexts/ModalsContext'
 import type { FullTaskInterface, TaskInterface } from 'interfaces/tasks/Task'
 import Headline from 'components/shared/Headline'
 
-export default function TaskList ({ data }: { data: FullTaskInterface }): React.JSX.Element {
+export default function TaskList({
+  data
+}: {
+  data: FullTaskInterface
+}): React.JSX.Element {
   const { setSelectedTask, shouldRenderStats } = useContext(AppContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } =
     useContext(ModalsContext)
@@ -34,20 +43,29 @@ export default function TaskList ({ data }: { data: FullTaskInterface }): React.
   return (
     <>
       <MasonryGrid>
-        {shouldRenderStats && !pathname.includes('search') && <Stats stats={stats} />}
+        {shouldRenderStats && !pathname.includes('search') && (
+          <Stats stats={stats} />
+        )}
         {tasks.map((task) => (
           <article
-            key={task._id} className='relative flex flex-col items-start p-6 text-black wrap-break-word transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
+            key={task._id}
+            className='relative flex flex-col items-start p-6 text-black wrap-break-word transition ease-in-out bg-light-blue dark:bg-white rounded-3xl duration-400 group md:p-7'
           >
             <Headline
-              variant='md' className={clsx(
+              variant='md'
+              className={clsx(
                 'pr-10 xl:pr-0',
                 task.description === '' && 'mb-0!'
               )}
-            >{task.title}
+            >
+              {task.title}
             </Headline>
 
-            {task.description !== '' && <Paragraph variant='sm'><Balancer>{task.description}</Balancer></Paragraph>}
+            {task.description !== '' && (
+              <Paragraph variant='sm'>
+                <Balancer>{task.description}</Balancer>
+              </Paragraph>
+            )}
 
             <div className='flex flex-wrap gap-3 mt-4'>
               <div className='relative flex items-center justify-center h-8 px-4 text-xs text-black rounded-full group/tooltip-1 bg-blue gap-x-1 font-secondaryFont'>
@@ -68,10 +86,20 @@ export default function TaskList ({ data }: { data: FullTaskInterface }): React.
             </div>
 
             <div className='absolute right-6 md:right-0 flex flex-col md:flex-row items-end justify-end md:justify-center md:w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 md:top-[-0.9rem] xl:opacity-0 gap-2 md:gap-3 group-hover:opacity-100'>
-              <div onClick={() => { handleUpdateTaskClick(task); }} className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-yellow hover:bg-blue'>
+              <div
+                onClick={() => {
+                  handleUpdateTaskClick(task)
+                }}
+                className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-yellow hover:bg-blue'
+              >
                 <PencilSquareIcon className='w-4 stroke-2' />
               </div>
-              <div onClick={() => { handleDeleteTaskClick(task); }} className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-red hover:bg-blue'>
+              <div
+                onClick={() => {
+                  handleDeleteTaskClick(task)
+                }}
+                className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-red hover:bg-blue'
+              >
                 <TrashIcon className='w-4 stroke-2' />
               </div>
             </div>

@@ -15,7 +15,7 @@ interface ModalsContextValues {
 
   searchModalStatus: boolean
   setSearchModalStatus: Dispatch<React.SetStateAction<boolean>>
-};
+}
 
 const DEFAULT_MODALS_CONTEXT_VALUES: ModalsContextValues = {
   addDataModalStatus: false,
@@ -29,7 +29,9 @@ const DEFAULT_MODALS_CONTEXT_VALUES: ModalsContextValues = {
   setSearchModalStatus: noop
 }
 
-export const ModalsContext = createContext<ModalsContextValues>(DEFAULT_MODALS_CONTEXT_VALUES)
+export const ModalsContext = createContext<ModalsContextValues>(
+  DEFAULT_MODALS_CONTEXT_VALUES
+)
 
 const ModalsProvider = ({ children }: ChildrenInterface): React.JSX.Element => {
   const [addDataModalStatus, setAddDataModalStatus] = useState(false)
@@ -39,7 +41,18 @@ const ModalsProvider = ({ children }: ChildrenInterface): React.JSX.Element => {
   const [searchModalStatus, setSearchModalStatus] = useState(false)
 
   return (
-    <ModalsContext.Provider value={{ addDataModalStatus, setAddDataModalStatus, updateDataModalStatus, setUpdateDataModalStatus, deleteDataModalStatus, setDeleteDataModalStatus, searchModalStatus, setSearchModalStatus }}>
+    <ModalsContext.Provider
+      value={{
+        addDataModalStatus,
+        setAddDataModalStatus,
+        updateDataModalStatus,
+        setUpdateDataModalStatus,
+        deleteDataModalStatus,
+        setDeleteDataModalStatus,
+        searchModalStatus,
+        setSearchModalStatus
+      }}
+    >
       {children}
     </ModalsContext.Provider>
   )

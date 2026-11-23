@@ -10,7 +10,9 @@ import Footer from 'components/shared/Footer'
 import { LENIS_OPTIONS } from 'constants/components'
 import type { ChildrenInterface } from 'interfaces/components'
 
-export default function Providers ({ children }: ChildrenInterface): React.JSX.Element {
+export default function Providers({
+  children
+}: ChildrenInterface): React.JSX.Element {
   return (
     <SWRConfig value={{ revalidateOnFocus: false }}>
       <AppProvider>
@@ -20,7 +22,11 @@ export default function Providers ({ children }: ChildrenInterface): React.JSX.E
             {children}
           </ReactLenis>
         </AnimatePresence>
-        <Toaster position='top-center' toastOptions={{ className: 'ui-notifications' }} duration={5000} />
+        <Toaster
+          position='top-center'
+          toastOptions={{ className: 'ui-notifications' }}
+          duration={5000}
+        />
         <Footer />
       </AppProvider>
     </SWRConfig>

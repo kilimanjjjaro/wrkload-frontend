@@ -18,7 +18,7 @@ const INITIAL_CREDENTIALS_STATE = {
   email: ''
 }
 
-export default function ResendConfirmationAccountLink (): React.JSX.Element {
+export default function ResendConfirmationAccountLink(): React.JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -29,7 +29,9 @@ export default function ResendConfirmationAccountLink (): React.JSX.Element {
     setCredentials({ ...credentials, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (
+    event: React.SubmitEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault()
     const { email } = credentials
 
@@ -52,14 +54,24 @@ export default function ResendConfirmationAccountLink (): React.JSX.Element {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
-          <Headline variant='md'><Balancer>We have a problem!</Balancer></Headline>
+          <Headline variant='md'>
+            <Balancer>We have a problem!</Balancer>
+          </Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
             <Balancer>
-              {error === 'auth/user-not-found' && 'No account associated with this email was found, please try again.'}
-              {error === 'auth/account-already-confirmed' && 'This account has already been confirmed, please try log in.'}
+              {error === 'auth/user-not-found' &&
+                'No account associated with this email was found, please try again.'}
+              {error === 'auth/account-already-confirmed' &&
+                'This account has already been confirmed, please try log in.'}
             </Balancer>
           </p>
-          <Button ariaLabel='Login' onClick={() => { router.push('/login'); }} variant='secondary'>
+          <Button
+            ariaLabel='Login'
+            onClick={() => {
+              router.push('/login')
+            }}
+            variant='secondary'
+          >
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -71,9 +83,21 @@ export default function ResendConfirmationAccountLink (): React.JSX.Element {
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
-          <Headline variant='md'><Balancer>Done!</Balancer></Headline>
-          <p className='mb-5 text-sm font-secondaryFont'><Balancer>A link to confirm the account was sent again, <b>please check your inbox.</b></Balancer></p>
-          <Button onClick={() => { router.push('/login'); }} variant='secondary'>
+          <Headline variant='md'>
+            <Balancer>Done!</Balancer>
+          </Headline>
+          <p className='mb-5 text-sm font-secondaryFont'>
+            <Balancer>
+              A link to confirm the account was sent again,{' '}
+              <b>please check your inbox.</b>
+            </Balancer>
+          </p>
+          <Button
+            onClick={() => {
+              router.push('/login')
+            }}
+            variant='secondary'
+          >
             <ArrowRightIcon className='w-4 stroke-3' />
           </Button>
         </div>
@@ -85,17 +109,41 @@ export default function ResendConfirmationAccountLink (): React.JSX.Element {
     <PageTransition>
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-96 min-w-auto rounded-3xl'>
-          <Headline variant='md'><Balancer>Resend confirmation account link</Balancer></Headline>
+          <Headline variant='md'>
+            <Balancer>Resend confirmation account link</Balancer>
+          </Headline>
           <Paragraph variant='sm'>
             <Balancer>
-              If the link to confirm your account has expired, <b>please complete the following form and we will send you a new one.</b>
+              If the link to confirm your account has expired,{' '}
+              <b>
+                please complete the following form and we will send you a new
+                one.
+              </b>
             </Balancer>
           </Paragraph>
-          <form className='mt-5' onSubmit={(event) => { void handleSubmit(event) }}>
+          <form
+            className='mt-5'
+            onSubmit={(event) => {
+              void handleSubmit(event)
+            }}
+          >
             <div className='flex flex-col gap-3 mb-3'>
-              <Input onChange={handleChange} value={credentials.email} name='email' type='email' placeholder='Email' autoComplete='email' centerText required />
+              <Input
+                onChange={handleChange}
+                value={credentials.email}
+                name='email'
+                type='email'
+                placeholder='Email'
+                autoComplete='email'
+                centerText
+                required
+              />
             </div>
-            <Button ariaLabel='Submit' variant='secondary' isLoading={isLoading}>
+            <Button
+              ariaLabel='Submit'
+              variant='secondary'
+              isLoading={isLoading}
+            >
               <ArrowRightIcon className='w-4 stroke-3' />
             </Button>
           </form>

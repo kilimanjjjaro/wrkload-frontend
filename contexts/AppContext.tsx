@@ -1,6 +1,12 @@
 'use client'
 
-import { createContext, useEffect, useState, useSyncExternalStore, type Dispatch } from 'react'
+import {
+  createContext,
+  useEffect,
+  useState,
+  useSyncExternalStore,
+  type Dispatch
+} from 'react'
 import { setCookie } from 'cookies-next/client'
 import type { ChildrenInterface } from 'interfaces/components'
 import type { TaskInterface } from 'interfaces/tasks/Task'
@@ -31,7 +37,7 @@ interface AppContextValues {
   setIsLoggingIn: Dispatch<React.SetStateAction<boolean>>
   trialMode: boolean
   setTrialMode: Dispatch<React.SetStateAction<boolean>>
-};
+}
 
 const DEFAULT_APP_CONTEXT_VALUE: AppContextValues = {
   user: null,
@@ -54,15 +60,33 @@ const DEFAULT_APP_CONTEXT_VALUE: AppContextValues = {
 
 const parseText = (stored: string): string => stored
 
-export const AppContext = createContext<AppContextValues>(DEFAULT_APP_CONTEXT_VALUE)
+export const AppContext = createContext<AppContextValues>(
+  DEFAULT_APP_CONTEXT_VALUE
+)
 
 const AppProvider = ({ children }: ChildrenInterface): React.JSX.Element => {
-  const [user, setUser] = useStoredState<SecureUserInterface | null>('user', parseStoredUser, null)
-  const [selectedUser, setSelectedUser] = useState<UserInterface>(INITIAL_USER_STATE)
-  const [selectedTask, setSelectedTask] = useState<TaskInterface>(INITIAL_TASK_STATE)
-  const [selectedProject, setSelectedProject] = useState<ProjectInterface>(INITIAL_PROJECT_STATE)
-  const [selectedProjectToFetch, setSelectedProjectToFetch] = useStoredState('selectedProject', parseText, '')
-  const [shouldRenderStats, setShouldRenderStats] = useStoredState('showStats', parseStoredBoolean, true)
+  const [user, setUser] = useStoredState<SecureUserInterface | null>(
+    'user',
+    parseStoredUser,
+    null
+  )
+  const [selectedUser, setSelectedUser] =
+    useState<UserInterface>(INITIAL_USER_STATE)
+  const [selectedTask, setSelectedTask] =
+    useState<TaskInterface>(INITIAL_TASK_STATE)
+  const [selectedProject, setSelectedProject] = useState<ProjectInterface>(
+    INITIAL_PROJECT_STATE
+  )
+  const [selectedProjectToFetch, setSelectedProjectToFetch] = useStoredState(
+    'selectedProject',
+    parseText,
+    ''
+  )
+  const [shouldRenderStats, setShouldRenderStats] = useStoredState(
+    'showStats',
+    parseStoredBoolean,
+    true
+  )
   const [isLoggingIn, setIsLoggingIn] = useState(false)
   const [trialMode, setTrialMode] = useState(false)
 
@@ -81,24 +105,25 @@ const AppProvider = ({ children }: ChildrenInterface): React.JSX.Element => {
   }, [hasStoredUser])
 
   return (
-    <AppContext.Provider value={{
-      user,
-      setUser,
-      selectedUser,
-      setSelectedUser,
-      selectedTask,
-      setSelectedTask,
-      selectedProject,
-      setSelectedProject,
-      selectedProjectToFetch,
-      setSelectedProjectToFetch,
-      shouldRenderStats,
-      setShouldRenderStats,
-      isLoggingIn,
-      setIsLoggingIn,
-      trialMode,
-      setTrialMode
-    }}
+    <AppContext.Provider
+      value={{
+        user,
+        setUser,
+        selectedUser,
+        setSelectedUser,
+        selectedTask,
+        setSelectedTask,
+        selectedProject,
+        setSelectedProject,
+        selectedProjectToFetch,
+        setSelectedProjectToFetch,
+        shouldRenderStats,
+        setShouldRenderStats,
+        isLoggingIn,
+        setIsLoggingIn,
+        trialMode,
+        setTrialMode
+      }}
     >
       {children}
     </AppContext.Provider>

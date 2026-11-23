@@ -208,7 +208,11 @@ export class FakeApi {
     }
 
     if (index === NOT_FOUND_INDEX) {
-      return fail(HTTP_STATUS_NOT_FOUND, 'tasks/task-not-found', 'Task not found')
+      return fail(
+        HTTP_STATUS_NOT_FOUND,
+        'tasks/task-not-found',
+        'Task not found'
+      )
     }
 
     if (recorded.method === 'DELETE') {
@@ -308,7 +312,8 @@ export class FakeApi {
       const users = this.users.filter((candidate) =>
         matches(candidate.username, recorded.query.search)
       )
-      if (users.length === NO_RESULTS) return ok({ pagination: null, users: [] })
+      if (users.length === NO_RESULTS)
+        return ok({ pagination: null, users: [] })
       const { docs, pagination } = paginate(users, recorded.query)
       return ok({ pagination, users: docs })
     }

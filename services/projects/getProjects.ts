@@ -7,7 +7,10 @@ interface Props {
   noLimit?: boolean
 }
 
-export const getProjects = async ({ page, noLimit }: Props): Promise<FullProjectInterface> => {
+export const getProjects = async ({
+  page,
+  noLimit
+}: Props): Promise<FullProjectInterface> => {
   let currentPage = '1'
   let config = {}
   const accessToken = getCookie('accessToken')
@@ -25,10 +28,16 @@ export const getProjects = async ({ page, noLimit }: Props): Promise<FullProject
   }
 
   if (noLimit === true) {
-    const response = await privateApi.get<FullProjectInterface>('/projects', config)
+    const response = await privateApi.get<FullProjectInterface>(
+      '/projects',
+      config
+    )
     return response.data
   } else {
-    const response = await privateApi.get<FullProjectInterface>(`/projects?limit=11&page=${currentPage}`, config)
+    const response = await privateApi.get<FullProjectInterface>(
+      `/projects?limit=11&page=${currentPage}`,
+      config
+    )
     return response.data
   }
 }

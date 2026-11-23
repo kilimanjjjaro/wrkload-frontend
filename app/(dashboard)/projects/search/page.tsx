@@ -22,15 +22,23 @@ export default function SearchProjects(): React.JSX.Element {
   const page = params.get('page')
   const router = useRouter()
 
-  const { data, isLoading, isValidating, mutate } = useSWR('projects', async () => await searchProjects({ query, page }), { onSuccess: data => sortProjects(data.projects) })
+  const { data, isLoading, isValidating, mutate } = useSWR(
+    'projects',
+    async () => await searchProjects({ query, page }),
+    { onSuccess: (data) => sortProjects(data.projects) }
+  )
 
   useEffect(() => {
     mutate().catch(logError)
   }, [page, mutate])
 
   const shouldRenderSkeleton = isLoading || isValidating
-  const shouldRenderProjects = data !== undefined && data.projects.length >= MIN_LENGTH && !shouldRenderSkeleton
-  const shouldRenderNotFoundSign = !shouldRenderProjects && !shouldRenderSkeleton
+  const shouldRenderProjects =
+    data !== undefined &&
+    data.projects.length >= MIN_LENGTH &&
+    !shouldRenderSkeleton
+  const shouldRenderNotFoundSign =
+    !shouldRenderProjects && !shouldRenderSkeleton
 
   return (
     <PageTransition>
@@ -40,7 +48,14 @@ export default function SearchProjects(): React.JSX.Element {
         </h2>
         {!shouldRenderNotFoundSign && (
           <div className='flex items-start gap-x-5'>
-            <Button onClick={() => { router.push('/projects'); }} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /> Go to projects</Button>
+            <Button
+              onClick={() => {
+                router.push('/projects')
+              }}
+              variant='primary'
+            >
+              <ArrowLeftIcon className='w-4 stroke-3' /> Go to projects
+            </Button>
           </div>
         )}
       </header>
@@ -55,8 +70,20 @@ export default function SearchProjects(): React.JSX.Element {
               src={notFoundImage}
               alt='Not found image'
             />
-            <span className='text-xl text-center text-black dark:text-white font-secondaryFont'>No search results found. <br className='hidden lg:block' />Please try again.</span>
-            <Button ariaLabel='Go to projects' className='w-auto!' onClick={() => { router.push('/projects'); }} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
+            <span className='text-xl text-center text-black dark:text-white font-secondaryFont'>
+              No search results found. <br className='hidden lg:block' />
+              Please try again.
+            </span>
+            <Button
+              ariaLabel='Go to projects'
+              className='w-auto!'
+              onClick={() => {
+                router.push('/projects')
+              }}
+              variant='primary'
+            >
+              <ArrowLeftIcon className='w-4 stroke-3' />
+            </Button>
           </div>
         )}
       </main>

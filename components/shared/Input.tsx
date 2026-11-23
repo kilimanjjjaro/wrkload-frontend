@@ -2,11 +2,25 @@ import clsx from 'clsx'
 import type { InputInterface } from 'interfaces/components'
 
 const VARIANTS = {
-  DISABLED: 'text-black placeholder-black bg-light-blue cursor-not-allowed hover:bg-light-blue! focus:bg-light-blue!',
+  DISABLED:
+    'text-black placeholder-black bg-light-blue cursor-not-allowed hover:bg-light-blue! focus:bg-light-blue!',
   CENTERED: 'text-center'
 }
 
-export default function Input ({ onChange, value, name, type, placeholder, autoComplete, centerText, required, disabled, minLength, maxLength, className }: InputInterface): React.JSX.Element {
+export default function Input({
+  onChange,
+  value,
+  name,
+  type,
+  placeholder,
+  autoComplete,
+  centerText,
+  required,
+  disabled,
+  minLength,
+  maxLength,
+  className
+}: InputInterface): React.JSX.Element {
   return (
     <input
       className={clsx(

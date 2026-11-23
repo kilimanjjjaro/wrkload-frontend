@@ -1,10 +1,5 @@
 import type { Page } from '@playwright/test'
-import {
-  PARTNER,
-  PASSWORDS,
-  TRIAL,
-  UNCONFIRMED
-} from '../constants/fixtures'
+import { PARTNER, PASSWORDS, TRIAL, UNCONFIRMED } from '../constants/fixtures'
 import { ROLE_PARTNER } from '../constants/api'
 import {
   FIRST_REQUEST,
@@ -14,13 +9,15 @@ import {
 import { expect, fill, logIn, test, visit } from '../utils/fixtures'
 
 const cookieValue = async (page: Page, name: string) =>
-  (await page.context().cookies()).find((cookie) => cookie.name === name)
-    ?.value
+  (await page.context().cookies()).find((cookie) => cookie.name === name)?.value
 
 test.describe('login', () => {
   test('logs in and goes to the tasks', async ({ page, api }) => {
     await visit(page, '/login')
-    await fill(page, { email: PARTNER.email, password: PASSWORDS[PARTNER.email] })
+    await fill(page, {
+      email: PARTNER.email,
+      password: PASSWORDS[PARTNER.email]
+    })
     await page.getByRole('button', { name: 'Login' }).click()
 
     await page.waitForURL('**/tasks')
@@ -68,7 +65,10 @@ test.describe('login', () => {
     })
   }
 
-  test('fills the trial credentials and welcomes the trial user', async ({ page, isMobile }) => {
+  test('fills the trial credentials and welcomes the trial user', async ({
+    page,
+    isMobile
+  }) => {
     await visit(page, '/')
     await page
       .getByRole('button', { name: 'Try now!' })
@@ -96,7 +96,9 @@ test.describe('registry', () => {
     await page.getByRole('button', { name: 'Registry' }).click()
 
     await expect(page.getByRole('heading', { name: 'Done!' })).toBeVisible()
-    expect(api.requestsTo('POST', '/auth/register')[FIRST_REQUEST].body).toEqual({
+    expect(
+      api.requestsTo('POST', '/auth/register')[FIRST_REQUEST].body
+    ).toEqual({
       username: 'Dave',
       email: 'dave@wrkload.test',
       password: 'dave-password',
@@ -105,7 +107,10 @@ test.describe('registry', () => {
     })
   })
 
-  test('rejects different passwords without calling the api', async ({ page, api }) => {
+  test('rejects different passwords without calling the api', async ({
+    page,
+    api
+  }) => {
     await visit(page, '/registry')
     await fill(page, {
       username: 'Dave',
@@ -146,12 +151,14 @@ test.describe('password recovery', () => {
     await expect(
       page.getByText('An email has been sent to forgot your password.')
     ).toBeVisible()
-    expect(api.requestsTo('POST', '/auth/remember-password')[FIRST_REQUEST].body).toEqual(
-      { email: PARTNER.email }
-    )
+    expect(
+      api.requestsTo('POST', '/auth/remember-password')[FIRST_REQUEST].body
+    ).toEqual({ email: PARTNER.email })
   })
 
-  test('explains that the trial account cannot reset its password', async ({ page }) => {
+  test('explains that the trial account cannot reset its password', async ({
+    page
+  }) => {
     await visit(page, '/remember-password')
     await fill(page, { email: TRIAL.email })
     await page.getByRole('button', { name: 'Submit' }).click()
@@ -230,7 +237,9 @@ test.describe('account settings', () => {
     await expect(
       page.getByText('You can now use your new password.')
     ).toBeVisible()
-    expect(api.requestsTo('PATCH', '/auth/change-password')[FIRST_REQUEST].body).toEqual({
+    expect(
+      api.requestsTo('PATCH', '/auth/change-password')[FIRST_REQUEST].body
+    ).toEqual({
       email: PARTNER.email,
       oldPassword: PASSWORDS[PARTNER.email],
       newPassword: 'new-password-1'
@@ -251,13 +260,18 @@ test.describe('account settings', () => {
 
   test('deletes the account', async ({ page, api }) => {
     await visit(page, '/delete-account')
-    await fill(page, { email: PARTNER.email, password: PASSWORDS[PARTNER.email] })
+    await fill(page, {
+      email: PARTNER.email,
+      password: PASSWORDS[PARTNER.email]
+    })
     await page.getByRole('button', { name: 'Submit' }).click()
 
     await expect(
       page.getByText('Your account was deleted. Thanks for this time!')
     ).toBeVisible()
-    expect(api.requestsTo('DELETE', `/users/${PARTNER._id}`)).toHaveLength(SINGLE_REQUEST)
+    expect(api.requestsTo('DELETE', `/users/${PARTNER._id}`)).toHaveLength(
+      SINGLE_REQUEST
+    )
   })
 
   test('logs out from the dashboard tab', async ({ page, api }) => {

@@ -6,7 +6,7 @@ interface LogoutResponseInterface {
   status: string
 }
 
-export default async function logout (): Promise<LogoutResponseInterface> {
+export default async function logout(): Promise<LogoutResponseInterface> {
   const response = await api.get<LogoutResponseInterface>('/auth/logout')
 
   if (response.data.status === 'ok') {

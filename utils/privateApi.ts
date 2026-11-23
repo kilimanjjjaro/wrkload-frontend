@@ -1,4 +1,8 @@
-import axios, { isAxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios'
+import axios, {
+  isAxiosError,
+  type AxiosResponse,
+  type InternalAxiosRequestConfig
+} from 'axios'
 import { getCookie, setCookie } from 'cookies-next/client'
 import { HTTP_STATUS_UNAUTHORIZED } from 'constants/http'
 import { toError } from 'utils/errors'
@@ -34,32 +38,44 @@ privateApi.interceptors.request.use(
   }
 )
 
-privateApi.interceptors.response.use((response) => response, async (error: unknown) => {
-  const config: RetriableRequestConfig | undefined = isAxiosError(error) ? error.config : undefined
+privateApi.interceptors.response.use(
+  (response) => response,
+  async (error: unknown) => {
+    const config: RetriableRequestConfig | undefined = isAxiosError(error)
+      ? error.config
+      : undefined
 
-  if (isAxiosError(error) && error.response?.status === HTTP_STATUS_UNAUTHORIZED && config !== undefined && config.sent === undefined) {
-    config.sent = true
+    if (
+      isAxiosError(error) &&
+      error.response?.status === HTTP_STATUS_UNAUTHORIZED &&
+      config !== undefined &&
+      config.sent === undefined
+    ) {
+      config.sent = true
 
-    const response: AxiosResponse<RefreshTokenInterface> = await axios({
-      method: 'GET',
-      baseURL: BASE_URL,
-      url: '/auth/refreshToken'
-    })
+      const response: AxiosResponse<RefreshTokenInterface> = await axios({
+        method: 'GET',
+        baseURL: BASE_URL,
+        url: '/auth/refreshToken'
+      })
 
-    setCookie('accessToken', response.data.accessToken, {
-      maxAge: response.data.expiresIn,
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      secure: process.env.NODE_ENV === 'production'
-    })
+      setCookie('accessToken', response.data.accessToken, {
+        maxAge: response.data.expiresIn,
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === 'production'
+      })
 
-    if (response.data.accessToken !== undefined) {
-      config.headers.set('Authorization', `Bearer ${response.data.accessToken}`)
+      if (response.data.accessToken !== undefined) {
+        config.headers.set(
+          'Authorization',
+          `Bearer ${response.data.accessToken}`
+        )
+      }
+
+      return await axios(config)
     }
-
-    return await axios(config)
+    throw toError(error)
   }
-  throw toError(error)
-}
 )
 
 export default privateApi

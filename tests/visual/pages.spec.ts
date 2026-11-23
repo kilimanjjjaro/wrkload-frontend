@@ -1,5 +1,11 @@
 import type { Page } from '@playwright/test'
-import { ADMIN, PARTNER, PASSWORDS, PROJECTS, TRIAL } from '../constants/fixtures'
+import {
+  ADMIN,
+  PARTNER,
+  PASSWORDS,
+  PROJECTS,
+  TRIAL
+} from '../constants/fixtures'
 import { HOME_MAX_DIFF_PIXEL_RATIO } from '../constants/e2e'
 import { FakeApi } from '../utils/fake-api'
 import { expect, fill, logIn, test, useLightTheme } from '../utils/fixtures'
@@ -58,7 +64,10 @@ const deleteCard = async (page: Page, title: string) => {
 }
 
 const closeModal = async (page: Page) => {
-  await page.getByRole('button', { name: 'Close' }).filter({ visible: true }).click()
+  await page
+    .getByRole('button', { name: 'Close' })
+    .filter({ visible: true })
+    .click()
   await settle(page)
 }
 
@@ -381,7 +390,10 @@ test.describe('toasts', () => {
   }
 
   const confirmDelete = async (page: Page) => {
-    await page.getByRole('button', { name: 'Delete' }).filter({ visible: true }).click()
+    await page
+      .getByRole('button', { name: 'Delete' })
+      .filter({ visible: true })
+      .click()
     await settle(page)
   }
 

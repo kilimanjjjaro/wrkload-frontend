@@ -36,7 +36,9 @@ export default function Users(): React.JSX.Element {
 
   const shouldRenderSkeleton = isLoading || isValidating
   const shouldRenderUsers =
-    data !== undefined && data.users.length >= MIN_LENGTH && !shouldRenderSkeleton
+    data !== undefined &&
+    data.users.length >= MIN_LENGTH &&
+    !shouldRenderSkeleton
   const shouldRenderNotFoundSign = !shouldRenderUsers && !shouldRenderSkeleton
 
   return (
