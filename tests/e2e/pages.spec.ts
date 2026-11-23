@@ -75,6 +75,14 @@ test.describe('public pages render without errors', () => {
     )
   })
 
+  test('loads the vercel analytics script', async ({ page, api }) => {
+    void api
+    const analytics = page.waitForRequest('**/_vercel/insights/script.js')
+    await visit(page, '/')
+
+    expect((await analytics).method()).toBe('GET')
+  })
+
   test('unknown pages answer 404', async ({ page, api }) => {
     void api
     const response = await visit(page, '/missing-page')
