@@ -4,7 +4,6 @@
 @import 'swiper/css/pagination' layer(components);
 
 @custom-variant dark (&:is(.dark *));
-@custom-variant hover (&:hover);
 
 @utility container {
   margin-inline: auto;
