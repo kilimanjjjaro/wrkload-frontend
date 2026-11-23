@@ -162,36 +162,51 @@ test.describe('tasks', () => {
     })
   })
 
-  test.fail(
-    'adds tasks to the remembered project after a reload',
-    async ({ page, api }) => {
-      await page.addInitScript(() => {
-        window.localStorage.setItem('selectedProject', 'Mobile App')
-      })
-      await visit(page, '/tasks')
-      await expect(card(page, 'Onboarding screens')).toBeVisible()
-      await page.getByRole('button', { name: 'Add task' }).click()
-      await page
-        .locator('[name="title"]')
-        .filter({ visible: true })
-        .fill('Release notes')
-      await page
-        .locator('[name="timing"]')
-        .filter({ visible: true })
-        .fill('01:00')
-      await page
-        .locator('[name="deliveredAt"]')
-        .filter({ visible: true })
-        .fill('2026-11-14')
-      await visibleButton(page, 'Submit').click()
+  test('adds tasks to the remembered project after a reload', async ({
+    page,
+    api
+  }) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem('selectedProject', 'Mobile App')
+    })
+    await visit(page, '/tasks')
+    await expect(card(page, 'Onboarding screens')).toBeVisible()
+    await page.getByRole('button', { name: 'Add task' }).click()
+    await page
+      .locator('[name="title"]')
+      .filter({ visible: true })
+      .fill('Release notes')
+    await page
+      .locator('[name="timing"]')
+      .filter({ visible: true })
+      .fill('01:00')
+    await page
+      .locator('[name="deliveredAt"]')
+      .filter({ visible: true })
+      .fill('2026-11-14')
+    await visibleButton(page, 'Submit').click()
 
-      await expect(card(page, 'Release notes')).toBeVisible()
-      expect(
-        api.requestsTo('POST', '/tasks')[FIRST_REQUEST].body
-      ).toMatchObject({ project: 'Mobile App' })
-      await expect(card(page, 'Onboarding screens')).toBeVisible()
-    }
-  )
+    await expect(card(page, 'Release notes')).toBeVisible()
+    expect(api.requestsTo('POST', '/tasks')[FIRST_REQUEST].body).toMatchObject({
+      project: 'Mobile App'
+    })
+    await expect(card(page, 'Onboarding screens')).toBeVisible()
+  })
+
+  test('falls back to the first project when the remembered one is gone', async ({
+    page
+  }) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem('selectedProject', 'Archived')
+    })
+    await visit(page, '/tasks')
+
+    await expect(
+      page.getByText('Agency Site', { exact: true }).first()
+    ).toBeVisible()
+    await expect(card(page, 'Landing page')).toBeVisible()
+    await expect(page.getByText('Archived')).toHaveCount(NO_ELEMENTS)
+  })
 
   test('confirms the updated task', async ({ page }) => {
     await visit(page, '/tasks')

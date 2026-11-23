@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { motion } from 'motion/react'
-import { mutate } from 'swr'
 import clsx from 'clsx'
 import {
   MagnifyingGlassIcon,
@@ -15,7 +14,6 @@ import {
   TRANSITION_DURATION,
   VISIBLE_OPACITY
 } from 'constants/animation'
-import { logError } from 'utils/logError'
 
 const VARIANTS = {
   open: { opacity: VISIBLE_OPACITY, y: NO_OFFSET, display: 'block' },
@@ -33,35 +31,20 @@ export default function ProjectSelector({
 }: {
   projectNames: string[]
 }): React.JSX.Element {
-  const { setSelectedProjectToFetch } = useContext(AppContext)
+  const { selectedProjectToFetch, setSelectedProjectToFetch } =
+    useContext(AppContext)
   const [open, setOpen] = useState(false)
-  const [selected, setSelected] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const selectedProject = window.localStorage.getItem('selectedProject')
-      if (selectedProject === null) {
-        return projectNames[FIRST_INDEX]
-      }
-      return selectedProject
-    }
-    return ''
-  })
+  const selected = projectNames.includes(selectedProjectToFetch)
+    ? selectedProjectToFetch
+    : projectNames[FIRST_INDEX]
   const [searchInputValue, setSearchInputValue] = useState('')
 
   const handleClick = ({ projectName }: { projectName: string }): void => {
-    setSelected(projectName)
     setSearchInputValue('')
     setOpen(false)
     setSelectedProjectToFetch(projectName)
     window.localStorage.setItem('selectedProject', projectName)
   }
-
-  useEffect(() => {
-    const mutateData = async (): Promise<void> => {
-      await mutate('tasks')
-    }
-
-    mutateData().catch(logError)
-  }, [selected])
 
   return (
     <div className='relative flex items-center bg-transparent md:justify-center'>

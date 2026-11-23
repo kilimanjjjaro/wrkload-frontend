@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
 import Header from 'components/tasks/Header'
@@ -45,7 +45,6 @@ const renderFlags = ({
 export default function Tasks(): React.JSX.Element {
   const { selectedProjectToFetch, setSelectedProjectToFetch } =
     useContext(AppContext)
-  let sortedProjectNames: string[] = []
   const params = useSearchParams()
   const page = params.get('page')
 
@@ -58,15 +57,22 @@ export default function Tasks(): React.JSX.Element {
     async () => await getProjects({ page: '1', noLimit: true })
   )
 
-  if (projects !== undefined && projects.projects.length > EMPTY_LENGTH) {
-    sortedProjectNames = projects.projects.map((project) => project.name).sort()
-  }
+  const sortedProjectNames = useMemo(
+    () =>
+      projects === undefined
+        ? []
+        : projects.projects.map((project) => project.name).sort(),
+    [projects]
+  )
 
   useEffect(() => {
-    if (sortedProjectNames.length > EMPTY_LENGTH) {
+    if (
+      sortedProjectNames.length > EMPTY_LENGTH &&
+      !sortedProjectNames.includes(selectedProjectToFetch)
+    ) {
       setSelectedProjectToFetch(sortedProjectNames[FIRST_INDEX])
     }
-  }, [projects])
+  }, [sortedProjectNames, selectedProjectToFetch, setSelectedProjectToFetch])
 
   const {
     data: tasks,
@@ -81,7 +87,7 @@ export default function Tasks(): React.JSX.Element {
 
   useEffect(() => {
     mutate().catch(logError)
-  }, [page, mutate])
+  }, [page, selectedProjectToFetch, mutate])
 
   const shouldRenderSkeleton =
     isLoadingTasks ||
