@@ -164,7 +164,7 @@ describe('data services', () => {
     ])
   })
 
-  it.fails('encodes the project and the search in the query', async () => {
+  it('encodes the project and the search in the query', async () => {
     const adapter = respondWith({ status: 'ok', tasks: [] })
 
     await searchTasks({ project: 'R&D', query: 'a&b', page: null })

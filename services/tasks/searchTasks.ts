@@ -30,7 +30,7 @@ export default async function searchTasks({
   }
 
   const response = await privateApi.get<FullTaskInterface>(
-    `/tasks?project=${String(project)}&search=${String(query)}&limit=8&page=${currentPage}`,
+    `/tasks?project=${encodeURIComponent(String(project))}&search=${encodeURIComponent(String(query))}&limit=8&page=${currentPage}`,
     config
   )
 

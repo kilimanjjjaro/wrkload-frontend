@@ -253,7 +253,7 @@ test.describe('tasks', () => {
     })
   })
 
-  test.fail('searches text with special characters', async ({ page, api }) => {
+  test('searches text with special characters', async ({ page, api }) => {
     await visit(page, '/tasks')
     await page.getByRole('button', { name: 'Search task' }).click()
     await page.locator('[name="query"]').filter({ visible: true }).fill('R&D')

@@ -40,10 +40,12 @@ export default function SearchForm({
     try {
       if (type === 'task')
         router.push(
-          `/tasks/search?project=${selectedProjectToFetch}&query=${query}`
+          `/tasks/search?project=${encodeURIComponent(selectedProjectToFetch)}&query=${encodeURIComponent(query)}`
         )
-      if (type === 'project') router.push(`/projects/search?query=${query}`)
-      if (type === 'user') router.push(`/users/search?query=${query}`)
+      if (type === 'project')
+        router.push(`/projects/search?query=${encodeURIComponent(query)}`)
+      if (type === 'user')
+        router.push(`/users/search?query=${encodeURIComponent(query)}`)
       setModalStatus(false)
     } catch (error) {
       logError(error)
