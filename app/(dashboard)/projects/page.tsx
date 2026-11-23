@@ -12,7 +12,7 @@ import { sortProjects } from 'utils/sortData'
 import { useSearchParams } from 'next/navigation'
 import PageTransition from 'components/shared/PageTransition'
 
-export default function Projects (): JSX.Element {
+export default function Projects (): React.JSX.Element {
   const params = useSearchParams()
   const page = params.get('page')
   const { data, isLoading, isValidating, mutate } = useSWR('projects', async () => await getProjects({ page }), { onSuccess: data => sortProjects(data.projects) })

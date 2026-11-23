@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import { jwtDecode } from 'jwt-decode'
 import Header from 'components/users/Header'
 import Skeleton from 'components/users/Skeleton'
@@ -14,7 +14,7 @@ import PageTransition from 'components/shared/PageTransition'
 import { getUsers } from 'services/users/getUsers'
 import { sortUsers } from 'utils/sortData'
 
-export default function Users(): JSX.Element {
+export default function Users(): React.JSX.Element {
   const [isTrialAccount, setIsTrialAccount] = useState(false)
   const accessToken = getCookie('accessToken')
   const params = useSearchParams()

@@ -3,7 +3,7 @@ import Features from 'components/home/Features'
 import IntroducingStats from 'components/home/IntroducingStats'
 import IntroducingDarkMode from 'components/home/IntroducingDarkMode'
 
-export default function Home (): JSX.Element {
+export default function Home (): React.JSX.Element {
   return (
     <>
       <HeroHeader />

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { LanguageIcon } from '@heroicons/react/24/solid'
 
 const VARIANTS = {
@@ -20,7 +20,7 @@ const LANGUAGES = [
   { name: 'Es', code: 'es' }
 ]
 
-export default function Languages (): JSX.Element {
+export default function Languages (): React.JSX.Element {
   const [showDropdown, setShowDropdown] = useState(false)
 
   return (

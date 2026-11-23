@@ -1,4 +1,4 @@
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import privateApi from 'utils/privateApi'
 import { PROJECTS_ENDPOINT } from 'constants/projects'
 import type { FullProjectInterface } from 'interfaces/projects/Project'

@@ -13,7 +13,7 @@ import Input from 'components/shared/Input'
 import { ModalsContext } from 'contexts/ModalsContext'
 import { INITIAL_PROJECT_STATE } from 'constants/projects'
 
-export default function AddProject(): JSX.Element {
+export default function AddProject(): React.JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
 
   const [project, setProject] = useState(INITIAL_PROJECT_STATE)

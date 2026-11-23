@@ -13,7 +13,7 @@ import { ModalsContext } from 'contexts/ModalsContext'
 import type { FullTaskInterface, TaskInterface } from 'interfaces/tasks/Task'
 import Headline from 'components/shared/Headline'
 
-export default function TaskList ({ data }: { data: FullTaskInterface }): JSX.Element {
+export default function TaskList ({ data }: { data: FullTaskInterface }): React.JSX.Element {
   const { setSelectedTask, shouldRenderStats } = useContext(AppContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } =
     useContext(ModalsContext)

@@ -7,7 +7,7 @@ import Button from 'components/shared/Button'
 
 import { ModalsContext } from 'contexts/ModalsContext'
 
-export default function NotFound(): JSX.Element {
+export default function NotFound(): React.JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
 
   return (

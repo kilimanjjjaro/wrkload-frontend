@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { mutate } from 'swr'
 import clsx from 'clsx'
 import { MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
@@ -16,7 +16,7 @@ const VARIANTS = {
   }
 }
 
-export default function ProjectSelector ({ projectNames }: { projectNames: string[] }): JSX.Element {
+export default function ProjectSelector ({ projectNames }: { projectNames: string[] }): React.JSX.Element {
   const { setSelectedProjectToFetch } = useContext(AppContext)
   const [open, setOpen] = useState(false)
   const [selected, setSelected] = useState(() => {

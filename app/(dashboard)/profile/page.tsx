@@ -4,6 +4,7 @@ import { useContext, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import AvatarEditor from 'react-avatar-editor'
+import type { AvatarEditorRef } from 'react-avatar-editor'
 import axios from 'axios'
 import { toast } from 'sonner'
 import clsx from 'clsx'
@@ -17,11 +18,11 @@ import { AppContext } from 'contexts/AppContext'
 import { updateAvatar } from 'services/users/updateAvatar'
 import { ALLOWED_IMAGE_SIZE, ALLOWED_IMAGE_MIME_TYPES } from 'constants/components'
 
-export default function Profile (): JSX.Element {
+export default function Profile (): React.JSX.Element {
   const { user, setUser, setIsLoggingIn } = useContext(AppContext)
   const [avatar, setAvatar] = useState<File | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const editor = useRef<AvatarEditor>(null)
+  const editor = useRef<AvatarEditorRef>(null)
   const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -115,18 +116,22 @@ export default function Profile (): JSX.Element {
               )}
               {avatar !== null && (
                 <div className='relative group rounded-full transition-all ease-in-out duration-400 bg-white border-[6px] border-black dark:bg-black dark:border-white dark:border-dashed flex justify-center items-center'>
-                  <AvatarEditor
+                  <div
                     className={clsx(
-                      'rounded-full opacity-20 group-hover:opacity-100 transition-opacity ease-in-out duration-400',
+                      'overflow-hidden rounded-full opacity-20 group-hover:opacity-100 transition-opacity ease-in-out duration-400',
                       isLoading && 'animate-pulse'
                     )}
-                    ref={editor}
-                    image={avatar}
-                    width={200}
-                    height={200}
-                    border={0}
-                    borderRadius={200}
-                  />
+                  >
+                    <AvatarEditor
+                      ref={editor}
+                      image={avatar}
+                      width={200}
+                      height={200}
+                      border={0}
+                      borderRadius={200}
+                      style={{ display: 'block' }}
+                    />
+                  </div>
                   <svg className='absolute transition-all ease-in-out w-14 h-14 group-hover:opacity-0 duration-400 group-hover:invisible' viewBox='0 0 21 21' xmlns='http://www.w3.org/2000/svg'><g fill='none' fillRule='evenodd' stroke='#fff' strokeLinecap='round' strokeLinejoin='round' transform='translate(4 4)'><path d='m5.5 3.5h4v4' /><path d='m9.5 9.5v3' /><path d='m3.5 3.5h-3.5' /><path d='m3.5.5v9h9' /></g></svg>
                 </div>
               )}

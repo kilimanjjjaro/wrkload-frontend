@@ -5,7 +5,7 @@ const VARIANTS = {
   CENTERED: 'text-center'
 }
 
-export default function Textarea ({ className, onChange, value, name, placeholder, centerText, maxLength }: TextareaInterface): JSX.Element {
+export default function Textarea ({ className, onChange, value, name, placeholder, centerText, maxLength }: TextareaInterface): React.JSX.Element {
   return (
     <textarea
       className={clsx(

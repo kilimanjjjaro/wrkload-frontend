@@ -3,6 +3,6 @@ import { pageMetadata } from 'constants/metadata'
 
 export const metadata = pageMetadata('Registry - wrkload', '/registry')
 
-export default function RegistryLayout ({ children }: ChildrenInterface): JSX.Element {
+export default function RegistryLayout ({ children }: ChildrenInterface): React.JSX.Element {
   return <>{children}</>
 }

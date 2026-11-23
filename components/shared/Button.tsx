@@ -10,7 +10,7 @@ const VARIANTS = {
   LOADING: 'cursor-not-allowed before:animate-loading [&>div>svg]:!stroke-blue'
 }
 
-export default function Button ({ className, type, variant, disablePagination, onClick, children, isLoading, ariaLabel }: ButtonInterface): JSX.Element {
+export default function Button ({ className, type, variant, disablePagination, onClick, children, isLoading, ariaLabel }: ButtonInterface): React.JSX.Element {
   return (
     <>
       <button

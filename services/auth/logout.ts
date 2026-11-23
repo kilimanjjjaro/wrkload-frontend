@@ -1,4 +1,4 @@
-import { deleteCookie } from 'cookies-next'
+import { deleteCookie } from 'cookies-next/client'
 import { mutate } from 'swr'
 import api from 'utils/api'
 

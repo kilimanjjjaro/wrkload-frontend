@@ -4,7 +4,7 @@ import { PresentationChartLineIcon, EyeSlashIcon, FireIcon } from '@heroicons/re
 import { AppContext } from 'contexts/AppContext'
 import type { ProjectStatsInterface } from 'interfaces/projects/Project'
 
-export default function Stats ({ stats }: { stats: ProjectStatsInterface }): JSX.Element {
+export default function Stats ({ stats }: { stats: ProjectStatsInterface }): React.JSX.Element {
   const { shouldRenderStats, setShouldRenderStats } = useContext(AppContext)
 
   const handleRenderStats = (): void => {

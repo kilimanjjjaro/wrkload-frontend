@@ -13,7 +13,7 @@ interface Props {
   className?: string
 }
 
-export default function Headline ({ className, variant, children }: Props): JSX.Element {
+export default function Headline ({ className, variant, children }: Props): React.JSX.Element {
   return (
     <h2 className={clsx(
       variant === '2xl' && VARIANTS['2XL'],

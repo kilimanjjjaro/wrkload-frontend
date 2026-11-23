@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
@@ -13,19 +13,13 @@ import resetPassword from 'services/auth/resetPassword'
 import PageTransition from 'components/shared/PageTransition'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
 
-interface ParamsInterface {
-  params: {
-    uid: string
-    resetPasswordToken: string
-  }
-}
-
 const INITIAL_CREDENTIALS_STATE = {
   newPassword: '',
   confirmNewPassword: ''
 }
 
-export default function ResetPassword ({ params }: ParamsInterface): JSX.Element {
+export default function ResetPassword (): React.JSX.Element {
+  const params = useParams<{ uid: string, resetPasswordToken: string }>()
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)

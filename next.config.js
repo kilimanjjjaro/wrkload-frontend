@@ -1,13 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'wrkload.vercel.app',
-      'res.cloudinary.com'
+    remotePatterns: [
+      { protocol: 'https', hostname: 'wrkload.vercel.app' },
+      { protocol: 'https', hostname: 'res.cloudinary.com' }
     ]
-  },
-  experimental: {
-    appDir: true
   },
   webpack (config) {
     config.module.rules.push({

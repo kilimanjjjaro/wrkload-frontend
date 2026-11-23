@@ -3,6 +3,6 @@ import { pageMetadata } from 'constants/metadata'
 
 export const metadata = pageMetadata('Search tasks - wrkload')
 
-export default function SearchLayout ({ children }: ChildrenInterface): JSX.Element {
+export default function SearchLayout ({ children }: ChildrenInterface): React.JSX.Element {
   return <>{children}</>
 }

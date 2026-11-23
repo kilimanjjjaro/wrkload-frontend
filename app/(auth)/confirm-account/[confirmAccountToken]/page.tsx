@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
@@ -9,13 +9,8 @@ import Button from 'components/shared/Button'
 import PageTransition from 'components/shared/PageTransition'
 import confirmAccount from 'services/auth/confirmAccount'
 
-interface ParamsInterface {
-  params: {
-    confirmAccountToken: string
-  }
-}
-
-export default function ConfirmAccount({ params }: ParamsInterface): JSX.Element {
+export default function ConfirmAccount(): React.JSX.Element {
+  const params = useParams<{ confirmAccountToken: string }>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState('')
   const router = useRouter()

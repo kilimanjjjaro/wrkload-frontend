@@ -1,4 +1,4 @@
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import { jwtDecode } from 'jwt-decode'
 import privateApi from 'utils/privateApi'
 import { USERS_ENDPOINT } from 'constants/users'

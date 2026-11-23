@@ -3,7 +3,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
-import { setCookie } from 'cookies-next'
+import { setCookie } from 'cookies-next/client'
 import { toast } from 'sonner'
 import { ArrowLeftIcon, HeartIcon, LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
@@ -23,7 +23,7 @@ const INITIAL_CREDENTIALS_STATE = {
   password: ''
 }
 
-export default function Login (): JSX.Element {
+export default function Login (): React.JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)

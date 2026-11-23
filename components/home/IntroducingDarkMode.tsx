@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView } from 'motion/react'
 import ReactCompareImage from 'react-compare-image'
 import Balancer from 'react-wrap-balancer'
 import Headline from 'components/shared/Headline'
@@ -30,7 +30,7 @@ const CONTENT_VARIANTS = {
   }
 }
 
-export default function IntroducingDarkMode (): JSX.Element {
+export default function IntroducingDarkMode (): React.JSX.Element {
   const containerRef = useRef(null)
   const leftColumnRef = useRef(null)
   const rightColumnRef = useRef(null)

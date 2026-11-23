@@ -6,7 +6,7 @@ const VARIANTS = {
   CENTERED: 'text-center'
 }
 
-export default function Input ({ onChange, value, name, type, placeholder, autoComplete, centerText, required, disabled, minLength, maxLength, className }: InputInterface): JSX.Element {
+export default function Input ({ onChange, value, name, type, placeholder, autoComplete, centerText, required, disabled, minLength, maxLength, className }: InputInterface): React.JSX.Element {
   return (
     <input
       className={clsx(

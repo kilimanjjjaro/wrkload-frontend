@@ -1,6 +1,5 @@
 import { ADMIN, PARTNER } from '../constants/fixtures'
 import { HTTP_STATUS_OK, HTTP_STATUS_NOT_FOUND } from '../constants/api'
-import { QUICK_TIMEOUT_MS } from '../constants/e2e'
 import {
   expect,
   logIn,
@@ -83,16 +82,14 @@ test.describe('public pages render without errors', () => {
     expect(response?.status()).toBe(HTTP_STATUS_NOT_FOUND)
   })
 
-  test.fail('unknown pages show the app not found page', async ({
-    page,
-    api
-  }) => {
+  test('unknown pages show the app not found page', async ({ page, api }) => {
     void api
     await visit(page, '/missing-page')
 
     await expect(
       page.getByRole('heading', { name: 'Page Not Found' })
-    ).toBeVisible({ timeout: QUICK_TIMEOUT_MS })
+    ).toBeVisible()
+    await expect(page.getByRole('img', { name: 'Not found image' })).toBeVisible()
   })
 })
 

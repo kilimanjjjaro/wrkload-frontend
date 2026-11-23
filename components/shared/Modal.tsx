@@ -1,5 +1,5 @@
 import { Dispatch } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import useDelayUnmount from 'hooks/useDelayUnmount'
 
 import { BACKGROUND_VARIANTS, CONTENT_VARIANTS } from 'constants/framerMotion'
@@ -10,7 +10,7 @@ interface Props {
   setModalStatus: Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function Modal ({ children, modalStatus, setModalStatus }: Props): JSX.Element {
+export default function Modal ({ children, modalStatus, setModalStatus }: Props): React.JSX.Element {
   const renderChild = useDelayUnmount(modalStatus, 400)
 
   return (

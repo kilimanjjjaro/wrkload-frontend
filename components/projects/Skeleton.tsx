@@ -1,7 +1,7 @@
 import MasonryGrid from 'components/shared/MasonryGrid'
 import { SKELETON } from 'constants/components'
 
-export default function Skeleton (): JSX.Element {
+export default function Skeleton (): React.JSX.Element {
   return (
     <MasonryGrid>
       {SKELETON.map((_, index) => (

@@ -30,7 +30,7 @@ const DEFAULT_MODALS_CONTEXT_VALUES: ModalsContextValues = {
 
 export const ModalsContext = createContext<ModalsContextValues>(DEFAULT_MODALS_CONTEXT_VALUES)
 
-const ModalsProvider = ({ children }: ChildrenInterface): JSX.Element => {
+const ModalsProvider = ({ children }: ChildrenInterface): React.JSX.Element => {
   const [addDataModalStatus, setAddDataModalStatus] = useState(false)
   const [updateDataModalStatus, setUpdateDataModalStatus] = useState(false)
   const [deleteDataModalStatus, setDeleteDataModalStatus] = useState(false)

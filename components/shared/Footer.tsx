@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import ThemeSelector from 'components/shared/ThemeSelector'
 import Languages from 'components/shared/Languages'
 import GitHubLogo from 'public/images/github.svg'
 
-export default function Footer (): JSX.Element {
+export default function Footer (): React.JSX.Element {
   return (
     <footer className='fixed bottom-0 left-0 flex items-center justify-between w-full px-6 pb-6 mx-auto text-black md:z-50 dark:text-blue md:pb-8 md:px-8'>
       <span className='text-sm font-light font-secondaryFont'>© 2023 wrkload</span>

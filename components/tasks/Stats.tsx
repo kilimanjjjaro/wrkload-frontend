@@ -6,7 +6,7 @@ import { ArrowDownIcon, ArrowUpIcon, PresentationChartLineIcon, ClockIcon, EyeSl
 import { AppContext } from 'contexts/AppContext'
 import type { TaskStatsInterface } from 'interfaces/tasks/Task'
 
-export default function Stats ({ stats }: { stats: TaskStatsInterface }): JSX.Element {
+export default function Stats ({ stats }: { stats: TaskStatsInterface }): React.JSX.Element {
   const { shouldRenderStats, setShouldRenderStats } = useContext(AppContext)
 
   const handleRenderStats = (): void => {

@@ -1,5 +1,5 @@
 import privateApi from 'utils/privateApi'
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import type { UserInterface } from 'interfaces/users/User'
 import { USERS_ENDPOINT } from 'constants/users'
 import { AxiosResponse } from 'axios'

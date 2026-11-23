@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 import Image from 'next/image'
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import { jwtDecode } from 'jwt-decode'
 import { toast } from 'sonner'
 import Balancer from 'react-wrap-balancer'
@@ -18,7 +18,7 @@ import notFoundImage from 'public/images/not-found.webp'
 import searchUsers from 'services/users/searchUsers'
 import { sortUsers } from 'utils/sortData'
 
-export default function SearchUsers(): JSX.Element {
+export default function SearchUsers(): React.JSX.Element {
   const [isTrialAccount, setIsTrialAccount] = useState(false)
   const params = useSearchParams()
   const query = params.get('query')

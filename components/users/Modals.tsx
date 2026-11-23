@@ -5,7 +5,7 @@ import DeleteUser from 'components/users/DeleteUser'
 import SearchForm from 'components/shared/SearchForm'
 import { ModalsContext } from 'contexts/ModalsContext'
 
-export default function Modals (): JSX.Element {
+export default function Modals (): React.JSX.Element {
   const { updateDataModalStatus, setUpdateDataModalStatus, deleteDataModalStatus, setDeleteDataModalStatus, searchModalStatus, setSearchModalStatus } = useContext(ModalsContext)
 
   return (

@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useEffect, useState, Dispatch } from 'react'
-import { setCookie } from 'cookies-next'
+import { setCookie } from 'cookies-next/client'
 import type { ChildrenInterface } from 'interfaces/components'
 import type { TaskInterface } from 'interfaces/tasks/Task'
 import type { ProjectInterface } from 'interfaces/projects/Project'
@@ -50,7 +50,7 @@ const DEFAULT_APP_CONTEXT_VALUE: AppContextValues = {
 
 export const AppContext = createContext<AppContextValues>(DEFAULT_APP_CONTEXT_VALUE)
 
-const AppProvider = ({ children }: ChildrenInterface): JSX.Element => {
+const AppProvider = ({ children }: ChildrenInterface): React.JSX.Element => {
   const [user, setUser] = useState<SecureUserInterface | null>(null)
   const [selectedUser, setSelectedUser] = useState<UserInterface>(INITIAL_USER_STATE)
   const [selectedTask, setSelectedTask] = useState<TaskInterface>(INITIAL_TASK_STATE)

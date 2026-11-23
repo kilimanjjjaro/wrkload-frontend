@@ -10,7 +10,7 @@ import { ModalsContext } from 'contexts/ModalsContext'
 import type { FullProjectInterface, ProjectInterface } from 'interfaces/projects/Project'
 import dayjs from 'dayjs'
 
-export default function ProjectList ({ data }: { data: FullProjectInterface }): JSX.Element {
+export default function ProjectList ({ data }: { data: FullProjectInterface }): React.JSX.Element {
   const { setSelectedProject, shouldRenderStats } = useContext(AppContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
   const pathname = usePathname()

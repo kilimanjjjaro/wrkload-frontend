@@ -7,7 +7,7 @@ import notFoundImage from 'public/images/not-found.webp'
 import Button from 'components/shared/Button'
 import { ModalsContext } from 'contexts/ModalsContext'
 
-export default function NotFound({ noProjects }: { noProjects: boolean }): JSX.Element {
+export default function NotFound({ noProjects }: { noProjects: boolean }): React.JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
   const router = useRouter()
 

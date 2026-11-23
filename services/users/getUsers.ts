@@ -1,4 +1,4 @@
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import privateApi from 'utils/privateApi'
 import type { FullUserInterface } from 'interfaces/users/User'
 

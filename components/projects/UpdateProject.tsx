@@ -13,7 +13,7 @@ import Input from 'components/shared/Input'
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 
-export default function UpdateProject(): JSX.Element {
+export default function UpdateProject(): React.JSX.Element {
   const { selectedProject } = useContext(AppContext)
   const { setUpdateDataModalStatus } = useContext(ModalsContext)
 

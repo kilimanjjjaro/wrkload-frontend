@@ -1,4 +1,4 @@
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import privateApi from 'utils/privateApi'
 
 interface Props {

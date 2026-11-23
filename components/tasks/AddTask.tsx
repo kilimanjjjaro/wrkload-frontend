@@ -17,7 +17,7 @@ import { AppContext } from 'contexts/AppContext'
 import { INITIAL_TASK_STATE } from 'constants/tasks'
 import { CHARACTER_LIMIT } from 'constants/components'
 
-export default function AddTask(): JSX.Element {
+export default function AddTask(): React.JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
   const { selectedProjectToFetch } = useContext(AppContext)
 

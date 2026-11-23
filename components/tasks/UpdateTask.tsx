@@ -13,7 +13,7 @@ import { ModalsContext } from 'contexts/ModalsContext'
 import { CHARACTER_LIMIT } from 'constants/components'
 import { toast } from 'sonner'
 
-export default function UpdateTask(): JSX.Element {
+export default function UpdateTask(): React.JSX.Element {
   const { selectedTask } = useContext(AppContext)
   const { setUpdateDataModalStatus } = useContext(ModalsContext)
 

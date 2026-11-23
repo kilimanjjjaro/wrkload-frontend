@@ -5,7 +5,7 @@ import Masonry from 'react-masonry-css'
 import type { ChildrenInterface } from 'interfaces/components'
 import { MASONRY_BREAKPOINTS } from 'constants/components'
 
-export default function MasonryGrid ({ children }: ChildrenInterface): JSX.Element {
+export default function MasonryGrid ({ children }: ChildrenInterface): React.JSX.Element {
   return (
     <Masonry
       breakpointCols={MASONRY_BREAKPOINTS}

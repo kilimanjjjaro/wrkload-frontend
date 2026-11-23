@@ -11,7 +11,7 @@ import Input from 'components/shared/Input'
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 
-export default function DeleteUser(): JSX.Element {
+export default function DeleteUser(): React.JSX.Element {
   const { selectedUser } = useContext(AppContext)
   const { setDeleteDataModalStatus } = useContext(ModalsContext)
 

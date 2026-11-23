@@ -14,7 +14,7 @@ import searchTasks from 'services/tasks/searchTasks'
 import { sortTasks } from 'utils/sortData'
 import PageTransition from 'components/shared/PageTransition'
 
-export default function SearchTasks(): JSX.Element {
+export default function SearchTasks(): React.JSX.Element {
   const params = useSearchParams()
   const project = params.get('project')
   const query = params.get('query')

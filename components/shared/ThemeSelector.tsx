@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { MoonIcon, SunIcon } from 'components/shared/ThemeIcons'
 
-export default function ThemeSelector (): JSX.Element {
+export default function ThemeSelector (): React.JSX.Element {
   const [darkMode, setDarkMode] = useState(true)
 
   const toggleTheme = (): void => {

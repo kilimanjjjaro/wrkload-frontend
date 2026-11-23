@@ -7,7 +7,7 @@ import Button from 'components/shared/Button'
 import { ModalsContext } from 'contexts/ModalsContext'
 import { AppContext } from 'contexts/AppContext'
 
-export default function Options(): JSX.Element {
+export default function Options(): React.JSX.Element {
   const { setAddDataModalStatus, setSearchModalStatus } = useContext(ModalsContext)
   const { shouldRenderStats, setShouldRenderStats } = useContext(AppContext)
 

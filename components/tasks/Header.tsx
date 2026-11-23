@@ -6,7 +6,7 @@ interface Props {
   shouldRenderNotFound: boolean
 }
 
-export default function Header ({ projectNames, shouldRenderNotFound }: Props): JSX.Element {
+export default function Header ({ projectNames, shouldRenderNotFound }: Props): React.JSX.Element {
   return (
     <header className='flex flex-col justify-between mb-10 text-black xl:items-center xl:flex-row dark:text-blue gap-y-8'>
       <h2 className='flex flex-col flex-wrap text-6xl md:flex-row gap-x-5 font-primaryFont'>

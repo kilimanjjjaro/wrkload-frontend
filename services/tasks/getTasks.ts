@@ -1,6 +1,6 @@
 import privateApi from 'utils/privateApi'
 import type { FullTaskInterface } from 'interfaces/tasks/Task'
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 
 interface Props {
   page: string | null

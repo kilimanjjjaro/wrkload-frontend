@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView } from 'motion/react'
 import Balancer from 'react-wrap-balancer'
 import { ArrowUpIcon, ArrowDownIcon, ClockIcon, FireIcon, RectangleStackIcon } from '@heroicons/react/24/outline'
 import Headline from 'components/shared/Headline'
@@ -29,7 +29,7 @@ const CONTENT_VARIANTS = {
   }
 }
 
-export default function IntroducingStats (): JSX.Element {
+export default function IntroducingStats (): React.JSX.Element {
   const containerRef = useRef(null)
   const leftColumnRef = useRef(null)
   const rightColumnRef = useRef(null)

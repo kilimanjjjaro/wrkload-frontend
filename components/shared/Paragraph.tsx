@@ -12,7 +12,7 @@ interface Props {
   className?: string
 }
 
-export default function Paragraph ({ className, children, variant }: Props): JSX.Element {
+export default function Paragraph ({ className, children, variant }: Props): React.JSX.Element {
   return (
     <p
       className={clsx(

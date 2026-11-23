@@ -10,7 +10,7 @@ import Logo from 'components/shared/Logo'
 import Button from 'components/shared/Button'
 import DashboardTab from 'components/shared/DashboardTab'
 
-export default function NavBar (): JSX.Element {
+export default function NavBar (): React.JSX.Element {
   const [showDashboardBox, setShowDashboardBox] = useState(false)
   const { user, isLoggingIn, setTrialMode } = useContext(AppContext)
   const router = useRouter()

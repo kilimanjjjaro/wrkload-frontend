@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useScroll, useSpring, useTransform, useMotionValue, useVelocity, useAnimationFrame } from 'framer-motion'
+import { motion, useScroll, useSpring, useTransform, useMotionValue, useVelocity, useAnimationFrame } from 'motion/react'
 import { wrap } from '@motionone/utils'
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   baseVelocity: number
 }
 
-function ParallaxText ({ children, baseVelocity = 100 }: Props): JSX.Element {
+function ParallaxText ({ children, baseVelocity = 100 }: Props): React.JSX.Element {
   const directionFactor = useRef<number>(1)
   const baseX = useMotionValue(0)
   const { scrollY } = useScroll()
@@ -45,7 +45,7 @@ function ParallaxText ({ children, baseVelocity = 100 }: Props): JSX.Element {
   )
 }
 
-export default function Features (): JSX.Element {
+export default function Features (): React.JSX.Element {
   return (
     <section className='mb-6 xl:mb-10'>
       <ParallaxText baseVelocity={-1}>Your best way to control your work <span className='text-[#0f1012]'>/</span></ParallaxText>

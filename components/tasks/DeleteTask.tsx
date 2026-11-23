@@ -11,7 +11,7 @@ import Input from 'components/shared/Input'
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 
-export default function DeleteTask(): JSX.Element {
+export default function DeleteTask(): React.JSX.Element {
   const { selectedTask } = useContext(AppContext)
   const { setDeleteDataModalStatus } = useContext(ModalsContext)
 

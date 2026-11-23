@@ -3,6 +3,6 @@ import { pageMetadata } from 'constants/metadata'
 
 export const metadata = pageMetadata('Remember password - wrkload', '/remember-password')
 
-export default function RememberPasswordLayout ({ children }: ChildrenInterface): JSX.Element {
+export default function RememberPasswordLayout ({ children }: ChildrenInterface): React.JSX.Element {
   return <>{children}</>
 }

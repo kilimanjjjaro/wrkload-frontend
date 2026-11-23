@@ -14,7 +14,7 @@ import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import Paragraph from 'components/shared/Paragraph'
 
-export default function DeleteProject(): JSX.Element {
+export default function DeleteProject(): React.JSX.Element {
   const { selectedProject } = useContext(AppContext)
   const { setDeleteDataModalStatus } = useContext(ModalsContext)
 

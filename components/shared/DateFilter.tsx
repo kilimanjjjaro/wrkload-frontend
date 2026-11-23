@@ -1,5 +1,5 @@
 import { Dispatch } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from 'components/shared/Button'
 import Input from 'components/shared/Input'
@@ -20,7 +20,7 @@ interface Props {
   setDependency: Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function DateFilter({ dependency, setDependency }: Props): JSX.Element {
+export default function DateFilter({ dependency, setDependency }: Props): React.JSX.Element {
   return (
     <motion.div
       className='absolute right-0 z-20 flex flex-col mt-5 text-white rounded-3xl bg-blue top-full p-7 gap-y-3'

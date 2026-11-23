@@ -1,8 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 
-export default function PageTransition ({ children }: { children: React.ReactNode }): JSX.Element {
+export default function PageTransition ({ children }: { children: React.ReactNode }): React.JSX.Element {
   return (
 
     <motion.div

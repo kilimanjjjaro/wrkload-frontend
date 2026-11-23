@@ -6,7 +6,7 @@ import ProjectSelector from 'components/tasks/ProjectSelector'
 import { getProjects } from 'services/projects/getProjects'
 import { AppContext } from 'contexts/AppContext'
 
-export default function PageTitle (): JSX.Element {
+export default function PageTitle (): React.JSX.Element {
   const { setSelectedProjectToFetch } = useContext(AppContext)
   let sortedProjectNames: string[] = []
 

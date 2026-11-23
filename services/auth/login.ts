@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import { setCookie } from 'cookies-next'
+import { setCookie } from 'cookies-next/client'
 import type { UserInterface } from 'interfaces/users/User'
 import api from 'utils/api'
 

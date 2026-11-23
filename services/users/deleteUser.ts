@@ -1,6 +1,6 @@
 import privateApi from 'utils/privateApi'
 import { USERS_ENDPOINT } from 'constants/users'
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import type { FullUserInterface } from 'interfaces/users/User'
 
 export const deleteUser = async (_id: string): Promise<FullUserInterface> => {

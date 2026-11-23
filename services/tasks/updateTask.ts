@@ -1,5 +1,5 @@
 import privateApi from 'utils/privateApi'
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import type { FullTaskInterface, TaskInterface } from 'interfaces/tasks/Task'
 import { TASKS_ENDPOINT } from 'constants/tasks'
 

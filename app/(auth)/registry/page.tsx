@@ -22,7 +22,7 @@ const INITIAL_CREDENTIALS_STATE = {
   confirmPassword: ''
 }
 
-export default function Register (): JSX.Element {
+export default function Register (): React.JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)

@@ -14,7 +14,7 @@ interface Props {
   isTrialAccount: boolean
 }
 
-export default function UserList ({ data, isTrialAccount }: Props): JSX.Element {
+export default function UserList ({ data, isTrialAccount }: Props): React.JSX.Element {
   const { setSelectedUser } = useContext(AppContext)
   const { setUpdateDataModalStatus, setDeleteDataModalStatus } = useContext(ModalsContext)
 

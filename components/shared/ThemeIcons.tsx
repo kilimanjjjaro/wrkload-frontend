@@ -1,13 +1,14 @@
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
+import type { Transition, Variants } from 'motion/react'
 
-const transition = {
+const transition: Transition = {
   type: 'spring',
   stiffness: 200,
   damping: 10
 }
 
-export const MoonIcon = (): JSX.Element => {
-  const variants = {
+export const MoonIcon = (): React.JSX.Element => {
+  const variants: Variants = {
     initial: { scale: 0.6, rotate: 90 },
     animate: { scale: 1, rotate: 0, transition },
     whileTap: { scale: 0.95, rotate: 15 }
@@ -37,15 +38,15 @@ export const MoonIcon = (): JSX.Element => {
   )
 }
 
-export const SunIcon = (): JSX.Element => {
+export const SunIcon = (): React.JSX.Element => {
   const whileTap = { scale: 0.95, rotate: 15 }
 
-  const raysVariants = {
+  const raysVariants: Variants = {
     initial: { rotate: 45 },
     animate: { rotate: 0, transition }
   }
 
-  const coreVariants = {
+  const coreVariants: Variants = {
     initial: { scale: 1.5 },
     animate: { scale: 1, transition }
   }

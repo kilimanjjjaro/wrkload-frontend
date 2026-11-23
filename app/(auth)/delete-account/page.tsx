@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
@@ -17,7 +18,7 @@ const INITIAL_CREDENTIALS_STATE = {
   password: ''
 }
 
-export default function DeleteAccount (): JSX.Element {
+export default function DeleteAccount (): React.JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -72,11 +73,11 @@ export default function DeleteAccount (): JSX.Element {
         <div className='p-6 text-black md:p-10 text-center bg-blue md:w-80 min-w-auto rounded-3xl'>
           <Headline variant='md'><Balancer>Done!</Balancer></Headline>
           <p className='mb-5 text-sm font-secondaryFont'><Balancer>Your account was deleted. <b>Thanks for this time!</b></Balancer></p>
-          <a aria-label='Go home' className='block relative w-full h-10 overflow-hidden text-sm transition duration-400 ease-in-out font-secondaryFont before:block before:top-0 before:left-0 before:w-full before:h-full before:translate-y-full before:absolute rounded-full before:transition before:duration-400 before:ease-in-out md:hover:before:translate-y-0 text-blue dark:text-blue bg-black md:dark:hover:text-black md:hover:text-black before:bg-white' href='/'>
+          <Link aria-label='Go home' className='block relative w-full h-10 overflow-hidden text-sm transition duration-400 ease-in-out font-secondaryFont before:block before:top-0 before:left-0 before:w-full before:h-full before:translate-y-full before:absolute rounded-full before:transition before:duration-400 before:ease-in-out md:hover:before:translate-y-0 text-blue dark:text-blue bg-black md:dark:hover:text-black md:hover:text-black before:bg-white' href='/'>
             <div className='relative flex items-center justify-center gap-2 px-5 md:text-base'>
               <ArrowRightIcon className='w-4 stroke-3' />
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     )

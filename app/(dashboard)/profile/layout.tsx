@@ -3,6 +3,6 @@ import { pageMetadata } from 'constants/metadata'
 
 export const metadata = pageMetadata('Profile - wrkload', '/profile')
 
-export default function ProfileLayout ({ children }: ChildrenInterface): JSX.Element {
+export default function ProfileLayout ({ children }: ChildrenInterface): React.JSX.Element {
   return <>{children}</>
 }

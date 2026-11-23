@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import { CheckCircleIcon, ShieldExclamationIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -24,7 +24,7 @@ const VARIANTS = {
   }
 }
 
-export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }: Props): JSX.Element {
+export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }: Props): React.JSX.Element {
   const { user, setUser } = useContext(AppContext)
   const [pages, setPages] = useState<typeof PAGES>([])
   const router = useRouter()

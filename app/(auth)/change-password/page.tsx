@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
-import { getCookie } from 'cookies-next'
+import { getCookie } from 'cookies-next/client'
 import { jwtDecode } from 'jwt-decode'
 import clsx from 'clsx'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
@@ -24,7 +24,7 @@ const INITIAL_CREDENTIALS_STATE = {
   confirmNewPassword: ''
 }
 
-export default function ChangePassword(): JSX.Element {
+export default function ChangePassword(): React.JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [email, setEmail] = useState('')
   const [step, setStep] = useState(1)

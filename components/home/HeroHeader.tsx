@@ -9,9 +9,8 @@ import Headline from 'components/shared/Headline'
 import Paragraph from 'components/shared/Paragraph'
 import Button from 'components/shared/Button'
 import { AppContext } from 'contexts/AppContext'
-import 'atropos/css'
 
-export default function HeroHeader (): JSX.Element {
+export default function HeroHeader (): React.JSX.Element {
   const { setTrialMode } = useContext(AppContext)
   const router = useRouter()
 

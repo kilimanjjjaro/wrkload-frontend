@@ -16,7 +16,7 @@ const INITIAL_CREDENTIALS_STATE = {
   email: ''
 }
 
-export default function ResendConfirmationAccountLink (): JSX.Element {
+export default function ResendConfirmationAccountLink (): React.JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)

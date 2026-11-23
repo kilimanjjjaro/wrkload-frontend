@@ -14,7 +14,7 @@ import { AppContext } from 'contexts/AppContext'
 import PageTransition from 'components/shared/PageTransition'
 import { getProjects } from 'services/projects/getProjects'
 
-export default function Tasks (): JSX.Element {
+export default function Tasks (): React.JSX.Element {
   const { selectedProjectToFetch, setSelectedProjectToFetch } = useContext(AppContext)
   let sortedProjectNames: string[] = []
   const params = useSearchParams()
