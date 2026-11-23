@@ -31,24 +31,42 @@ Is a web app where you can track what you've worked on in a simple and organized
 
 ## Getting Started
 
-First, install the dependencies:
+Requirements: Node.js 26 and pnpm 11, both pinned in `package.json` (Volta,
+`packageManager` and `devEngines`).
 
 ```bash
-npm install
-# or
-yarn
-# or (recommended)
 pnpm install
-```
-
-Then, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or (recommended)
 pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+In development the app calls the API at `http://localhost:5000`, so run
+[wrkload-api](https://github.com/kilimanjjjaro/wrkload-api) locally. Production
+builds call `https://wrkload-api.onrender.com`.
+
+## Checks
+
+```bash
+pnpm format:check  # Prettier (pnpm format fixes the files)
+pnpm typecheck     # TypeScript
+pnpm lint          # ESLint
+pnpm test          # Unit tests (Vitest)
+pnpm build         # Production build
+pnpm test:e2e      # End-to-end tests (Playwright, needs a build first)
+pnpm test:visual   # Screenshot tests (Playwright, Windows only)
+pnpm test:all      # All of the above, in order
+```
+
+Before the first e2e run, install the browser with
+`pnpm exec playwright install chromium`. The e2e and visual tests mock the API
+with `page.route`, so they never reach the real backend.
+
+The visual tests compare full-page screenshots in desktop and mobile viewports
+against the references in `tests/visual/__screenshots__/win32`. They are
+captured on Windows, so they are skipped on other platforms and in CI. After an
+intended visual change, regenerate them with `pnpm test:visual:update` and
+review the new images before committing them.
+
+The same checks, except the visual tests, run in CI on every pull request
+(`.github/workflows/ci.yml`).
