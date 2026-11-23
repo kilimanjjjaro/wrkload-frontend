@@ -33,7 +33,7 @@
     "react-masonry-css": "1.0.16",
     "react-wrap-balancer": "1.1.1",
     "sonner": "1.7.4",
-    "swiper": "11.2.10",
+    "swiper": "14.4.0",
     "swr": "2.5.1"
   },
   "devDependencies": {
