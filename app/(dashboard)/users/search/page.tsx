@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import useSWR from 'swr'
 import Image from 'next/image'
 import { getCookie } from 'cookies-next/client'
@@ -19,12 +19,14 @@ import searchUsers from 'services/users/searchUsers'
 import { sortUsers } from 'utils/sortData'
 
 export default function SearchUsers(): React.JSX.Element {
-  const [isTrialAccount, setIsTrialAccount] = useState(false)
   const params = useSearchParams()
   const query = params.get('query')
   const page = params.get('page')
   const router = useRouter()
   const accessToken = getCookie('accessToken')
+  const isTrialAccount =
+    accessToken !== undefined &&
+    jwtDecode<{ uid: string }>(accessToken).uid === '6439b01cf35b6e22570cd842'
 
   const { data, isLoading, isValidating, mutate } = useSWR(
     'users',
@@ -33,13 +35,8 @@ export default function SearchUsers(): React.JSX.Element {
   )
 
   useEffect(() => {
-    if (accessToken !== undefined) {
-      const { uid }: { uid: string } = jwtDecode(accessToken)
-
-      if (uid === '6439b01cf35b6e22570cd842') {
-        setIsTrialAccount(true)
-
-        toast(
+    if (isTrialAccount) {
+      toast(
           <>
             <ShieldCheckIcon className='w-4 stroke-blue stroke-3' />
             <h3 className='font-bold'>How data do we store?</h3>
@@ -51,9 +48,8 @@ export default function SearchUsers(): React.JSX.Element {
             </p>
           </>
         )
-      }
     }
-  }, [accessToken])
+  }, [isTrialAccount])
 
   useEffect(() => {
     mutate().catch((error) => console.error(error))
@@ -87,7 +83,7 @@ export default function SearchUsers(): React.JSX.Element {
           <div className='flex flex-col items-center h-full mt-28 gap-y-5'>
             <Image
               className='w-72'
-              priority
+              preload
               src={notFoundImage}
               alt='Not found image'
             />

@@ -1,16 +1,23 @@
+import type { Viewport } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import { inter, spaceGrotesk } from 'utils/fonts'
 import Providers from 'app/providers'
 import { DESCRIPTION, pageMetadata } from 'constants/metadata'
 import type { ChildrenInterface } from 'interfaces/components'
-import 'atropos/css'
+import 'atropos/atropos.css'
+import 'swiper/css'
+import 'swiper/css/pagination'
 import 'app/globals.css'
 
 export const metadata = {
   ...pageMetadata('wrkload', '/'),
   description: DESCRIPTION,
-  viewport: 'width=device-width, initial-scale=1',
   icons: { shortcut: '/favicon.png' }
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1
 }
 
 export default function RootLayout ({ children }: ChildrenInterface): React.JSX.Element {

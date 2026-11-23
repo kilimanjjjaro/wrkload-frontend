@@ -49,7 +49,7 @@ export default function SearchProjects(): React.JSX.Element {
           <div className='flex flex-col items-center h-full mt-28 gap-y-5'>
             <Image
               className='w-72'
-              priority
+              preload
               src={notFoundImage}
               alt='Not found image'
             />

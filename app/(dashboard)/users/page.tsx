@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
 import { getCookie } from 'cookies-next/client'
@@ -15,8 +15,10 @@ import { getUsers } from 'services/users/getUsers'
 import { sortUsers } from 'utils/sortData'
 
 export default function Users(): React.JSX.Element {
-  const [isTrialAccount, setIsTrialAccount] = useState(false)
   const accessToken = getCookie('accessToken')
+  const isTrialAccount =
+    accessToken !== undefined &&
+    jwtDecode<{ uid: string }>(accessToken).uid === '6439b01cf35b6e22570cd842'
   const params = useSearchParams()
   const page = params.get('page')
 
@@ -25,16 +27,6 @@ export default function Users(): React.JSX.Element {
     async () => await getUsers({ page }),
     { onSuccess: (data) => sortUsers(data.users) }
   )
-
-  useEffect(() => {
-    if (accessToken !== undefined) {
-      const { uid }: { uid: string } = jwtDecode(accessToken)
-
-      if (uid === '6439b01cf35b6e22570cd842') {
-        setIsTrialAccount(true)
-      }
-    }
-  }, [accessToken])
 
   useEffect(() => {
     mutate().catch((error) => console.error(error))

@@ -1,8 +1,9 @@
+import type { MutatorOptions } from 'swr'
 import { sortTasks } from 'utils/sortData'
 
 import type { TaskInterface, FullTaskInterface } from 'interfaces/tasks/Task'
 
-export const addTaskOptions = (newTask: TaskInterface): any => {
+export const addTaskOptions = (newTask: TaskInterface): MutatorOptions => {
   return {
     optimisticData: (data: FullTaskInterface) => {
       return { ...data, tasks: sortTasks([...data.tasks, newTask]) }
@@ -14,7 +15,7 @@ export const addTaskOptions = (newTask: TaskInterface): any => {
   }
 }
 
-export const updateTaskOptions = (updatedTask: TaskInterface): any => {
+export const updateTaskOptions = (updatedTask: TaskInterface): MutatorOptions => {
   return {
     optimisticData: (data: FullTaskInterface) => {
       const prevTasks = data.tasks.filter(task => {
@@ -32,7 +33,7 @@ export const updateTaskOptions = (updatedTask: TaskInterface): any => {
   }
 }
 
-export const deleteTaskOptions = (_id: string): any => {
+export const deleteTaskOptions = (_id: string): MutatorOptions => {
   return {
     optimisticData: (data: FullTaskInterface) => {
       return {

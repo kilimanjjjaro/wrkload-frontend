@@ -17,7 +17,7 @@ export default function NotFound(): React.JSX.Element {
       <Headline className='font-bold text-center text-blue' variant='xl'>Page Not Found</Headline>
       <Image
         className='w-72'
-        priority
+        preload
         src={notFoundImage}
         alt='Not found image'
       />

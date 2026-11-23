@@ -8,6 +8,7 @@ import Headline from 'components/shared/Headline'
 import Button from 'components/shared/Button'
 import PageTransition from 'components/shared/PageTransition'
 import confirmAccount from 'services/auth/confirmAccount'
+import { apiErrorCode } from 'utils/errors'
 
 export default function ConfirmAccount(): React.JSX.Element {
   const params = useParams<{ confirmAccountToken: string }>()
@@ -28,22 +29,20 @@ export default function ConfirmAccount(): React.JSX.Element {
   }
 
   useEffect(() => {
-    setIsLoading(true)
-
     const sendConfirmAccount = async (): Promise<void> => {
       const { confirmAccountToken } = params
 
       try {
         await confirmAccount({ confirmAccountToken })
-      } catch (error: any) {
-        setError(error.response.data.code)
+      } catch (error) {
+        setError(apiErrorCode(error) ?? '')
       } finally {
         setIsLoading(false)
       }
     }
 
     if (params.confirmAccountToken !== undefined) {
-      sendConfirmAccount().catch((error: any) => console.error(error))
+      sendConfirmAccount().catch((error: unknown) => console.error(error))
     }
   }, [params])
 

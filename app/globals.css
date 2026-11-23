@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "~swiper/css";
-@import "~swiper/css/pagination";
-
 /* Custom toast notifications */
 [data-sonner-toaster] {
   display: flex;

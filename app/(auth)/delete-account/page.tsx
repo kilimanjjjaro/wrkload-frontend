@@ -12,6 +12,7 @@ import Button from 'components/shared/Button'
 import PageTransition from 'components/shared/PageTransition'
 import deleteAccount from 'services/auth/deleteAccount'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
+import { apiErrorCode } from 'utils/errors'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: '',
@@ -40,8 +41,8 @@ export default function DeleteAccount (): React.JSX.Element {
       if (response.status === SERVER_RESPONSE_STATUS.OK) {
         setSuccess(true)
       }
-    } catch (error: any) {
-      setError(error.response.data.code)
+    } catch (error) {
+      setError(apiErrorCode(error) ?? '')
     } finally {
       setIsLoading(false)
     }

@@ -13,7 +13,7 @@ export interface ButtonInterface {
   type?: 'submit'
   variant: 'primary' | 'secondary' | 'light-alternative' | 'dark-alternative'
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  fullWidth?: Boolean
+  fullWidth?: boolean
   children: React.ReactNode
   disablePagination?: boolean
   isLoading?: boolean

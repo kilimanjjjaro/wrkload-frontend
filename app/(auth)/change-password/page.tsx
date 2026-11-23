@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import { getCookie } from 'cookies-next/client'
@@ -16,6 +16,8 @@ import login from 'services/auth/login'
 import changePassword from 'services/auth/changePassword'
 import logout from 'services/auth/logout'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
+import { apiErrorCode } from 'utils/errors'
+import type { ApiError } from 'utils/errors'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: '',
@@ -26,7 +28,6 @@ const INITIAL_CREDENTIALS_STATE = {
 
 export default function ChangePassword(): React.JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
-  const [email, setEmail] = useState('')
   const [step, setStep] = useState(1)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -43,12 +44,10 @@ export default function ChangePassword(): React.JSX.Element {
     router.refresh()
   }
 
-  useEffect(() => {
-    if (accessToken !== undefined) {
-      const { email }: { email: string } = jwtDecode(accessToken)
-      setEmail(email)
-    }
-  }, [accessToken])
+  const email =
+    accessToken === undefined
+      ? ''
+      : jwtDecode<{ email: string }>(accessToken).email
 
   const handleStepOne = async (
     event: React.FormEvent<HTMLFormElement>
@@ -63,11 +62,11 @@ export default function ChangePassword(): React.JSX.Element {
       // TODO: handle week password
       // TODO: handle unlogged session
       setStep(2)
-    } catch (error: any) {
-      if (error.response.data.error[0].param === 'email') {
+    } catch (error) {
+      if ((error as ApiError).response?.data.error[0].param === 'email') {
         setError('auth/expired-session')
       }
-      if (error.response.data.code === 'auth/invalid-credentials') {
+      if (apiErrorCode(error) === 'auth/invalid-credentials') {
         setError('auth/invalid-credentials')
       }
     } finally {
@@ -98,17 +97,17 @@ export default function ChangePassword(): React.JSX.Element {
         setSuccess(true)
         await logout()
       }
-    } catch (error: any) {
-      if (error.message === 'auth/different-passwords') {
+    } catch (error) {
+      if (error instanceof Error && error.message === 'auth/different-passwords') {
         setError('auth/different-passwords')
         return
       }
 
-      if (error.response.data.code === 'auth/invalid-credentials') {
+      if (apiErrorCode(error) === 'auth/invalid-credentials') {
         setError('auth/invalid-credentials')
       }
 
-      if (error.response.data.code === 'trial/permission-denied') {
+      if (apiErrorCode(error) === 'trial/permission-denied') {
         setError('trial/permission-denied')
       }
     } finally {

@@ -12,6 +12,7 @@ import Button from 'components/shared/Button'
 import resetPassword from 'services/auth/resetPassword'
 import PageTransition from 'components/shared/PageTransition'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
+import { apiErrorCode } from 'utils/errors'
 
 const INITIAL_CREDENTIALS_STATE = {
   newPassword: '',
@@ -59,14 +60,16 @@ export default function ResetPassword (): React.JSX.Element {
       if (response.status === SERVER_RESPONSE_STATUS.OK) {
         setSuccess(true)
       }
-    } catch (error: any) {
-      if (error.message === 'auth/different-passwords') {
+    } catch (error) {
+      if (error instanceof Error && error.message === 'auth/different-passwords') {
         setError('auth/different-passwords')
         return
       }
 
-      if (error.response.data.code.length >= 1) {
-        setError(error.response.data.code)
+      const code = apiErrorCode(error)
+
+      if (code !== undefined && code.length >= 1) {
+        setError(code)
       }
     } finally {
       setIsLoading(false)

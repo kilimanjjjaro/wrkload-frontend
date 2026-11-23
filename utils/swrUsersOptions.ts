@@ -1,8 +1,9 @@
+import type { MutatorOptions } from 'swr'
 import { sortUsers } from 'utils/sortData'
 
 import type { FullUserInterface, UserInterface } from 'interfaces/users/User'
 
-export const updateUserOptions = (updatedUser: UserInterface): any => {
+export const updateUserOptions = (updatedUser: UserInterface): MutatorOptions => {
   return {
     optimisticData: (data: FullUserInterface) => {
       const prevUsers = data.users.filter(user => {
@@ -20,7 +21,7 @@ export const updateUserOptions = (updatedUser: UserInterface): any => {
   }
 }
 
-export const deleteUserOptions = (_id: string): any => {
+export const deleteUserOptions = (_id: string): MutatorOptions => {
   return {
     optimisticData: (data: FullUserInterface) => {
       return {

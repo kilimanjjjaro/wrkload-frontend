@@ -12,6 +12,7 @@ import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
+import { apiErrorCode } from 'utils/errors'
 
 export default function UpdateProject(): React.JSX.Element {
   const { selectedProject } = useContext(AppContext)
@@ -38,8 +39,8 @@ export default function UpdateProject(): React.JSX.Element {
           </>
         )
       }
-    } catch (error: any) {
-      if (error.response.data.code === 'trial/permission-denied') {
+    } catch (error) {
+      if (apiErrorCode(error) === 'trial/permission-denied') {
         toast(
           <>
             <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />

@@ -1,8 +1,9 @@
+import type { MutatorOptions } from 'swr'
 import { sortProjects } from './sortData'
 
 import type { FullProjectInterface, ProjectInterface } from 'interfaces/projects/Project'
 
-export const addProjectOptions = (newProject: ProjectInterface): any => {
+export const addProjectOptions = (newProject: ProjectInterface): MutatorOptions => {
   return {
     optimisticData: (data: FullProjectInterface) => {
       return { ...data, projects: sortProjects([...data.projects, newProject]) }
@@ -14,7 +15,7 @@ export const addProjectOptions = (newProject: ProjectInterface): any => {
   }
 }
 
-export const updateProjectOptions = (updatedProject: ProjectInterface): any => {
+export const updateProjectOptions = (updatedProject: ProjectInterface): MutatorOptions => {
   return {
     optimisticData: (data: FullProjectInterface) => {
       const prevProjects = data.projects.filter(project => {
@@ -32,7 +33,7 @@ export const updateProjectOptions = (updatedProject: ProjectInterface): any => {
   }
 }
 
-export const deleteProjectOptions = (_id: string): any => {
+export const deleteProjectOptions = (_id: string): MutatorOptions => {
   return {
     optimisticData: (data: FullProjectInterface) => {
       return {

@@ -1,23 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { MoonIcon, SunIcon } from 'components/shared/ThemeIcons'
+import useStoredState from 'hooks/useStoredState'
+
+const parseDarkMode = (stored: string): boolean => JSON.parse(stored)
 
 export default function ThemeSelector (): React.JSX.Element {
-  const [darkMode, setDarkMode] = useState(true)
+  const [darkMode, setDarkMode] = useStoredState('darkMode', parseDarkMode, true)
 
   const toggleTheme = (): void => {
     setDarkMode(!darkMode)
     window.localStorage.setItem('darkMode', JSON.stringify(!darkMode))
   }
-
-  useEffect(() => {
-    const darkModeFromLocalStorage = window.localStorage.getItem('darkMode')
-
-    if (darkModeFromLocalStorage !== null) {
-      setDarkMode(JSON.parse(darkModeFromLocalStorage))
-    }
-  }, [])
 
   useEffect(() => {
     if (darkMode) {

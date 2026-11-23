@@ -6,18 +6,18 @@ import {
   TEST_NOW
 } from '../constants/e2e'
 
-const useNativeTextBalancing = async (page: Page) => {
+const enableNativeTextBalancing = async (page: Page) => {
   await page.addInitScript(() => {
     Object.assign(window, { __wrap_n: 1 })
   })
 }
 
 export const prepareRealTime = async (page: Page) => {
-  await useNativeTextBalancing(page)
+  await enableNativeTextBalancing(page)
 }
 
 export const freezeTime = async (page: Page) => {
-  await useNativeTextBalancing(page)
+  await enableNativeTextBalancing(page)
   await page.clock.install({ time: TEST_NOW })
 }
 

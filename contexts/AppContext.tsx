@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useEffect, useState, Dispatch } from 'react'
+import { createContext, useEffect, useState, useSyncExternalStore, Dispatch } from 'react'
 import { setCookie } from 'cookies-next/client'
 import type { ChildrenInterface } from 'interfaces/components'
 import type { TaskInterface } from 'interfaces/tasks/Task'
@@ -9,6 +9,7 @@ import type { SecureUserInterface, UserInterface } from 'interfaces/users/User'
 import { INITIAL_TASK_STATE } from 'constants/tasks'
 import { INITIAL_PROJECT_STATE } from 'constants/projects'
 import { INITIAL_USER_STATE } from 'constants/users'
+import useStoredState from 'hooks/useStoredState'
 
 interface AppContextValues {
   user: SecureUserInterface | null
@@ -48,36 +49,35 @@ const DEFAULT_APP_CONTEXT_VALUE: AppContextValues = {
   setTrialMode: () => {}
 }
 
+const parseJson = <T,>(stored: string): T => JSON.parse(stored)
+const parseText = (stored: string): string => stored
+const subscribe = (): (() => void) => () => {}
+
 export const AppContext = createContext<AppContextValues>(DEFAULT_APP_CONTEXT_VALUE)
 
 const AppProvider = ({ children }: ChildrenInterface): React.JSX.Element => {
-  const [user, setUser] = useState<SecureUserInterface | null>(null)
+  const [user, setUser] = useStoredState<SecureUserInterface | null>('user', parseJson, null)
   const [selectedUser, setSelectedUser] = useState<UserInterface>(INITIAL_USER_STATE)
   const [selectedTask, setSelectedTask] = useState<TaskInterface>(INITIAL_TASK_STATE)
   const [selectedProject, setSelectedProject] = useState<ProjectInterface>(INITIAL_PROJECT_STATE)
-  const [selectedProjectToFetch, setSelectedProjectToFetch] = useState('')
-  const [shouldRenderStats, setShouldRenderStats] = useState(true)
+  const [selectedProjectToFetch, setSelectedProjectToFetch] = useStoredState('selectedProject', parseText, '')
+  const [shouldRenderStats, setShouldRenderStats] = useStoredState<boolean>('showStats', parseJson, true)
   const [isLoggingIn, setIsLoggingIn] = useState(false)
   const [trialMode, setTrialMode] = useState(false)
 
-  useEffect(() => {
-    const userFromLocalStorage = window.localStorage.getItem('user')
-    const selectedProyectFromLocalStorage = window.localStorage.getItem('selectedProject')
+  const hasStoredUser = useSyncExternalStore(
+    subscribe,
+    () => window.localStorage.getItem('user') !== null,
+    () => false
+  )
 
-    if (userFromLocalStorage !== null) {
-      setUser(JSON.parse(userFromLocalStorage))
+  useEffect(() => {
+    if (hasStoredUser) {
       setCookie('isLogged', true, {
         maxAge: 60 * 60 * 24 * 30
       })
     }
-
-    if (selectedProyectFromLocalStorage !== null) {
-      setSelectedProjectToFetch(selectedProyectFromLocalStorage)
-    }
-
-    const showStats = window.localStorage.getItem('showStats')
-    if (showStats !== null) setShouldRenderStats(JSON.parse(showStats))
-  }, [])
+  }, [hasStoredUser])
 
   return (
     <AppContext.Provider value={{

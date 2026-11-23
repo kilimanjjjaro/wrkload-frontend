@@ -12,6 +12,7 @@ import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import { CHARACTER_LIMIT } from 'constants/components'
 import { toast } from 'sonner'
+import { apiErrorCode } from 'utils/errors'
 
 export default function UpdateTask(): React.JSX.Element {
   const { selectedTask } = useContext(AppContext)
@@ -38,8 +39,8 @@ export default function UpdateTask(): React.JSX.Element {
           </>
         )
       }
-    } catch (error: any) {
-      if (error.response.data.code === 'trial/permission-denied') {
+    } catch (error) {
+      if (apiErrorCode(error) === 'trial/permission-denied') {
         toast(
           <>
             <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />

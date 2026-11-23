@@ -36,8 +36,8 @@ export default function SearchForm ({ type, setModalStatus }: Props): React.JSX.
       if (type === 'project') router.push(`/projects/search?query=${query}`)
       if (type === 'user') router.push(`/users/search?query=${query}`)
       setModalStatus(false)
-    } catch (error: any) {
-      console.error(error.response)
+    } catch (error) {
+      console.error(error)
     }
   }
 

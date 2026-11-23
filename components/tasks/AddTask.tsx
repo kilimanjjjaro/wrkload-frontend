@@ -16,6 +16,7 @@ import { ModalsContext } from 'contexts/ModalsContext'
 import { AppContext } from 'contexts/AppContext'
 import { INITIAL_TASK_STATE } from 'constants/tasks'
 import { CHARACTER_LIMIT } from 'constants/components'
+import { apiErrorCode } from 'utils/errors'
 
 export default function AddTask(): React.JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
@@ -32,9 +33,9 @@ export default function AddTask(): React.JSX.Element {
     setAddDataModalStatus(false)
 
     try {
-      task.project = selectedProjectToFetch
+      const newTask = { ...task, project: selectedProjectToFetch }
 
-      const response = await mutate('tasks', addTask(task), addTaskOptions(task))
+      const response = await mutate('tasks', addTask(newTask), addTaskOptions(newTask))
 
       if (response?.status === 'ok') {
         toast(
@@ -44,8 +45,8 @@ export default function AddTask(): React.JSX.Element {
           </>
         )
       }
-    } catch (error: any) {
-      if (error.response.data.code === 'trial/permission-denied') {
+    } catch (error) {
+      if (apiErrorCode(error) === 'trial/permission-denied') {
         toast(
           <>
             <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />

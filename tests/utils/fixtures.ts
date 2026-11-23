@@ -13,13 +13,13 @@ export const test = base.extend<{
   api: FakeApi
   browserErrors: BrowserError[]
 }>({
-  api: async ({ page }, use) => {
+  api: async ({ page }, provide) => {
     const api = new FakeApi()
     await api.install(page)
-    await use(api)
+    await provide(api)
   },
   browserErrors: [
-    async ({ page }, use) => {
+    async ({ page }, provide) => {
       const errors: BrowserError[] = []
 
       page.on('console', (message) => {
@@ -31,7 +31,7 @@ export const test = base.extend<{
         errors.push({ text: `Uncaught: ${error.message}`, url: '' })
       })
 
-      await use(errors)
+      await provide(errors)
     },
     { auto: true }
   ]

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { motion } from 'motion/react'
 import Link from 'next/link'
 import { toast } from 'sonner'
@@ -26,23 +26,14 @@ const VARIANTS = {
 
 export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }: Props): React.JSX.Element {
   const { user, setUser } = useContext(AppContext)
-  const [pages, setPages] = useState<typeof PAGES>([])
   const router = useRouter()
 
-  useEffect(() => {
-    if (user !== null) {
-      const { role } = user
-      let filteredPages = PAGES
-
-      if (role === 3) {
-        filteredPages = PAGES.filter((page) => {
-          return !page.admin
-        })
-      }
-
-      setPages(filteredPages)
-    }
-  }, [user])
+  const pages =
+    user === null
+      ? []
+      : user.role === 3
+        ? PAGES.filter((page) => !page.admin)
+        : PAGES
 
   const handleLogout = async (): Promise<void> => {
     try {

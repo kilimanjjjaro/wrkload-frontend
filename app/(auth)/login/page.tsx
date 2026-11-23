@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Balancer from 'react-wrap-balancer'
 import { setCookie } from 'cookies-next/client'
@@ -17,17 +17,31 @@ import login from 'services/auth/login'
 import { AppContext } from 'contexts/AppContext'
 import PageTransition from 'components/shared/PageTransition'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
+import { apiErrorCode } from 'utils/errors'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: '',
   password: ''
 }
 
+const TRIAL_CREDENTIALS = {
+  email: 'wrkload@kilimanjjjaro.com',
+  password: 'Ec@z92!QWKFkmhY'
+}
+
 export default function Login (): React.JSX.Element {
-  const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
+  const { setUser, setIsLoggingIn, trialMode } = useContext(AppContext)
+  const [credentials, setCredentials] = useState(
+    trialMode ? TRIAL_CREDENTIALS : INITIAL_CREDENTIALS_STATE
+  )
+  const [previousTrialMode, setPreviousTrialMode] = useState(trialMode)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const { setUser, setIsLoggingIn, trialMode } = useContext(AppContext)
+
+  if (trialMode !== previousTrialMode) {
+    setPreviousTrialMode(trialMode)
+    if (trialMode) setCredentials(TRIAL_CREDENTIALS)
+  }
   const router = useRouter()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -61,22 +75,13 @@ export default function Login (): React.JSX.Element {
           )
         }
       }
-    } catch (error: any) {
-      setError(error.response.data.code)
+    } catch (error) {
+      setError(apiErrorCode(error) ?? '')
     } finally {
       setIsLoading(false)
       setIsLoggingIn(false)
     }
   }
-
-  useEffect(() => {
-    if (trialMode) {
-      setCredentials({
-        email: 'wrkload@kilimanjjjaro.com',
-        password: 'Ec@z92!QWKFkmhY'
-      })
-    }
-  }, [trialMode])
 
   if (error.length >= 1) {
     return (

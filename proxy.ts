@@ -2,7 +2,7 @@ import { jwtDecode } from 'jwt-decode'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest): NextResponse {
+export function proxy(request: NextRequest): NextResponse {
   const isLoggedCookie = request.cookies.get('isLogged')
   const accessToken = request.cookies.get('accessToken')
   let isLogged = false

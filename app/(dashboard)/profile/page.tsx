@@ -35,11 +35,11 @@ export default function Profile (): React.JSX.Element {
         if (!ALLOWED_IMAGE_MIME_TYPES.includes(file.type)) throw new Error('This file type is not allowed. Please select an image (jpg, jpeg, png, webp).')
 
         setAvatar(file)
-      } catch (error: any) {
+      } catch (error) {
         toast(
           <>
             <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />
-            <p><Balancer>{error.message}</Balancer></p>
+            <p><Balancer>{error instanceof Error ? error.message : ''}</Balancer></p>
           </>
         )
       }
@@ -111,7 +111,7 @@ export default function Profile (): React.JSX.Element {
                   alt={user.username}
                   width={200}
                   height={200}
-                  priority
+                  preload
                 />
               )}
               {avatar !== null && (

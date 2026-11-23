@@ -13,6 +13,7 @@ import Input from 'components/shared/Input'
 import { AppContext } from 'contexts/AppContext'
 import { ModalsContext } from 'contexts/ModalsContext'
 import Paragraph from 'components/shared/Paragraph'
+import { apiErrorCode } from 'utils/errors'
 
 export default function DeleteProject(): React.JSX.Element {
   const { selectedProject } = useContext(AppContext)
@@ -39,8 +40,8 @@ export default function DeleteProject(): React.JSX.Element {
           </>
         )
       }
-    } catch (error: any) {
-      if (error.response.data.code === 'trial/permission-denied') {
+    } catch (error) {
+      if (apiErrorCode(error) === 'trial/permission-denied') {
         toast(
           <>
             <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />

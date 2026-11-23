@@ -12,6 +12,7 @@ import Headline from 'components/shared/Headline'
 import Input from 'components/shared/Input'
 import { ModalsContext } from 'contexts/ModalsContext'
 import { INITIAL_PROJECT_STATE } from 'constants/projects'
+import { apiErrorCode } from 'utils/errors'
 
 export default function AddProject(): React.JSX.Element {
   const { setAddDataModalStatus } = useContext(ModalsContext)
@@ -37,8 +38,8 @@ export default function AddProject(): React.JSX.Element {
           </>
         )
       }
-    } catch (error: any) {
-      if (error.response.data.code === 'trial/permission-denied') {
+    } catch (error) {
+      if (apiErrorCode(error) === 'trial/permission-denied') {
         toast(
           <>
             <ShieldExclamationIcon className='w-5 stroke-blue stroke-3' />

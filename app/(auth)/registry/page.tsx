@@ -14,6 +14,7 @@ import register from 'services/auth/register'
 import PageTransition from 'components/shared/PageTransition'
 import clsx from 'clsx'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
+import { apiErrorCode } from 'utils/errors'
 
 const INITIAL_CREDENTIALS_STATE = {
   username: '',
@@ -54,13 +55,13 @@ export default function Register (): React.JSX.Element {
       if (response.status === SERVER_RESPONSE_STATUS.OK) {
         setSuccess(true)
       }
-    } catch (error: any) {
-      if (error.message === 'auth/different-passwords') {
+    } catch (error) {
+      if (error instanceof Error && error.message === 'auth/different-passwords') {
         setError('auth/different-passwords')
         return
       }
 
-      if (error.response.data.code === 'auth/email-already-exists') {
+      if (apiErrorCode(error) === 'auth/email-already-exists') {
         setError('auth/email-already-exists')
       }
     } finally {

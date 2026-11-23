@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
 import { describe, expect, it } from 'vitest'
-import { config, middleware } from '../../middleware'
+import { config, proxy } from '../../proxy'
 import { ROLE_ADMIN, ROLE_PARTNER, ROLE_TRIAL } from '../constants/api'
 
 const ORIGIN = 'https://wrkload.test'
@@ -20,7 +20,7 @@ const request = (path: string, cookies: Record<string, string> = {}) => {
 
 const redirectOf = (response: Response) => response.headers.get('location')
 
-describe('middleware', () => {
+describe('proxy', () => {
   it('runs on the dashboard pages', () => {
     expect(config.matcher).toEqual(['/tasks', '/projects', '/profile', '/users'])
   })
@@ -28,15 +28,15 @@ describe('middleware', () => {
   it.each(['/tasks', '/projects', '/profile', '/users'])(
     'sends visitors without a session from %s to the home page',
     (path) => {
-      expect(redirectOf(middleware(request(path)))).toBe(`${ORIGIN}/`)
+      expect(redirectOf(proxy(request(path)))).toBe(`${ORIGIN}/`)
       expect(
-        redirectOf(middleware(request(path, { isLogged: 'false' })))
+        redirectOf(proxy(request(path, { isLogged: 'false' })))
       ).toBe(`${ORIGIN}/`)
     }
   )
 
   it('lets logged in users through', () => {
-    const response = middleware(
+    const response = proxy(
       request('/tasks', {
         isLogged: 'true',
         accessToken: tokenWithRole(ROLE_PARTNER)
@@ -47,7 +47,7 @@ describe('middleware', () => {
   })
 
   it('sends partners from the users page to their tasks', () => {
-    const response = middleware(
+    const response = proxy(
       request('/users', {
         isLogged: 'true',
         accessToken: tokenWithRole(ROLE_PARTNER)
@@ -60,7 +60,7 @@ describe('middleware', () => {
   it.each([ROLE_ADMIN, ROLE_TRIAL])(
     'lets role %i see the users page',
     (role) => {
-      const response = middleware(
+      const response = proxy(
         request('/users', { isLogged: 'true', accessToken: tokenWithRole(role) })
       )
 
