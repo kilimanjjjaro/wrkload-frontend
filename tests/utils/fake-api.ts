@@ -6,6 +6,7 @@ import {
   HTTP_STATUS_NO_CONTENT,
   HTTP_STATUS_NOT_FOUND,
   HTTP_STATUS_UNAUTHORIZED,
+  ROLE_ADMIN,
   ROLE_PARTNER,
   TRIAL_ACCOUNT_ID
 } from '../constants/api'
@@ -294,6 +295,17 @@ export class FakeApi {
     return ok({ updatedProject })
   }
 
+  private listUsers(recorded: RecordedRequest, user: FixtureUser): Reply {
+    const users = this.users.filter(
+      (candidate) =>
+        (user.role === ROLE_ADMIN || candidate._id === user._id) &&
+        matches(candidate.username, recorded.query.search)
+    )
+    if (users.length === NO_RESULTS) return ok({ pagination: null, users: [] })
+    const { docs, pagination } = paginate(users, recorded.query)
+    return ok({ pagination, users: docs })
+  }
+
   private userRoutes(
     recorded: RecordedRequest,
     user: FixtureUser,
@@ -309,13 +321,7 @@ export class FakeApi {
 
     if (recorded.method === 'GET' && id === undefined) {
       if (user.role === ROLE_PARTNER) return permissionDenied
-      const users = this.users.filter((candidate) =>
-        matches(candidate.username, recorded.query.search)
-      )
-      if (users.length === NO_RESULTS)
-        return ok({ pagination: null, users: [] })
-      const { docs, pagination } = paginate(users, recorded.query)
-      return ok({ pagination, users: docs })
+      return this.listUsers(recorded, user)
     }
 
     if (target === undefined) {
@@ -335,7 +341,8 @@ export class FakeApi {
       return ok({})
     }
 
-    if (target._id !== user._id) return permissionDenied
+    if (target._id !== user._id && user.role !== ROLE_ADMIN)
+      return permissionDenied
 
     Object.assign(target, body)
     return ok({ user: secureUser(target) })

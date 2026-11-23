@@ -424,6 +424,23 @@ test.describe('users', () => {
     await expect(card(page, 'Trial')).toBeVisible()
   })
 
+  test('lets an admin rename another user', async ({ page, api }) => {
+    await logIn(page, ADMIN)
+    await visit(page, '/users')
+    await openCardAction(page, 'Alice', 'edit')
+    await page
+      .locator('[name="username"]')
+      .filter({ visible: true })
+      .fill('Alicia')
+    await visibleButton(page, 'Update').click()
+
+    await expect(page.getByText('User updated successfully!')).toBeVisible()
+    await expect(card(page, 'Alicia')).toBeVisible()
+    expect(
+      api.requestsTo('PATCH', `/users/${PARTNER._id}`)[FIRST_REQUEST].body
+    ).toEqual({ username: 'Alicia' })
+  })
+
   test('hides the users link from partners', async ({ page }) => {
     await logIn(page, PARTNER)
     await visit(page, '/tasks')
