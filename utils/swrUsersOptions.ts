@@ -1,7 +1,11 @@
 import type { MutatorOptions } from 'swr'
 import { sortUsers } from 'utils/sortData'
 
-import type { FullUserInterface, UserInterface } from 'interfaces/users/User'
+import type {
+  FullUserInterface,
+  SecureUserInterface,
+  UserInterface
+} from 'interfaces/users/User'
 
 export const updateUserOptions = (
   updatedUser: UserInterface
@@ -11,9 +15,12 @@ export const updateUserOptions = (
     return { ...data, users: sortUsers([...prevUsers, updatedUser]) }
   },
   rollbackOnError: true,
-  populateCache: (updated: UserInterface, data: FullUserInterface) => {
+  populateCache: (updated: SecureUserInterface, data: FullUserInterface) => {
     const prevUsers = data.users.filter((user) => user._id !== updatedUser._id)
-    return { ...data, users: sortUsers([...prevUsers, updated]) }
+    return {
+      ...data,
+      users: sortUsers([...prevUsers, { ...updatedUser, ...updated }])
+    }
   }
 })
 

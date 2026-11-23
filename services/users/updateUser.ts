@@ -1,11 +1,11 @@
 import privateApi from 'utils/privateApi'
 import { getCookie } from 'cookies-next/client'
-import type { FullUserInterface, UserInterface } from 'interfaces/users/User'
+import type { SecureUserInterface, UserInterface } from 'interfaces/users/User'
 import { USERS_ENDPOINT } from 'constants/users'
 
 export const updateUser = async (
   user: UserInterface
-): Promise<FullUserInterface> => {
+): Promise<SecureUserInterface> => {
   let config = {}
   const accessToken = getCookie('accessToken')
 
@@ -21,10 +21,10 @@ export const updateUser = async (
     username: user.username
   }
 
-  const response = await privateApi.patch<{ updatedUser: FullUserInterface }>(
+  const response = await privateApi.patch<{ user: SecureUserInterface }>(
     `${USERS_ENDPOINT}/${user._id}`,
     updatedUser,
     config
   )
-  return response.data.updatedUser
+  return response.data.user
 }

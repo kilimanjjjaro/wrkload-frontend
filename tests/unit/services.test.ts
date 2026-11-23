@@ -246,7 +246,7 @@ describe('data services', () => {
     )
   })
 
-  it.fails('returns the user updated by the api', async () => {
+  it('returns the user updated by the api', async () => {
     const updated = { ...USER, username: 'New name' }
     respondWith({ status: 'ok', user: updated })
 

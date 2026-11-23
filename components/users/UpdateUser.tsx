@@ -34,20 +34,14 @@ export default function UpdateUser(): React.JSX.Element {
     setUpdateDataModalStatus(false)
 
     try {
-      const response = await mutate(
-        'users',
-        updateUser(user),
-        updateUserOptions(user)
-      )
+      await mutate('users', updateUser(user), updateUserOptions(user))
 
-      if (response?.status === 'ok') {
-        toast(
-          <>
-            <CheckCircleIcon className='w-5 stroke-blue stroke-3' />
-            <p>User updated successfully!</p>
-          </>
-        )
-      }
+      toast(
+        <>
+          <CheckCircleIcon className='w-5 stroke-blue stroke-3' />
+          <p>User updated successfully!</p>
+        </>
+      )
     } catch (error) {
       if (apiErrorCode(error) === 'trial/permission-denied') {
         toast(
