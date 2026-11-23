@@ -63,12 +63,6 @@ export const logIn = async (page: Page, user: FixtureUser) => {
   )
 }
 
-export const useLightTheme = async (page: Page) => {
-  await page.addInitScript(() => {
-    window.localStorage.setItem('darkMode', 'false')
-  })
-}
-
 const EXPECTED_ERRORS = ['/_vercel/insights/script.js']
 
 export const unexpectedErrors = (errors: BrowserError[]) =>

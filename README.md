@@ -54,19 +54,11 @@ pnpm lint          # ESLint
 pnpm test          # Unit tests (Vitest)
 pnpm build         # Production build
 pnpm test:e2e      # End-to-end tests (Playwright, needs a build first)
-pnpm test:visual   # Screenshot tests (Playwright, Windows only)
 pnpm test:all      # All of the above, in order
 ```
 
 Before the first e2e run, install the browser with
-`pnpm exec playwright install chromium`. The e2e and visual tests mock the API
-with `page.route`, so they never reach the real backend.
+`pnpm exec playwright install chromium`. The e2e tests mock the API with
+`page.route`, so they never reach the real backend.
 
-The visual tests compare full-page screenshots in desktop and mobile viewports
-against the references in `tests/visual/__screenshots__/win32`. They are
-captured on Windows, so they are skipped on other platforms and in CI. After an
-intended visual change, regenerate them with `pnpm test:visual:update` and
-review the new images before committing them.
-
-The same checks, except the visual tests, run in CI on every pull request
-(`.github/workflows/ci.yml`).
+The same checks run in CI on every pull request (`.github/workflows/ci.yml`).
