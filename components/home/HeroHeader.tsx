@@ -28,7 +28,7 @@ export default function HeroHeader (): React.JSX.Element {
           <Paragraph variant='normal'><Balancer>With wrkload you can track what you&apos;ve worked on in a simple and organized way.</Balancer></Paragraph>
         </div>
         <div className='flex items-center gap-x-5'>
-          <Button className='!w-auto' variant='primary' onClick={() => router.push('/registry')}>Start now for free <ArrowRightIcon className='w-4 stroke-3' /></Button>
+          <Button className='w-auto!' variant='primary' onClick={() => router.push('/registry')}>Start now for free <ArrowRightIcon className='w-4 stroke-3' /></Button>
           <button className='flex items-center transition ease-in-out gap-x-2 md:hidden font-secondaryFont hover:text-blue duration-400 dark:text-white dark:hover:text-blue' onClick={handleTrialMode}><HeartIcon className='w-4 stroke-3' /> Try now!</button>
         </div>
       </div>
@@ -37,7 +37,7 @@ export default function HeroHeader (): React.JSX.Element {
           className='hidden 2xl:block'
           duration={600}
           highlight={false}
-          innerClassName='!overflow-visible'
+          innerClassName='overflow-visible!'
         >
           <article
             data-atropos-offset='6'
@@ -63,7 +63,7 @@ export default function HeroHeader (): React.JSX.Element {
                 </div>
               </div>
             </div>
-            <div className='absolute right-6 md:right-0 flex flex-col md:flex-row items-end justify-end md:justify-center md:w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 md:-top-[1.05rem] xl:opacity-0 gap-2 md:gap-3 group-hover:opacity-100'>
+            <div className='absolute right-6 md:right-0 flex flex-col md:flex-row items-end justify-end md:justify-center md:w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 md:top-[-1.05rem] xl:opacity-0 gap-2 md:gap-3 group-hover:opacity-100'>
               <div className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-yellow hover:bg-blue'>
                 <PencilSquareIcon className='w-4 stroke-2' />
               </div>
@@ -74,26 +74,26 @@ export default function HeroHeader (): React.JSX.Element {
           </article>
         </Atropos>
         <article className='p-6 xl:scale-[0.80] bg-light-blue dark:bg-blue md:p-7 rounded-3xl transition duration-400 ease-in-out'>
-          <div className='w-4/6 mb-4 xl:mb-5 h-9 bg-gradient-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-[length:200%_100%] rounded-full animate-skeleton' />
-          <div className='w-full h-28 bg-gradient-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-[length:200%_100%] rounded-3xl animate-skeleton' />
+          <div className='w-4/6 mb-4 xl:mb-5 h-9 bg-linear-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-size-[200%_100%] rounded-full animate-skeleton' />
+          <div className='w-full h-28 bg-linear-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-size-[200%_100%] rounded-3xl animate-skeleton' />
           <div className='flex flex-wrap w-full gap-3 mt-4'>
-            <div className='w-2/6 h-8 bg-gradient-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-[length:200%_100%] rounded-full animate-skeleton' />
-            <div className='w-2/6 h-8 bg-gradient-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-[length:200%_100%] rounded-full animate-skeleton' />
+            <div className='w-2/6 h-8 bg-linear-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-size-[200%_100%] rounded-full animate-skeleton' />
+            <div className='w-2/6 h-8 bg-linear-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-size-[200%_100%] rounded-full animate-skeleton' />
           </div>
         </article>
         <article className='p-6 hidden 2xl:block xl:scale-[0.80] bg-light-blue dark:bg-blue md:p-7 rounded-3xl transition duration-400 ease-in-out'>
-          <div className='w-4/6 mb-4 xl:mb-5 h-9 bg-gradient-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-[length:200%_100%] rounded-full animate-skeleton' />
-          <div className='w-full h-28 bg-gradient-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-[length:200%_100%] rounded-3xl animate-skeleton' />
+          <div className='w-4/6 mb-4 xl:mb-5 h-9 bg-linear-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-size-[200%_100%] rounded-full animate-skeleton' />
+          <div className='w-full h-28 bg-linear-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-size-[200%_100%] rounded-3xl animate-skeleton' />
           <div className='flex flex-wrap w-full gap-3 mt-4'>
-            <div className='w-2/6 h-8 bg-gradient-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-[length:200%_100%] rounded-full animate-skeleton' />
-            <div className='w-2/6 h-8 bg-gradient-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-[length:200%_100%] rounded-full animate-skeleton' />
+            <div className='w-2/6 h-8 bg-linear-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-size-[200%_100%] rounded-full animate-skeleton' />
+            <div className='w-2/6 h-8 bg-linear-to-r from-white dark:from-light-blue via-blue dark:via-white/30 to-white dark:to-light-blue bg-size-[200%_100%] rounded-full animate-skeleton' />
           </div>
         </article>
         <Atropos
           className='hidden 2xl:block'
           duration={600}
           highlight={false}
-          innerClassName='!overflow-visible'
+          innerClassName='overflow-visible!'
         >
           <article
             data-atropos-offset='6'
@@ -119,7 +119,7 @@ export default function HeroHeader (): React.JSX.Element {
                 </div>
               </div>
             </div>
-            <div className='absolute right-6 md:right-0 flex flex-col md:flex-row items-end justify-end md:justify-center md:w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 md:-top-[1.05rem] xl:opacity-0 gap-2 md:gap-3 group-hover:opacity-100'>
+            <div className='absolute right-6 md:right-0 flex flex-col md:flex-row items-end justify-end md:justify-center md:w-full text-xs font-semibold tracking-widest text-black uppercase transition ease-in-out opacity-100 font-secondaryFont duration-400 md:top-[-1.05rem] xl:opacity-0 gap-2 md:gap-3 group-hover:opacity-100'>
               <div className='flex items-center justify-center w-8 h-8 transition ease-in-out rounded-full cursor-pointer duration-400 bg-yellow hover:bg-blue'>
                 <PencilSquareIcon className='w-4 stroke-2' />
               </div>

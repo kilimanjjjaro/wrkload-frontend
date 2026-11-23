@@ -115,9 +115,9 @@ export default function Register (): React.JSX.Element {
                 <Input onChange={handleChange} value={credentials.password} name='password' type='password' placeholder='Password' autoComplete='current-password' minLength={8} centerText required />
                 <div className={clsx(
                   'absolute flex items-center gap-x-1 right-3 pt-[2px]',
-                  credentials.password.length > 0 && credentials.password.length < 8 && '[&>div]:!bg-red',
-                  credentials.password.length >= 7 && credentials.password.length < 12 && '[&>div]:!bg-yellow',
-                  credentials.password.length >= 11 && '[&>div]:!bg-green'
+                  credentials.password.length > 0 && credentials.password.length < 8 && '[&>div]:bg-red!',
+                  credentials.password.length >= 7 && credentials.password.length < 12 && '[&>div]:bg-yellow!',
+                  credentials.password.length >= 11 && '[&>div]:bg-green!'
                 )}
                 >
                   {credentials.password.length > 0 && <div className='w-[5px] h-[5px] rounded-full' />}

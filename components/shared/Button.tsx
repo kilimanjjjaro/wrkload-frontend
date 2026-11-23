@@ -6,8 +6,8 @@ const VARIANTS = {
   SECONDARY: 'text-blue dark:text-blue bg-black md:dark:hover:text-black md:hover:text-black before:bg-white',
   LIGHT_ALTERNATIVE: 'text-black before:bg-black md:hover:text-blue border-black dark:text-white border-2 dark:fill-white dark:border-white md:dark:hover:fill-black md:dark:hover:text-black dark:before:bg-white',
   DARK_ALTERNATIVE: 'text-black border-2 border-black fill-black md:hover:fill-blue md:hover:text-blue before:bg-black',
-  DISABLED: 'cursor-not-allowed border-2 border-blue dark:border-white dark:text-white !bg-transparent hover:!text-black dark:hover:!text-white md:hover:!text-black md:dark:hover:!text-white before:hidden',
-  LOADING: 'cursor-not-allowed before:animate-loading [&>div>svg]:!stroke-blue'
+  DISABLED: 'cursor-not-allowed border-2 border-blue dark:border-white dark:text-white bg-transparent! hover:text-black! dark:hover:text-white! md:hover:text-black! md:dark:hover:text-white! before:hidden',
+  LOADING: 'cursor-not-allowed before:animate-loading [&>div>svg]:stroke-blue!'
 }
 
 export default function Button ({ className, type, variant, disablePagination, onClick, children, isLoading, ariaLabel }: ButtonInterface): React.JSX.Element {

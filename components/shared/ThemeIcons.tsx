@@ -16,7 +16,7 @@ export const MoonIcon = (): React.JSX.Element => {
 
   return (
     <motion.svg
-      className='outline-0 [&>*]:outline-0'
+      className='outline-0 *:outline-0'
       xmlns='http://www.w3.org/2000/svg'
       width='18px'
       height='18px'
@@ -53,7 +53,7 @@ export const SunIcon = (): React.JSX.Element => {
 
   return (
     <motion.svg
-      className='origin-center outline-0 [&>*]:outline-0'
+      className='origin-center outline-0 *:outline-0'
       key='sun'
       width='1em'
       height='1em'

@@ -38,13 +38,13 @@ export default function NavBar (): React.JSX.Element {
         {user === null && !isLoggingIn && (
           <div className='flex items-center gap-x-5'>
             <button className='items-center hidden transition ease-in-out md:flex gap-x-2 font-secondaryFont hover:text-blue duration-400 dark:text-white dark:hover:text-blue' onClick={handleTrialMode}><HeartIcon className='w-4 stroke-3' /> Try now!</button>
-            <Button className='!w-auto' onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-3' /></Button>
+            <Button className='w-auto!' onClick={() => router.push('/login')} variant='primary'>Log in <LockClosedIcon className='w-4 stroke-3' /></Button>
           </div>
         )}
         {isLoggingIn && (
-          <div className='items-center flex gap-x-3 [&>*]:animate-skeleton'>
-            <div className='w-36 h-5 bg-gradient-to-r from-light-blue via-blue to-light-blue bg-[length:200%_100%] rounded-full hidden md:block' />
-            <div className='w-12 h-12 md:w-10 md:h-10 bg-gradient-to-r from-light-blue via-blue to-light-blue bg-[length:200%_100%] rounded-full' />
+          <div className='items-center flex gap-x-3 *:animate-skeleton'>
+            <div className='w-36 h-5 bg-linear-to-r from-light-blue via-blue to-light-blue bg-size-[200%_100%] rounded-full hidden md:block' />
+            <div className='w-12 h-12 md:w-10 md:h-10 bg-linear-to-r from-light-blue via-blue to-light-blue bg-size-[200%_100%] rounded-full' />
           </div>
         )}
         {user !== null && !isLoggingIn && (

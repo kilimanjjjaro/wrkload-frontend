@@ -68,7 +68,7 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
         <div className='sticky top-0 z-10 flex items-center px-4 py-3 border-b border-black bg-blue'>
           <MagnifyingGlassIcon className='w-4 stroke-3 stroke-black' />
           <input
-            className='pl-2 text-black outline-none bg-blue placeholder:text-black'
+            className='pl-2 text-black outline-hidden bg-blue placeholder:text-black'
             type='text'
             value={searchInputValue}
             onChange={(e) => setSearchInputValue(e.target.value.toLowerCase())}
@@ -88,8 +88,8 @@ export default function ProjectSelector ({ projectNames }: { projectNames: strin
           >
             {projectName}
             <span className={clsx(
-              'absolute rounded-full right-3 hidden px-2 tracking-wider uppercase bg-black text-[8px] text-white',
-              projectName.toLowerCase() === selected.toLowerCase() && '!flex'
+              'absolute rounded-full right-3 hidden px-2 tracking-wider uppercase bg-black text-[8px] leading-5 text-white',
+              projectName.toLowerCase() === selected.toLowerCase() && 'flex!'
             )}
             >
               Selected

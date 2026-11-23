@@ -134,9 +134,9 @@ export default function ResetPassword (): React.JSX.Element {
                 <Input onChange={handleChange} value={credentials.newPassword} name='newPassword' type='password' placeholder='New password' minLength={8} centerText required />
                 <div className={clsx(
                   'absolute flex items-center gap-x-1 right-3 pt-[2px]',
-                  credentials.newPassword.length > 0 && credentials.newPassword.length < 8 && '[&>div]:!bg-red',
-                  credentials.newPassword.length >= 7 && credentials.newPassword.length < 12 && '[&>div]:!bg-yellow',
-                  credentials.newPassword.length >= 11 && '[&>div]:!bg-green'
+                  credentials.newPassword.length > 0 && credentials.newPassword.length < 8 && '[&>div]:bg-red!',
+                  credentials.newPassword.length >= 7 && credentials.newPassword.length < 12 && '[&>div]:bg-yellow!',
+                  credentials.newPassword.length >= 11 && '[&>div]:bg-green!'
                 )}
                 >
                   {credentials.newPassword.length > 0 && <div className='w-[5px] h-[5px] rounded-full' />}

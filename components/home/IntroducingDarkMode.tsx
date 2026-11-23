@@ -94,7 +94,7 @@ export default function IntroducingDarkMode (): React.JSX.Element {
           delay: 0.4
         }}
       >
-        <Headline variant='2xl' className='!mb-10'><Balancer>Discover the Dark Side of wrkload!</Balancer></Headline>
+        <Headline variant='2xl' className='mb-10!'><Balancer>Discover the Dark Side of wrkload!</Balancer></Headline>
         <div className='dark:text-white'>
           <Paragraph variant='normal'><Balancer>With our dark mode, you can enjoy a more relaxed and focused user experience. The interface will help you work without eye strain and optimize your device&apos;s battery.</Balancer></Paragraph>
         </div>

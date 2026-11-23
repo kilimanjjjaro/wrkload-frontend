@@ -39,9 +39,9 @@ export default function Pagination ({ data }: { data: PaginationInterface }): Re
 
   return (
     <div className='flex justify-center mt-10 gap-x-5'>
-      <Button ariaLabel='Prev page' className='!w-auto' variant='primary' disablePagination={disablePrevPageButton} onClick={handlePrevPage}><ArrowLeftIcon className='w-4 stroke-3' /></Button>
+      <Button ariaLabel='Prev page' className='w-auto!' variant='primary' disablePagination={disablePrevPageButton} onClick={handlePrevPage}><ArrowLeftIcon className='w-4 stroke-3' /></Button>
       <div className='self-center text-sm text-black transition-colors ease-in-out dark:text-white duration-400 font-secondaryFont'>Page {data?.page} of {totalPages}</div>
-      <Button ariaLabel='Next page' className='!w-auto' variant='primary' disablePagination={disableNextPageButton} onClick={handleNextPage}><ArrowRightIcon className='w-4 stroke-3' /></Button>
+      <Button ariaLabel='Next page' className='w-auto!' variant='primary' disablePagination={disableNextPageButton} onClick={handleNextPage}><ArrowRightIcon className='w-4 stroke-3' /></Button>
     </div>
   )
 }

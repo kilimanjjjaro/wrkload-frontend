@@ -19,14 +19,14 @@ export default function Options(): React.JSX.Element {
 
   return (
     <div className='flex items-start gap-x-5'>
-      <Button className='!w-auto' onClick={handleRenderStats} variant='light-alternative'>
+      <Button className='w-auto!' onClick={handleRenderStats} variant='light-alternative'>
         <PresentationChartLineIcon className='w-4 stroke-3' />
         <span className='hidden md:inline-block'>{statsButtonText}</span>
       </Button>
-      <Button ariaLabel='Add task' className='!w-auto' onClick={() => setAddDataModalStatus(true)} variant='primary'><PlusIcon className='w-4 stroke-3' /></Button>
-      <Button ariaLabel='Search task' className='!w-auto' onClick={() => setSearchModalStatus(true)} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
+      <Button ariaLabel='Add task' className='w-auto!' onClick={() => setAddDataModalStatus(true)} variant='primary'><PlusIcon className='w-4 stroke-3' /></Button>
+      <Button ariaLabel='Search task' className='w-auto!' onClick={() => setSearchModalStatus(true)} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
       <div className='relative'>
-        <Button ariaLabel='Filter' className='!w-auto' onClick={() => setShowDateFilterBoxStatus(!(showDateFilterBoxStatus))} variant='primary'><CalendarIcon className='w-4 stroke-3' /></Button>
+        <Button ariaLabel='Filter' className='w-auto!' onClick={() => setShowDateFilterBoxStatus(!(showDateFilterBoxStatus))} variant='primary'><CalendarIcon className='w-4 stroke-3' /></Button>
         <DateFilter dependency={showDateFilterBoxStatus} setDependency={setShowDateFilterBoxStatus} />
       </div>
     </div>

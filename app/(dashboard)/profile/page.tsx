@@ -102,7 +102,7 @@ export default function Profile (): React.JSX.Element {
       {(user !== null) && (
         <div className='flex flex-col gap-10 xl:w-1/2'>
           <div className='flex flex-col items-start gap-4'>
-            <Headline className='!mb-0 dark:text-white' variant='md'>Avatar</Headline>
+            <Headline className='mb-0! dark:text-white' variant='md'>Avatar</Headline>
             <div className='relative flex items-center justify-center'>
               {avatar === null && (
                 <Image
@@ -151,24 +151,24 @@ export default function Profile (): React.JSX.Element {
           </div>
 
           <div className='flex flex-col gap-4 dark:text-white'>
-            <Headline className='!mb-0' variant='md'>Username</Headline>
+            <Headline className='mb-0!' variant='md'>Username</Headline>
             <Paragraph variant='normal'>{user.username}</Paragraph>
           </div>
 
           <div className='flex flex-col gap-4 dark:text-white'>
-            <Headline className='!mb-0' variant='md'>Email</Headline>
+            <Headline className='mb-0!' variant='md'>Email</Headline>
             <Paragraph variant='normal'>{user.email}</Paragraph>
           </div>
 
           <div className='flex flex-col items-start gap-4'>
             <div className='relative flex justify-center group'>
-              <Button className='!w-auto' variant='primary'><PencilSquareIcon className='w-4 stroke-3' /> Update profile</Button>
+              <Button className='w-auto!' variant='primary'><PencilSquareIcon className='w-4 stroke-3' /> Update profile</Button>
               <div className='absolute invisible opacity-100 md:opacity-0 tracking-widest uppercase leading-none py-[7px] px-[10px] font-bold text-[8px] text-center transition-all ease-in-out top-8 bg-light-blue duration-400 group-hover:opacity-100 group-hover:visible rounded-full'>
                 Coming soon
               </div>
             </div>
-            <Button className='!w-auto' variant='primary' onClick={() => router.push('/change-password')}><LockClosedIcon className='w-4 stroke-3' /> Change password</Button>
-            <Button className='!w-auto' variant='primary' onClick={() => router.push('/delete-account')}><UserMinusIcon className='w-4 stroke-3' /> Delete account</Button>
+            <Button className='w-auto!' variant='primary' onClick={() => router.push('/change-password')}><LockClosedIcon className='w-4 stroke-3' /> Change password</Button>
+            <Button className='w-auto!' variant='primary' onClick={() => router.push('/delete-account')}><UserMinusIcon className='w-4 stroke-3' /> Delete account</Button>
           </div>
         </div>
       )}

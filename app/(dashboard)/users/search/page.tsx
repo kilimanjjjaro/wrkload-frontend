@@ -93,7 +93,7 @@ export default function SearchUsers(): React.JSX.Element {
             </span>
             <Button
               ariaLabel='Go to users'
-              className='!w-auto'
+              className='w-auto!'
               onClick={() => router.push('/users')}
               variant='primary'
             >

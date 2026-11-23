@@ -4,9 +4,6 @@ import { inter, spaceGrotesk } from 'utils/fonts'
 import Providers from 'app/providers'
 import { DESCRIPTION, pageMetadata } from 'constants/metadata'
 import type { ChildrenInterface } from 'interfaces/components'
-import 'atropos/atropos.css'
-import 'swiper/css'
-import 'swiper/css/pagination'
 import 'app/globals.css'
 
 export const metadata = {

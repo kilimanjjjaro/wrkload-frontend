@@ -1,6 +1,74 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import 'atropos/atropos.css' layer(components);
+@import 'swiper/css' layer(components);
+@import 'swiper/css/pagination' layer(components);
+
+@custom-variant dark (&:is(.dark *));
+@custom-variant hover (&:hover);
+
+@utility container {
+  margin-inline: auto;
+}
+
+@theme inline {
+  --font-*: initial;
+  --font-primaryFont: var(--space-grotesk-font), system-ui, sans-serif;
+  --font-secondaryFont: var(--inter-font), system-ui, sans-serif;
+}
+
+@theme {
+  --color-blue: #7686b7;
+  --color-light-blue: #d2d7e3;
+  --color-black: #0a0a0a;
+  --color-white: #efefef;
+  --color-red: #e32626;
+  --color-yellow: #dfcd24;
+  --color-green: #34a400;
+
+  --transition-duration-400: 400ms;
+
+  --animate-skeleton: shine 2.5s ease-in-out infinite;
+  --animate-loading: loading 2s ease-out infinite;
+
+  --stroke-width-3: 3px;
+  --stroke-width-4: 4px;
+  --stroke-width-3_5: 3.5px;
+
+  @keyframes shine {
+    to {
+      background-position-x: -200%;
+    }
+  }
+  @keyframes loading {
+    0% {
+      transform: translateY(100%);
+    }
+    25% {
+      transform: translateY(150%);
+    }
+    50% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: #e5e7eb;
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
 
 /* Custom toast notifications */
 [data-sonner-toaster] {

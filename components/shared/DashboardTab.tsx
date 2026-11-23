@@ -77,7 +77,7 @@ export default function DashboardTab ({ showDashboardBox, setShowDashboardBox }:
         ))}
         <button className='px-8 py-4 transition ease-in-out rounded-full cursor-pointer xl:px-5 xl:py-2 bg-blue duration-400 xl:rounded-3xl xl:hover:bg-black xl:hover:text-white dark:xl:hover:text-black dark:xl:hover:bg-white' onClick={() => { void handleLogout() }}>Log out</button>
       </ul>
-      <div className='p-2 transition xl:absolute xl:mt-4 xl:top-full ease-in-out rounded-full cursor-pointer w-9 xl:w-7 bg-blue duration-400 xl:hover:bg-black [&>svg]:dark:xl:hover:stroke-black [&>svg]:xl:hover:stroke-white dark:xl:hover:bg-white' onClick={() => setShowDashboardBox(!showDashboardBox)}>
+      <div className='p-2 transition xl:absolute xl:mt-4 xl:top-full ease-in-out rounded-full cursor-pointer w-9 xl:w-7 bg-blue duration-400 xl:hover:bg-black dark:xl:hover:[&>svg]:stroke-black xl:hover:[&>svg]:stroke-white dark:xl:hover:bg-white' onClick={() => setShowDashboardBox(!showDashboardBox)}>
         <XMarkIcon className='transition ease-in-out stroke-2 stroke-black duration-400' />
       </div>
     </motion.nav>

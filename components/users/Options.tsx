@@ -8,7 +8,7 @@ export default function Options(): React.JSX.Element {
 
   return (
     <div className='flex items-start gap-x-5'>
-      <Button ariaLabel='Search user' className='!w-auto' onClick={() => setSearchModalStatus(true)} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
+      <Button ariaLabel='Search user' className='w-auto!' onClick={() => setSearchModalStatus(true)} variant='primary'><MagnifyingGlassIcon className='w-4 stroke-3' /></Button>
     </div>
   )
 }

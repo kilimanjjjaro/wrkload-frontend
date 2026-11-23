@@ -254,12 +254,12 @@ export default function ChangePassword(): React.JSX.Element {
                       'absolute flex items-center gap-x-1 right-3 pt-[2px]',
                       credentials.newPassword.length > 0 &&
                         credentials.newPassword.length < 8 &&
-                        '[&>div]:!bg-red',
+                        '[&>div]:bg-red!',
                       credentials.newPassword.length >= 7 &&
                         credentials.newPassword.length < 12 &&
-                        '[&>div]:!bg-yellow',
+                        '[&>div]:bg-yellow!',
                       credentials.newPassword.length >= 11 &&
-                        '[&>div]:!bg-green'
+                        '[&>div]:bg-green!'
                     )}
                   >
                     {credentials.newPassword.length > 0 && (

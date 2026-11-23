@@ -22,7 +22,7 @@ export default function NotFound(): React.JSX.Element {
         alt='Not found image'
       />
       <Paragraph className='text-white' variant='normal'><Balancer>Sorry, we couldn&apos;t find what you were looking for, please try again.</Balancer></Paragraph>
-      <Button ariaLabel='Go back' className='!w-auto' onClick={() => router.back()} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
+      <Button ariaLabel='Go back' className='w-auto!' onClick={() => router.back()} variant='primary'><ArrowLeftIcon className='w-4 stroke-3' /></Button>
     </div>
   )
 }

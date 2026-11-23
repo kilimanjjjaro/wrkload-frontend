@@ -117,7 +117,7 @@ export default function IntroducingStats (): React.JSX.Element {
           delay: 0.4
         }}
       >
-        <Headline variant='2xl' className='!mb-10'><Balancer>All you need in one blink!</Balancer></Headline>
+        <Headline variant='2xl' className='mb-10!'><Balancer>All you need in one blink!</Balancer></Headline>
         <div className='dark:text-white'>
           <Paragraph variant='normal'><Balancer>You can control in detail the time you worked on a project and extra data associated with it. All in the same place.</Balancer></Paragraph>
         </div>
