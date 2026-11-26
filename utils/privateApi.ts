@@ -4,10 +4,9 @@ import axios, {
   type InternalAxiosRequestConfig
 } from 'axios'
 import { getCookie, setCookie } from 'cookies-next/client'
+import { API_URL } from 'constants/api'
 import { HTTP_STATUS_UNAUTHORIZED } from 'constants/http'
 import { toError } from 'utils/errors'
-
-const BASE_URL = `${process.env.NODE_ENV === 'production' ? 'https://wrkload-api.onrender.com' : 'http://localhost:5000'}/api/v1`
 
 interface RefreshTokenInterface {
   status: string
@@ -20,7 +19,7 @@ interface RetriableRequestConfig extends InternalAxiosRequestConfig {
 }
 
 const privateApi = axios.create({
-  baseURL: BASE_URL
+  baseURL: API_URL
 })
 
 privateApi.interceptors.request.use(
@@ -55,7 +54,7 @@ privateApi.interceptors.response.use(
 
       const response: AxiosResponse<RefreshTokenInterface> = await axios({
         method: 'GET',
-        baseURL: BASE_URL,
+        baseURL: API_URL,
         url: '/auth/refreshToken'
       })
 

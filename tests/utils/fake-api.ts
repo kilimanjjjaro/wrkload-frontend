@@ -1,6 +1,6 @@
 import type { Page, Request, Route } from '@playwright/test'
 import {
-  API_URL,
+  LOCAL_API_URL,
   HTTP_STATUS_CREATED,
   HTTP_STATUS_FORBIDDEN,
   HTTP_STATUS_NO_CONTENT,
@@ -92,7 +92,7 @@ export class FakeApi {
   }
 
   async install(page: Page) {
-    await page.route(`${API_URL}/**`, async (route) => {
+    await page.route(`${LOCAL_API_URL}/**`, async (route) => {
       await this.handle(route)
     })
   }
@@ -127,7 +127,7 @@ export class FakeApi {
     const url = new URL(request.url())
     const recorded: RecordedRequest = {
       method: request.method(),
-      path: url.pathname.replace(new URL(API_URL).pathname, ''),
+      path: url.pathname.replace(new URL(LOCAL_API_URL).pathname, ''),
       query: Object.fromEntries(url.searchParams),
       body: request.postDataJSON() as unknown
     }

@@ -1,11 +1,10 @@
 import axios from 'axios'
+import { API_URL } from 'constants/api'
 
 axios.defaults.withCredentials = true
 
-const BASE_URL = `${process.env.NODE_ENV === 'production' ? 'https://wrkload-api.onrender.com' : 'http://localhost:5000'}/api/v1`
-
 const api = axios.create({
-  baseURL: BASE_URL
+  baseURL: API_URL
 })
 
 export default api
