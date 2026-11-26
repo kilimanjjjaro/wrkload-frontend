@@ -1,5 +1,5 @@
 export const DEFAULT_AVATAR =
-  'https://wrkload.vercel.app/images/default-avatar.svg'
+  'https://wrkload.kilimanjjjaro.com/images/default-avatar.svg'
 
 export const ADMIN_ROLE = 1
 export const TRIAL_ROLE = 2

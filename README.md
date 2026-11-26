@@ -2,7 +2,7 @@
 
 Is a web app where you can track what you've worked on in a simple and organized way.
 
-[Visit it](https://wrkload.vercel.app/)
+[Visit it](https://wrkload.kilimanjjjaro.com/)
 
 ## Features
 
