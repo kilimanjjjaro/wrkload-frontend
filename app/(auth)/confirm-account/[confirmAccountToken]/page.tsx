@@ -8,9 +8,11 @@ import Headline from 'components/shared/Headline'
 import Button from 'components/shared/Button'
 import PageTransition from 'components/shared/PageTransition'
 import confirmAccount from 'services/auth/confirmAccount'
-import { apiErrorCode } from 'utils/errors'
+import { commonErrorMessage, errorCode } from 'utils/errors'
 import { MIN_LENGTH } from 'constants/math'
 import { logError } from 'utils/logError'
+
+const HANDLED_ERRORS = ['auth/account-already-confirmed', 'token/token-expired']
 
 export default function ConfirmAccount(): React.JSX.Element {
   const params = useParams<{ confirmAccountToken: string }>()
@@ -19,6 +21,11 @@ export default function ConfirmAccount(): React.JSX.Element {
   const router = useRouter()
 
   const handleClick = (): void => {
+    if (!HANDLED_ERRORS.includes(error)) {
+      window.location.reload()
+      return
+    }
+
     setError('')
 
     if (error === 'auth/account-already-confirmed') {
@@ -37,7 +44,7 @@ export default function ConfirmAccount(): React.JSX.Element {
       try {
         await confirmAccount({ confirmAccountToken })
       } catch (error) {
-        setError(apiErrorCode(error) ?? '')
+        setError(errorCode(error))
       } finally {
         setIsLoading(false)
       }
@@ -59,6 +66,7 @@ export default function ConfirmAccount(): React.JSX.Element {
                 'This account has already been confirmed, please try log in.'}
               {error === 'token/token-expired' &&
                 'Sorry, the confirmation link has expired. Please request one again.'}
+              {!HANDLED_ERRORS.includes(error) && commonErrorMessage(error)}
             </Balancer>
           </p>
           <Button ariaLabel='Next' onClick={handleClick} variant='secondary'>

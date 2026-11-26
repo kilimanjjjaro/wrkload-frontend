@@ -11,12 +11,14 @@ import Button from 'components/shared/Button'
 import resendConfirmationAccountLink from 'services/auth/resendConfirmationAccountLink'
 import PageTransition from 'components/shared/PageTransition'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
-import { apiErrorCode } from 'utils/errors'
+import { commonErrorMessage, errorCode } from 'utils/errors'
 import { MIN_LENGTH } from 'constants/math'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: ''
 }
+
+const HANDLED_ERRORS = ['auth/user-not-found', 'auth/account-already-confirmed']
 
 export default function ResendConfirmationAccountLink(): React.JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
@@ -44,7 +46,7 @@ export default function ResendConfirmationAccountLink(): React.JSX.Element {
         setSuccess(true)
       }
     } catch (error) {
-      setError(apiErrorCode(error) ?? '')
+      setError(errorCode(error))
     } finally {
       setIsLoading(false)
     }
@@ -63,6 +65,7 @@ export default function ResendConfirmationAccountLink(): React.JSX.Element {
                 'No account associated with this email was found, please try again.'}
               {error === 'auth/account-already-confirmed' &&
                 'This account has already been confirmed, please try log in.'}
+              {!HANDLED_ERRORS.includes(error) && commonErrorMessage(error)}
             </Balancer>
           </p>
           <Button

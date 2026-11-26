@@ -16,7 +16,7 @@ import login from 'services/auth/login'
 import changePassword from 'services/auth/changePassword'
 import logout from 'services/auth/logout'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
-import { apiErrorCode } from 'utils/errors'
+import { commonErrorMessage, errorCode } from 'utils/errors'
 import type { ApiErrorData } from 'utils/errors'
 import { FIRST_INDEX, MIN_LENGTH } from 'constants/math'
 import PasswordStrength from 'components/shared/PasswordStrength'
@@ -84,10 +84,10 @@ export default function ChangePassword(): React.JSX.Element {
         error.response?.data.error?.[FIRST_INDEX].param === 'email'
       ) {
         setError('auth/expired-session')
+        return
       }
-      if (apiErrorCode(error) === 'auth/invalid-credentials') {
-        setError('auth/invalid-credentials')
-      }
+
+      setError(errorCode(error))
     } finally {
       setIsLoading(false)
     }
@@ -125,13 +125,7 @@ export default function ChangePassword(): React.JSX.Element {
         return
       }
 
-      if (apiErrorCode(error) === 'auth/invalid-credentials') {
-        setError('auth/invalid-credentials')
-      }
-
-      if (apiErrorCode(error) === 'trial/permission-denied') {
-        setError('trial/permission-denied')
-      }
+      setError(errorCode(error))
     } finally {
       setIsLoading(false)
     }
@@ -145,7 +139,9 @@ export default function ChangePassword(): React.JSX.Element {
             <Balancer>We have a problem!</Balancer>
           </Headline>
           <p className='mb-5 text-sm font-secondaryFont'>
-            <Balancer>{ERROR_MESSAGES[error]}</Balancer>
+            <Balancer>
+              {ERROR_MESSAGES[error] ?? commonErrorMessage(error)}
+            </Balancer>
           </p>
           {error !== 'auth/expired-session' && (
             <Button

@@ -11,12 +11,14 @@ import Button from 'components/shared/Button'
 import rememberPassword from 'services/auth/rememberPassword'
 import PageTransition from 'components/shared/PageTransition'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
-import { apiErrorCode } from 'utils/errors'
+import { commonErrorMessage, errorCode } from 'utils/errors'
 import { MIN_LENGTH } from 'constants/math'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: ''
 }
+
+const HANDLED_ERRORS = ['trial/permission-denied', 'auth/user-not-found']
 
 export default function RememberPassword(): React.JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
@@ -44,7 +46,7 @@ export default function RememberPassword(): React.JSX.Element {
         setSuccess(true)
       }
     } catch (error) {
-      setError(apiErrorCode(error) ?? '')
+      setError(errorCode(error))
     } finally {
       setIsLoading(false)
     }
@@ -63,6 +65,7 @@ export default function RememberPassword(): React.JSX.Element {
                 'This is a trial account, to access this feature you must register.'}
               {error === 'auth/user-not-found' &&
                 'No account associated with this email was found, please try again.'}
+              {!HANDLED_ERRORS.includes(error) && commonErrorMessage(error)}
             </Balancer>
           </p>
           <Button

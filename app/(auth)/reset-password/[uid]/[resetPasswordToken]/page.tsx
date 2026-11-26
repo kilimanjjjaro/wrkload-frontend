@@ -12,7 +12,7 @@ import Button from 'components/shared/Button'
 import resetPassword from 'services/auth/resetPassword'
 import PageTransition from 'components/shared/PageTransition'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
-import { apiErrorCode } from 'utils/errors'
+import { commonErrorMessage, errorCode } from 'utils/errors'
 import { MIN_LENGTH } from 'constants/math'
 import PasswordStrength from 'components/shared/PasswordStrength'
 import PasswordMatch from 'components/shared/PasswordMatch'
@@ -88,17 +88,18 @@ export default function ResetPassword(): React.JSX.Element {
         return
       }
 
-      const code = apiErrorCode(error)
-
-      if (code !== undefined && code.length >= MIN_LENGTH) {
-        setError(code)
-      }
+      setError(errorCode(error))
     } finally {
       setIsLoading(false)
     }
   }
 
   if (error.length >= MIN_LENGTH) {
+    const canTryAgain =
+      error === 'auth/different-passwords' ||
+      error === 'token/token-expired' ||
+      ERROR_MESSAGES[error] === undefined
+
     return (
       <div className='flex flex-col items-center gap-y-5'>
         <div className='p-6 text-center text-black md:p-10 bg-blue md:w-80 min-w-auto rounded-3xl'>
@@ -108,15 +109,14 @@ export default function ResetPassword(): React.JSX.Element {
           <p
             className={clsx(
               'text-sm font-secondaryFont',
-              (error === 'auth/different-passwords' ||
-                error === 'token/token-expired') &&
-                'md:mb-5'
+              canTryAgain && 'md:mb-5'
             )}
           >
-            <Balancer>{ERROR_MESSAGES[error]}</Balancer>
+            <Balancer>
+              {ERROR_MESSAGES[error] ?? commonErrorMessage(error)}
+            </Balancer>
           </p>
-          {(error === 'auth/different-passwords' ||
-            error === 'token/token-expired') && (
+          {canTryAgain && (
             <Button
               ariaLabel='Try again'
               onClick={handleClick}

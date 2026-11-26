@@ -14,13 +14,19 @@ import deleteAccount from 'services/auth/deleteAccount'
 import logout from 'services/auth/logout'
 import { AppContext } from 'contexts/AppContext'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
-import { apiErrorCode } from 'utils/errors'
+import { commonErrorMessage, errorCode } from 'utils/errors'
 import { MIN_LENGTH } from 'constants/math'
 
 const INITIAL_CREDENTIALS_STATE = {
   email: '',
   password: ''
 }
+
+const HANDLED_ERRORS = [
+  'trial/permission-denied',
+  'auth/invalid-credentials',
+  'auth/account-not-confirmed'
+]
 
 export default function DeleteAccount(): React.JSX.Element {
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE)
@@ -50,7 +56,7 @@ export default function DeleteAccount(): React.JSX.Element {
         await logout()
       }
     } catch (error) {
-      setError(apiErrorCode(error) ?? '')
+      setError(errorCode(error))
     } finally {
       setIsLoading(false)
     }
@@ -71,6 +77,7 @@ export default function DeleteAccount(): React.JSX.Element {
                 'The email or password are invalid. Please, try again.'}
               {error === 'auth/account-not-confirmed' &&
                 'This account has not been confirmed yet. Please, do this first.'}
+              {!HANDLED_ERRORS.includes(error) && commonErrorMessage(error)}
             </Balancer>
           </p>
           <Button
