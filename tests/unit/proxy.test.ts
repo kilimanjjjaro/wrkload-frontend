@@ -19,13 +19,24 @@ const request = (path: string, cookies: Record<string, string> = {}) => {
 const redirectOf = (response: Response) => response.headers.get('location')
 
 describe('proxy', () => {
-  it('runs on the dashboard pages', () => {
+  it('runs on the dashboard pages and their search pages', () => {
     expect(config.matcher).toEqual([
-      '/tasks',
-      '/projects',
+      '/tasks/:path*',
+      '/projects/:path*',
       '/profile',
-      '/users'
+      '/users/:path*'
     ])
+  })
+
+  it('sends partners from the users search page to their tasks', () => {
+    const response = proxy(
+      request('/users/search?query=a', {
+        isLogged: 'true',
+        accessToken: tokenWithRole(ROLE_PARTNER)
+      })
+    )
+
+    expect(redirectOf(response)).toBe(`${ORIGIN}/tasks`)
   })
 
   it.each(['/tasks', '/projects', '/profile', '/users'])(
