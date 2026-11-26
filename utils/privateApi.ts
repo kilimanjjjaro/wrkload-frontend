@@ -6,6 +6,7 @@ import axios, {
 import { getCookie, setCookie } from 'cookies-next/client'
 import { API_URL } from 'constants/api'
 import { HTTP_STATUS_UNAUTHORIZED } from 'constants/http'
+import { accessTokenCookieOptions } from 'utils/cookies'
 import { toError } from 'utils/errors'
 
 interface RefreshTokenInterface {
@@ -58,11 +59,11 @@ privateApi.interceptors.response.use(
         url: '/auth/refreshToken'
       })
 
-      setCookie('accessToken', response.data.accessToken, {
-        maxAge: response.data.expiresIn,
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-        secure: process.env.NODE_ENV === 'production'
-      })
+      setCookie(
+        'accessToken',
+        response.data.accessToken,
+        accessTokenCookieOptions(response.data.expiresIn)
+      )
 
       if (response.data.accessToken !== undefined) {
         config.headers.set(
