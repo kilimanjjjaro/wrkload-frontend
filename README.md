@@ -41,9 +41,12 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-In development the app calls the API at `http://localhost:5000`, so run
-[wrkload-api](https://github.com/kilimanjjjaro/wrkload-api) locally. Production
-builds call `https://wrkload-api.onrender.com`.
+The app calls the API set in `NEXT_PUBLIC_BACKEND_URL` (the origin, without a
+trailing slash or `/api/v1`). When it is not set, it calls
+`http://localhost:5000`, so run
+[wrkload-api](https://github.com/kilimanjjjaro/wrkload-api) locally. Next.js
+inlines the variable at build time, so set it in the hosting environment before
+building the production app and rebuild after changing it. See `.env.example`.
 
 ## Checks
 

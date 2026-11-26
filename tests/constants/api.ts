@@ -1,4 +1,3 @@
-export const API_URL = 'https://wrkload-api.onrender.com/api/v1'
 export const LOCAL_API_URL = 'http://localhost:5000/api/v1'
 
 export const HTTP_STATUS_OK = 200
