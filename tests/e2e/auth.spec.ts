@@ -1,12 +1,18 @@
 import type { Page } from '@playwright/test'
 import { PARTNER, PASSWORDS, TRIAL, UNCONFIRMED } from '../constants/fixtures'
-import { ROLE_PARTNER } from '../constants/api'
+import {
+  HTTP_STATUS_INTERNAL_SERVER_ERROR,
+  HTTP_STATUS_SERVICE_UNAVAILABLE,
+  HTTP_STATUS_TOO_MANY_REQUESTS,
+  ROLE_PARTNER
+} from '../constants/api'
 import {
   FIRST_REQUEST,
   QUICK_TIMEOUT_MS,
   SINGLE_REQUEST
 } from '../constants/e2e'
 import { expect, fill, logIn, test, visit } from '../utils/fixtures'
+import { failApi } from '../utils/api-failures'
 
 const cookieValue = async (page: Page, name: string) =>
   (await page.context().cookies()).find((cookie) => cookie.name === name)?.value
@@ -307,5 +313,96 @@ test.describe('account settings', () => {
     await expect(page.getByText('Session ended successfully')).toBeVisible()
     expect(api.requestsTo('GET', '/auth/logout')).toHaveLength(SINGLE_REQUEST)
     expect(await cookieValue(page, 'isLogged')).toBeUndefined()
+  })
+})
+
+test.describe('api errors', () => {
+  const MAIL_ERROR = 'We could not send the email. Please, try again later.'
+  const RATE_LIMIT_ERROR =
+    'Too many attempts. Please, wait a few minutes and try again.'
+  const GENERIC_ERROR = 'Something went wrong. Please, try again later.'
+
+  const register = async (page: Page) => {
+    await visit(page, '/registry')
+    await fill(page, {
+      username: 'Dave',
+      email: 'dave@wrkload.test',
+      password: 'dave-password',
+      confirmPassword: 'dave-password'
+    })
+    await page.getByRole('button', { name: 'Registry' }).click()
+  }
+
+  const expectProblem = async (page: Page, message: string) => {
+    await expect(
+      page.getByRole('heading', { name: 'We have a problem!' })
+    ).toBeVisible()
+    await expect(page.getByText(message)).toBeVisible()
+  }
+
+  test('explains a registry whose confirmation mail fails', async ({
+    page
+  }) => {
+    test.fail()
+    await failApi(page, '/auth/register', {
+      status: HTTP_STATUS_SERVICE_UNAVAILABLE,
+      code: 'mail/delivery-failed'
+    })
+
+    await register(page)
+
+    await expectProblem(page, MAIL_ERROR)
+  })
+
+  test('explains a registry over the rate limit', async ({ page }) => {
+    test.fail()
+    await failApi(page, '/auth/register', {
+      status: HTTP_STATUS_TOO_MANY_REQUESTS,
+      code: 'request/too-many-requests'
+    })
+
+    await register(page)
+
+    await expectProblem(page, RATE_LIMIT_ERROR)
+  })
+
+  test('explains a registry that cannot reach the api', async ({ page }) => {
+    test.fail()
+    await failApi(page, '/auth/register', 'network')
+
+    await register(page)
+
+    await expectProblem(page, GENERIC_ERROR)
+  })
+
+  test('explains an unexpected login error', async ({ page }) => {
+    test.fail()
+    await failApi(page, '/auth/login', {
+      status: HTTP_STATUS_INTERNAL_SERVER_ERROR,
+      code: 'server/unhandled-error'
+    })
+
+    await visit(page, '/login')
+    await fill(page, {
+      email: PARTNER.email,
+      password: PASSWORDS[PARTNER.email]
+    })
+    await page.getByRole('button', { name: 'Login' }).click()
+
+    await expectProblem(page, GENERIC_ERROR)
+  })
+
+  test('explains a reset mail that fails', async ({ page }) => {
+    test.fail()
+    await failApi(page, '/auth/remember-password', {
+      status: HTTP_STATUS_SERVICE_UNAVAILABLE,
+      code: 'mail/delivery-failed'
+    })
+
+    await visit(page, '/remember-password')
+    await fill(page, { email: PARTNER.email })
+    await page.getByRole('button', { name: 'Submit' }).click()
+
+    await expectProblem(page, MAIL_ERROR)
   })
 })
