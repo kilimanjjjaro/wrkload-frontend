@@ -19,7 +19,7 @@ const request = (path: string, cookies: Record<string, string> = {}) => {
 const redirectOf = (response: Response) => response.headers.get('location')
 
 describe('proxy', () => {
-  it.fails('runs on the dashboard pages and their search pages', () => {
+  it('runs on the dashboard pages and their search pages', () => {
     expect(config.matcher).toEqual([
       '/tasks/:path*',
       '/projects/:path*',

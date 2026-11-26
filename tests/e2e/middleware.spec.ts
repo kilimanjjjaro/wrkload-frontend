@@ -55,7 +55,6 @@ test.describe('middleware', () => {
     test(`sends visitors without a session from ${path} home`, async ({
       request
     }) => {
-      test.fail()
       const response = await request.get(path, { maxRedirects: NO_REDIRECTS })
 
       expect(response.headers().location).toBe('/')
@@ -65,7 +64,6 @@ test.describe('middleware', () => {
   test('sends partners from the users search page to their tasks', async ({
     request
   }) => {
-    test.fail()
     const response = await request.get('/users/search?query=a', {
       maxRedirects: NO_REDIRECTS,
       headers: { cookie: session(PARTNER) }
