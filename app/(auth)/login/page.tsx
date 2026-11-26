@@ -22,7 +22,7 @@ import login from 'services/auth/login'
 import { AppContext } from 'contexts/AppContext'
 import PageTransition from 'components/shared/PageTransition'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
-import { apiErrorCode } from 'utils/errors'
+import { commonErrorMessage, errorCode } from 'utils/errors'
 import { MIN_LENGTH } from 'constants/math'
 import { LOGGED_IN_MAX_AGE_SECONDS } from 'constants/auth'
 
@@ -35,6 +35,12 @@ const TRIAL_CREDENTIALS = {
   email: 'wrkload@kilimanjjjaro.com',
   password: 'Ec@z92!QWKFkmhY'
 }
+
+const HANDLED_ERRORS = [
+  'auth/user-not-found',
+  'auth/invalid-credentials',
+  'auth/account-not-confirmed'
+]
 
 export default function Login(): React.JSX.Element {
   const { setUser, setIsLoggingIn, trialMode } = useContext(AppContext)
@@ -89,7 +95,7 @@ export default function Login(): React.JSX.Element {
         }
       }
     } catch (error) {
-      setError(apiErrorCode(error) ?? '')
+      setError(errorCode(error))
     } finally {
       setIsLoading(false)
       setIsLoggingIn(false)
@@ -115,6 +121,7 @@ export default function Login(): React.JSX.Element {
                   <b>Please, do this first.</b>
                 </>
               )}
+              {!HANDLED_ERRORS.includes(error) && commonErrorMessage(error)}
             </Balancer>
           </p>
           <Button

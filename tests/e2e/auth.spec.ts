@@ -343,7 +343,6 @@ test.describe('api errors', () => {
   test('explains a registry whose confirmation mail fails', async ({
     page
   }) => {
-    test.fail()
     await failApi(page, '/auth/register', {
       status: HTTP_STATUS_SERVICE_UNAVAILABLE,
       code: 'mail/delivery-failed'
@@ -355,7 +354,6 @@ test.describe('api errors', () => {
   })
 
   test('explains a registry over the rate limit', async ({ page }) => {
-    test.fail()
     await failApi(page, '/auth/register', {
       status: HTTP_STATUS_TOO_MANY_REQUESTS,
       code: 'request/too-many-requests'
@@ -367,7 +365,6 @@ test.describe('api errors', () => {
   })
 
   test('explains a registry that cannot reach the api', async ({ page }) => {
-    test.fail()
     await failApi(page, '/auth/register', 'network')
 
     await register(page)
@@ -376,7 +373,6 @@ test.describe('api errors', () => {
   })
 
   test('explains an unexpected login error', async ({ page }) => {
-    test.fail()
     await failApi(page, '/auth/login', {
       status: HTTP_STATUS_INTERNAL_SERVER_ERROR,
       code: 'server/unhandled-error'
@@ -393,7 +389,6 @@ test.describe('api errors', () => {
   })
 
   test('explains a reset mail that fails', async ({ page }) => {
-    test.fail()
     await failApi(page, '/auth/remember-password', {
       status: HTTP_STATUS_SERVICE_UNAVAILABLE,
       code: 'mail/delivery-failed'

@@ -18,10 +18,12 @@ import GoogleLogo from 'public/images/google.svg'
 import register from 'services/auth/register'
 import PageTransition from 'components/shared/PageTransition'
 import { SERVER_RESPONSE_STATUS } from 'constants/components'
-import { apiErrorCode } from 'utils/errors'
+import { commonErrorMessage, errorCode } from 'utils/errors'
 import { MIN_LENGTH } from 'constants/math'
 import PasswordStrength from 'components/shared/PasswordStrength'
 import PasswordMatch from 'components/shared/PasswordMatch'
+
+const HANDLED_ERRORS = ['auth/different-passwords', 'auth/email-already-exists']
 
 const INITIAL_CREDENTIALS_STATE = {
   username: '',
@@ -73,9 +75,7 @@ export default function Register(): React.JSX.Element {
         return
       }
 
-      if (apiErrorCode(error) === 'auth/email-already-exists') {
-        setError('auth/email-already-exists')
-      }
+      setError(errorCode(error))
     } finally {
       setIsLoading(false)
     }
@@ -94,6 +94,7 @@ export default function Register(): React.JSX.Element {
                 'Passwords are not the same. Please, try again.'}
               {error === 'auth/email-already-exists' &&
                 'An account with this email already exists. Please, try another one or login.'}
+              {!HANDLED_ERRORS.includes(error) && commonErrorMessage(error)}
             </Balancer>
           </p>
           <Button
