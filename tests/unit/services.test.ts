@@ -124,7 +124,7 @@ describe('auth services', () => {
         username: 'Kili',
         email: USER.email,
         password: 'password',
-        avatar: 'https://wrkload.vercel.app/images/default-avatar.svg',
+        avatar: 'https://wrkload.kilimanjjjaro.com/images/default-avatar.svg',
         role: ROLE_PARTNER
       }
     })

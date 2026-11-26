@@ -108,7 +108,7 @@ test.describe('registry', () => {
       username: 'Dave',
       email: 'dave@wrkload.test',
       password: 'dave-password',
-      avatar: 'https://wrkload.vercel.app/images/default-avatar.svg',
+      avatar: 'https://wrkload.kilimanjjjaro.com/images/default-avatar.svg',
       role: ROLE_PARTNER
     })
   })

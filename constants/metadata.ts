@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-const SITE_URL = 'https://wrkload.vercel.app'
+const SITE_URL = 'https://wrkload.kilimanjjjaro.com'
 
 export const DESCRIPTION =
   "wrkload is a web app where you can track what you've worked on in a simple and organized way."

@@ -71,7 +71,7 @@ test.describe('public pages render without errors', () => {
     )
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
       'content',
-      'https://wrkload.vercel.app/images/og.jpg'
+      'https://wrkload.kilimanjjjaro.com/images/og.jpg'
     )
   })
 
